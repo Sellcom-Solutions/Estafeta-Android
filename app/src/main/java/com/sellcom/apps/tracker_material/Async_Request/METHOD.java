@@ -1,7 +1,7 @@
 package com.sellcom.apps.tracker_material.Async_Request;
 
 public enum METHOD {
-    LOGIN ("login"),
+    SEND_TRACKING ("login"),
     GET_USER_PDVS ("get_user_pdvs"),
     USER_CHECK_IN ("user_checkin"),
     USER_CHECK_OUT ("user_checkout"),

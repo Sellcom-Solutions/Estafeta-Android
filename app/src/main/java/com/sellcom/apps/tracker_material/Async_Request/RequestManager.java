@@ -13,7 +13,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.Window;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -28,14 +27,10 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.gc.materialdesign.widgets.Dialog;
-import com.sellcom.apps.tracker_material.Utils.ErrorDecoder;
-import com.sellcom.apps.tracker_material.R;
-import com.sellcom.apps.tracker_material.Utils.SessionManager;
 
 public class RequestManager implements ResponseListenerInterface {
 
@@ -70,9 +65,8 @@ public class RequestManager implements ResponseListenerInterface {
 
     public void showErrorDialog(String errorMessage, Context context){
         Log.d(LOG_TAG_MANAGER,"Error message: "+errorMessage);
-        String message = ErrorDecoder.decodeErrorMessage(errorMessage,context);
 
-        Dialog  dialog = new Dialog(context,"Error",message);
+        Dialog  dialog = new Dialog(context,"Error",errorMessage);
         dialog.show();
     }
 
@@ -105,45 +99,7 @@ public class RequestManager implements ResponseListenerInterface {
     }
 
     public void showLoadingDialog(){
-        String dialogMessage    = "";
-        switch (method){
-            case LOGIN:
-                dialogMessage   = activity.getString(R.string.req_man_login);
-                break;
-            case GET_USER_PDVS:
-                dialogMessage   = activity.getString(R.string.req_man_retrieving_pdvs);
-                break;
-            case USER_CHECK_IN:
-                dialogMessage   = activity.getString(R.string.req_man_check_in);
-                break;
-            case USER_CHECK_OUT:
-                dialogMessage   = activity.getString(R.string.req_man_check_out);
-                break;
-            case GET_PRODUCTS:
-                dialogMessage   = activity.getString(R.string.req_man_get_products);
-                break;
-            case SET_ORDER:
-                dialogMessage   = activity.getString(R.string.req_man_set_order);
-                break;
-            case GET_RECOMMENDATIONS:
-                dialogMessage   = activity.getString(R.string.req_man_get_recommendations);
-                break;
-            case GET_BUDGET_CATS:
-                dialogMessage   = activity.getString(R.string.req_man_get_budget_cats);
-                break;
-            case GET_BUDGET:
-                dialogMessage   = activity.getString(R.string.req_man_get_budget);
-                break;
 
-            default:
-                break;
-        }
-
-        progressDialog = new ProgressDialog(activity);
-        progressDialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        progressDialog.setMessage(dialogMessage);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
     }
 
     public void dismissProgressDialog(){
@@ -154,12 +110,7 @@ public class RequestManager implements ResponseListenerInterface {
         this.method                 = method;
 
         Map<String,String> params = new HashMap<>();
-        if (includeCredentials){
-            params.putAll(SessionManager.getSessionInfo(activity));
-            params.putAll(reqData);
-        }
-        else
-            params  = reqData;
+        params  = reqData;
 
         params.put("request", method.toString());
 
@@ -198,7 +149,7 @@ public class RequestManager implements ResponseListenerInterface {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            showErrorDialog(activity.getString(R.string.req_man_error_contacting_service), this.activity);
+
         }
     }
 
@@ -304,11 +255,6 @@ public class RequestManager implements ResponseListenerInterface {
                         jsonResponse.put("method",method.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
-                    }
-                    if (method == METHOD.LOGIN){
-                    }
-                    else {
-
                     }
 
                 } catch (InterruptedException e) {

@@ -1,8 +1,5 @@
 package com.sellcom.apps.tracker_material.Activities;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,18 +16,13 @@ import android.widget.Toast;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
-import com.sellcom.apps.tracker_material.Fragments.FragmentBudget;
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreo;
 import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerCallbacks;
 import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerFragment;
 import com.sellcom.apps.tracker_material.R;
-import com.sellcom.apps.tracker_material.Utils.SessionManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks, UIResponseListenerInterface {
@@ -134,34 +126,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragment = new FragmentRastreo();
                 break;
 
-            case NavigationDrawerFragment.WORK_PLAN:
-                CURRENT_FRAGMENT_TAG        = TrackerFragment.FRAGMENT_TAG.FRAG_WORKPLAN.toString();
-                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null)
-                    fragment                = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
-                else
-                    fragment                = new FragmentWorkPlan();
-                break;
-
-            case NavigationDrawerFragment.BUDGETS:
-                /*CURRENT_FRAGMENT_TAG        = TrackerFragment.FRAGMENT_TAG.FRAG_BUDGETS.toString();
-                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null)
-                    fragment                = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
-                else
-                    fragment                = new FragmentBudget();
-                */
-                break;
-
-            case NavigationDrawerFragment.RECOMMENDATIONS:
-                CURRENT_FRAGMENT_TAG        = TrackerFragment.FRAGMENT_TAG.FRAG_RECOMMENDATIONS.toString();
-                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null)
-                    fragment                = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
-                else
-                    fragment                = new FragmentRecommendations();
-                break;
-
-            case NavigationDrawerFragment.LOG_OUT:
-                logOut();
-                return;
             default:
                 Toast.makeText(this,"Módulo no implementado",Toast.LENGTH_SHORT).show();
                 return;
@@ -190,35 +154,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         fragmentTransaction.replace(R.id.container, fragment, CURRENT_FRAGMENT_TAG).commit();
     }
 
-    public void logOut() {
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        alertDialogBuilder
-                .setCancelable(false)
-                .setMessage(getString(R.string.log_out))
-                .setPositiveButton(getString(R.string.done),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                dialog.dismiss();
-                                prepareRequest(METHOD.LOGOUT,new HashMap<String, String>(),true);
-                            }
-                        }
-                )
-                .setNegativeButton(getString(R.string.cancel),
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        }
-                );
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
     public void onSectionAttached(int number) {
-        mTitle = getResources().getStringArray(R.array.drawer_items_names_salesman_ragasa)[number];
+        mTitle = getResources().getStringArray(R.array.drawer_items)[number];
     }
 
     public void restoreActionBar() {
@@ -242,13 +179,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         FragmentManager     fragmentManager     = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment            workplan            = fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_WORKPLAN.toString());
 
-        if (workplan != null && workplan.isAdded()) {
-            fragmentTransaction.remove(workplan);
-            fragmentTransaction.add(R.id.container, new FragmentWorkPlan(), TrackerFragment.FRAGMENT_TAG.FRAG_WORKPLAN.toString());
-            fragmentTransaction.commitAllowingStateLoss();
-        }
     }
 
     @Override
@@ -259,21 +190,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void decodeResponse(String stringResponse) {
-        JSONObject resp;
 
-        try {
-            resp = new JSONObject(stringResponse);
-
-            if (resp.getString("method").equalsIgnoreCase(METHOD.LOGOUT.toString())){
-                SessionManager.clearSession(this);
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(i);
-                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
 
