@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Estafeta</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Drawer options strings -->
+    <string-array name="drawer_items">
+        <item>Rastreo</item>
+        <item>Oficinas</item>
+        <item>Cotizador</item>
+        <item>Código Postal</item>
+        <item>Aviso de Privacidad</item>
+    </string-array>
+
+    <!-- Globals -->
+    <string name="Search">Buscar</string>
+    <string name="offices_search_by_address">Buscar por dirección</string>
+    <string name="city_etc">Ciudad, municipio, delegación</string>
+    <string name="locality">Colonia</string>
+    <string name="zip_code">Código Postal</string>
+    <string name="mandatory_fields">Campos Obligatorios *</string>
+
+    offices_required
+
+
+
+
+    <!-- Headers -->
+    <string name="rastreo">Rastreo</string>
+
+    <!-- Rastreo -->
+    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de Guía debe tener 22 dígitos</string>
+    <string name="codigo">Código</string>
+    <string name="aviso_codigo">Puedes ingresar hasta 10 envíos (uno por línea)</string>
+    <string name="boton_escanear">ESCANEAR</string>
+    <string name="boton_rastrear">RASTREAR</string>
+    <string name="boton_codigo_guia">Código de Guía</string>
+    <string name="codigo_factura">Código de Factura</string>
+    <string name="codigo_ticket">Código de Ticket</string>
+    <string name="cerrar">CERRAR</string>
+
+    <!-- Oficinas -->
+    <string name="offices_near"> Cerca de mí</string>
+
+
+    <!-- ********************   Strings aplicación anterior   ************************** -->
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+
+</resources>

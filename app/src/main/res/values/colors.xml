@@ -1,0 +1,36 @@
+<resources>
+
+    <!--
+        Check Android Theme colors for color reference:
+        https://developer.android.com/training/material/images/ThemeColors.png
+
+        Refer also to Color palette for the UI colors you should use:
+        http://www.google.com/design/spec/style/color.html#color-ui-color-palette
+    -->
+
+    <color name="primaryColor">#00a0c6</color>
+    <color name="primaryDarkColor">#133896</color>
+    <color name="accentColor">#00a6b6</color>
+    <color name="drawerBackground">#fafafa</color>
+    <color name="myWindowBackground">#DEDEDE</color>
+    <color name="textPrimaryColor">#FFFFFF</color>
+    <color name="myNavigationColor">#000000</color>
+
+    <color name="selected_gray">#ffdbdbdb</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="green">#6bc04b</color>
+    <color name="soft_blue">#00a6b6</color>
+    <color name="red">#ff0000</color>
+
+    <color name="ragasa_green">#6bc04b</color>
+    <color name="ragasa_blue">#00a6b6</color>
+    <color name="ragasa_indigo">#253746</color>
+
+    <color name="estafeta_red">#A91F20</color>
+    <color name="estafeta_blue">#4D75A0</color>
+    <color name="estafeta_soft_gray">#B8B8B8</color>
+    <color name="estafeta_text">#555555</color>
+    <color name="estafeta_light_gray">#EFEFF4</color>
+
+</resources>

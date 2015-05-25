@@ -1,0 +1,54 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/estafeta_red</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/estafeta_red</item>
+        <item name="android:textColorPrimary">@color/textPrimaryColor</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="android:editTextStyle">@style/EditStyle</item>
+        <item name="android:windowBackground">@color/myWindowBackground</item>
+    </style>
+
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="ToolBarStyle" parent="">
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="DialogAnimations">
+        <item name="android:windowEnterAnimation">@anim/dialog_from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/dialog_to_bottom</item>
+    </style>
+
+    <style name="AnimatedDialog" parent="@android:style/Theme.Holo.Dialog">
+        <item name="android:windowAnimationStyle">@style/DialogAnimations</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="EditStyle" parent="Widget.AppCompat.EditText">
+
+        <item name="colorControlNormal">@color/estafeta_red</item>
+        <item name="colorControlActivated">@color/estafeta_red</item>
+        <item name="colorControlHighlight">@color/estafeta_red</item>
+
+    </style>
+
+    <!--<style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+        &lt;!&ndash; Customize your theme here. &ndash;&gt;
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
+        <item name="colorAccent">@color/accentColor</item>
+        <item name="android:textColorPrimary">@color/textPrimaryColor</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+
+        <item name="android:windowBackground">@color/myWindowBackground</item>
+    </style>
+-->
+</resources>

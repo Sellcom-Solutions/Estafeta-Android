@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation     ="vertical"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:background      ="@color/white">
+
+    <LinearLayout
+        android:orientation     ="horizontal"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="115dp"
+        android:background      ="@drawable/head_oficinas"
+        android:gravity         ="center">
+
+        <TextView
+            android:layout_width        ="wrap_content"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/Search"
+            android:textSize            ="@dimen/sizeLargeText"
+            android:textStyle           ="bold"
+            android:layout_gravity      ="bottom"
+            android:layout_marginBottom ="5dp"
+            android:layout_marginLeft   ="40dp"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id              ="@+id/btn_near"
+        android:layout_width    ="300dp"
+        android:layout_height   ="wrap_content"
+        android:text            ="@string/offices_near"
+        android:textSize        ="@dimen/sizeMediumText"
+        android:textColor       ="@color/estafeta_red"
+        android:textStyle       ="normal"
+        android:background      ="@drawable/btn_red_border"
+        android:layout_gravity  ="center_horizontal"
+        android:layout_margin   ="15dp"/>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/selected_gray"></LinearLayout>
+
+    <TextView
+        android:layout_width    ="match_parent"
+        android:layout_height   ="wrap_content"
+        android:text            ="@string/offices_search_by_address"
+        android:textSize        ="@dimen/sizeMediumText"
+        android:textStyle       ="bold"
+        android:id              ="@+id/textView"
+        android:layout_gravity  ="left"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
+
+    <Spinner
+        android:id              ="@+id/spn_state"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="wrap_content"
+        android:layout_gravity  ="left"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:spinnerMode       ="dialog"
+        android:dividerHeight     ="0dp"
+        />
+
+    <EditText
+        android:id                  ="@+id/edt_city"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+
+        android:textColor           ="@color/estafeta_red"
+        android:textSize            ="@dimen/sizeMediumText"
+        android:hint                ="@string/city_etc"
+        android:textColorHint       ="@color/estafeta_soft_gray"
+
+        android:nextFocusDown       ="@+id/edt_colony"
+
+        android:layout_marginTop    ="20dp"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp"/>
+
+    <LinearLayout
+        android:orientation         ="horizontal"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_gravity      ="left"
+        android:layout_marginTop    ="20dp"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp">
+
+        <EditText
+            android:id                  ="@+id/edt_colony"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/locality"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1"
+            android:nextFocusDown       ="@+id/edt_zip_code"
+
+            android:layout_marginRight  ="10dp"/>
+
+        <EditText
+            android:id                  ="@+id/edt_zip_code"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/zip_code"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="2" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width        ="wrap_content"
+        android:layout_height       ="wrap_content"
+        android:text                ="@string/mandatory_fields"
+        android:textSize=           "@dimen/sizeXSmallText"
+        android:textColor           ="@color/estafeta_red"
+        android:layout_gravity      ="left"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp"/>
+
+    <Button
+        android:id                  ="@+id/btn_search"
+        android:layout_width        ="250dp"
+        android:layout_height       ="wrap_content"
+        android:text                ="@string/Search"
+        android:textSize            ="@dimen/sizeNormalText"
+        android:textColor           ="@color/estafeta_red"
+        android:background          ="@android:color/transparent"
+        android:layout_gravity      ="center_horizontal"
+        android:layout_marginTop    ="20dp"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp"/>
+
+
+</LinearLayout>
