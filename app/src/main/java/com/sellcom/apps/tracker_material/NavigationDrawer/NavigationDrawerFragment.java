@@ -21,7 +21,7 @@ import java.util.List;
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
 
     public static final int RASTREO         = 0;
-    public static final int WORK_PLAN       = 1;
+    public static final int OFICINAS        = 1;
     public static final int BUDGETS         = 3;
     public static final int RECOMMENDATIONS = 2;
 
@@ -81,7 +81,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mFragmentContainerView  = getActivity().findViewById(fragmentId);
         mDrawerLayout           = drawerLayout;
         mDrawerLayout.setStatusBarBackgroundColor(
-                getResources().getColor(R.color.primaryDarkColor));
+                getResources().getColor(R.color.white));
 
         mActionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override

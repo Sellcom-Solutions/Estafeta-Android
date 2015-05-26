@@ -16,7 +16,10 @@ import android.widget.Toast;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
+
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreo;
+import com.sellcom.apps.tracker_material.Fragments.FragmentOffices;
+
 import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerCallbacks;
 import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerFragment;
 import com.sellcom.apps.tracker_material.R;
@@ -83,15 +86,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         if (depthCounter == 1) {
 
             FragmentManager fragmentManager = getSupportFragmentManager();
-            Fragment workplan  = fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_WORKPLAN.toString());
+            Fragment tracking   = fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString());
 
-            if(workplan != null && workplan.isAdded()){
-                fragmentManager.beginTransaction().remove(workplan).commit();
+            if(tracking != null && tracking.isAdded()){
+                fragmentManager.beginTransaction().remove(tracking).commit();
                 this.recreate();
             }
 
         } else {
-            Fragment home = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_HOME.toString());
+            Fragment home = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString());
             /*if(home != null && home.isAdded()){
                 Log.d("---->","Is already added");
                 moveTaskToBack(true);
@@ -124,6 +127,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     Fragment_Default    = new FragmentRastreo();
                 }else
                     fragment = new FragmentRastreo();
+            break;
+
+            case NavigationDrawerFragment.OFICINAS:
+                CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_OFFICES.toString();
+                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
+                    fragment            = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
+                }else
+                    fragment = new FragmentOffices();
                 break;
 
             default:
@@ -142,11 +153,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         } else if (position == 0) {
             depthCounter = 0;
         }
-        if(fragmentManager.findFragmentByTag("trafficmap") != null)
-            fragmentTransaction.remove(fragmentManager.findFragmentByTag("trafficmap"));
 
-        if(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_HOME.toString()) != null)
-            fragmentTransaction.remove(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_HOME.toString()));
+        if(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString()) != null)
+            fragmentTransaction.remove(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString()));
 
         if(Fragment_Default != null)
             fragment = Fragment_Default;

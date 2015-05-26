@@ -3,17 +3,4 @@
     android:layout_height   ="fill_parent"
     android:background      ="#88FFFFFF">
 
-    <com.gc.materialdesign.views.ProgressBarCircularIndeterminate
-        android:id                      ="@+id/progressBar"
-        android:layout_width            ="32dp"
-        android:layout_height           ="32dp"
-        android:background              = "@color/primaryColor"
-        android:layout_centerVertical   ="true"/>
-
-    <TextView android:id        ="@+id/text"
-        android:layout_width    ="wrap_content"
-        android:layout_height   ="fill_parent"
-        android:textColor       ="@color/primaryDarkColor"
-        android:text            ="Cargando..."/>
-
     </RelativeLayout>

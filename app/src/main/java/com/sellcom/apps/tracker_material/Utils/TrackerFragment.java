@@ -17,20 +17,11 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
     public String   tag             = "";
 
     public enum FRAGMENT_TAG {
-        FRAG_HOME ("home"),
-        FRAG_WORKPLAN ("workplan"),
-        FRAG_BUDGETS ("budgets"),
-        FRAG_RECOMMENDATIONS ("recommendations"),
-        FRAG_PARTIAL_SETTLEMENT ("partial_sett"),
-        FRAG_ORDERS ("orders"),
-        FRAG_ADD_PROSPECT_COSTUMER ("add_prospect"),
-        FRAG_VISIT ("visit"),
-        FRAG_SETTINGS ("settings"),
-
-
         FRAG_RASTREO("rastreo"),
         FRAG_RASTREO_EFECTUADO("rastreo_efectuado"),
-        FRAG_RASTREO_DIALOGO("rastreo_dialogo")
+        FRAG_RASTREO_DIALOGO("rastreo_dialogo"),
+
+        FRAG_OFFICES ("officinas")
         ;
 
         private final String name;

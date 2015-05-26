@@ -5,7 +5,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.sellcom.apps.tracker_material"
+        applicationId "com.estafeta.estafetamovilv1"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
@@ -15,6 +15,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        estafeta {
+            applicationId
+            "com.estafeta.estafetamovilv1"
+            versionName "1.0"
         }
     }
 }
