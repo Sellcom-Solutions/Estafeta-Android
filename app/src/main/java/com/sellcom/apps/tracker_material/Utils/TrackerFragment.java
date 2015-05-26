@@ -20,8 +20,8 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         FRAG_RASTREO("rastreo"),
         FRAG_RASTREO_EFECTUADO("rastreo_efectuado"),
         FRAG_RASTREO_DIALOGO("rastreo_dialogo"),
-
-        FRAG_OFFICES ("officinas")
+        FRAG_OFFICES ("officinas"),
+        FRAG_CODIGO_POSTAL("codigo_postal")
         ;
 
         private final String name;

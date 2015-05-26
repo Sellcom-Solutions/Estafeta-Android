@@ -44,11 +44,20 @@
 
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>
-
+    
+    <!-- Codigo Postal -->
+    <string name="verificar_codigo">Validar un Código Postal</string>
+    <string name="abr_codigo">C.P.</string>
+    <string name="validar_codigo">Validar</string>
+    <string name="buscar_codigo">Buscar un Código Postal</string>
+    <string name="search_by_zip_code">Buscar Código Postal</string>
 
     <!-- ********************   Strings aplicación anterior   ************************** -->
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

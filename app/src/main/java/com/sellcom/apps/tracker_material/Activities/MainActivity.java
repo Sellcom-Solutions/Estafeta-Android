@@ -17,6 +17,7 @@ import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 
+import com.sellcom.apps.tracker_material.Fragments.FragmentCodigoPostal;
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreo;
 import com.sellcom.apps.tracker_material.Fragments.FragmentOffices;
 
@@ -105,7 +106,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         if (depthCounter > 0)
             depthCounter--;
 
-        Log.d(ACT_TAG,"Deep depthCounter Back 2:"+depthCounter);
+        Log.d(ACT_TAG, "Deep depthCounter Back 2:" + depthCounter);
     }
 
     @Override
@@ -135,6 +136,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragment            = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
                 }else
                     fragment = new FragmentOffices();
+                break;
+
+            //Created by Jose Luis 26/05/2015
+            case NavigationDrawerFragment.CODIGO_POSTAL:
+                CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_CODIGO_POSTAL.toString();
+                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
+                    fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
+                }else{
+                    fragment = new FragmentCodigoPostal();
+                }
                 break;
 
             default:
