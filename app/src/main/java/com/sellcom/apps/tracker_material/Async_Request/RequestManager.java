@@ -1,6 +1,7 @@
 package com.sellcom.apps.tracker_material.Async_Request;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -29,8 +31,14 @@ import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 import com.gc.materialdesign.widgets.Dialog;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 public class RequestManager implements ResponseListenerInterface {
 
@@ -39,8 +47,16 @@ public class RequestManager implements ResponseListenerInterface {
     public  final   String 	                                LOG_TAG_MANAGER    = "requestManager";
     public  final   String 	                                LOG_TAG_REQUEST    = "asyncRequest";
 
-    public  final   String 	                                API_URL 	       = "http://187.237.42.162:8880/alpura/api.php";
-    //public  final   String 	                                API_URL 	       = "http://172.20.111.69:8880/alpura/api.php";
+    public final String API_REQUEST_ZIPCODE = "http://validacpscs.estafeta.com/RestService.svc/ConsultaCP";
+
+    /*
+    public static final int METHOD_REQUEST_ZIPCODE = 0;
+    public static final int METHOD_REQUEST_ZIPCODE_ADDRESSES = 1;
+    public static final int METHOD_REQUEST_ = 2;
+    public static final int METHOD_REQUEST_ZIPCODE = 3;
+    public static final int METHOD_REQUEST_ZIPCODE = 4;
+    */
+
 
     private static 	RequestManager   						manager;
     private         Activity                                activity;
@@ -64,7 +80,7 @@ public class RequestManager implements ResponseListenerInterface {
     public UIResponseListenerInterface  getListener(){return listener;}
 
     public void showErrorDialog(String errorMessage, Context context){
-        Log.d(LOG_TAG_MANAGER,"Error message: "+errorMessage);
+        Log.d(LOG_TAG_MANAGER, "Error message: " + errorMessage);
 
         Dialog  dialog = new Dialog(context,"Error",errorMessage);
         dialog.show();
@@ -75,8 +91,8 @@ public class RequestManager implements ResponseListenerInterface {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Atención");
         builder.setMessage(confirmMessage);
-        builder.setNeutralButton("OK",new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int id) {
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
 
             }
         });
@@ -103,36 +119,14 @@ public class RequestManager implements ResponseListenerInterface {
     }
 
     public void dismissProgressDialog(){
-        progressDialog.dismiss();
+
     }
 
-    public void makeRequestWithDataAndMethodIncludeCredentials(Map<String,String> reqData, METHOD method, boolean includeCredentials){
-        this.method                 = method;
-
-        Map<String,String> params = new HashMap<>();
-        params  = reqData;
-
-        params.put("request", method.toString());
-
-        showLoadingDialog();
-        final AsyncRequest req      = new AsyncRequest(activity, params, this);
-
-        /* DUMMY request mode info */
-        req.method                  = method;
-        /***************************/
-        req.execute(null,null,null);
-    }
-
-    public void makeRequestWithJSONDataAndMethod(JSONObject reqData, METHOD method){
-        Log.d(LOG_TAG_MANAGER,"MakeRequestJSON");
-        this.method                         = method;
-        showLoadingDialog();
-        final AsyncRequestWithJSON req      = new AsyncRequestWithJSON(activity, reqData, this);
-
-        /* DUMMY request mode info */
-        req.method                  = method;
-        /***************************/
-        req.execute(null,null,null);
+    //created by jose luis at 27/05/2015
+    public void makeRequest(METHOD type_request, Map<String, String> params){
+        this.method = type_request;
+        final AsyncRequest asyncRequest =  new AsyncRequest(activity, params, this, method);
+        asyncRequest.execute();
     }
 
     @Override
@@ -149,207 +143,147 @@ public class RequestManager implements ResponseListenerInterface {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-
         }
     }
 
-    public class AsyncRequest extends AsyncTask<Void,Void,JSONObject>{
-        Activity 					activity;
-        Map<String, String> 		requestData;
-        ResponseListenerInterface   listener;
+    @Override
+    public void responseServiceToManager(String stringReponse){
+        listener.decodeResponse(stringReponse);
+    }
 
-        /* DUMMY request mode info */
-        METHOD                      method;
+    /**
+     *Created by Jose Luis at 27/05/2015
+     * Generic AsyncRequest
+     */
+    public class AsyncRequest extends AsyncTask<Void, Void, String>{
 
-        public AsyncRequest(Activity activity, Map<String, String> requestData, ResponseListenerInterface listener){
-            this.activity 	       	= activity;
-            this.requestData        = requestData;
-            this.listener    		= listener;
+        Activity activity;
+        Map<String, String> requestData;
+        ResponseListenerInterface listener;
+        METHOD method;
+
+        public AsyncRequest(Activity activity, Map<String, String> requestData,
+                                   ResponseListenerInterface listener, METHOD method){
+            this.activity =  activity;
+            this.requestData = requestData;
+            this.listener = listener;
+            this.method = method;
         }
 
         @Override
-        protected JSONObject doInBackground(Void... voids) {
-            Log.d(LOG_TAG_REQUEST,"Request data:"+requestData.toString());
-            JSONObject jsonResponse = null;
-            if (TEST_MODE){
+        protected String doInBackground(Void... voids){
 
-            }
-            else{
-                HttpParams httpParameters   = new BasicHttpParams();
-                int timeoutConnection       = 5000;
-                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-                int timeoutSocket           = 5000;
-                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
+            String stringResponse = null;
 
-                HttpClient httpclient   = new DefaultHttpClient(httpParameters);
-                HttpPost httppost       = new HttpPost(API_URL);
+            HttpParams httpParameters = new BasicHttpParams();
+            int timeoutConnection = 5000;
+            HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
+            int timeoutSocket = 5000;
+            HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
-                try {
-                    List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
+            //create a new instance of HttpClient request POST
+            HttpClient httpclient = new DefaultHttpClient(httpParameters);
+            //especify the method to connect to web server
+            HttpPost httppost = new HttpPost(getRequestURL(this.method));
 
-                    for (Map.Entry<String, String> entry : requestData.entrySet())
-                        params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+            try {
+                List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
 
-                    httppost.setEntity(new UrlEncodedFormEntity(params));
+                for (Map.Entry<String, String> entry : requestData.entrySet())
+                    params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 
-                    HttpResponse response       = httpclient.execute(httppost);
-                    String       strResponse    = EntityUtils.toString(response.getEntity());
-                    Log.d(LOG_TAG_REQUEST,"Response: "+strResponse);
+                httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+                httppost.setHeader("Content-Type","application/x-www-form-urlencoded");
+
+                HttpResponse response = httpclient.execute(httppost);
+
+                HttpEntity entity = response.getEntity();
+                if(entity != null) {
+                    InputStream streamZipCodes = entity.getContent();
                     try {
-                        jsonResponse            = new JSONObject(strResponse);
-                        jsonResponse.put("method",method.toString());
-                        Log.d(LOG_TAG_REQUEST,"jsonResponse: "+jsonResponse.toString());
-                    } catch (JSONException e) {
+                        stringResponse = parseToStringZipCodes(streamZipCodes);
+                    } catch (SAXException e) {
+                        e.printStackTrace();
+                    } catch (ParserConfigurationException e) {
                         e.printStackTrace();
                     }
-
-                } catch (ClientProtocolException e) {
-                    try {
-                        jsonResponse    = new JSONObject();
-                        jsonResponse.put("error", "Network");
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
-                } catch (IOException e) {
-                    try {
-                        jsonResponse    = new JSONObject();
-                        jsonResponse.put("error", "Info");
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
                 }
+
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            return jsonResponse;
+
+            return stringResponse;
         }
 
-        protected void onPostExecute(JSONObject jsonResponse) {
-            //Log.d(LOG_TAG_REQUEST,"jsonResponse_post: "+jsonResponse.toString());
-            listener.responseServiceToManager(jsonResponse);
+        @Override
+        protected void onPostExecute(String stringResponse){
+            listener.responseServiceToManager(stringResponse);
         }
     }
 
-    public class AsyncRequestWithJSON extends AsyncTask<Void,Void,JSONObject>{
-        Activity 					activity;
-        JSONObject 		            requestData;
-        ResponseListenerInterface   listener;
-
-        /* DUMMY request mode info */
-        METHOD                      method;
-
-        public AsyncRequestWithJSON(Activity activity, JSONObject requestData, ResponseListenerInterface listener){
-            this.activity 	       	= activity;
-            this.requestData        = requestData;
-            this.listener    		= listener;
-
-        }
-
-        @Override
-        protected JSONObject doInBackground(Void... voids) {
-            Log.d(LOG_TAG_REQUEST,"Request data (JSON):"+requestData.toString());
-            JSONObject jsonResponse = null;
-            if (TEST_MODE){
-                try {
-                    Thread.sleep(5000);
-                    jsonResponse = new JSONObject();
-                    try {
-                        jsonResponse.put("method",method.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            else{
-                HttpParams httpParameters   = new BasicHttpParams();
-                int timeoutConnection       = 10000;
-                HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-                int timeoutSocket = 10000;
-                HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
-
-                HttpClient httpclient   = new DefaultHttpClient(httpParameters);
-                HttpPost httppost               = new HttpPost(API_URL);
-                ArrayList<NameValuePair> params = new ArrayList<NameValuePair>(6);
-                try {
-                    Log.d(LOG_TAG_REQUEST,"Req: "+requestData.toString());
-
-                    if ((requestData.toString().contains("{pdv_id:2"))
-                    || (requestData.toString().contains("{pdv_id\":\"4\",\n" +
-                            "\t\"products\":\"[\n" +
-                            "\t\t{\\\"id_product_container\\\":\\\"2\\\",\\\"price\\\":\\\"5\\\",\\\"id_product\\\":\\\"47\\\"},\n" +
-                            "\t\t{\\\"id_product_container\\\":\\\"1\\\",\\\"price\\\":\\\"6.70\\\",\\\"id_product\\\":\\\"67\\\"}]\",\n"))){
-                        try {
-                            Thread.sleep(5000);
-                            jsonResponse = new JSONObject();
-                            try {
-                                jsonResponse.put("method",method.toString());
-                                jsonResponse.put("success",true);
-                                jsonResponse.put("resp","OK");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-
-                    try {
-                        params.add(new BasicNameValuePair("request", requestData.get("request").toString()));
-                        params.add(new BasicNameValuePair("user", requestData.get("user").toString()));
-                        params.add(new BasicNameValuePair("token", requestData.get("token").toString()));
-                        params.add(new BasicNameValuePair("date", requestData.get("date").toString()));
-                        params.add(new BasicNameValuePair("id_pdv", requestData.get("id_pdv").toString()));
-                        String str = (requestData.get("products").toString());
-                        params.add(new BasicNameValuePair("products", str));
-
-                        httppost.setEntity(new UrlEncodedFormEntity(params,HTTP.UTF_8));
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    HttpResponse response       = httpclient.execute(httppost);
-
-                    String       strResponse    = EntityUtils.toString(response.getEntity());
-                    Log.d(LOG_TAG_REQUEST,"Response: "+strResponse);
-                    try {
-                        jsonResponse            = new JSONObject(strResponse);
-                        jsonResponse.put("method",method.toString());
-                        Log.d(LOG_TAG_REQUEST,"jsonResponse: "+jsonResponse.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                } catch (ClientProtocolException e) {
-                    try {
-                        jsonResponse    = new JSONObject();
-                        jsonResponse.put("resp", "Network");
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
-                } catch (IOException e) {
-                    try {
-                        jsonResponse    = new JSONObject();
-                        jsonResponse.put("resp", "Info");
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            }
-            return jsonResponse;
-        }
-
-        protected void onPostExecute(JSONObject jsonResponse) {
-            //Log.d(LOG_TAG_REQUEST,"jsonResponse_post: "+jsonResponse.toString());
-            listener.responseServiceToManager(jsonResponse);
-        }
+    /**
+     * @param zipcodes
+     * @return
+     * @throws SAXException
+     * @throws IOException
+     * @throws ParserConfigurationException
+     */
+    public String parseToStringZipCodes(InputStream zipcodes) throws SAXException, IOException, ParserConfigurationException{
+        Document doc;
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        documentBuilder.isValidating();
+        doc = documentBuilder.parse(zipcodes);
+        zipcodes.close();
+        doc.getDocumentElement().normalize();
+        String contentDocument = doc.getDocumentElement().getTextContent();
+        return contentDocument;
     }
 
     public interface ConfirmationDialogListener {
         public void okFromConfirmationDialog(String message);
+    }
+
+    private String getRequestURL(METHOD type_request){
+        String url = null;
+        switch (type_request){
+            case REQUEST_ZIPCODE:
+                url=  "http://validacpscs.estafeta.com/RestService.svc/ConsultaCP";
+                Log.v(METHOD.REQUEST_ZIPCODE.toString(), url);
+            break;
+            case REQUEST_ZIPCODE_ADDRESSES:
+                url =  "http://validacpscs.estafeta.com/RestService.svc/ConsultaDatosCP";
+                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), url);
+            break;
+            case REQUEST_TRACKING_LIST_CODES:
+                url =  "http://trackingcs.estafeta.com/RestService.svc/ExecuteQueryPlano";
+                Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), url);
+            break;
+            case REQUEST_TRACKING_LIST_GUIDES:
+                url =  "http://trackingcs.estafeta.com/RestService.svc/ExecuteQueryPlano";
+                Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), url);
+            break;
+            case REQUEST_NATIONAL_DELIVERY:
+                url =  "http://frecuenciacotizadorcs.estafeta.com/RestService.svc/FrecuenciaCotizadorPlano";
+                Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), url);
+            break;
+            case REQUEST_INTERNATIONAL_DELIVERY:
+                url =  "http://cotizadorintcs.estafeta.com/RestService.svc/CotizaPlano";
+                Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), url);
+                break;
+            case REQUEST_OFFICES:
+                url = "http://sucursalescs.estafeta.com/RestService.svc/consultaConFechaPlano";
+                Log.v( METHOD.REQUEST_OFFICES.toString(), url);
+            case REQUEST_EXCEPTION_CODES:
+                url =  "http://clavexcs.estafeta.com/RestService.svc/consultaConFechaMovilidadPlano";
+                Log.v( METHOD.REQUEST_EXCEPTION_CODES.toString(), url);
+            break;
+            default:
+                break;
+        }
+        return url;
     }
 }

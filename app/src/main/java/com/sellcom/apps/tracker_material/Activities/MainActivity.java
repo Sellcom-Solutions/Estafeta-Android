@@ -200,12 +200,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         FragmentManager     fragmentManager     = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+        //this.prepareRequest(method, params, true);
+
     }
 
     @Override
     public void prepareRequest(METHOD method, Map<String, String> params, boolean includeCredentials) {
         RequestManager.sharedInstance().setListener(this);
-        RequestManager.sharedInstance().makeRequestWithDataAndMethodIncludeCredentials(params, method,includeCredentials);
+        //RequestManager.sharedInstance().makeRequestWithDataAndMethodIncludeCredentials(params, method,includeCredentials);
     }
 
     @Override

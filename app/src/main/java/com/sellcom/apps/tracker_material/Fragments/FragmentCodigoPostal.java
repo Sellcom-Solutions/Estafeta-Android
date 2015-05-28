@@ -1,28 +1,37 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
+import com.sellcom.apps.tracker_material.Async_Request.METHOD;
+import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
+import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import com.sellcom.apps.tracker_material.R;
 
-import java.util.ArrayList;
+import org.json.JSONObject;
+
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Jose Luis 26/05/2015
  */
-public class FragmentCodigoPostal extends TrackerFragment{
+public class FragmentCodigoPostal extends TrackerFragment implements OnClickListener, UIResponseListenerInterface{
 
     private Spinner spinner_state;
     private String[] array_states;
     private SpinnerAdapter spinnerAdapter;
+    private Button validateZipCode;
+    private UIResponseListenerInterface listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -35,37 +44,47 @@ public class FragmentCodigoPostal extends TrackerFragment{
 
         if(view != null){
             spinner_state = (Spinner) view.findViewById(R.id.spinner_state);
-            setSpinnerStates(spinner_state);
+            validateZipCode = (Button) view.findViewById(R.id.btn_validar_zipcode);
+
+            //setStates to Spinner
+            setStatesToSpinner(spinner_state);
+
+            validateZipCode.setOnClickListener(this);
         }
 
         return view;
     }
 
-    public void setSpinnerStates(Spinner spinner){
-        List<Map<String, String>> listStates = new ArrayList<>();
+    @Override
+    public void onClick(View view) {
 
-        array_states = new String[10];
-        array_states[0] = "Estado de Mexico";
-        array_states[1] = "Distrito Federal";
-        array_states[2] = "Jalisco";
-        array_states[3] = "Hidalgo";
-        array_states[4] = "Tamaulipas";
-        array_states[5] = "Veracruz";
-        array_states[6] = "Queretaro";
-        array_states[7] = "San Luis Potosi";
-        array_states[8] = "Quintana Roo";
-        array_states[9] = "Estado*";
+        //MapString Params...
+        //Query from Zip Code
+        Map<String, String> requestData =  new HashMap<>();
+        requestData.put("suscriberId", "1");
+        requestData.put("login", "AdminUser");
+        requestData.put("password", "zi+Eybk8");
+        requestData.put("pais", "Mexico");
+        //requestData.put("estado", "Hidalgo");
+        //requestData.put("codigoPostal", "43000");
+        //requestData.put("ciudad", "Huejutla de Reyes");
+        //requestData.put("localidad", "Huejutla de Reyes");
 
-        for(int i = 0; i < 10; i++){
-            Map<String, String> state = new HashMap<>();
-            state.put("state", array_states[i]);
-            listStates.add(state);
-        }
-
-        spinnerAdapter = new SpinnerAdapter(getActivity(), listStates, SpinnerAdapter.SPINNER_TYPE.STATES);
-        spinner.setAdapter(spinnerAdapter);
-        spinner.setSelection(listStates.size() - 1);
+        //Send params to RequestManager
+        RequestManager.sharedInstance().setListener(this);
+        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_EXCEPTION_CODES ,requestData);
 
     }
+
+    @Override
+    public void decodeResponse(String response){
+        if(response != null){
+            Log.v("FragmentCodigoPostal", response);
+        }else{
+            Log.v("FragmentCodigoPostal", "El servidor devolvio null");
+        }
+
+    }
+
 
 }

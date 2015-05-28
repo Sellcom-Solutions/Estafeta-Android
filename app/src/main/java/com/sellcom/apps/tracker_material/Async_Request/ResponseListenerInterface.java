@@ -6,4 +6,5 @@ import java.util.Map;
 
 public interface ResponseListenerInterface {
     public void responseServiceToManager(JSONObject jsonResponse);
+    public void responseServiceToManager(String stringResponse);
 }
