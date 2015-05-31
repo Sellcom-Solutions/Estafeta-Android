@@ -52,6 +52,38 @@
     <string name="buscar_codigo">Buscar un Código Postal</string>
     <string name="search_by_zip_code">Buscar Código Postal</string>
 
+    <string name="db_trackdata">CREATE TABLE "trackdata" ("id_trackdata"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "waybill"  TEXT(24),
+        "shortwaybill" TEXT(24), "srvcid"  TEXT(24), "srvcdescspa" TEXT(24), "srvcdesceng" TEXT(24), "custnumber" TEXT(24), "packagetype" TEXT(24),
+        "adtnlinfo" TEXT(24), "statusspa" TEXT(24), "statuseng"  TEXT(24), "pd_org_acronym" TEXT(24), "pd_org_name"  TEXT(24), "pd_pkup_date" TEXT(24),
+        "dd_dst_acronym" TEXT(24), "dd_dst_name" TEXT(24), "dd_dlvry_date" TEXT(24), "dd_zip"  TEXT(24), "dd_rcvr" TEXT(24), "dm_weight" TEXT(24),
+        "dm_volweight"  TEXT(24), "dm_width"  TEXT(24), "dm_length"  TEXT(24), "dm_height" TEXT(24), "wbrd_org_waybill"  TEXT(24), "wbrd_rplc_waybill"
+        TEXT(24), "rtrndd_initl_waybill"  TEXT(24), "rtrndd_final_waybill" TEXT(24), "msd_prec_waybills" TEXT(24), "msd_foll_waybills" TEXT(24),
+        "msd_wb_list"  TEXT(24), "intld_intl_waybill"  TEXT(24), "intld_org_countrycode" TEXT(24), "intld_org_countryspa"  TEXT(24), "intld_org_countryeng"
+        TEXT(24), "cstminfo_reference" TEXT(24), "cstminfo_costsCentre" TEXT(24), "id_ctl_favoritos" INTEGER NOT NULL)</string>
+
+    <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "evnt_date"  TEXT(20), "evnt_id" TEXT(50),
+        "evnt_desc_spa" TEXT(200), "evnt_desc_eng" TEXT(200), "evnt_place_acronym" TEXT(200), "evnt_place_name"  TEXT(200), "except_code"  TEXT(3),
+        "except_descspa" TEXT(200), "except_desceng" TEXT(200), "except_details"  TEXT(200), "id_trackdata"  INTEGER NOT NULL)</string>
+
+    <string name="db_ctlfavoritos">CREATE TABLE "ctl_favoritos" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"guia"  TEXT(24),"rastreo"
+        TEXT(24),"alias"  TEXT(100),"fecha_registro"  TEXT(20) NOT NULL, "notifica" integer not null default(0))</string>
+
+    <string name="db_estados">CREATE TABLE estados ( Z_PK INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ZNUMEROESTADO INTEGER, ZLATITUD VARCHAR,
+        ZLONGITUD VARCHAR, ZNOMBRE VARCHAR )</string>
+
+    <string name="db_offices">CREATE TABLE "offices" ( "id_office" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ent" TEXT(24), "opt" TEXT(24),
+        "estado" TEXT(24), "calle1" TEXT(200), "calle2" TEXT(200), "ciudad" TEXT(200), "codigo_postal" TEXT(10), "colonia" TEXT(200), "correo" TEXT(200),
+        "entrega_oficina" TEXT(200), "ext1" TEXT(10), "ext2" TEXT(10), "horario_atencion" TEXT(200), "horario_comida" TEXT(200), "horario_ext" TEXT(200),
+        "horario_recol" TEXT(200), "horario_sabatino" TEXT(200), "idcatalogo" TEXT(24), "latitud" TEXT(24),  "longitud" TEXT(24), "no_oficina" TEXT(24),
+        "nombre" TEXT(200), "telefono1" TEXT(50), "telefono2" TEXT(50), "tipo_oficina" TEXT(5), "tipos_pago" TEXT(200), "version" TEXT(25), "ciudad_n"
+        TEXT(200), "colonia_n" TEXT(200))</string>
+
+    <string name="db_codigos">CREATE TABLE codigos ( Z_PK INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ZCLAVE VARCHAR, ZDESCRIPCIONCLAVE VARCHAR,
+        ZIDCATALOGO VARCHAR, ZVERSION VARCHAR )</string>
+
+    <string name="db_paises">CREATE TABLE "paises" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "idpais" TEXT, "nombrepais_esp" TEXT,
+        "nombrepais_ing" TEXT)</string>
+
     <!-- ********************   Strings aplicación anterior   ************************** -->
     <string name="title_activity_main">MainActivity</string>
     <string name="hello_world">Hello world!</string>
