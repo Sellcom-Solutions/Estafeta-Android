@@ -3,9 +3,11 @@ package com.sellcom.apps.tracker_material.Async_Request;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,6 +15,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -158,6 +161,7 @@ public class RequestManager implements ResponseListenerInterface {
     public class AsyncRequest extends AsyncTask<Void, Void, String>{
 
         Activity activity;
+        Map<String, String> credentials;
         Map<String, String> requestData;
         ResponseListenerInterface listener;
         METHOD method;
@@ -185,9 +189,14 @@ public class RequestManager implements ResponseListenerInterface {
             HttpClient httpclient = new DefaultHttpClient(httpParameters);
             //especify the method to connect to web server
             HttpPost httppost = new HttpPost(getRequestURL(this.method));
+            credentials = getCredentials(this.method);
 
             try {
+                List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
                 List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
+
+                for (Map.Entry<String, String> entry : credentials.entrySet())
+                    params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 
                 for (Map.Entry<String, String> entry : requestData.entrySet())
                     params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
@@ -285,5 +294,72 @@ public class RequestManager implements ResponseListenerInterface {
                 break;
         }
         return url;
+    }
+
+    private Map<String, String> getCredentials(METHOD type_request){
+        Map<String, String> requestData = new HashMap<>();
+        switch (type_request){
+            case REQUEST_OFFICES:
+                requestData.put("idUsuario","1");
+                requestData.put("usuario","AdminUser");
+                requestData.put("password","zi+Eybk8");
+
+                Log.v( METHOD.REQUEST_OFFICES.toString(), "");
+
+            case REQUEST_EXCEPTION_CODES:
+                requestData.put("idUsuario","1");
+                requestData.put("usuario","AdminUser");
+                requestData.put("password","zi+Eybk8");
+                Log.v( METHOD.REQUEST_EXCEPTION_CODES.toString(), "");
+                break;
+
+            case REQUEST_ZIPCODE:
+                requestData.put("suscriberId", "1");
+                requestData.put("login", "AdminUser");
+                requestData.put("password", "zi+Eybk8");
+
+                Log.v(METHOD.REQUEST_ZIPCODE.toString(), "");
+                break;
+            case REQUEST_ZIPCODE_ADDRESSES:
+                requestData.put("suscriberId", "1");
+                requestData.put("login", "AdminUser");
+                requestData.put("password", "zi+Eybk8");
+                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "");
+                break;
+            case REQUEST_TRACKING_LIST_CODES:
+                requestData.put("suscriberId", "1");
+                requestData.put("login", "AdminUser");
+                requestData.put("password", "zi+Eybk8");
+                Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), "");
+                break;
+            case REQUEST_TRACKING_LIST_GUIDES:
+                requestData.put("suscriberId", "1");
+                requestData.put("login", "AdminUser");
+                requestData.put("password", "zi+Eybk8");
+                Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), "");
+                break;
+            case REQUEST_NATIONAL_DELIVERY:
+                requestData.put("idUsuario","1");
+                requestData.put("usuario","AdminUser");
+                requestData.put("contra",",1,B(vVi");
+                requestData.put("esFrecuencia","false");
+                requestData.put("esLista","true");
+
+                Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), "");
+                break;
+            case REQUEST_INTERNATIONAL_DELIVERY:
+                requestData.put("idUsuario","1");
+                requestData.put("usuario","AdminUser");
+                requestData.put("pass","zi+Eybk8");
+                requestData.put("modalidad","0");
+                requestData.put("medicion","1");
+                Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), "");
+                break;
+
+
+            default:
+                break;
+        }
+    return requestData;
     }
 }

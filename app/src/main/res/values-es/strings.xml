@@ -19,6 +19,7 @@
 
     <!-- Headers-->
     <string name="rastreo">Rastreo</string>
+    <string name="oficinas">Oficinas</string>
 
     <!-- Rastreo-->
     <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de Guía debe tener 22 dígitos</string>

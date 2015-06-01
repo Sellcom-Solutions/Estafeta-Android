@@ -25,9 +25,6 @@
 
     offices_required
 
-
-
-
     <!-- Headers -->
     <string name="rastreo">Rastreo</string>
 
@@ -44,6 +41,7 @@
 
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>
+    <string name="oficinas">Oficinas</string>
     
     <!-- Codigo Postal -->
     <string name="verificar_codigo">Validar un Código Postal</string>

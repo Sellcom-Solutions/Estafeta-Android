@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
@@ -31,6 +32,8 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     private String[] array_states;
     private SpinnerAdapter spinnerAdapter;
     private Button validateZipCode;
+    private EditText zipCode;
+    private String zipCodeString;
     private UIResponseListenerInterface listener;
 
     @Override
@@ -45,9 +48,10 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
         if(view != null){
             spinner_state = (Spinner) view.findViewById(R.id.spinner_state);
             validateZipCode = (Button) view.findViewById(R.id.btn_validar_zipcode);
-
+            zipCode = (EditText) view.findViewById(R.id.verify_zip_code);
             //setStates to Spinner
             setStatesToSpinner(spinner_state);
+
 
             validateZipCode.setOnClickListener(this);
         }
@@ -58,21 +62,18 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     @Override
     public void onClick(View view) {
 
+        zipCodeString = zipCode.getText().toString();
         //MapString Params...
         //Query from Zip Code
         Map<String, String> requestData =  new HashMap<>();
-        requestData.put("suscriberId", "1");
-        requestData.put("login", "AdminUser");
-        requestData.put("password", "zi+Eybk8");
         requestData.put("pais", "Mexico");
+        requestData.put("codigoPostal",zipCodeString);
         //requestData.put("estado", "Hidalgo");
-        //requestData.put("codigoPostal", "43000");
-        //requestData.put("ciudad", "Huejutla de Reyes");
-        //requestData.put("localidad", "Huejutla de Reyes");
+
 
         //Send params to RequestManager
         RequestManager.sharedInstance().setListener(this);
-        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_EXCEPTION_CODES ,requestData);
+        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES,requestData);
 
     }
 

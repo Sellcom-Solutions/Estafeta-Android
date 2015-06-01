@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:layout_width                ="match_parent"
-        android:layout_height               ="wrap_content"
+        android:layout_height               ="115dp"
         android:background                  ="@drawable/head_rastreo"
         android:orientation                 ="vertical">
 
@@ -139,13 +139,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray">
 
         <ListView
             android:id                      ="@+id/liv_rastreo"
             android:layout_width            ="match_parent"
             android:layout_height           ="wrap_content"
-            android:visibility="visible">
+            android:visibility              ="visible">
 
         </ListView>
 

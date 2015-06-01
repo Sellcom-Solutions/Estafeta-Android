@@ -10,7 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import database.model.States;
 
+import com.sellcom.apps.tracker_material.Async_Request.METHOD;
+import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
+import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 import com.sellcom.apps.tracker_material.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import database.DataBaseAdapter;
 import database.DataBaseHelper;
@@ -44,7 +50,6 @@ public class SplashScreenActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
@@ -53,7 +58,7 @@ public class SplashScreenActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class CreateDB extends AsyncTask<String, Void, String>{
+    class CreateDB extends AsyncTask<String, Void, String> implements UIResponseListenerInterface {
 
         @Override
         protected void onPreExecute() {
@@ -66,11 +71,19 @@ public class SplashScreenActivity extends ActionBarActivity {
             //Crear DB
             DataBaseHelper dbHelper = new DataBaseHelper(context);
             Log.d("SplashScreen","crea dbHelper");
-
             DataBaseAdapter.openDB(context);
-            //dbHelper.close();
             States.setStates(context,"states.json");
 
+            //Actualizar oficinas
+            Map<String, String> requestData =  new HashMap<>();
+            String fecha = "2015-05-28 15:01:22.000";
+            requestData.put("ultimaAct",fecha);
+
+            RequestManager.sharedInstance().setListener(this);
+            RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES ,requestData);
+
+
+            dbHelper.close();
             return null;
         }
         @Override
@@ -80,6 +93,19 @@ public class SplashScreenActivity extends ActionBarActivity {
 
         }
 
+        @Override
+        public void prepareRequest(METHOD method, Map<String, String> params, boolean includeCredentials) {
+
+        }
+
+        @Override
+        public void decodeResponse(String stringResponse) {
+            if(stringResponse != null){
+                Log.v("SplashScreen resp", stringResponse);
+            }else{
+                Log.v("SplashScreenActivity", "El servidor devolvio null");
+            }
+        }
     }
 
     class RefreshDB extends AsyncTask<String, Void, String>{
