@@ -1,7 +1,10 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +13,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
@@ -20,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import location.GPSTracker;
 
 /**
  * Created by jonathan.vazquez on 21/05/15.
@@ -37,6 +45,8 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
     private ArrayAdapter<String>    arrayAdapter;
     private SpinnerAdapter  spinnerAdap;
 
+    private TrackerFragment fragment;
+
     private EditText    edt_city,
                         edt_colony,
                         edt_zip_code;
@@ -44,6 +54,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getActivity();
     }
 
     @Override
@@ -78,9 +89,16 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         switch (v.getId()) {
 
             case R.id.btn_near:
+                Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
+                if(myLocation != null){
+                    nearOffice();
+                }else{
+                    Toast.makeText(context, "Favor de encender su GPS", Toast.LENGTH_SHORT).show();
+                }
 
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando Oficinas...");
-                //nearOffice();
+
+                //DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando Oficinas...");
+
                 break;
 
             case  R.id.btn_search:
@@ -94,17 +112,16 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         Bundle bundle = new Bundle();
 
 
-/*        FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
+        FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        FragmentOfficesMap fragment             = new FragmentOfficesMap();
-
+        fragment   = new FragmentOfficesMap();
+        fragment.addFragmentToStack(getActivity());
         fragment.setArguments(bundle);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.container, fragment, TAG);
         fragmentTransaction.commit();
-        ((MainActivity) getActivity()).depthCounter = 2;
-*/
+
 
     }
 
@@ -153,7 +170,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
         spinnerAdap = new SpinnerAdapter(getActivity(),listStates, SpinnerAdapter.SPINNER_TYPE.STATES);
         spinner.setAdapter(spinnerAdap);
-        spinner.setSelection(listStates.size() - 1);
+        //spinner.setSelection(listStates.size() - 1);
 
     }
 }

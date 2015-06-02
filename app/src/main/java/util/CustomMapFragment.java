@@ -46,9 +46,9 @@ public class CustomMapFragment extends SupportMapFragment {
             settings.setScrollGesturesEnabled(true);
             settings.setMyLocationButtonEnabled(false);
 
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 16));
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 14));
             map.setMyLocationEnabled(true);
-            map.setTrafficEnabled(true);
+            map.setTrafficEnabled(false);
         }
     }
 }

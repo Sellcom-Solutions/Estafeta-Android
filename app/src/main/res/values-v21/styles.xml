@@ -9,7 +9,10 @@
         <item name="android:textColorPrimary">@color/estafeta_text</item>
         <item name="android:navigationBarColor">@color/estafeta_red</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
+        <item name="android:spinnerStyle">@style/mySpinnerItemStyle</item>
+        <item name="colorControlNormal">@color/estafeta_soft_gray</item>
+        <item name="colorControlActivated">@color/estafeta_soft_gray</item>
+        <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
 
@@ -33,4 +36,18 @@
         <item name="android:windowAnimationStyle">@style/DialogAnimations</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <style name="EditStyle" parent="Widget.AppCompat.EditText">
+
+        <item name="colorControlNormal">@color/estafeta_red</item>
+        <item name="colorControlActivated">@color/estafeta_red</item>
+        <item name="colorControlHighlight">@color/estafeta_red</item>
+
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Spinner">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:popupBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

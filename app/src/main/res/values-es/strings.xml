@@ -14,7 +14,7 @@
     <string name="offices_search_by_address">Buscar por dirección</string>
     <string name="city_etc">Ciudad, municipio, delegación</string>
     <string name="locality">Colonia</string>
-    <string name="zip_code">Código Postal</string>
+    <string name="zip_code">C.P.</string>
     <string name="mandatory_fields">Campos Obligatorios *</string>
 
     <!-- Headers-->

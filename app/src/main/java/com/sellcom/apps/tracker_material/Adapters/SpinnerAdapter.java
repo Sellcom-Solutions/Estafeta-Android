@@ -49,7 +49,7 @@ public class SpinnerAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return mItems.size()-1;
+        return mItems.size();
     }
 
     public Object getItem(int position) {
