@@ -38,6 +38,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import com.gc.materialdesign.widgets.Dialog;
+import com.sellcom.apps.tracker_material.R;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -111,6 +112,25 @@ public class RequestManager implements ResponseListenerInterface {
         builder.setNeutralButton("OK",new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int id) {
                 listener.okFromConfirmationDialog(confirmMessage);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    public void showDecisionDialogWithListener(final String confirmMessage, Context context, final DecisionDialogWithListener listener){
+        Log.d(LOG_TAG_MANAGER,"Error message: "+confirmMessage);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Atención");
+        builder.setMessage(confirmMessage);
+        builder.setPositiveButton(context.getString(R.string.done), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                listener.responseFromDecisionDialog(confirmMessage, "OK");
+            }
+        });
+        builder.setNegativeButton(context.getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                listener.responseFromDecisionDialog(confirmMessage, "CANCEL");
             }
         });
         AlertDialog alert = builder.create();

@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.sellcom.apps.tracker_material.Async_Request.DecisionDialogWithListener;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
@@ -30,7 +31,7 @@ import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 import java.util.Map;
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks, UIResponseListenerInterface {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks, UIResponseListenerInterface ,DecisionDialogWithListener {
 
     String ACT_TAG = "MainActivity";
 
@@ -86,18 +87,20 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             return;
         }
 
-        if (depthCounter == 1) {
-
+        if (depthCounter == 0) {
+            /*
             FragmentManager fragmentManager = getSupportFragmentManager();
             Fragment tracking   = fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString());
 
             if(tracking != null && tracking.isAdded()){
                 fragmentManager.beginTransaction().remove(tracking).commit();
                 this.recreate();
-            }
+            }*/
+
+            RequestManager.sharedInstance().showDecisionDialogWithListener(getString(R.string.req_man_confirm_exit), this, this);
 
         } else {
-            Fragment home = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString());
+            //Fragment home = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString());
             /*if(home != null && home.isAdded()){
                 Log.d("---->","Is already added");
                 moveTaskToBack(true);
@@ -160,12 +163,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public void prepareTransaction(){
         fragment.section_index  = position;
         fragment.tag            = CURRENT_FRAGMENT_TAG;
+        /*
         if (position > 0) {
             fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.shrink_out, R.anim.slide_from_left, R.anim.shrink_out);
             depthCounter = 1;
         } else if (position == 0) {
             depthCounter = 0;
-        }
+        }*/
+
+        fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.shrink_out, R.anim.slide_from_left, R.anim.shrink_out);
+        depthCounter = 0;
 
         if(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString()) != null)
             fragmentTransaction.remove(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString()));
@@ -178,6 +185,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     public void onSectionAttached(int number) {
         mTitle = getResources().getStringArray(R.array.drawer_items)[number];
+    }
+
+    public void incrementDepthCounter(){
+        depthCounter++;
     }
 
     public void restoreActionBar() {
@@ -218,4 +229,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     }
 
 
+    @Override
+    public void responseFromDecisionDialog(String confirmMessage, String option) {
+        if (option.equalsIgnoreCase("OK"))
+            moveTaskToBack(true);
+    }
 }

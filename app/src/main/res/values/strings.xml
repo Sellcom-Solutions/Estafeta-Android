@@ -6,6 +6,13 @@
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Settings</string>
 
+    <!-- RequestManager -->
+
+    <string name="done">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="req_man_confirm_exit">¿Desea salir de la aplicación?</string>
+
+
     <!-- Drawer options strings -->
     <string-array name="drawer_items">
         <item>Rastreo</item>

@@ -75,6 +75,14 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
 
     }
 
+
+    public void addFragmentToStack(Activity activity){
+
+        ((MainActivity) activity).incrementDepthCounter();
+
+    }
+
+
     //created by jose luis at 27/05/2015
     public void setStatesToSpinner(Spinner spinner) {
         //get the states from database

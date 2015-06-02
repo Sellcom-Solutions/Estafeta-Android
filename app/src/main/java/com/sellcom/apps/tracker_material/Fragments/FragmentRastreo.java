@@ -128,7 +128,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 fragmentManager =getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragment = new FragmentRastreoEfectuado();
-
+                fragment.addFragmentToStack(getActivity());
                 fragment.setArguments(bundle);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.container, fragment, TAG);
