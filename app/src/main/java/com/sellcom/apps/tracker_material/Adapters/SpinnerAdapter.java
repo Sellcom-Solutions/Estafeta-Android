@@ -71,7 +71,7 @@ public class SpinnerAdapter extends BaseAdapter {
         //main_text.setBackground(mContext.getResources().getDrawable(R.drawable.underline_red));
         switch (type){
             case STATES:
-                main_text.setText(mItem.get("state"));
+                main_text.setText(mItem.get("ZNOMBRE"));
                 break;
 
             default:
@@ -97,7 +97,7 @@ public class SpinnerAdapter extends BaseAdapter {
 
         switch (type){
             case STATES:
-                main_text.setText(mItem.get("state"));
+                main_text.setText(mItem.get("ZNOMBRE"));
                 break;
             default:
                 break;

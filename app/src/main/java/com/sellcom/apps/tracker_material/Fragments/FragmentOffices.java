@@ -1,5 +1,6 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,7 +28,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
     public static final String TAG = "FRAG_OFFICES";
 
-
+    Context context;
     private Button      btn_near,
                         btn_search;
 
@@ -65,7 +66,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             btn_search.setOnClickListener(this);
 
 
-            setSpinnerStates(spn_state);
+            setStatesToSpinner(spn_state, context);
         }
 
         return view;
@@ -79,7 +80,6 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             case R.id.btn_near:
 
                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando Oficinas...");
-
                 //nearOffice();
                 break;
 
@@ -138,7 +138,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         for (int i = 0; i < 10 ; i++){
             Log.d(TAG,arraySpinner[i]);
             Map<String,String> map = new HashMap<>();
-            map.put("state",arraySpinner[i]);
+            map.put("ZNOMBRE",arraySpinner[i]);
             listStates.add(map);
         }
 

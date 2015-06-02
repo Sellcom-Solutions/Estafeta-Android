@@ -55,7 +55,7 @@
     <string name="abr_codigo">C.P.</string>
     <string name="validar_codigo">Validar</string>
     <string name="buscar_codigo">Buscar un Código Postal</string>
-    <string name="search_by_zip_code">Buscar Código Postal</string>
+    <string name="search_by_zip_code">Código Postal</string>
 
     <string name="db_trackdata">CREATE TABLE "trackdata" ("id_trackdata"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "waybill"  TEXT(24),
         "shortwaybill" TEXT(24), "srvcid"  TEXT(24), "srvcdescspa" TEXT(24), "srvcdesceng" TEXT(24), "custnumber" TEXT(24), "packagetype" TEXT(24),

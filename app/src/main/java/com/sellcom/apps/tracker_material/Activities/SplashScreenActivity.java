@@ -8,6 +8,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import database.model.Offices;
 import database.model.States;
 
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
@@ -73,21 +75,22 @@ public class SplashScreenActivity extends ActionBarActivity {
         @Override
         protected String doInBackground(String... params) {
             //Crear DB
-            DataBaseHelper dbHelper = new DataBaseHelper(context);
+           // DataBaseHelper dbHelper = new DataBaseHelper(context);
             Log.d("SplashScreen","crea dbHelper");
             DataBaseAdapter.openDB(context);
+
             States.setStates(context,"states.json");
 
             //Actualizar oficinas
             Map<String, String> requestData =  new HashMap<>();
-            String fecha = "2015-05-28 15:01:22.000";
+            String fecha = Offices.getVersion(context);
             requestData.put("ultimaAct",fecha);
 
             RequestManager.sharedInstance().setListener(this);
             RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
 
 
-            dbHelper.close();
+           // dbHelper.close();
             return null;
         }
         @Override

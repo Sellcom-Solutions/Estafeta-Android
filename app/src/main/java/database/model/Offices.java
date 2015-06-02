@@ -2,6 +2,10 @@ package database.model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import database.DataBaseAdapter;
 
@@ -154,4 +158,16 @@ public class Offices {
 
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
     }
+
+    public static String getVersion(Context context) {
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            String version = cursor.getString(cursor.getColumnIndexOrThrow(VERSION));
+            cursor.close();
+            return version;
+        }
+        return null;
+    }
+
+
 }

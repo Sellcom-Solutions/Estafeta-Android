@@ -3,6 +3,7 @@ package database.model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.database.Cursor;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -11,6 +12,9 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import database.DataBaseAdapter;
 
@@ -49,6 +53,29 @@ public class States {
         cv.put(ZNOMBRE, znombre);
 
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
+    }
+
+    public static ArrayList<Map<String,String>> getAllInMaps(Context context){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+                Map<String,String> map  = new HashMap<String, String>();
+
+                map.put(ZNUMEROESTADO,cursor.getString(cursor.getColumnIndexOrThrow(ZNUMEROESTADO)));
+                map.put(ZLATITUD,cursor.getString(cursor.getColumnIndexOrThrow(ZLATITUD)));
+                map.put(ZLONGITUD,cursor.getString(cursor.getColumnIndexOrThrow(ZLONGITUD)));
+                map.put(ZNOMBRE,cursor.getString(cursor.getColumnIndexOrThrow(ZNOMBRE)));
+                list.add(map);
+            }
+            Log.d("Campos recuperados: ", ""+list.size());
+            cursor.close();
+            return list;
+        }
+        return null;
     }
 
     public static void setStates(Context context, String file_name){
