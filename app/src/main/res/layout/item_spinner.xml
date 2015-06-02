@@ -10,10 +10,9 @@
         android:layout_height="wrap_content"
 
         android:textSize="@dimen/sizeNormalText"
-        android:textColor="@color/estafeta_soft_gray"
+        android:textColor="@color/estafeta_text"
         android:background="@color/white"
         android:singleLine="true"
-        android:textStyle="bold"
         android:ellipsize="marquee"
 
 

@@ -26,7 +26,7 @@
     <string name="offices_search_by_address">Buscar por dirección</string>
     <string name="city_etc">Ciudad, municipio, delegación*</string>
     <string name="locality">Colonia</string>
-    <string name="zip_code">Código Postal</string>
+    <string name="zip_code">C.P.</string>
     <string name="mandatory_fields">Campos Obligatorios *</string>
 
     offices_required
@@ -52,6 +52,7 @@
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>
+    <string name="ubicar_oficinas">Ubicar Oficinas</string>
     
     <!-- Codigo Postal -->
     <string name="verificar_codigo">Validar un Código Postal</string>
