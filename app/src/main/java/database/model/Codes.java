@@ -2,6 +2,12 @@ package database.model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import database.DataBaseAdapter;
 
@@ -44,7 +50,45 @@ public class Codes {
 
     }
 
+    public static ArrayList<Map<String,String>> getAllInMaps(Context context){
 
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+                Map<String,String> map  = new HashMap<String, String>();
+
+                map.put(ZCLAVE,cursor.getString(cursor.getColumnIndexOrThrow(ZCLAVE)));
+                map.put(ZDESCRIPCIONCLAVE,cursor.getString(cursor.getColumnIndexOrThrow(ZDESCRIPCIONCLAVE)));
+                map.put(ZIDCATALOGO,cursor.getString(cursor.getColumnIndexOrThrow(ZIDCATALOGO)));
+                map.put(ZVERSION,cursor.getString(cursor.getColumnIndexOrThrow(ZVERSION)));
+
+                list.add(map);
+            }
+            Log.d("Campos recuperados: ", "" + list.size());
+            cursor.close();
+            return list;
+        }
+        return null;
+    }
+
+    public static void removeAll(Context context){
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ZPK);
+        if (cursor != null && cursor.getCount() > 0) {
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                int id              = cursor.getInt(cursor.getColumnIndexOrThrow(ZPK));
+                delete(context, id);
+            }
+        }
+        cursor.close();
+    }
+
+    public static int delete(Context context, int id) {
+        return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ZPK + "=" + id, null);
+    }
 
 
 }
