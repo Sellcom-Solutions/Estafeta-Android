@@ -1,6 +1,7 @@
 package com.sellcom.apps.tracker_material.Utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,6 +17,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import database.model.States;
 
 public class TrackerFragment extends Fragment implements UIResponseListenerInterface {
     public boolean  isFromDrawer    = true;
@@ -76,45 +79,16 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
     }
 
     //created by jose luis at 27/05/2015
-    public void setStatesToSpinner(Spinner spinner) {
+    public void setStatesToSpinner(Spinner spinner, Context context) {
         //get the states from database
-        String[] states = getStates();
-
-        //Initialize the ListMap<>
-        List<Map<String, String>> listStates = new ArrayList<>();
-
-        //Add all states to ListMap
-        for (int i = 0; i < states.length; i++){
-            Map<String, String> state = new HashMap<>();
-            state.put("state", states[i]);
-            listStates.add(state);
-        }
+        ArrayList<Map<String,String>> states = States.getAllInMaps(context);
 
         //set the spinnerAdapter with the values states
-        spinnerAdapter = new SpinnerAdapter(getActivity(), listStates, SpinnerAdapter.SPINNER_TYPE.STATES);
+        spinnerAdapter = new SpinnerAdapter(getActivity(), states, SpinnerAdapter.SPINNER_TYPE.STATES);
         spinner.setAdapter(spinnerAdapter);
-        spinner.setSelection(listStates.size() - 1);
+        spinner.setSelection(states.size() - 1);
 
     }
 
-    //Simulate call to database, return array or ArrayList<?>
-    public String[] getStates(){
 
-        //initialize size of array
-        String[] array_states = new String[10];
-
-        //Set values in X position
-        array_states[0] = "Estado de Mexico";
-        array_states[1] = "Distrito Federal";
-        array_states[2] = "Jalisco";
-        array_states[3] = "Hidalgo";
-        array_states[4] = "Tamaulipas";
-        array_states[5] = "Veracruz";
-        array_states[6] = "Queretaro";
-        array_states[7] = "San Luis Potosi";
-        array_states[8] = "Quintana Roo";
-        array_states[9] = "Estado*";
-
-        return array_states;
-    }
 }

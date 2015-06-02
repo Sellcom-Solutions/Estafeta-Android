@@ -1,5 +1,6 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,13 +29,21 @@ import java.util.Map;
  */
 public class FragmentCodigoPostal extends TrackerFragment implements OnClickListener, UIResponseListenerInterface{
 
+    Context context;
     private Spinner spinner_state;
     private String[] array_states;
     private SpinnerAdapter spinnerAdapter;
+
     private Button validateZipCode;
+    private Button buscarZipCode;
     private EditText zipCode;
+    private EditText ciudad;
+    private EditText colonia;
+
     private String zipCodeString;
-    private UIResponseListenerInterface listener;
+    private String ciudadString;
+    private String coloniaString;
+    private String estadoString;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -46,14 +55,19 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
         View view = inflater.inflate(R.layout.fragment_codigo_postal, container, false);
 
         if(view != null){
-            spinner_state = (Spinner) view.findViewById(R.id.spinner_state);
+            spinner_state   = (Spinner) view.findViewById(R.id.spinner_state);
             validateZipCode = (Button) view.findViewById(R.id.btn_validar_zipcode);
-            zipCode = (EditText) view.findViewById(R.id.verify_zip_code);
+            buscarZipCode   = (Button) view.findViewById(R.id.btn_buscar_zipcode);
+            zipCode         = (EditText) view.findViewById(R.id.verify_zip_code);
+            ciudad          = (EditText) view.findViewById(R.id.ciudad);
+            colonia         = (EditText) view.findViewById(R.id.colonia);
+
             //setStates to Spinner
-            setStatesToSpinner(spinner_state);
+            setStatesToSpinner(spinner_state,context);
 
 
             validateZipCode.setOnClickListener(this);
+            buscarZipCode.setOnClickListener(this);
         }
 
         return view;
@@ -62,18 +76,36 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     @Override
     public void onClick(View view) {
 
-        zipCodeString = zipCode.getText().toString();
-        //MapString Params...
-        //Query from Zip Code
-        Map<String, String> requestData =  new HashMap<>();
-        requestData.put("pais", "Mexico");
-        requestData.put("codigoPostal",zipCodeString);
-        //requestData.put("estado", "Hidalgo");
+        switch (view.getId()){
+            case R.id.btn_validar_zipcode:
+                zipCodeString = zipCode.getText().toString();
+                //MapString Params...
+                //Query from Zip Code
+                Map<String, String> requestData =  new HashMap<>();
+                requestData.put("pais", "Mexico");
+                requestData.put("codigoPostal",zipCodeString);
 
+                //Send params to RequestManager
+                RequestManager.sharedInstance().setListener(this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES,requestData);
+                break;
 
-        //Send params to RequestManager
-        RequestManager.sharedInstance().setListener(this);
-        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES,requestData);
+            case R.id.btn_buscar_zipcode:
+                ciudadString = ciudad.getText().toString();
+                coloniaString = colonia.getText().toString();
+                estadoString = spinner_state.getSelectedItem().toString();
+
+                requestData = new HashMap<>();
+                requestData.put("pais","MEXICO");
+                requestData.put("estado", estadoString);
+                requestData.put("ciudad",ciudadString);
+                requestData.put("localidad",coloniaString);
+
+                RequestManager.sharedInstance().setListener(this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE,requestData);
+                break;
+        }
+
 
     }
 
