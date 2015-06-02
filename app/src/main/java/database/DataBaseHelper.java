@@ -1,6 +1,7 @@
 package database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,7 +11,10 @@ import com.sellcom.apps.tracker_material.R;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.security.acl.Permission;
 
+
+import database.model.Offices;
 import database.model.States;
 
 /**
@@ -85,34 +89,14 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
-
-        //readInsertsFile("insert_estados.txt");
-        readInsertsFile("insert_paises.txt");
-        readInsertsFile("insert_codigos.txt");
-        readInsertsFile("insert_oficinas.txt");
     }
 
-    private void readInsertsFile(String filename) {
-        try {
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    mContext.getAssets().open("dbtxt/" + filename)));
-            String strLine;
-            // Read File Line By Line
-            db.beginTransaction();
-            while ((strLine = br.readLine()) != null) {
-                db.execSQL(strLine);
-            }
-            db.setTransactionSuccessful();
-        } catch (Exception e) {// Catch exception if any
-            System.err.println("Error: " + e.getMessage());
-        } finally{
-            db.endTransaction();
-        }
-    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+
 }

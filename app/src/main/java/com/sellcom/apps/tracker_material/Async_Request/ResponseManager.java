@@ -18,7 +18,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class ResponseManager {
 
-   /* public ArrayList<Map<String,String>> parseToStringServices(InputStream response) throws SAXException, IOException, ParserConfigurationException {
+    public ArrayList<Map<String,String>> parseZipCodes(InputStream response, String tipo) throws SAXException, IOException, ParserConfigurationException {
         Document doc;
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -35,8 +35,9 @@ public class ResponseManager {
         }
 
 
-       *//* String contentDocument = doc.getDocumentElement().getTextContent();
-        return contentDocument;*//*
-    }*/
+       /* String contentDocument = doc.getDocumentElement().getTextContent();
+        return contentDocument;*/
+        return null;
+    }
 
 }

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import database.DataBaseManager;
 import database.model.Offices;
 import database.model.States;
 
@@ -77,9 +78,8 @@ public class SplashScreenActivity extends ActionBarActivity {
             //Crear DB
            // DataBaseHelper dbHelper = new DataBaseHelper(context);
             Log.d("SplashScreen","crea dbHelper");
-            DataBaseAdapter.openDB(context);
+            DataBaseManager.sharedInstance().insert(context);
 
-            States.setStates(context,"states.json");
 
             //Actualizar oficinas
             Map<String, String> requestData =  new HashMap<>();

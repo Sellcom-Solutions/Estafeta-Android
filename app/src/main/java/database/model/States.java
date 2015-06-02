@@ -116,4 +116,20 @@ public class States {
         }
 
     }
+
+    public static void removeAll(Context context){
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, Z_PK);
+        if (cursor != null && cursor.getCount() > 0) {
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                int id              = cursor.getInt(cursor.getColumnIndexOrThrow(Z_PK));
+                delete(context, id);
+            }
+        }
+        cursor.close();
+    }
+
+    public static int delete(Context context, int id) {
+        return DataBaseAdapter.getDB(context).delete(TABLE_NAME, Z_PK + "=" + id, null);
+    }
 }
