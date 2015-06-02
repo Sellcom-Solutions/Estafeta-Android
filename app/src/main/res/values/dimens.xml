@@ -13,4 +13,7 @@
     <dimen name="customer_dimens_600sp">20sp</dimen>
     <dimen name="customer_dimens_720sp">23sp</dimen>
 
+    <!--Footer  -->
+    <dimen name="footerSize">10dp</dimen>
+
 </resources>

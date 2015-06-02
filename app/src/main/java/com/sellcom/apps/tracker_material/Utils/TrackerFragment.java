@@ -94,7 +94,7 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         //set the spinnerAdapter with the values states
         spinnerAdapter = new SpinnerAdapter(getActivity(), states, SpinnerAdapter.SPINNER_TYPE.STATES);
         spinner.setAdapter(spinnerAdapter);
-        spinner.setSelection(states.size() - 1);
+        //spinner.setSelection(states.size()-1);
 
     }
 

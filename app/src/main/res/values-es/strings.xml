@@ -31,4 +31,9 @@
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>
 
+    <!-- Footer -->
+    <string name="footer">(c) 2012-2015 Estafeta Mexicana S.A. de C.V.</string>
+
+    <string name="estado">Estado</string>
+
 </resources>

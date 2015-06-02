@@ -67,6 +67,8 @@ public class RequestManager implements ResponseListenerInterface {
     private         UIResponseListenerInterface             listener;
     private         METHOD                                  method;
 
+    public ArrayList<Map<String,String>> responseArray= new ArrayList<>();
+
     private         ProgressDialog                          progressDialog;
 
     private RequestManager(){
@@ -174,6 +176,8 @@ public class RequestManager implements ResponseListenerInterface {
         listener.decodeResponse(stringReponse);
     }
 
+
+
     /**
      *Created by Jose Luis at 27/05/2015
      * Generic AsyncRequest
@@ -199,6 +203,7 @@ public class RequestManager implements ResponseListenerInterface {
 
             String stringResponse = null;
 
+
             HttpParams httpParameters = new BasicHttpParams();
             int timeoutConnection = 5000;
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
@@ -212,7 +217,7 @@ public class RequestManager implements ResponseListenerInterface {
             credentials = getCredentials(this.method);
 
             try {
-                List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
+               // List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
                 List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
 
                 for (Map.Entry<String, String> entry : credentials.entrySet())
@@ -231,11 +236,13 @@ public class RequestManager implements ResponseListenerInterface {
                     InputStream streamZipCodes = entity.getContent();
                     try {
                         stringResponse = parseToStringZipCodes(streamZipCodes);
+                        responseArray = responseParse(streamZipCodes,this.method);
                     } catch (SAXException e) {
                         e.printStackTrace();
                     } catch (ParserConfigurationException e) {
                         e.printStackTrace();
                     }
+
                 }
 
             } catch (ClientProtocolException e) {
@@ -250,9 +257,64 @@ public class RequestManager implements ResponseListenerInterface {
         @Override
         protected void onPostExecute(String stringResponse){
             listener.responseServiceToManager(stringResponse);
+
         }
     }
 
+
+    /*Process response*/
+    protected ArrayList<Map<String,String>> responseParse(InputStream resp,METHOD method){
+        ArrayList<Map<String,String>> responseArray= new ArrayList<>();
+        Log.d("responseParse","inicial");
+        switch (method){
+            case REQUEST_ZIPCODE:
+                    //stringResponse = parseToStringZipCodes(streamZipCodes);
+                try {
+                    responseArray = ResponseManager.sharedInstance().parseZipCodes(resp,"");
+                    Log.d("responseParse","ok");
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
+                Log.v(METHOD.REQUEST_ZIPCODE.toString(), "parse");
+
+                break;
+            case REQUEST_ZIPCODE_ADDRESSES:
+
+                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "");
+                break;
+            case REQUEST_TRACKING_LIST_CODES:
+
+                Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), "");
+                break;
+            case REQUEST_TRACKING_LIST_GUIDES:
+
+                Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), "");
+                break;
+            case REQUEST_NATIONAL_DELIVERY:
+
+                Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), "");
+                break;
+            case REQUEST_INTERNATIONAL_DELIVERY:
+
+                Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(),"");
+                break;
+            case REQUEST_OFFICES:
+
+                Log.v( METHOD.REQUEST_OFFICES.toString(), "");
+            case REQUEST_EXCEPTION_CODES:
+
+                Log.v( METHOD.REQUEST_EXCEPTION_CODES.toString(), "");
+                break;
+            default:
+                break;
+        }
+
+        return responseArray;
+    }
     /**
      * @param zipcodes
      * @return

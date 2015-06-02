@@ -8,6 +8,8 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import database.model.Codes;
+import database.model.Countries;
 import database.model.Offices;
 import database.model.States;
 
@@ -40,13 +42,25 @@ public class DataBaseManager {
     public void readInsertsFile(String filename) {
         if(filename.equals("insert_oficinas.txt")){
             if(Offices.getAllInMaps(mContext)!= null){
-                Offices.removeAll(mContext);
+               return;
             }
         }
 
         if(filename.equals("insert_estados.txt")){
             if(States.getAllInMaps(mContext)!= null){
-               States.removeAll(mContext);
+               return;
+            }
+        }
+
+        if(filename.equals("insert_paises.txt")){
+            if(Countries.getAllInMaps(mContext)!= null){
+                return;
+            }
+        }
+
+        if(filename.equals("insert_codigos.txt")){
+            if(Codes.getAllInMaps(mContext)!= null){
+                return;
             }
         }
 

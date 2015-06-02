@@ -15,11 +15,13 @@ import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import com.sellcom.apps.tracker_material.R;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -79,15 +81,21 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
         switch (view.getId()){
             case R.id.btn_validar_zipcode:
                 zipCodeString = zipCode.getText().toString();
-                //MapString Params...
-                //Query from Zip Code
-                Map<String, String> requestData =  new HashMap<>();
-                requestData.put("pais", "Mexico");
-                requestData.put("codigoPostal",zipCodeString);
+                if(zipCodeString == null || zipCodeString.equals("")){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo));
+                }
+                else {
+                    //MapString Params...
+                    //Query from Zip Code
+                    Map<String, String> requestData = new HashMap<>();
+                    requestData.put("pais", "Mexico");
+                    requestData.put("codigoPostal", zipCodeString);
 
-                //Send params to RequestManager
-                RequestManager.sharedInstance().setListener(this);
-                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES,requestData);
+                    //Send params to RequestManager
+                    RequestManager.sharedInstance().setListener(this);
+                    RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData);
+
+                }
                 break;
 
             case R.id.btn_buscar_zipcode:
@@ -95,6 +103,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                 coloniaString = colonia.getText().toString();
                 estadoString = spinner_state.getSelectedItem().toString();
 
+                Map<String, String> requestData = new HashMap<>();
                 requestData = new HashMap<>();
                 requestData.put("pais","MEXICO");
                 requestData.put("estado", estadoString);
@@ -113,6 +122,8 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     public void decodeResponse(String response){
         if(response != null){
             Log.v("FragmentCodigoPostal", response);
+            ArrayList<Map<String,String>> resp = RequestManager.sharedInstance().responseArray;
+            Log.v("FCP, array", "tam:"+resp.size());
         }else{
             Log.v("FragmentCodigoPostal", "El servidor devolvio null");
         }
