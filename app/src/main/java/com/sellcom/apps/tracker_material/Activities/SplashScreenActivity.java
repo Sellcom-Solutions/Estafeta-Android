@@ -14,6 +14,7 @@ import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +30,10 @@ public class SplashScreenActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         context = this;
-         Log.d("SplashScreen","Llama al hilo");
+         Log.d("SplashScreen", "Llama al hilo");
+        DialogManager.sharedInstance().setActivity(this);
+        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, "");
+
         new CreateDB().execute();
     }
 
@@ -80,7 +84,7 @@ public class SplashScreenActivity extends ActionBarActivity {
             requestData.put("ultimaAct",fecha);
 
             RequestManager.sharedInstance().setListener(this);
-            RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES ,requestData);
+            RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
 
 
             dbHelper.close();
@@ -90,6 +94,7 @@ public class SplashScreenActivity extends ActionBarActivity {
         protected void onPostExecute(String result) {
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
             startActivity(intent);
+            DialogManager.sharedInstance().dismissDialog();
 
         }
 
@@ -130,6 +135,7 @@ public class SplashScreenActivity extends ActionBarActivity {
 
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
             startActivity(intent);
+            DialogManager.sharedInstance().dismissDialog();
         }
 
     }

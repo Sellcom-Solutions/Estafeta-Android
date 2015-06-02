@@ -1,26 +1,18 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
-import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerFragment;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 import java.util.ArrayList;
@@ -85,7 +77,10 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         switch (v.getId()) {
 
             case R.id.btn_near:
-                nearOffice();
+
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando Oficinas...");
+
+                //nearOffice();
                 break;
 
             case  R.id.btn_search:

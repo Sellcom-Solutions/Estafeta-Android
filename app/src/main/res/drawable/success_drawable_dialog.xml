@@ -1,0 +1,22 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/ic_success1" android:duration="50" />
+    <item android:drawable="@drawable/ic_success2" android:duration="50" />
+    <item android:drawable="@drawable/ic_success3" android:duration="50" />
+    <item android:drawable="@drawable/ic_success4" android:duration="50" />
+    <item android:drawable="@drawable/ic_success5" android:duration="50" />
+    <item android:drawable="@drawable/ic_success6" android:duration="50" />
+    <item android:drawable="@drawable/ic_success7" android:duration="50" />
+    <item android:drawable="@drawable/ic_success8" android:duration="50" />
+    <item android:drawable="@drawable/ic_success9" android:duration="50" />
+    <item android:drawable="@drawable/ic_success10" android:duration="50" />
+    <item android:drawable="@drawable/ic_success11" android:duration="50" />
+    <item android:drawable="@drawable/ic_success12" android:duration="50" />
+    <item android:drawable="@drawable/ic_success13" android:duration="50" />
+    <item android:drawable="@drawable/ic_success14" android:duration="50" />
+    <item android:drawable="@drawable/ic_success15" android:duration="50" />
+    <item android:drawable="@drawable/ic_success16" android:duration="50" />
+    <item android:drawable="@drawable/ic_success17" android:duration="50" />
+    <item android:drawable="@drawable/ic_success18" android:duration="500" />
+
+</animation-list>

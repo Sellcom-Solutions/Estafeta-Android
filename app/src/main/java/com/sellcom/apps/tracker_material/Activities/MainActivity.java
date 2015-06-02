@@ -24,6 +24,7 @@ import com.sellcom.apps.tracker_material.Fragments.FragmentOffices;
 import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerCallbacks;
 import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerFragment;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 
@@ -50,9 +51,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.d(ACT_TAG,"Creating view:"+depthCounter);
+        Log.d(ACT_TAG, "Creating view:" + depthCounter);
 
         RequestManager.sharedInstance().setActivity(this);
+        DialogManager.sharedInstance().setActivity(this);
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);

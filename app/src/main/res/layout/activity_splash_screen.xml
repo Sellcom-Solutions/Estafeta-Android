@@ -7,11 +7,5 @@
     android:background="@drawable/splash"
     tools:context="com.sellcom.apps.tracker_material.Activities.SplashScreenActivity">
 
-    <ProgressBar
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:indeterminateDrawable="@drawable/progress_anim_white"/>
 
 </RelativeLayout>
