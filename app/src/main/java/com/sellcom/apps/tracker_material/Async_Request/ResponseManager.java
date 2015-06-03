@@ -40,18 +40,18 @@ public class ResponseManager {
     public Activity                     getActivity()                   {return activity;}
 
 
-    public ArrayList<Map<String,String>> parseZipCodes(InputStream response, String tipo) throws SAXException, IOException, ParserConfigurationException {
-        Document doc;
+    public ArrayList<Map<String,String>> parseZipCodes(Document doc, String tipo) throws SAXException, IOException, ParserConfigurationException {
+       /* Document doc;
         DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-        documentBuilder.isValidating();
+        documentBuilder.isValidating();*/
 
         ArrayList<Map<String ,String>> codigoMap =new ArrayList<>();
         Map<String,String> map  = new HashMap<String, String>();
 
 
-        doc = documentBuilder.parse(response);
-        response.close();
+       /* doc = documentBuilder.parse(response);
+        response.close();*/
         doc.getDocumentElement().normalize();
         NodeList respDoc;
         respDoc = doc.getElementsByTagName("ConsultaDatosCPResult");
@@ -62,60 +62,71 @@ public class ResponseManager {
         Node node = null;
         node = respDoc.item(0);
         NodeList all = node.getChildNodes();
+        Log.d("Node size",":"+all.getLength());
         Node nodeitem;
         String nodeName;
         for (int i = 0; i < all.getLength(); i++) {
             nodeitem = all.item(i);
             nodeName = nodeitem.getNodeName();
-            if (!nodeName.startsWith("#"))
-                if (nodeitem.hasChildNodes()) {
-                    Node subNode = nodeitem.getFirstChild();
-                    String nodeValue = "";
-                    if (subNode.getNodeValue() != null)
-                        nodeValue = subNode.getNodeValue();
+            Log.d("Node name", nodeName);
+            if (nodeitem.hasChildNodes()) {
+                Node subNode = nodeitem.getFirstChild();
+                Log.d("Node child", "true");
+                Log.d("Node name sub", subNode.getNodeName());
+                String nodeValue = "";
+                if (subNode.getNodeValue() != null)
+                    nodeValue = subNode.getNodeValue();
+                if ("HasError".equals(nodeName)) {
+                    if (nodeValue.equals("true"))
+                        map.put("HasError", "true");
+                    else
+                        map.put("Has error", "false");
+                    continue;
+                }
 
-                    if ("ListadoCodigo".equals(nodeName)){
-                        NodeList listColonias = nodeitem.getChildNodes();
-                        Node eachCP;
-                        NodeList eachServNode;
-                        for (int f = 0; f < listColonias.getLength(); f++) {
-                            eachCP = listColonias.item(f);
-                            eachServNode = eachCP.getChildNodes();
-                            for (int d = 0; d < eachServNode.getLength(); d++) {
-                                String charac = eachServNode.item(d)
-                                        .getNodeName();
-                                String nodeValue2 = eachServNode.item(d)
-                                        .getFirstChild()
-                                        .getNodeValue();
+                if (nodeName.equals("ListadoCodigo")) {
+                    NodeList listColonias = nodeitem.getChildNodes();
+                    Node eachCP;
+                    NodeList eachServNode;
+                    Log.d("Lista cod", "size" + listColonias.getLength());
 
-                                if ("a:Ciudad".equals(charac)) {
-                                    map.put("ciudad",nodeValue2);
-                                    continue;
-                                }
-                                if ("a:Colonia".equals(charac)) {
-                                    map.put("Colonia",nodeValue2);
-                                    continue;
-                                }
-                                if ("a:Estado".equals(charac)) {
-                                    map.put("estado", nodeValue2);
-                                    continue;
-                                }
+                    for (int f = 0; f < listColonias.getLength(); f++) {
+                        eachCP = listColonias.item(f);
+                        eachServNode = eachCP.getChildNodes();
+                        Log.d("eachCP", eachCP.getNodeName());
+                        Map<String,String> map1  = new HashMap<String, String>();
+
+                        for (int d = 0; d < eachServNode.getLength(); d++) {
+                            String charac = eachServNode.item(d).getNodeName();
+                            String nodeValue2 = eachServNode.item(d).getFirstChild()
+                                    .getNodeValue();
+                            Log.d("Node char", charac);
+                            Log.d("Node value", nodeValue2);
+                            if(charac.equals("a:CP")){
+                                map1.put("cp",nodeValue2);
+                            }
+                            if (charac.equals("a:Ciudad")){
+                                map1.put("ciudad",nodeValue2);
+                            }
+                            if (charac.equals("a:Colonia")){
+                                map1.put("colonia",nodeValue2);
+                            }
+                            if (charac.equals("a:Estado")){
+                                map1.put("estado",nodeValue2);
+                            }
+                            if (charac.equals("a:Pais")){
+                                map1.put("pais",nodeValue2);
                             }
                         }
-
-                    codigoMap.add(map);
-                        Log.d("Response Manager","tam"+codigoMap.size());
+                        codigoMap.add(map1);
                     }
                 }
-            return codigoMap;
+            }
         }
-
-
-
-
-       /* String contentDocument = doc.getDocumentElement().getTextContent();
-        return contentDocument;*/
-        return null;
+        Log.d("ArrayList","tam:"+codigoMap.size());
+        for(int i=0;i<codigoMap.size();i++)
+            Log.d("ArrayList",codigoMap.get(i).get("colonia"));
+        return codigoMap;
     }
 
 }

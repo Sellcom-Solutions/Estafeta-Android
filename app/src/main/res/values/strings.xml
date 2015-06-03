@@ -47,7 +47,7 @@
     <string name="boton_codigo_guia">Código de Guía</string>
     <string name="codigo_factura">Código de Factura</string>
     <string name="codigo_ticket">Código de Ticket</string>
-    <string name="cerrar">CERRAR</string>
+    <string name="cerrar">Cerrar</string>
 
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>

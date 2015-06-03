@@ -2,6 +2,8 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,6 +35,10 @@ import java.util.Map;
 public class FragmentCodigoPostal extends TrackerFragment implements OnClickListener, UIResponseListenerInterface{
 
     Context context;
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+    private TrackerFragment         fragment;
+
     private Spinner spinner_state;
     private String[] array_states;
     private SpinnerAdapter spinnerAdapter;
@@ -122,12 +129,38 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     public void decodeResponse(String response){
         if(response != null){
             Log.v("FragmentCodigoPostal", response);
-            ArrayList<Map<String,String>> resp = RequestManager.sharedInstance().responseArray;
-            Log.v("FCP, array", "tam:"+resp.size());
+            ArrayList<Map<String,String>> resp = new ArrayList<>();
+                    resp =RequestManager.sharedInstance().getResponseArray();
+            Map<String,String> item ;
+            item = new HashMap<>();
+
+            List colonias = new ArrayList<>();
+            for(int i=0;i<resp.size();i++){
+                item = resp.get(i);
+                colonias.add(item.get("colonia"));
+                Log.d("Colonia",""+ item.get("colonia"));
+            }
+            showDialogCP(colonias, item.get("cp"),item.get("estado"),item.get("ciudad"));
+
         }else{
             Log.v("FragmentCodigoPostal", "El servidor devolvio null");
         }
 
+    }
+
+    public void showDialogCP(List values, String cp, String estado, String ciudad){
+        Bundle bundle= new Bundle();
+        Log.d("Frag CP, colonias","size"+values.size());
+       // bundle.putStringArrayList("colonias",values);
+        bundle.putParcelableArrayList("col", (ArrayList<? extends android.os.Parcelable>) values);
+        bundle.putString("cp",cp);
+        bundle.putString("estado",estado);
+        bundle.putString("ciudad",ciudad);
+
+        fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentDialogCP fdh = new FragmentDialogCP();
+        fdh.setArguments(bundle);
+        fdh.show(fragmentManager,"FRAG_DIALOG_CP");
     }
 
 

@@ -67,7 +67,15 @@ public class RequestManager implements ResponseListenerInterface {
     private         UIResponseListenerInterface             listener;
     private         METHOD                                  method;
 
-    public ArrayList<Map<String,String>> responseArray= new ArrayList<>();
+    public ArrayList<Map<String, String>> getResponseArray() {
+        return responseArray;
+    }
+
+    public void setResponseArray(ArrayList<Map<String, String>> responseArray) {
+        this.responseArray = responseArray;
+    }
+
+    private static ArrayList<Map<String,String>> responseArray= new ArrayList<>();
 
     private         ProgressDialog                          progressDialog;
 
@@ -202,7 +210,7 @@ public class RequestManager implements ResponseListenerInterface {
         protected String doInBackground(Void... voids){
 
             String stringResponse = null;
-
+            JSONObject jsonResponse = null;
 
             HttpParams httpParameters = new BasicHttpParams();
             int timeoutConnection = 5000;
@@ -230,13 +238,15 @@ public class RequestManager implements ResponseListenerInterface {
                 httppost.setHeader("Content-Type","application/x-www-form-urlencoded");
 
                 HttpResponse response = httpclient.execute(httppost);
+                Log.d("Service response",response.toString());
 
                 HttpEntity entity = response.getEntity();
                 if(entity != null) {
                     InputStream streamZipCodes = entity.getContent();
                     try {
                         stringResponse = parseToStringZipCodes(streamZipCodes);
-                        responseArray = responseParse(streamZipCodes,this.method);
+                        //responseArray = responseParse(streamZipCodes,this.method);
+                        Log.d("Method",":"+this.method);
                     } catch (SAXException e) {
                         e.printStackTrace();
                     } catch (ParserConfigurationException e) {
@@ -263,15 +273,16 @@ public class RequestManager implements ResponseListenerInterface {
 
 
     /*Process response*/
-    protected ArrayList<Map<String,String>> responseParse(InputStream resp,METHOD method){
+    protected ArrayList<Map<String,String>> responseParse(Document doc,METHOD method){
         ArrayList<Map<String,String>> responseArray= new ArrayList<>();
         Log.d("responseParse","inicial");
         switch (method){
             case REQUEST_ZIPCODE:
                     //stringResponse = parseToStringZipCodes(streamZipCodes);
                 try {
-                    responseArray = ResponseManager.sharedInstance().parseZipCodes(resp,"");
-                    Log.d("responseParse","ok");
+                    responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"");
+                    setResponseArray(responseArray);
+                    Log.d("responseParse","ok"+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -283,6 +294,18 @@ public class RequestManager implements ResponseListenerInterface {
 
                 break;
             case REQUEST_ZIPCODE_ADDRESSES:
+                try {
+                    responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"");
+                    //Log.d("RM",responseArray.get(1).get("colonia"));
+                    Log.d("responseParse","ok"+responseArray.size());
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
+                Log.v(METHOD.REQUEST_ZIPCODE.toString(), "parse");
 
                 Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "");
                 break;
@@ -330,6 +353,7 @@ public class RequestManager implements ResponseListenerInterface {
         doc = documentBuilder.parse(zipcodes);
         zipcodes.close();
         doc.getDocumentElement().normalize();
+        responseArray = responseParse(doc,this.method);
         String contentDocument = doc.getDocumentElement().getTextContent();
         return contentDocument;
     }
