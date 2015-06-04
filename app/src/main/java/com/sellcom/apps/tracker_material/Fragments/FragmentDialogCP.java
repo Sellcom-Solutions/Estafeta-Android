@@ -17,6 +17,7 @@ import com.sellcom.apps.tracker_material.Adapters.CPAListdapter;
 import com.sellcom.apps.tracker_material.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,10 +33,11 @@ public class FragmentDialogCP extends DialogFragment implements View.OnClickList
     ListView lst_colonias;
     Button   cerrar;
 
-    List colonias;
+    ArrayList<Map<String,String>> colonias;
     String ciudad;
     String estado;
     String cp;
+    String tipo;
 
     public FragmentDialogCP() {
         // Required empty public constructor
@@ -62,16 +64,29 @@ public class FragmentDialogCP extends DialogFragment implements View.OnClickList
         cerrar          = (Button)   view.findViewById(R.id.btn_dialog_cerrar);
 
         try {
-            colonias = getArguments().getParcelableArrayList("col");
+           // colonias = getArguments().getParcelableArrayList("col");
+            colonias = (ArrayList<Map<String,String>>) getArguments().getSerializable("col");
+            Map<String,String> aux = new HashMap<>();
+
             Log.d("colonias","size:"+colonias.size());
-            CPAListdapter adapter = new CPAListdapter(getActivity(),colonias);
+
+            tipo = getArguments().getString("tipo");
+            if (tipo.equals("0")){
+                view.findViewById(R.id.tv_cp_header).setVisibility(view.GONE);
+            }
+            else {
+                cp = aux.get("cp");
+                txt_cp.setText(txt_cp.getText().toString()+" "+cp);
+            }
+            aux = colonias.get(0);
+
+            CPAListdapter adapter = new CPAListdapter(getActivity(),colonias,tipo);
             lst_colonias.setAdapter(adapter);
 
-            ciudad = getArguments().getString("ciudad");
+            ciudad = aux.get("ciudad");
             txt_ciudad.setText(ciudad);
-            cp = getArguments().getString("cp");
-            txt_cp.setText(txt_cp.getText().toString()+" "+cp);
-            estado = getArguments().getString("estado");
+
+            estado = aux.get("estado");
             txt_estado.setText(estado);
 
         } catch (Exception e) {

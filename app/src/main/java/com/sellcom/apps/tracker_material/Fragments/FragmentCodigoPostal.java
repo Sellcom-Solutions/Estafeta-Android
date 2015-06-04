@@ -1,7 +1,9 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -29,6 +31,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import database.model.States;
+
+
 /**
  * Created by Jose Luis 26/05/2015
  */
@@ -53,6 +58,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     private String ciudadString;
     private String coloniaString;
     private String estadoString;
+    private String tipo;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -90,6 +96,13 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                 zipCodeString = zipCode.getText().toString();
                 if(zipCodeString == null || zipCodeString.equals("")){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo));
+                    Handler handler = null;
+                    handler = new Handler();
+                    handler.postDelayed(new Runnable(){
+                        public void run(){
+                           DialogManager.sharedInstance().dismissDialog();
+                        }
+                    }, 1000);
                 }
                 else {
                     //MapString Params...
@@ -97,7 +110,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     Map<String, String> requestData = new HashMap<>();
                     requestData.put("pais", "Mexico");
                     requestData.put("codigoPostal", zipCodeString);
-
+                    tipo = "0";
                     //Send params to RequestManager
                     RequestManager.sharedInstance().setListener(this);
                     RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData);
@@ -107,18 +120,46 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
             case R.id.btn_buscar_zipcode:
                 ciudadString = ciudad.getText().toString();
-                coloniaString = colonia.getText().toString();
-                estadoString = spinner_state.getSelectedItem().toString();
+                if(ciudadString== null || ciudadString.equals("")){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_ciudad));
+                    Handler handler = null;
+                    handler = new Handler();
+                    handler.postDelayed(new Runnable(){
+                        public void run(){
+                            DialogManager.sharedInstance().dismissDialog();
+                        }
+                    }, 1000);
+                }
+                else {
+                    zipCode.setText("");
+                    tipo = "1";
+                    ciudadString = ciudad.getText().toString();
+                    coloniaString = colonia.getText().toString();
+                    estadoString = spinner_state.getSelectedItem().toString();
 
-                Map<String, String> requestData = new HashMap<>();
-                requestData = new HashMap<>();
-                requestData.put("pais","MEXICO");
-                requestData.put("estado", estadoString);
-                requestData.put("ciudad",ciudadString);
-                requestData.put("localidad",coloniaString);
 
-                RequestManager.sharedInstance().setListener(this);
-                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE,requestData);
+                    if (estadoString.equalsIgnoreCase("Baja California Norte")) {
+                        estadoString = "BAJA CALIFORNIA";
+                    }
+                    else if (estadoString.equalsIgnoreCase("Estado de México")) {
+                        estadoString = "EDO. DE MEXICO";
+                    }
+                    else if (estadoString.equalsIgnoreCase("México, D.F.")) {
+                        estadoString = "DISTRITO FEDERAL";
+                    }
+
+
+                    Map<String, String> requestData = new HashMap<>();
+                    requestData = new HashMap<>();
+                    requestData.put("pais", "MEXICO");
+                    requestData.put("estado", estadoString);
+                    Log.d("Estado",estadoString);
+                    requestData.put("ciudad", ciudadString);
+                    requestData.put("localidad", coloniaString);
+
+                    RequestManager.sharedInstance().setListener(this);
+                    RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE, requestData);
+                }
                 break;
         }
 
@@ -127,20 +168,22 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
     @Override
     public void decodeResponse(String response){
-        if(response != null){
+        if(response != null && response.length() > 0){
             Log.v("FragmentCodigoPostal", response);
             ArrayList<Map<String,String>> resp = new ArrayList<>();
                     resp =RequestManager.sharedInstance().getResponseArray();
-            Map<String,String> item ;
-            item = new HashMap<>();
-
-            List colonias = new ArrayList<>();
-            for(int i=0;i<resp.size();i++){
-                item = resp.get(i);
-                colonias.add(item.get("colonia"));
-                Log.d("Colonia",""+ item.get("colonia"));
+            if(resp != null && resp.size()>0 )
+                showDialogCP(resp);
+            else {
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio));
+                Handler handler = null;
+                handler = new Handler();
+                handler.postDelayed(new Runnable(){
+                    public void run(){
+                        DialogManager.sharedInstance().dismissDialog();
+                    }
+                }, 1000);
             }
-            showDialogCP(colonias, item.get("cp"),item.get("estado"),item.get("ciudad"));
 
         }else{
             Log.v("FragmentCodigoPostal", "El servidor devolvio null");
@@ -148,14 +191,13 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
     }
 
-    public void showDialogCP(List values, String cp, String estado, String ciudad){
+    public void showDialogCP(ArrayList<Map<String, String>> values){
         Bundle bundle= new Bundle();
         Log.d("Frag CP, colonias","size"+values.size());
        // bundle.putStringArrayList("colonias",values);
-        bundle.putParcelableArrayList("col", (ArrayList<? extends android.os.Parcelable>) values);
-        bundle.putString("cp",cp);
-        bundle.putString("estado",estado);
-        bundle.putString("ciudad",ciudad);
+        //bundle.putParcelableArrayList("col", (ArrayList<? extends android.os.Parcelable>) values);
+        bundle.putSerializable("col", values);
+        bundle.putString("tipo",tipo);
 
         fragmentManager = getActivity().getSupportFragmentManager();
         FragmentDialogCP fdh = new FragmentDialogCP();

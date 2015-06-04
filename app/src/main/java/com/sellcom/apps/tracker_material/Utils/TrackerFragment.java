@@ -89,7 +89,7 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
     //created by jose luis at 27/05/2015
     public void setStatesToSpinner(Spinner spinner, Context context) {
         //get the states from database
-        ArrayList<Map<String,String>> states = States.getAllInMaps(context);
+        ArrayList<Map<String,String>> states = States.getStatesNames(context);
 
         //set the spinnerAdapter with the values states
         spinnerAdapter = new SpinnerAdapter(getActivity(), states, SpinnerAdapter.SPINNER_TYPE.STATES);

@@ -14,6 +14,7 @@ import com.sellcom.apps.tracker_material.R;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,19 +27,21 @@ public class CPAListdapter extends BaseAdapter{
     String TAG = "CP_ADAPTER_LOG";
 
     Context context;
-    //private List<Map<String,String>> codigos;
-    List<String> colonias;
+    ArrayList<Map<String,String>> colonias;
+    String tipo;
 
 
-    public  CPAListdapter (Context context, List colonias){
+    public  CPAListdapter (Context context, ArrayList<Map<String,String>> colonias, String tipo){
         this.context        = context;
-        this.colonias       = (List <String>) colonias;
+        this.colonias       = colonias;
+        this.tipo           = tipo;
         Log.d("CPAdapter", "sz"+colonias.size());
 
     }
 
     class ColoniasViewHolder{
         TextView tv_colonias;
+        TextView tv_cp;
         int      position;
 
     }
@@ -62,28 +65,56 @@ public class CPAListdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ColoniasViewHolder   holder;
-        if (convertView == null){
-            holder                      = new ColoniasViewHolder();
-            convertView                 = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_spinner,parent,false);
-            holder.tv_colonias          = (TextView)convertView.findViewById(R.id.txt_spn_item);
+        if(tipo.equals("1")) {
+            if (convertView == null) {
+                holder = new ColoniasViewHolder();
+                convertView = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_lv_cp, parent, false);
+                holder.tv_colonias = (TextView) convertView.findViewById(R.id.txt_lvcp_item);
+                holder.tv_cp = (TextView) convertView.findViewById(R.id.txt_lvcp_item1);
 
-            convertView.setTag(holder);
+                convertView.setTag(holder);
+            } else {
+                holder = (ColoniasViewHolder) convertView.getTag();
+            }
+
+            try {
+                Log.d("Adapter", "size" + colonias.size());
+                Map<String, String> col = new HashMap<>();
+                col = colonias.get(position);
+                String coloniaStr = col.get("colonia");
+                String cp = col.get("cp");
+                //Log.d("Adapter","colonia"+coloniaStr);
+                holder.tv_colonias.setText(coloniaStr);
+                holder.tv_cp.setText(cp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-        else{
-            holder  = (ColoniasViewHolder)convertView.getTag();
+        else {
+            if (convertView == null) {
+                holder = new ColoniasViewHolder();
+                convertView = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_spinner, parent, false);
+                holder.tv_colonias = (TextView) convertView.findViewById(R.id.txt_spn_item);
+                //holder.tv_cp = (TextView) convertView.findViewById(R.id.txt_lvcp_item1);
+
+                convertView.setTag(holder);
+            } else {
+                holder = (ColoniasViewHolder) convertView.getTag();
+            }
+
+            try {
+                Log.d("Adapter", "size" + colonias.size());
+                Map<String, String> col = new HashMap<>();
+                col = colonias.get(position);
+                String coloniaStr = col.get("colonia");
+                //String cp = col.get("cp");
+                //Log.d("Adapter","colonia"+coloniaStr);
+                holder.tv_colonias.setText(coloniaStr);
+                //holder.tv_cp.setText(cp);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-        try {
-            Log.d("Adapter","size"+colonias.size());
-
-            String coloniaStr = this.colonias.get(position);
-            Log.d("Adapter","colonia"+coloniaStr);
-
-            holder.tv_colonias.setText(coloniaStr);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return convertView;
     }
 }

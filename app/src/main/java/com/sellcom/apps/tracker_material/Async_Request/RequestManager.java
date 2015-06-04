@@ -206,6 +206,10 @@ public class RequestManager implements ResponseListenerInterface {
             this.method = method;
         }
 
+        protected void onPreExecute(){
+
+        }
+
         @Override
         protected String doInBackground(Void... voids){
 
@@ -236,6 +240,8 @@ public class RequestManager implements ResponseListenerInterface {
 
                 httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
                 httppost.setHeader("Content-Type","application/x-www-form-urlencoded");
+
+                Log.d("Request",httppost.toString());
 
                 HttpResponse response = httpclient.execute(httppost);
                 Log.d("Service response",response.toString());
@@ -280,7 +286,7 @@ public class RequestManager implements ResponseListenerInterface {
             case REQUEST_ZIPCODE:
                     //stringResponse = parseToStringZipCodes(streamZipCodes);
                 try {
-                    responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"");
+                    responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"1");
                     setResponseArray(responseArray);
                     Log.d("responseParse","ok"+responseArray.size());
                 } catch (SAXException e) {
@@ -295,8 +301,8 @@ public class RequestManager implements ResponseListenerInterface {
                 break;
             case REQUEST_ZIPCODE_ADDRESSES:
                 try {
-                    responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"");
-                    //Log.d("RM",responseArray.get(1).get("colonia"));
+                    responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"0");
+                    setResponseArray(responseArray);
                     Log.d("responseParse","ok"+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();

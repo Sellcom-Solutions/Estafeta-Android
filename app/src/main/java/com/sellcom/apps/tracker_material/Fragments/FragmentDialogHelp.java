@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.sellcom.apps.tracker_material.R;
 
@@ -24,6 +25,7 @@ public class FragmentDialogHelp extends DialogFragment implements View.OnClickLi
     Button btn_cod_guia;
     Button btn_cod_factura;
     Button btn_cod_ticket;
+    ImageView im_dialog_help;
 
     public FragmentDialogHelp() {
         // Required empty public constructor
@@ -43,6 +45,8 @@ public class FragmentDialogHelp extends DialogFragment implements View.OnClickLi
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dialog_help, container, false);
+
+        im_dialog_help = (ImageView) view.findViewById(R.id.im_dialog_help);
 
         cerrar = (Button)view.findViewById(R.id.btn_cerrar);
         cerrar.setOnClickListener(this);
@@ -67,14 +71,19 @@ public class FragmentDialogHelp extends DialogFragment implements View.OnClickLi
                 break;
 
             case R.id.btn_guia:
-                btn_cod_guia.setTextColor(estafeta_red);
+                btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_red));
+                im_dialog_help.setImageResource(R.drawable.help_guia);
                 break;
 
 
             case R.id.btn_factura:
+                btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_red));
+                im_dialog_help.setImageResource(R.drawable.help_factura);
                 break;
 
             case R.id.btn_ticket:
+                btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_red));
+                im_dialog_help.setImageResource(R.drawable.help_ticket);
                 break;
 
         }

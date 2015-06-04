@@ -65,6 +65,8 @@
 
     <!-- Dialog messages-->
     <string name="error_codigo">Error, código postal no válido</string>
+    <string name="error_ciudad">Error, el campo ciudad es obligatorio</string>
+    <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente</string>
     <string name="cargando">Cargando ...</string>
 
 

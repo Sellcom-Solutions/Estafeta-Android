@@ -53,7 +53,7 @@ public class SpinnerAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        return mItems .get(position);
+        return mItems .get(position).get("ZNOMBRE");
     }
 
     @Override
@@ -104,6 +104,7 @@ public class SpinnerAdapter extends BaseAdapter {
         }
         return view;
     }
+
 
 
     public long getItemId(int position) {

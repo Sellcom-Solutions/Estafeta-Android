@@ -78,6 +78,41 @@ public class States {
         return null;
     }
 
+    public static ArrayList<Map<String,String>> getStatesNames(Context context){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+                Map<String,String> map  = new HashMap<String, String>();
+
+                map.put(ZNOMBRE,cursor.getString(cursor.getColumnIndexOrThrow(ZNOMBRE)));
+                list.add(map);
+            }
+            Log.d("Campos recuperados: ", ""+list.size());
+            cursor.close();
+            return list;
+        }
+        return null;
+    }
+
+    public static String getStateNameById(Context context,String Id){
+        if(Id.equals("") ){
+            return null;
+        }
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                new String[] {ZNUMEROESTADO, ZNOMBRE},
+                ZNUMEROESTADO +"= ?",
+                new String[] {Id}, null ,null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+        }
+        String estado = cursor.getString(cursor.getColumnIndexOrThrow(ZNOMBRE));
+        return estado;
+    }
+
     public static void setStates(Context context, String file_name){
 
         try {

@@ -54,7 +54,10 @@ public class ResponseManager {
         response.close();*/
         doc.getDocumentElement().normalize();
         NodeList respDoc;
-        respDoc = doc.getElementsByTagName("ConsultaDatosCPResult");
+        if(tipo.equals("0"))
+            respDoc = doc.getElementsByTagName("ConsultaDatosCPResult");
+        else
+            respDoc = doc.getElementsByTagName("ConsultaCPResult");
 
         if(respDoc == null || respDoc.getLength() == 0 ){
             return null;

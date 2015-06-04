@@ -7,6 +7,7 @@
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
 
     <ImageView
+        android:id="@+id/im_dialog_help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
