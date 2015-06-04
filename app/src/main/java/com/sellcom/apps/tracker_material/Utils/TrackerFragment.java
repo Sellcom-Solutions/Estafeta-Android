@@ -22,7 +22,7 @@ import database.model.States;
 
 public class TrackerFragment extends Fragment implements UIResponseListenerInterface {
     public boolean  isFromDrawer    = true;
-    public int      section_index   = 0;
+    public static int      section_index   = 0;
     public String   tag             = "";
 
     public SpinnerAdapter spinnerAdapter;

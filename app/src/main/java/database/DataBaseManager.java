@@ -42,24 +42,28 @@ public class DataBaseManager {
     public void readInsertsFile(String filename) {
         if(filename.equals("insert_oficinas.txt")){
             if(Offices.getAllInMaps(mContext)!= null){
+                Log.d("DataBaseManager"," Ya hay oficinas cargadas ");
                return;
             }
         }
 
         if(filename.equals("insert_estados.txt")){
             if(States.getAllInMaps(mContext)!= null){
+                Log.d("DataBaseManager"," Ya hay estados cargados ");
                return;
             }
         }
 
         if(filename.equals("insert_paises.txt")){
             if(Countries.getAllInMaps(mContext)!= null){
+                Log.d("DataBaseManager"," Ya hay paises cargados ");
                 return;
             }
         }
 
         if(filename.equals("insert_codigos.txt")){
             if(Codes.getAllInMaps(mContext)!= null){
+                Log.d("DataBaseManager"," Ya hay C.P. cargados ");
                 return;
             }
         }
@@ -73,6 +77,7 @@ public class DataBaseManager {
             // Read File Line By Line
             DataBaseAdapter.getDB(mContext).beginTransaction();
             while ((strLine = br.readLine()) != null) {
+                Log.d("DataBaseManager",filename +" ----- "+ strLine);
                 DataBaseAdapter.getDB(mContext).execSQL(strLine);
             }
             DataBaseAdapter.getDB(mContext).setTransactionSuccessful();

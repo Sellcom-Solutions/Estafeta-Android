@@ -238,4 +238,6 @@ public class Offices {
         return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ID_OFFICE + "=" + id, null);
     }
 
+
+
 }

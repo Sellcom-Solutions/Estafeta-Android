@@ -1,15 +1,606 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/frameContainer"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
 
     >
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/fragment_map_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
         />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lin_container"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:background="#FFFFFF"
+                android:paddingTop="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="20dp"
+                android:focusableInTouchMode="false"
+                android:orientation="vertical">
+
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sizeLargeText"
+                    android:textColor="@color/estafeta_text"
+                    android:text="Ver"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/estafeta_soft_gray"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/estafeta_soft_gray"
+                    android:layout_marginBottom="5dp"
+                    android:text="Estafeta"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="100"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60"
+                        android:weightSum="3"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:weightSum="100"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="40"
+                                android:orientation="horizontal">
+                                <CheckBox
+                                    android:id="@+id/rg1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="true"
+                                    android:gravity="left"/>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_filtro_rojo"
+                                    android:scaleType="centerInside"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="60"
+                                android:text="Sucursal"
+                                android:gravity="center"
+                                android:textSize="14sp"
+                                android:textColor="@color/estafeta_text"/>
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:weightSum="100"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="40"
+                                android:orientation="horizontal">
+                                <CheckBox
+                                    android:id="@+id/rg2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="true"
+                                    android:gravity="left"/>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_filtro_gris"
+                                    android:scaleType="centerInside"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="60"
+                                android:text="Concesionaria autorizada"
+                                android:gravity="center"
+                                android:textSize="14sp"
+                                android:textColor="@color/estafeta_text"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:weightSum="100"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="40"
+                                android:orientation="horizontal">
+                                <CheckBox
+                                    android:id="@+id/rg3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:checked="true"
+                                    android:gravity="left"/>
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_filtro_azul"
+                                    android:scaleType="centerInside"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="60"
+                                android:text="Centro operativo y sucursal"
+                                android:gravity="center"
+                                android:textSize="14sp"
+                                android:textColor="@color/estafeta_text"/>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/estafeta_soft_gray"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="@color/estafeta_soft_gray"
+                            android:text="Afiliados"/>
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txv_footer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/footerSize"
+        android:text="@string/footer"
+        android:gravity="center|bottom"
+        android:visibility="gone"
+        android:textColor="@color/estafeta_text"
+        android:layout_gravity="bottom|center_horizontal"/>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_gravity_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical|right"
+            fab:fab_addButtonColorNormal="@color/estafeta_blue"
+            fab:fab_addButtonColorPressed="@color/estafeta_blue"
+            fab:fab_colorNormal="@color/estafeta_blue"
+            fab:fab_addButtonSize="mini"
+            fab:fab_icon="@drawable/ic_filtro"
+            fab:fab_size="normal"
+            fab:fab_colorPressed="@color/estafeta_blue"
+            fab:fab_addButtonPlusIconColor="@color/estafeta_blue"
+            fab:fab_expandDirection="down"
+            >
+        </com.getbase.floatingactionbutton.FloatingActionButton>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/multiple_actions_down"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom|right"
+                fab:fab_addButtonColorNormal="@color/estafeta_blue"
+                fab:fab_addButtonColorPressed="@color/estafeta_blue"
+                fab:fab_colorNormal="@color/estafeta_blue"
+                fab:fab_addButtonSize="mini"
+                fab:fab_icon="@drawable/ic_filtro"
+                fab:fab_size="normal"
+                fab:fab_colorPressed="@color/estafeta_blue"
+                fab:fab_addButtonPlusIconColor="@color/estafeta_blue"
+                fab:fab_expandDirection="down"
+                >
+            </com.getbase.floatingactionbutton.FloatingActionButton>
+
+    </FrameLayout>
+
+
+
+
 </FrameLayout>
+
+
+
+<!--
+
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    android:background="@android:color/white"
+    android:layout_height="match_parent"
+
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/fragment_map_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/lin_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFFFFF"
+        android:padding="20dp"
+        android:visibility="gone"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical">
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sizeLargeText"
+            android:textColor="@color/estafeta_text"
+            android:text="Ver"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/estafeta_soft_gray"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@color/estafeta_soft_gray"
+            android:layout_marginBottom="5dp"
+            android:text="Estafeta"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="100"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="60"
+                android:weightSum="3"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:weightSum="100"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/rg1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:gravity="left"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_filtro_rojo"
+                            android:scaleType="centerInside"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60"
+                        android:text="Sucursal"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/estafeta_text"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:weightSum="100"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/rg2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_filtro_gris"
+                            android:scaleType="centerInside"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60"
+                        android:text="Concesionaria autorizada"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/estafeta_text"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:weightSum="100"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="40"
+                        android:orientation="horizontal">
+                        <RadioButton
+                            android:id="@+id/rg3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"/>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_filtro_azul"
+                            android:scaleType="centerInside"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="60"
+                        android:text="Centro operativo y sucursal"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="@color/estafeta_text"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/estafeta_soft_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="40"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/estafeta_soft_gray"
+                    android:text="Afiliados"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+<TextView
+        android:id="@+id/txv_footer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="@dimen/footerSize"
+        android:text="@string/footer"
+        android:gravity="center|bottom"
+        android:visibility="gone"
+        android:textColor="@color/estafeta_text"
+        android:layout_gravity="bottom|center_horizontal"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+
+        >
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_gravity_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_gravity="center_vertical|right"
+            fab:fab_addButtonColorNormal="@color/estafeta_blue"
+            fab:fab_addButtonColorPressed="@color/estafeta_blue"
+            fab:fab_colorNormal="@color/estafeta_blue"
+            fab:fab_addButtonSize="mini"
+            fab:fab_icon="@drawable/ic_filtro"
+            fab:fab_size="normal"
+            fab:fab_colorPressed="@color/estafeta_blue"
+            fab:fab_addButtonPlusIconColor="@color/estafeta_blue"
+            fab:fab_expandDirection="down"
+            >
+        </com.getbase.floatingactionbutton.FloatingActionButton>
+
+    </FrameLayout>
+
+
+<FrameLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+
+    >
+<com.getbase.floatingactionbutton.FloatingActionButton
+    android:id="@+id/multiple_actions_down"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom|right"
+    fab:fab_addButtonColorNormal="@color/estafeta_blue"
+    fab:fab_addButtonColorPressed="@color/estafeta_blue"
+    fab:fab_colorNormal="@color/estafeta_blue"
+    fab:fab_addButtonSize="mini"
+    fab:fab_icon="@drawable/ic_filtro"
+    fab:fab_size="normal"
+    fab:fab_colorPressed="@color/estafeta_blue"
+    fab:fab_addButtonPlusIconColor="@color/estafeta_blue"
+    fab:fab_expandDirection="down"
+    >
+</com.getbase.floatingactionbutton.FloatingActionButton>
+
+</FrameLayout>
+
+
+
+
+</FrameLayout>
+
+-->

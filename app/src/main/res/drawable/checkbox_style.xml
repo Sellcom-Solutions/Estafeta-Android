@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/apptheme_btn_radio_on_focused_holo_light"
+        android:state_checked="true">
+        <color android:color="@android:color/white" />
+    </item>
+    <!-- checked -->
+    <item android:drawable="@drawable/apptheme_btn_radio_off_disabled_focused_holo_light"
+        android:state_checked="false">
+        <color android:color="@android:color/white"></color>
+    </item>
+    <!-- unchecked -->
+</selector>
