@@ -102,17 +102,26 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="40"
+                                android:layout_weight="35"
                                 android:orientation="horizontal">
-                                <CheckBox
-                                    android:id="@+id/rg1"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:checked="true"
-                                    android:gravity="left"/>
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:orientation="vertical">
+                                    <CheckBox
+                                        android:id="@+id/rg1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="true"
+                                        android:gravity="right"/>
+                                </LinearLayout>
+
                                 <ImageView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:src="@drawable/ic_filtro_rojo"
                                     android:scaleType="centerInside"/>
 
@@ -121,7 +130,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="60"
+                                android:layout_weight="65"
                                 android:text="Sucursal"
                                 android:gravity="center"
                                 android:textSize="14sp"
@@ -141,17 +150,25 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="40"
+                                android:layout_weight="35"
                                 android:orientation="horizontal">
-                                <CheckBox
-                                    android:id="@+id/rg2"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:checked="true"
-                                    android:gravity="left"/>
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:orientation="vertical">
+                                    <CheckBox
+                                        android:id="@+id/rg2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="true"
+                                        android:gravity="right"/>
+                                </LinearLayout>
                                 <ImageView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_weight="1"
                                     android:src="@drawable/ic_filtro_gris"
                                     android:scaleType="centerInside"/>
 
@@ -160,7 +177,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="60"
+                                android:layout_weight="65"
                                 android:text="Concesionaria autorizada"
                                 android:gravity="center"
                                 android:textSize="14sp"
@@ -179,18 +196,26 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="40"
+                                android:layout_weight="35"
                                 android:orientation="horizontal">
-                                <CheckBox
-                                    android:id="@+id/rg3"
-                                    android:layout_width="wrap_content"
+                                <LinearLayout
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:checked="true"
-                                    android:gravity="left"/>
+                                    android:layout_weight="1"
+                                    android:gravity="right"
+                                    android:orientation="vertical">
+                                    <CheckBox
+                                        android:id="@+id/rg3"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:checked="true"
+                                        android:gravity="right"/>
+                                </LinearLayout>
                                 <ImageView
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/ic_filtro_azul"
+                                    android:layout_weight="1"
                                     android:scaleType="centerInside"/>
 
                             </LinearLayout>
@@ -198,7 +223,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="60"
+                                android:layout_weight="65"
                                 android:text="Centro operativo y sucursal"
                                 android:gravity="center"
                                 android:textSize="14sp"

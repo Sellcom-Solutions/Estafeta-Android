@@ -29,6 +29,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,8 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
     List <LatLng>                           listPositions;
     List <String>                           listType;
-    List<Map<String,String>>                listOficinas;
+    List<Map<String,String>>                listOficinas,
+                                            listOficinasFiltradas;
     private double                          latitud,
                                             longitud;
     private LatLng                          currentPosition;
@@ -105,6 +107,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
         listPositions   = new ArrayList();
         listType        = new ArrayList();
         listOficinas    = new ArrayList<Map<String, String>>();
+        listOficinasFiltradas = new ArrayList<Map<String, String>>();
         new CargarSucursales().execute();
 
 
@@ -293,6 +296,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
             if (myLocation != null) {
                 currentPosition = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
                 listPositions.add(currentPosition);
+                listOficinasFiltradas.add(new HashMap<String, String>());
                 listType.add("0");
             }
 
@@ -308,6 +312,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
                 Log.d("Distancia", distanceM +"");
 
                 if (distanceM <= 7.5){
+                    listOficinasFiltradas.add(listOficinas.get(i));
                     position = new LatLng(latitud, longitud);
                     listPositions.add(position);
                     listType.add(listOficinas.get(i).get("tipo_oficina"));
@@ -321,7 +326,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
         @Override
         protected String doInBackground(String... params) {
 
-            mapFragment = CustomMapFragment.newInstance(listPositions, listType);
+            mapFragment = CustomMapFragment.newInstance(getActivity(), listPositions, listType, listOficinasFiltradas);
 
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             //transaction.setCustomAnimations(R.anim.dialog_from_bottom, R.anim.dialog_to_bottom);
