@@ -36,4 +36,19 @@
 
     <string name="estado">Estado</string>
 
+    <!-- Aviso de Privacidad -->
+    <string name="aviso_privacidad">ESTAFETA MEXICANA S.A DE C.V. (en lo sucesivo ESTAFETA) le comunica al CLIENTE que la
+    información que este último le proporcione para la prestación de los servicios que se contraten con ESTAFETA, puede
+    contener Datos Personales y/o Datos Personales Sensibles o financieros, mismos que podrán ser tratados y/o almacenados
+    por ESTAFETA conforme sea necesario para poder prestar sus servicios. Asimismo, ESTAFETA podrá trasferir dichos datos a
+    aquellas entidades relacionadas con ESTAFETA, siempre que sea necesarios para poder prestar los servicios acordados entre
+    las partes.\n\n
+    ESTAFETA cuenta con domicilio en Hamburgo No. 213, piso 14, colonia Juárez, en la Ciudad de México, Distrito Federal. En caso
+    de que EL CLIENTE desee limitar el uso o divulgación de los datos proporionados a ESTAFETA, así como ejercer sus derechos de acceso,
+    rectificación, cancelación u oposición a que se hace referencia en la legislación aplicable, deberá dirigir su solicitud por escrito
+    al área de Atención a Clientes de ESTAFETA con domicilio en Cerrada de Ceylán 539, Col. Industrial Vallejo, C.P. 02300, México, D.F.,
+    a partir del 6 de enero de 2012.\n\n
+    Cualquier cambio a los términos del presente aviso de privacidad será publicado a través de la página de internet de ESTAFETA,
+    http://www.estafeta.com\n\n</string>
+
 </resources>

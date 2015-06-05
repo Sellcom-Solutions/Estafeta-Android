@@ -18,6 +18,7 @@ import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 
+import com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad;
 import com.sellcom.apps.tracker_material.Fragments.FragmentCodigoPostal;
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreo;
 import com.sellcom.apps.tracker_material.Fragments.FragmentOffices;
@@ -150,6 +151,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
                 }else{
                     fragment = new FragmentCodigoPostal();
+                }
+                break;
+
+            case NavigationDrawerFragment.AVISO_PRIVACIDAD:
+                CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_AVISO_PRIVACIDAD.toString();
+                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
+                    fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
+                }else{
+                    fragment = new FragmentAvisoPrivacidad();
                 }
                 break;
 

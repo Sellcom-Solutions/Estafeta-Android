@@ -20,9 +20,11 @@ import java.util.List;
 
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
 
-    public static final int RASTREO         = 0;
-    public static final int OFICINAS        = 1;
-    public static final int CODIGO_POSTAL   = 3;
+    public static final int RASTREO             = 0;
+    public static final int OFICINAS            = 1;
+    public static final int CODIGO_POSTAL       = 3;
+    public static final int AVISO_PRIVACIDAD    = 4;
+
     public static final int RECOMMENDATIONS = 2;
     public static final int BUDGETS         = 3;
 

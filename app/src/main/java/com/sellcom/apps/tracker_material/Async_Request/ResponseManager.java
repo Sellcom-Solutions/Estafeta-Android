@@ -127,8 +127,8 @@ public class ResponseManager {
             }
         }
         Log.d("ArrayList","tam:"+codigoMap.size());
-        for(int i=0;i<codigoMap.size();i++)
-            Log.d("ArrayList",codigoMap.get(i).get("colonia"));
+        /*for(int i=0;i<codigoMap.size();i++)
+            Log.d("ArrayList",codigoMap.get(i).get("colonia"));*/
         return codigoMap;
     }
 

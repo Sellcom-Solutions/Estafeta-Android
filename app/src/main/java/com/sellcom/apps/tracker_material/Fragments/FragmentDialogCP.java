@@ -69,16 +69,18 @@ public class FragmentDialogCP extends DialogFragment implements View.OnClickList
             Map<String,String> aux = new HashMap<>();
 
             Log.d("colonias","size:"+colonias.size());
+            aux = colonias.get(0);
 
             tipo = getArguments().getString("tipo");
             if (tipo.equals("0")){
-                view.findViewById(R.id.tv_cp_header).setVisibility(view.GONE);
-            }
-            else {
                 cp = aux.get("cp");
+                view.findViewById(R.id.tv_cp_header).setVisibility(view.GONE);
                 txt_cp.setText(txt_cp.getText().toString()+" "+cp);
             }
-            aux = colonias.get(0);
+            else {
+                txt_cp.setText(txt_cp.getText().toString());
+            }
+
 
             CPAListdapter adapter = new CPAListdapter(getActivity(),colonias,tipo);
             lst_colonias.setAdapter(adapter);

@@ -3,31 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="100"
     android:background="@color/estafeta_light_gray"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
 
     <ImageView
         android:id="@+id/im_dialog_help"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center"
+        android:scaleType="fitCenter"
+        android:background="@color/white"
+        android:src="@drawable/help_guia"
+       />
 
     <Button
         android:id="@+id/btn_guia"
         android:layout_gravity="left"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/boton_codigo_guia"
         android:textSize="@dimen/sizeNormalText"
         android:gravity="left|center_vertical"
         android:paddingLeft="10dp"
         android:background="@color/zxing_transparent"
-        android:textColor="@color/estafeta_text"/>
+        android:textColor="@color/estafeta_red"/>
 
     <Button
         android:id="@+id/btn_factura"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/codigo_factura"
         android:textSize="@dimen/sizeNormalText"
@@ -38,7 +45,7 @@
 
     <Button
         android:id="@+id/btn_ticket"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/codigo_ticket"
         android:textSize="@dimen/sizeNormalText"
@@ -49,10 +56,11 @@
 
     <Button
         android:id="@+id/btn_cerrar"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cerrar"
         android:textSize="@dimen/sizeNormalText"
+        android:layout_gravity="right"
         android:gravity="right|center_vertical"
         android:paddingRight="10dp"
         android:background="@color/zxing_transparent"

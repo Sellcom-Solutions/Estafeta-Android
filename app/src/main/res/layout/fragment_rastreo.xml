@@ -1,50 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="100">
+
+        <FrameLayout
+            android:layout_width    ="match_parent"
+            android:layout_height   ="0dp"
+            android:layout_weight   ="25"
+            android:gravity         ="center"
+            android:weightSum       ="100">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/head_rastreo"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width        ="0dp"
+                        android:layout_height       ="match_parent"
+                        android:layout_gravity="right"
+                        android:layout_weight="80"
+                        android:gravity="center"
+                        android:text                ="@string/rastreo"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeLargeText"/>
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </FrameLayout>
 
     <LinearLayout
-        android:layout_width                ="match_parent"
-        android:layout_height               ="115dp"
-        android:background                  ="@drawable/head_rastreo"
-        android:orientation                 ="vertical">
-
-        <TextView
-            android:layout_width            ="wrap_content"
-            android:layout_height           ="wrap_content"
-            android:textSize                ="@dimen/sizeLargeText"
-            android:textColor               ="@color/estafeta_text"
-            android:layout_gravity          ="center_horizontal|bottom"
-            android:layout_marginTop        ="70dp"
-            android:text                    ="@string/rastreo"/>
-
-    </LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="75"
+        android:weightSum="150"
+        android:orientation="vertical">
 
     <LinearLayout
+        android:id                          ="@+id/info_linelayout"
         android:layout_width                ="match_parent"
-        android:layout_height               ="wrap_content"
+        android:layout_height               ="0dp"
+        android:layout_weight               ="20"
         android:orientation                 ="horizontal"
-        android:weightSum                   ="100"
-        android:id                          ="@+id/info_linelayout">
+        android:weightSum                   ="100">
 
         <TextView
             android:layout_width            ="0dp"
             android:layout_height           ="wrap_content"
-            android:layout_weight           ="90"
             android:layout_marginLeft       ="10dp"
+            android:layout_marginStart      ="10dp"
             android:layout_marginTop        ="10dp"
-            android:textStyle               ="bold"
-            android:textColor               ="@color/estafeta_soft_gray"
-            android:text                    ="@string/aviso_rastreo"/>
+            android:layout_weight           ="90"
+            android:text                    ="@string/aviso_rastreo"
+            android:textColor               ="@color/estafeta_text"
+            android:textStyle               ="bold"/>
 
         <ImageButton
             android:id                      ="@+id/btn_help"
             android:layout_width            ="0dp"
             android:layout_height           ="wrap_content"
-            android:layout_weight           ="10"
-            android:layout_marginRight      ="10dp"
             android:layout_margin           ="10dp"
+            android:layout_marginRight      ="10dp"
+            android:layout_weight           ="10"
             android:background              ="@drawable/border_general_edittext"
             android:src                     ="@android:drawable/ic_menu_help"/>
 
@@ -52,34 +93,37 @@
 
     <LinearLayout
         android:layout_width            ="match_parent"
-        android:layout_height           ="wrap_content"
+        android:layout_height           ="0dp"
+        android:layout_weight           ="20"
         android:weightSum               ="100">
 
         <EditText
             android:id                      ="@+id/edt_codigo"
-            android:focusableInTouchMode    ="true"
+            style                           ="@style/EditStyle"
             android:layout_width            ="0dp"
             android:layout_height           ="wrap_content"
-            android:layout_weight           ="90"
-            android:layout_marginTop        ="10dp"
             android:layout_marginLeft       ="10dp"
-            android:inputType               ="number"
-            android:textColor               ="@color/estafeta_text"
-            android:textSize                ="@dimen/sizeNormalText"
+            android:layout_marginTop        ="10dp"
+            android:layout_weight           ="90"
             android:drawablePadding         ="5dp"
-            style                           ="@style/EditStyle"
-            android:padding                 ="3dp"
+            android:focusableInTouchMode    ="true"
             android:hint                    ="@string/codigo"
+            android:inputType               ="number"
+            android:maxLength               ="22"
+            android:padding                 ="3dp"
+            android:textColor               ="@color/estafeta_text"
             android:textColorHint           ="@color/estafeta_red"
+            android:textSize                ="@dimen/sizeNormalText"
             />
 
         <ImageButton
-            android:id="@+id/btn_agregar"
+            android:id                      ="@+id/btn_agregar"
             android:layout_width            ="0dp"
             android:layout_height           ="wrap_content"
-            android:layout_weight           ="10"
-            android:layout_marginRight      ="10dp"
             android:layout_gravity          ="right"
+            android:layout_marginRight      ="10dp"
+            android:layout_marginTop        ="10dp"
+            android:layout_weight           ="10"
             android:background              ="@drawable/border_general_edittext"
             android:src                     ="@android:drawable/ic_input_add"/>
 
@@ -87,60 +131,63 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="15">
 
         <TextView
             android:layout_width            ="wrap_content"
             android:layout_height           ="wrap_content"
-            android:textColor               ="@color/estafeta_soft_gray"
             android:layout_gravity          ="right"
-            android:layout_marginLeft       ="10dp"
             android:layout_marginBottom     ="10dp"
+            android:layout_marginLeft       ="10dp"
             android:layout_marginTop        ="10dp"
-            android:text                    ="@string/aviso_codigo"/>
+            android:text                    ="@string/aviso_codigo"
+            android:textColor               ="@color/estafeta_text"/>
 
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/estafeta_light_gray"
         android:orientation="horizontal"
-        android:background="@android:color/darker_gray"
+        android:layout_weight="20"
         android:weightSum="100">
 
         <Button
             android:id                      ="@+id/btn_escanear"
             android:layout_width            ="0dp"
             android:layout_height           ="wrap_content"
-            android:layout_weight           ="50"
+            android:layout_gravity          ="left"
             android:layout_marginBottom     ="1dp"
             android:layout_marginRight      ="1dp"
+            android:layout_weight           ="50"
             android:background              ="@color/white"
+            android:text                    ="@string/boton_escanear"
             android:textColor               ="@color/estafeta_red"
-            android:textSize                ="@dimen/sizeMediumText"
-            android:layout_gravity          ="left"
-            android:text                    ="@string/boton_escanear"/>
+            android:textSize                ="@dimen/sizeMediumText"/>
 
         <Button
             android:id                      ="@+id/btn_rastrear"
             android:layout_width            ="0dp"
-            android:layout_weight           ="50"
-            android:layout_marginLeft       ="1dp"
-            android:layout_marginBottom     ="1dp"
             android:layout_height           ="wrap_content"
-            android:background              ="@color/white"
-            android:textColor               ="@color/estafeta_red"
-            android:textSize                ="@dimen/sizeMediumText"
             android:layout_gravity          ="right"
-            android:text                    ="@string/boton_rastrear"/>
+            android:layout_marginBottom     ="1dp"
+            android:layout_marginLeft       ="1dp"
+            android:layout_weight           ="50"
+            android:background              ="@color/white"
+            android:text                    ="@string/boton_rastrear"
+            android:textColor               ="@color/estafeta_red"
+            android:textSize                ="@dimen/sizeMediumText"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/darker_gray">
+        android:layout_height="0dp"
+        android:layout_weight="65"
+        android:background="@color/estafeta_light_gray">
 
         <ListView
             android:id                      ="@+id/liv_rastreo"
@@ -152,5 +199,24 @@
 
     </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/footerSize"
+                android:layout_marginLeft="10dp"
+                android:text="@string/footer"
+                android:textColor="@color/estafeta_soft_gray"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="bottom|center_horizontal"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

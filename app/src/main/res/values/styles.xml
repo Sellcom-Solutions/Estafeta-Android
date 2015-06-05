@@ -52,6 +52,9 @@
         <item name="android:button">@drawable/checkbox_style</item>
     </style>
 
+    <style name="StarCheckBox" parent="">
+        <item name="android:button">@drawable/star_button</item>
+    </style>
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Spinner">
         <item name="android:colorControlNormal">@color/estafeta_red</item>

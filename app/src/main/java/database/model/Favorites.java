@@ -2,6 +2,12 @@ package database.model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import database.DataBaseAdapter;
 
@@ -46,5 +52,31 @@ public class Favorites {
 
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
 
+    }
+
+    public static ArrayList<Map<String,String>> getStatesNames(Context context){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+                Map<String,String> map  = new HashMap<String, String>();
+
+                map.put(ID_CTL_FAVORITOS,cursor.getString(cursor.getColumnIndexOrThrow(ID_CTL_FAVORITOS)));
+                map.put(GUIA,cursor.getString(cursor.getColumnIndexOrThrow(GUIA)));
+                map.put(RASTREO,cursor.getString(cursor.getColumnIndexOrThrow(RASTREO)));
+                map.put(ALIAS,cursor.getString(cursor.getColumnIndexOrThrow(ALIAS)));
+                map.put(FECHA_REGISTRO,cursor.getString(cursor.getColumnIndexOrThrow(FECHA_REGISTRO)));
+                map.put(NOTIFICA,cursor.getString(cursor.getColumnIndexOrThrow(NOTIFICA)));
+
+                list.add(map);
+            }
+            Log.d("Campos recuperados: ", "" + list.size());
+            cursor.close();
+            return list;
+        }
+        return null;
     }
 }

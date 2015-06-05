@@ -72,17 +72,23 @@ public class FragmentDialogHelp extends DialogFragment implements View.OnClickLi
 
             case R.id.btn_guia:
                 btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_red));
+                btn_cod_factura.setTextColor(getResources().getColor(R.color.estafeta_text));
+                btn_cod_ticket.setTextColor(getResources().getColor(R.color.estafeta_text));
                 im_dialog_help.setImageResource(R.drawable.help_guia);
                 break;
 
 
             case R.id.btn_factura:
-                btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_red));
+                btn_cod_factura.setTextColor(getResources().getColor(R.color.estafeta_red));
+                btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_text));
+                btn_cod_ticket.setTextColor(getResources().getColor(R.color.estafeta_text));
                 im_dialog_help.setImageResource(R.drawable.help_factura);
                 break;
 
             case R.id.btn_ticket:
-                btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_red));
+                btn_cod_ticket.setTextColor(getResources().getColor(R.color.estafeta_red));
+                btn_cod_factura.setTextColor(getResources().getColor(R.color.estafeta_text));
+                btn_cod_guia.setTextColor(getResources().getColor(R.color.estafeta_text));
                 im_dialog_help.setImageResource(R.drawable.help_ticket);
                 break;
 

@@ -112,6 +112,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     requestData.put("codigoPostal", zipCodeString);
                     tipo = "0";
                     //Send params to RequestManager
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando));
                     RequestManager.sharedInstance().setListener(this);
                     RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData);
 
@@ -157,6 +158,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     requestData.put("ciudad", ciudadString);
                     requestData.put("localidad", coloniaString);
 
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando));
                     RequestManager.sharedInstance().setListener(this);
                     RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE, requestData);
                 }
@@ -168,6 +170,12 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
     @Override
     public void decodeResponse(String response){
+
+        try {
+            DialogManager.sharedInstance().dismissDialog();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if(response != null && response.length() > 0){
             Log.v("FragmentCodigoPostal", response);
             ArrayList<Map<String,String>> resp = new ArrayList<>();
