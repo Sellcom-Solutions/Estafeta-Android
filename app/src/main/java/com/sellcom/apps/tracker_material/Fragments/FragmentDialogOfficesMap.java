@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,16 +22,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sellcom.apps.tracker_material.R;
 
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 
-public class DialogMapOffices extends DialogFragment implements View.OnClickListener{
+public class FragmentDialogOfficesMap extends DialogFragment implements View.OnClickListener{
 
     public static String TAG = "DIALOG_MAP_OFFICES";
     private Context context;
@@ -41,6 +38,7 @@ public class DialogMapOffices extends DialogFragment implements View.OnClickList
     private static Map<String,String> list;
     private static LatLng latLng;
     private static String type;
+    private String          sendText;
 
     private TextView        txv_nombre_estafeta,
                             txv_direccion_estafeta,
@@ -55,7 +53,7 @@ public class DialogMapOffices extends DialogFragment implements View.OnClickList
                             btn_cerrar_estafeta;
 
 
-    public DialogMapOffices (){
+    public FragmentDialogOfficesMap(){
 
 
     }
@@ -80,8 +78,11 @@ public class DialogMapOffices extends DialogFragment implements View.OnClickList
         btn_cerrar_estafeta = (Button)view.findViewById(R.id.btn_cerrar_estafeta);
         btn_cerrar_estafeta.setOnClickListener(this);
 
+        btn_compartir_estafeta = (Button)view.findViewById(R.id.btn_compartir_estafeta);
+        btn_compartir_estafeta.setOnClickListener(this);
 
-        txv_nombre_estafeta     = (TextView)view.findViewById(R.id.txv_nombre_estafeta);
+
+        txv_nombre_estafeta     = (TextView) view.findViewById(R.id.txv_nombre_estafeta);
         txv_direccion_estafeta  = (TextView)view.findViewById(R.id.txv_direccion_estafeta);
         txv_horario_estafeta    = (TextView)view.findViewById(R.id.txv_horario_estafeta);
         txv_horario2_estafeta   = (TextView)view.findViewById(R.id.txv_horario2_estafeta);
@@ -115,6 +116,8 @@ public class DialogMapOffices extends DialogFragment implements View.OnClickList
             txv_telefono_estafeta.setText(""+list.get("telefono1"));
         }
 
+        sendText = txv_nombre_estafeta.getText().toString() + "\n" + txv_horario2_estafeta.getText().toString() + " \n" +
+                    txv_direccion_estafeta.getText().toString() + "\nTeléfono: " + txv_telefono_estafeta.getText().toString();
 
         supportMapFragment      = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapEstafeta);
         supportMapFragment      = SupportMapFragment.newInstance();
@@ -163,15 +166,15 @@ public class DialogMapOffices extends DialogFragment implements View.OnClickList
     }
 
     public static void setList(Map<String, String> list) {
-        DialogMapOffices.list = list;
+        FragmentDialogOfficesMap.list = list;
     }
 
     public static void setLatLng(LatLng latLng) {
-        DialogMapOffices.latLng = latLng;
+        FragmentDialogOfficesMap.latLng = latLng;
     }
 
     public static void setType(String type) {
-        DialogMapOffices.type = type;
+        FragmentDialogOfficesMap.type = type;
     }
 
 
@@ -216,6 +219,17 @@ public class DialogMapOffices extends DialogFragment implements View.OnClickList
             case R.id.btn_ir_estafeta:
 
                 onClickMapa(Float.parseFloat(list.get("latitud")),Float.parseFloat(list.get("longitud")));
+
+                break;
+
+            case R.id.btn_compartir_estafeta:
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, txv_nombre_estafeta.getText().toString());
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
 
                 break;
 

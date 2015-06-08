@@ -1,15 +1,12 @@
 package util;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -20,7 +17,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sellcom.apps.tracker_material.Fragments.DialogMapOffices;
+import com.sellcom.apps.tracker_material.Fragments.FragmentDialogOfficesMap;
 import com.sellcom.apps.tracker_material.R;
 
 import java.util.ArrayList;
@@ -211,11 +208,11 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
                 }
 
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                DialogMapOffices dialogo = new DialogMapOffices();
+                FragmentDialogOfficesMap dialogo = new FragmentDialogOfficesMap();
                 dialogo.setList(listMap.get(i));
                 dialogo.setLatLng(position);
                 dialogo.setType(type);
-                dialogo.show(fragmentManager, DialogMapOffices.TAG);
+                dialogo.show(fragmentManager, FragmentDialogOfficesMap.TAG);
 
 
             }
