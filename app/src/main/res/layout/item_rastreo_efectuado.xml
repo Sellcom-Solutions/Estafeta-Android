@@ -8,7 +8,7 @@
     android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp">
 
-    <ImageButton
+   <!-- <ImageButton
         android:id                      ="@+id/btn_favorito"
         android:layout_width            ="0dp"
         android:layout_height           ="20dp"
@@ -16,7 +16,15 @@
         android:layout_weight           ="15"
         android:layout_gravity          ="center"
         android:src                     ="@drawable/estrella_gris"
-        android:background              ="@color/zxing_transparent"/>
+        android:background              ="@color/zxing_transparent"/>-->
+    <CheckBox
+        android:id="@+id/btn_favorito"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="17"
+        android:layout_gravity="center"
+        style="@style/StarCheckBox"
+        />
 
     <LinearLayout
         android:layout_width            ="0dp"
@@ -25,29 +33,96 @@
         android:layout_weight           ="70"
         android:weightSum               ="90">
 
-        <TextView
-            android:id                  ="@+id/txt_no_guia"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="0dp"
-            android:layout_marginTop    ="5dp"
-            android:textColor           ="@color/estafeta_text"
-            android:layout_weight       ="30"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:layout_weight="30">
 
-        <TextView
-            android:id                  ="@+id/txt_codigo_rastreo"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="0dp"
-            android:layout_marginTop    ="5dp"
-            android:textColor           ="@color/estafeta_text"
-            android:layout_weight       ="30"/>
+            <TextView
+                android:id                  ="@+id/lbl_no_guia"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                ="@string/no_guia2"
+                android:textSize            ="@dimen/sizeXSmallText"
+                android:textStyle           ="bold"
+                />
 
-        <TextView
-            android:id                  ="@+id/txt_estatus"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="0dp"
-            android:textColor           ="@color/estafeta_text"
-            android:layout_marginTop    ="5dp"
-            android:layout_weight       ="30"/>
+            <TextView
+                android:id                  ="@+id/txt_no_guia"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                =""
+                android:textSize            ="@dimen/sizeXSmallText"
+                />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:layout_weight="30">
+
+            <TextView
+                android:id                  ="@+id/lbl_codigo_rastreo"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                ="@string/cod_rastreo"
+                android:textSize            ="@dimen/sizeXSmallText"
+                android:textStyle           ="bold"
+                />
+
+            <TextView
+                android:id                  ="@+id/txt_codigo_rastreo"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                =""
+                android:textSize            ="@dimen/sizeXSmallText"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:layout_weight="30">
+
+            <TextView
+                android:id                  ="@+id/lbl_estatus"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:textColor           ="@color/estafeta_text"
+                android:text                ="@string/estatus_servicio"
+                android:textSize            ="@dimen/sizeXSmallText"
+                android:textStyle           ="bold"
+                android:layout_marginTop    ="2dp"/>
+
+            <TextView
+                android:id                  ="@+id/txt_estatus"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:textColor           ="@color/estafeta_text"
+                android:text                =""
+                android:textSize            ="@dimen/sizeXSmallText"
+                android:layout_marginTop    ="2dp"/>
+
+        </LinearLayout>
+
+
         </LinearLayout>
 
     <ImageView
@@ -57,6 +132,6 @@
         android:scaleType="centerInside"
         android:layout_weight="15"
         android:layout_gravity="center"
-        android:src="@drawable/estatus_entregado"/>
+        android:src="@drawable/estatus_sin"/>
 
 </LinearLayout>

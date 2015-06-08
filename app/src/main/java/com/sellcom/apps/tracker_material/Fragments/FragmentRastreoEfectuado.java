@@ -17,6 +17,9 @@ import com.sellcom.apps.tracker_material.Adapters.RastreoEfectuadoAdapter;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -24,7 +27,9 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
 
     String TAG = "FRAG_RASTREO_EFECTUADO";
     ListView lst_rastreo_efectuado;
+
     RastreoEfectuadoAdapter efectuadoAdapter;
+    ArrayList<Map<String,String>> codes= new ArrayList<>();
 
     public FragmentRastreoEfectuado() {
         // Required empty public constructor
@@ -38,8 +43,9 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
         View view  = inflater.inflate(R.layout.fragment_rastreo_efectuado, container, false);
         lst_rastreo_efectuado = (ListView)view.findViewById(R.id.lst_rastreo_efectuado);
 
-        String [] values = {"prueba","prueba2","prueba3"};
-        efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),values);
+        codes = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes");
+
+        efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),codes);
         lst_rastreo_efectuado.setAdapter(efectuadoAdapter);
         
         return view;
@@ -67,7 +73,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
 
         switch (item.getItemId()) {
             case R.id.add_favorite:
-                Log.d(TAG,"Agregar a favoritos");
+                Log.i(TAG,"Agregar a favoritos");
                 return true;
 
             default: return super.onOptionsItemSelected(item);

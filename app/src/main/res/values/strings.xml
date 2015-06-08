@@ -45,11 +45,13 @@
     <string name="boton_escanear">ESCANEAR</string>
     <string name="boton_rastrear">RASTREAR</string>
     <string name="no_guia">Número de Guía:</string>
-    <string name="cod_rastreo">Código de Rastreo:</string>
+    <string name="cod_rastreo">Código de Rastreo: </string>
     <string name="boton_codigo_guia">Código de Guía</string>
     <string name="codigo_factura">Código de Factura</string>
     <string name="codigo_ticket">Código de Ticket</string>
     <string name="cerrar">Cerrar</string>
+    <string name="no_guia2">No. Guía: </string>
+    <string name="estatus_servicio">Estatus del Servicio: </string>
 
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>
@@ -116,6 +118,8 @@
 
     <string name="db_paises">CREATE TABLE "paises" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "idpais" TEXT, "nombrepais_esp" TEXT,
         "nombrepais_ing" TEXT)</string>
+
+    <string name="db_rastreo_tmp">CREATE TABLE "rastreo_tmp" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "codigo" TEXT, "favorito" TEXT)</string>
 
     <!-- ********************   Strings aplicación anterior   ************************** -->
     <string name="title_activity_main">MainActivity</string>

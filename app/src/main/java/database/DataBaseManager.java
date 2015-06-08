@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import database.model.Codes;
 import database.model.Countries;
 import database.model.Offices;
+import database.model.Rastreo_tmp;
 import database.model.States;
 
 /**
@@ -27,6 +28,15 @@ public class DataBaseManager {
         if (dbM== null)
             dbM = new DataBaseManager();
         return dbM;
+    }
+
+    public void cleanRastreo(Context context){
+        if(Rastreo_tmp.getAllInMaps(mContext)!= null){
+            Rastreo_tmp.removeAll(context);
+            Log.d("DataBaseManager"," Ya hay codigos y guian cargadas ");
+            return;
+        }
+
     }
 
 

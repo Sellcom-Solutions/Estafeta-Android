@@ -89,6 +89,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
+        try {
+            db.execSQL(mContext.getString(R.string.db_rastreo_tmp));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

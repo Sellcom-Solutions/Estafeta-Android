@@ -311,12 +311,21 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-                Log.v(METHOD.REQUEST_ZIPCODE.toString(), "parse");
 
-                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "");
+                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "parse");
                 break;
             case REQUEST_TRACKING_LIST_CODES:
-
+                try {
+                    responseArray = ResponseManager.sharedInstance().parseGuide(doc);
+                    setResponseArray(responseArray);
+                    Log.d("responseParse","ok"+responseArray.size());
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
                 Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), "");
                 break;
             case REQUEST_TRACKING_LIST_GUIDES:

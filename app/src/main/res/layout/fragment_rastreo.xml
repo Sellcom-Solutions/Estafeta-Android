@@ -66,6 +66,7 @@
         android:layout_height               ="0dp"
         android:layout_weight               ="20"
         android:orientation                 ="horizontal"
+        android:minHeight                   ="@dimen/sizeNormalText"
         android:weightSum                   ="100">
 
         <TextView
@@ -77,6 +78,7 @@
             android:layout_weight           ="90"
             android:text                    ="@string/aviso_rastreo"
             android:textColor               ="@color/estafeta_text"
+            android:textSize="@dimen/sizeSmallText"
             android:textStyle               ="bold"/>
 
         <ImageButton
@@ -95,6 +97,7 @@
         android:layout_width            ="match_parent"
         android:layout_height           ="0dp"
         android:layout_weight           ="20"
+        android:minHeight               ="@dimen/sizeNormalText"
         android:weightSum               ="100">
 
         <EditText
@@ -132,6 +135,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:minHeight="@dimen/sizeSmallText"
         android:layout_weight="15">
 
         <TextView
@@ -142,6 +146,7 @@
             android:layout_marginLeft       ="10dp"
             android:layout_marginTop        ="10dp"
             android:text                    ="@string/aviso_codigo"
+            android:textSize                ="@dimen/sizeSmallText"
             android:textColor               ="@color/estafeta_text"/>
 
     </LinearLayout>
@@ -153,6 +158,7 @@
         android:background="@color/estafeta_light_gray"
         android:orientation="horizontal"
         android:layout_weight="20"
+        android:minHeight="15dp"
         android:weightSum="100">
 
         <Button

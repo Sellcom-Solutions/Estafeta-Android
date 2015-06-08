@@ -18,6 +18,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import database.model.Rastreo_tmp;
+
 /**
  * Created by rebecalopezmartinez on 22/05/15.
  */
@@ -71,7 +73,6 @@ public class RastreoListAdapter extends BaseAdapter {
             convertView                 = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_rastreo,parent,false);
             holder.tipo_codigo          = (TextView)convertView.findViewById(R.id.li_tipo_codigo);
             holder.no_codigo            = (TextView)convertView.findViewById(R.id.li_codigo);
-            //holder.favorito             = (ImageButton)convertView.findViewById(R.id.btn_li_rastreo);
             holder.favorito             = (CheckBox) convertView.findViewById(R.id.btn_li_rastreo);
             convertView.setTag(holder);
         }
@@ -98,6 +99,7 @@ public class RastreoListAdapter extends BaseAdapter {
                         Map<String, String> aux = new HashMap<>();
                         aux.put("codigo",codStr);
                         aux.put("favorito","true");
+                        Rastreo_tmp.update(context, aux);
                         Log.d("Favorito","true");
                         codigos.remove(position);
                         codigos.add(position,aux);
@@ -106,6 +108,7 @@ public class RastreoListAdapter extends BaseAdapter {
                         Map<String, String> aux = new HashMap<>();
                         aux.put("codigo",codStr);
                         aux.put("favorito","false");
+                        Rastreo_tmp.update(context, aux);
                         Log.d("Favorito","false");
                         codigos.remove(position);
                         codigos.add(position,aux);
