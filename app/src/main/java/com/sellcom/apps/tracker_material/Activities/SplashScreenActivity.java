@@ -79,7 +79,6 @@ public class SplashScreenActivity extends ActionBarActivity {
            // DataBaseHelper dbHelper = new DataBaseHelper(context);
             Log.d("SplashScreen","crea dbHelper");
             DataBaseManager.sharedInstance().insert(context);
-            DataBaseManager.sharedInstance().cleanRastreo(context);
 
             //Actualizar oficinas
             Map<String, String> requestData =  new HashMap<>();

@@ -72,9 +72,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
         Log.d(TAG, "Selected:  " + item.getItemId());
 
         switch (item.getItemId()) {
-            case R.id.add_favorite:
-                Log.i(TAG,"Agregar a favoritos");
-                return true;
+
 
             default: return super.onOptionsItemSelected(item);
         }

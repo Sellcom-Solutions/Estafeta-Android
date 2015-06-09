@@ -23,6 +23,7 @@ import database.model.Rastreo_tmp;
 /**
  * Created by rebecalopezmartinez on 22/05/15.
  */
+
 public class RastreoListAdapter extends BaseAdapter {
 
     String TAG = "RASTREO_ADAPTER_LOG";
@@ -73,7 +74,7 @@ public class RastreoListAdapter extends BaseAdapter {
             convertView                 = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_rastreo,parent,false);
             holder.tipo_codigo          = (TextView)convertView.findViewById(R.id.li_tipo_codigo);
             holder.no_codigo            = (TextView)convertView.findViewById(R.id.li_codigo);
-            holder.favorito             = (CheckBox) convertView.findViewById(R.id.btn_li_rastreo);
+            //holder.favorito             = (CheckBox) convertView.findViewById(R.id.btn_li_rastreo);
             convertView.setTag(holder);
         }
         else{
@@ -92,7 +93,7 @@ public class RastreoListAdapter extends BaseAdapter {
                 holder.tipo_codigo.setText(context.getString(R.string.cod_rastreo));
 
             holder.no_codigo.setText(codStr);
-            holder.favorito.setOnClickListener(new View.OnClickListener() {
+            /*holder.favorito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(holder.favorito.isChecked()){
@@ -114,7 +115,7 @@ public class RastreoListAdapter extends BaseAdapter {
                         codigos.add(position,aux);
                     }
                 }
-            });
+            });*/
 
         } catch (Exception e) {
             e.printStackTrace();

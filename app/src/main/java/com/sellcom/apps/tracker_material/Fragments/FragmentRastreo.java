@@ -72,11 +72,9 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         context = getActivity();
-        codes_array = Rastreo_tmp.getAllInMaps(context);
+       // codes_array = Rastreo_tmp.getAllInMaps(context);
         lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
-       /* lst_rastreo.setAdapter(lstAdapter);
-       Log.d(TAG,"Hugoooo------------------------");
-        Toast.makeText(context,"Hola Hugooooo!!",Toast.LENGTH_SHORT).show();*/
+
     }
 
     @Override
@@ -94,7 +92,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         codigo      = (EditText)view.findViewById(R.id.edt_codigo);
 
 
-        codes_array = Rastreo_tmp.getAllInMaps(context);
+        //codes_array = Rastreo_tmp.getAllInMaps(context);
 
         if( codes_array != null){
             Log.v(TAG,"aux size"+codes_array.size());
@@ -122,11 +120,18 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        if (savedInstanceState != null) {
+            codes_array = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes");
+        }
         setHasOptionsMenu(true);
     }
 
-    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("codes",codes_array);
+    }
+
+        @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         if (!((MainActivity) getActivity()).isDrawerOpen) {
@@ -161,8 +166,6 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             case R.id.btn_rastrear:
                 new GetCodesInfo().execute();
-
-
                 break;
 
             case R.id.btn_agregar:
@@ -171,9 +174,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         }
 
     }
+
     public void addCode(){
         String codigoStr = codigo.getText().toString();
-        codes_array = Rastreo_tmp.getAllInMaps(context);
+        //codes_array = Rastreo_tmp.getAllInMaps(context);
 
         if(codigoStr.length()== 10 || codigoStr.length()== 22){
             if(codes_array != null) {
@@ -200,8 +204,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             item.put("codigo",codigoStr);
             item.put("favorito","false");
             Rastreo_tmp.insert(context, item);
-            //codes_array.add(item);
-            codes_array = Rastreo_tmp.getAllInMaps(context);
+            codes_array.add(item);
+            //codes_array = Rastreo_tmp.getAllInMaps(context);
 
             lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
             lst_rastreo.setAdapter(lstAdapter);
@@ -233,6 +237,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
     }
+
+
 
     public class GetCodesInfo extends AsyncTask<Void, Void, String> implements UIResponseListenerInterface {
 

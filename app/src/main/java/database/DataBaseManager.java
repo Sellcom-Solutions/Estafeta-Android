@@ -30,14 +30,14 @@ public class DataBaseManager {
         return dbM;
     }
 
-    public void cleanRastreo(Context context){
+   /* public void cleanRastreo(Context context){
         if(Rastreo_tmp.getAllInMaps(mContext)!= null){
             Rastreo_tmp.removeAll(context);
             Log.d("DataBaseManager"," Ya hay codigos y guian cargadas ");
             return;
         }
 
-    }
+    }*/
 
 
     public void insert(Context context){

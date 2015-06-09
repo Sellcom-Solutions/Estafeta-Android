@@ -17,7 +17,7 @@
         android:layout_gravity          ="center"
         android:src                     ="@drawable/estrella_gris"
         android:background              ="@color/zxing_transparent"/>-->
-
+<!--
     <CheckBox
         android:id="@+id/btn_li_rastreo"
         android:layout_width="0dp"
@@ -25,12 +25,14 @@
         android:layout_weight="20"
         android:layout_gravity="center"
         style="@style/StarCheckBox"
-        />
+        />-->
 
     <LinearLayout
         android:layout_width            ="0dp"
         android:layout_height           ="wrap_content"
         android:layout_weight           ="80"
+        android:layout_marginLeft       ="20dp"
+        android:layout_marginRight      ="10dp"
         android:orientation             ="vertical"
         android:weightSum               ="100">
 
