@@ -24,7 +24,7 @@
     <!-- Globals -->
     <string name="Search">Buscar</string>
     <string name="offices_search_by_address">Buscar por dirección</string>
-    <string name="city_etc">Ciudad, municipio, delegación*</string>
+    <string name="city_etc">Ciudad, municipio, delegación</string>
     <string name="locality">Colonia</string>
     <string name="zip_code">C.P.</string>
     <string name="mandatory_fields">Campos Obligatorios *</string>
@@ -57,6 +57,27 @@
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>
     <string name="ubicar_oficinas">Ubicar Oficinas</string>
+
+    <!--Fragment Quotation-->
+    <string name="quotation_title">Cotizador</string>
+    <string name="quotation_shipping">Cotizar Envío</string>
+    <string name="quotation_national">Nacional</string>
+    <string name="quotation_international">Internacional</string>
+    <string name="quotation_packet">SOBRE</string>
+    <string name="quotation_package">PAQUETE</string>
+    <string name="quotation_zip_origin">C.P. Origen</string>
+    <string name="quotation_zip_destination">C.P. Destino</string>
+    <string name="quotation_quote">Cotizar</string>
+
+    <string name="quotation_weigth">Peso(kg)*</string>
+    <string name="quotation_high">Alto(cm)*</string>
+    <string name="quotation_long">Largo(cm)*</string>
+    <string name="quotation_width">Ancho(cm)*</string>
+
+    <string name="quotation_search_zc">Buscar Código Postal</string>
+
+    <string name="quotation_search_zc_accept">Aceptar</string>
+    <string name="quotation_search_zc_cancel">Cancelar</string>
     
     <!-- Codigo Postal -->
     <string name="verificar_codigo">Validar un Código Postal</string>
@@ -76,8 +97,8 @@
     de que EL CLIENTE desee limitar el uso o divulgación de los datos proporionados a ESTAFETA, así como ejercer sus derechos de acceso,
     rectificación, cancelación u oposición a que se hace referencia en la legislación aplicable, deberá dirigir su solicitud por escrito
     al área de Atención a Clientes de ESTAFETA con domicilio en Cerrada de Ceylán 539, Col. Industrial Vallejo, C.P. 02300, México, D.F.,
-    a partir del 6 de enero de 2012.\n\nCualquier cambio a los términos del presente aviso de privacidad será publicado a través de la página de internet de ESTAFETA,
-    http://www.estafeta.com\n\n</string>
+    a partir del 6 de enero de 2012.\n\nCualquier cambio a los términos del presente aviso de privacidad será publicado a través de
+    la página de internet de ESTAFETA, http://www.estafeta.com\n\n</string>
 
     <!-- Dialog messages-->
     <string name="error_codigo">Error, código postal no válido.</string>
@@ -86,7 +107,11 @@
     <string name="cargando">Cargando ...</string>
     <string name="error_tamaño_codigo">Error,un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
     <string name="error_cod_repetido">Error, el número ya existe en la lista de rastreo.</string>
+    <string name="error_lista_vacia">Error, la lista de rastreo se encuentra vacía.</string>
+    <string name="error_agregar_fav">Error, no existe información acerca de este registro</string>
+    <string name="exito_agregar_fav">Operación exitosa</string>
 
+    <!-- Data base -->
     <string name="db_trackdata">CREATE TABLE "trackdata" ("id_trackdata"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "waybill"  TEXT(24),
         "shortwaybill" TEXT(24), "srvcid"  TEXT(24), "srvcdescspa" TEXT(24), "srvcdesceng" TEXT(24), "custnumber" TEXT(24), "packagetype" TEXT(24),
         "adtnlinfo" TEXT(24), "statusspa" TEXT(24), "statuseng"  TEXT(24), "pd_org_acronym" TEXT(24), "pd_org_name"  TEXT(24), "pd_pkup_date" TEXT(24),
@@ -120,6 +145,8 @@
         "nombrepais_ing" TEXT)</string>
 
     <string name="db_rastreo_tmp">CREATE TABLE "rastreo_tmp" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "codigo" TEXT, "favorito" TEXT)</string>
+
+
 
     <!-- ********************   Strings aplicación anterior   ************************** -->
     <string name="title_activity_main">MainActivity</string>

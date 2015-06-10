@@ -54,7 +54,14 @@ public class Favorites {
 
     }
 
-    public static ArrayList<Map<String,String>> getStatesNames(Context context){
+    public static long insertMap(ArrayList<Map<String, String>> values){
+        for(int i=0;i<values.size();i++){
+
+        }
+        return 0;
+    }
+
+    public static ArrayList<Map<String,String>> getAll(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
         if (cursor != null && cursor.getCount() > 0) {

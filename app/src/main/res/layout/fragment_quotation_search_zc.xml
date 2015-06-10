@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_gravity="center"
+    android:padding="25dp">
+
+    <EditText
+        android:id                  ="@+id/edt_dummy"
+        android:layout_width        ="0dp"
+        android:layout_height       ="0dp"
+        />
+
+    <TextView
+        android:layout_width        ="wrap_content"
+        android:layout_height       ="wrap_content"
+        android:text                ="@string/quotation_search_zc"
+        android:textSize            ="@dimen/sizeNormalText"
+        android:textStyle           ="bold"
+        />
+
+    <Spinner
+        android:id                  ="@+id/spn_state"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_gravity      ="left"
+        android:layout_marginTop    ="30dp"
+        android:spinnerMode         ="dialog"
+        android:dividerHeight       ="0dp"
+        />
+
+    <EditText
+        android:id                  ="@+id/edt_city"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+
+        android:textColor           ="@color/estafeta_red"
+        android:textSize            ="@dimen/sizeMediumText"
+        android:hint                ="@string/city_etc"
+        android:textColorHint       ="@color/estafeta_soft_gray"
+
+        android:nextFocusDown       ="@+id/edt_colony"
+
+        android:layout_marginTop    ="20dp"/>
+
+    <EditText
+        android:id                  ="@+id/edt_colony"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+
+        android:textColor           ="@color/estafeta_red"
+        android:textSize            ="@dimen/sizeMediumText"
+        android:hint                ="@string/locality"
+        android:textColorHint       ="@color/estafeta_soft_gray"
+        android:layout_weight       ="1"
+        android:nextFocusDown       ="@+id/edt_zip_code"
+
+        android:layout_marginTop    ="20dp"/>
+
+    <TextView
+        android:layout_width        ="wrap_content"
+        android:layout_height       ="wrap_content"
+        android:text                ="@string/mandatory_fields"
+        android:textSize=           "@dimen/sizeXSmallText"
+        android:textColor           ="@color/estafeta_red"
+        android:layout_gravity      ="left"/>
+
+    <LinearLayout
+        android:orientation         ="horizontal"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginTop    ="40dp"
+        android:gravity             ="right"
+        >
+
+        <Button
+            android:id                  ="@+id/btn_cancel"
+            android:layout_width        ="wrap_content"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/quotation_search_zc_cancel"
+            android:textSize            ="@dimen/sizeSmallText"
+            android:textColor           ="@color/estafeta_red"
+            android:background          ="@android:color/transparent"
+            android:paddingLeft         ="20dp"
+            android:paddingRight        ="20dp"
+            />
+
+        <Button
+            android:id                  ="@+id/btn_accept"
+            android:layout_width        ="wrap_content"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/quotation_search_zc_accept"
+            android:textSize            ="@dimen/sizeSmallText"
+            android:textColor           ="@color/estafeta_red"
+            android:background          ="@android:color/transparent"
+            android:paddingLeft         ="20dp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -2,7 +2,6 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
@@ -21,8 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.content.Context;
-import android.widget.Toast;
-
 
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.RastreoListAdapter;
@@ -61,7 +58,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     ListView lst_rastreo;
     RastreoListAdapter lstAdapter;
     static ArrayList<Map<String,String>> codes_array = new ArrayList<Map<String,String>>();
-    ArrayList<Map<String, String>> aux;
+
     Context context;
 
     public FragmentRastreo() {
@@ -165,7 +162,20 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 break;
 
             case R.id.btn_rastrear:
-                new GetCodesInfo().execute();
+                if(codes_array == null || codes_array.size()<=0){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_lista_vacia));
+                    Handler handler = null;
+                    handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            DialogManager.sharedInstance().dismissDialog();
+                        }
+                    }, 1000);
+                }
+                else {
+                    new GetCodesInfo().execute();
+                }
+
                 break;
 
             case R.id.btn_agregar:
@@ -203,7 +213,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             Map<String,String> item = new HashMap<>();
             item.put("codigo",codigoStr);
             item.put("favorito","false");
-            Rastreo_tmp.insert(context, item);
+            //Rastreo_tmp.insert(context, item);
             codes_array.add(item);
             //codes_array = Rastreo_tmp.getAllInMaps(context);
 
@@ -242,6 +252,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
     public class GetCodesInfo extends AsyncTask<Void, Void, String> implements UIResponseListenerInterface {
 
+        int j=0;
+        ArrayList<Map<String, String>> aux = new ArrayList<>();
+        boolean flag = false;
+
         protected void onPreExecute() {
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando));
         }
@@ -255,6 +269,12 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 code_item = codes_array.get(i);
 
                 Log.d("Codigo for",code_item.get("codigo"));
+
+                /*if(i == (codes_array.size()-1)) {
+                    flag = true;
+                    Log.d(TAG,"size codes array: "+codes_array.size());
+                    Log.d(TAG,"flag "+flag+" i "+i);
+                }*/
 
                 requestData.put("initialWaybill","");
                 requestData.put("finalWaybill","");
@@ -281,13 +301,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_TRACKING_LIST_CODES, requestData);
+
+
             }
-                 /*
-            for (int i = 0; i < vNumeros.size(); i++) {
-                nameValuePairs.add(new BasicNameValuePair("wayBills",
-                        (String) vNumeros.elementAt(i)));
-            }
-            */
+
             return null;
 
             }
@@ -299,33 +316,62 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
         @Override
         public void decodeResponse(String stringResponse) {
-            if(stringResponse != null && stringResponse.length() > 0) {
-                try {
-                    Log.v("Fragment Rastreo", stringResponse);
-                    ArrayList<Map<String, String>> auxResponse = new ArrayList<>();
-                    auxResponse = RequestManager.sharedInstance().getResponseArray();
-                    Log.v("auxResponse", "" + auxResponse.size());
-                } catch (Exception e) {
-                    e.printStackTrace();
+            try {
+                if (stringResponse == null ||stringResponse.equals("0") ) {
+                    Log.v(TAG, "El servidor devolvió null o 0");
+                    String cod_aux= codes_array.get(j).get("codigo");
+                    Map<String, String> auxResponse = new HashMap<>();
+                    if(cod_aux.length() == 10) {
+                        auxResponse.put("shortWayBillId", cod_aux);
+                        auxResponse.put("wayBill","Sin información");
+                        auxResponse.put("statusSPA","Sin información");
+                    }
+                    else{
+                        auxResponse.put("shortWayBillId","Sin información");
+                        auxResponse.put("wayBill", cod_aux);
+                        auxResponse.put("statusSPA","Sin información");
+                    }
+                    aux.add(auxResponse);
+                    Log.v(TAG + "aux", "" + aux.size());
+                } else {
+                    Log.v(TAG, stringResponse);
+                    Map<String, String> auxResponse = new HashMap<>();
+                    auxResponse = RequestManager.sharedInstance().getResponseArray().get(0);
+                    if (auxResponse != null) {
+                        Log.v(TAG + "auxResponse", "" + auxResponse.size());
+                        if (auxResponse.size() > 0)
+                            aux.add(auxResponse);
+                        Log.v(TAG + "aux", "" + aux.size());
+                    }
                 }
-            }else{
-                Log.v("FragmentCodigoPostal", "El servidor devolvio null");
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
+            j++;
+            Log.d(TAG,"contador:"+j);
+            if (j == codes_array.size()){
+                Log.d(TAG,"flag "+flag+" j "+j);
+                Bundle bundle= new Bundle();
+                //bundle.putSerializable("codes",codes_array);
+                bundle.putSerializable("codes_info",aux);
+
+                fragmentManager =getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragment = new FragmentRastreoEfectuado();
+                fragment.addFragmentToStack(getActivity());
+                fragment.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, fragment, TAG);
+                fragmentTransaction.commit();
+                //DialogManager.sharedInstance().dismissDialog();
+            }
+
         }
 
         protected void onPostExecute(String result) {
-            Bundle bundle= new Bundle();
-            bundle.putSerializable("codes",codes_array);
 
-            fragmentManager =getActivity().getSupportFragmentManager();
-            fragmentTransaction = fragmentManager.beginTransaction();
-            fragment = new FragmentRastreoEfectuado();
-            fragment.addFragmentToStack(getActivity());
-            fragment.setArguments(bundle);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.replace(R.id.container, fragment, TAG);
-            fragmentTransaction.commit();
-            DialogManager.sharedInstance().dismissDialog();
+
 
         }
 

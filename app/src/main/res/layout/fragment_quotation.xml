@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation     ="vertical"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:background      ="@color/white">
+
+    <EditText
+        android:id                  ="@+id/edt_dummy"
+        android:layout_width        ="0dp"
+        android:layout_height       ="0dp"
+        />
+
+    <LinearLayout
+        android:orientation     ="horizontal"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="115dp"
+        android:background      ="@drawable/head_cotizador"
+        android:gravity         ="center">
+
+        <TextView
+            android:layout_width        ="wrap_content"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/quotation_shipping"
+            android:textSize            ="@dimen/sizeLargeText"
+            android:textStyle           ="bold"
+            android:textColor           ="@color/estafeta_text"
+            android:layout_gravity      ="bottom"
+            android:layout_marginBottom ="5dp"
+            android:layout_marginLeft   ="40dp"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ToggleButton
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:id                  ="@+id/tbtn_nat"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:background          ="@drawable/toggle_selector"
+            android:layout_weight       ="1"
+            android:textColor           ="@color/estafeta_text"
+            android:textOn              ="@string/quotation_national"
+            android:textOff             ="@string/quotation_national"/>
+
+        <LinearLayout
+            android:orientation     ="vertical"
+            android:layout_width    ="2dp"
+            android:layout_height   ="match_parent"
+            android:layout_weight   ="0"
+            android:background      ="@color/estafeta_light_gray"></LinearLayout>
+
+        <ToggleButton
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:id                  ="@+id/tbtn_inter"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:background          ="@drawable/toggle_selector"
+            android:layout_weight       ="1"
+            android:textColor           ="@color/estafeta_text"
+            android:textOn              ="@string/quotation_international"
+            android:textOff             ="@string/quotation_international"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation             ="horizontal"
+        android:layout_width            ="match_parent"
+        android:layout_height           ="wrap_content"
+        android:layout_marginLeft       ="20dp"
+        android:layout_marginRight      ="20dp"
+        android:layout_marginTop        ="10dp">
+
+        <CheckBox
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/quotation_packet"
+            android:textColor           ="@color/estafeta_soft_gray"
+            android:textStyle           ="bold"
+            android:textSize            ="@dimen/sizeSmallText"
+            android:id                  ="@+id/cb_packet"
+            android:layout_weight       ="1"
+            android:drawableTop         ="@drawable/sobre"
+            android:gravity             ="center"
+            />
+
+        <CheckBox
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:textSize            ="@dimen/sizeSmallText"
+            android:text                ="@string/quotation_package"
+            android:textColor           ="@color/estafeta_soft_gray"
+            android:textStyle           ="bold"
+            android:id                  ="@+id/cb_package"
+            android:layout_weight       ="1"
+            android:drawableTop         ="@drawable/paquete"
+            android:gravity             ="center"/>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation         ="horizontal"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_gravity      ="left"
+        android:layout_marginTop    ="20dp"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp">
+
+        <EditText
+            android:id                  ="@+id/edt_zc_origin"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/quotation_zip_origin"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1"
+            android:layout_gravity      ="center"
+            android:singleLine          ="true"/>
+
+        <ImageButton
+            android:layout_width        ="35dp"
+            android:layout_height       ="40dp"
+            android:id                  ="@+id/btn_zc_ori_search"
+            android:background          ="@drawable/busca"
+            android:layout_marginLeft   ="5dp"
+            android:layout_marginRight  ="10dp"/>
+
+        <ImageButton
+            android:layout_width        ="35dp"
+            android:layout_height       ="40dp"
+            android:id                  ="@+id/btn_zc_ori_phonebook"
+            android:background          ="@drawable/agenda"
+            android:layout_marginLeft   ="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation         ="horizontal"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_gravity      ="left"
+        android:layout_marginTop    ="20dp"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp">
+
+        <EditText
+            android:id                  ="@+id/edt_zc_destination"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/quotation_zip_destination"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1"
+            android:layout_gravity      ="center"
+            android:singleLine          ="true"/>
+
+        <ImageButton
+            android:layout_width        ="35dp"
+            android:layout_height       ="40dp"
+            android:id                  ="@+id/btn_zc_dest_search"
+            android:background          ="@drawable/busca"
+            android:layout_marginLeft   ="5dp"
+            android:layout_marginRight  ="10dp"/>
+
+        <ImageButton
+            android:layout_width        ="35dp"
+            android:layout_height       ="40dp"
+            android:id                  ="@+id/btn_zc_dest_phonebook"
+            android:background          ="@drawable/agenda"
+            android:layout_marginLeft   ="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation         ="vertical"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:id                  ="@+id/ll_for_package"
+        android:visibility          ="gone">
+
+
+    <LinearLayout
+        android:orientation         ="horizontal"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_gravity      ="left"
+        android:layout_marginTop    ="10dp"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp">
+
+        <EditText
+            android:id                  ="@+id/edt_weigth"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:singleLine          ="true"
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/quotation_weigth"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1"
+            android:nextFocusDown       ="@+id/edt_high"
+
+            android:layout_marginRight  ="10dp"/>
+
+        <EditText
+            android:id                  ="@+id/edt_high"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:singleLine          ="true"
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/quotation_high"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1"
+
+            android:nextFocusDown       ="@+id/edt_long"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation         ="horizontal"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_gravity      ="left"
+        android:layout_marginTop    ="10dp"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp">
+
+        <EditText
+            android:id                  ="@+id/edt_long"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:singleLine          ="true"
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/quotation_long"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1"
+            android:nextFocusDown       ="@+id/edt_width"
+
+            android:layout_marginRight  ="10dp"/>
+
+        <EditText
+            android:id                  ="@+id/edt_width"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:singleLine          ="true"
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/quotation_width"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1" />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id                  ="@+id/required"
+        android:layout_width        ="wrap_content"
+        android:layout_height       ="wrap_content"
+        android:text                ="@string/mandatory_fields"
+        android:textSize=           "@dimen/sizeXSmallText"
+        android:textColor           ="@color/estafeta_red"
+        android:layout_gravity      ="left"
+        android:layout_marginLeft   ="20dp"
+        android:layout_marginRight  ="20dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation         ="horizontal"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="match_parent"
+        android:gravity             ="center|bottom"
+        android:layout_marginBottom ="10dp"
+        >
+
+    <Button
+        android:id                  ="@+id/btn_quote"
+        android:layout_width        ="250dp"
+        android:layout_height       ="wrap_content"
+        android:text                ="@string/quotation_quote"
+        android:textSize            ="@dimen/sizeNormalText"
+        android:textColor           ="@color/estafeta_red"
+        android:background          ="@android:color/transparent"
+        />
+
+    </LinearLayout>
+</LinearLayout>

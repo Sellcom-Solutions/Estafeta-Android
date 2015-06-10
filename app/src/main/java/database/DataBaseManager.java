@@ -87,7 +87,7 @@ public class DataBaseManager {
             // Read File Line By Line
             DataBaseAdapter.getDB(mContext).beginTransaction();
             while ((strLine = br.readLine()) != null) {
-                Log.d("DataBaseManager",filename +" ----- "+ strLine);
+              //  Log.d("DataBaseManager",filename +" ----- "+ strLine);
                 DataBaseAdapter.getDB(mContext).execSQL(strLine);
             }
             DataBaseAdapter.getDB(mContext).setTransactionSuccessful();

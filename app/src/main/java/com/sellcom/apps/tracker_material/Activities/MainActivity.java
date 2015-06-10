@@ -20,6 +20,7 @@ import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterfa
 
 import com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad;
 import com.sellcom.apps.tracker_material.Fragments.FragmentCodigoPostal;
+import com.sellcom.apps.tracker_material.Fragments.FragmentQuotation;
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreo;
 import com.sellcom.apps.tracker_material.Fragments.FragmentOffices;
 
@@ -163,8 +164,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 }
                 break;
 
+            case NavigationDrawerFragment.COTIZADOR:
+                CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_QUOTATION.toString();
+                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
+                    fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
+                }else{
+                    fragment = new FragmentQuotation();
+                }
+                break;
+
             default:
-                Toast.makeText(this,"Módulo no implementado",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"Módulo no implementado",Toast.LENGTH_SHORT).show();
                 return;
         }
         prepareTransaction();

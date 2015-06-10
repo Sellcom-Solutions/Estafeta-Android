@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.RastreoEfectuadoAdapter;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
 
     RastreoEfectuadoAdapter efectuadoAdapter;
     ArrayList<Map<String,String>> codes= new ArrayList<>();
+    ArrayList<Map<String, String>> codes_info = new ArrayList<>();
 
     public FragmentRastreoEfectuado() {
         // Required empty public constructor
@@ -43,11 +45,19 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
         View view  = inflater.inflate(R.layout.fragment_rastreo_efectuado, container, false);
         lst_rastreo_efectuado = (ListView)view.findViewById(R.id.lst_rastreo_efectuado);
 
-        codes = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes");
+        //codes = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes");
+        codes_info = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes_info");
 
-        efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),codes);
+        //efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),codes);
+        efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),codes_info);
         lst_rastreo_efectuado.setAdapter(efectuadoAdapter);
-        
+
+        try {
+            DialogManager.sharedInstance().dismissDialog();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return view;
     }
 

@@ -400,9 +400,13 @@ public class ResponseManager {
             data.add(map);
         }
 
-         for(int ii=0;ii<data.size();ii++)
-            Log.d("ArrayList",data.get(ii).get("wayBill"));
-        return data;
+        if (data.size() <0)
+            return null;
+        else {
+            for (int ii = 0; ii < data.size(); ii++)
+                Log.d("ArrayList", data.get(ii).get("wayBill"));
+            return data;
+        }
     }
 
 }

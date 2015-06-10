@@ -44,7 +44,7 @@
             android:layout_weight       ="50"
             android:textStyle           ="bold"
             android:textColor           ="@color/estafeta_text"
-            android:textSize            ="@dimen/sizeXSmallText"
+            android:textSize            ="@dimen/sizeSmallText"
             android:text                =""/>
 
         <TextView
@@ -52,10 +52,9 @@
             android:layout_width        ="match_parent"
             android:layout_height       ="0dp"
             android:layout_weight       ="50"
-            android:layout_marginTop    ="5dp"
             android:layout_marginBottom ="5dp"
             android:textColor           ="@color/estafeta_text"
-            android:textSize            ="@dimen/sizeXSmallText"
+            android:textSize            ="@dimen/sizeSmallText"
             android:text=""/>
 
         </LinearLayout>

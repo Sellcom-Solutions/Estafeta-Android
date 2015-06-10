@@ -30,16 +30,11 @@ public class RastreoListAdapter extends BaseAdapter {
 
     Context context;
     private ArrayList<Map<String,String>> codigos;
-    //String []codigos;
-    //private List<Map<String,String>> codigos_copy;
 
     public  RastreoListAdapter (Context context, ArrayList<Map<String,String>> codigos){
         this.context        = context;
         this.codigos       = codigos;
-        //this.codigos_copy  = new ArrayList<>(codigos);
     }
-
-
 
     class CodigosViewHolder{
         TextView        tipo_codigo;

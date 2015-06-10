@@ -23,8 +23,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="17"
         android:layout_gravity="center"
-        style="@style/StarCheckBox"
-        />
+        android:scaleY="0.5"
+        android:scaleX="0.5"
+        style="@style/StarCheckBox"/>
 
     <LinearLayout
         android:layout_width            ="0dp"
@@ -66,7 +67,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+
             android:orientation="horizontal"
             android:layout_weight="30">
 
@@ -97,7 +98,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
             android:orientation="horizontal"
             android:layout_weight="30">
 
