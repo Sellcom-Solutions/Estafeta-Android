@@ -17,7 +17,6 @@
         <item name="colorControlNormal">@color/estafeta_soft_gray</item>
         <item name="colorControlActivated">@color/estafeta_soft_gray</item>
         <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
-        <item name="android:colorAccent">@color/estafeta_soft_gray</item>
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
@@ -43,8 +42,6 @@
 
     <style name="EditStyle" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/estafeta_red</item>
-        <item name="android:strokeColor">@color/estafeta_red</item>
-        <item name="android:colorAccent">@color/estafeta_red</item>
     </style>
 
 
@@ -57,7 +54,6 @@
     </style>
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Spinner">
-        <item name="android:colorControlNormal">@color/estafeta_red</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:popupBackground">@android:color/transparent</item>
     </style>

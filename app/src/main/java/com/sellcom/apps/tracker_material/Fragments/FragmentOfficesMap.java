@@ -34,6 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 import database.model.Offices;
+import database.model.States;
 import location.GPSTracker;
 import util.CustomMapFragment;
 
@@ -42,6 +43,7 @@ import util.CustomMapFragment;
  */
 public class FragmentOfficesMap extends TrackerFragment implements View.OnClickListener{
 
+    public static final String              TAG = "FragmentOfficesMap";
     private Context                         context;
 
     List <LatLng>                           listPositions;
@@ -54,7 +56,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
     private int                             distanceM = 0;
     private CustomMapFragment               mapFragment;
 
-    private CheckBox                     rg1,rg2,rg3;
+    private CheckBox                        rg1,rg2,rg3;
     private LinearLayout                    lin_container;
     private FloatingActionButton            click,fab_gravity_center;
     Animation                               filterDown,filterUp,animacionDown,animacionUp;
@@ -63,7 +65,10 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
     private TextView                        txv_footer;
 
-    private String Type;
+    private String Type,typeSearch,sql,state;
+    private String[] selectionArgs = {};
+
+    private List<Map<String,String>>    listStates;
 
     private Handler puente = new Handler() {
         @Override
@@ -108,6 +113,9 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
         listType        = new ArrayList();
         listOficinas    = new ArrayList<Map<String, String>>();
         listOficinasFiltradas = new ArrayList<Map<String, String>>();
+        listStates      = new ArrayList<Map<String, String>>();
+        typeSearch = getArguments().getString("typeSearch");
+
         new CargarSucursales().execute();
 
 
@@ -290,43 +298,99 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
         protected void onPreExecute() {
             super.onPreExecute();
 
-            listOficinas = Offices.getAllInMaps(context);
-
-            Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
-            if (myLocation != null) {
-                currentPosition = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
-                listPositions.add(currentPosition);
-                listOficinasFiltradas.add(new HashMap<String, String>());
-                listType.add("0");
+            if(typeSearch.equals("cerca_de_mi")) {
+                listOficinas = Offices.getAllInMaps(context);
+            }else if(typeSearch.equals("busqueda_avanzada")){
+                sql = getArguments().getString("sql");
+                selectionArgs = getArguments().getStringArray("selectionArgs");
+                state = getArguments().getString("state");
+                listOficinas = Offices.getOfficesByCity(context, sql, selectionArgs);
+                listStates = States.getStatesNames(context);
+                //Toast.makeText(context, "" + listOficinas.size(), Toast.LENGTH_SHORT).show();
+            }else if(typeSearch.equals("nada")){
+                listOficinas = new ArrayList<Map<String, String>>();
+                state = getArguments().getString("state");
+                listStates = States.getStatesNames(context);
             }
 
-            mapFragment = (CustomMapFragment) getChildFragmentManager().findFragmentByTag("map");
 
-            LatLng position;
-            for(int i = 0; i<listOficinas.size(); i++){
-                latitud     = Double.parseDouble(listOficinas.get(i).get("latitud"));
-                longitud    = Double.parseDouble(listOficinas.get(i).get("longitud"));
+            if(typeSearch.equals("cerca_de_mi")) {
 
 
-                distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float)latitud, (float)longitud);
-                Log.d("Distancia", distanceM +"");
-
-                if (distanceM <= 7.5){
-                    listOficinasFiltradas.add(listOficinas.get(i));
-                    position = new LatLng(latitud, longitud);
-                    listPositions.add(position);
-                    listType.add(listOficinas.get(i).get("tipo_oficina"));
-
+                Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
+                if (myLocation != null) {
+                    currentPosition = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
+                    listPositions.add(currentPosition);
+                    listOficinasFiltradas.add(new HashMap<String, String>());
+                    listType.add("0");
                 }
 
 
+                mapFragment = (CustomMapFragment) getChildFragmentManager().findFragmentByTag("map");
+
+                LatLng position;
+                for (int i = 0; i < listOficinas.size(); i++) {
+                    latitud = Double.parseDouble(listOficinas.get(i).get("latitud"));
+                    longitud = Double.parseDouble(listOficinas.get(i).get("longitud"));
+
+
+                    distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
+                    Log.d("Distancia", distanceM + "");
+
+                    if (distanceM <= 7.5) {
+                        listOficinasFiltradas.add(listOficinas.get(i));
+                        position = new LatLng(latitud, longitud);
+                        listPositions.add(position);
+                        listType.add(listOficinas.get(i).get("tipo_oficina"));
+
+                    }
+
+
+                }
+            }else if(typeSearch.equals("busqueda_avanzada")){
+
+                currentPosition = new LatLng((Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLATITUD"))), Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLONGITUD")));
+                listPositions.add(currentPosition);
+                listOficinasFiltradas.add(new HashMap<String, String>());
+                listType.add("0");
+
+                mapFragment = (CustomMapFragment) getChildFragmentManager().findFragmentByTag("map");
+
+                LatLng position;
+                for (int i = 0; i < listOficinas.size(); i++) {
+                    latitud = Double.parseDouble(listOficinas.get(i).get("latitud"));
+                    longitud = Double.parseDouble(listOficinas.get(i).get("longitud"));
+
+                    //distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
+                    //Log.d("Distancia", distanceM + "");
+
+                   // if (distanceM <= 7.5) {
+                        listOficinasFiltradas.add(listOficinas.get(i));
+                        position = new LatLng(latitud, longitud);
+                        listPositions.add(position);
+                        listType.add(listOficinas.get(i).get("tipo_oficina"));
+
+                    //}
+
+
+                }
+
+            }else if(typeSearch.equals("nada")){
+                currentPosition = new LatLng((Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLATITUD"))), Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLONGITUD")));
+                listPositions.add(currentPosition);
+                listOficinasFiltradas.add(new HashMap<String, String>());
+                listType.add("0");
+
+                mapFragment = (CustomMapFragment) getChildFragmentManager().findFragmentByTag("map");
+
             }
+
         }
 
         @Override
         protected String doInBackground(String... params) {
 
-            mapFragment = CustomMapFragment.newInstance(getActivity(), listPositions, listType, listOficinasFiltradas);
+            mapFragment = CustomMapFragment.newInstance(getActivity(), listPositions, listType, listOficinasFiltradas, typeSearch);
 
             FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
             //transaction.setCustomAnimations(R.anim.dialog_from_bottom, R.anim.dialog_to_bottom);

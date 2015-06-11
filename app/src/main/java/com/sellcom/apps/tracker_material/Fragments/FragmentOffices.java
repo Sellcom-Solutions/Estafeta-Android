@@ -2,6 +2,8 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 import android.content.Context;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -27,6 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import database.model.Offices;
 import location.GPSTracker;
 
 /**
@@ -40,12 +43,17 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
     private Button      btn_near,
                         btn_search;
 
+    Bundle bundle = new Bundle();
     private Spinner     spn_state;
     private String[]    arraySpinner;
     private ArrayAdapter<String>    arrayAdapter;
     private SpinnerAdapter  spinnerAdap;
 
     private TrackerFragment fragment;
+
+    private String[] selectionArgs = {};
+
+    private List<Map<String,String>> mapList;
 
     private EditText    edt_city,
                         edt_colony,
@@ -64,6 +72,10 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
         if(view != null){
 
+            mapList = new ArrayList<Map<String,String>>();
+
+
+
             btn_near = (Button) view.findViewById(R.id.btn_near);
             btn_search = (Button) view.findViewById(R.id.btn_search);
 
@@ -75,7 +87,6 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
             btn_near.setOnClickListener(this);
             btn_search.setOnClickListener(this);
-
 
             setStatesToSpinner(spn_state, context);
         }
@@ -103,14 +114,21 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                 break;
 
             case  R.id.btn_search:
-                searchOffice();
+                Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
+                if(myLocationAdvance != null){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Oficinas...");
+                    searchOffice();
+                }else{
+                    Toast.makeText(context, "Favor de encender su GPS", Toast.LENGTH_SHORT).show();
+                }
+
                 break;
         }
     }
 
     private void nearOffice(){
 
-        Bundle bundle = new Bundle();
+        bundle.putString("typeSearch", "cerca_de_mi");
         FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -118,7 +136,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         fragment.addFragmentToStack(getActivity());
         fragment.setArguments(bundle);
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.replace(R.id.container, fragment, FRAGMENT_TAG.FRAG_OFFICES.toString());
+        fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
         fragmentTransaction.commit();
 
 
@@ -126,11 +144,64 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
     private void searchOffice(){
         String state, city, colony, zipCode;
+        selectionArgs = null;
+        ArrayList<String> args = new ArrayList<String>();
+        String sql = "select * from offices where estado=? ";
 
-        state   = "" + spn_state.getSelectedItem();
+        state   = "" + (spn_state.getSelectedItemPosition() + 1);
+        args.add("" + state);
+
+
         city    = "" + edt_city.getText().toString();
+        if(!city.equals("")){
+            args.add("%" + city + "%");
+            sql += " and ciudad_n like ? ";
+        }
         colony  = "" + edt_colony.getText().toString();
+        if(!colony.equals("")){
+            args.add("%" + colony + "%");
+            sql += " and colonia_n like ? ";
+        }
         zipCode = "" + edt_zip_code.getText().toString();
+        if(!zipCode.equals("")){
+            args.add(zipCode);
+            sql += " and codigo_postal like ? ";
+        }
+
+        selectionArgs = args.toArray(new String[args.size()]);
+
+        mapList = Offices.getOfficesByCity(context, sql, selectionArgs);
+        if(mapList != null) {
+
+            bundle.putString("typeSearch","busqueda_avanzada");
+            bundle.putString("sql",sql);
+            bundle.putStringArray("selectionArgs",selectionArgs);
+            bundle.putString("state",state);
+
+            FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragment   = new FragmentOfficesMap();
+            fragment.addFragmentToStack(getActivity());
+            fragment.setArguments(bundle);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
+            fragmentTransaction.commit();
+            //Toast.makeText(context, "" + mapList.size(), Toast.LENGTH_SHORT).show();
+        }else{
+
+            bundle.putString("typeSearch","nada");
+            bundle.putString("state",state);
+            FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragment   = new FragmentOfficesMap();
+            fragment.addFragmentToStack(getActivity());
+            fragment.setArguments(bundle);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
+            fragmentTransaction.commit();
+        }
     }
 
     public void setSpinnerStates(Spinner spinner){
@@ -172,4 +243,13 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         //spinner.setSelection(listStates.size() - 1);
 
     }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager
+                .getActiveNetworkInfo();
+        return activeNetworkInfo != null;
+    }
+
 }

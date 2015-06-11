@@ -221,6 +221,59 @@ public class Offices {
         return null;
     }
 
+    public static ArrayList<Map<String,String>> getOfficesByCity(Context context, String sql, String[] args){
+
+
+        Cursor cursor = DataBaseAdapter.getDB(context).rawQuery(sql,args);
+       /* Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, "estado LIKE ? AND ciudad_n LIKE ? AND colonia_n LIKE ? AND codigo_postal LIKE ?",
+                new String[] { "%" +estado+ "%","%" +ciudad_n+ "%","%" +colonia_n+ "%",codigo_postal}, null, null, null);*/
+
+        if (cursor != null && cursor.getCount() > 0) {
+            ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+
+            for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+
+                Map<String,String> map  = new HashMap<String, String>();
+
+                map.put(ENT,cursor.getString(cursor.getColumnIndexOrThrow(ENT)));
+                map.put(OPT,cursor.getString(cursor.getColumnIndexOrThrow(OPT)));
+                map.put(ESTADO,cursor.getString(cursor.getColumnIndexOrThrow(ESTADO)));
+                map.put(CALLE1,cursor.getString(cursor.getColumnIndexOrThrow(CALLE1)));
+                map.put(CALLE2,cursor.getString(cursor.getColumnIndexOrThrow(CALLE2)));
+                map.put(CIUDAD,cursor.getString(cursor.getColumnIndexOrThrow(CIUDAD)));
+                map.put(CODIGO_POSTAL,cursor.getString(cursor.getColumnIndexOrThrow(CODIGO_POSTAL)));
+                map.put(COLONIA,cursor.getString(cursor.getColumnIndexOrThrow(COLONIA)));
+                map.put(CORREO,cursor.getString(cursor.getColumnIndexOrThrow(CORREO)));
+                map.put(ENTREGA_OFICINA,cursor.getString(cursor.getColumnIndexOrThrow(ENTREGA_OFICINA)));
+                map.put(EXT1,cursor.getString(cursor.getColumnIndexOrThrow(EXT1)));
+                map.put(EXT2,cursor.getString(cursor.getColumnIndexOrThrow(EXT2)));
+                map.put(HORARIO_ATENCION,cursor.getString(cursor.getColumnIndexOrThrow(HORARIO_ATENCION)));
+                map.put(HORARIO_COMIDA,cursor.getString(cursor.getColumnIndexOrThrow(HORARIO_COMIDA)));
+                map.put(HORARIO_EXT,cursor.getString(cursor.getColumnIndexOrThrow(HORARIO_EXT)));
+                map.put(HORARIO_RECOL,cursor.getString(cursor.getColumnIndexOrThrow(HORARIO_RECOL)));
+                map.put(HORARIO_SABATINO,cursor.getString(cursor.getColumnIndexOrThrow(HORARIO_SABATINO)));
+                map.put(ID_CATALOGO,cursor.getString(cursor.getColumnIndexOrThrow(ID_CATALOGO)));
+                map.put(LATITUD,cursor.getString(cursor.getColumnIndexOrThrow(LATITUD)));
+                map.put(LONGITUD,cursor.getString(cursor.getColumnIndexOrThrow(LONGITUD)));
+                map.put(NO_OFICINA,cursor.getString(cursor.getColumnIndexOrThrow(NO_OFICINA)));
+                map.put(NOMBRE,cursor.getString(cursor.getColumnIndexOrThrow(NOMBRE)));
+                map.put(TELEFONO1,cursor.getString(cursor.getColumnIndexOrThrow(TELEFONO1)));
+                map.put(TELEFONO2,cursor.getString(cursor.getColumnIndexOrThrow(TELEFONO2)));
+                map.put(TIPO_OFICINA,cursor.getString(cursor.getColumnIndexOrThrow(TIPO_OFICINA)));
+                map.put(TIPOS_PAGO,cursor.getString(cursor.getColumnIndexOrThrow(TIPOS_PAGO)));
+                map.put(VERSION,cursor.getString(cursor.getColumnIndexOrThrow(VERSION)));
+                map.put(CIUDAD_N,cursor.getString(cursor.getColumnIndexOrThrow(CIUDAD_N)));
+                map.put(COLONIA_N,cursor.getString(cursor.getColumnIndexOrThrow(COLONIA_N)));
+
+                list.add(map);
+            }
+            Log.d("Campos recuperados: ", "" + list.size());
+            cursor.close();
+            return list;
+        }
+        return null;
+    }
+
 
     public static void removeAll(Context context){
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ID_OFFICE);

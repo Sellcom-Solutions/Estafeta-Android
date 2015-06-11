@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.sellcom.apps.tracker_material.Fragments.FragmentDialogOfficesMap;
@@ -36,6 +39,8 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
     private static List<String> listTypes;
     private static List<Marker> markerSU,markerCO,markerCA;
     private static List<Map<String,String>> listMap;
+    private static String typeSearch;
+    private MarkerOptions markerOptions;
 
 
 
@@ -44,7 +49,7 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
     private static String   type;
 
 
-    public static CustomMapFragment newInstance(Context context1, List list1, List listType, List<Map<String,String>> listMap1){
+    public static CustomMapFragment newInstance(Context context1, List list1, List listType, List<Map<String,String>> listMap1, String type){
         CustomMapFragment fragment = new CustomMapFragment();
 
         context = context1;
@@ -54,6 +59,7 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
         markerSU = new ArrayList<>();
         markerCO = new ArrayList<>();
         markerCA = new ArrayList<>();
+        typeSearch = type;
 
         return fragment;
     }
@@ -71,53 +77,78 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
         map = getMap();
         if (map != null) {
             UiSettings settings = map.getUiSettings();
-            settings.setAllGesturesEnabled(false);
+            settings.setAllGesturesEnabled(true);
             settings.setZoomGesturesEnabled(true);
             settings.setZoomControlsEnabled(false);
             settings.setScrollGesturesEnabled(true);
             settings.setMyLocationButtonEnabled(false);
 
 
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 13));
-            map.setMyLocationEnabled(true);
-            map.setTrafficEnabled(false);
-            map.setOnMarkerClickListener(this);
-
-
             Log.d("CustomMapFragment", " list.size " + list.size());
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+
+            if(!typeSearch.equals("busqueda_avanzada"))
+                builder.include(list.get(0));
 
             for(int i = 0; i<list.size(); i++){
 
+                markerOptions = new MarkerOptions();
+
                 if(listTypes.get(i).equals("SU")) {
-                    MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(list.get(i));
                     markerOptions.title(listMap.get(i).get("no_oficina"));
                     markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_rojo));
                     //map.addMarker(markerOptions);
                     markerSU.add(map.addMarker(markerOptions));
-
+                    builder.include(markerOptions.getPosition());
 
                 }else if(listTypes.get(i).equals("CO")){
-                    MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(list.get(i));
                     markerOptions.title(listMap.get(i).get("no_oficina"));
                     markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_azul));
                     //map.addMarker(markerOptions);
                     markerCO.add(map.addMarker(markerOptions));
 
-
+                    builder.include(markerOptions.getPosition());
                 }else if(listTypes.get(i).equals("CA")){
-                    MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions.position(list.get(i));
                     markerOptions.title(listMap.get(i).get("no_oficina"));
                     markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_gris));
                     //map.addMarker(markerOptions);
                     markerCA.add(map.addMarker(markerOptions));
-
+                    builder.include(markerOptions.getPosition());
                 }
 
+
+
+            }
+            if(list.size()>2) {
+
+                final LatLngBounds bounds = builder.build();
+
+                final int padding = 100; // offset from edges of the map in pixels
+                //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+
+                map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+
+                    @Override
+                    public void onCameraChange(CameraPosition arg0) {
+                        // Move camera.
+                        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
+                        // Remove listener to prevent position reset on camera move.
+                        map.setOnCameraChangeListener(null);
+                    }
+                });
+            }else if(list.size() == 2){
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(1),17));
+            }else if(list.size() == 1){
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0),10));
             }
 
+
+            map.setMyLocationEnabled(true);
+            map.setTrafficEnabled(false);
+            map.setOnMarkerClickListener(this);
 
 
         }

@@ -80,7 +80,7 @@ public class States {
 
     public static ArrayList<Map<String,String>> getStatesNames(Context context){
 
-        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ZNUMEROESTADO);
         if (cursor != null && cursor.getCount() > 0) {
             ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
 
@@ -89,6 +89,9 @@ public class States {
                 Map<String,String> map  = new HashMap<String, String>();
 
                 map.put(ZNOMBRE,cursor.getString(cursor.getColumnIndexOrThrow(ZNOMBRE)));
+                map.put(ZNUMEROESTADO,cursor.getString(cursor.getColumnIndexOrThrow(ZNUMEROESTADO)));
+                map.put(ZLATITUD,cursor.getString(cursor.getColumnIndexOrThrow(ZLATITUD)));
+                map.put(ZLONGITUD,cursor.getString(cursor.getColumnIndexOrThrow(ZLONGITUD)));
                 list.add(map);
             }
             Log.d("Campos recuperados: ", ""+list.size());
