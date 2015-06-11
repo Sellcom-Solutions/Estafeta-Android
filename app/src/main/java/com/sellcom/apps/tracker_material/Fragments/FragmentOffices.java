@@ -102,7 +102,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             case R.id.btn_near:
                 Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
                 if(myLocation != null){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Oficinas...");
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Oficinas...",0);
                     nearOffice();
                 }else{
                     Toast.makeText(context, "Favor de encender su GPS", Toast.LENGTH_SHORT).show();
@@ -116,7 +116,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             case  R.id.btn_search:
                 Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
                 if(myLocationAdvance != null){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Oficinas...");
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Oficinas...",0);
                     searchOffice();
                 }else{
                     Toast.makeText(context, "Favor de encender su GPS", Toast.LENGTH_SHORT).show();

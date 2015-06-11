@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Utils;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.os.Handler;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.ProgressBar;
@@ -61,7 +62,8 @@ public class DialogManager {
     public Activity                     getActivity()                   {return activity;}
 
 
-   public void showDialog(TYPE_DIALOG type ,String message){
+   public void showDialog(TYPE_DIALOG type ,String message, int time){
+
 
        dialogType = type;
 
@@ -96,8 +98,18 @@ public class DialogManager {
                 }else if(type == TYPE_DIALOG.SUCCESS){
                     pgb.setIndeterminateDrawable(activity.getResources().getDrawable(R.drawable.success_drawable_dialog));
                 }
-
                dialogLoadig.show();
+
+                if(time != 0) {
+
+                    Handler handler = new Handler();//Para dar un tiempo al dialog
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            dismissDialog();
+                        }
+                    }, time);
+                }
+
 
        }
 

@@ -35,7 +35,7 @@ public class SplashScreenActivity extends ActionBarActivity {
         context = this;
          Log.d("SplashScreen", "Llama al hilo");
         DialogManager.sharedInstance().setActivity(this);
-        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.cargando));
+        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.cargando),0);
 
         new CreateDB().execute();
     }

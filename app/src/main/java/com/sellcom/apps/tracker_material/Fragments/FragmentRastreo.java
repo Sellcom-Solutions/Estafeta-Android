@@ -163,14 +163,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             case R.id.btn_rastrear:
                 if(codes_array == null || codes_array.size()<=0){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_lista_vacia));
-                    Handler handler = null;
-                    handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            DialogManager.sharedInstance().dismissDialog();
-                        }
-                    }, 1000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_lista_vacia),1000);
                 }
                 else {
                     new GetCodesInfo().execute();
@@ -196,14 +189,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     aux = codes_array.get(i);
                     String c = aux.get("codigo");
                     if (c.equals(codigoStr)) {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido));
-                        Handler handler = null;
-                        handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                DialogManager.sharedInstance().dismissDialog();
-                            }
-                        }, 1000);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido),1000);
                         return;
                     }
 
@@ -230,14 +216,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
         }
         else {
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_tamaño_codigo));
-            Handler handler = null;
-            handler = new Handler();
-            handler.postDelayed(new Runnable(){
-                public void run(){
-                    DialogManager.sharedInstance().dismissDialog();
-                }
-            }, 2000);
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_tamaño_codigo),2000);
 
         }
 
@@ -257,7 +236,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         boolean flag = false;
 
         protected void onPreExecute() {
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando));
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando),0);
         }
 
         @Override

@@ -95,14 +95,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             case R.id.btn_validar_zipcode:
                 zipCodeString = zipCode.getText().toString();
                 if(zipCodeString == null || zipCodeString.equals("")){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo));
-                    Handler handler = null;
-                    handler = new Handler();
-                    handler.postDelayed(new Runnable(){
-                        public void run(){
-                           DialogManager.sharedInstance().dismissDialog();
-                        }
-                    }, 1000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo),1000);
                 }
                 else {
                     //MapString Params...
@@ -112,7 +105,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     requestData.put("codigoPostal", zipCodeString);
                     tipo = "0";
                     //Send params to RequestManager
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando));
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando),0);
                     RequestManager.sharedInstance().setListener(this);
                     RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData);
 
@@ -122,14 +115,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             case R.id.btn_buscar_zipcode:
                 ciudadString = ciudad.getText().toString();
                 if(ciudadString== null || ciudadString.equals("")){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_ciudad));
-                    Handler handler = null;
-                    handler = new Handler();
-                    handler.postDelayed(new Runnable(){
-                        public void run(){
-                            DialogManager.sharedInstance().dismissDialog();
-                        }
-                    }, 1000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_ciudad),1000);
                 }
                 else {
                     zipCode.setText("");
@@ -158,7 +144,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     requestData.put("ciudad", ciudadString);
                     requestData.put("localidad", coloniaString);
 
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando));
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando),0);
                     RequestManager.sharedInstance().setListener(this);
                     RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE, requestData);
                 }
@@ -183,14 +169,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             if(resp != null && resp.size()>0 )
                 showDialogCP(resp);
             else {
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio));
-                Handler handler = null;
-                handler = new Handler();
-                handler.postDelayed(new Runnable(){
-                    public void run(){
-                        DialogManager.sharedInstance().dismissDialog();
-                    }
-                }, 1000);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio),1000);
             }
 
         }else{

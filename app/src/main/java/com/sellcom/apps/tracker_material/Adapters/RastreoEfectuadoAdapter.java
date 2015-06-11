@@ -118,25 +118,11 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                 if (holder.btn_favoritos.isChecked()) {
                     if (holder.estatus.getText().toString().equals("Sin información")) {
                         holder.btn_favoritos.setChecked(false);
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav));
-                        Handler handler = null;
-                        handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                DialogManager.sharedInstance().dismissDialog();
-                            }
-                        }, 1000);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),1000);
                         Log.d(TAG,"Position"+holder.position);
                     }
                     else {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav));
-                        Handler handler = null;
-                        handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            public void run() {
-                                DialogManager.sharedInstance().dismissDialog();
-                            }
-                        }, 1000);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),1000);
                         holder.btn_favoritos.setEnabled(false);
                         Log.d(TAG,"Position"+holder.position);
                     }
