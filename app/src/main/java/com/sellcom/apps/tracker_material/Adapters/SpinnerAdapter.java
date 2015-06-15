@@ -52,12 +52,23 @@ public class SpinnerAdapter extends BaseAdapter {
         return mItems.size();
     }
 
-    public Object getItem(int position) {
-        return mItems .get(position).get("ZNOMBRE");
+
+
+    @Override
+    public boolean isEnabled(int position) {
+        if(position == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     @Override
+    public Object getItem(int position) {
+        return mItems.get(position).get("ZNOMBRE");
+    }
 
+    @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         Map<String,String>  mItem    = mItems.get(i);
 
@@ -68,7 +79,7 @@ public class SpinnerAdapter extends BaseAdapter {
         }
 
         TextView main_text = (TextView) view .findViewById(R.id.txt_spn_item_head);
-        //main_text.setBackground(mContext.getResources().getDrawable(R.drawable.underline_red));
+
         switch (type){
             case STATES:
                 main_text.setText(mItem.get("ZNOMBRE"));
@@ -83,7 +94,6 @@ public class SpinnerAdapter extends BaseAdapter {
 
     @Override
     public View getDropDownView(int i, View view, ViewGroup parent) {
-
         Map<String,String>  mItem    = mItems.get(i);
 
         if (view == null || !view.getTag().toString().equals("DIALOG")) {

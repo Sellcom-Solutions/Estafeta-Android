@@ -82,7 +82,7 @@ public class DialogManager {
                dialogLoadig = new Dialog(activity);
                dialogLoadig.requestWindowFeature(Window.FEATURE_NO_TITLE);
                dialogLoadig.setContentView(R.layout.dialog_message_loading);
-               //dialogLoadig.setCancelable(false);
+               dialogLoadig.setCancelable(false);
 
 
                TextView textDialogLoading = (TextView) dialogLoadig.findViewById(R.id.txv_general_name_dialog);

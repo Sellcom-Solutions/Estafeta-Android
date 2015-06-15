@@ -103,8 +103,13 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
             case R.id.btn_buscar_zipcode:
                 ciudadString = ciudad.getText().toString();
-                if(ciudadString== null || ciudadString.equals("")){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_ciudad),1000);
+
+                if(spinner_state.getSelectedItemPosition() == 0){
+
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_estado), 3000);
+                    return;
+                }else if(ciudadString== null || ciudadString.equals("")){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_ciudad),3000);
                 }
                 else {
                     zipCode.setText("");

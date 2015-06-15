@@ -59,16 +59,4 @@
     </style>
 
 
-
-    <!--<style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
-        &lt;!&ndash; Customize your theme here. &ndash;&gt;
-        <item name="colorPrimary">@color/red</item>
-        <item name="colorPrimaryDark">@color/primaryDarkColor</item>
-        <item name="colorAccent">@color/accentColor</item>
-        <item name="android:textColorPrimary">@color/textPrimaryColor</item>
-        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
-        <item name="android:windowBackground">@color/myWindowBackground</item>
-    </style>
--->
 </resources>

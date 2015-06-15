@@ -93,7 +93,7 @@
     <string name="abr_codigo">C.P.</string>
     <string name="validar_codigo">Validar</string>
     <string name="buscar_codigo">Buscar un Código Postal</string>
-    <string name="search_by_zip_code">Código Postal*</string>
+    <string name="search_by_zip_code">Código Postal</string>
     <string name="estado">Estado</string>
 
     <!-- Aviso de Privacidad -->
@@ -112,6 +112,8 @@
     <!-- Dialog messages-->
     <string name="error_codigo">Error, código postal no válido.</string>
     <string name="error_ciudad">Error, el campo ciudad es obligatorio.</string>
+    <string name="error_estado">Error, debes seleccionar un estado.</string>
+    <string name="cargando_oficinas">Cargando Oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
     <string name="cargando">Cargando ...</string>
     <string name="actualizando">Actualizando ...</string>
@@ -162,6 +164,9 @@
     <string name="title_activity_main">MainActivity</string>
 
 
+    <!-- FragmentOffices  -->
+
+    <string name="encender_gps">Favor de encender su GPS</string>
 
 
 
