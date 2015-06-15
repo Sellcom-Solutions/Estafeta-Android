@@ -170,63 +170,67 @@ public class Offices {
             Map<String, String> item = new HashMap<>();
             item = values.get(i);
 
-           /* if (item.get("status").equals("true")){
+            //Log.d(TABLE_NAME,"status"+item.get("status"));
+            if (item.get("status").equals("true")){
+                int edo = States.getStateNumberByName(context, item.get("estado_name"));
 
-            }*/
-            int edo = States.getStateNumberByName(context, item.get("estado_name"));
+                if (edo == 99) {
+                    Log.d(TABLE_NAME, "error recuperando estado");
+                } else
+                    cv.put(ESTADO, edo);
 
-            if (edo == 99) {
-                Log.d(TABLE_NAME, "error recuperando estado");
-            } else
-                cv.put(ESTADO, edo);
+                cv.put(CALLE1, item.get("calle1"));
+                cv.put(CALLE2, item.get("calle2"));
+                cv.put(CIUDAD, item.get("ciudad"));
+                cv.put(CODIGO_POSTAL, item.get("codigoPostal"));
+                cv.put(COLONIA, item.get("colonia"));
+                cv.put(CORREO, item.get("correoE"));
+                cv.put(ENTREGA_OFICINA, item.get("entregaOcurre"));
+                cv.put(EXT1, item.get("ext1"));
+                cv.put(EXT2, item.get("ext2"));
+                cv.put(HORARIO_ATENCION, item.get("horariosAtencion"));
+                cv.put(HORARIO_COMIDA, item.get("horarioComida"));
+                cv.put(HORARIO_EXT, item.get("horarioExtendido"));
 
-            cv.put(CALLE1, item.get("calle1"));
-            cv.put(CALLE2, item.get("calle2"));
-            cv.put(CIUDAD, item.get("ciudad"));
-            cv.put(CODIGO_POSTAL, item.get("codigoPostal"));
-            cv.put(COLONIA, item.get("colonia"));
-            cv.put(CORREO, item.get("correoE"));
-            cv.put(ENTREGA_OFICINA, item.get("entregaOcurre"));
-            cv.put(EXT1, item.get("ext1"));
-            cv.put(EXT2, item.get("ext2"));
-            cv.put(HORARIO_ATENCION, item.get("horariosAtencion"));
-            cv.put(HORARIO_COMIDA, item.get("horarioComida"));
-            cv.put(HORARIO_EXT, item.get("horarioExtendido"));
+                cv.put(HORARIO_SABATINO, item.get("horarioSabatino"));
+                cv.put(LATITUD, item.get("latitud").trim());
+                cv.put(LONGITUD, item.get("longitud".trim()));
+                cv.put(NO_OFICINA, item.get("idOficina"));
+                cv.put(NOMBRE, item.get("nombreOficina"));
+                cv.put(TELEFONO1, item.get("telefono1"));
+                cv.put(TELEFONO2, item.get("telefono2"));
+                cv.put(TIPO_OFICINA, item.get("idTipoOficina"));
+                cv.put(TIPOS_PAGO, item.get("tiposPago"));
+                cv.put(VERSION, item.get("ultimaAct"));
 
-            cv.put(HORARIO_SABATINO, item.get("horarioSabatino"));
-            cv.put(LATITUD, item.get("latitud").trim());
-            cv.put(LONGITUD, item.get("longitud".trim()));
-            cv.put(NO_OFICINA, item.get("idOficina"));
-            cv.put(NOMBRE, item.get("nombreOficina"));
-            cv.put(TELEFONO1, item.get("telefono1"));
-            cv.put(TELEFONO2, item.get("telefono2"));
-            cv.put(TIPO_OFICINA, item.get("idTipoOficina"));
-            cv.put(TIPOS_PAGO, item.get("tiposPago"));
-            cv.put(VERSION, item.get("ultimaAct"));
-
-            String auxVersion = getVersionByOffice(context, item.get("idOficina"));
-            if (auxVersion != null) {
-                if (auxVersion.equals(item.get("ultimaAct"))) {
-                    Log.d(TABLE_NAME, "oficina actualizada");
-                } else {
+                String auxVersion = getVersionByOffice(context, item.get("idOficina"));
+                if (auxVersion != null) {
+                    if (auxVersion.equals(item.get("ultimaAct"))) {
+                        Log.d(TABLE_NAME, "oficina actualizada");
+                    } else {
+                        try {
+                            aux = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, NO_OFICINA + "=?", new String[]{item.get("idOficina")});
+                            Log.d(TABLE_NAME, "actualizar aux: " + aux);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d(TABLE_NAME,"No actualizado");
+                        }
+                    }
+                }else {
                     try {
-                        aux = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, NO_OFICINA + "=?", new String[]{item.get("idOficina")});
-                        Log.d(TABLE_NAME, "actualizar aux: " + aux);
+                        aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null,cv);
+                        Log.d(TABLE_NAME, "insertar aux: " + aux);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Log.d(TABLE_NAME,"No actualizado");
+                        Log.d(TABLE_NAME,"No insertado");
                     }
                 }
-            }else {
-                try {
-                    aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null,cv);
-                    Log.d(TABLE_NAME, "insertar aux: " + aux);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d(TABLE_NAME,"No insertado");
-                }
             }
-
+            else{
+                String auxId = item.get("idOficina");
+                //Log.d(TABLE_NAME,"idOficina: "+auxId);
+                delete(context,auxId);
+            }
         }
         Log.d(TABLE_NAME,"Oficinas actualizadas");
       return aux;
@@ -253,12 +257,13 @@ public class Offices {
         if (cursor != null && cursor.moveToFirst()) {
             String version = cursor.getString(cursor.getColumnIndexOrThrow(VERSION));
             cursor.close();
-           // Log.d(TABLE_NAME,"version"+version);
             return version;
         }
         return null;
 
     }
+
+
     public static ArrayList<Map<String,String>> getAllInMaps(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
@@ -301,16 +306,15 @@ public class Offices {
 
                 list.add(map);
             }
-            Log.d("Campos recuperados: ", "" + list.size());
+            //Log.d("Campos recuperados: ", "" + list.size());
             cursor.close();
             return list;
         }
         return null;
     }
 
+
     public static ArrayList<Map<String,String>> getOfficesByCity(Context context, String sql, String[] args){
-
-
         Cursor cursor = DataBaseAdapter.getDB(context).rawQuery(sql,args);
        /* Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, "estado LIKE ? AND ciudad_n LIKE ? AND colonia_n LIKE ? AND codigo_postal LIKE ?",
                 new String[] { "%" +estado+ "%","%" +ciudad_n+ "%","%" +colonia_n+ "%",codigo_postal}, null, null, null);*/
@@ -363,22 +367,21 @@ public class Offices {
 
 
     public static void removeAll(Context context){
-        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ID_OFFICE);
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, NO_OFICINA);
         if (cursor != null && cursor.getCount() > 0) {
 
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                int id              = cursor.getInt(cursor.getColumnIndexOrThrow(ID_OFFICE));
+                String id              = cursor.getString(cursor.getColumnIndexOrThrow(NO_OFICINA));
                 Offices.delete(context, id);
             }
         }
         cursor.close();
     }
 
-    public static int delete(Context context, int id) {
-        return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ID_OFFICE + "=" + id, null);
+    public static int delete(Context context, String id) {
+        int resp = DataBaseAdapter.getDB(context).delete(TABLE_NAME, NO_OFICINA + "=?" , new String[]{ id });
+        //Log.d(TABLE_NAME,"delete resp:"+resp);
+        return resp;
     }
-
-
-
 
 }

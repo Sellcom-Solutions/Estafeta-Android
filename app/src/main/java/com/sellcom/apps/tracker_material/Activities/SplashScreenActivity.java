@@ -9,10 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import database.DataBaseManager;
-import database.model.Offices;
-import database.model.States;
-
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
@@ -22,6 +18,9 @@ import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import database.DataBaseManager;
+import database.model.Offices;
 
 
 public class SplashScreenActivity extends ActionBarActivity implements UIResponseListenerInterface {
@@ -50,7 +49,6 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         RequestManager.sharedInstance().setListener(this);
         RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
 
-        //new CreateDB().execute();
     }
 
     protected void onResume(){
@@ -109,8 +107,8 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             Log.d(TAG,"response null");
         }
 
-        Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
-        startActivity(intent);
+       /* Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+        startActivity(intent);*/
 
        // DialogManager.sharedInstance().dismissDialog();
     }
@@ -138,7 +136,8 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         }
         @Override
         protected void onPostExecute(String result) {
-
+            Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
+            startActivity(intent);
         }
 
 

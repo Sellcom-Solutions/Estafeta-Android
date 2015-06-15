@@ -1,9 +1,7 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -15,23 +13,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
+import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
-import com.sellcom.apps.tracker_material.R;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import database.model.States;
 
 
 /**
@@ -45,8 +36,6 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     private TrackerFragment         fragment;
 
     private Spinner spinner_state;
-    private String[] array_states;
-    private SpinnerAdapter spinnerAdapter;
 
     private Button validateZipCode;
     private Button buscarZipCode;
@@ -181,8 +170,6 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     public void showDialogCP(ArrayList<Map<String, String>> values){
         Bundle bundle= new Bundle();
         Log.d("Frag CP, colonias","size"+values.size());
-       // bundle.putStringArrayList("colonias",values);
-        //bundle.putParcelableArrayList("col", (ArrayList<? extends android.os.Parcelable>) values);
         bundle.putSerializable("col", values);
         bundle.putString("tipo",tipo);
 

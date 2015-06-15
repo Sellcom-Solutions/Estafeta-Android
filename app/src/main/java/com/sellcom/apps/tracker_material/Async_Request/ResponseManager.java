@@ -9,16 +9,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-
-import database.model.States;
 
 /**
  * Created by rebecalopezmartinez on 02/06/15.
@@ -556,6 +551,8 @@ public class ResponseManager {
                         }
                         if("a:status".equals(nodeName)){
                             map.put("status",value);
+                            //Log.d("status:",value);
+                            continue;
                         }
                         if ("a:ultimaAct".equals(nodeName)) {
                             map.put("ultimaAct",value);

@@ -1,15 +1,12 @@
 package com.sellcom.apps.tracker_material.Adapters;
 
 import android.content.Context;
-import android.media.Image;
-import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +15,6 @@ import com.sellcom.apps.tracker_material.Utils.DialogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import database.model.Favorites;
@@ -32,14 +28,12 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
     Context context;
     private ArrayList<Map<String,String>> codigos;
-    //String []codigos;
 
 
     public  RastreoEfectuadoAdapter (Context context, ArrayList<Map<String,String>> codigos){
         this.context        = context;
         this.codigos       = codigos;
         Log.d("Cod adapter size",""+codigos.size());
-        //this.codigos_copy  = new ArrayList<>(codigos);
     }
 
     class CodigosViewHolder{
@@ -53,13 +47,11 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
     }
     @Override
     public int getCount() {
-        //return codigos.length;
         return codigos.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // return codigos.get(position);
         return null;
     }
 
@@ -100,20 +92,25 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         String estatusStr = codigos_copy.get("statusSPA");
 
 
-        if(estatusStr.equals("EN_TRANSITO")){
-            holder.img_status.setImageResource(R.drawable.estatus_transito);
-            Log.d("Codigo RE Adapter",""+estatusStr);
-            holder.estatus.setText("Pendiente de entrega");
-        }else if(estatusStr.equals("ENTREGADO")){
-            holder.img_status.setImageResource(R.drawable.estatus_entregado);
-            Log.d("Codigo RE Adapter",""+estatusStr);
-            holder.estatus.setText("Entregado");
-        }else{
-            holder.img_status.setImageResource(R.drawable.estatus_sin);
-            Log.d("Codigo RE Adapter",""+estatusStr);
-            holder.estatus.setText("Sin información");
+        switch (estatusStr) {
+            case "EN_TRANSITO":
+                holder.img_status.setImageResource(R.drawable.estatus_transito);
+                Log.d("Codigo RE Adapter", "" + estatusStr);
+                holder.estatus.setText("Pendiente de entrega");
+                break;
+
+            case "ENTREGADO":
+                holder.img_status.setImageResource(R.drawable.estatus_entregado);
+                Log.d("Codigo RE Adapter", "" + estatusStr);
+                holder.estatus.setText("Entregado");
+                break;
+
+            default:
+                holder.img_status.setImageResource(R.drawable.estatus_sin);
+                Log.d("Codigo RE Adapter", "" + estatusStr);
+                holder.estatus.setText("Sin información");
+                break;
         }
-        //holder.codigo.setText(codigos[position]);
 
         holder.btn_favoritos.setOnClickListener(new View.OnClickListener() {
             @Override

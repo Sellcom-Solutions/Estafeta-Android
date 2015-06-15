@@ -51,17 +51,6 @@ public class RequestManager implements ResponseListenerInterface {
     public  final   String 	                                LOG_TAG_MANAGER    = "requestManager";
     public  final   String 	                                LOG_TAG_REQUEST    = "asyncRequest";
 
-
-
-    /*
-    public static final int METHOD_REQUEST_ZIPCODE = 0;
-    public static final int METHOD_REQUEST_ZIPCODE_ADDRESSES = 1;
-    public static final int METHOD_REQUEST_ = 2;
-    public static final int METHOD_REQUEST_ZIPCODE = 3;
-    public static final int METHOD_REQUEST_ZIPCODE = 4;
-    */
-
-
     private static 	RequestManager   						manager;
     private         Activity                                activity;
     private         UIResponseListenerInterface             listener;
@@ -245,7 +234,7 @@ public class RequestManager implements ResponseListenerInterface {
                 //Log.v("Request",httppost.toString());
 
                 HttpResponse response = httpclient.execute(httppost);
-                Log.d("Service response",response.toString());
+                Log.d(LOG_TAG_REQUEST+"Service response",response.toString());
 
                 HttpEntity entity = response.getEntity();
                 if(entity != null) {
@@ -253,8 +242,8 @@ public class RequestManager implements ResponseListenerInterface {
                     try {
                         stringResponse = parseToStringZipCodes(streamZipCodes);
                         //responseArray = responseParse(streamZipCodes,this.method);
-                        Log.d("AT Method",":"+this.method);
-                        Log.v("AT Response",stringResponse);
+                        Log.d(LOG_TAG_REQUEST+"Method",":"+this.method);
+                        Log.v(LOG_TAG_REQUEST+"Response",stringResponse);
                     } catch (SAXException e) {
                         e.printStackTrace();
                     } catch (ParserConfigurationException e) {
@@ -286,7 +275,6 @@ public class RequestManager implements ResponseListenerInterface {
         Log.d("responseParse","inicial");
         switch (method){
             case REQUEST_ZIPCODE:
-                    //stringResponse = parseToStringZipCodes(streamZipCodes);
                 try {
                     responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"1");
                     setResponseArray(responseArray);
@@ -299,8 +287,8 @@ public class RequestManager implements ResponseListenerInterface {
                     e.printStackTrace();
                 }
                 Log.v(METHOD.REQUEST_ZIPCODE.toString(), "parse");
-
                 break;
+
             case REQUEST_ZIPCODE_ADDRESSES:
                 try {
                     responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"0");
@@ -313,9 +301,9 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-
                 Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "parse");
                 break;
+
             case REQUEST_TRACKING_LIST_CODES:
                 try {
                     responseArray = ResponseManager.sharedInstance().parseGuide(doc);
