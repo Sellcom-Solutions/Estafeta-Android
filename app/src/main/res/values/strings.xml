@@ -114,6 +114,7 @@
     <string name="error_ciudad">Error, el campo ciudad es obligatorio.</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
     <string name="cargando">Cargando ...</string>
+    <string name="actualizando">Actualizando ...</string>
     <string name="error_tamaño_codigo">Error,un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
     <string name="error_cod_repetido">Error, el número ya existe en la lista de rastreo.</string>
     <string name="error_lista_vacia">Error, la lista de rastreo se encuentra vacía.</string>

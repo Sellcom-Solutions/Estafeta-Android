@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="100"
+    android:background="@color/white"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp">
+
+   <!-- <ImageButton
+        android:id                      ="@+id/btn_favorito"
+        android:layout_width            ="0dp"
+        android:layout_height           ="20dp"
+        android:scaleType               ="centerInside"
+        android:layout_weight           ="15"
+        android:layout_gravity          ="center"
+        android:src                     ="@drawable/estrella_gris"
+        android:background              ="@color/zxing_transparent"/>-->
+    <CheckBox
+        android:id="@+id/btn_favorito"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="17"
+        android:layout_gravity="center"
+        style="@style/StarCheckBox"
+        android:scaleY="0.9"
+        android:scaleX="0.9"
+        android:layout_marginLeft="30dp"/>
+
+    <LinearLayout
+        android:layout_width            ="0dp"
+        android:layout_height           ="wrap_content"
+        android:orientation             ="vertical"
+        android:layout_weight           ="70"
+        android:weightSum               ="90">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:layout_weight="30">
+
+            <TextView
+                android:id                  ="@+id/lbl_no_guia"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                ="@string/no_guia2"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:textStyle           ="bold"
+                />
+
+            <TextView
+                android:id                  ="@+id/txt_no_guia"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                =""
+                android:textSize            ="@dimen/sizeMediumText"
+                />
+
+            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="30">
+
+            <TextView
+                android:id                  ="@+id/lbl_codigo_rastreo"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                ="@string/cod_rastreo"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:textStyle           ="bold"
+                />
+
+            <TextView
+                android:id                  ="@+id/txt_codigo_rastreo"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:layout_marginTop    ="2dp"
+                android:textColor           ="@color/estafeta_text"
+                android:text                =""
+                android:textSize            ="@dimen/sizeMediumText"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal"
+            android:layout_weight="30">
+
+            <TextView
+                android:id                  ="@+id/lbl_estatus"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:textColor           ="@color/estafeta_text"
+                android:text                ="@string/estatus_servicio"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:textStyle           ="bold"
+                android:layout_marginTop    ="2dp"/>
+
+            <TextView
+                android:id                  ="@+id/txt_estatus"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:textColor           ="@color/estafeta_text"
+                android:text                =""
+                android:textSize            ="@dimen/sizeMediumText"
+                android:layout_marginTop    ="2dp"/>
+
+        </LinearLayout>
+
+
+        </LinearLayout>
+
+    <ImageView
+        android:id="@+id/img_status"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:scaleType="centerInside"
+        android:layout_weight="10"
+        android:layout_gravity="center"
+        android:src="@drawable/estatus_sin"/>
+
+</LinearLayout>

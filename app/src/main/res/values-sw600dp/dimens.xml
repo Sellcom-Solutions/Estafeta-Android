@@ -26,4 +26,5 @@
     <dimen name="size_photo">200dp</dimen>
     <dimen name="size_button_dialog">18sp</dimen>
     <dimen name="dimen_photo">300dp</dimen>
+    <dimen name="footerSizeMedium">20dp</dimen>
 </resources>

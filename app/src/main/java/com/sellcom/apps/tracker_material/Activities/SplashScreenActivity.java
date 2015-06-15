@@ -97,7 +97,9 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
                 item = auxResponse.get(0);
                 if (item.get("method").equals(METHOD.REQUEST_OFFICES.toString())){
                     Log.d(TAG,"metodo oficinas");
-                    Offices.updateOffices(context,auxResponse);
+                    final UpdateOffices updateOffices = new UpdateOffices(auxResponse);
+                    updateOffices.execute();
+                    //Offices.updateOffices(context,auxResponse);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -113,56 +115,33 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
        // DialogManager.sharedInstance().dismissDialog();
     }
 
-    /*class CreateDB extends AsyncTask<String, Void, String> implements UIResponseListenerInterface {
 
+
+
+    class UpdateOffices extends AsyncTask<String, Void, String>  {
+
+        ArrayList<Map<String,String>> values;
+        public UpdateOffices(ArrayList<Map<String, String>> values){
+            this.values = values;
+        }
         @Override
         protected void onPreExecute() {
-
-
+            DialogManager.sharedInstance().dismissDialog();
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.actualizando),0);
         }
 
         @Override
         protected String doInBackground(String... params) {
-            //Crear DB
-           // DataBaseHelper dbHelper = new DataBaseHelper(context);
-            Log.d("SplashScreen","crea dbHelper");
-            DataBaseManager.sharedInstance().insert(context);
-
-            //Actualizar oficinas
-            Map<String, String> requestData =  new HashMap<>();
-            String fecha = Offices.getVersion(context);
-            requestData.put("ultimaAct",fecha);
-
-            Log.d("SplashScreen","Antes de Request");
-            RequestManager.sharedInstance().setListener(this);
-            RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
-
-
+            Offices.updateOffices(context,values);
            // dbHelper.close();
             return null;
         }
         @Override
         protected void onPostExecute(String result) {
-           *//* Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
-            startActivity(intent);
-            DialogManager.sharedInstance().dismissDialog();*//*
 
         }
 
-        @Override
-        public void prepareRequest(METHOD method, Map<String, String> params, boolean includeCredentials) {
 
-        }
-
-        @Override
-        public void decodeResponse(String stringResponse) {
-            if(stringResponse != null){
-                Log.v("SplashScreen resp", stringResponse);
-
-            }else{
-                Log.v("SplashScreenActivity", "El servidor devolvio null");
-            }
-        }
-    }*/
+    }
 
 }
