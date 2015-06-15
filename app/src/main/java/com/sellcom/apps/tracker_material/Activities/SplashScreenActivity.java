@@ -97,7 +97,6 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
                     Log.d(TAG,"metodo oficinas");
                     final UpdateOffices updateOffices = new UpdateOffices(auxResponse);
                     updateOffices.execute();
-                    //Offices.updateOffices(context,auxResponse);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -109,8 +108,6 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
 
        /* Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
         startActivity(intent);*/
-
-       // DialogManager.sharedInstance().dismissDialog();
     }
 
 

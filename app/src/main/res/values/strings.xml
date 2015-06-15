@@ -135,8 +135,13 @@
         "evnt_desc_spa" TEXT(200), "evnt_desc_eng" TEXT(200), "evnt_place_acronym" TEXT(200), "evnt_place_name"  TEXT(200), "except_code"  TEXT(3),
         "except_descspa" TEXT(200), "except_desceng" TEXT(200), "except_details"  TEXT(200), "id_trackdata"  INTEGER NOT NULL)</string>
 
-    <string name="db_ctlfavoritos">CREATE TABLE "ctl_favoritos" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"guia"  TEXT(24),"rastreo"
-        TEXT(24),"alias"  TEXT(100),"fecha_registro"  TEXT(20) NOT NULL, "notifica" integer not null default(0))</string>
+    <!-- <string name="db_ctlfavoritos">CREATE TABLE "ctl_favoritos" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"guia"  TEXT(24),"rastreo"
+        TEXT(24),"alias"  TEXT(100),"fecha_registro"  TEXT(20) NOT NULL, "notifica" integer not null default(0))</string>-->
+
+    <string name="db_ctlfavoritos">CREATE TABLE "favorites" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"add_date"  TEXT(24) NOT NULL,
+                                   "alias"  TEXT(24), "codigo_rastreo"  TEXT(24), "cp_destino"  TEXT(24), "destino"  TEXT(24), "estatus"  TEXT(24),
+                                   "fecha_recoleccion"  TEXT(24), "fechaHoraEntrega"  TEXT(24), "historia"  TEXT(24), "no_guia"  TEXT(24), "origen"  TEXT(24),
+                                   "recibio"  TEXT(24), "referencia"  TEXT(24), "signature"  TEXT(24),"notifica"  TEXT(24))</string>
 
     <string name="db_estados">CREATE TABLE estados ( Z_PK INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ZNUMEROESTADO INTEGER, ZLATITUD VARCHAR,
         ZLONGITUD VARCHAR, ZNOMBRE VARCHAR )</string>

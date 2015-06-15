@@ -10,6 +10,7 @@
     <dimen name="sizeMediumText">25sp</dimen>
     <dimen name="sizeLargeText">40sp</dimen>
 
+
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="navigation_drawer_width_Large">400dp</dimen>
     <dimen name="login_progressBar_width">300dp</dimen>
@@ -34,6 +35,7 @@
 
     <dimen name="sizeTitleOffice">50sp</dimen>
     <dimen name="sizeTitles">50sp</dimen>
+    <dimen name="sizeAlertCP">30sp</dimen>
     <!-- footer-->
     <dimen name="footerSizeLarge">30dp</dimen>
 
