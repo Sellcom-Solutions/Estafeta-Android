@@ -113,7 +113,28 @@ public class States {
             cursor.moveToFirst();
         }
         String estado = cursor.getString(cursor.getColumnIndexOrThrow(ZNOMBRE));
+        cursor.close();
+
         return estado;
+    }
+
+    public static int getStateNumberByName(Context context,String name){
+       // Log.d(TABLE_NAME,"estado: "+name);
+        if(name.equals("") ){
+            return 99;
+        }
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                new String[] {ZNUMEROESTADO, ZNOMBRE},
+                ZNOMBRE +"= ?",
+                new String[] { name }, null ,null, null);
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(ZNUMEROESTADO));
+            cursor.close();
+            return id;
+        }
+        cursor.close();
+       return 99;
     }
 
     public static void setStates(Context context, String file_name){

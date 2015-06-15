@@ -104,6 +104,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             lstAdapter.notifyDataSetChanged();
         }
 
+        try {
+            DialogManager.sharedInstance().dismissDialog();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         info.setOnClickListener(this);
         escanear.setOnClickListener(this);
@@ -142,7 +147,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         Log.d(TAG, "Selected:  " + item.getItemId());
         switch (item.getItemId()) {
             case R.id.add_favorite:
-                Log.d(TAG,"Agregar a favoritos");
+                Log.d(TAG,"item selected");
                 return true;
             default: return super.onOptionsItemSelected(item);
         }

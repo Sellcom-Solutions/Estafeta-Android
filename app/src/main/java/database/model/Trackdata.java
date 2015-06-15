@@ -3,6 +3,8 @@ package database.model;
 import android.content.ContentValues;
 import android.content.Context;
 
+import java.util.Map;
+
 import database.DataBaseAdapter;
 
 /**
@@ -165,8 +167,6 @@ public class Trackdata {
         cv.put(DD_DST_NAME, dd_dst_name);
         cv.put(DD_DLVRY_DATE, dd_dlvry_date);
         cv.put(DD_ZIP, dd_zip);
-        cv.put(DD_DLVRY_DATE, dd_dlvry_date);
-        cv.put(DD_ZIP, dd_zip);
         cv.put(DD_RCVR, dd_rcvr);
         cv.put(DM_WEIGHT, dm_weight);
         cv.put(DM_VOLWEIGHT, dm_volweight);
@@ -190,5 +190,51 @@ public class Trackdata {
 
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
 
+    }
+
+    public static long insert(Map<String, String> values){
+        ContentValues cv = new ContentValues();
+
+        cv.put(WAYBILL, values.get("wayBill"));
+        cv.put(SHORTWAYBILL, values.get("shortWayBillId"));
+        cv.put(SRVCID, values.get("serviceId"));
+        cv.put(SRVCDESCSPA, values.get("serviceDescriptionSPA"));
+        cv.put(SRVCDESCENG, values.get("serviceDescriptionENG"));
+        cv.put(CUSTNUMBER, values.get("customerNumber"));
+        cv.put(PACKAGETYPE, values.get("packageType"));
+        cv.put(ADTNLINFO, values.get("additionalInformation"));
+        cv.put(STATUSSPA, values.get("statusSPA"));
+        cv.put(STATUSENG, values.get("statusENG"));
+        cv.put(PD_ORG_ACRONYM, values.get("PK_originAcronym"));
+        cv.put(PD_ORG_NAME, values.get("PK_originName"));
+        cv.put(PD_PKUP_DATE, values.get("PK_pickupDateTime"));
+        cv.put(DD_DST_ACRONYM, values.get("DD_destinationAcronym"));
+        cv.put(DD_DST_NAME, values.get("DD_destinationName"));
+        cv.put(DD_DLVRY_DATE, values.get("DD_deliveryDateTime"));
+        cv.put(DD_ZIP, values.get("DD_zipCode"));
+        cv.put(DD_RCVR, values.get("DD_receiverName"));
+        cv.put(DM_WEIGHT, values.get("Dim_weight"));
+        cv.put(DM_VOLWEIGHT, values.get("Dim_volumetricWeight"));
+        cv.put(DM_WIDTH, values.get("Dim_width"));
+        cv.put(DM_LENGTH, values.get("Dim_length"));
+        cv.put(DM_HEIGHT, values.get("Dim_height"));
+
+        cv.put(WBRD_ORG_WAYBILL, values.get(""));
+        cv.put(WBRD_RPLC_WAYBILL, values.get(""));
+        cv.put(RTRNDD_INITL_WAYBILL, values.get(""));
+        cv.put(RTRNDD_FINAL_WAYBILL, values.get(""));
+        cv.put(MSD_PREC_WAYBILLS, values.get(""));
+        cv.put(MSD_FOLL_WAYBILLS, values.get(""));
+        cv.put(MSD_WB_LIST, values.get(""));
+        cv.put(INITID_INTL_WAYBILL, values.get(""));
+        cv.put(INITID_ORG_COUNTRYCODE, values.get(""));
+        cv.put(INITID_ORG_COUNTRYSPA, values.get(""));
+        cv.put(INITID_ORG_COUNTRYENG, values.get(""));
+
+        cv.put(CSTMINFO_REFERENCE, values.get("CI_reference"));
+        cv.put(CSTMINFO_COSTSCENTRE, values.get("CI_costsCentre"));
+        cv.put(ID_CTL_FAVORITOS, values.get("id_ctl_favoritos"));
+
+        return 0;
     }
 }

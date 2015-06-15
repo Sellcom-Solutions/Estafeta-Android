@@ -52,6 +52,15 @@
     <string name="cerrar">Cerrar</string>
     <string name="no_guia2">No. Guía: </string>
     <string name="estatus_servicio">Estatus del Servicio: </string>
+    <string name="origen">Origen: </string>
+    <string name="fecha_recoleccion">Fecha de recolección: </string>
+    <string name="destino">Destino: </string>
+    <string name="cp_destino">C.P. Destino: </string>
+    <string name="fecha_hora">Fecha y hora de entrega: </string>
+    <string name="recibio">Recibió: </string>
+    <string name="ver_historia">VER HISTORIA</string>
+    <string name="llamar">Llamar</string>
+    <string name="compartir">Compartir</string>
 
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>
@@ -132,9 +141,9 @@
         ZLONGITUD VARCHAR, ZNOMBRE VARCHAR )</string>
 
     <string name="db_offices">CREATE TABLE "offices" ( "id_office" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ent" TEXT(24), "opt" TEXT(24),
-        "estado" TEXT(24), "calle1" TEXT(200), "calle2" TEXT(200), "ciudad" TEXT(200), "codigo_postal" TEXT(10), "colonia" TEXT(200), "correo" TEXT(200),
+        "estado" TEXT(24) NOT NULL, "calle1" TEXT(200), "calle2" TEXT(200), "ciudad" TEXT(200), "codigo_postal" TEXT(10), "colonia" TEXT(200), "correo" TEXT(200),
         "entrega_oficina" TEXT(200), "ext1" TEXT(10), "ext2" TEXT(10), "horario_atencion" TEXT(200), "horario_comida" TEXT(200), "horario_ext" TEXT(200),
-        "horario_recol" TEXT(200), "horario_sabatino" TEXT(200), "idcatalogo" TEXT(24), "latitud" TEXT(24),  "longitud" TEXT(24), "no_oficina" TEXT(24),
+        "horario_recol" TEXT(200), "horario_sabatino" TEXT(200), "idcatalogo" TEXT(24), "latitud" TEXT(24) NOT NULL,  "longitud" TEXT(24) NOT NULL, "no_oficina" TEXT(24),
         "nombre" TEXT(200), "telefono1" TEXT(50), "telefono2" TEXT(50), "tipo_oficina" TEXT(5), "tipos_pago" TEXT(200), "version" TEXT(25), "ciudad_n"
         TEXT(200), "colonia_n" TEXT(200))</string>
 
@@ -151,8 +160,7 @@
     <!-- ********************   Strings aplicación anterior   ************************** -->
     <string name="title_activity_main">MainActivity</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
 

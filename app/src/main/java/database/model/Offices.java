@@ -131,7 +131,7 @@ public class Offices {
         ContentValues cv = new ContentValues();
         cv.put(ENT, ent);
         cv.put(OPT, opt);
-        cv.put(ESTADO, estado);
+
         cv.put(CALLE1, calle1);
         cv.put(CALLE2, calle2);
         cv.put(CIUDAD, ciudad);
@@ -147,8 +147,8 @@ public class Offices {
         cv.put(HORARIO_RECOL, horario_recol);
         cv.put(HORARIO_SABATINO, horario_sabatino);
         cv.put(ID_CATALOGO, idcatalogo);
-        cv.put(LATITUD, latitud);
-        cv.put(LONGITUD, longitud);
+        cv.put(LATITUD, latitud.trim());
+        cv.put(LONGITUD, longitud.trim());
         cv.put(NO_OFICINA, no_oficina);
         cv.put(NOMBRE, nombre);
         cv.put(TELEFONO1, telefono1);
@@ -162,6 +162,77 @@ public class Offices {
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
     }
 
+    public static long updateOffices(Context context, ArrayList<Map<String, String>> values){
+        ContentValues cv = new ContentValues();
+        long aux=0;
+
+        for(int i = 0; i <values.size(); i++) {
+            Map<String, String> item = new HashMap<>();
+            item = values.get(i);
+
+           /* if (item.get("status").equals("true")){
+
+            }*/
+            int edo = States.getStateNumberByName(context, item.get("estado_name"));
+
+            if (edo == 99) {
+                Log.d(TABLE_NAME, "error recuperando estado");
+            } else
+                cv.put(ESTADO, edo);
+
+            cv.put(CALLE1, item.get("calle1"));
+            cv.put(CALLE2, item.get("calle2"));
+            cv.put(CIUDAD, item.get("ciudad"));
+            cv.put(CODIGO_POSTAL, item.get("codigoPostal"));
+            cv.put(COLONIA, item.get("colonia"));
+            cv.put(CORREO, item.get("correoE"));
+            cv.put(ENTREGA_OFICINA, item.get("entregaOcurre"));
+            cv.put(EXT1, item.get("ext1"));
+            cv.put(EXT2, item.get("ext2"));
+            cv.put(HORARIO_ATENCION, item.get("horariosAtencion"));
+            cv.put(HORARIO_COMIDA, item.get("horarioComida"));
+            cv.put(HORARIO_EXT, item.get("horarioExtendido"));
+
+            cv.put(HORARIO_SABATINO, item.get("horarioSabatino"));
+            cv.put(LATITUD, item.get("latitud").trim());
+            cv.put(LONGITUD, item.get("longitud".trim()));
+            cv.put(NO_OFICINA, item.get("idOficina"));
+            cv.put(NOMBRE, item.get("nombreOficina"));
+            cv.put(TELEFONO1, item.get("telefono1"));
+            cv.put(TELEFONO2, item.get("telefono2"));
+            cv.put(TIPO_OFICINA, item.get("idTipoOficina"));
+            cv.put(TIPOS_PAGO, item.get("tiposPago"));
+            cv.put(VERSION, item.get("ultimaAct"));
+
+            String auxVersion = getVersionByOffice(context, item.get("idOficina"));
+            if (auxVersion != null) {
+                if (auxVersion.equals(item.get("ultimaAct"))) {
+                    Log.d(TABLE_NAME, "oficina actualizada");
+                } else {
+                    try {
+                        aux = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, NO_OFICINA + "=?", new String[]{item.get("idOficina")});
+                        Log.d(TABLE_NAME, "actualizar aux: " + aux);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d(TABLE_NAME,"No actualizado");
+                    }
+                }
+            }else {
+                try {
+                    aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null,cv);
+                    Log.d(TABLE_NAME, "insertar aux: " + aux);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Log.d(TABLE_NAME,"No insertado");
+                }
+            }
+
+        }
+        Log.d(TABLE_NAME,"Oficinas actualizadas");
+      return aux;
+
+    }
+
     public static String getVersion(Context context) {
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -172,6 +243,22 @@ public class Offices {
         return null;
     }
 
+    public static String getVersionByOffice(Context context, String no_oficina){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                new String[] {NO_OFICINA,VERSION},
+                NO_OFICINA + "=?",
+                new String[] {no_oficina}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            String version = cursor.getString(cursor.getColumnIndexOrThrow(VERSION));
+            cursor.close();
+           // Log.d(TABLE_NAME,"version"+version);
+            return version;
+        }
+        return null;
+
+    }
     public static ArrayList<Map<String,String>> getAllInMaps(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
@@ -290,6 +377,7 @@ public class Offices {
     public static int delete(Context context, int id) {
         return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ID_OFFICE + "=" + id, null);
     }
+
 
 
 

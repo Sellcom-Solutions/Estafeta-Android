@@ -51,7 +51,7 @@ public class RequestManager implements ResponseListenerInterface {
     public  final   String 	                                LOG_TAG_MANAGER    = "requestManager";
     public  final   String 	                                LOG_TAG_REQUEST    = "asyncRequest";
 
-    public final String API_REQUEST_ZIPCODE = "http://validacpscs.estafeta.com/RestService.svc/ConsultaCP";
+
 
     /*
     public static final int METHOD_REQUEST_ZIPCODE = 0;
@@ -217,9 +217,9 @@ public class RequestManager implements ResponseListenerInterface {
             JSONObject jsonResponse = null;
 
             HttpParams httpParameters = new BasicHttpParams();
-            int timeoutConnection = 5000;
+            int timeoutConnection = 9000;
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-            int timeoutSocket = 5000;
+            int timeoutSocket = 9000;
             HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
             //create a new instance of HttpClient request POST
@@ -240,8 +240,9 @@ public class RequestManager implements ResponseListenerInterface {
 
                 httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
                 httppost.setHeader("Content-Type","application/x-www-form-urlencoded");
+                //httppost.setHeader("Host",getRequestURL(this.method) );
 
-                Log.d("Request",httppost.toString());
+                //Log.v("Request",httppost.toString());
 
                 HttpResponse response = httpclient.execute(httppost);
                 Log.d("Service response",response.toString());
@@ -252,7 +253,8 @@ public class RequestManager implements ResponseListenerInterface {
                     try {
                         stringResponse = parseToStringZipCodes(streamZipCodes);
                         //responseArray = responseParse(streamZipCodes,this.method);
-                        Log.d("Method",":"+this.method);
+                        Log.d("AT Method",":"+this.method);
+                        Log.v("AT Response",stringResponse);
                     } catch (SAXException e) {
                         e.printStackTrace();
                     } catch (ParserConfigurationException e) {
@@ -341,7 +343,17 @@ public class RequestManager implements ResponseListenerInterface {
                 Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(),"");
                 break;
             case REQUEST_OFFICES:
-
+                try {
+                    responseArray = ResponseManager.sharedInstance().parseOffices(doc);
+                    setResponseArray(responseArray);
+                    Log.d("responseParse","ok size: "+responseArray.size());
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
                 Log.v( METHOD.REQUEST_OFFICES.toString(), "");
             case REQUEST_EXCEPTION_CODES:
 
@@ -384,33 +396,43 @@ public class RequestManager implements ResponseListenerInterface {
                 url=  "http://validacpscs.estafeta.com/RestService.svc/ConsultaCP";
                 Log.v(METHOD.REQUEST_ZIPCODE.toString(), url);
             break;
+
             case REQUEST_ZIPCODE_ADDRESSES:
                 url =  "http://validacpscs.estafeta.com/RestService.svc/ConsultaDatosCP";
                 Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), url);
             break;
+
             case REQUEST_TRACKING_LIST_CODES:
                 url =  "http://trackingcs.estafeta.com/RestService.svc/ExecuteQueryPlano";
                 Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), url);
             break;
+
             case REQUEST_TRACKING_LIST_GUIDES:
                 url =  "http://trackingcs.estafeta.com/RestService.svc/ExecuteQueryPlano";
                 Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), url);
             break;
+
             case REQUEST_NATIONAL_DELIVERY:
                 url =  "http://frecuenciacotizadorcs.estafeta.com/RestService.svc/FrecuenciaCotizadorPlano";
                 Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), url);
             break;
+
             case REQUEST_INTERNATIONAL_DELIVERY:
                 url =  "http://cotizadorintcs.estafeta.com/RestService.svc/CotizaPlano";
                 Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), url);
                 break;
+
             case REQUEST_OFFICES:
                 url = "http://sucursalescs.estafeta.com/RestService.svc/consultaConFechaPlano";
-                Log.v( METHOD.REQUEST_OFFICES.toString(), url);
+                Log.v( "Request URL"+METHOD.REQUEST_OFFICES.toString(), url);
+                break;
+
+
             case REQUEST_EXCEPTION_CODES:
                 url =  "http://clavexcs.estafeta.com/RestService.svc/consultaConFechaMovilidadPlano";
-                Log.v( METHOD.REQUEST_EXCEPTION_CODES.toString(), url);
+                Log.v( "Request URL"+METHOD.REQUEST_EXCEPTION_CODES.toString(), url);
             break;
+
             default:
                 break;
         }

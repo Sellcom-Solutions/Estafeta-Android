@@ -18,6 +18,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import database.model.States;
+
 /**
  * Created by rebecalopezmartinez on 02/06/15.
  */
@@ -66,8 +68,8 @@ public class ResponseManager {
             Log.d("Node name", nodeName);
             if (nodeitem.hasChildNodes()) {
                 Node subNode = nodeitem.getFirstChild();
-                Log.d("Node child", "true");
-                Log.d("Node name sub", subNode.getNodeName());
+               // Log.d("Node child", "true");
+                //Log.d("Node name sub", subNode.getNodeName());
                 String nodeValue = "";
                 if (subNode.getNodeValue() != null)
                     nodeValue = subNode.getNodeValue();
@@ -83,7 +85,7 @@ public class ResponseManager {
                     NodeList listColonias = nodeitem.getChildNodes();
                     Node eachCP;
                     NodeList eachServNode;
-                    Log.d("Lista cod", "size" + listColonias.getLength());
+                    //Log.d("Lista cod", "size" + listColonias.getLength());
 
                     for (int f = 0; f < listColonias.getLength(); f++) {
                         eachCP = listColonias.item(f);
@@ -95,8 +97,8 @@ public class ResponseManager {
                             String charac = eachServNode.item(d).getNodeName();
                             String nodeValue2 = eachServNode.item(d).getFirstChild()
                                     .getNodeValue();
-                            Log.d("Node char", charac);
-                            Log.d("Node value", nodeValue2);
+                         //   Log.d("Node char", charac);
+                         //   Log.d("Node value", nodeValue2);
                             if(charac.equals("a:CP")){
                                 map1.put("cp",nodeValue2);
                             }
@@ -113,6 +115,7 @@ public class ResponseManager {
                                 map1.put("pais",nodeValue2);
                             }
                         }
+
                         codigoMap.add(map1);
                     }
                 }
@@ -403,10 +406,176 @@ public class ResponseManager {
         if (data.size() <0)
             return null;
         else {
-            for (int ii = 0; ii < data.size(); ii++)
-                Log.d("ArrayList", data.get(ii).get("wayBill"));
+           /* for (int ii = 0; ii < data.size(); ii++)
+                Log.d("ArrayList", data.get(ii).get("wayBill"));*/
             return data;
         }
     }
 
+
+    public ArrayList<Map<String,String>> parseOffices(Document doc) throws SAXException, IOException, ParserConfigurationException{
+
+        ArrayList<Map<String ,String>> officeMap =new ArrayList<>();
+        doc.getDocumentElement().normalize();
+        NodeList sucursales = doc.getElementsByTagName("a:Sucursal");
+
+        if(sucursales!=null){
+            if(sucursales.getLength()==0){
+                return null;
+            }
+        }
+        Node node = null;
+        String value="";
+        for (int i = 0; i < sucursales.getLength(); i++) {
+            node = sucursales.item(i);
+            Map<String,String> map  = new HashMap<String, String>();
+            NodeList list2 = node.getChildNodes();
+
+            //Log.d("Node size",":"+list2.getLength());
+            for (int j = 0; j < list2.getLength(); j++) {
+                Node nodoItem=list2.item(j);
+                String nodeName = nodoItem.getNodeName();
+                //Log.d("Node name", nodeName);
+
+                if(!nodeName.startsWith("#"))
+                    if (nodeName != null) {
+                        Node subNode=nodoItem.getFirstChild();
+                       /* Log.d("Node child", "true");
+                        Log.d("Node name sub", subNode.getNodeName());*/
+
+                        if(subNode==null){
+                            continue;
+                        }
+                        value=subNode.getNodeValue();
+                        //Log.d("Node value", value);
+
+                        if ("a:calle1".equals(nodeName)) {
+                            map.put("calle1", value);
+                            continue;
+                        }
+                        if ("a:calle2".equals(nodeName)) {
+                            map.put("calle2", value);
+                            continue;
+                        }
+                        if ("a:ciudad".equals(nodeName)) {
+                            map.put("ciudad", value);
+                            continue;
+                        }
+                        if ("a:codigoPostal".equals(nodeName)) {
+                            map.put("codigoPostal", value);
+                            continue;
+                        }
+                        if ("a:colonia".equals(nodeName)) {
+                            map.put("colonia", value);
+                            continue;
+                        }
+                        if ("a:correoE".equals(nodeName)) {
+                            map.put("correoE", value);
+                            continue;
+                        }
+                        if ("a:entregaOcurre".equals(nodeName)) {
+                            map.put("entregaOcurre", value);
+                            continue;
+                        }
+                        if ("a:estado".equals(nodeName)) {
+                            int val=0;
+
+                            if (value.equalsIgnoreCase("BAJA CALIFORNIA")) {
+                                value = "Baja California Norte";
+                            }
+							else if (value.equalsIgnoreCase("EDO. DE MEXICO")) {
+								value = "Estado de Mexico";
+							}
+                            else if (value.equalsIgnoreCase("DISTRITO FEDERAL")) {
+                                value = "México, D.F.";
+                            }
+
+                            map.put("estado_name",value);
+                            continue;
+                        }
+                        if ("a:ext1".equals(nodeName)) {
+                            map.put("ext1",value);
+                            continue;
+                        }
+                        if ("a:ext2".equals(nodeName)) {
+                            map.put("ext2",value);
+                            continue;
+                        }
+                        if ("a:horarioComida".equals(nodeName)) {
+                            map.put("horarioComida",value);
+                            continue;
+                        }
+                        if ("a:horarioExtendido".equals(nodeName)) {
+                            map.put("horarioExtendido",value);
+                            continue;
+                        }
+                        if ("a:horarioSabatino".equals(nodeName)) {
+                            map.put("horarioSabatino",value);
+                            continue;
+                        }
+                        if ("a:horariosAtencion".equals(nodeName)) {
+                            map.put("horariosAtencion",value);
+                            continue;
+                        }
+                        if ("a:idOficina".equals(nodeName)) {
+                            map.put("idOficina",value);
+                            continue;
+                        }
+                        if ("a:idTipoOficina".equals(nodeName)) {
+                            map.put("idTipoOficina",value);
+                            continue;
+                        }
+                        if ("a:latitud".equals(nodeName)) {
+                            //value = value.trim();
+                            String auxla = value.replaceAll("\\s+","");
+                            map.put("latitud",auxla);
+                            //Log.d("latitud", value);
+                            continue;
+                        }
+                        if ("a:longitud".equals(nodeName)) {
+                            //value = value.trim();
+                            String auxlo = value.replaceAll("\\s+","");
+                            map.put("longitud",auxlo);
+                            continue;
+                        }
+                        if ("a:nombreOficina".equals(nodeName)) {
+                            map.put("nombreOficina",value);
+                            continue;
+                        }
+                        if ("a:telefono1".equals(nodeName)) {
+                            map.put("telefono1",value);
+                            continue;
+                        }
+                        if ("a:telefono2".equals(nodeName)) {
+                            map.put("telefono2",value);
+                            continue;
+                        }
+                        if ("a:tiposPago".equals(nodeName)) {
+                            map.put("tiposPago",value);
+                            continue;
+                        }
+                        if("a:status".equals(nodeName)){
+                            map.put("status",value);
+                        }
+                        if ("a:ultimaAct".equals(nodeName)) {
+                            map.put("ultimaAct",value);
+                            continue;
+
+                        }
+                    }
+            }
+            map.put("method",METHOD.REQUEST_OFFICES.toString());
+            officeMap.add(map);
+           // data.addElement(sucursal);
+
+        }
+        if(officeMap.size()>0){
+           /* for(int i=0;i<officeMap.size();i++)
+            Log.d("ArrayList",officeMap.get(i).get("nombreOficina"));*/
+            Log.d("Response Manager","end");
+            return officeMap;
+        }
+        Log.d("Response Manager","end");
+        return null;
+    }
 }

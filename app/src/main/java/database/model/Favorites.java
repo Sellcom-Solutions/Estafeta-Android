@@ -54,11 +54,15 @@ public class Favorites {
 
     }
 
-    public static long insertMap(ArrayList<Map<String, String>> values){
-        for(int i=0;i<values.size();i++){
+    public static long insertMap(Context context, Map<String, String> values){
+        ContentValues cv = new ContentValues();
+        cv.put(GUIA, values.get("wayBill"));
+        cv.put(RASTREO, values.get("shortWayBillId"));
+        cv.put(ALIAS, " ");
+        cv.put(FECHA_REGISTRO," ");
+        cv.put(NOTIFICA,0);
 
-        }
-        return 0;
+        return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
     }
 
     public static ArrayList<Map<String,String>> getAll(Context context){
@@ -85,5 +89,21 @@ public class Favorites {
             return list;
         }
         return null;
+    }
+
+    public static String getIdByWayBill(Context context,String waybill){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                new String[] {ID_CTL_FAVORITOS,GUIA},
+                GUIA + "=?",
+                new String[] {waybill}, null ,null, null);
+        if(cursor != null){
+            cursor.moveToFirst();
+            String response= cursor.getString(cursor.getColumnIndexOrThrow(ID_CTL_FAVORITOS));
+            return response;
+        }
+
+        else
+            return null;
     }
 }

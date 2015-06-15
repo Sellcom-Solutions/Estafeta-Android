@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
@@ -24,7 +25,7 @@ import java.util.Map;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentRastreoEfectuado extends TrackerFragment {
+public class FragmentRastreoEfectuado extends TrackerFragment implements AdapterView.OnItemSelectedListener {
 
     String TAG = "FRAG_RASTREO_EFECTUADO";
     ListView lst_rastreo_efectuado;
@@ -58,6 +59,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
             e.printStackTrace();
         }
 
+        lst_rastreo_efectuado.setOnItemSelectedListener(this);
         return view;
     }
 
@@ -88,4 +90,13 @@ public class FragmentRastreoEfectuado extends TrackerFragment {
         }
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }

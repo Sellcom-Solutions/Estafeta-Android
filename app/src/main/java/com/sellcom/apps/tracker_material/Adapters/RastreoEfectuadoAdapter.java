@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import database.model.Favorites;
+import database.model.Trackdata;
+
 /**
  * Created by rebecalopezmartinez on 30/05/15.
  */
@@ -125,6 +128,17 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),1000);
                         holder.btn_favoritos.setEnabled(false);
                         Log.d(TAG,"Position"+holder.position);
+
+                        try {
+                            Favorites.insertMap(context, codigos.get(holder.position));
+                            Log.d(TAG,"Despues de insertar en fav");
+                            String id= Favorites.getIdByWayBill(context,codigos.get(holder.position).get("wayBill"));
+                            Log.d(TAG,"Recuperar id tabla "+id);
+                            codigos.get(holder.position).put("id_ctl_favoritos",id);
+                            Trackdata.insert(codigos.get(holder.position));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 
