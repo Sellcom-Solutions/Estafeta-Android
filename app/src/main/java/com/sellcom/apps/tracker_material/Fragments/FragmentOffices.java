@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,6 +90,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             btn_search.setOnClickListener(this);
 
             setStatesToSpinner(spn_state, context);
+
         }
 
         return view;
@@ -102,25 +104,36 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             case R.id.btn_near:
                 Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
                 if(myLocation != null){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Oficinas...",0);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando_oficinas),0);
                     nearOffice();
                 }else{
-                    Toast.makeText(context, "Favor de encender su GPS", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
                 }
-
-
-                //DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando Oficinas...");
 
                 break;
 
             case  R.id.btn_search:
-                Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
-                if(myLocationAdvance != null){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Oficinas...",0);
-                    searchOffice();
+
+                if(spn_state.getSelectedItemPosition() == 0){
+
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_estado), 3000);
+                    return;
+                }else if(edt_city.getText().toString().equals("")) {
+
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_ciudad), 3000);
+                    return;
+
                 }else{
-                    Toast.makeText(context, "Favor de encender su GPS", Toast.LENGTH_SHORT).show();
+                    Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
+                    if(myLocationAdvance != null){
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando_oficinas),0);
+                        searchOffice();
+                    }else{
+                        Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
 
                 break;
         }
@@ -148,7 +161,8 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         ArrayList<String> args = new ArrayList<String>();
         String sql = "select * from offices where estado=? ";
 
-        state   = "" + (spn_state.getSelectedItemPosition() + 1);
+        state   = "" + (spn_state.getSelectedItemPosition());
+        Log.e("Prompt"," ------ "+(spn_state.getSelectedItemPosition() + 1));
         args.add("" + state);
 
 
@@ -202,54 +216,6 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
             fragmentTransaction.commit();
         }
-    }
-
-    public void setSpinnerStates(Spinner spinner){
-
-        List<Map<String, String>> listStates = new ArrayList<>();
-
-        arraySpinner = new String[10];
-
-        arraySpinner[0] = "Distrito Federal";
-        arraySpinner[1] = "Jalisco";
-        arraySpinner[2] = "Nuevo Leon";
-        arraySpinner[3] = "Estado de Mexico";
-        arraySpinner[4] = "Colina";
-        arraySpinner[5] = "Guerrero";
-        arraySpinner[6] = "Guanjuato";
-        arraySpinner[7] = "Oaxaca";
-        arraySpinner[8] = "Baja California Sur";
-        arraySpinner[9] = "Estado*";
-
-
-        for (int i = 0; i < 10 ; i++){
-            Log.d(TAG,arraySpinner[i]);
-            Map<String,String> map = new HashMap<>();
-            map.put("ZNOMBRE",arraySpinner[i]);
-            listStates.add(map);
-        }
-
-        //listStates = States.getAllInMaps(getActivity());
-        //arraySpinner = new String[listStates.size()];
-        /*for (int i = 0; i < 5; i++) {
-            //arraySpinner[i] = listStates.get(i).get("state");
-        }
-        */
-        //arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.select_dialog_item, arraySpinner);
-        //arrayAdapter.setDropDownViewResource(android.R.layout.select_dialog_item);
-
-        spinnerAdap = new SpinnerAdapter(getActivity(),listStates, SpinnerAdapter.SPINNER_TYPE.STATES);
-        spinner.setAdapter(spinnerAdap);
-        //spinner.setSelection(listStates.size() - 1);
-
-    }
-
-
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager
-                .getActiveNetworkInfo();
-        return activeNetworkInfo != null;
     }
 
 }

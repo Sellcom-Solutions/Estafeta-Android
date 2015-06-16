@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/sizeMediumText"
-            android:text="Horario"
+            android:text="@string/horario"
             android:layout_marginBottom="5dp"
             android:textColor="@color/estafeta_text"
             android:textStyle="bold"
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
                 android:textSize="@dimen/sizeMediumText"
-                android:text="Ext."
+                android:text="@string/ext"
                 android:textColor="@color/estafeta_text"
                 android:textStyle="bold"
                 />
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/estafeta_red"
                     android:textSize="@dimen/sizeMediumText"
-                    android:drawableLeft="@android:drawable/sym_action_call"
+                    android:drawableLeft="@drawable/ic_phone"
                     android:textStyle="bold"
                     android:text="5558370295"/>
 
@@ -144,7 +144,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/estafeta_red"
                     android:textSize="16sp"
-                    android:text="IR A"
+                    android:text="@string/ir_a"
                     android:background="@android:color/transparent"/>
 
                 <Button
@@ -154,7 +154,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/estafeta_red"
                     android:textSize="16sp"
-                    android:text="COMPARTIR"
+                    android:text="@string/compartir_oficinas"
                     android:background="@android:color/transparent"/>
 
                 <Button
@@ -164,7 +164,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/estafeta_red"
                     android:textSize="16sp"
-                    android:text="CERRAR"
+                    android:text="@string/cerrar_oficinas"
                     android:background="@android:color/transparent"/>
 
             </LinearLayout>

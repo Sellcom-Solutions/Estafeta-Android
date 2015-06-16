@@ -93,7 +93,7 @@
     <string name="abr_codigo">C.P.</string>
     <string name="validar_codigo">Validar</string>
     <string name="buscar_codigo">Buscar un Código Postal</string>
-    <string name="search_by_zip_code">Código Postal*</string>
+    <string name="search_by_zip_code">Código Postal</string>
     <string name="estado">Estado</string>
 
     <!-- Aviso de Privacidad -->
@@ -112,6 +112,8 @@
     <!-- Dialog messages-->
     <string name="error_codigo">Error, código postal no válido.</string>
     <string name="error_ciudad">Error, el campo ciudad es obligatorio.</string>
+    <string name="error_estado">Error, debes seleccionar un estado.</string>
+    <string name="cargando_oficinas">Cargando Oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
     <string name="cargando">Cargando ...</string>
     <string name="actualizando">Actualizando ...</string>
@@ -167,6 +169,20 @@
     <string name="title_activity_main">MainActivity</string>
 
 
+    <!-- FragmentOffices  -->
+
+    <string name="encender_gps">Favor de encender su GPS</string>
+    <string name="consesionaria_autorizada">Consecionaria Autorizada</string>
+    <string name="centro_operativo">Centro operativo y sucursal</string>
+    <string name="sucursal">Sucursal</string>
+    <string name="seccion_estafeta">Estafeta</string>
+    <string name="ver">Ver</string>
+    <string name="afiliados">Afiliados</string>
+    <string name="ir_a">IR A</string>
+    <string name="compartir_oficinas">COMPARTIR</string>
+    <string name="cerrar_oficinas">CERRAR</string>
+    <string name="ext">Ext.</string>
+    <string name="horario">Horario</string>
 
 
 
