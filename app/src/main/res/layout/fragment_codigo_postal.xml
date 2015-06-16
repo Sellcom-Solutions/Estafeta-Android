@@ -59,6 +59,7 @@
                 android:textColorHint       ="@color/estafeta_soft_gray"
                 android:maxLength           ="5"
                 android:layout_marginLeft   ="20dp"
+                android:paddingRight="30dp"
                 android:inputType           ="numberSigned"
                 android:layout_marginRight  ="10dp" />
 

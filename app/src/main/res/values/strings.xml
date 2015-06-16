@@ -167,6 +167,17 @@
     <!-- FragmentOffices  -->
 
     <string name="encender_gps">Favor de encender su GPS</string>
+    <string name="consesionaria_autorizada">Consecionaria Autorizada</string>
+    <string name="centro_operativo">Centro operativo y sucursal</string>
+    <string name="sucursal">Sucursal</string>
+    <string name="seccion_estafeta">Estafeta</string>
+    <string name="ver">Ver</string>
+    <string name="afiliados">Afiliados</string>
+    <string name="ir_a">IR A</string>
+    <string name="compartir_oficinas">COMPARTIR</string>
+    <string name="cerrar_oficinas">CERRAR</string>
+    <string name="ext">Ext.</string>
+    <string name="horario">Horario</string>
 
 
 
