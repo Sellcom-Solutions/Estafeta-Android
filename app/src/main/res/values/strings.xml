@@ -120,7 +120,7 @@
     <string name="error_tamaño_codigo">Error,un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
     <string name="error_cod_repetido">Error, el número ya existe en la lista de rastreo.</string>
     <string name="error_lista_vacia">Error, la lista de rastreo se encuentra vacía.</string>
-    <string name="error_agregar_fav">Error, no existe información acerca de este registro</string>
+    <string name="error_agregar_fav">Error, no existe información acerca de este registro.</string>
     <string name="exito_agregar_fav">Operación exitosa</string>
 
     <!-- Data base -->
@@ -133,20 +133,23 @@
         "msd_wb_list"  TEXT(24), "intld_intl_waybill"  TEXT(24), "intld_org_countrycode" TEXT(24), "intld_org_countryspa"  TEXT(24), "intld_org_countryeng"
         TEXT(24), "cstminfo_reference" TEXT(24), "cstminfo_costsCentre" TEXT(24), "id_ctl_favoritos" INTEGER NOT NULL)</string>
 
-    <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "evnt_date"  TEXT(20), "evnt_id" TEXT(50),
+    <!-- <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "evnt_date"  TEXT(20), "evnt_id" TEXT(50),
         "evnt_desc_spa" TEXT(200), "evnt_desc_eng" TEXT(200), "evnt_place_acronym" TEXT(200), "evnt_place_name"  TEXT(200), "except_code"  TEXT(3),
-        "except_descspa" TEXT(200), "except_desceng" TEXT(200), "except_details"  TEXT(200), "id_trackdata"  INTEGER NOT NULL)</string>
+        "except_descspa" TEXT(200), "except_desceng" TEXT(200), "except_details"  TEXT(200), "id_trackdata"  INTEGER NOT NULL)</string>-->
+
+    <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "add_date"  TEXT(20),
+                              "code_number" TEXT(50), "mov_coms" TEXT(200), "mov_date" TEXT(200), "mov_place" TEXT(200))</string>
 
     <!-- <string name="db_ctlfavoritos">CREATE TABLE "ctl_favoritos" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"guia"  TEXT(24),"rastreo"
         TEXT(24),"alias"  TEXT(100),"fecha_registro"  TEXT(20) NOT NULL, "notifica" integer not null default(0))</string>-->
 
-    <string name="db_ctlfavoritos">CREATE TABLE "favorites" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"add_date"  TEXT(24) NOT NULL,
+    <string name="db_ctlfavoritos">CREATE TABLE "favorites" ("id_favoritos" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"add_date"  TEXT(24) NOT NULL,
                                    "alias"  TEXT(24), "codigo_rastreo"  TEXT(24), "cp_destino"  TEXT(24), "destino"  TEXT(24), "estatus"  TEXT(24),
                                    "fecha_recoleccion"  TEXT(24), "fechaHoraEntrega"  TEXT(24), "historia"  TEXT(24), "no_guia"  TEXT(24), "origen"  TEXT(24),
                                    "recibio"  TEXT(24), "referencia"  TEXT(24), "signature"  TEXT(24),"notifica"  TEXT(24))</string>
 
     <string name="db_estados">CREATE TABLE estados ( Z_PK INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ZNUMEROESTADO INTEGER, ZLATITUD VARCHAR,
-        ZLONGITUD VARCHAR, ZNOMBRE VARCHAR )</string>
+                              ZLONGITUD VARCHAR, ZNOMBRE VARCHAR )</string>
 
     <string name="db_offices">CREATE TABLE "offices" ( "id_office" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ent" TEXT(24), "opt" TEXT(24),
         "estado" TEXT(24) NOT NULL, "calle1" TEXT(200), "calle2" TEXT(200), "ciudad" TEXT(200), "codigo_postal" TEXT(10), "colonia" TEXT(200), "correo" TEXT(200),

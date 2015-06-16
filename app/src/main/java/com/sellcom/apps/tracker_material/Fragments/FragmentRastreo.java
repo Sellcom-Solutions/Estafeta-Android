@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import database.model.Favorites;
 import database.model.Rastreo_tmp;
 
 /**
@@ -233,50 +234,43 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     }
 
 
-
     public class GetCodesInfo extends AsyncTask<Void, Void, String> implements UIResponseListenerInterface {
 
-        int j=0;
+        int j = 0;
         ArrayList<Map<String, String>> aux = new ArrayList<>();
         boolean flag = false;
 
         protected void onPreExecute() {
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando),0);
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
         }
 
         @Override
         protected String doInBackground(Void... params) {
 
-            for(int i = 0; i< codes_array.size();i++){
+            for (int i = 0; i < codes_array.size(); i++) {
                 Map<String, String> requestData = new HashMap<>();
-                Map<String, String> code_item =new HashMap<>();
+                Map<String, String> code_item = new HashMap<>();
                 code_item = codes_array.get(i);
 
-                Log.d("Codigo for",code_item.get("codigo"));
+                Log.d("Codigo for", code_item.get("codigo"));
 
-                /*if(i == (codes_array.size()-1)) {
-                    flag = true;
-                    Log.d(TAG,"size codes array: "+codes_array.size());
-                    Log.d(TAG,"flag "+flag+" i "+i);
-                }*/
+                requestData.put("initialWaybill", "");
+                requestData.put("finalWaybill", "");
 
-                requestData.put("initialWaybill","");
-                requestData.put("finalWaybill","");
-
-                if(code_item.get("codigo").length() == 10)
-                    requestData.put("waybillType","R");
+                if (code_item.get("codigo").length() == 10)
+                    requestData.put("waybillType", "R");
                 else
-                    requestData.put("waybillType","G");
+                    requestData.put("waybillType", "G");
 
-                requestData.put("wayBills",code_item.get("codigo"));
+                requestData.put("wayBills", code_item.get("codigo"));
 
-                requestData.put("type","L");
+                requestData.put("type", "L");
                 requestData.put("includeDimensions", "true");
-                requestData.put("includeWaybillReplaceData","true");
-                requestData.put("includeReturnDocumentData","true");
-                requestData.put("includeMultipleServiceData","true");
-                requestData.put("includeInternationalData","true");
-                requestData.put("includeSignature","true");
+                requestData.put("includeWaybillReplaceData", "true");
+                requestData.put("includeReturnDocumentData", "true");
+                requestData.put("includeMultipleServiceData", "true");
+                requestData.put("includeInternationalData", "true");
+                requestData.put("includeSignature", "true");
                 requestData.put("includeCustomerInfo", "true");
                 requestData.put("includeHistory", "true");
                 requestData.put("historyType", "ALL");
@@ -286,12 +280,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_TRACKING_LIST_CODES, requestData);
 
-
             }
 
             return null;
 
-            }
+        }
 
         @Override
         public void prepareRequest(METHOD method, Map<String, String> params, boolean includeCredentials) {
@@ -301,19 +294,18 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         @Override
         public void decodeResponse(String stringResponse) {
             try {
-                if (stringResponse == null ||stringResponse.equals("0") ) {
+                if (stringResponse == null || stringResponse.equals("0")) {
                     Log.v(TAG, "El servidor devolvió null o 0");
-                    String cod_aux= codes_array.get(j).get("codigo");
+                    String cod_aux = codes_array.get(j).get("codigo");
                     Map<String, String> auxResponse = new HashMap<>();
-                    if(cod_aux.length() == 10) {
+                    if (cod_aux.length() == 10) {
                         auxResponse.put("shortWayBillId", cod_aux);
-                        auxResponse.put("wayBill","Sin información");
-                        auxResponse.put("statusSPA","Sin información");
-                    }
-                    else{
-                        auxResponse.put("shortWayBillId","Sin información");
+                        auxResponse.put("wayBill", "Sin información");
+                        auxResponse.put("statusSPA", "Sin información");
+                    } else {
+                        auxResponse.put("shortWayBillId", "Sin información");
                         auxResponse.put("wayBill", cod_aux);
-                        auxResponse.put("statusSPA","Sin información");
+                        auxResponse.put("statusSPA", "Sin información");
                     }
                     aux.add(auxResponse);
                     Log.v(TAG + "aux", "" + aux.size());
@@ -322,10 +314,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     Map<String, String> auxResponse = new HashMap<>();
                     auxResponse = RequestManager.sharedInstance().getResponseArray().get(0);
                     if (auxResponse != null) {
-                        Log.v(TAG + "auxResponse", "" + auxResponse.size());
+                       // Log.v(TAG + "auxResponse", "" + auxResponse.size());
                         if (auxResponse.size() > 0)
                             aux.add(auxResponse);
-                        Log.v(TAG + "aux", "" + aux.size());
+                     //   Log.v(TAG + "aux", "" + aux.size());
                     }
                 }
 
@@ -333,14 +325,16 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 e.printStackTrace();
             }
             j++;
-            Log.d(TAG,"contador:"+j);
-            if (j == codes_array.size()){
-                Log.d(TAG,"flag "+flag+" j "+j);
-                Bundle bundle= new Bundle();
-                //bundle.putSerializable("codes",codes_array);
-                bundle.putSerializable("codes_info",aux);
+            Log.d(TAG, "contador:" + j);
+            if (j == codes_array.size()) {
+                Log.d(TAG, "flag " + flag + " j " + j);
+                ArrayList<Map<String, String>> codes_ver = new ArrayList<>();
+                codes_ver = verifyFavorites(aux);
 
-                fragmentManager =getActivity().getSupportFragmentManager();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("codes_info", codes_ver);
+
+                fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragment = new FragmentRastreoEfectuado();
                 fragment.addFragmentToStack(getActivity());
@@ -348,13 +342,38 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.container, fragment, TAG);
                 fragmentTransaction.commit();
-                //DialogManager.sharedInstance().dismissDialog();
             }
 
         }
+        public ArrayList<Map<String, String>> verifyFavorites(ArrayList<Map<String, String>> values){
+            Log.d(TAG, "verifyFavorites");
+            ArrayList<Map<String, String>> resp = new ArrayList<>();
+            for(int i = 0; i < values.size(); i++){
+                Map<String, String> item = new HashMap<>();
+                item= values.get(i);
+
+                if(item.get("wayBill")!= null) {
+                    String auxFavId = Favorites.getIdByWayBill(context, item.get("wayBill"));
+                    //Log.d(TAG, "DB aux = "+auxFavId);
+                    if (auxFavId != null) {
+                        item.put("favorites", "true");
+                        //Log.d(TAG, "item true");
+                    }
+                    else {
+                        item.put("favorites", "false");
+                        //Log.d(TAG, "item false");
+                    }
+                }
+                else {
+                    item.put("favorites", "false");
+                    //Log.d(TAG, "item false");
+                }
+                resp.add(item);
+            }
+            return resp;
+        }
 
         protected void onPostExecute(String result) {
-
 
 
         }

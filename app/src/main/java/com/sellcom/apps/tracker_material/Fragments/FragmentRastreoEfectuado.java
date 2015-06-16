@@ -1,6 +1,7 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.RastreoEfectuadoAdapter;
@@ -20,14 +22,18 @@ import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+
+import database.model.Favorites;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentRastreoEfectuado extends TrackerFragment implements AdapterView.OnItemSelectedListener {
+public class FragmentRastreoEfectuado extends TrackerFragment implements AdapterView.OnItemClickListener {
 
     String TAG = "FRAG_RASTREO_EFECTUADO";
+    Context context;
     ListView lst_rastreo_efectuado;
 
     RastreoEfectuadoAdapter efectuadoAdapter;
@@ -44,14 +50,14 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_rastreo_efectuado, container, false);
+        context = getActivity();
         lst_rastreo_efectuado = (ListView)view.findViewById(R.id.lst_rastreo_efectuado);
 
-        //codes = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes");
         codes_info = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes_info");
 
-        //efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),codes);
-        efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),codes_info);
+        efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),context ,codes_info,getActivity().getSupportFragmentManager());
         lst_rastreo_efectuado.setAdapter(efectuadoAdapter);
+        //lst_rastreo_efectuado.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         try {
             DialogManager.sharedInstance().dismissDialog();
@@ -59,7 +65,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
             e.printStackTrace();
         }
 
-        lst_rastreo_efectuado.setOnItemSelectedListener(this);
+        //lst_rastreo_efectuado.setOnItemClickListener(this);
         return view;
     }
 
@@ -90,13 +96,13 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
         }
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-    }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.v(TAG,"item id"+id);
+        Toast.makeText(context,
+                "Click ListItem Number " + position, Toast.LENGTH_LONG)
+                .show();
 
     }
 }

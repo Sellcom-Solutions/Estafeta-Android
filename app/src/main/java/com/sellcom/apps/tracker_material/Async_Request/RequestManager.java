@@ -234,7 +234,7 @@ public class RequestManager implements ResponseListenerInterface {
                 //Log.v("Request",httppost.toString());
 
                 HttpResponse response = httpclient.execute(httppost);
-                Log.d(LOG_TAG_REQUEST+"Service response",response.toString());
+                Log.d(LOG_TAG_REQUEST+"response",response.toString());
 
                 HttpEntity entity = response.getEntity();
                 if(entity != null) {

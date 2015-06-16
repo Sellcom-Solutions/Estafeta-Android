@@ -141,7 +141,7 @@ public class ResponseManager {
             for (j = 0; j < list2.getLength(); j++) {
                 nodoItem=list2.item(j);
                 nodeName = nodoItem.getNodeName();
-                Log.d("nodeName",nodeName);
+                //Log.d("nodeName",nodeName);
 
                 if(!nodeName.startsWith("#"))
                     if (nodeName != null) {
@@ -151,10 +151,10 @@ public class ResponseManager {
                         if(subNode==null){
                             continue;
                         }else
-                            Log.d("nodeNameSub",subNode.getNodeName());
+                           // Log.d("nodeNameSub",subNode.getNodeName());
 
                         value=subNode.getNodeValue();
-                        Log.d("subNode","value: "+value);
+                       // Log.d("subNode","value: "+value);
 
                         if ("a:waybill".equals(nodeName)) {
                             map.put("wayBill",value);
@@ -186,6 +186,10 @@ public class ResponseManager {
                         if ("a:statusENG".equals(nodeName)) {
                             map.put("statusENG",value);
                         }
+                        if ("a:signature".equals(nodeName)) {
+                            Log.d("signature",value);
+                            map.put("signature",value);
+                        }
 
                         ////
                         if ("a:pickupData".equals(nodeName)) {
@@ -196,6 +200,7 @@ public class ResponseManager {
                             for (int l = 0; l < listpk.getLength(); l++) {
                                 Node dataNode = listpk.item(l);
                                 nameElement = dataNode.getNodeName();
+                                //Log.d("nameElement PK",nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodepk=dataNode.getFirstChild();
@@ -227,6 +232,7 @@ public class ResponseManager {
                             for (int l = 0; l < listdd.getLength(); l++) {
                                 Node dataNode = listdd.item(l);
                                 nameElement = dataNode.getNodeName();
+                               // Log.d("nameElement DD",nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodeDD=dataNode.getFirstChild();
@@ -266,7 +272,7 @@ public class ResponseManager {
                             for (int l = 0; l < listD.getLength(); l++) {
                                 Node dataNode = listD.item(l);
                                 nameElement = dataNode.getNodeName();
-
+                                //Log.d("nameElement Dim",nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodeD=dataNode.getFirstChild();
@@ -306,6 +312,7 @@ public class ResponseManager {
                             for (int l = 0; l < listCI.getLength(); l++) {
                                 Node dataNode = listCI.item(l);
                                 nameElement = dataNode.getNodeName();
+                                //Log.d("nameElement CI",nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodeCI=dataNode.getFirstChild();
@@ -339,6 +346,7 @@ public class ResponseManager {
                                         for (int l = 0; l < historyData.getLength(); l++) {
                                             Node dataNode = historyData.item(l);
                                             nameElement = dataNode.getNodeName();
+                                           // Log.d("nameElement History",nameElement);
                                             if(!nameElement.startsWith("#"))
                                                 if (nameElement != null) {
                                                     Node subNodeH=dataNode.getFirstChild();

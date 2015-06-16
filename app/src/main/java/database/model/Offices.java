@@ -205,21 +205,23 @@ public class Offices {
 
                 String auxVersion = getVersionByOffice(context, item.get("idOficina"));
                 if (auxVersion != null) {
-                    if (auxVersion.equals(item.get("ultimaAct"))) {
-                        Log.d(TABLE_NAME, "oficina actualizada");
-                    } else {
+                    if (!auxVersion.equals(item.get("ultimaAct"))) {
                         try {
                             aux = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, NO_OFICINA + "=?", new String[]{item.get("idOficina")});
-                            Log.d(TABLE_NAME, "actualizar aux: " + aux);
+                            // Log.d(TABLE_NAME, "actualizar aux: " + aux);
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.d(TABLE_NAME,"No actualizado");
                         }
+                       
                     }
+                    /*else {
+                        Log.d(TABLE_NAME, "oficina actualizada");
+                    }*/
                 }else {
                     try {
                         aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null,cv);
-                        Log.d(TABLE_NAME, "insertar aux: " + aux);
+                       // Log.d(TABLE_NAME, "insertar aux: " + aux);
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.d(TABLE_NAME,"No insertado");

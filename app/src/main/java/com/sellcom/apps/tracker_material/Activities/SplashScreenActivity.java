@@ -46,6 +46,8 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         requestData.put("ultimaAct",fecha);
 
         Log.d(TAG, "Llama al servicio");
+        DialogManager.sharedInstance().dismissDialog();
+        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.actualizando),0);
         RequestManager.sharedInstance().setListener(this);
         RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
 
@@ -104,14 +106,13 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         }
         else {
             Log.d(TAG,"response null");
+            Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
+            startActivity(intent);
         }
 
        /* Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
         startActivity(intent);*/
     }
-
-
-
 
     class UpdateOffices extends AsyncTask<String, Void, String>  {
 
