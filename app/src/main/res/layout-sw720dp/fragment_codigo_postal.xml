@@ -95,7 +95,7 @@
                         <EditText
                             android:id                  ="@+id/verify_zip_code"
                             android:layout_width        ="0dp"
-                            android:layout_height       ="match_parent"
+                            android:layout_height       ="60dp"
                             android:textColor           ="@color/estafeta_text"
                             android:textSize            ="@dimen/sizeLargeText"
                             android:hint                ="@string/search_by_zip_code"
