@@ -146,11 +146,11 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                 if (holder.btn_favoritos.isChecked()) {
                     if (holder.estatus.getText().toString().equals("Sin información")) {
                         holder.btn_favoritos.setChecked(false);
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),1000);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),3000);
                         //Log.d(TAG,"Position"+holder.position);
                     }
                     else {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),1000);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
                         holder.btn_favoritos.setEnabled(false);
                         //Log.d(TAG,"Position"+holder.position);
 
@@ -180,10 +180,10 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         holder.linear_rastreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
 
-                /*if(codigos.get(holder.position).get("statusSPA").equals("Sin información")){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),1000);
+
+                if(codigos.get(holder.position).get("statusSPA").equals("Sin información")){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),3000);
                 }else {
                     Bundle bundle = new Bundle();
                     bundle.putString("code",codigos.get(holder.position).get("wayBill"));
@@ -198,7 +198,7 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                     fragmentTransaction.replace(R.id.container, fragment, TAG);
                     fragmentTransaction.commit();
                    // DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),1000);
-                }*/
+                }
             }
         });
 

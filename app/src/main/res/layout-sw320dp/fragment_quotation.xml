@@ -399,7 +399,7 @@
             android:textSize="@dimen/footerSize"
             android:text="@string/footer"
             android:gravity="center|bottom"
-            android:textColor="@color/estafeta_text"
+            android:textColor="@color/estafeta_soft_gray"
             android:layout_marginTop="5dp"
             android:layout_gravity="bottom|center_horizontal"/>
 

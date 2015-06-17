@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -197,8 +198,14 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 @Override
                 public void onClick(View v) {
                     Log.e(TAG, "ACCEPT");
-
                     searchZC();
+                }
+            });
+
+            btn_accept.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -357,6 +364,15 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
             CPAListdapter adapter = new CPAListdapter(getActivity(),colonias,"1");
             lv_dialog_colonia.setAdapter(adapter);
+
+            /*lv_dialog_colonia.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    lv_dialog_colonia.getSelectedItem().toString();
+                }
+            });*/
+
+
 
             tv_dialog_ciudad.setText(ciudadString);
 

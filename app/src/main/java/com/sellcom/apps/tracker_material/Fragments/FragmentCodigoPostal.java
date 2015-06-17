@@ -84,7 +84,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             case R.id.btn_validar_zipcode:
                 zipCodeString = zipCode.getText().toString();
                 if(zipCodeString == null || zipCodeString.equals("")){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo),1000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo),3000);
                 }
                 else {
                     //MapString Params...
@@ -163,7 +163,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             if(resp != null && resp.size()>0 )
                 showDialogCP(resp);
             else {
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio),1000);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio),3000);
             }
 
         }else{
