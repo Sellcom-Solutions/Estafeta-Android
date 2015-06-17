@@ -136,7 +136,7 @@
                 android:nextFocusDown       ="@+id/edt_colony"
 
                 android:layout_marginTop    ="10dp"
-                android:layout_marginLeft   ="20dp"/>
+                android:layout_marginLeft   ="30dp"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -171,7 +171,7 @@
                 android:textColorHint       ="@color/estafeta_soft_gray"
                 android:layout_weight       ="1"
                 android:nextFocusDown       ="@+id/edt_zip_code"
-
+                android:layout_marginLeft   ="10dp"
                 android:layout_marginRight  ="10dp"/>
 
             <EditText
@@ -194,7 +194,7 @@
                 android:textSize=           "@dimen/sizeSmallText"
                 android:textColor           ="@color/estafeta_red"
                 android:layout_gravity      ="left"
-                android:layout_marginLeft   ="20dp"
+                android:layout_marginLeft   ="30dp"
                 android:layout_marginRight  ="20dp"/>
             </LinearLayout>
 
