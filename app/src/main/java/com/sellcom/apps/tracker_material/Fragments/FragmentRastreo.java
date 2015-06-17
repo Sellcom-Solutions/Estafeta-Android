@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.content.Context;
 
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
@@ -148,7 +149,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         Log.d(TAG, "Selected:  " + item.getItemId());
         switch (item.getItemId()) {
             case R.id.add_favorite:
-                Log.d(TAG,"item selected");
+                //Log.d(TAG,"item selected");
+                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
@@ -165,6 +167,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 break;
 
             case R.id.btn_escanear:
+                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.btn_rastrear:

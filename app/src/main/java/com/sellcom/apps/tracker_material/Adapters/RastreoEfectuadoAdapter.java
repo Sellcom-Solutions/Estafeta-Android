@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.Fragments.FragmentDetalleRastreo;
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreoEfectuado;
@@ -179,7 +180,9 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         holder.linear_rastreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(codigos.get(holder.position).get("statusSPA").equals("Sin información")){
+                Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
+
+                /*if(codigos.get(holder.position).get("statusSPA").equals("Sin información")){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),1000);
                 }else {
                     Bundle bundle = new Bundle();
@@ -195,7 +198,7 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                     fragmentTransaction.replace(R.id.container, fragment, TAG);
                     fragmentTransaction.commit();
                    // DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),1000);
-                }
+                }*/
             }
         });
 

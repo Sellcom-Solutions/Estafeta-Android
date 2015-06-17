@@ -4,7 +4,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <item android:id="@+id/add_favorite"
-            android:title="Favoritos"
             android:icon="@drawable/estrella_blanca"
             app:showAsAction="ifRoom" />
 

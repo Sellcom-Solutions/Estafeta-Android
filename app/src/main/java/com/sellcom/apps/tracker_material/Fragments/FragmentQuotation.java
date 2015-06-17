@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.widget.TextView;
 import android.widget.ListView;
@@ -285,11 +286,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private void openPhonebook(){
 
-
+        Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
     }
 
     private void requestQuote(){
-
+        Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
     }
 
 

@@ -91,6 +91,10 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
 
         switch (item.getItemId()) {
 
+            case R.id.add_favorite:
+                //Log.d(TAG,"item selected");
+                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                return true;
 
             default: return super.onOptionsItemSelected(item);
         }
