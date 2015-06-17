@@ -72,8 +72,7 @@
                 android:layout_height               ="0dp"
                 android:layout_weight               ="29"
                 android:orientation                 ="horizontal"
-                android:minHeight                   ="@dimen/sizeNormalText"
-                android:weightSum                   ="100">
+                android:minHeight                   ="@dimen/sizeNormalText">
 
                 <TextView
                     android:layout_width            ="0dp"
@@ -81,21 +80,22 @@
                     android:layout_marginLeft       ="10dp"
                     android:layout_marginStart      ="10dp"
                     android:layout_marginTop        ="10dp"
-                    android:layout_weight           ="90"
+                    android:layout_weight           ="1"
                     android:text                    ="@string/aviso_rastreo"
                     android:textColor               ="@color/estafeta_text"
                     android:textSize                ="@dimen/sizeSmallText"
                     android:textStyle               ="bold"/>
 
-                <ImageButton
+                <Button
                     android:id                      ="@+id/btn_help"
-                    android:layout_width            ="0dp"
-                    android:layout_height           ="wrap_content"
-                    android:layout_margin           ="10dp"
-                    android:layout_marginRight      ="10dp"
-                    android:layout_weight           ="10"
-                    android:background              ="@drawable/border_general_edittext"
-                    android:src                     ="@android:drawable/ic_menu_help"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:text="\?"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="10dp"
+                    android:textSize="@dimen/sizeXLargeText"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/circle_border_red"/>
 
             </LinearLayout>
 
@@ -103,8 +103,7 @@
                 android:layout_width            ="match_parent"
                 android:layout_height           ="0dp"
                 android:layout_weight           ="14"
-                android:minHeight               ="@dimen/sizeNormalText"
-                android:weightSum               ="100">
+                android:minHeight               ="@dimen/sizeNormalText">
 
                 <EditText
                     android:id                      ="@+id/edt_codigo"
@@ -112,7 +111,7 @@
                     android:layout_width            ="0dp"
                     android:layout_height           ="40dp"
                     android:layout_marginLeft       ="10dp"
-                    android:layout_weight           ="90"
+                    android:layout_weight           ="1"
                     android:drawablePadding         ="5dp"
                     android:focusableInTouchMode    ="true"
                     android:hint                    ="@string/codigo"
@@ -124,15 +123,16 @@
                     android:textSize                ="@dimen/sizeNormalText"
                     />
 
-                <ImageButton
+                <Button
                     android:id                      ="@+id/btn_agregar"
-                    android:layout_width            ="0dp"
-                    android:layout_height           ="wrap_content"
-                    android:layout_gravity          ="right"
-                    android:layout_marginRight      ="10dp"
-                    android:layout_weight           ="10"
-                    android:background              ="@drawable/border_general_edittext"
-                    android:src                     ="@android:drawable/ic_input_add"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:text="+"
+                    android:textColor="@color/estafeta_red"
+                    android:layout_marginRight="10dp"
+                    android:textSize="@dimen/sizeXLargeText"
+                    android:layout_gravity="center_vertical|top"
+                    android:background="@android:color/transparent"/>
 
             </LinearLayout>
 
