@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +39,7 @@ public class FragmentDetalleRastreo extends TrackerFragment {
              fecha_hora_entrega,
              recibio;
     ImageView img_estatus;
+    CheckBox btn_favorito;
 
     Map<String, String> data = new HashMap<>();
 
@@ -63,14 +65,22 @@ public class FragmentDetalleRastreo extends TrackerFragment {
         fecha_hora_entrega  = (TextView) view.findViewById(R.id.fd_fecha_hora_entrega);
         recibio             = (TextView) view.findViewById(R.id.fd_recibio);
         img_estatus         = (ImageView) view.findViewById(R.id.fd_img_status);
+        btn_favorito        = (CheckBox) view.findViewById(R.id.fd_btn_favorito);
+        try {
+            Map<String, String> codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
+            Log.d(TAG, "size: "+codes_info.size());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        //String code = (String) getArguments().getSerializable("codes");
         String code = getArguments().getString("code");
         Log.d(TAG,"cod_rastreo: "+code);
 
-        try {
+
             data = Favorites.getFavoriteByWayBill(context,code);
             Log.d(TAG,"data: "+data.size());
+
+        if(data != null) {
 
             no_guia.setText(data.get("no_guia"));
             cod_rastreo.setText(data.get("codigo_rastreo"));
@@ -80,6 +90,8 @@ public class FragmentDetalleRastreo extends TrackerFragment {
             cp_destino.setText(data.get("cp_destino"));
             fecha_hora_entrega.setText(data.get("echaHoraEntrega"));
             recibio.setText(data.get("recibio"));
+            btn_favorito.setChecked(true);
+            btn_favorito.setEnabled(false);
 
             String statusStr = data.get("estatus");
             switch (statusStr) {
@@ -101,10 +113,8 @@ public class FragmentDetalleRastreo extends TrackerFragment {
                     estatus.setText("Sin información");
                     break;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
+        }
         return view;
     }
 

@@ -184,9 +184,9 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                 }else {
                     Bundle bundle = new Bundle();
                     bundle.putString("code",codigos.get(holder.position).get("wayBill"));
-                    //bundle.putSerializable("code", codigos.get(holder.position).get("wayBill"));
+                    bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
 
-                    Log.d(TAG,"codigo enviado"+codigos.get(holder.position).get("wayBill"));
+                    Log.d(TAG, "codigo enviado" + codigos.get(holder.position).get("wayBill"));
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragment = new FragmentDetalleRastreo();
                     fragment.addFragmentToStack(activity);

@@ -50,10 +50,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     private FragmentTransaction     fragmentTransaction;
     private TrackerFragment         fragment;
 
-    ImageButton                     info;
+    Button                     info;
     Button                          rastreo;
     Button                          escanear;
-    ImageButton                     agregar;
+    Button                     agregar;
     EditText                        codigo;
 
     ListView lst_rastreo;
@@ -82,10 +82,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         View view  = inflater.inflate(R.layout.fragment_rastreo, container, false);
         context = getActivity();
 
-        info        = (ImageButton)view.findViewById(R.id.btn_help);
+        info        = (Button)view.findViewById(R.id.btn_help);
         rastreo     = (Button)view.findViewById(R.id.btn_rastrear);
         escanear    = (Button) view.findViewById(R.id.btn_escanear);
-        agregar     = (ImageButton) view.findViewById(R.id.btn_agregar);
+        agregar     = (Button) view.findViewById(R.id.btn_agregar);
         lst_rastreo = (ListView)view.findViewById(R.id.liv_rastreo);
         codigo      = (EditText)view.findViewById(R.id.edt_codigo);
 
@@ -211,7 +211,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
             lst_rastreo.setAdapter(lstAdapter);
-           // lst_rastreo.setOnItemClickListener(this);
+            //lst_rastreo.setOnItemClickListener(this);
 
              if(codes_array.size() == 10) {
                   agregar.setEnabled(false);
@@ -219,12 +219,13 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                   codigo.setEnabled(false);
                   escanear.setEnabled(false);
               }
-
+            codigo.setText("");
         }
         else {
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_tamaño_codigo),2000);
 
         }
+
 
     }
 
