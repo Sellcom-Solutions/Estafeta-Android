@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
@@ -26,7 +24,7 @@ import database.model.Favorites;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentDetalleRastreo extends TrackerFragment implements View.OnClickListener{
+public class FragmentDetalleRastreo extends TrackerFragment {
 
     String TAG= "FRAG_DETALLE_RASTREO";
 
@@ -42,7 +40,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
              recibio;
     ImageView img_estatus;
     CheckBox btn_favorito;
-    Button btn_historia;
 
     Map<String, String> data = new HashMap<>();
 
@@ -69,15 +66,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         recibio             = (TextView) view.findViewById(R.id.fd_recibio);
         img_estatus         = (ImageView) view.findViewById(R.id.fd_img_status);
         btn_favorito        = (CheckBox) view.findViewById(R.id.fd_btn_favorito);
-        btn_historia        = (Button)view.findViewById(R.id.btn_historia);
-        btn_historia.setOnClickListener(this);
-
-        try {
-            Map<String, String> codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
-            Log.d(TAG, "size: "+codes_info.size());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
         String code = getArguments().getString("code");
         Log.d(TAG,"cod_rastreo: "+code);
@@ -94,7 +82,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             fecha_recol.setText(data.get("fecha_recoleccion"));
             destino.setText(data.get("destino"));
             cp_destino.setText(data.get("cp_destino"));
-            fecha_hora_entrega.setText(data.get("echaHoraEntrega"));
+            fecha_hora_entrega.setText(data.get("fechaHoraEntrega"));
             recibio.setText(data.get("recibio"));
             btn_favorito.setChecked(true);
             btn_favorito.setEnabled(false);
@@ -121,19 +109,43 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             }
 
         }
+        else {
+            Map<String, String> codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
+            Log.d(TAG, "size: "+codes_info.size());
+
+            no_guia.setText(codes_info.get("wayBill"));
+            cod_rastreo.setText(codes_info.get("shortWayBillId"));
+            origen.setText(codes_info.get("PK_originName"));
+            fecha_recol.setText(codes_info.get("PK_pickupDateTime"));
+            destino.setText(codes_info.get("DD_destinationName"));
+            cp_destino.setText(codes_info.get("DD_zipCode"));
+            fecha_hora_entrega.setText(codes_info.get("DD_deliveryDateTime"));
+            recibio.setText(codes_info.get("DD_receiverName"));
+
+
+            String statusStr = codes_info.get("statusSPA");
+            switch (statusStr) {
+                case "EN_TRANSITO":
+                    img_estatus.setImageResource(R.drawable.estatus_transito);
+                    //Log.d("Codigo RE Adapter", "" + estatusStr);
+                    estatus.setText("Pendiente de entrega");
+                    break;
+
+                case "ENTREGADO":
+                    img_estatus.setImageResource(R.drawable.estatus_entregado);
+                    //Log.d("Codigo RE Adapter", "" + estatusStr);
+                    estatus.setText("Entregado");
+                    break;
+
+                default:
+                    img_estatus.setImageResource(R.drawable.estatus_sin);
+                    //Log.d("Codigo RE Adapter", "" + estatusStr);
+                    estatus.setText("Sin información");
+                    break;
+            }
+        }
         return view;
     }
 
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()){
-            case R.id.btn_historia:
-                Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn_favorito:
-                Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
 }

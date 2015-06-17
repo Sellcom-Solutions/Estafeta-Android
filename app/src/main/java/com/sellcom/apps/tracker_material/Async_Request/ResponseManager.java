@@ -54,13 +54,13 @@ public class ResponseManager {
         Node node = null;
         node = respDoc.item(0);
         NodeList all = node.getChildNodes();
-        Log.d("Node size",":"+all.getLength());
+        //Log.d("Node size",":"+all.getLength());
         Node nodeitem;
         String nodeName;
         for (int i = 0; i < all.getLength(); i++) {
             nodeitem = all.item(i);
             nodeName = nodeitem.getNodeName();
-            Log.d("Node name", nodeName);
+            //Log.d("Node name", nodeName);
             if (nodeitem.hasChildNodes()) {
                 Node subNode = nodeitem.getFirstChild();
                // Log.d("Node child", "true");
@@ -80,12 +80,12 @@ public class ResponseManager {
                     NodeList listColonias = nodeitem.getChildNodes();
                     Node eachCP;
                     NodeList eachServNode;
-                    //Log.d("Lista cod", "size" + listColonias.getLength());
+                    Log.d("Lista cod", "size" + listColonias.getLength());
 
                     for (int f = 0; f < listColonias.getLength(); f++) {
                         eachCP = listColonias.item(f);
                         eachServNode = eachCP.getChildNodes();
-                        Log.d("eachCP", eachCP.getNodeName());
+                        //Log.d("eachCP", eachCP.getNodeName());
                         Map<String,String> map1  = new HashMap<String, String>();
 
                         for (int d = 0; d < eachServNode.getLength(); d++) {

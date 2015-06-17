@@ -170,7 +170,7 @@ public class Offices {
             Map<String, String> item = new HashMap<>();
             item = values.get(i);
 
-            Log.d(TABLE_NAME,"status"+item.get("status"));
+            //Log.d(TABLE_NAME,"status"+item.get("status"));
             if (item.get("status").equals("true")){
                 int edo = States.getStateNumberByName(context, item.get("estado_name"));
 

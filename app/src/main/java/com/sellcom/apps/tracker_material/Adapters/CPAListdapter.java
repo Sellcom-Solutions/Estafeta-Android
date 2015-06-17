@@ -35,7 +35,7 @@ public class CPAListdapter extends BaseAdapter{
         this.context        = context;
         this.colonias       = colonias;
         this.tipo           = tipo;
-        Log.d("CPAdapter", "sz"+colonias.size());
+        //Log.d("CPAdapter", "sz"+colonias.size());
 
     }
 
@@ -78,7 +78,7 @@ public class CPAListdapter extends BaseAdapter{
             }
 
             try {
-                Log.d("Adapter", "size" + colonias.size());
+                //Log.d("Adapter", "size" + colonias.size());
                 Map<String, String> col = new HashMap<>();
                 col = colonias.get(position);
                 String coloniaStr = col.get("colonia");
@@ -103,7 +103,7 @@ public class CPAListdapter extends BaseAdapter{
             }
 
             try {
-                Log.d("Adapter", "size" + colonias.size());
+                //Log.d("Adapter", "size" + colonias.size());
                 Map<String, String> col = new HashMap<>();
                 col = colonias.get(position);
                 String coloniaStr = col.get("colonia");

@@ -133,10 +133,14 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     Map<String, String> requestData = new HashMap<>();
                     requestData = new HashMap<>();
                     requestData.put("pais", "MEXICO");
-                    requestData.put("estado", estadoString);
+
+
+
+                    requestData.put("estado", convertNonAscii(estadoString).toUpperCase());
                     Log.d("Estado",estadoString);
-                    requestData.put("ciudad", ciudadString);
-                    requestData.put("localidad", coloniaString);
+
+                    requestData.put("ciudad", convertNonAscii(ciudadString).trim());
+                    requestData.put("localidad", convertNonAscii(ciudadString).trim());
 
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando),0);
                     RequestManager.sharedInstance().setListener(this);
