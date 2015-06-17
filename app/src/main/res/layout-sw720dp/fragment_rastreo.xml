@@ -78,7 +78,7 @@
                 android:layout_weight           ="90"
                 android:text                    ="@string/aviso_rastreo"
                 android:textColor               ="@color/estafeta_text"
-                android:textSize="@dimen/sizeSmallText"
+                android:textSize="@dimen/sizeMediumText"
                 android:textStyle               ="bold"/>
 
             <ImageButton
@@ -150,6 +150,12 @@
                 android:textColor               ="@color/estafeta_text"/>
 
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/estafeta_soft_gray"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
