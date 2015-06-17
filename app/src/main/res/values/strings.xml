@@ -74,8 +74,8 @@
     <string name="quotation_international">Internacional</string>
     <string name="quotation_packet">SOBRE</string>
     <string name="quotation_package">PAQUETE</string>
-    <string name="quotation_zip_origin">C.P. Origen</string>
-    <string name="quotation_zip_destination">C.P. Destino</string>
+    <string name="quotation_zip_origin">C.P. Origen*</string>
+    <string name="quotation_zip_destination">C.P. Destino*</string>
     <string name="quotation_quote">Cotizar</string>
 
     <string name="quotation_weigth">Peso(kg)*</string>

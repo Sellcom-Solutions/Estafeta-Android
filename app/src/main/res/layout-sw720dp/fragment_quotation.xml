@@ -80,12 +80,12 @@
             android:textOn              ="@string/quotation_national"
             android:textOff             ="@string/quotation_national"/>
 
-        <LinearLayout
+        <TextView
             android:orientation     ="vertical"
             android:layout_width    ="2dp"
             android:layout_height   ="match_parent"
             android:layout_weight   ="0"
-            android:background      ="@color/estafeta_light_gray"></LinearLayout>
+            android:background      ="@color/estafeta_light_gray"></TextView>
 
         <ToggleButton
             android:layout_width        ="match_parent"

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:background="@color/white"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:id="@+id/lin_capturar_datos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+        <EditText
+            android:id                  ="@+id/edt_dummy"
+            android:layout_width        ="0dp"
+            android:layout_height       ="0dp"
+            />
+
+        <TextView
+            android:layout_width        ="wrap_content"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/quotation_search_zc"
+            android:textSize            ="@dimen/sizeNormalText"
+            android:textColor           ="@color/estafeta_text"
+            android:textStyle           ="bold"
+            />
+
+        <Spinner
+            android:id                  ="@+id/spn_state"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:layout_gravity      ="left"
+            android:layout_marginTop    ="30dp"
+            android:spinnerMode         ="dialog"
+            style                       ="@style/mySpinnerItemStyle"
+            android:dividerHeight       ="0dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <EditText
+                android:id                  ="@+id/edt_city"
+                android:layout_width        ="0dp"
+                android:layout_height       ="wrap_content"
+                android:layout_weight="95"
+                android:textColor           ="@color/estafeta_text"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:hint                ="@string/city_etc"
+                android:textColorHint       ="@color/estafeta_soft_gray"
+                style                       ="@style/EditStyle"
+                android:nextFocusDown       ="@+id/edt_colony"
+
+                android:layout_marginTop    ="10dp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:textColor="@color/estafeta_red"
+                android:text="*"
+                android:textStyle="bold"/>
+
+        </LinearLayout>
+
+        <EditText
+            android:id                  ="@+id/edt_colony"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+
+            android:textColor           ="@color/estafeta_red"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:hint                ="@string/locality"
+            android:textColorHint       ="@color/estafeta_soft_gray"
+            android:layout_weight       ="1"
+            android:nextFocusDown       ="@+id/edt_zip_code"
+            style                       ="@style/EditStyle"
+            android:layout_marginTop    ="20dp"/>
+
+        <TextView
+            android:layout_width        ="wrap_content"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/mandatory_fields"
+            android:textSize=           "@dimen/sizeXSmallText"
+            android:textColor           ="@color/estafeta_red"
+            android:layout_gravity      ="left"/>
+
+        <LinearLayout
+            android:orientation         ="horizontal"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:layout_marginTop    ="40dp"
+            android:gravity             ="right"
+            >
+
+            <Button
+                android:id                  ="@+id/btn_cancel"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:text                ="@string/quotation_search_zc_cancel"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:textColor           ="@color/estafeta_red"
+                android:background          ="@android:color/transparent"
+                android:paddingLeft         ="20dp"
+                android:paddingRight        ="20dp"
+                />
+
+            <Button
+                android:id                  ="@+id/btn_search"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:text                ="@string/quotation_search_zc_accept"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:textColor           ="@color/estafeta_red"
+                android:background          ="@android:color/transparent"
+                android:paddingLeft         ="20dp"
+                android:paddingRight        ="20dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_escoger_cp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="120"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_dialog_cp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="@string/codigo_postal"
+                android:textColor="@color/estafeta_text"
+                android:textSize="@dimen/sizeNormalText"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/estado"
+                android:textColor="@color/estafeta_text"
+                android:textSize="@dimen/sizeSmallText"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tv_dialog_estado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/estafeta_text"
+                android:textSize="@dimen/sizeSmallText"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/city_etc"
+                android:textColor="@color/estafeta_text"
+                android:textSize="@dimen/sizeSmallText"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:id="@+id/tv_dialog_ciudad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/estafeta_text"
+                android:textSize="@dimen/sizeSmallText"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10"
+            android:weightSum="100"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:background="@color/estafeta_red">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="60"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/locality"
+                android:textColor="@color/white"
+                android:background="@color/estafeta_red"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/tv_cp_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="40"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/zip_code"
+                android:textColor="@color/white"
+                android:background="@color/estafeta_red"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="40">
+            <ListView
+                android:id="@+id/lv_dialog_colonia"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="left"
+                android:divider="@color/estafeta_soft_gray"
+                android:dividerHeight="-20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+
+            </ListView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation         ="horizontal"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="0dp"
+            android:layout_weight="20"
+            android:gravity             ="right"
+            >
+
+            <Button
+                android:id                  ="@+id/btn_cancel_cp"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:text                ="@string/quotation_search_zc_cancel"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:textColor           ="@color/estafeta_red"
+                android:background          ="@android:color/transparent"
+                android:paddingLeft         ="20dp"
+                android:paddingRight        ="20dp"
+                />
+
+            <Button
+                android:id                  ="@+id/btn_accept"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="wrap_content"
+                android:text                ="@string/quotation_search_zc_accept"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:textColor           ="@color/estafeta_red"
+                android:background          ="@android:color/transparent"
+                android:paddingLeft         ="20dp"
+                android:paddingRight        ="20dp"
+                />
+
+        </LinearLayout>
+
+
+
+        </LinearLayout>
+
+</LinearLayout>

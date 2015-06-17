@@ -1,11 +1,13 @@
 package com.sellcom.apps.tracker_material.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.R;
 
@@ -19,7 +21,8 @@ import java.util.Map;
 public class SpinnerAdapter extends BaseAdapter {
 
     public enum SPINNER_TYPE {
-        STATES ("states");
+        STATES ("states"),
+        COUNTRIES ("countries");
 
         private final String name;
 
@@ -65,7 +68,21 @@ public class SpinnerAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return mItems.get(position).get("ZNOMBRE");
+
+        String item = "";
+
+        switch (type){
+            case STATES:
+                item =  mItems.get(position).get("ZNOMBRE");
+                break;
+            case COUNTRIES:
+                item =  mItems.get(position).get("NOMBREPAIS_ESP");
+                break;
+
+            default:
+                break;
+        }
+        return item;
     }
 
     @Override
@@ -84,6 +101,9 @@ public class SpinnerAdapter extends BaseAdapter {
             case STATES:
                 main_text.setText(mItem.get("ZNOMBRE"));
                 break;
+            case COUNTRIES:
+                main_text.setText(mItem.get("NOMBREPAIS_ESP"));
+                break;
 
             default:
                 break;
@@ -99,7 +119,7 @@ public class SpinnerAdapter extends BaseAdapter {
         if (view == null || !view.getTag().toString().equals("DIALOG")) {
             LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layoutInflater.inflate(R.layout.item_spinner, null);
-            view.setTag("DIALOG");
+            view.setTag("DIALOG2");
         }
 
 
@@ -109,6 +129,10 @@ public class SpinnerAdapter extends BaseAdapter {
             case STATES:
                 main_text.setText(mItem.get("ZNOMBRE"));
                 break;
+            case COUNTRIES:
+                main_text.setText(mItem.get("NOMBREPAIS_ESP"));
+                break;
+
             default:
                 break;
         }

@@ -170,7 +170,7 @@ public class Offices {
             Map<String, String> item = new HashMap<>();
             item = values.get(i);
 
-            //Log.d(TABLE_NAME,"status"+item.get("status"));
+            Log.d(TABLE_NAME,"status"+item.get("status"));
             if (item.get("status").equals("true")){
                 int edo = States.getStateNumberByName(context, item.get("estado_name"));
 
@@ -208,7 +208,7 @@ public class Offices {
                     if (!auxVersion.equals(item.get("ultimaAct"))) {
                         try {
                             aux = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, NO_OFICINA + "=?", new String[]{item.get("idOficina")});
-                            // Log.d(TABLE_NAME, "actualizar aux: " + aux);
+                             Log.d(TABLE_NAME, "actualizar aux: " + aux);
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.d(TABLE_NAME,"No actualizado");
@@ -221,7 +221,7 @@ public class Offices {
                 }else {
                     try {
                         aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null,cv);
-                       // Log.d(TABLE_NAME, "insertar aux: " + aux);
+                        Log.d(TABLE_NAME, "insertar aux: " + aux);
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.d(TABLE_NAME,"No insertado");

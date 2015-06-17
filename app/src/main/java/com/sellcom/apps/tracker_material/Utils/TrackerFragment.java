@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import database.model.Countries;
 import database.model.States;
 
 public class TrackerFragment extends Fragment implements UIResponseListenerInterface {
@@ -25,7 +26,8 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
     public static int      section_index   = 0;
     public String   tag             = "";
 
-    public SpinnerAdapter spinnerAdapter;
+    public SpinnerAdapter   spinnerAdapter,
+                            spinnerAdapterCountries;
 
     public enum FRAGMENT_TAG {
         FRAG_RASTREO("rastreo"),
@@ -113,6 +115,34 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         //set the spinnerAdapter with the values states
         spinnerAdapter = new SpinnerAdapter(getActivity(), states, SpinnerAdapter.SPINNER_TYPE.STATES);
         spinner.setAdapter(spinnerAdapter);
+
+    }
+
+    //created by hugo.figueroa at 16/06/2015
+    public void setCountriesToSpinner(Spinner spinner, Context context) {
+        //get the states from database
+
+        ArrayList<Map<String,String>> countries = new ArrayList<Map<String,String>>();
+        ArrayList<Map<String,String>> auxCountries = Countries.getCountriesNames(context);
+
+        Map<String,String> mapa  = new HashMap<String,String>();
+        mapa.put("NOMBREPAIS_ESP","País Destino*");
+        countries.add(mapa);
+
+
+        Map<String,String> auxMapa;
+        for(int i = 0; i<auxCountries.size(); i++){
+
+            auxMapa  = new HashMap<String,String>();
+            auxMapa.put("NOMBREPAIS_ESP",auxCountries.get(i).get("nombrepais_esp"));
+            countries.add(auxMapa);
+
+        }
+
+
+        //set the spinnerAdapter with the values states
+        spinnerAdapterCountries = new SpinnerAdapter(getActivity(), countries, SpinnerAdapter.SPINNER_TYPE.COUNTRIES);
+        spinner.setAdapter(spinnerAdapterCountries);
 
     }
 

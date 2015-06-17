@@ -41,7 +41,9 @@
 
 
     <style name="EditStyle" parent="Widget.AppCompat.EditText">
-        <item name="colorControlNormal">@color/estafeta_red</item>
+        <item name="colorControlNormal">@color/estafeta_soft_gray</item>
+        <item name="colorControlActivated">@color/estafeta_soft_gray</item>
+        <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
     </style>
 
 

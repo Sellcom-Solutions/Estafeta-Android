@@ -45,9 +45,9 @@ public class Countries {
 
     }
 
-    public static ArrayList<Map<String,String>> getAllInMaps(Context context){
+    public static ArrayList<Map<String,String>> getCountriesNames(Context context){
 
-        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ID);
         if (cursor != null && cursor.getCount() > 0) {
             ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
 

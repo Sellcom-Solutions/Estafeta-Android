@@ -65,7 +65,7 @@ public class DataBaseManager {
         }
 
         if(filename.equals("insert_paises.txt")){
-            if(Countries.getAllInMaps(mContext)!= null){
+            if(Countries.getCountriesNames(mContext)!= null){
                 Log.d("DataBaseManager"," Ya hay paises cargados ");
                 return;
             }
