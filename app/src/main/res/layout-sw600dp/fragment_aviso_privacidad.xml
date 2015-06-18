@@ -6,23 +6,21 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:weightSum="100"
-    android:padding="16dp"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad">
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="0dp"
         android:layout_weight="7"
         android:scaleType="fitCenter"
         android:src="@drawable/logo_privacidad"/>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="90">
+        android:layout_weight="87">
 
         <ScrollView
         android:layout_width="match_parent"
@@ -36,29 +34,31 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
+            android:textSize="@dimen/sizeNormalText"
             android:textColor="@color/estafeta_text"
-            android:text="@string/aviso_privacidad"
-            android:textSize="20dp" />
+            android:text="@string/aviso_privacidad"/>
 
         </ScrollView>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
+        android:layout_height="0dp"
+        android:layout_weight="5"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/footerSizeMedium"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/footerSize"
             android:layout_marginLeft="10dp"
             android:text="@string/footer"
             android:textColor="@color/estafeta_soft_gray"
             android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="bottom|center_horizontal"/>
+            android:gravity="bottom"
+            android:layout_gravity="bottom|center_horizontal"
+            />
+
 
     </LinearLayout>
 
