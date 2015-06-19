@@ -8,7 +8,8 @@
     <dimen name="sizeNormalText">20sp</dimen>
     <dimen name="sizeMediumText">25sp</dimen>
     <dimen name="sizeLargeText">35sp</dimen>
-    <dimen name="navigation_drawer_width">240dp</dimen>
+    <dimen name="sizeXLargeText">40sp</dimen>
+    <dimen name="navigation_drawer_width">280dp</dimen>
     <dimen name="login_progressBar_width">300dp</dimen>
     <dimen name="login_progressBar_height">40dp</dimen>
     <dimen name="dialog_width">500dp</dimen>
@@ -27,4 +28,6 @@
     <dimen name="size_button_dialog">18sp</dimen>
     <dimen name="dimen_photo">300dp</dimen>
     <dimen name="footerSizeMedium">20dp</dimen>
+    <dimen name="footerSizeNormal">20dp</dimen>
+    <dimen name="footerSize">15dp</dimen>
 </resources>

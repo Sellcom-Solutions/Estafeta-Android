@@ -70,7 +70,7 @@
                 android:id                          ="@+id/info_linelayout"
                 android:layout_width                ="match_parent"
                 android:layout_height               ="0dp"
-                android:layout_weight               ="29"
+                android:layout_weight               ="29 "
                 android:orientation                 ="horizontal"
                 android:minHeight                   ="@dimen/sizeNormalText">
 
@@ -79,7 +79,7 @@
                     android:layout_height           ="wrap_content"
                     android:layout_marginLeft       ="10dp"
                     android:layout_marginStart      ="10dp"
-                    android:layout_marginTop        ="10dp"
+                    android:layout_marginTop        ="7dp"
                     android:layout_weight           ="1"
                     android:layout_gravity="center_vertical"
                     android:text                    ="@string/aviso_rastreo"
@@ -93,7 +93,7 @@
                     android:layout_height="32dp"
                     android:text="\?"
                     android:textColor="@color/white"
-                    android:layout_marginRight="9dp"
+                    android:layout_marginRight="11dp"
                     android:layout_marginTop ="10dp"
                     android:textSize="@dimen/sizeLargeText"
                     android:textAlignment="center"
