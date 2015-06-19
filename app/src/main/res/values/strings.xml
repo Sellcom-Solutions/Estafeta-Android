@@ -127,6 +127,7 @@
     <string name="error_estado">Error, debes seleccionar un estado.</string>
     <string name="cargando_oficinas">Cargando Oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
+    <string name="error_servicio1">Ocurrió un error con el servicio, intente de nuevo.</string>
     <string name="cargando">Cargando ...</string>
     <string name="actualizando">Actualizando ...</string>
     <string name="error_tamaño_codigo">Error,un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>

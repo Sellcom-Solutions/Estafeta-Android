@@ -171,6 +171,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             }
 
         }else{
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1),3000);
             Log.v("FragmentCodigoPostal", "El servidor devolvio null");
         }
 

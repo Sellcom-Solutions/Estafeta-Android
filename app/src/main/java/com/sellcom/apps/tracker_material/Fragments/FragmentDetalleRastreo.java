@@ -71,6 +71,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         img_estatus         = (ImageView) view.findViewById(R.id.fd_img_status);
         btn_favorito        = (CheckBox) view.findViewById(R.id.fd_btn_favorito);
         btn_historia        = (Button)view.findViewById(R.id.btn_historia);
+
+        btn_favorito.setOnClickListener(this);
         btn_historia.setOnClickListener(this);
 
         String code = getArguments().getString("code");
@@ -81,7 +83,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             //Log.d(TAG,"data: "+data.size());
 
         if(data != null) {
-
             no_guia.setText(data.get("no_guia"));
             cod_rastreo.setText(data.get("codigo_rastreo"));
             origen.setText(data.get("origen"));
@@ -156,11 +157,17 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
     @Override
     public void onClick(View v) {
         switch(v.getId()){
+
             case R.id.btn_historia:
                 Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.btn_favorito:
-                Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
+
+            case R.id.fd_btn_favorito:
+                Log.d(TAG, "btn favorito: ");
+                if(btn_favorito.isChecked())
+                    Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(context, "Not checked", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

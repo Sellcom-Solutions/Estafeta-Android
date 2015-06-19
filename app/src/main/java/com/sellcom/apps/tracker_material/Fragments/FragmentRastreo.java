@@ -298,55 +298,69 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         @Override
         public void decodeResponse(String stringResponse) {
             try {
-                if (stringResponse == null || stringResponse.equals("0")) {
-                    Log.v(TAG, "El servidor devolvió null o 0");
-                    String cod_aux = codes_array.get(j).get("codigo");
-                    Map<String, String> auxResponse = new HashMap<>();
-                    if (cod_aux.length() == 10) {
-                        auxResponse.put("shortWayBillId", cod_aux);
-                        auxResponse.put("wayBill", "Sin información");
-                        auxResponse.put("statusSPA", "Sin información");
-                    } else {
-                        auxResponse.put("shortWayBillId", "Sin información");
-                        auxResponse.put("wayBill", cod_aux);
-                        auxResponse.put("statusSPA", "Sin información");
+                if(stringResponse == null){
+                    Log.d(TAG,"respuesta null");
+                    j++;
+                    Log.d(TAG, "contador:" + j);
+                    if (j == codes_array.size()) {
+                        DialogManager.sharedInstance().dismissDialog();
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
                     }
-                    aux.add(auxResponse);
-                    Log.v(TAG + "aux", "" + aux.size());
-                } else {
-                    Log.v(TAG, stringResponse);
-                    Map<String, String> auxResponse = new HashMap<>();
-                    auxResponse = RequestManager.sharedInstance().getResponseArray().get(0);
-                    if (auxResponse != null) {
-                       // Log.v(TAG + "auxResponse", "" + auxResponse.size());
-                        if (auxResponse.size() > 0)
-                            aux.add(auxResponse);
-                     //   Log.v(TAG + "aux", "" + aux.size());
+                }
+                else {
+                    if (stringResponse.equals("0")) {
+                        Log.v(TAG, "El servidor devolvió null o 0");
+                        String cod_aux = codes_array.get(j).get("codigo");
+                        Map<String, String> auxResponse = new HashMap<>();
+                        if (cod_aux.length() == 10) {
+                            auxResponse.put("shortWayBillId", cod_aux);
+                            auxResponse.put("wayBill", "Sin información");
+                            auxResponse.put("statusSPA", "Sin información");
+                        } else {
+                            auxResponse.put("shortWayBillId", "Sin información");
+                            auxResponse.put("wayBill", cod_aux);
+                            auxResponse.put("statusSPA", "Sin información");
+                        }
+                        aux.add(auxResponse);
+                        Log.v(TAG + "aux", "" + aux.size());
+
+                    } else {
+                        Log.v(TAG, stringResponse);
+                        Map<String, String> auxResponse = new HashMap<>();
+                        auxResponse = RequestManager.sharedInstance().getResponseArray().get(0);
+                        if (auxResponse != null) {
+                            // Log.v(TAG + "auxResponse", "" + auxResponse.size());
+                            if (auxResponse.size() > 0)
+                                aux.add(auxResponse);
+                            //   Log.v(TAG + "aux", "" + aux.size());
+                        }
+
+                    }
+                    j++;
+                    Log.d(TAG, "contador:" + j);
+                    if (j == codes_array.size()) {
+                        Log.d(TAG, "flag " + flag + " j " + j);
+                        ArrayList<Map<String, String>> codes_ver = new ArrayList<>();
+                        codes_ver = verifyFavorites(aux);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("codes_info", codes_ver);
+
+                        fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragment = new FragmentRastreoEfectuado();
+                        fragment.addFragmentToStack(getActivity());
+                        fragment.setArguments(bundle);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.replace(R.id.container, fragment, TAG);
+                        fragmentTransaction.commit();
                     }
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            j++;
-            Log.d(TAG, "contador:" + j);
-            if (j == codes_array.size()) {
-                Log.d(TAG, "flag " + flag + " j " + j);
-                ArrayList<Map<String, String>> codes_ver = new ArrayList<>();
-                codes_ver = verifyFavorites(aux);
 
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("codes_info", codes_ver);
-
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragment = new FragmentRastreoEfectuado();
-                fragment.addFragmentToStack(getActivity());
-                fragment.setArguments(bundle);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.container, fragment, TAG);
-                fragmentTransaction.commit();
-            }
 
         }
         public ArrayList<Map<String, String>> verifyFavorites(ArrayList<Map<String, String>> values){
