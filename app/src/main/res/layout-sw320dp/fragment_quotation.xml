@@ -6,34 +6,30 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:weightSum="100">
-
     <EditText
         android:id                  ="@+id/edt_dummy"
         android:layout_width        ="0dp"
         android:layout_height       ="0dp"
         />
 
-    <FrameLayout
-        android:layout_width    ="match_parent"
-        android:layout_height   ="0dp"
-        android:layout_weight="25"
-        android:gravity         ="center"
-        android:weightSum="100">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="25">
+
+        <FrameLayout
+            android:layout_width    ="match_parent"
+            android:layout_height   ="match_parent"
+            android:gravity         ="center">
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:src="@drawable/head_cotizador"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:layout_gravity="top"/>
-        </LinearLayout>
-
-
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -52,22 +48,20 @@
                     android:layout_height       ="match_parent"
                     android:text                ="@string/quotation_title"
                     android:textSize            ="@dimen/sizeLargeText"
-                    android:layout_gravity="right"
-                    android:gravity="center"
+                    android:layout_gravity      ="right"
+                    android:paddingLeft         ="60dp"
+                    android:gravity             ="center"
                     android:textColor           ="@color/estafeta_text"/>
             </LinearLayout>
-
         </FrameLayout>
-
-
-
-
-    </FrameLayout>
+        </FrameLayout>
+    </LinearLayout><!--20-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="60"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <LinearLayout
@@ -182,7 +176,6 @@
                     android:layout_marginRight  ="10dp"/>
 
                 <ImageButton
-
                     android:layout_width        ="35dp"
                     android:layout_height       ="40dp"
                     android:id                  ="@+id/btn_zc_ori_phonebook"
@@ -282,77 +275,77 @@
             android:visibility          ="gone">
 
 
-            <LinearLayout
-                android:orientation         ="horizontal"
+        <LinearLayout
+            android:orientation         ="horizontal"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:layout_gravity      ="left"
+            android:layout_marginLeft   ="20dp"
+            android:layout_marginRight  ="20dp">
+
+            <EditText
+                android:id                  ="@+id/edt_weigth"
                 android:layout_width        ="match_parent"
                 android:layout_height       ="wrap_content"
-                android:layout_gravity      ="left"
-                android:layout_marginLeft   ="20dp"
-                android:layout_marginRight  ="20dp">
+                android:singleLine          ="true"
+                android:textColor           ="@color/estafeta_red"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:hint                ="@string/quotation_weigth"
+                android:textColorHint       ="@color/estafeta_soft_gray"
+                android:layout_weight       ="1"
+                android:nextFocusDown       ="@+id/edt_high"
 
-                <EditText
-                    android:id                  ="@+id/edt_weigth"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="wrap_content"
-                    android:singleLine          ="true"
-                    android:textColor           ="@color/estafeta_red"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:hint                ="@string/quotation_weigth"
-                    android:textColorHint       ="@color/estafeta_soft_gray"
-                    android:layout_weight       ="1"
-                    android:nextFocusDown       ="@+id/edt_high"
+                android:layout_marginRight  ="10dp"/>
 
-                    android:layout_marginRight  ="10dp"/>
-
-                <EditText
-                    android:id                  ="@+id/edt_high"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="wrap_content"
-                    android:singleLine          ="true"
-                    android:textColor           ="@color/estafeta_red"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:hint                ="@string/quotation_high"
-                    android:textColorHint       ="@color/estafeta_soft_gray"
-                    android:layout_weight       ="1"
-
-                    android:nextFocusDown       ="@+id/edt_long"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation         ="horizontal"
+            <EditText
+                android:id                  ="@+id/edt_high"
                 android:layout_width        ="match_parent"
                 android:layout_height       ="wrap_content"
-                android:layout_gravity      ="left"
-                android:layout_marginLeft   ="20dp"
-                android:layout_marginRight  ="20dp">
+                android:singleLine          ="true"
+                android:textColor           ="@color/estafeta_red"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:hint                ="@string/quotation_high"
+                android:textColorHint       ="@color/estafeta_soft_gray"
+                android:layout_weight       ="1"
 
-                <EditText
-                    android:id                  ="@+id/edt_long"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="wrap_content"
-                    android:singleLine          ="true"
-                    android:textColor           ="@color/estafeta_red"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:hint                ="@string/quotation_long"
-                    android:textColorHint       ="@color/estafeta_soft_gray"
-                    android:layout_weight       ="1"
-                    android:nextFocusDown       ="@+id/edt_width"
+                android:nextFocusDown       ="@+id/edt_long"/>
 
-                    android:layout_marginRight  ="10dp"/>
+        </LinearLayout>
 
-                <EditText
-                    android:id                  ="@+id/edt_width"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="wrap_content"
-                    android:singleLine          ="true"
-                    android:textColor           ="@color/estafeta_red"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:hint                ="@string/quotation_width"
-                    android:textColorHint       ="@color/estafeta_soft_gray"
-                    android:layout_weight       ="1" />
+        <LinearLayout
+            android:orientation         ="horizontal"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:layout_gravity      ="left"
+            android:layout_marginLeft   ="20dp"
+            android:layout_marginRight  ="20dp">
 
-            </LinearLayout>
+            <EditText
+                android:id                  ="@+id/edt_long"
+                android:layout_width        ="match_parent"
+                android:layout_height       ="wrap_content"
+                android:singleLine          ="true"
+                android:textColor           ="@color/estafeta_red"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:hint                ="@string/quotation_long"
+                android:textColorHint       ="@color/estafeta_soft_gray"
+                android:layout_weight       ="1"
+                android:nextFocusDown       ="@+id/edt_width"
+
+                android:layout_marginRight  ="10dp"/>
+
+            <EditText
+                android:id                  ="@+id/edt_width"
+                android:layout_width        ="match_parent"
+                android:layout_height       ="wrap_content"
+                android:singleLine          ="true"
+                android:textColor           ="@color/estafeta_red"
+                android:textSize            ="@dimen/sizeMediumText"
+                android:hint                ="@string/quotation_width"
+                android:textColorHint       ="@color/estafeta_soft_gray"
+                android:layout_weight       ="1" />
+
+        </LinearLayout>
 
 
 
@@ -401,6 +394,7 @@
             android:gravity="center|bottom"
             android:textColor="@color/estafeta_soft_gray"
             android:layout_marginTop="5dp"
+            android:textStyle="bold"
             android:layout_gravity="bottom|center_horizontal"/>
 
     </LinearLayout>

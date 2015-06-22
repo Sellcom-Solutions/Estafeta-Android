@@ -3,33 +3,31 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="25">
 
     <FrameLayout
         android:layout_width    ="match_parent"
-        android:layout_height   ="0dp"
-        android:layout_weight="20"
-        android:gravity         ="center"
-        android:weightSum="100">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
+        android:layout_height   ="match_parent"
+        android:gravity         ="center">
 
         <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
                 android:src="@drawable/head_cpostal"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:layout_gravity="top"/>
-        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -50,13 +48,14 @@
 
             </LinearLayout>
         </FrameLayout>
-    </FrameLayout>
+        </FrameLayout>
+    </LinearLayout><!--20-->
 
         <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="0dp"
-        android:layout_weight="75">
+        android:layout_weight="72">
 
 
             <LinearLayout
@@ -208,7 +207,7 @@
      <LinearLayout
         android:layout_width="match_parent"
         android:layout_height   ="0dp"
-        android:layout_weight="5"
+        android:layout_weight="3"
         android:gravity="bottom"
         android:orientation="vertical">
 
