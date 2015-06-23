@@ -82,8 +82,6 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
             settings.setZoomControlsEnabled(false);
             settings.setScrollGesturesEnabled(true);
             settings.setMyLocationButtonEnabled(false);
-
-
             Log.d("CustomMapFragment", " list.size " + list.size());
             LatLngBounds.Builder builder = new LatLngBounds.Builder();
 

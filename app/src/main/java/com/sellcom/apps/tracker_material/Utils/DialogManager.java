@@ -127,5 +127,14 @@ public class DialogManager {
 
     }
 
+    public boolean isShowingDialog(){
+        if(dialogType == TYPE_DIALOG.SPLASH){
+            return dialogSplahs.isShowing();
+        }else if(dialogType == TYPE_DIALOG.LOADING || dialogType == TYPE_DIALOG.ERROR || dialogType == TYPE_DIALOG.SUCCESS){
+            return dialogLoadig.isShowing();
+        }
+        return false;
+    }
+
 
 }

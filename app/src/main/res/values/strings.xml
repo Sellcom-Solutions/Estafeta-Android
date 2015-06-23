@@ -68,6 +68,8 @@
     <string name="title_coments">COMENTARIOS</string>
 
     <!-- Oficinas -->
+    <string name="view_ar">Ver AR</string>
+    <string name="loading_AR_elements">Cargando Componentes</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>
     <string name="ubicar_oficinas">Ubicar Oficinas</string>

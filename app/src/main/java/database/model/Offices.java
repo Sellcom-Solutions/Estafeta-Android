@@ -275,7 +275,7 @@ public class Offices {
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
                 Map<String,String> map  = new HashMap<String, String>();
-
+                map.put(ID_OFFICE,cursor.getString(cursor.getColumnIndexOrThrow(ID_OFFICE)));
                 map.put(ENT,cursor.getString(cursor.getColumnIndexOrThrow(ENT)));
                 map.put(OPT,cursor.getString(cursor.getColumnIndexOrThrow(OPT)));
                 map.put(ESTADO,cursor.getString(cursor.getColumnIndexOrThrow(ESTADO)));

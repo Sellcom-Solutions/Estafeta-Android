@@ -42,7 +42,8 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
     Context context;
     private Button      btn_near,
-                        btn_search;
+                        btn_search,
+                        btn_ar;
 
     Bundle bundle = new Bundle();
     private Spinner     spn_state;
@@ -79,6 +80,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
             btn_near = (Button) view.findViewById(R.id.btn_near);
             btn_search = (Button) view.findViewById(R.id.btn_search);
+            btn_ar = (Button) view.findViewById(R.id.btn_ar);
 
             spn_state = (Spinner) view.findViewById(R.id.spn_state);
 
@@ -88,6 +90,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
             btn_near.setOnClickListener(this);
             btn_search.setOnClickListener(this);
+            btn_ar.setOnClickListener(this);
 
             setStatesToSpinner(spn_state, context);
 
@@ -136,7 +139,24 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
 
                 break;
+
+            case R.id.btn_ar:
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.loading_AR_elements),0);
+                openFragmentAR();
+                break;
         }
+    }
+
+    public void openFragmentAR(){
+        //System.gc();
+        FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragment   = new FragmentAR();
+        fragment.addFragmentToStack(getActivity());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
+        fragmentTransaction.commit();
     }
 
     private void nearOffice(){

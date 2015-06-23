@@ -1,5 +1,6 @@
 package com.sellcom.apps.tracker_material.Activities;
 
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.Async_Request.DecisionDialogWithListener;
@@ -18,6 +20,7 @@ import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 
+import com.sellcom.apps.tracker_material.Fragments.FragmentAR;
 import com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad;
 import com.sellcom.apps.tracker_material.Fragments.FragmentCodigoPostal;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotation;
@@ -48,6 +51,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private TrackerFragment             Fragment_Default,fragment;
             String                      CURRENT_FRAGMENT_TAG;
     public  int                         depthCounter   = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void onBackPressed() {
+
+        Fragment currentFragment=getSupportFragmentManager().findFragmentById(R.id.container);
+
+        if(currentFragment instanceof FragmentAR){
+            ((FragmentAR)currentFragment).finalizar();
+            super.onBackPressed();
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            getSupportActionBar().show();
+            //System.gc();
+            return;
+        }
 
         Log.d(ACT_TAG,"Deep depthCounter Back 1:"+depthCounter);
 
@@ -251,7 +266,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     @Override
     public void responseFromDecisionDialog(String confirmMessage, String option) {
-        if (option.equalsIgnoreCase("OK"))
+        if (option.equalsIgnoreCase("OK")){
             moveTaskToBack(true);
+            this.finish();
+        }
+
+
     }
+
 }
