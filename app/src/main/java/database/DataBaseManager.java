@@ -78,7 +78,6 @@ public class DataBaseManager {
 
         try {
 
-
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     mContext.getAssets().open("dbtxt/" + filename)));
             String strLine;

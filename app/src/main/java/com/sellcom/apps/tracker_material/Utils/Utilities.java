@@ -10,12 +10,16 @@ import android.util.Base64;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.sellcom.apps.tracker_material.R;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
+import database.model.Offices;
 
 public class Utilities {
 
@@ -63,4 +67,38 @@ public class Utilities {
         SharedPreferences sharedPref        = activity.getPreferences(Context.MODE_PRIVATE);
         return sharedPref.getString(key,"CLEAR");
     }
+
+    public static int convertOfficesTypeToInt(String type){
+        if(type.equals("SU"))
+            return 0;
+        else if(type.equals("CO"))
+            return 1;
+        else if (type.equals("CA"))
+            return 2;
+        return -1;
+    }
+
+    public static String convertOfficesIntToType(int type){
+        switch (type){
+            case 0:
+                return "SU";
+            case 1:
+                return "CO";
+            case 2:
+                return "CA";
+        }
+        return "-1";
+    }
+
+    public static Bitmap getOfficesIcon(String type,Context context){
+        Bitmap bMap=null;
+        if (type.equals("SU"))
+            return BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_rojo);
+        else if (type.equals("CO"))
+            return BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_azul);
+        else if(type.equals("CA"))
+                return BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_gris);
+        return bMap;
+    }
+
 }

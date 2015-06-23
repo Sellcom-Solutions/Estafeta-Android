@@ -136,6 +136,7 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         protected void onPostExecute(String result) {
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
 

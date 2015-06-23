@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -54,6 +55,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
                                             longitud;
     private LatLng                          currentPosition;
     private int                             distanceM = 0;
+    public static final float distancia_max_deteccion = 7500; //7.5 km
     private CustomMapFragment               mapFragment;
 
     private CheckBox                        rg1,rg2,rg3;
@@ -213,10 +215,6 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
                 }
             }).start();
 
-
-
-
-
         }
 
 
@@ -231,6 +229,20 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
             lin_container.setVisibility(View.VISIBLE);
             txv_footer.startAnimation(filterUp);
             txv_footer.setVisibility(View.VISIBLE);
+            lin_container.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    //mapFragment.getMap().getUiSettings().setAllGesturesEnabled(false);
+                    Log.d("fdsa", "rfeds");
+                    return false;
+                }
+            });
+            lin_container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("fdsa", "rfeds");
+                }
+            });
 
         }
 
@@ -238,16 +250,17 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
     }
 
     public static float distFrom(float lat1, float lng1, float lat2, float lng2) {
-        double earthRadius = 6371;
-        //kilometers
-        double dLat = Math.toRadians(lat2-lat1);
-        double dLng = Math.toRadians(lng2-lng1);
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.sin(dLng/2) * Math.sin(dLng/2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        float dist = (float) (earthRadius * c);
-        return dist;
+        Location loc,loc2;
+        loc=new Location("");
+        loc2=new Location("");
+        loc.setLatitude(lat1);
+        loc.setLongitude(lng1);
+        loc.setAltitude(0);
+        loc2.setLatitude(lat2);
+        loc2.setLongitude(lng2);
+        loc2.setAltitude(0);
+        return loc.distanceTo(loc2);
     }
-
 
     @Override
     public void onClick(View v) {
@@ -339,7 +352,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
                         distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
                         Log.d("Distancia", distanceM + "");
 
-                        if (distanceM <= 7.5) {
+                        if (distanceM <= distancia_max_deteccion) {
                             listOficinasFiltradas.add(listOficinas.get(i));
                             position = new LatLng(latitud, longitud);
                             listPositions.add(position);
@@ -369,7 +382,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
                     //distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
                     //Log.d("Distancia", distanceM + "");
 
-                   // if (distanceM <= 7.5) {
+                   // if (distanceM <= distancia_max_deteccion) {
                         listOficinasFiltradas.add(listOficinas.get(i));
                         position = new LatLng(latitud, longitud);
                         listPositions.add(position);
