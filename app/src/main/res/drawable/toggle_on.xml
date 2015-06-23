@@ -3,7 +3,7 @@
     <item android:top="-6dp" android:left="-6dp" android:right="-6dp">
         <shape>
             <solid android:color="@color/white"/>
-            <stroke android:color="@color/estafeta_blue" android:width="3dp"/>
+            <stroke android:color="@color/estafeta_red" android:width="3dp"/>
         </shape>
     </item>
 </layer-list>

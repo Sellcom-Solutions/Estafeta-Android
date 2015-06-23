@@ -314,18 +314,18 @@
                 android:id="@+id/button_share"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/estafeta_blue"
-                fab:fab_colorPressed="@color/estafeta_blue"
-                fab:fab_icon="@android:drawable/ic_menu_share"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white"
+                fab:fab_icon="@drawable/ic_share"
                 fab:fab_title="Share"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/button_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/estafeta_blue"
-                fab:fab_colorPressed="@color/estafeta_blue"
-                fab:fab_icon="@android:drawable/ic_menu_call"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white"
+                fab:fab_icon="@drawable/ic_call"
                 fab:fab_title="Call"/>
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
