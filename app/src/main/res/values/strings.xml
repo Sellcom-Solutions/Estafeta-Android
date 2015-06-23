@@ -62,6 +62,11 @@
     <string name="llamar">Llamar</string>
     <string name="compartir">Compartir</string>
 
+    <!-- History -->
+    <string name="title_date_time">FECHA - HORA</string>
+    <string name="title_place_event">LUGAR - MOVIMIENTO</string>
+    <string name="title_coments">COMENTARIOS</string>
+
     <!-- Oficinas -->
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>
@@ -189,8 +194,5 @@
     <string name="cerrar_oficinas">CERRAR</string>
     <string name="ext">Ext.</string>
     <string name="horario">Horario</string>
-
-
-
 
 </resources>

@@ -346,7 +346,7 @@ public class ResponseManager {
                                         for (int l = 0; l < historyData.getLength(); l++) {
                                             Node dataNode = historyData.item(l);
                                             nameElement = dataNode.getNodeName();
-                                           // Log.d("nameElement History",nameElement);
+                                            Log.d("nameElement History",nameElement);
                                             if(!nameElement.startsWith("#"))
                                                 if (nameElement != null) {
                                                     Node subNodeH=dataNode.getFirstChild();
@@ -354,6 +354,7 @@ public class ResponseManager {
                                                         continue;
                                                     }
                                                     value=subNodeH.getNodeValue();
+                                                    Log.d("Value",value);
                                                     if (nameElement.equals("a:eventDateTime")) {
                                                         map.put("H_eventDateTime",value);
                                                         //history.setEventDateTime(value);

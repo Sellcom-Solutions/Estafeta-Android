@@ -150,10 +150,6 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                         //Log.d(TAG,"Position"+holder.position);
                     }
                     else {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
-                        holder.btn_favoritos.setEnabled(false);
-                        //Log.d(TAG,"Position"+holder.position);
-
                         try {
                             long idHistory = History.insertMap(context, codigos.get(holder.position));
                             Log.d(TAG,"Despues de insertar en History");
@@ -167,6 +163,9 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
                             ArrayList<Map<String, String>> auxFav= Favorites.getAll(context);
                             Log.d(TAG,"Recuperar tamaño fav"+auxFav.size());
+
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
+                            holder.btn_favoritos.setEnabled(false);
 
                         } catch (Exception e) {
                             e.printStackTrace();

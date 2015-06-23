@@ -1,10 +1,12 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
 
+import android.content.Intent;
+import android.net.Uri;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,23 +17,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import database.model.Favorites;
+import database.model.History;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Created by rebecalopezmartinez .
  */
+
 public class FragmentDetalleRastreo extends TrackerFragment implements View.OnClickListener{
 
     String TAG= "FRAG_DETALLE_RASTREO";
 
     Context context;
+    TrackerFragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
     TextView no_guia,
              cod_rastreo,
              origen,
@@ -46,6 +55,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
     Button btn_historia;
 
     Map<String, String> data = new HashMap<>();
+    Map<String, String> codes_info = new HashMap<>();
 
     public FragmentDetalleRastreo() {
         // Required empty public constructor
@@ -71,18 +81,46 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         img_estatus         = (ImageView) view.findViewById(R.id.fd_img_status);
         btn_favorito        = (CheckBox) view.findViewById(R.id.fd_btn_favorito);
         btn_historia        = (Button)view.findViewById(R.id.btn_historia);
+        final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
+        final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
+
+       /* btn_call.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG,"Action Call");
+                Toast.makeText(context,"Action call clicked",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Action Share");
+                Toast.makeText(context,"Action share clicked",Toast.LENGTH_SHORT).show();
+            }
+        });*/
 
         btn_favorito.setOnClickListener(this);
         btn_historia.setOnClickListener(this);
+        btn_call.setOnClickListener(this);
+        btn_share.setOnClickListener(this);
 
         String code = getArguments().getString("code");
         Log.d(TAG,"cod_rastreo: "+code);
+        codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
+        Log.d(TAG, "size: "+codes_info.size());
 
-
-            data = Favorites.getFavoriteByWayBill(context,code);
+        data = Favorites.getFavoriteByWayBill(context,code);
             //Log.d(TAG,"data: "+data.size());
 
         if(data != null) {
+            long idHistory = History.insertMap(context, codes_info);
+            Log.d(TAG,"Despues de insertar en History");
+            codes_info.put("history_id", String.valueOf(idHistory));
+
+            Favorites.update(context,codes_info);
+
             no_guia.setText(data.get("no_guia"));
             cod_rastreo.setText(data.get("codigo_rastreo"));
             origen.setText(data.get("origen"));
@@ -117,9 +155,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
         }
         else {
-            Map<String, String> codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
-            Log.d(TAG, "size: "+codes_info.size());
-
             no_guia.setText(codes_info.get("wayBill"));
             cod_rastreo.setText(codes_info.get("shortWayBillId"));
             origen.setText(codes_info.get("PK_originName"));
@@ -128,7 +163,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             cp_destino.setText(codes_info.get("DD_zipCode"));
             fecha_hora_entrega.setText(codes_info.get("DD_deliveryDateTime"));
             recibio.setText(codes_info.get("DD_receiverName"));
-
 
             String statusStr = codes_info.get("statusSPA");
             switch (statusStr) {
@@ -156,20 +190,70 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
 
             case R.id.btn_historia:
-                Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("codes_info",(java.io.Serializable) codes_info);
+
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragment = new FragmentHistory();
+                fragment.addFragmentToStack(getActivity());
+                fragment.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, fragment, TAG);
+                fragmentTransaction.commit();
                 break;
 
             case R.id.fd_btn_favorito:
                 Log.d(TAG, "btn favorito: ");
-                if(btn_favorito.isChecked())
-                    Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(context, "Not checked", Toast.LENGTH_SHORT).show();
+                if (btn_favorito.isChecked()) {
+                    try {
+                        long idHistory = History.insertMap(context, codes_info);
+                        Log.d(TAG, "Despues de insertar en History");
+                        codes_info.put("history_id", String.valueOf(idHistory));
+                        Favorites.insert(context, codes_info);
+                        Log.d(TAG, "Despues de insertar en Favorites");
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
+                        btn_favorito.setEnabled(false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+
+            case R.id.button_call:
+                Log.d(TAG, "Action Call");
+                String phoneNumber = "018003782338";
+                onClickTelefono(phoneNumber);
+                break;
+
+            case R.id.button_share:
+                Log.d(TAG, "Action Share");
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+
+                String sendText = "No.Guía: "+ no_guia.getText()+". "
+                                  +"Código Rastreo: "+cod_rastreo.getText()+". "
+                                  +"Origen: "+origen.getText()+". "
+                                  +"Destino: "+destino.getText()+". ";
+
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
                 break;
         }
     }
 
+    public void onClickTelefono(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
 }

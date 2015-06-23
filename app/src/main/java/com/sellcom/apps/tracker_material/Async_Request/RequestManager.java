@@ -206,9 +206,9 @@ public class RequestManager implements ResponseListenerInterface {
             JSONObject jsonResponse = null;
 
             HttpParams httpParameters = new BasicHttpParams();
-            int timeoutConnection = 9000;
+            int timeoutConnection = 10000;
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-            int timeoutSocket = 9000;
+            int timeoutSocket = 10000;
             HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
             //create a new instance of HttpClient request POST

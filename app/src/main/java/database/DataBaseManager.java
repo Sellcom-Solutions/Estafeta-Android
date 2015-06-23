@@ -2,7 +2,6 @@ package database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -11,7 +10,6 @@ import java.io.InputStreamReader;
 import database.model.Codes;
 import database.model.Countries;
 import database.model.Offices;
-import database.model.Rastreo_tmp;
 import database.model.States;
 
 /**

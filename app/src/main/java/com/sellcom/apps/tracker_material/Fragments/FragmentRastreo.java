@@ -3,7 +3,6 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -17,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.content.Context;
@@ -26,7 +24,6 @@ import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.RastreoListAdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
-import com.sellcom.apps.tracker_material.Async_Request.ResponseManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
@@ -34,11 +31,9 @@ import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import database.model.Favorites;
-import database.model.Rastreo_tmp;
 
 /**
  * Created by rebecalopezmartinez on 21/05/15.

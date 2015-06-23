@@ -23,6 +23,7 @@ public class History {
     public static final String MOV_DATE = "mov_date";
     public static final String MOV_PLACE = "mov_place";
 
+
     public static long insertMap(Context context, Map<String, String> values){
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
         String date = df.format(Calendar.getInstance().getTime());
@@ -30,7 +31,7 @@ public class History {
         ContentValues cv = new ContentValues();
         cv.put(ADD_DATE,date);
         cv.put(CODE_NUMBER, values.get("shortWayBillId"));
-        cv.put(MOV_COMS, values.get(""));
+        cv.put(MOV_COMS, values.get("H_eventDescriptionSPA"));
         cv.put(MOV_DATE, values.get("H_eventDateTime"));
         cv.put(MOV_PLACE, values.get("H_eventPlaceName"));
 
