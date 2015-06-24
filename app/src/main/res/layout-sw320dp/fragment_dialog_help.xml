@@ -1,15 +1,21 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="100"
     android:background="@color/estafeta_light_gray"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:weightSum="100">
 
     <ImageView
         android:id="@+id/im_dialog_help"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="@dimen/dialog_width"
 
         android:layout_marginTop="10dp"
@@ -65,4 +71,5 @@
         android:paddingRight="10dp"
         android:background="@color/zxing_transparent"
         android:textColor="@color/estafeta_red"/>
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -8,15 +8,6 @@
     android:layout_marginBottom="10dp"
     android:layout_marginTop="10dp">
 
-   <!-- <ImageButton
-        android:id                      ="@+id/btn_favorito"
-        android:layout_width            ="0dp"
-        android:layout_height           ="20dp"
-        android:scaleType               ="centerInside"
-        android:layout_weight           ="15"
-        android:layout_gravity          ="center"
-        android:src                     ="@drawable/estrella_gris"
-        android:background              ="@color/zxing_transparent"/>-->
     <CheckBox
         android:id="@+id/btn_favorito"
         android:layout_width="0dp"

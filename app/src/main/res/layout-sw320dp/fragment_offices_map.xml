@@ -6,22 +6,17 @@
     android:layout_width="match_parent"
     android:id="@+id/frameContainer"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    android:layout_height="match_parent"
-
-    >
+    android:layout_height="match_parent" >
 
     <RelativeLayout
         android:id="@+id/fragment_map_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        />
+        android:layout_height="match_parent"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,6 +35,13 @@
 
             </LinearLayout>
 
+            <com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="50"
+                android:fillViewport="true">
 
             <LinearLayout
                 android:id="@+id/lin_container"
@@ -263,6 +265,7 @@
 
 
             </LinearLayout>
+            </com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
 
 
 
@@ -288,9 +291,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:orientation="vertical" >
 
-        >
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_gravity_center"
             android:layout_width="match_parent"
@@ -314,9 +316,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-
-        >
+        android:orientation="vertical"   >
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/multiple_actions_down"
                 android:layout_width="match_parent"
@@ -330,8 +330,7 @@
                 fab:fab_size="normal"
                 fab:fab_colorPressed="@color/estafeta_blue"
                 fab:fab_addButtonPlusIconColor="@color/estafeta_blue"
-                fab:fab_expandDirection="down"
-                >
+                fab:fab_expandDirection="down" >
             </com.getbase.floatingactionbutton.FloatingActionButton>
 
     </FrameLayout>
