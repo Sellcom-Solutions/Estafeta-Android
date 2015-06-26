@@ -34,6 +34,7 @@
     <!-- Headers -->
     <string name="rastreo">Rastreo</string>
     <string name="codigo_postal">Código Postal</string>
+    <string name="favoritos">Favoritos</string>
 
     <!-- Footer -->
     <string name="footer">(c) 2012-2015 Estafeta Mexicana S.A. de C.V.</string>
@@ -61,11 +62,17 @@
     <string name="ver_historia">VER HISTORIA</string>
     <string name="llamar">Llamar</string>
     <string name="compartir">Compartir</string>
+    <string name="delete">Eliminar</string>
+    <string name="modify">Modificar</string>
 
     <!-- History -->
     <string name="title_date_time">FECHA - HORA</string>
     <string name="title_place_event">LUGAR - MOVIMIENTO</string>
     <string name="title_coments">COMENTARIOS</string>
+
+    <!-- Favorites -->
+    <string name="notification_alarm">Alarma de Notificación</string>
+    <string name="delivery_confirmation">Confirmación de Entrega</string>
 
     <!-- Oficinas -->
     <string name="view_ar">Ver AR</string>
@@ -196,5 +203,6 @@
     <string name="cerrar_oficinas">CERRAR</string>
     <string name="ext">Ext.</string>
     <string name="horario">Horario</string>
+
 
 </resources>
