@@ -1,11 +1,11 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="120"
-    android:background="@color/white"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogCP">
+    android:background="@color/white">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -154,4 +154,4 @@
         android:textSize="@dimen/sizeSmallText"
         />
     </LinearLayout>
-</ScrollView>
+</com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>

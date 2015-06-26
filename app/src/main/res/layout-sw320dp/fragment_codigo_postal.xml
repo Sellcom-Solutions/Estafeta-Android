@@ -1,234 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+<com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:weightSum="100">
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:weightSum="100">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="25">
-
-    <FrameLayout
-        android:layout_width    ="match_parent"
-        android:layout_height   ="match_parent"
-        android:gravity         ="center">
-
-        <ImageView
+    android:layout_weight="95">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-                android:src="@drawable/head_cpostal"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_gravity="top"/>
+            android:background="@color/white"
+            android:weightSum="100">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:gravity="right"
-                android:weightSum="100">
-                <TextView
-                    android:layout_width        ="0dp"
-                    android:layout_height       ="match_parent"
-                    android:layout_weight       ="100"
-                    android:text                ="@string/codigo_postal"
-                    android:textSize            ="@dimen/sizeLargeText"
-                    android:paddingLeft         ="60dp"
-                    android:textColor           ="@color/estafeta_text"
-                    android:layout_gravity      ="right"
-                    android:gravity             ="center" />
+                android:orientation="vertical"
+                android:layout_weight="25">
+                <FrameLayout
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="match_parent"
+                    android:gravity         ="center">
 
-            </LinearLayout>
-        </FrameLayout>
-        </FrameLayout>
-    </LinearLayout><!--20-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/head_cpostal"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:paddingBottom="50dp"
+                        android:layout_gravity="top|center_horizontal"/>
 
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="0dp"
-        android:layout_weight="72">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:text                ="@string/codigo_postal"
+                            android:textSize            ="@dimen/sizeLargeText"
+                            android:layout_weight       ="100"
+                            android:paddingLeft         ="60dp"
+                            android:textColor           ="@color/estafeta_text"
+                            android:layout_gravity      ="right"
+                            android:gravity             ="center" />
+
+                    </FrameLayout>
+                </FrameLayout>
+            </LinearLayout><!--25-->
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:weightSum="100">
+                android:layout_height="match_parent"
+                android:layout_weight="70">
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:layout_weight="20">
-
-                    <TextView
-                        android:layout_width        ="match_parent"
-                        android:layout_height       ="wrap_content"
-                        android:textSize            ="@dimen/sizeMediumText"
-                        android:textColor           ="@android:color/black"
-                        android:text                ="@string/verificar_codigo"
-                        android:layout_marginLeft   ="20dp"
-                        android:layout_marginRight  ="20dp"
-                        android:layout_marginTop    ="10dp"
-                        android:layout_marginBottom ="10dp"
-                        android:layout_weight="50"/>
+                    android:weightSum="100">
                     <LinearLayout
-                        android:layout_width        ="match_parent"
-                        android:layout_height       ="wrap_content"
-                        android:orientation         ="horizontal"
-                        android:layout_gravity      ="left"
-                        android:layout_marginLeft   ="20dp"
-                        android:layout_marginRight  ="20dp"
-                        android:layout_weight="50">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_weight="20">
 
-                        <EditText
-                            android:id                  ="@+id/verify_zip_code"
-                            android:layout_width        ="0dp"
-                            android:layout_height       ="43dp"
-                            android:textColor           ="@color/estafeta_text"
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
                             android:textSize            ="@dimen/sizeMediumText"
-                            android:hint                ="@string/search_by_zip_code"
-                            android:textColorHint       ="@color/estafeta_soft_gray"
-                            android:layout_weight       ="3"
-                            android:maxLength           ="5"
-                            android:inputType           ="number"
-                            android:layout_marginRight  ="20dp"/>
+                            android:textColor           ="@android:color/black"
+                            android:text                ="@string/verificar_codigo"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"
+                            android:layout_marginBottom ="10dp"
+                            android:layout_weight="50"/>
+                        <LinearLayout
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:orientation         ="horizontal"
+                            android:layout_gravity      ="left"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"
+                            android:layout_weight="50">
 
-                        <Button
-                            android:id              ="@+id/btn_validar_zipcode"
-                            android:layout_width    ="0dp"
-                            android:layout_height   ="wrap_content"
-                            android:layout_weight   ="1"
-                            android:text            ="@string/validar_codigo"
-                            android:textSize        ="@dimen/sizeMediumText"
-                            android:textColor       ="@color/estafeta_red"
-                            android:layout_gravity  ="center_horizontal"
-                            android:background      ="@android:color/transparent"/>
+                            <EditText
+                                android:id                  ="@+id/verify_zip_code"
+                                android:layout_width        ="0dp"
+                                android:layout_height       ="43dp"
+                                android:textColor           ="@color/estafeta_text"
+                                android:textSize            ="@dimen/sizeMediumText"
+                                android:hint                ="@string/search_by_zip_code"
+                                android:textColorHint       ="@color/estafeta_soft_gray"
+                                android:layout_weight       ="3"
+                                android:maxLength           ="5"
+                                android:inputType           ="number"
+                                android:layout_marginRight  ="20dp"/>
+
+                            <Button
+                                android:id              ="@+id/btn_validar_zipcode"
+                                android:layout_width    ="0dp"
+                                android:layout_height   ="wrap_content"
+                                android:layout_weight   ="1"
+                                android:text            ="@string/validar_codigo"
+                                android:textSize        ="@dimen/sizeMediumText"
+                                android:textColor       ="@color/estafeta_red"
+                                android:layout_gravity  ="center_horizontal"
+                                android:background      ="@android:color/transparent"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/estafeta_light_gray"
+                        android:layout_marginLeft="1dp"
+                        android:layout_marginRight="1dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:textSize            ="@dimen/sizeMediumText"
+                            android:textColor           ="@android:color/black"
+                            android:text                ="@string/buscar_codigo"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"/>
+
+                        <Spinner
+                            android:id                  ="@+id/spinner_state"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:layout_gravity      ="left"
+                            android:layout_marginRight  ="20dp"
+                            android:layout_marginLeft   ="20dp"
+                            android:spinnerMode         ="dialog"
+                            android:dividerHeight       ="0dp" />
+
+                        <EditText
+                            android:id                  ="@+id/ciudad"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:textColor           ="@color/estafeta_text"
+                            android:textSize            ="@dimen/sizeMediumText"
+                            android:hint                ="@string/city_etc"
+                            android:textColorHint       ="@color/estafeta_soft_gray"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp" />
+                        <EditText
+                            android:id                  ="@+id/colonia"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:textColor           ="@color/estafeta_text"
+                            android:textSize            ="@dimen/sizeMediumText"
+                            android:hint                ="@string/locality"
+                            android:textColorHint       ="@color/estafeta_soft_gray"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mandatory_fields"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:textColor="@color/estafeta_red"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"/>
+                    </LinearLayout>
+
+
                 </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/estafeta_light_gray"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                <TextView
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:textColor           ="@android:color/black"
-                android:text                ="@string/buscar_codigo"
-                android:layout_marginLeft   ="20dp"
-                android:layout_marginRight  ="20dp"
-                android:layout_marginTop    ="10dp"/>
-
-                <Spinner
-                android:id                  ="@+id/spinner_state"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:layout_gravity      ="left"
-                android:layout_marginTop    ="10dp"
-                android:layout_marginRight  ="20dp"
-                android:layout_marginLeft   ="20dp"
-                android:spinnerMode         ="dialog"
-                android:dividerHeight       ="0dp" />
-
-                <EditText
-                    android:id                  ="@+id/ciudad"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="wrap_content"
-                    android:textColor           ="@color/estafeta_text"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:hint                ="@string/city_etc"
-                    android:textColorHint       ="@color/estafeta_soft_gray"
-                    android:layout_marginTop    ="10dp"
-                    android:layout_marginLeft   ="20dp"
-                    android:layout_marginRight  ="20dp" />
-                <EditText
-                android:id                  ="@+id/colonia"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:textColor           ="@color/estafeta_text"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/locality"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-                android:layout_marginLeft   ="20dp"
-                android:layout_marginRight  ="20dp" />
-                <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/mandatory_fields"
-                android:textSize="@dimen/sizeXSmallText"
-                android:textColor="@color/estafeta_red"
-                android:layout_marginTop="0dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"/>
-            </LinearLayout>
-
-
-            </LinearLayout>
+            </LinearLayout><!--70-->
             <LinearLayout
-                android:orientation         ="horizontal"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="match_parent"
-                android:gravity             ="center|bottom"
-                android:layout_marginTop    ="70dp">
-
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_gravity="bottom|center_horizontal"
+                android:weightSum="5">
                 <Button
                     android:id="@+id/btn_buscar_zipcode"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width        ="match_parent"
+                    android:layout_height       ="match_parent"
+                    android:paddingTop          ="35dp"
                     android:text="@string/Search"
                     android:textSize="@dimen/sizeNormalText"
-                    android:textColor="@color/estafeta_red"
-                    android:background="@android:color/transparent"
-                    android:layout_marginTop="10dp"
+                    android:textColor           ="@color/estafeta_red"
+                    android:background          ="@android:color/transparent"
                     android:layout_gravity="bottom|center_horizontal"/>
             </LinearLayout>
-        </LinearLayout>
 
-     <LinearLayout
+
+        </LinearLayout>
+</com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height   ="0dp"
-        android:layout_weight="3"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal">
 
-         <TextView
-             android:layout_width="wrap_content"
-             android:layout_height="match_parent"
-             android:textSize="@dimen/footerSize"
-             android:layout_marginLeft="10dp"
-             android:text="@string/footer"
-             android:textColor="@color/estafeta_soft_gray"
-             android:textStyle="bold"
-             android:gravity="bottom"
-             android:layout_gravity="bottom|center_horizontal"
-             />
-     </LinearLayout>
-        </LinearLayout>
-</ScrollView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/footerSize"
+            android:layout_marginLeft="10dp"
+            android:text="@string/footer"
+            android:textColor="@color/estafeta_soft_gray"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="top"
+            android:layout_gravity="top|center_horizontal"
+            />
+    </LinearLayout><!--5-->
+
+</LinearLayout>

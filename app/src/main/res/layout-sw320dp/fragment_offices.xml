@@ -1,80 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation     ="vertical"
-    android:layout_width    ="fill_parent"
-    android:layout_height   ="fill_parent"
-    android:background      ="@color/white"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:weightSum="100">
+<com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation     ="vertical"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:background      ="@color/white"
+    android:layout_weight="95">
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:weightSum="100">
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_weight="25">
-
-    <FrameLayout
-        android:layout_width    ="match_parent"
-        android:layout_height   ="fill_parent"
-        android:layout_weight="20"
-        android:gravity         ="center"
-        android:weightSum="100">
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:src="@drawable/head_oficinas"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_gravity="top"/>
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="25">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:gravity="right">
-                <TextView
-                    android:layout_width        ="0dp"
-                    android:layout_height       ="match_parent"
-                    android:text                ="@string/ubicar_oficinas"
-                    android:textSize            ="@dimen/sizeLargeText"
-                    android:layout_weight       ="100"
-                    android:paddingLeft         ="60dp"
-                    android:textColor           ="@color/estafeta_text"
-                    android:layout_gravity      ="right"
-                    android:gravity             ="center" />
+            <FrameLayout
+                android:layout_width    ="match_parent"
+                android:layout_height   ="match_parent"
+                android:gravity         ="center">
 
-            </LinearLayout>
-        </FrameLayout>
-    </FrameLayout>
-        </LinearLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/head_oficinas"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:paddingBottom="50dp"
+                        android:layout_gravity="top|center_horizontal"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="0dp"
-        android:layout_weight="72">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:text                ="@string/ubicar_oficinas"
+                            android:textSize            ="@dimen/sizeLargeText"
+                            android:layout_weight       ="100"
+                            android:paddingLeft         ="60dp"
+                            android:textColor           ="@color/estafeta_text"
+                            android:layout_gravity      ="right"
+                            android:gravity             ="center" />
+
+                </FrameLayout>
+            </FrameLayout>
+            </LinearLayout><!--25-->
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center"
+            android:layout_height="0dp"
+            android:layout_weight="75"
             android:weightSum="100">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
+                android:layout_weight   ="20"
                 android:weightSum="100"
                 android:layout_marginTop="10dp">
                 <Button
@@ -105,7 +100,8 @@
                     android:layout_marginLeft="3dp"
                     android:layout_marginBottom="5dp"/>
 
-            </LinearLayout>
+            </LinearLayout><!--20-->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -113,157 +109,165 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"/>
 
-
-
-            <TextView
-                android:layout_width    ="match_parent"
-                android:layout_height   ="wrap_content"
-                android:text            ="@string/offices_search_by_address"
-                android:textSize        ="@dimen/sizeMediumText"
-                android:id              ="@+id/textView"
-                android:layout_gravity  ="left"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"/>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:orientation="vertical"
                 android:gravity="center"
-                android:weightSum="100">
-            <Spinner
-                android:id              ="@+id/spn_state"
-                android:layout_width    ="0dp"
-                android:layout_height   ="wrap_content"
-               android:layout_weight    ="90"
-                android:spinnerMode       ="dialog"
-                android:dividerHeight     ="0dp"
-                />
-            </LinearLayout>
+                android:weightSum="100"
+                android:layout_weight   ="70">
 
+                <TextView
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="wrap_content"
+                    android:text            ="@string/offices_search_by_address"
+                    android:textSize        ="@dimen/sizeMediumText"
+                    android:id              ="@+id/textView"
+                    android:layout_gravity  ="left"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:weightSum="100">
+                    <Spinner
+                        android:id              ="@+id/spn_state"
+                        android:layout_width    ="0dp"
+                        android:layout_height   ="wrap_content"
+                        android:layout_weight    ="90"
+                        android:spinnerMode       ="dialog"
+                        android:dividerHeight     ="0dp"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <EditText
+                        android:id                  ="@+id/edt_city"
+                        android:layout_width        ="0dp"
+                        android:layout_height       ="wrap_content"
+                        android:layout_weight       ="90"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:hint                ="@string/city_etc"
+                        android:textColorHint       ="@color/estafeta_soft_gray"
+
+                        android:nextFocusDown       ="@+id/edt_colony"
+
+                        android:layout_marginTop    ="10dp"
+                        android:layout_marginLeft   ="20dp"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textColor="@color/estafeta_red"
+                        android:layout_marginRight  ="10dp"
+                        android:text="*"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sizeMediumText"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation         ="horizontal"
+                    android:layout_width        ="match_parent"
+                    android:layout_height       ="wrap_content"
+                    android:layout_gravity      ="left"
+                    android:layout_marginTop    ="10dp"
+                    android:layout_marginLeft   ="10dp"
+                    android:layout_marginRight  ="20dp">
+
+                    <EditText
+                        android:id                  ="@+id/edt_colony"
+                        android:layout_width        ="match_parent"
+                        android:layout_height       ="wrap_content"
+
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:hint                ="@string/locality"
+                        android:textColorHint       ="@color/estafeta_soft_gray"
+                        android:layout_weight       ="1"
+                        android:nextFocusDown       ="@+id/edt_zip_code"
+                        android:layout_marginLeft   ="10dp"
+                        android:layout_marginRight  ="10dp"/>
+
+                    <EditText
+                        android:id                  ="@+id/edt_zip_code"
+                        android:layout_width        ="match_parent"
+                        android:layout_height       ="wrap_content"
+
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:hint                ="@string/zip_code"
+                        android:textColorHint       ="@color/estafeta_soft_gray"
+                        android:layout_weight       ="2" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width        ="wrap_content"
+                    android:layout_height       ="wrap_content"
+                    android:text                ="@string/mandatory_fields"
+                    android:textSize=           "@dimen/sizeXSmallText"
+                    android:textColor           ="@color/estafeta_red"
+                    android:layout_gravity      ="left"
+                    android:layout_marginLeft   ="30dp"
+                    android:layout_marginRight  ="20dp"/>
+            </LinearLayout><!--70-->
             <LinearLayout
-            android:layout_width="match_parent"
+                android:orientation         ="horizontal"
+                android:layout_width        ="match_parent"
+                android:layout_height       ="match_parent"
+                android:gravity             ="center|bottom"
+                android:layout_weight   ="10"
+                android:paddingTop="2dp">
+
+                <Button
+                    android:id="@+id/btn_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/Search"
+                    android:textSize="@dimen/sizeNormalText"
+                    android:textColor="@color/estafeta_red"
+                    android:background="@android:color/transparent"
+                    android:layout_gravity="bottom|center_horizontal"/>
+            </LinearLayout><!--10-->
+        </LinearLayout><!--72-->
+
+
+    </LinearLayout>
+</com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
+            android:textSize="@dimen/footerSize"
+            android:layout_marginLeft="10dp"
+            android:text="@string/footer"
+            android:textColor="@color/estafeta_soft_gray"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="top"
+            android:layout_gravity="top|center_horizontal"
+            />
+    </LinearLayout><!--5-->
 
-            <EditText
-                android:id                  ="@+id/edt_city"
-                android:layout_width        ="0dp"
-                android:layout_height       ="wrap_content"
-                android:layout_weight       ="90"
-                android:textColor           ="@color/estafeta_text"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/city_etc"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-
-                android:nextFocusDown       ="@+id/edt_colony"
-
-                android:layout_marginTop    ="10dp"
-                android:layout_marginLeft   ="20dp"/>
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:textColor="@color/estafeta_red"
-                android:layout_marginRight  ="10dp"
-                android:text="*"
-                android:textStyle="bold"
-                android:textSize="@dimen/sizeMediumText"/>
-
-
-        </LinearLayout>
-
-            <LinearLayout
-            android:orientation         ="horizontal"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="wrap_content"
-            android:layout_gravity      ="left"
-            android:layout_marginTop    ="10dp"
-            android:layout_marginLeft   ="10dp"
-            android:layout_marginRight  ="20dp">
-
-            <EditText
-                android:id                  ="@+id/edt_colony"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-
-                android:textColor           ="@color/estafeta_text"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/locality"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-                android:layout_weight       ="1"
-                android:nextFocusDown       ="@+id/edt_zip_code"
-                android:layout_marginLeft   ="10dp"
-                android:layout_marginRight  ="10dp"/>
-
-            <EditText
-                android:id                  ="@+id/edt_zip_code"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-
-                android:textColor           ="@color/estafeta_text"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/zip_code"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-                android:layout_weight       ="2" />
-
-        </LinearLayout>
-
-            <TextView
-                android:layout_width        ="wrap_content"
-                android:layout_height       ="wrap_content"
-                android:text                ="@string/mandatory_fields"
-                android:textSize=           "@dimen/sizeXSmallText"
-                android:textColor           ="@color/estafeta_red"
-                android:layout_gravity      ="left"
-                android:layout_marginLeft   ="30dp"
-                android:layout_marginRight  ="20dp"/>
-            </LinearLayout>
-        <LinearLayout
-            android:orientation         ="horizontal"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="match_parent"
-            android:gravity             ="center|bottom"
-            android:layout_marginTop    ="70dp">
-
-            <Button
-                android:id="@+id/btn_search"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/Search"
-                android:textSize="@dimen/sizeNormalText"
-                android:textColor="@color/estafeta_red"
-                android:background="@android:color/transparent"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="bottom|center_horizontal"/>
-        </LinearLayout>
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/footerSize"
-                android:layout_marginLeft="10dp"
-                android:text="@string/footer"
-                android:textColor="@color/estafeta_soft_gray"
-                android:textStyle="bold"
-                android:gravity="bottom"
-                android:layout_gravity="bottom|center_horizontal"
-                />
-
-
-        </LinearLayout>
-    </LinearLayout>
-
-
-</ScrollView>
+</LinearLayout>

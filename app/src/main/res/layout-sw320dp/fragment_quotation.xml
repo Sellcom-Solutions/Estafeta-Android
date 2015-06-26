@@ -1,409 +1,415 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<?xml version="1.0" encoding="utf-8"?><LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:weightSum="100">
-
+<com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation     ="vertical"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:background      ="@color/white"
+    android:layout_weight="95">
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:background="@color/white"
         android:weightSum="100">
-        <EditText
-            android:id                  ="@+id/edt_dummy"
-            android:layout_width        ="0dp"
-            android:layout_height       ="0dp"
-            />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:layout_weight="25">
+            <EditText
+                android:id                  ="@+id/edt_dummy"
+                android:layout_width        ="0dp"
+                android:layout_height       ="0dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="25">
+                <FrameLayout
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="match_parent"
+                    android:gravity         ="center">
 
-        <FrameLayout
-            android:layout_width    ="fill_parent"
-            android:layout_height   ="fill_parent"
-            android:gravity         ="center">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/head_cotizador"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:paddingBottom="50dp"
+                        android:layout_gravity="top|center_horizontal"/>
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:src="@drawable/head_cotizador"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_gravity="top"/>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-        <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:text                ="@string/quotation_title"
+                            android:textSize            ="@dimen/sizeLargeText"
+                            android:layout_weight       ="100"
+                            android:paddingLeft         ="60dp"
+                            android:textColor           ="@color/estafeta_text"
+                            android:layout_gravity      ="right"
+                            android:gravity             ="center" />
+
+                    </FrameLayout>
+                </FrameLayout>
+            </LinearLayout><!--20-->
+
 
             <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp"
-                android:gravity="right"
-                android:weightSum="100">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="70"
+                android:weightSum="200"
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width        ="fill_parent"
-                    android:layout_height       ="fill_parent"
-                    android:text                ="@string/quotation_title"
-                    android:textSize            ="@dimen/sizeLargeText"
-                    android:layout_gravity      ="right"
-                    android:paddingLeft         ="60dp"
-                    android:gravity             ="center"
-                    android:textColor           ="@color/estafeta_text"/>
-            </LinearLayout>
-        </FrameLayout>
-        </FrameLayout>
-    </LinearLayout><!--20-->
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:background="@color/white"
+                        android:layout_height="wrap_content">
+
+                        <ToggleButton
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:id                  ="@+id/tbtn_nat"
+                            android:textSize            ="@dimen/sizeMediumText"
+                            android:background          ="@drawable/toggle_selector"
+                            android:layout_weight       ="1"
+                            android:textColor           ="@color/estafeta_text"
+                            android:textOn              ="@string/quotation_national"
+                            android:textOff             ="@string/quotation_national"/>
+
+                        <TextView
+                            android:orientation     ="vertical"
+                            android:layout_width    ="2dp"
+                            android:layout_height   ="match_parent"
+                            android:layout_weight   ="0"
+                            android:background      ="@color/estafeta_light_gray"></TextView>
+
+                        <ToggleButton
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:id                  ="@+id/tbtn_inter"
+                            android:textSize            ="@dimen/sizeMediumText"
+                            android:background          ="@drawable/toggle_selector"
+                            android:layout_weight       ="1"
+                            android:textColor           ="@color/estafeta_text"
+                            android:textOn              ="@string/quotation_international"
+                            android:textOff             ="@string/quotation_international"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation             ="horizontal"
+                        android:layout_width            ="match_parent"
+                        android:layout_height           ="wrap_content"
+                        android:layout_marginLeft       ="20dp"
+                        android:layout_marginRight      ="20dp">
+
+                        <CheckBox
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:text                ="@string/quotation_packet"
+                            android:textColor           ="@color/estafeta_soft_gray"
+                            android:textStyle           ="bold"
+                            android:textSize            ="@dimen/sizeSmallText"
+                            android:id                  ="@+id/cb_packet"
+                            android:layout_weight       ="1"
+                            android:drawableTop         ="@drawable/sobre"
+                            android:checked="true"
+                            android:gravity             ="center"
+                            />
+
+                        <CheckBox
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:textSize            ="@dimen/sizeSmallText"
+                            android:text                ="@string/quotation_package"
+                            android:textColor           ="@color/estafeta_soft_gray"
+                            android:textStyle           ="bold"
+                            android:id                  ="@+id/cb_package"
+                            android:layout_weight       ="1"
+                            android:drawableTop         ="@drawable/paquete"
+                            android:gravity             ="center"/>
+
+                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/lin_nacional_cp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:orientation         ="horizontal"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:layout_gravity      ="left"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp">
+
+                            <EditText
+                                android:id                  ="@+id/edt_zc_origin"
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="wrap_content"
+                                android:textColor           ="@color/estafeta_red"
+                                android:textSize            ="@dimen/sizeMediumText"
+                                android:hint                ="@string/quotation_zip_origin"
+                                android:textColorHint       ="@color/estafeta_soft_gray"
+                                android:layout_weight       ="1"
+                                android:maxLength           ="5"
+                                android:inputType           ="numberSigned"
+                                android:layout_gravity      ="center"
+                                android:singleLine          ="true"/>
+
+                            <ImageButton
+                                android:layout_width        ="35dp"
+                                android:layout_height       ="40dp"
+                                android:id                  ="@+id/btn_zc_ori_search"
+                                android:background          ="@drawable/busca"
+                                android:layout_marginLeft   ="5dp"
+                                android:layout_marginRight  ="10dp"/>
+
+                            <ImageButton
+                                android:layout_width        ="35dp"
+                                android:layout_height       ="40dp"
+                                android:id                  ="@+id/btn_zc_ori_phonebook"
+                                android:background          ="@drawable/agenda"
+                                android:layout_marginLeft   ="5dp"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation         ="horizontal"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:layout_gravity      ="left"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp">
+
+                            <EditText
+                                android:id                  ="@+id/edt_zc_destination"
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="wrap_content"
+                                android:textColor           ="@color/estafeta_red"
+                                android:textSize            ="@dimen/sizeMediumText"
+                                android:hint                ="@string/quotation_zip_destination"
+                                android:textColorHint       ="@color/estafeta_soft_gray"
+                                android:layout_weight       ="1"
+                                android:maxLength           ="5"
+                                android:inputType           ="numberSigned"
+                                android:layout_gravity      ="center"
+                                android:singleLine          ="true"/>
+
+                            <ImageButton
+                                android:layout_width        ="35dp"
+                                android:layout_height       ="40dp"
+                                android:id                  ="@+id/btn_zc_dest_search"
+                                android:background          ="@drawable/busca"
+                                android:layout_marginLeft   ="5dp"
+                                android:layout_marginRight  ="10dp"/>
+
+                            <ImageButton
+                                android:layout_width        ="35dp"
+                                android:layout_height       ="40dp"
+                                android:id                  ="@+id/btn_zc_dest_phonebook"
+                                android:background          ="@drawable/agenda"
+                                android:layout_marginLeft   ="5dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/lin_internacional_pais"
+                        android:layout_width            ="match_parent"
+                        android:layout_height           ="wrap_content"
+                        android:visibility="gone"
+                        android:orientation             ="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="left"
+                            android:weightSum="100">
+
+                            <EditText
+                                android:layout_width        ="0dp"
+                                android:layout_height       ="wrap_content"
+                                android:layout_weight       ="70"
+                                android:text                ="México"
+                                android:textColor           ="@color/estafeta_text"
+                                android:layout_marginLeft   ="20dp"
+                                android:layout_marginRight  ="20dp"
+                                android:clickable           ="false"
+                                style                       ="@style/EditStyle"/>
+                        </LinearLayout>
+
+                        <Spinner
+                            android:id="@+id/spn_countrie"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            style="@style/mySpinnerItemStyle"
+                            android:spinnerMode="dialog"
+                            android:layout_marginTop="10dp"
+                            android:dividerHeight     ="0dp"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation         ="vertical"
+                        android:layout_width        ="match_parent"
+                        android:layout_height       ="wrap_content"
+                        android:id                  ="@+id/ll_for_package"
+                        android:visibility          ="gone">
+
+
+                        <LinearLayout
+                            android:orientation         ="horizontal"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:layout_gravity      ="left"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp">
+
+                            <EditText
+                                android:id                  ="@+id/edt_weigth"
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="wrap_content"
+                                android:singleLine          ="true"
+                                android:textColor           ="@color/estafeta_red"
+                                android:textSize            ="@dimen/sizeMediumText"
+                                android:hint                ="@string/quotation_weigth"
+                                android:textColorHint       ="@color/estafeta_soft_gray"
+                                android:layout_weight       ="1"
+                                android:nextFocusDown       ="@+id/edt_high"
+
+                                android:layout_marginRight  ="10dp"/>
+
+                            <EditText
+                                android:id                  ="@+id/edt_high"
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="wrap_content"
+                                android:singleLine          ="true"
+                                android:textColor           ="@color/estafeta_red"
+                                android:textSize            ="@dimen/sizeMediumText"
+                                android:hint                ="@string/quotation_high"
+                                android:textColorHint       ="@color/estafeta_soft_gray"
+                                android:layout_weight       ="1"
+
+                                android:nextFocusDown       ="@+id/edt_long"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation         ="horizontal"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:layout_gravity      ="left"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp">
+
+                            <EditText
+                                android:id                  ="@+id/edt_long"
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="wrap_content"
+                                android:singleLine          ="true"
+                                android:textColor           ="@color/estafeta_red"
+                                android:textSize            ="@dimen/sizeMediumText"
+                                android:hint                ="@string/quotation_long"
+                                android:textColorHint       ="@color/estafeta_soft_gray"
+                                android:layout_weight       ="1"
+                                android:nextFocusDown       ="@+id/edt_width"
+                                android:layout_marginRight  ="10dp"/>
+
+                            <EditText
+                                android:id                  ="@+id/edt_width"
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="wrap_content"
+                                android:singleLine          ="true"
+                                android:textColor           ="@color/estafeta_red"
+                                android:textSize            ="@dimen/sizeMediumText"
+                                android:hint                ="@string/quotation_width"
+                                android:textColorHint       ="@color/estafeta_soft_gray"
+                                android:layout_weight       ="1" />
+
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+                    <TextView
+                        android:id                  ="@+id/required"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:text                ="@string/mandatory_fields"
+                        android:textSize=           "@dimen/sizeXSmallText"
+                        android:textColor           ="@color/estafeta_red"
+                        android:layout_gravity      ="left"
+                        android:layout_marginLeft   ="20dp"
+                        android:layout_marginRight  ="20dp"/>
+                </LinearLayout>
+                </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:layout_gravity="bottom|center_horizontal"
+                android:weightSum="5">
+
+                        <Button
+                            android:id                  ="@+id/btn_quote"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:paddingTop          ="35dp"
+                            android:text                ="@string/quotation_quote"
+                            android:textSize            ="@dimen/sizeNormalText"
+                            android:textColor           ="@color/estafeta_red"
+                            android:background          ="@android:color/transparent"
+                            android:gravity="center"
+                            android:layout_gravity="bottom|center_horizontal"  />
+                </LinearLayout>
+
+
+    </LinearLayout>
+</com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="60"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:background="@color/white"
-            android:layout_height="wrap_content">
-
-            <ToggleButton
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:id                  ="@+id/tbtn_nat"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:background          ="@drawable/toggle_selector"
-                android:layout_weight       ="1"
-                android:textColor           ="@color/estafeta_text"
-                android:textOn              ="@string/quotation_national"
-                android:textOff             ="@string/quotation_national"/>
-
-            <TextView
-                android:orientation     ="vertical"
-                android:layout_width    ="2dp"
-                android:layout_height   ="match_parent"
-                android:layout_weight   ="0"
-                android:background      ="@color/estafeta_light_gray"></TextView>
-
-            <ToggleButton
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:id                  ="@+id/tbtn_inter"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:background          ="@drawable/toggle_selector"
-                android:layout_weight       ="1"
-                android:textColor           ="@color/estafeta_text"
-                android:textOn              ="@string/quotation_international"
-                android:textOff             ="@string/quotation_international"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:orientation             ="horizontal"
-            android:layout_width            ="match_parent"
-            android:layout_height           ="wrap_content"
-            android:layout_marginLeft       ="20dp"
-            android:layout_marginRight      ="20dp">
-
-            <CheckBox
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:text                ="@string/quotation_packet"
-                android:textColor           ="@color/estafeta_soft_gray"
-                android:textStyle           ="bold"
-                android:textSize            ="@dimen/sizeSmallText"
-                android:id                  ="@+id/cb_packet"
-                android:layout_weight       ="1"
-                android:drawableTop         ="@drawable/sobre"
-                android:checked="true"
-                android:gravity             ="center"
-                />
-
-            <CheckBox
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:textSize            ="@dimen/sizeSmallText"
-                android:text                ="@string/quotation_package"
-                android:textColor           ="@color/estafeta_soft_gray"
-                android:textStyle           ="bold"
-                android:id                  ="@+id/cb_package"
-                android:layout_weight       ="1"
-                android:drawableTop         ="@drawable/paquete"
-                android:gravity             ="center"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/lin_nacional_cp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            android:orientation="vertical">
-
-
-            <LinearLayout
-                android:orientation         ="horizontal"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="50dp"
-                android:layout_gravity      ="left"
-                android:layout_marginLeft   ="20dp"
-                android:layout_marginRight  ="20dp">
-
-                <EditText
-                    android:id                  ="@+id/edt_zc_origin"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="wrap_content"
-                    android:textColor           ="@color/estafeta_red"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:hint                ="@string/quotation_zip_origin"
-                    android:textColorHint       ="@color/estafeta_soft_gray"
-                    android:layout_weight       ="1"
-                    android:maxLength           ="5"
-                    android:inputType           ="numberSigned"
-                    android:layout_gravity      ="center"
-                    android:singleLine          ="true"/>
-
-                <ImageButton
-                    android:layout_width        ="35dp"
-                    android:layout_height       ="40dp"
-                    android:id                  ="@+id/btn_zc_ori_search"
-                    android:background          ="@drawable/busca"
-                    android:layout_marginLeft   ="5dp"
-                    android:layout_marginRight  ="10dp"/>
-
-                <ImageButton
-                    android:layout_width        ="35dp"
-                    android:layout_height       ="40dp"
-                    android:id                  ="@+id/btn_zc_ori_phonebook"
-                    android:background          ="@drawable/agenda"
-                    android:layout_marginLeft   ="5dp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation         ="horizontal"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="50dp"
-                android:layout_gravity      ="left"
-                android:layout_marginLeft   ="20dp"
-                android:layout_marginRight  ="20dp">
-
-                <EditText
-                    android:id                  ="@+id/edt_zc_destination"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="wrap_content"
-                    android:textColor           ="@color/estafeta_red"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:hint                ="@string/quotation_zip_destination"
-                    android:textColorHint       ="@color/estafeta_soft_gray"
-                    android:layout_weight       ="1"
-                    android:maxLength           ="5"
-                    android:inputType           ="numberSigned"
-                    android:layout_gravity      ="center"
-                    android:singleLine          ="true"/>
-
-                <ImageButton
-                    android:layout_width        ="35dp"
-                    android:layout_height       ="40dp"
-                    android:id                  ="@+id/btn_zc_dest_search"
-                    android:background          ="@drawable/busca"
-                    android:layout_marginLeft   ="5dp"
-                    android:layout_marginRight  ="10dp"/>
-
-                <ImageButton
-                    android:layout_width        ="35dp"
-                    android:layout_height       ="40dp"
-                    android:id                  ="@+id/btn_zc_dest_phonebook"
-                    android:background          ="@drawable/agenda"
-                    android:layout_marginLeft   ="5dp"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:id="@+id/lin_internacional_pais"
-            android:layout_width            ="match_parent"
-            android:layout_height           ="wrap_content"
-            android:visibility="gone"
-            android:orientation             ="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="left"
-                android:weightSum="100">
-
-                <EditText
-                    android:layout_width        ="0dp"
-                    android:layout_height       ="wrap_content"
-                    android:layout_weight       ="70"
-                    android:text                ="México"
-                    android:textColor           ="@color/estafeta_text"
-                    android:layout_marginLeft   ="20dp"
-                    android:layout_marginRight  ="20dp"
-                    android:clickable           ="false"
-                    style                       ="@style/EditStyle"/>
-            </LinearLayout>
-
-            <Spinner
-                android:id="@+id/spn_countrie"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/mySpinnerItemStyle"
-                android:spinnerMode="dialog"
-                android:layout_marginTop="10dp"
-                android:dividerHeight     ="0dp"
-                android:layout_marginLeft   ="20dp"
-                android:layout_marginRight  ="20dp"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:orientation         ="vertical"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="wrap_content"
-            android:id                  ="@+id/ll_for_package"
-            android:visibility          ="gone">
-
-
-        <LinearLayout
-            android:orientation         ="horizontal"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="wrap_content"
-            android:layout_gravity      ="left"
-            android:layout_marginLeft   ="20dp"
-            android:layout_marginRight  ="20dp">
-
-            <EditText
-                android:id                  ="@+id/edt_weigth"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:singleLine          ="true"
-                android:textColor           ="@color/estafeta_red"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/quotation_weigth"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-                android:layout_weight       ="1"
-                android:nextFocusDown       ="@+id/edt_high"
-
-                android:layout_marginRight  ="10dp"/>
-
-            <EditText
-                android:id                  ="@+id/edt_high"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:singleLine          ="true"
-                android:textColor           ="@color/estafeta_red"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/quotation_high"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-                android:layout_weight       ="1"
-
-                android:nextFocusDown       ="@+id/edt_long"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation         ="horizontal"
-            android:layout_width        ="match_parent"
-            android:layout_height       ="wrap_content"
-            android:layout_gravity      ="left"
-            android:layout_marginLeft   ="20dp"
-            android:layout_marginRight  ="20dp">
-
-            <EditText
-                android:id                  ="@+id/edt_long"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:singleLine          ="true"
-                android:textColor           ="@color/estafeta_red"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/quotation_long"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-                android:layout_weight       ="1"
-                android:nextFocusDown       ="@+id/edt_width"
-
-                android:layout_marginRight  ="10dp"/>
-
-            <EditText
-                android:id                  ="@+id/edt_width"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:singleLine          ="true"
-                android:textColor           ="@color/estafeta_red"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/quotation_width"
-                android:textColorHint       ="@color/estafeta_soft_gray"
-                android:layout_weight       ="1" />
-
-        </LinearLayout>
-
-
-
-
-        </LinearLayout>
-        <TextView
-            android:id                  ="@+id/required"
-            android:layout_width        ="wrap_content"
-            android:layout_height       ="wrap_content"
-            android:text                ="@string/mandatory_fields"
-            android:textSize=           "@dimen/sizeXSmallText"
-            android:textColor           ="@color/estafeta_red"
-            android:layout_gravity      ="left"
-            android:layout_marginLeft   ="20dp"
-            android:layout_marginRight  ="20dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation         ="vertical"
-        android:layout_width        ="match_parent"
-        android:layout_height       ="100dp"
-        android:layout_weight       ="15"
-        android:layout_gravity      ="bottom"
-        android:layout_marginTop    ="70dp">
-
-        <Button
-            android:id                  ="@+id/btn_quote"
-            android:layout_width        ="250dp"
-            android:layout_height       ="wrap_content"
-            android:text                ="@string/quotation_quote"
-            android:textSize            ="@dimen/sizeNormalText"
-            android:textColor           ="@color/estafeta_red"
-            android:background          ="@android:color/transparent"
-            android:gravity="center"
-            android:layout_gravity="bottom|center_horizontal"
-
-            />
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal">
 
         <TextView
-            android:id="@+id/txv_footer"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/footerSize"
+            android:layout_marginLeft="10dp"
             android:text="@string/footer"
-            android:gravity="center|bottom"
             android:textColor="@color/estafeta_soft_gray"
-            android:layout_marginTop="5dp"
             android:textStyle="bold"
-            android:layout_gravity="bottom|center_horizontal"/>
+            android:padding="5dp"
+            android:gravity="top"
+            android:layout_gravity="top|center_horizontal"
+            />
+        </LinearLayout><!--5-->
 
     </LinearLayout>
-    </LinearLayout>
-</ScrollView>
