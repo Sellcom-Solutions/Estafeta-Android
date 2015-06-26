@@ -6,6 +6,7 @@
     <color name="estafeta_text">#555555</color>
     <color name="estafeta_light_gray">#EFEFF4</color>
     <color name="white">#FFFFFF</color>
+    <color name="new_col">#FFD060</color>
 
     <!--<color name="estafeta_blue">#4D75A0</color>-->
 </resources>
