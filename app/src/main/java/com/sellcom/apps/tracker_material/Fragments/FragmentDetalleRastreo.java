@@ -25,6 +25,7 @@ import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import java.util.HashMap;
 import java.util.Map;
 
+import database.model.Codes;
 import database.model.Favorites;
 import database.model.History;
 
@@ -84,23 +85,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
 
-       /* btn_call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG,"Action Call");
-                Toast.makeText(context,"Action call clicked",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        btn_share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d(TAG, "Action Share");
-                Toast.makeText(context,"Action share clicked",Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
         btn_favorito.setOnClickListener(this);
         btn_historia.setOnClickListener(this);
         btn_call.setOnClickListener(this);
@@ -115,7 +99,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             //Log.d(TAG,"data: "+data.size());
 
         if(data != null) {
-            long idHistory = History.insertMap(context, codes_info);
+/*            long idHistory = History.insertMap(context, codes_info);
             Log.d(TAG,"Despues de insertar en History");
             codes_info.put("history_id", String.valueOf(idHistory));
 
@@ -128,11 +112,11 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             destino.setText(data.get("destino"));
             cp_destino.setText(data.get("cp_destino"));
             fecha_hora_entrega.setText(data.get("fechaHoraEntrega"));
-            recibio.setText(data.get("recibio"));
+            recibio.setText(data.get("recibio"));*/
             btn_favorito.setChecked(true);
             btn_favorito.setEnabled(false);
 
-            String statusStr = data.get("estatus");
+            /*String statusStr = data.get("estatus");
             switch (statusStr) {
                 case "EN_TRANSITO":
                     img_estatus.setImageResource(R.drawable.estatus_transito);
@@ -151,10 +135,10 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                     //Log.d("Codigo RE Adapter", "" + estatusStr);
                     estatus.setText("Sin información");
                     break;
-            }
+            }*/
 
         }
-        else {
+       // else {
             no_guia.setText(codes_info.get("wayBill"));
             cod_rastreo.setText(codes_info.get("shortWayBillId"));
             origen.setText(codes_info.get("PK_originName"));
@@ -165,26 +149,37 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             recibio.setText(codes_info.get("DD_receiverName"));
 
             String statusStr = codes_info.get("statusSPA");
-            switch (statusStr) {
-                case "EN_TRANSITO":
-                    img_estatus.setImageResource(R.drawable.estatus_transito);
-                    //Log.d("Codigo RE Adapter", "" + estatusStr);
-                    estatus.setText("Pendiente de entrega");
-                    break;
+            String codigoExcStr = codes_info.get("H_exceptionCode");
 
-                case "ENTREGADO":
-                    img_estatus.setImageResource(R.drawable.estatus_entregado);
-                    //Log.d("Codigo RE Adapter", "" + estatusStr);
-                    estatus.setText("Entregado");
-                    break;
+        String estatus_aux= selectImageOnStatus(statusStr, codigoExcStr);
 
-                default:
-                    img_estatus.setImageResource(R.drawable.estatus_sin);
-                    //Log.d("Codigo RE Adapter", "" + estatusStr);
-                    estatus.setText("Sin información");
-                    break;
-            }
+        switch (estatus_aux) {
+            case "celda_pr":
+                img_estatus.setImageResource(R.drawable.estatus_transito);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                estatus.setText("Proceso de entrega");
+                break;
+
+            case "celda_pe":
+                img_estatus.setImageResource(R.drawable.estatus_sin);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                estatus.setText("Pendiente");
+                break;
+
+            case "celda_en":
+                img_estatus.setImageResource(R.drawable.estatus_entregado);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                estatus.setText("Entregado");
+                break;
+
+            default:
+                img_estatus.setImageResource(R.drawable.estatus_sin);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                estatus.setText("Sin información");
+                break;
         }
+
+      //  }
         return view;
     }
 
@@ -255,5 +250,30 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    public String selectImageOnStatus(String status, String code){
+
+        boolean conCodigo = false;
+        if (code != null)
+            conCodigo = Codes.existsZclave(code, context);
+
+        String imagen = "celda_";
+        if (status == null) {
+            imagen = imagen + "no";
+        } else {
+            if (status.equals("CONFIRMADO")) {
+                imagen = imagen + "en";
+            } else if (status.equals("DEVUELTO")) {
+                imagen = imagen + "pe";
+            } else if (status.equals("EN_TRANSITO")) {
+                if (conCodigo) {
+                    imagen = imagen + "pe";
+                } else {
+                    imagen = imagen + "pr";
+                }
+            }
+        }
+        return imagen;
     }
 }

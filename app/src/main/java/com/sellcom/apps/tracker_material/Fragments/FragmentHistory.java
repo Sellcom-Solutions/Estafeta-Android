@@ -45,7 +45,6 @@ public class FragmentHistory extends TrackerFragment {
 
         try {
             Log.d(TAG, "size" + codes_info.size());
-
         } catch (Exception e) {
             e.printStackTrace();
         }

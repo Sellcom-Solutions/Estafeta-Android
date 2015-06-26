@@ -11,6 +11,7 @@ import org.xml.sax.SAXException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -125,6 +126,7 @@ public class ResponseManager {
     public ArrayList<Map<String,String>> parseGuide(Document doc) throws SAXException, IOException, ParserConfigurationException {
         ArrayList<Map<String,String>>  data = new ArrayList<>();
         Map<String,String> map  = new HashMap<String, String>();
+
 
         NodeList list = doc.getElementsByTagName("a:TrackingData");
         Node node = null;
@@ -337,6 +339,7 @@ public class ResponseManager {
                             String nameElement = null;
                             String valueH = "";
                             for (int k = 0; k < listHistory.getLength(); k++) {
+                                Map<String,String> list_history = new HashMap<>();
                                 Node nodeHist = listHistory.item(k);
                                 String name = nodeHist.getNodeName();
                                 if(!name.startsWith("#"))
@@ -357,54 +360,67 @@ public class ResponseManager {
                                                     Log.d("Value",value);
                                                     if (nameElement.equals("a:eventDateTime")) {
                                                         map.put("H_eventDateTime",value);
+                                                        //list_history.put("H_eventDateTime",value);
                                                         //history.setEventDateTime(value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventId")) {
                                                         map.put("H_eventId",value);
+                                                        //list_history.put("H_eventId",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventDescriptionSPA")) {
                                                         map.put("H_eventDescriptionSPA",value);
+                                                        //list_history.put("H_eventDescriptionSPA",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventDescriptionENG")) {
-                                                        map.put("H_eventDescriptionENG",value);
+                                                        //map.put("H_eventDescriptionENG",value);
+                                                        list_history.put("H_eventDescriptionENG",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventPlaceAcronym")) {
                                                         map.put("H_eventPlaceAcronym",value);
+                                                        //list_history.put("H_eventPlaceAcronym",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventPlaceName")) {
                                                         map.put("H_eventPlaceName",value);
+                                                        //list_history.put("H_eventPlaceName",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCode")) {
                                                         map.put("H_exceptionCode",value);
+                                                        //list_history.put("H_exceptionCode",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCodeDescriptionSPA")) {
                                                         map.put("H_exceptionCodeDescriptionSPA",value);
+                                                        //list_history.put("H_exceptionCodeDescriptionSPA",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCodeDescriptionENG")) {
                                                         map.put("H_exceptionCodeDescriptionENG",value);
+                                                        //list_history.put("H_exceptionCodeDescriptionENG",value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCodeDetails")) {
                                                         map.put("H_exceptionCodeDetails",value);
+                                                        //list_history.put("H_exceptionCodeDetails",value);
                                                         continue;
                                                     }
                                                 }
                                         }
                                     }
+                                //data.add(list_history);
                             }
+
 
                         }
                     }
             }
             data.add(map);
+
         }
 
         if (data.size() <0)
