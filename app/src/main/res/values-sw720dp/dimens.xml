@@ -9,6 +9,7 @@
     <dimen name="sizeNormalText">20sp</dimen>
     <dimen name="sizeMediumText">25sp</dimen>
     <dimen name="sizeLargeText">40sp</dimen>
+    <dimen name="sizeAugmentedRealityText">35sp</dimen>
 
 
     <dimen name="navigation_drawer_width">240dp</dimen>

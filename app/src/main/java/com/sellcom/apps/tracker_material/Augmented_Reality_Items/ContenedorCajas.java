@@ -32,7 +32,6 @@ public class ContenedorCajas {
     private RelativeLayout contenedor;
     private List<Marcador> lista;
     private int altoC;
-    public static final int tamLetraSP=8; //Tam de la letra en sp
     public static int tamLetra;
     private int color_fondo_AR;
     private int color_texto_AR;
@@ -41,7 +40,9 @@ public class ContenedorCajas {
     public ContenedorCajas(RelativeLayout contenedor) {
         this.contenedor=contenedor;
         lista=new LinkedList<Marcador>();
-        tamLetra=(int)Pantalla.convertSpsToPixels(tamLetraSP,contenedor.getContext());
+        float dimm=contenedor.getContext().getResources().getDimension(R.dimen.sizeAugmentedRealityText);
+        tamLetra = (int)Pantalla.convertPixelsToSp(dimm,contenedor.getContext());
+        Log.d("TAM TEX: ",String.valueOf(tamLetra));
         color_fondo_AR=Color.BLACK;
         color_texto_AR=Color.WHITE;
     }

@@ -16,6 +16,8 @@ public class Sensores implements SensorEventListener{
     private SensorManager sensorManager;
     private Sensor sensorAccelerometer;
     private Sensor sensorMagneticField;
+    private Sensor sensorOrientation;
+    private double azimuthO;
     private float[] valuesAccelerometer;
     private float[] valuesMagneticField;
     private int contar;
@@ -24,6 +26,11 @@ public class Sensores implements SensorEventListener{
     private float[] matrixValues;
     private double azimuth;
     private double azimuth_Anterior;
+    private double azimuth_AnteriorO;
+
+    private  float []newValues;
+    private float []RMXB;
+
     public static int AuxiliarActualizacion=1;
     private SensorsListener listener;
 
@@ -60,12 +67,17 @@ public class Sensores implements SensorEventListener{
         sensorManager = (SensorManager)a.getSystemService(Context.SENSOR_SERVICE);
         sensorAccelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorMagneticField = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        sensorOrientation = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+
+        RMXB = new float[9];
+        newValues = new float[3];
         valuesAccelerometer = new float[3];
         valuesMagneticField = new float[3];
         matrixR = new float[9];
         matrixI = new float[9];
         matrixValues = new float[3];
         azimuth_Anterior=-1;
+        azimuth_AnteriorO=-1;
         roll_anterior=1;
 
         sensorManager.registerListener(this,
@@ -75,7 +87,16 @@ public class Sensores implements SensorEventListener{
         sensorManager.registerListener(this,
                 sensorMagneticField,
                 SensorManager.SENSOR_DELAY_NORMAL);
+
+
+        /*sensorManager.registerListener(this,
+                sensorOrientation,
+                SensorManager.SENSOR_DELAY_NORMAL);*/
+
+
         this.setListener(listener);
+
+
     }
 
     @Override
@@ -88,6 +109,7 @@ public class Sensores implements SensorEventListener{
 
         // TODO Auto-generated method stub
         switch(event.sensor.getType()){
+
             case Sensor.TYPE_ACCELEROMETER:
                 for(int i =0; i < 3; i++){
                     valuesAccelerometer[i] = event.values[i];
@@ -96,6 +118,7 @@ public class Sensores implements SensorEventListener{
             case Sensor.TYPE_MAGNETIC_FIELD:
                 for(int i =0; i < 3; i++){
                     valuesMagneticField[i] = event.values[i];
+
                 }
 
                 boolean success = SensorManager.getRotationMatrix(
@@ -105,10 +128,16 @@ public class Sensores implements SensorEventListener{
                         valuesMagneticField);
                 if(success){
                     SensorManager.getOrientation(matrixR, matrixValues);
-                    azimuth =(int) Math.toDegrees(matrixValues[0]);
+
+                    SensorManager.remapCoordinateSystem(matrixR,SensorManager.AXIS_X,SensorManager.AXIS_Z,RMXB);
+
+                    SensorManager.getOrientation(RMXB , newValues);
+
+
+                    azimuth =(int) Math.toDegrees(newValues[0]);
                     if(azimuth<0)
                         azimuth=360+azimuth;
-                    azimuth=azimuth+90;
+                    //azimuth=azimuth+90;
                     if(azimuth>360)
                         azimuth=azimuth-360;
                     if(azimuth_Anterior!=-1){
@@ -131,9 +160,10 @@ public class Sensores implements SensorEventListener{
                     }
                     else
                         azimuth=azimuth-azimuth%tolerancia_Azimuth;
-                    pitch = (int)Math.toDegrees(matrixValues[1]);
-                    roll = (int)Math.toDegrees(matrixValues[2]);
-                    roll=-roll;
+
+                    pitch = (int)Math.toDegrees(newValues[2]);
+                    roll = (int)Math.toDegrees(newValues[1]);
+                    roll=-roll+85;
                     if(roll_anterior!=-1){
                         if (roll>roll_anterior){
                             if(roll%tolerancia_roll!=0){
@@ -155,12 +185,13 @@ public class Sensores implements SensorEventListener{
                     else
                         roll=roll-roll%tolerancia_roll;
                     roll_anterior=roll;
+
                     azimuth_Anterior=azimuth;
                     //Log.d("Main",String.valueOf(azimuth));
                     contar++;
                     contar=contar%AuxiliarActualizacion;
-                    //if (contar==1)
-                        listener.identificar();
+                    if (contar==0)
+                       listener.identificar();
                 }
                 break;
         }
@@ -176,7 +207,8 @@ public class Sensores implements SensorEventListener{
     public void finalize(){
         if (sensorManager!=null){
             sensorManager.unregisterListener(this, sensorAccelerometer);
-            sensorManager.unregisterListener(this,sensorMagneticField);
+            sensorManager.unregisterListener(this, sensorMagneticField);
+            //sensorManager.unregisterListener(this,sensorOrientation);
         }
         sensorManager=null;
         Log.d("Sensores", "Finalizado");

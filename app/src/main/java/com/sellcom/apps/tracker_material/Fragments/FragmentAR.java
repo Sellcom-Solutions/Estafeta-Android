@@ -118,9 +118,9 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
                 else{
                     if(ubicacion!=null)
                         identificados=ListaMarcadores.identificarMarcadores(ubicacion,sensor.getAzimuth());
-                    else
+                    //else
 
-                        Log.d("GPS","GPS NULO");
+                        //Log.d("GPS","GPS NULO");
                 }
                 contenedor.eliminar();
                 agregarElementos(identificados);
@@ -137,16 +137,17 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
 
 
     public void agregarElementos(List<Marcador> identificados){
+        //Log.d("SENSOR","Agregar elementos pos "+ String.valueOf(sensor.getAzimuth()));
         Marcador temporal=new Marcador();
         int posX,posY;
         for (int indice=0;indice<identificados.size();indice++){
             //Log.d("Main","Lugar Identificado");
             temporal=identificados.get(indice);
             posX= ListaMarcadores.verificarPosicionEjeX(ubicacion, sensor.getAzimuth(), temporal);
-            posY=ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(),temporal);
-            contenedor.agregarLugaraPantalla(listener, new CajaDeTexto(context),posX,posY,temporal,ubicacion);
-
+            posY=ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(), temporal);
+            contenedor.agregarLugaraPantalla(listener, new CajaDeTexto(context), posX, posY, temporal, ubicacion);
         }
+        //Log.d("SENSOR", "Elementos agregados");
 
     }
 

@@ -128,7 +128,9 @@ public class ListaMarcadores {
         //t.show();
     }
 
+
     public static List<Marcador> identificarMarcadores(Location loc,double direccion){
+
         List<Marcador> identificados;
         identificados=verificarMarcadores(loc, direccion);
         if (identificados.size()>3)
@@ -264,7 +266,7 @@ public class ListaMarcadores {
         posicionY=     (int) (Pantalla.ALTO/2- (Pantalla.Paso_Pantalla_Eje_Y*diferencia));
         //posicionX=posicionX-parametros.width;
 
-        posicionY= posicionY-   (CajaDeTexto.getAltoGenerico()*marcador.getNumLineas())/2 ;
+        posicionY= posicionY-   (CajaDeTexto.getAltoGenerico()*marcador.getNumLineas()) ;
         //posicionY=
         return posicionY;
         //Toast t=Toast.makeText(c,"Identificados: "+identificados.size(),Toast.LENGTH_LONG);
