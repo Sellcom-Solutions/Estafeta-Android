@@ -54,11 +54,11 @@ public class Codes {
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
         if (cursor != null && cursor.getCount() > 0) {
-            ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
+            ArrayList<Map<String,String>> list = new ArrayList<>();
 
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
-                Map<String,String> map  = new HashMap<String, String>();
+                Map<String,String> map  = new HashMap<>();
 
                 map.put(ZCLAVE,cursor.getString(cursor.getColumnIndexOrThrow(ZCLAVE)));
                 map.put(ZDESCRIPCIONCLAVE,cursor.getString(cursor.getColumnIndexOrThrow(ZDESCRIPCIONCLAVE)));
@@ -71,7 +71,35 @@ public class Codes {
             cursor.close();
             return list;
         }
+        try {
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
+    }
+
+    public static boolean existsZclave(String zclave, Context context){
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                null,
+                ZCLAVE + "=?",
+                new String[]{zclave}, null ,null, null);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            if(cursor.getString(cursor.getColumnIndexOrThrow(ZCLAVE)).equals(zclave)){
+                cursor.close();
+                return true;
+            }
+            cursor.close();
+            return false;
+        }
+        try {
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static void removeAll(Context context){
@@ -83,7 +111,11 @@ public class Codes {
                 delete(context, id);
             }
         }
-        cursor.close();
+        try {
+            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static int delete(Context context, int id) {
