@@ -12,4 +12,5 @@
     <dimen name="dialog_width">400dp</dimen>
     <dimen name="dimen_text_step_visit">25sp</dimen>
     <dimen name="dimen_item_step_visit">200dp</dimen>
+    <dimen name="sizeAugmentedRealityText">25sp</dimen>
 </resources>

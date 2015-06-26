@@ -45,8 +45,6 @@ public class ObjetoPintable {
         return false;
     }
 
-
-
     public boolean verificarColisionMarcadorIcono(Marcador marcador){
         boolean colP1,colP2,colP3,colP4;
         colP1=this.verificarColisionPunto(marcador.getXmin(), marcador.getYmin());
@@ -80,14 +78,6 @@ public class ObjetoPintable {
         }
         return false;
     }
-
-
-
-
-
-
-
-
 
     public void setValoresX(int X,int Ancho){
         this.Xmax=X+Ancho;

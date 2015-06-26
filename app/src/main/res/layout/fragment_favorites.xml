@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:weightSum="100"
+    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentFavorites">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="25">
+
+        <FrameLayout
+            android:layout_width    ="match_parent"
+            android:layout_height   ="wrap_content"
+            android:layout_weight   ="20"
+            android:gravity         ="center"
+            android:weightSum="100">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/head_favorites"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:layout_gravity="top"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp"
+                    android:gravity="right">
+                    <TextView
+                        android:layout_width        ="0dp"
+                        android:layout_height       ="match_parent"
+                        android:text                ="@string/favoritos"
+                        android:textSize            ="@dimen/sizeLargeText"
+                        android:layout_weight       ="100"
+                        android:paddingLeft         ="60dp"
+                        android:textColor           ="@color/estafeta_text"
+                        android:layout_gravity      ="right"
+                        android:gravity             ="center" />
+
+                </LinearLayout>
+            </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="72">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/notification_alarm"
+            android:textColor="@color/estafeta_text"
+            android:textSize="@dimen/sizeMediumText"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="20dp"
+                android:layout_weight="75"
+
+                android:layout_marginBottom="2dp"
+                android:text="@string/delivery_confirmation"
+                android:textColor="@color/estafeta_text"
+                android:textSize="@dimen/sizeMediumText"
+                android:background="@color/white"/>
+
+            <Switch
+                android:layout_weight="20"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                style="@style/AppTheme"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/favorite_lst"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/estafeta_light_gray"
+            android:divider="@color/estafeta_soft_gray"
+            android:dividerHeight="1dp">
+
+        </ListView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        android:gravity="bottom">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/footerSize"
+            android:layout_marginLeft="10dp"
+            android:text="@string/footer"
+            android:textColor="@color/estafeta_soft_gray"
+            android:gravity="bottom"
+            android:textStyle="bold"
+            android:layout_gravity="bottom|center_horizontal"
+            />
+
+    </LinearLayout><!--10-->
+
+</LinearLayout>

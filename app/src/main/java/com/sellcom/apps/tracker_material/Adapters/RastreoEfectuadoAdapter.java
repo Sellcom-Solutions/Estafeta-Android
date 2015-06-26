@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import database.model.Codes;
 import database.model.Favorites;
 import database.model.History;
 import database.model.Trackdata;
@@ -80,6 +81,8 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         return position;
     }
 
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final CodigosViewHolder   holder;
@@ -111,16 +114,24 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         holder.codigo.setText(codigoStr);
 
         String estatusStr = codigos_copy.get("statusSPA");
+        String codigoExcStr = codigos_copy.get("H_exceptionCode");
 
+        String estatus_aux= selectImageOnStatus(estatusStr, codigoExcStr);
 
-        switch (estatusStr) {
-            case "EN_TRANSITO":
+        switch (estatus_aux) {
+            case "celda_pr":
                 holder.img_status.setImageResource(R.drawable.estatus_transito);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
-                holder.estatus.setText("Pendiente de entrega");
+                holder.estatus.setText("Proceso de entrega");
                 break;
 
-            case "ENTREGADO":
+            case "celda_pe":
+                holder.img_status.setImageResource(R.drawable.estatus_sin);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                holder.estatus.setText("Pendiente");
+                break;
+
+            case "celda_en":
                 holder.img_status.setImageResource(R.drawable.estatus_entregado);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 holder.estatus.setText("Entregado");
@@ -203,4 +214,31 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
         return convertView;
     }
+
+    public String selectImageOnStatus(String status, String code){
+
+        boolean conCodigo = false;
+        if (code != null)
+            conCodigo = Codes.existsZclave(code, context);
+
+        String imagen = "celda_";
+        if (status == null) {
+            imagen = imagen + "no";
+        } else {
+            if (status.equals("CONFIRMADO")) {
+                imagen = imagen + "en";
+            } else if (status.equals("DEVUELTO")) {
+                imagen = imagen + "pe";
+            } else if (status.equals("EN_TRANSITO")) {
+                if (conCodigo) {
+                    imagen = imagen + "pe";
+                } else {
+                    imagen = imagen + "pr";
+                }
+            }
+        }
+        return imagen;
+    }
+
+
 }

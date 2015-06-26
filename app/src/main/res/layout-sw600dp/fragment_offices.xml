@@ -77,13 +77,26 @@
                     android:id              ="@+id/btn_near"
                     android:layout_width    ="0dp"
                     android:layout_height   ="wrap_content"
-                    android:layout_weight   ="90"
+                    android:layout_weight   ="45"
                     android:text            ="@string/offices_near"
                     android:textSize        ="@dimen/sizeLargeText"
                     android:textColor       ="@color/estafeta_red"
                     android:textStyle       ="normal"
                     android:background      ="@drawable/btn_red_border"
                     android:layout_gravity  ="center_horizontal"
+                    android:layout_marginBottom="5dp"/>
+                <Button
+                    android:id              ="@+id/btn_ar"
+                    android:layout_width    ="0dp"
+                    android:layout_height   ="wrap_content"
+                    android:layout_weight   ="45"
+                    android:text            ="@string/view_ar"
+                    android:textSize        ="@dimen/sizeLargeText"
+                    android:textColor       ="@color/estafeta_red"
+                    android:textStyle       ="normal"
+                    android:background      ="@drawable/btn_red_border"
+                    android:layout_gravity  ="center_horizontal"
+                    android:layout_marginLeft="3dp"
                     android:layout_marginBottom="5dp"/>
 
             </LinearLayout>

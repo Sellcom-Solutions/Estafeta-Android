@@ -2,13 +2,17 @@ package com.sellcom.apps.tracker_material.Augmented_Reality_Items;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
+import android.test.ActivityTestCase;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.Surface;
+import android.view.WindowManager;
 
 /**
  * Created by juan.guerra on 22/06/2015.
@@ -33,8 +37,8 @@ public class Pantalla {
         Log.d("PANTALLA", String.valueOf(DENSIDAD));
         // Tomamos la pantalla del dispositivo
         Display display = c.getWindowManager().getDefaultDisplay();
-        Point size = new Point();
 
+        Point size = new Point();
         if(Build.VERSION.SDK_INT >=
                 Build.VERSION_CODES.HONEYCOMB_MR2){
             display.getSize(size);
@@ -60,6 +64,13 @@ public class Pantalla {
         Log.d("Medidas: ",String.valueOf(ANCHO_PANTALLA)+" "+String.valueOf(ALTO_PANTALLA));
         Log.d("Medidas: ",String.valueOf(ANCHO)+" "+String.valueOf(ALTO));
         Log.d("Densidad: ",String.valueOf(DENSIDAD));
+        obtenerOrientacionDispositivo(c);
+
+
+        Log.d("Cantidad de DP en X: ", String.valueOf(convertPixelsToDp(ANCHO,c)));
+        Log.d("Cantidad de DP en Y: ",String.valueOf(convertPixelsToDp(ALTO,c)));
+
+
     }
 
     public static float convertDpToPixel(float dp, Context context){
@@ -87,7 +98,33 @@ public class Pantalla {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         float px = sp * metrics.scaledDensity;
+        Log.d("Pantalla","Tamaño de 1 sp en telefono: "+
+                String.valueOf( (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 1,
+                        resources.getDisplayMetrics())));
         return px;
+    }
+
+    public static void obtenerOrientacionDispositivo(Context c){
+        WindowManager windowMgr =(WindowManager)c.getSystemService(Context.WINDOW_SERVICE);
+        int rotationIndex = windowMgr.getDefaultDisplay().getRotation();
+        Log.d("ROTATION",String.valueOf(getDeviceDefaultOrientation(c)));
+    }
+
+    public static int getDeviceDefaultOrientation(Context c) {
+
+        WindowManager windowManager =  (WindowManager) c.getSystemService(Context.WINDOW_SERVICE);
+        Configuration config = c.getResources().getConfiguration();
+
+        int rotation = windowManager.getDefaultDisplay().getRotation();
+
+        if ( ((rotation == Surface.ROTATION_0 || rotation == Surface.ROTATION_180) &&
+                config.orientation == Configuration.ORIENTATION_LANDSCAPE)
+                || ((rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270) &&
+                config.orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            return Configuration.ORIENTATION_LANDSCAPE;
+        } else {
+            return Configuration.ORIENTATION_PORTRAIT;
+        }
     }
 
 }

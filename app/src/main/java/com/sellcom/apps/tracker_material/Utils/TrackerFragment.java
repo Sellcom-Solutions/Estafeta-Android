@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import database.model.Codes;
 import database.model.Countries;
 import database.model.States;
 
@@ -34,6 +35,7 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         FRAG_RASTREO_EFECTUADO("rastreo_efectuado"),
         FRAG_RASTREO_DIALOGO("rastreo_dialogo"),
         FRAG_HISTORY("history"),
+        FRAG_FAVORITES("favorites"),
         FRAG_OFFICES ("officinas"),
         FRAG_CODIGO_POSTAL("codigo_postal"),
         FRAG_QUOTATION("cotizador"),
