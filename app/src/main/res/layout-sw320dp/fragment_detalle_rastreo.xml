@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+
+    <com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_weight="95">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:weightSum="100">
+            <FrameLayout
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical"
+                xmlns:fab="http://schemas.android.com/apk/res-auto"
+                tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDetalleRastreo">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:weightSum="100">
+
+                        <CheckBox
+                            android:id="@+id/fd_btn_favorito"
+                            style="@style/StarCheckBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="top|center_horizontal"
+                            android:gravity="center_horizontal"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_weight="10"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="85"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/no_guia2"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_no_guia"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/cod_rastreo"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_cod_rastreo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/origen"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_origen"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/fecha_recoleccion"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_fecha_recol"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=" "
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/destino"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_destino"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=" "
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/cp_destino"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_cp_destino"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/estatus_servicio"
+                                    android:textColor="@color/estafeta_text"
+                                    android:textSize="@dimen/sizeSmallText"
+                                    android:textStyle="bold" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    >
+
+                                    <TextView
+                                        android:id="@+id/fd_estatus"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/estafeta_text"
+                                        android:layout_weight="1"
+                                        android:textSize="@dimen/sizeSmallText" />
+
+                                    <ImageView
+                                        android:id="@+id/fd_img_status"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center"
+                                        android:scaleType="centerInside"
+                                        android:layout_weight="0"
+                                        android:src="@drawable/estatus_sin" />
+                                </LinearLayout>
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/fecha_hora"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_fecha_hora_entrega"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/recibio"
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/fd_recibio"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:textColor="@color/estafeta_text"
+                                        android:textSize="@dimen/sizeSmallText" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="70dp"
+                                    android:background="@drawable/border_gray" />
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <Button
+                            android:id="@+id/btn_historia"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center"
+                            android:background="@color/zxing_transparent"
+                            android:text="@string/ver_historia"
+                            android:paddingTop="20dp"
+                            android:layout_marginBottom="25dp"
+                            android:textColor="@color/estafeta_red" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <com.getbase.floatingactionbutton.FloatingActionsMenu
+                        android:id="@+id/history_more"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        fab:fab_addButtonColorNormal="@color/estafeta_blue"
+                        fab:fab_addButtonColorPressed="@color/estafeta_blue"
+                        fab:fab_addButtonSize="normal"
+                        fab:fab_addButtonPlusIconColor="@color/white"
+                        fab:fab_expandDirection="up"
+                        android:layout_gravity="bottom|right"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp">
+
+                        <com.getbase.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/button_share"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            fab:fab_colorNormal="@color/white"
+                            fab:fab_colorPressed="@color/white"
+                            fab:fab_icon="@drawable/ic_share"
+                            fab:fab_title="Share"/>
+
+                        <com.getbase.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/button_call"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            fab:fab_colorNormal="@color/white"
+                            fab:fab_colorPressed="@color/white"
+                            fab:fab_icon="@drawable/ic_call"
+                            fab:fab_title="Call"/>
+
+                    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+                </FrameLayout>
+
+            </FrameLayout>
+            </LinearLayout>
+    </com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/footerSize"
+            android:layout_marginLeft="10dp"
+            android:text="@string/footer"
+            android:textColor="@color/estafeta_soft_gray"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="top"
+            android:layout_gravity="top|center_horizontal"
+            />
+    </LinearLayout><!--5-->
+
+</LinearLayout>
