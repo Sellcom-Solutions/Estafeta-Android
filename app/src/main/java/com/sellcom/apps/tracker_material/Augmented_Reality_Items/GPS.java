@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -85,6 +86,7 @@ public class GPS implements
 
     private void mostrarPosicion(Location loc) {
         if (loc!=null){
+            Log.d("GPS Accuary: ",String.valueOf(loc.getAccuracy()));
             if (DialogManager.sharedInstance().isShowingDialog())
                 DialogManager.sharedInstance().dismissDialog();
             loc.setAltitude(0);

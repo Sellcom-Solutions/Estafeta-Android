@@ -101,7 +101,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     }
 
     @Override
-    public synchronized void identificar(){
+    public void identificar(){
         //Log.d("SENSOR","Valor Leido");
         if (identificacion)
         {

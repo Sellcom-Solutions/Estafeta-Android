@@ -31,7 +31,8 @@ public class Sensores implements SensorEventListener{
     private  float []newValues;
     private float []RMXB;
 
-    public static int AuxiliarActualizacion=1;
+    public static int AuxiliarActualizacion=2;
+    public static long TiempoAuxiliarActualizacion = 100;
     private SensorsListener listener;
 
     public double getAzimuth() {
@@ -49,6 +50,8 @@ public class Sensores implements SensorEventListener{
     private double roll_anterior;
     private final int tolerancia_roll=4;
     private static Sensores sensor;
+
+    private long lastTime;
 
     public synchronized static Sensores getInstance(Context a,SensorsListener listener){
         if (sensor==null){
@@ -95,7 +98,7 @@ public class Sensores implements SensorEventListener{
 
 
         this.setListener(listener);
-
+        lastTime = System.nanoTime();
 
     }
 
@@ -190,8 +193,18 @@ public class Sensores implements SensorEventListener{
                     //Log.d("Main",String.valueOf(azimuth));
                     contar++;
                     contar=contar%AuxiliarActualizacion;
-                    if (contar==0)
-                       listener.identificar();
+                    long newTime;
+                    newTime = System.nanoTime();
+                    //Log.d("Time: ",String.valueOf((newTime - lastTime)/1000000));
+
+
+                    //if (contar==0)
+                    if ( ((newTime - this.lastTime)/1000000) >= TiempoAuxiliarActualizacion ){
+                        //Log.d("Final Time: ", String.valueOf((newTime - this.lastTime) / 1000000));
+                        this.lastTime = newTime;
+                        listener.identificar();
+                    }
+
                 }
                 break;
         }
