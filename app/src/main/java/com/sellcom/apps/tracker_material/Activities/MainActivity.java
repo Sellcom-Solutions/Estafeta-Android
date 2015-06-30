@@ -90,9 +90,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         if(currentFragment instanceof FragmentAR){
             ((FragmentAR)currentFragment).finalizar();
-            super.onBackPressed();
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             getSupportActionBar().show();
+            mNavigationDrawerFragment.selectItem(NavigationDrawerFragment.OFICINAS);
             //System.gc();
             return;
         }

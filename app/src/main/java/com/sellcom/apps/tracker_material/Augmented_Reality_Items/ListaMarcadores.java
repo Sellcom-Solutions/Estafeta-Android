@@ -35,6 +35,8 @@ public class ListaMarcadores {
         List<Map<String,String>> listOficinas;
         listOficinas = Offices.getAllInMaps(context);
         Map<String,String> oficina;
+        if (listOficinas == null)
+            return;
 
         for (int index=0;index<listOficinas.size();index++){
             oficina=listOficinas.get(index);
@@ -47,7 +49,7 @@ public class ListaMarcadores {
                         Utilities.convertOfficesTypeToInt(oficina.get(Offices.TIPO_OFICINA))));
             }
             catch(java.lang.NumberFormatException e){
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
@@ -149,7 +151,7 @@ public class ListaMarcadores {
 
     public static List<Marcador> ordenarMarcadores(List<Marcador> marcadores,Location loc){
         int valores[]=new int[3];
-        double minimo=Double.MAX_VALUE;
+        double minimo;
         double distancia;
         List<Marcador> marc=new LinkedList<Marcador>();
         for (int ciclos=0;ciclos<3;ciclos++){
@@ -276,7 +278,7 @@ public class ListaMarcadores {
 
 
     public static double calcularDiferencia(double direccion,double bearing){
-        double diferencia=0;
+        double diferencia;
         if(bearing<0){
             bearing=360+bearing;
         }

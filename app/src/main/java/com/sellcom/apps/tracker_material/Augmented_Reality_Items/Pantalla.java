@@ -76,29 +76,27 @@ public class Pantalla {
     public static float convertDpToPixel(float dp, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-        float px = dp * (metrics.densityDpi / 160f);
-        return px;
+        return (dp * (metrics.densityDpi / 160f));
     }
 
     public static float convertPixelsToDp(float px, Context context){
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-        float dp = px / (metrics.densityDpi / 160f);
-        return dp;
+        return (px / (metrics.densityDpi / 160f));
+
     }
 
     public static float convertPixelsToSp(float px,Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-        float sp = px / metrics.scaledDensity;
-        return sp;
+        return (px / metrics.scaledDensity);
     }
 
     public static float convertSpsToPixels(float sp,Context context) {
         Resources resources = context.getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
         float px = sp * metrics.scaledDensity;
-        Log.d("Pantalla","Tamaño de 1 sp en telefono: "+
+        Log.d("Pantalla","Tam de 1 sp en telefono: "+
                 String.valueOf( (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 1,
                         resources.getDisplayMetrics())));
         return px;

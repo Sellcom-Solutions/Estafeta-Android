@@ -139,6 +139,7 @@
     <string name="error_lista_vacia">Error, la lista de rastreo se encuentra vacía.</string>
     <string name="error_agregar_fav">Error, no existe información acerca de este registro.</string>
     <string name="exito_agregar_fav">Operación exitosa</string>
+    <string name="no_sensor">No es posible llevar a cabo la función de realidad aumentada debido a que tu dispositivo no cuenta con sensor de campo magnético, </string>
 
     <!-- Data base -->
     <string name="db_trackdata">CREATE TABLE "trackdata" ("id_trackdata"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "waybill"  TEXT(24),

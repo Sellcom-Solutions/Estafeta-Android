@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.gc.materialdesign.widgets.Dialog;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.CajaDeTexto;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.Camara;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.ContenedorCajas;
@@ -25,6 +28,7 @@ import com.sellcom.apps.tracker_material.Augmented_Reality_Items.Pantalla;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.Sensores;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.SensorsListener;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import android.view.View.OnClickListener;
 
@@ -61,19 +65,26 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getActivity();
-        ListaMarcadores.actualizarMarcadores(context);
-        gps=GPS.getInstance(context);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_augmented_reality, container, false);
-        inicializar();
+        context = getActivity();
+        if (verificarSensores())
+            inicializar();
+        else {
+            if (DialogManager.sharedInstance().isShowingDialog())
+                DialogManager.sharedInstance().dismissDialog();
+        }
+
         return view;
     }
 
     public void inicializar(){
+        ListaMarcadores.actualizarMarcadores(context);
+        gps=GPS.getInstance(context);
         //RRA.getId();
         contenedorCajas=new RelativeLayout(getActivity());
         RelativeLayout.LayoutParams parametros=new RelativeLayout.LayoutParams(
@@ -90,6 +101,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
         identificacion=true;
         contenedor=new ContenedorCajas(contenedorCajas);
         this.ubicacion=null;
+
         sensor=Sensores.getInstance(getActivity(), this);
         listener=new OnClickListener() {
             @Override
@@ -99,6 +111,20 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
         };
         ocupado=false;
     }
+
+    public boolean verificarSensores(){
+        SensorManager sensorManager = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) == null){
+          //if (null == null){
+                Dialog dialog = new Dialog(context,"Error",getResources().getString(R.string.no_sensor));
+                dialog.show();
+            getActivity().onBackPressed();
+              return false;
+        }
+        else
+              return true;
+    }
+
 
     @Override
     public void identificar(){
@@ -137,7 +163,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
 
 
     public void agregarElementos(List<Marcador> identificados){
-        //Log.d("SENSOR","Agregar elementos pos "+ String.valueOf(sensor.getAzimuth()));
+        Log.d("SENSOR","Agregar elementos en direccion: "+ String.valueOf(sensor.getAzimuth()));
         Marcador temporal=new Marcador();
         int posX,posY;
         for (int indice=0;indice<identificados.size();indice++){
