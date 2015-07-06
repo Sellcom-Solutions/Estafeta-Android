@@ -9,4 +9,7 @@
     <color name="new_col">#FFD060</color>
 
     <!--<color name="estafeta_blue">#4D75A0</color>-->
+
+    <drawable name="selected">#EFEFF4</drawable>
+
 </resources>

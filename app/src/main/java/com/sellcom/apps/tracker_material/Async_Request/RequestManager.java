@@ -39,6 +39,7 @@ import org.xml.sax.SAXException;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -55,6 +56,7 @@ public class RequestManager implements ResponseListenerInterface {
     private         Activity                                activity;
     private         UIResponseListenerInterface             listener;
     private         METHOD                                  method;
+    private ArrayList<Map<String, String>> responseArray1;
 
     public ArrayList<Map<String, String>> getResponseArray() {
         return responseArray;
@@ -323,6 +325,18 @@ public class RequestManager implements ResponseListenerInterface {
                 Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), "");
                 break;
             case REQUEST_NATIONAL_DELIVERY:
+                try {
+                    responseArray = ResponseManager.sharedInstance().parseCotizador(doc);
+                    setResponseArray(responseArray);
+
+                    //Log.d("responseParse","ok size: "+responseArray.size());
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
 
                 Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), "");
                 break;
@@ -368,7 +382,7 @@ public class RequestManager implements ResponseListenerInterface {
         doc = documentBuilder.parse(zipcodes);
         zipcodes.close();
         doc.getDocumentElement().normalize();
-        responseArray = responseParse(doc,this.method);
+        responseArray1 = responseParse(doc,this.method);
         String contentDocument = doc.getDocumentElement().getTextContent();
         return contentDocument;
     }

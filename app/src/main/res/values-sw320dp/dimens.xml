@@ -35,6 +35,8 @@
     <!--item_rastreo_efect  -->
 
     <dimen name="sizeRastreoEfectuado">13sp</dimen>
+
     <!--Footer  -->
     <dimen name="footerSize">10dp</dimen>
+
 </resources>

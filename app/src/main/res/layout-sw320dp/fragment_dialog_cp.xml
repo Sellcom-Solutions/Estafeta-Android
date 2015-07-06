@@ -131,7 +131,6 @@
         android:layout_height="150dp"
         android:layout_gravity="left"
         android:divider="@color/estafeta_soft_gray"
-        android:dividerHeight="-20dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lin_item_cp"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:weightSum="100">
 
     <TextView
@@ -11,10 +13,9 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/sizeSmallText"
         android:textColor="@color/estafeta_text"
-        android:background="@color/white"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:padding="20dp"
+        android:padding="10dp"
         android:layout_weight="60"
         android:text="Item"  />
 
@@ -24,10 +25,9 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/sizeSmallText"
         android:textColor="@color/estafeta_text"
-        android:background="@color/white"
         android:singleLine="true"
         android:ellipsize="marquee"
-        android:padding="20dp"
+        android:padding="10dp"
         android:gravity="center"
         android:layout_weight="40"
         android:text="Item" />

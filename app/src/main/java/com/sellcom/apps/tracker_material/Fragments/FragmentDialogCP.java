@@ -82,7 +82,7 @@ public class FragmentDialogCP extends DialogFragment implements View.OnClickList
             }
 
 
-            CPAListdapter adapter = new CPAListdapter(getActivity(),colonias,tipo);
+            CPAListdapter adapter = new CPAListdapter(getActivity(),getActivity(),colonias,tipo);
             lst_colonias.setAdapter(adapter);
 
             ciudad = aux.get("ciudad");
