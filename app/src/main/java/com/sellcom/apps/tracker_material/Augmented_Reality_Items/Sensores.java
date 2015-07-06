@@ -46,9 +46,9 @@ public class Sensores implements SensorEventListener{
     private double roll;
     private Context a;
 
-    private final int tolerancia_Azimuth=4;
+    private final int tolerancia_Azimuth=2;
     private double roll_anterior;
-    private final int tolerancia_roll=4;
+    private final int tolerancia_roll=2;
     private static Sensores sensor;
 
     private long lastTime;
