@@ -28,7 +28,7 @@ public class ListaMarcadores {
     public static double tolerancia=Pantalla.Angulo_Tolerancia;
     public static double distancia;
     private static final float DISTANCIA= FragmentOfficesMap.distancia_max_deteccion;
-
+    private static final int NUMERO_ELEMENTOS = 5;
 
     public static void actualizarMarcadores(Context context){
         listaMarcadores=new LinkedList<Marcador>();
@@ -135,7 +135,7 @@ public class ListaMarcadores {
 
         List<Marcador> identificados;
         identificados=verificarMarcadores(loc, direccion);
-        if (identificados.size()>3)
+        if (identificados.size()>NUMERO_ELEMENTOS)
             identificados=ordenarMarcadores(identificados, loc);
         Marcador temp;
         for (int location=0;location<identificados.size();location++){
@@ -150,11 +150,11 @@ public class ListaMarcadores {
     }
 
     public static List<Marcador> ordenarMarcadores(List<Marcador> marcadores,Location loc){
-        int valores[]=new int[3];
+        int valores[]=new int[NUMERO_ELEMENTOS];
         double minimo;
         double distancia;
         List<Marcador> marc=new LinkedList<Marcador>();
-        for (int ciclos=0;ciclos<3;ciclos++){
+        for (int ciclos=0;ciclos<NUMERO_ELEMENTOS;ciclos++){
             minimo=Double.MAX_VALUE;
             for (int location=0;location<marcadores.size();location++){
                 distancia=loc.distanceTo(marcadores.get(location).getLocalizacionLugar());
