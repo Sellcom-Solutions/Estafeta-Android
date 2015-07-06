@@ -4,6 +4,8 @@ package com.sellcom.apps.tracker_material.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +34,11 @@ import database.model.Favorites;
  */
 public class FragmentRastreoEfectuado extends TrackerFragment implements AdapterView.OnItemClickListener {
 
+
+    TrackerFragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
     String TAG = "FRAG_RASTREO_EFECTUADO";
     Context context;
     ListView lst_rastreo_efectuado;
@@ -43,7 +50,6 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
     public FragmentRastreoEfectuado() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,6 +100,16 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
             case R.id.add_favorite:
                 //Log.d(TAG,"item selected");
                 Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                Bundle bundle= new Bundle();
+                bundle.putSerializable("codes_info", codes_info);
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragment = new FragmentFavorites();
+                fragment.addFragmentToStack(getActivity());
+                fragment.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, fragment, TAG);
+                fragmentTransaction.commit();
                 return true;
 
             default: return super.onOptionsItemSelected(item);
