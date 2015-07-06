@@ -341,8 +341,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case R.id.btn_quote:
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                //requestQuote();
+                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                requestQuote();
                 break;
         }
     }
