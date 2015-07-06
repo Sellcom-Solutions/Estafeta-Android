@@ -229,4 +229,33 @@
     <string name="noCpDestination">Error, Código postal destino no existe.</string>
 
 
+    <!-- Edit Favorite -->
+    <string name="EditFavorite">Editar</string>
+    <string name="No_Guia">No. Guia</string>
+    <string name="Cod_Rastreo">Codigo de rastreo</string>
+    <string name="no_guia3">No. Guía: </string>
+    <string name="references_favorite">Referencia: </string>
+    <string name="favorite_cod_rastreo">Código de rastreo: </string>
+    <string name="name_guia">Asigna un nombre a tu numero de guía para facilitar su localización </string>
+    <string name="favorite_ServiceStatus">Estatus del Servicio: </string>
+    <string name="edit_cancel">Cancelar</string>
+    <string name="edit_save">Guardar</string>
+    <string name="edit_name_guia">Referencia</string>
+
+    <!-- Detalle Favorite -->
+
+    <string name="fav_favorite">Favorito</string>
+    <string name="fav_reference">Referencia: </string>
+    <string name="fav_cod_rastreo">Codigo de rastreo</string>
+    <string name="fav_no_guia">No. Guía: </string>
+    <string name="fav_origen">Origen</string>
+    <string name="fav_destino">Destino:</string>
+    <string name="fav_cp_destino">C.R. Destino:</string>
+    <string name="fav_estatus">Estatus del Srvicio:</string>
+    <string name="fav_fecha">Fecha y hora de entrega</string>
+    <string name="fav_recibio">Recibio: </string>
+    <string name="fav_btn_call">Llamar </string>
+    <string name="fav_btn_share">Compartir </string>
+    <string name="fav_btn_closed">Cerrar </string>
+
 </resources>
