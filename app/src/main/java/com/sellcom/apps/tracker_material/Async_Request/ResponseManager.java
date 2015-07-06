@@ -437,6 +437,7 @@ public class ResponseManager {
 
         ArrayList<Map<String ,String>> officeMap =new ArrayList<>();
         doc.getDocumentElement().normalize();
+
         NodeList sucursales = doc.getElementsByTagName("a:Sucursal");
 
         if(sucursales!=null){
@@ -600,4 +601,337 @@ public class ResponseManager {
         Log.d("Response Manager","end");
         return null;
     }
+
+
+
+    public ArrayList<Map<String,String>> parseCotizador(Document doc) throws SAXException, IOException, ParserConfigurationException {
+        ArrayList<Map<String, String>> cotizadorMap = new ArrayList<>();
+        Map<String,String> map  = new HashMap<String, String>();
+        Node nodeitem;
+        String nodeValue = "";
+        String nodeName = "";
+        NodeList list = doc.getElementsByTagName("a:Respuesta");
+        if (list != null) {
+            if (list.getLength() == 0) {
+                return null;
+            }
+        }
+
+        Node node = null;
+        node = list.item(0);
+        NodeList all = node.getChildNodes();
+
+        nodeitem = all.item(5);
+        nodeName = nodeitem.getNodeName();
+        Log.d("Node name", nodeName);
+            if (nodeitem.hasChildNodes()) {
+
+                Node error = nodeitem.getFirstChild();
+                if (error.getNodeValue() != null)
+                    nodeValue = error.getNodeValue();
+
+                if ("a:Error".equals(nodeName)) {
+
+                    if(!nodeValue.equals("000")){
+                        map.put("Error", nodeValue);
+                        Log.v("Error", nodeValue);
+                        cotizadorMap.add(map);
+                        return cotizadorMap;
+                    }else{
+                        map.put("Error", nodeValue);
+                        Log.v("Error", nodeValue);
+                    }
+                }
+
+            }
+
+
+
+        for (int i = 0; i < all.getLength(); i++) {
+
+            nodeitem = all.item(i);
+            nodeName = nodeitem.getNodeName();
+            Log.d("Node name", nodeName);
+            if (!nodeName.startsWith("#"))
+                if (nodeitem.hasChildNodes()) {
+
+                    Node subNode = nodeitem.getFirstChild();
+
+
+                    if (subNode.getNodeValue() != null)
+                        nodeValue = subNode.getNodeValue();
+
+                    if ("a:CodigoPosOri".equals(nodeName)) {
+                        map.put("CodigoPosOri", nodeValue);
+                        Log.v("CodigoPosOri", nodeValue);
+                        continue;
+                    }
+
+                    if ("a:Destino".equals(nodeName)) {
+                        NodeList destinysChild = nodeitem.getChildNodes();
+                        for (int d = 0; d < destinysChild.getLength(); d++) {
+                            String destiny = destinysChild.item(d)
+                                    .getNodeName();
+                            String nodeValue2 = destinysChild.item(d)
+                                    .getFirstChild().getNodeValue();
+                            if ("a:CpDestino".equals(destiny)) {
+                                map.put("CpDestino", nodeValue2);
+                                Log.v("CpDestino", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Estado".equals(destiny)) {
+                                if (destinysChild.item(d).hasChildNodes())
+                                    map.put("Estado", nodeValue2);
+                                Log.v("Estado", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Municipio".equals(destiny)) {
+                                if (destinysChild.item(d).hasChildNodes())
+                                    map.put("Municipio", nodeValue2);
+                                Log.v("Municipio", nodeValue2);
+                                continue;
+                            }
+                            if("a:Plaza1".equals(destiny)){
+                                if(destinysChild.item(d).hasChildNodes())
+                                    map.put("Plaza1", nodeValue2);
+                                Log.v("Plaza1", nodeValue2);
+                                continue;
+                            }
+                        }
+                        continue;
+                    }
+                    if ("a:CostoReexpedicion".equals(nodeName)) {
+                        map.put("CostoReexpedicion", nodeName);
+                        Log.v("CostoReexpedicion", nodeValue);
+                        continue;
+                    }
+                    if ("a:DiasEntrega".equals(nodeName)) {
+                        NodeList days = nodeitem.getChildNodes();
+                        for (int d = 0; d < days.getLength(); d++) {
+                            String dayName = days.item(d).getNodeName();
+                            String nodeValue2 = days.item(d)
+                                    .getFirstChild().getNodeValue();
+                            if ("a:Lunes".equals(dayName)) {
+                                if (days.item(d).hasChildNodes())
+                                    map.put("Lunes", nodeValue2);
+                                Log.v("Lunes", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Martes".equals(dayName)) {
+                                if (days.item(d).hasChildNodes())
+                                    map.put("Martes", nodeValue2);
+                                Log.v("Martes", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Miercoles".equals(dayName)) {
+                                if (days.item(d).hasChildNodes())
+                                    map.put("Miercoles", nodeValue2);
+                                Log.v("Miercoles", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Jueves".equals(dayName)) {
+                                if (days.item(d).hasChildNodes())
+                                    map.put("Jueves", nodeValue2);
+                                Log.v("Jueves", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Viernes".equals(dayName)) {
+                                if (days.item(d).hasChildNodes())
+                                    map.put("Viernes", nodeValue2);
+                                Log.v("Viernes", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Sabado".equals(dayName)) {
+                                if (days.item(d).hasChildNodes())
+                                    map.put("Sabado", nodeValue2);
+                                Log.v("Sabado", nodeValue2);
+                                continue;
+                            }
+                            if ("a:Domingo".equals(dayName)) {
+                                if (days.item(d).hasChildNodes())
+                                    map.put("Domingo", nodeValue2);
+                                Log.v("Domingo", nodeValue2);
+                                continue;
+                            }
+                        }
+                        continue;
+                    }
+
+                    if ("a:Origen".equals(nodeName)) {
+                        NodeList originsChild = nodeitem.getChildNodes();
+                        for (int d = 0; d < originsChild.getLength(); d++) {
+                            String origin = originsChild.item(d)
+                                    .getNodeName();
+                            String nodeValue2 = originsChild.item(d)
+                                    .getFirstChild().getNodeValue();
+
+                            if ("a:CodigoPosOri".equals(origin)) {
+                                map.put("CodigoPosOri", nodeValue2);
+                                Log.v("CodigoPosOri", nodeValue2);
+                                continue;
+                            }
+
+                            if ("a:MunicipioOri".equals(origin)) {
+                                map.put("MunicipioOri", nodeValue2);
+                                Log.v("MunicipioOri", nodeValue2);
+                                continue;
+                            }
+                            if ("a:EstadoOri".equals(origin)) {
+                                if (originsChild.item(d).hasChildNodes())
+                                    map.put("EstadoOri", nodeValue2);
+                                Log.v("EstadoOri", nodeValue2);
+                                continue;
+                            }
+                        }
+                        continue;
+                    }
+
+                    if ("a:ModalidadEntrega".equals(nodeName)) {
+                        NodeList mode = nodeitem.getChildNodes();
+                        for (int d = 0; d < mode.getLength(); d++) {
+                            String freOcc = mode.item(d).getNodeName();
+                            String nodeValue2 = mode.item(d)
+                                    .getFirstChild().getNodeValue();
+                            if ("a:Frecuencia".equals(freOcc)) {
+                                map.put("Frecuencia", nodeValue2);
+                                Log.v("Frecuencia", nodeValue2);
+                                continue;
+                            }
+                            if ("a:OcurreForzoso".equals(freOcc)) {
+                                map.put("OcurreForzoso", nodeValue2);
+                                Log.v("OcurreForzoso", nodeValue2);
+                                continue;
+                            }
+                        }
+                        continue;
+                    }
+                    if ("a:TipoEnvio".equals(nodeName)) {
+                        NodeList sentType = nodeitem.getChildNodes();
+                        for (int d = 0; d < sentType.getLength(); d++) {
+                            String charac = sentType.item(d).getNodeName();
+                            String nodeValue2 = sentType.item(d)
+                                    .getFirstChild().getNodeValue();
+                            if ("Alto".equals(charac)) {
+                                map.put("Alto", nodeValue2);
+                                Log.v("Alto", nodeValue2);
+                                continue;
+                            }
+                            if ("Ancho".equals(charac)) {
+                                map.put("Ancho", nodeValue2);
+                                Log.v("Ancho", nodeValue2);
+                                continue;
+                            }
+                            if ("EsPaquete".equals(charac)) {
+                                map.put("EsPaquete", nodeValue2);
+                                Log.v("EsPaquete", nodeValue2);
+                                continue;
+                            }
+                            if ("Largo".equals(charac)) {
+                                map.put("Largo", nodeValue2);
+                                Log.v("Largo", nodeValue2);
+                                continue;
+                            }
+                            if ("Peso".equals(charac)) {
+                                map.put("Peso", nodeValue2);
+                                Log.v("Peso", nodeValue2);
+                                continue;
+                            }
+                        }
+                        cotizadorMap.add(map);
+                        continue;
+                    }
+                    if ("a:TipoServicio".equals(nodeName)) {
+                        map  = new HashMap<String, String>();
+                        NodeList respuestacotiza = nodeitem.getChildNodes();
+                        Node eachservice;
+                        NodeList eachServNode;
+                        for (int f = 0; f < respuestacotiza.getLength(); f++) {
+                            eachservice = respuestacotiza.item(f);
+                            eachServNode = eachservice.getChildNodes();
+                            for (int d = 0; d < eachServNode.getLength(); d++) {
+                                String charac = eachServNode.item(d)
+                                        .getNodeName();
+                                String nodeValue2 = eachServNode
+                                        .item(d).getFirstChild()
+                                        .getNodeValue();
+                                if ("a:CCSobrePeso".equals(charac)) {
+                                    map.put("CCSobrePeso", nodeValue2);
+                                    Log.v("CCSobrePeso", nodeValue2);
+                                    continue;
+                                }
+                                if ("a:CCTarifaBase".equals(charac)) {
+                                    map.put("CCTarifaBase", nodeValue2);
+                                    Log.v("CCTarifaBase", nodeValue2);
+                                    continue;
+                                }
+                                if ("a:CargosExtra".equals(charac)) {
+                                    map.put("CargosExtra", nodeValue2);
+                                    Log.v("CargosExtra", nodeValue2);
+                                    continue;
+                                }
+                                if ("a:CostoTotal".equals(charac)) {
+                                    map.put("CostoTotal", nodeValue2);
+                                    Log.v("CostoTotal", nodeValue2);
+
+                                    continue;
+                                }
+                                if ("a:DescripcionServicio".equals(charac)) {
+                                    map.put("DescripcionServicio", nodeValue2);
+                                    Log.v("DescripcionServicio", nodeValue2);
+                                    continue;
+                                }
+                                if ("a:Peso".equals(charac)) {
+                                    map.put("Peso", nodeValue2);
+                                    Log.v("Peso", nodeValue2);
+                                    continue;
+                                }
+                                if ("a:SobrePeso".equals(charac)) {
+                                    map.put("SobrePeso", nodeValue2);
+                                    Log.v("SobrePeso", nodeValue2);
+                                    continue;
+                                }
+                                if ("a:TarifaBase".equals(charac)) {
+                                    map.put("TarifaBase", nodeValue2);
+                                    Log.v("TarifaBase", nodeValue2);
+                                    continue;
+                                }
+                                if ("a:TipoEnvioRes".equals(charac)) {
+                                    map.put("TipoEnvioRes", nodeValue2);
+                                    Log.v("TipoEnvioRes", nodeValue2);
+                                    continue;
+                                }
+
+                                if ("a:AplicaCotizacion".equals(charac)) {
+                                    map.put("AplicaCotizacion", nodeValue2);
+                                    Log.v("AplicaCotizacion", nodeValue2);
+                                    continue;
+                                }
+
+                                if ("a:AplicaServicio".equals(charac)) {
+                                    map.put("AplicaServicio", nodeValue2);
+                                    Log.v("AplicaServicio", nodeValue2);
+                                    continue;
+                                }
+                            }
+                            cotizadorMap.add(map);
+                        }
+                        continue;
+                    }
+                }
+
+
+        }
+
+        if(cotizadorMap.size()>0){
+           /* for(int i=0;i<officeMap.size();i++)
+            Log.d("ArrayList",officeMap.get(i).get("nombreOficina"));*/
+            Log.d("Response Manager","end");
+            return cotizadorMap;
+        }
+
+        return null;
+
+    }
+
+
 }

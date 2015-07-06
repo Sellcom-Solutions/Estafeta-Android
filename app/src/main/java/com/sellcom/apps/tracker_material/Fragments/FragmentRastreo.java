@@ -28,6 +28,7 @@ import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterfa
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,7 +86,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         lst_rastreo = (ListView)view.findViewById(R.id.liv_rastreo);
         codigo      = (EditText)view.findViewById(R.id.edt_codigo);
 
-
+        Utilities.hideKeyboard(context,codigo);
         //codes_array = Rastreo_tmp.getAllInMaps(context);
 
         if( codes_array != null){
@@ -167,15 +168,17 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             case R.id.btn_rastrear:
                 if(codes_array == null || codes_array.size()<=0){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_lista_vacia),1000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_lista_vacia),3000);
                 }
                 else {
+
                     new GetCodesInfo().execute();
                 }
 
                 break;
 
             case R.id.btn_agregar:
+                Utilities.hideKeyboard(context,codigo);
                 addCode();
                 break;
         }
@@ -193,7 +196,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     aux = codes_array.get(i);
                     String c = aux.get("codigo");
                     if (c.equals(codigoStr)) {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido),1000);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido),3000);
                         return;
                     }
 
@@ -220,7 +223,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             codigo.setText("");
         }
         else {
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_tamaño_codigo),2000);
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_tamaño_codigo),3000);
 
         }
 

@@ -188,8 +188,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         switch (v.getId()) {
 
             case R.id.btn_historia:
-                //Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
+/*
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("codes_info",(java.io.Serializable) codes_info);
 
@@ -200,7 +200,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 fragment.setArguments(bundle);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.replace(R.id.container, fragment, TAG);
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
                 break;
 
             case R.id.fd_btn_favorito:

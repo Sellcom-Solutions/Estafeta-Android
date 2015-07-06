@@ -1,36 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="100">
+    android:layout_height="match_parent">
 
-    <com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:layout_weight="95">
+        android:layout_height="match_parent">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            android:weightSum="100">
-            <FrameLayout
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:orientation="vertical"
-                xmlns:fab="http://schemas.android.com/apk/res-auto"
-                tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDetalleRastreo">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+            android:scrollbars="vertical"
+            android:background="@color/white">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -65,6 +47,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -87,6 +70,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -109,6 +93,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -132,6 +117,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -156,6 +142,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -178,6 +165,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal">
 
                                     <TextView
@@ -208,6 +196,7 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal"
                                     >
 
@@ -291,6 +280,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="bottom"
+                        android:layout_gravity="bottom"
                         android:orientation="vertical">
                         <Button
                             android:id="@+id/btn_historia"
@@ -300,59 +291,28 @@
                             android:background="@color/zxing_transparent"
                             android:text="@string/ver_historia"
                             android:paddingTop="20dp"
+                            android:gravity="bottom|center_horizontal"
                             android:layout_marginBottom="25dp"
                             android:textColor="@color/estafeta_red" />
-                    </LinearLayout>
+
+
+
+
+
                 </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
 
-                    <com.getbase.floatingactionbutton.FloatingActionsMenu
-                        android:id="@+id/history_more"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        fab:fab_addButtonColorNormal="@color/estafeta_blue"
-                        fab:fab_addButtonColorPressed="@color/estafeta_blue"
-                        fab:fab_addButtonSize="normal"
-                        fab:fab_addButtonPlusIconColor="@color/white"
-                        fab:fab_expandDirection="up"
-                        android:layout_gravity="bottom|right"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginEnd="10dp">
 
-                        <com.getbase.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/button_share"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            fab:fab_colorNormal="@color/white"
-                            fab:fab_colorPressed="@color/white"
-                            fab:fab_icon="@drawable/ic_share"
-                            fab:fab_title="Share"/>
 
-                        <com.getbase.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/button_call"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            fab:fab_colorNormal="@color/white"
-                            fab:fab_colorPressed="@color/white"
-                            fab:fab_icon="@drawable/ic_call"
-                            fab:fab_title="Call"/>
 
-                    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-                </FrameLayout>
-
-            </FrameLayout>
             </LinearLayout>
-    </com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+    </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
         android:orientation="vertical"
+        android:gravity="bottom"
         android:layout_gravity="bottom|center_horizontal">
 
 
@@ -365,9 +325,50 @@
             android:textColor="@color/estafeta_soft_gray"
             android:textStyle="bold"
             android:padding="5dp"
-            android:gravity="top"
-            android:layout_gravity="top|center_horizontal"
+            android:gravity="bottom"
+            android:layout_gravity="bottom|center_horizontal"
             />
     </LinearLayout><!--5-->
 
-</LinearLayout>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <com.getbase.floatingactionbutton.FloatingActionsMenu
+                android:id="@+id/history_more"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                fab:fab_addButtonColorNormal="@color/estafeta_blue"
+                fab:fab_addButtonColorPressed="@color/estafeta_blue"
+                fab:fab_addButtonSize="normal"
+                fab:fab_addButtonPlusIconColor="@color/white"
+                fab:fab_expandDirection="up"
+                android:layout_gravity="bottom|right"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp">
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/white"
+                    fab:fab_colorPressed="@color/white"
+                    fab:fab_icon="@drawable/ic_share"
+                    fab:fab_title="Share"/>
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/white"
+                    fab:fab_colorPressed="@color/white"
+                    fab:fab_icon="@drawable/ic_call"
+                    fab:fab_title="Call"/>
+
+            </com.getbase.floatingactionbutton.FloatingActionsMenu>
+        </FrameLayout>
+
+
+</FrameLayout>
