@@ -1,63 +1,69 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:weightSum="100"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentFavorites">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="25">
-
-        <FrameLayout
-            android:layout_width    ="match_parent"
-            android:layout_height   ="wrap_content"
-            android:layout_weight   ="20"
-            android:gravity         ="center"
+    android:weightSum="100">
+    <com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation     ="vertical"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="match_parent"
+        android:background      ="@color/white"
+        android:layout_weight="95">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
             android:weightSum="100">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/head_favorites"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter"
-                android:layout_gravity="top"/>
+                android:orientation="vertical"
+                android:layout_weight="25">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="match_parent"
+                    android:gravity         ="center">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp"
-                    android:gravity="right">
-                    <TextView
-                        android:layout_width        ="0dp"
-                        android:layout_height       ="match_parent"
-                        android:text                ="@string/favoritos"
-                        android:textSize            ="@dimen/sizeLargeText"
-                        android:layout_weight       ="100"
-                        android:paddingLeft         ="60dp"
-                        android:textColor           ="@color/estafeta_text"
-                        android:layout_gravity      ="right"
-                        android:gravity             ="center" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/head_favorites"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:paddingBottom="50dp"
+                        android:layout_gravity="top|center_horizontal"/>
 
-                </LinearLayout>
-            </FrameLayout>
-        </FrameLayout>
-    </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-    <LinearLayout
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:text                ="@string/favoritos"
+                            android:textSize            ="@dimen/sizeLargeText"
+                            android:layout_weight       ="100"
+                            android:paddingLeft         ="60dp"
+                            android:textColor           ="@color/estafeta_text"
+                            android:layout_gravity      ="right"
+                            android:gravity             ="center" />
+
+                    </FrameLayout>
+                </FrameLayout>
+            </LinearLayout><!--25-->
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
         android:layout_weight="72">
 
         <TextView
@@ -99,9 +105,9 @@
         </LinearLayout>
 
         <ListView
-            android:id="@+id/favorite_lst"
+            android:id="@+id/liv_favorite"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="180dp"
             android:background="@color/estafeta_light_gray"
             android:divider="@color/estafeta_soft_gray"
             android:dividerHeight="1dp">
@@ -110,26 +116,25 @@
 
 
     </LinearLayout>
-
+</LinearLayout>
+    </com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
         android:orientation="vertical"
-        android:gravity="bottom">
-
+        android:layout_gravity="bottom|center_horizontal">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="@dimen/footerSize"
             android:layout_marginLeft="10dp"
             android:text="@string/footer"
             android:textColor="@color/estafeta_soft_gray"
-            android:gravity="bottom"
             android:textStyle="bold"
-            android:layout_gravity="bottom|center_horizontal"
+            android:padding="5dp"
+            android:gravity="top"
+            android:layout_gravity="top|center_horizontal"
             />
-
-    </LinearLayout><!--10-->
-
+    </LinearLayout><!--5-->
 </LinearLayout>

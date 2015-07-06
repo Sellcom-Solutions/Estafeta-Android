@@ -1,0 +1,279 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    android:background="@color/estafeta_light_gray"
+    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:weightSum="100"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/ed_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fav_favorite"
+                android:textSize="@dimen/sizeLargeText"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="20dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_reference"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_reference"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_no_guia"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_no_guia"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_cod_rastreo"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_cod_rastreo"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_origen"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_origen"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="15dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_destino"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_destino"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_cp_destino"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_cp_destino"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_estatus"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_estatus"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="15dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_fecha"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_fecha"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:paddingTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_recibio"
+                        android:textSize="@dimen/sizeMediumText"/>
+                    <TextView
+                        android:id                  ="@+id/fav_recibio"
+                        android:layout_width        ="wrap_content"
+                        android:layout_height       ="wrap_content"
+                        android:textColor           ="@color/estafeta_text"
+                        android:textSize            ="@dimen/sizeMediumText"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:background="@drawable/border_gray" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="90">
+                    <Button
+                        android:id="@+id/btn_fav_call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_btn_call"
+                        android:textSize="@dimen/sizeMediumText"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical"
+                        android:background="@color/zxing_transparent"
+                        android:textColor="@color/estafeta_red"
+                        android:layout_weight="30"/>
+                    <Button
+                        android:id="@+id/btn_fav_share"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_btn_share"
+                        android:textSize="@dimen/sizeMediumText"
+                        android:layout_gravity="right"
+                        android:gravity="center_vertical"
+                        android:background="@color/zxing_transparent"
+                        android:textColor="@color/estafeta_red"
+                        android:layout_weight="30"/>
+
+                    <Button
+                        android:id="@+id/btn_fav_closed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fav_btn_closed"
+                        android:textSize="@dimen/sizeMediumText"
+                        android:layout_gravity="right"
+                        android:gravity="right|center_vertical"
+                        android:background="@color/zxing_transparent"
+                        android:textColor="@color/estafeta_red"
+                        android:layout_weight="30"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+     </LinearLayout>
+
+</ScrollView>
