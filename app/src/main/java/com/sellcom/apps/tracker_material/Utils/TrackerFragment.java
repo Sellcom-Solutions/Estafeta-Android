@@ -36,6 +36,8 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         FRAG_RASTREO_DIALOGO("rastreo_dialogo"),
         FRAG_HISTORY("history"),
         FRAG_FAVORITES("favorites"),
+        FRAG_DIALOG_FAVORITE_EDIT("dialog_favorites_edit"),
+        FRAG_DIALOG_FAVORITE("dialog_favorites"),
         FRAG_OFFICES ("officinas"),
         FRAG_CODIGO_POSTAL("codigo_postal"),
         FRAG_QUOTATION("cotizador"),
