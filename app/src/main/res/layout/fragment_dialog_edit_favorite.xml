@@ -1,0 +1,164 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="100"
+    android:background="@color/estafeta_light_gray"
+    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:weightSum="100"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+
+        <TextView
+            android:id="@+id/ed_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/estafeta_text"
+            android:text="@string/EditFavorite"
+            android:textSize="@dimen/sizeLargeText"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/fav_edit_info"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/estafeta_text"
+                    android:text="@string/fav_no_guia"
+                    android:textSize="@dimen/sizeMediumText"/>
+                <TextView
+                    android:id                  ="@+id/fav_edit_no_guia"
+                    android:layout_width        ="wrap_content"
+                    android:layout_height       ="wrap_content"
+                    android:textColor           ="@color/estafeta_text"
+                    android:textSize            ="@dimen/sizeMediumText"
+                    android:text=""/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="5dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/estafeta_text"
+                    android:text="@string/favorite_cod_rastreo"
+                    android:textSize="@dimen/sizeMediumText"/>
+                <TextView
+                    android:id                  ="@+id/fav_edit_cod_rastreo"
+                    android:layout_width        ="wrap_content"
+                    android:layout_height       ="wrap_content"
+                    android:textColor           ="@color/estafeta_text"
+                    android:textSize            ="@dimen/sizeMediumText"
+                    android:text=""/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/estafeta_text"
+                    android:text="@string/name_guia"
+                    android:textSize="@dimen/sizeSmallText"
+                    android:paddingTop="5dp"/>
+
+                <EditText
+                    android:id                      ="@+id/edit_name_guia"
+                    style                           ="@style/EditStyle"
+                    android:layout_width            ="match_parent"
+                    android:layout_height           ="wrap_content"
+                    android:layout_marginTop        ="5dp"
+                    android:layout_weight           ="1"
+                    android:drawablePadding         ="5dp"
+                    android:focusableInTouchMode    ="true"
+                    android:hint                    ="@string/edit_name_guia"
+                    android:inputType               ="number"
+                    android:maxLength               ="22"
+                    android:padding                 ="3dp"
+                    android:textColor               ="@color/estafeta_text"
+                    android:textColorHint           ="@color/estafeta_red"
+                    android:textSize                ="@dimen/sizeNormalText"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/estafeta_text"
+                        android:text="@string/delivery_confirmation"
+                        android:textSize="@dimen/sizeSmallText"
+                        android:paddingTop="5dp"
+                        android:layout_weight="50"/>
+
+                    <Switch
+                        android:id="@+id/swch_confirmar"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        style="@style/AppTheme"
+                        android:background="@color/white"
+                        android:layout_weight="50"
+                        android:checked="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:paddingTop="20dp">
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_save"
+                android:textSize="@dimen/sizeNormalText"
+                android:layout_gravity="right"
+                android:gravity="right|center_vertical"
+                android:paddingRight="20dp"
+                android:background="@color/zxing_transparent"
+                android:textColor="@color/estafeta_red"/>
+            <Button
+                android:id="@+id/btn_cancel_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_cancel"
+                android:textSize="@dimen/sizeNormalText"
+                android:layout_gravity="right"
+                android:gravity="right|center_vertical"
+                android:background="@color/zxing_transparent"
+                android:textColor="@color/estafeta_red"/>
+            </LinearLayout>
+    </LinearLayout>
+</ScrollView>
+

@@ -5,7 +5,9 @@
     android:orientation="vertical"
     android:weightSum="100"
     android:background="@color/white"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentRastreoEfectuado">
+
 
     <ListView
         android:id="@+id/lst_rastreo_efectuado"
