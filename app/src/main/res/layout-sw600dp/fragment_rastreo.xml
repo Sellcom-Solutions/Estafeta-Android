@@ -1,117 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
     android:weightSum="100">
-
+<com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation     ="vertical"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:background      ="@color/white"
+    android:layout_weight="95">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_weight="25">
-
-    <FrameLayout
-        android:layout_width    ="match_parent"
-        android:layout_height   ="wrap_content"
-        android:gravity         ="center">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/head_rastreo"
-            android:adjustViewBounds="true"
-            android:scaleType="fitCenter"
-            android:layout_gravity="top"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:weightSum="100">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="70dp"
-            android:gravity="right">
+            android:orientation="vertical"
+            android:layout_weight="25">
 
-                <TextView
-                    android:layout_width        ="0dp"
-                    android:layout_height       ="match_parent"
-                    android:text                ="@string/rastreo"
-                    android:textColor           ="@color/estafeta_text"
-                    android:textSize            ="@dimen/sizeLargeText"
-                    android:layout_weight       ="100"
-                    android:paddingLeft         ="60dp"
-                    android:layout_gravity      ="right"
-                    android:gravity             ="center" />
+            <FrameLayout
+                android:layout_width    ="match_parent"
+                android:layout_height   ="match_parent"
+                android:gravity         ="center">
 
-            </LinearLayout>
-        </FrameLayout>
-    </FrameLayout>
-    </LinearLayout><!--20-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="72"
-        android:weightSum="100"
-        android:orientation="vertical">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/head_rastreo"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:paddingBottom="50dp"
+                    android:layout_gravity="top|center_horizontal"/>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width        ="match_parent"
+                        android:layout_height       ="match_parent"
+                        android:text                ="@string/rastreo"
+                        android:textSize            ="@dimen/sizeLargeText"
+                        android:layout_weight       ="100"
+                        android:paddingLeft         ="60dp"
+                        android:textColor           ="@color/estafeta_text"
+                        android:layout_gravity      ="right"
+                        android:gravity             ="center" />
+
+                </FrameLayout>
+            </FrameLayout>
+        </LinearLayout><!--25-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_weight="50"
-            android:weightSum="60"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="75"
+            android:weightSum="150"
+            android:orientation="vertical"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp">
 
             <LinearLayout
                 android:id                          ="@+id/info_linelayout"
                 android:layout_width                ="match_parent"
-                android:layout_height               ="0dp"
-                android:layout_weight               ="29 "
+                android:layout_height               ="wrap_content"
+                android:layout_weight               ="20"
                 android:orientation                 ="horizontal"
-                android:minHeight                   ="@dimen/sizeNormalText">
+                android:minHeight                   ="@dimen/sizeNormalText"
+                android:paddingBottom="10dp">
 
-                <TextView
-                    android:layout_width            ="0dp"
-                    android:layout_height           ="wrap_content"
-                    android:layout_marginLeft       ="10dp"
-                    android:layout_marginStart      ="10dp"
-                    android:layout_marginTop        ="7dp"
-                    android:layout_weight           ="1"
-                    android:layout_gravity="center_vertical"
-                    android:text                    ="@string/aviso_rastreo"
-                    android:textColor               ="@color/estafeta_text"
-                    android:textSize                ="@dimen/sizeNormalText"
-                    android:textStyle               ="bold"/>
 
-                <Button
-                    android:id                      ="@+id/btn_help"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:text="\?"
-                    android:textColor="@color/white"
-                    android:layout_marginRight="11dp"
-                    android:layout_marginTop ="10dp"
-                    android:textSize="@dimen/sizeMediumText"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:background="@drawable/circle_border_red"/>
+                    <TextView
+                        android:layout_width            ="0dp"
+                        android:layout_height           ="80dp"
+                        android:layout_marginLeft       ="10dp"
+                        android:layout_marginStart      ="10dp"
+                        android:layout_weight           ="1"
+                        android:layout_gravity="center_vertical"
+                        android:text                    ="@string/aviso_rastreo"
+                        android:textColor               ="@color/estafeta_text"
+                        android:textSize                ="@dimen/sizeMediumText"
+                        android:textStyle               ="bold"/>
+                    <Button
+                        android:id                      ="@+id/btn_help"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:text="\?"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="11dp"
+                        android:textSize="@dimen/sizeLargeText"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_border_red"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width            ="match_parent"
                 android:layout_height           ="0dp"
-                android:layout_weight           ="14"
-                android:minHeight               ="@dimen/sizeNormalText">
+                android:layout_weight           ="20"
+                android:minHeight               ="@dimen/sizeNormalText"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                >
 
                 <EditText
                     android:id                      ="@+id/edt_codigo"
                     style                           ="@style/EditStyle"
-                    android:layout_width            ="0dp"
-                    android:layout_height           ="60dp"
+                    android:layout_width            ="wrap_content"
+                    android:layout_height           ="wrap_content"
                     android:layout_marginLeft       ="10dp"
+                    android:layout_marginTop        ="5dp"
                     android:layout_weight           ="1"
                     android:drawablePadding         ="5dp"
                     android:focusableInTouchMode    ="true"
@@ -126,106 +132,113 @@
 
                 <Button
                     android:id                      ="@+id/btn_agregar"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:text="+"
                     android:textColor="@color/estafeta_red"
                     android:layout_marginRight="10dp"
                     android:textSize="@dimen/sizeXLargeText"
-                    android:layout_gravity="center_vertical|top"
+                    android:layout_gravity="center_vertical"
                     android:background="@android:color/transparent"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:minHeight="@dimen/sizeSmallText"
-                android:layout_weight="17">
+                android:layout_weight="15"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:layout_width            ="wrap_content"
                     android:layout_height           ="wrap_content"
-                    android:layout_gravity          ="start"
+                    android:layout_gravity          ="right"
                     android:layout_marginLeft       ="10dp"
+                    android:layout_marginTop        ="5dp"
                     android:text                    ="@string/aviso_codigo"
-                    android:textSize                ="@dimen/sizeSmallText"
+                    android:textSize                ="@dimen/sizeNormalText"
                     android:textColor               ="@color/estafeta_text"/>
+
             </LinearLayout>
 
-        </LinearLayout><!--60-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="@color/estafeta_light_gray"
-            android:orientation="horizontal"
-            android:layout_weight="13"
-            android:minHeight="15dp"
-            android:weightSum="100">
 
-            <Button
-                android:id                      ="@+id/btn_escanear"
-                android:layout_width            ="0dp"
-                android:layout_height           ="wrap_content"
-                android:layout_gravity          ="left"
-                android:layout_marginBottom     ="1dp"
-                android:layout_marginRight      ="1dp"
-                android:layout_weight           ="50"
-                android:background              ="@color/white"
-                android:text                    ="@string/boton_escanear"
-                android:textColor               ="@color/estafeta_red"
-                android:textSize                ="@dimen/sizeLargeText"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/estafeta_light_gray"
+                android:orientation="horizontal"
+                android:layout_weight="20"
+                android:minHeight="15dp"
+                android:weightSum="100">
 
-            <Button
-                android:id                      ="@+id/btn_rastrear"
-                android:layout_width            ="0dp"
-                android:layout_height           ="wrap_content"
-                android:layout_gravity          ="right"
-                android:layout_marginBottom     ="1dp"
-                android:layout_marginLeft       ="1dp"
-                android:layout_weight           ="50"
-                android:background              ="@color/white"
-                android:text                    ="@string/boton_rastrear"
-                android:textColor               ="@color/estafeta_red"
-                android:textSize                ="@dimen/sizeLargeText"/>
+                <Button
+                    android:id                      ="@+id/btn_escanear"
+                    android:layout_width            ="0dp"
+                    android:layout_height           ="wrap_content"
+                    android:layout_gravity          ="left"
+                    android:layout_marginBottom     ="1dp"
+                    android:layout_marginRight      ="1dp"
+                    android:layout_weight           ="50"
+                    android:background              ="@color/white"
+                    android:text                    ="@string/boton_escanear"
+                    android:textColor               ="@color/estafeta_red"
+                    android:textSize                ="@dimen/sizeLargeText"/>
 
-        </LinearLayout><!--10-->
+                <Button
+                    android:id                      ="@+id/btn_rastrear"
+                    android:layout_width            ="0dp"
+                    android:layout_height           ="wrap_content"
+                    android:layout_gravity          ="right"
+                    android:layout_marginBottom     ="1dp"
+                    android:layout_marginLeft       ="1dp"
+                    android:layout_weight           ="50"
+                    android:background              ="@color/white"
+                    android:text                    ="@string/boton_rastrear"
+                    android:textColor               ="@color/estafeta_red"
+                    android:textSize                ="@dimen/sizeLargeText"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="37"
-            android:background="@color/estafeta_light_gray">
+            </LinearLayout>
 
-            <ListView
-                android:id                      ="@+id/liv_rastreo"
-                android:layout_width            ="match_parent"
-                android:layout_height           ="wrap_content"
-                android:visibility              ="visible">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="65"
+                android:background="@color/estafeta_light_gray">
 
-            </ListView>
+                <ListView
+                    android:id                      ="@+id/liv_rastreo"
+                    android:layout_width            ="match_parent"
+                    android:layout_height           ="350dp"
+                    android:visibility              ="visible">
 
-        </LinearLayout><!--30-->
-    </LinearLayout><!--70-->
+                </ListView>
 
+            </LinearLayout>
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+</com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
         android:orientation="vertical"
-        android:gravity="bottom">
-
+        android:layout_gravity="bottom|center_horizontal">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="@dimen/footerSize"
             android:layout_marginLeft="10dp"
             android:text="@string/footer"
             android:textColor="@color/estafeta_soft_gray"
-            android:gravity="bottom"
-            android:layout_gravity="bottom|center_horizontal"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="top"
+            android:layout_gravity="top|center_horizontal"
             />
-
-    </LinearLayout><!--10-->
-
+    </LinearLayout><!--5-->
 </LinearLayout>

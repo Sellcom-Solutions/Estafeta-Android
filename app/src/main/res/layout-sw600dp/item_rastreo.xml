@@ -25,7 +25,7 @@
             android:layout_weight       ="50"
             android:textStyle           ="bold"
             android:textColor           ="@color/estafeta_text"
-            android:textSize            ="@dimen/sizeNormalText"
+            android:textSize            ="@dimen/sizeMediumText"
             android:text                =""/>
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_weight       ="50"
             android:layout_marginBottom ="5dp"
             android:textColor           ="@color/estafeta_text"
-            android:textSize            ="@dimen/sizeNormalText"
+            android:textSize            ="@dimen/sizeMediumText"
             android:text=""/>
 
         </LinearLayout>

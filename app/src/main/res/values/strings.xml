@@ -246,9 +246,9 @@
 
     <string name="fav_favorite">Favorito</string>
     <string name="fav_reference">Referencia: </string>
-    <string name="fav_cod_rastreo">Codigo de rastreo</string>
+    <string name="fav_cod_rastreo">Codigo de rastreo:</string>
     <string name="fav_no_guia">No. Guía: </string>
-    <string name="fav_origen">Origen</string>
+    <string name="fav_origen">Origen: </string>
     <string name="fav_destino">Destino:</string>
     <string name="fav_cp_destino">C.R. Destino:</string>
     <string name="fav_estatus">Estatus del Srvicio:</string>

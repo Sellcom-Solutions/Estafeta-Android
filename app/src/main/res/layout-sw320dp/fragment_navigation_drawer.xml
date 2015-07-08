@@ -10,16 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="130dp"
         />
-<android.support.v7.widget.RecyclerView
-    android:id                      ="@+id/drawerList"
-    xmlns:android                   ="http://schemas.android.com/apk/res/android"
-    android:layout_width            ="match_parent"
-    android:clickable               ="true"
-    android:focusableInTouchMode    ="true"
-    android:scrollbars              ="vertical"
-    android:focusable               ="true"
-    android:fitsSystemWindows       ="true"
-    android:layout_height           ="match_parent"
-    android:background              ="@color/white"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.v7.widget.RecyclerView
+        android:id                      ="@+id/drawerList"
+        xmlns:android                   ="http://schemas.android.com/apk/res/android"
+        android:layout_width            ="match_parent"
+        android:clickable               ="true"
+        android:focusableInTouchMode    ="true"
+        android:scrollbars              ="vertical"
+        android:focusable               ="true"
+        android:fitsSystemWindows       ="true"
+        android:layout_height           ="match_parent"/>
+    </FrameLayout>
 
 </LinearLayout>

@@ -39,7 +39,7 @@
                 android:layout_marginTop    ="2dp"
                 android:textColor           ="@color/estafeta_text"
                 android:text                ="@string/no_guia2"
-                android:textSize            ="@dimen/sizeNormalText"
+                android:textSize            ="@dimen/sizeMediumText"
                 android:textStyle           ="bold"
                 />
 
@@ -50,7 +50,7 @@
                 android:layout_marginTop    ="2dp"
                 android:textColor           ="@color/estafeta_text"
                 android:text                =""
-                android:textSize            ="@dimen/sizeNormalText"
+                android:textSize            ="@dimen/sizeMediumText"
                 />
 
             </LinearLayout>
@@ -69,7 +69,7 @@
                 android:layout_marginTop    ="2dp"
                 android:textColor           ="@color/estafeta_text"
                 android:text                ="@string/cod_rastreo"
-                android:textSize            ="@dimen/sizeNormalText"
+                android:textSize            ="@dimen/sizeMediumText"
                 android:textStyle           ="bold"
                 />
 
@@ -80,7 +80,7 @@
                 android:layout_marginTop    ="2dp"
                 android:textColor           ="@color/estafeta_text"
                 android:text                =""
-                android:textSize            ="@dimen/sizeNormalText"
+                android:textSize            ="@dimen/sizeMediumText"
                 />
 
         </LinearLayout>
@@ -99,7 +99,7 @@
                 android:layout_height       ="wrap_content"
                 android:textColor           ="@color/estafeta_text"
                 android:text                ="@string/estatus_servicio"
-                android:textSize            ="@dimen/sizeNormalText"
+                android:textSize            ="@dimen/sizeMediumText"
                 android:textStyle           ="bold"
                 android:layout_marginTop    ="2dp"/>
 
@@ -109,7 +109,7 @@
                 android:layout_height       ="wrap_content"
                 android:textColor           ="@color/estafeta_text"
                 android:text                =""
-                android:textSize            ="@dimen/sizeNormalText"
+                android:textSize            ="@dimen/sizeMediumText"
                 android:layout_marginTop    ="2dp"/>
 
         </LinearLayout>
@@ -120,7 +120,7 @@
     <ImageView
         android:id="@+id/img_status"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="50dp"
         android:scaleType="centerInside"
         android:layout_weight="15"
         android:layout_gravity="center"

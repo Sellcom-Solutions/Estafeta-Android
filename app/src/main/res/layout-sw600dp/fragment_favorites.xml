@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="100">
+    <com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation     ="vertical"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="match_parent"
+        android:background      ="@color/white"
+        android:layout_weight="95">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:weightSum="100">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="25">
+
+                <FrameLayout
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="match_parent"
+                    android:gravity         ="center">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/head_favorites"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:paddingBottom="50dp"
+                        android:layout_gravity="top|center_horizontal"/>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:text                ="@string/favoritos"
+                            android:textSize            ="@dimen/sizeLargeText"
+                            android:layout_weight       ="100"
+                            android:paddingLeft         ="60dp"
+                            android:textColor           ="@color/estafeta_text"
+                            android:layout_gravity      ="right"
+                            android:gravity             ="center" />
+
+                    </FrameLayout>
+                </FrameLayout>
+            </LinearLayout><!--25-->
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+        android:layout_weight="72">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/notification_alarm"
+            android:textColor="@color/estafeta_text"
+            android:textSize="@dimen/sizeLargeText"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="75"
+                android:layout_marginBottom="2dp"
+                android:text="@string/delivery_confirmation"
+                android:textColor="@color/estafeta_text"
+                android:textSize="@dimen/sizeLargeText"
+                android:background="@color/white"/>
+
+            <Switch
+                android:layout_weight="20"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                style="@style/AppTheme"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/liv_favorite"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:background="@color/estafeta_light_gray"
+            android:divider="@color/estafeta_soft_gray"
+            android:dividerHeight="1dp">
+
+        </ListView>
+
+
+    </LinearLayout>
+</LinearLayout>
+    </com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/footerSize"
+            android:layout_marginLeft="10dp"
+            android:text="@string/footer"
+            android:textColor="@color/estafeta_soft_gray"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="top"
+            android:layout_gravity="top|center_horizontal"
+            />
+    </LinearLayout><!--5-->
+</LinearLayout>
