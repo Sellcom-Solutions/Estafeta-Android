@@ -7,7 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.Adapters.FavoriteListAdapter;
@@ -34,6 +37,14 @@ public class FragmentFavorites extends TrackerFragment {
     public FragmentFavorites() {
         // Required empty public constructor
     }
+    class CodigosViewHolder{
+        TextView            no_guia;
+        TextView            codigo;
+        Button              edit;
+        LinearLayout        linear_favorite;
+        int                 position;
+
+    }
 
 
     @Override
@@ -44,9 +55,6 @@ public class FragmentFavorites extends TrackerFragment {
         context = getActivity();
 
         lst_favorite = (ListView) view.findViewById(R.id.liv_favorite);
-
-        //codes_info = (ArrayList<Map<String, String>>) getArguments().getSerializable("codes_info");
-
         codes_info = Favorites.getAll(context);
         Log.e(TAG,"codes_info:  ---->  "+codes_info.size());
         // codes_info= ArrayList<Map<String,String>> getAll(Context context)
@@ -62,4 +70,6 @@ public class FragmentFavorites extends TrackerFragment {
         }
         return view;
     }
+
+
 }

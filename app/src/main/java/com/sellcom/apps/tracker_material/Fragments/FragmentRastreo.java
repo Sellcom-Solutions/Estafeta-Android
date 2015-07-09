@@ -144,10 +144,22 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "Selected:  " + item.getItemId());
         switch (item.getItemId()) {
+
             case R.id.add_favorite:
                 //Log.d(TAG,"item selected");
                 Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+               // Bundle bundle= new Bundle();
+               // bundle.putSerializable("codes_info", codes_info);
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragment = new FragmentFavorites();
+                fragment.addFragmentToStack(getActivity());
+             //   fragment.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, fragment, TAG);
+                fragmentTransaction.commit();
                 return true;
+
             default: return super.onOptionsItemSelected(item);
         }
     }

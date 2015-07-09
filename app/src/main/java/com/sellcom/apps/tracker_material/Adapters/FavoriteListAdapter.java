@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -129,7 +130,18 @@ public class FavoriteListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "btn edit: ");
+
+                Bundle bundle = new Bundle();
+                bundle.putString("code", codigos.get(holder.position).get("no_guia"));
+                bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
+                bundle.putString("code", codigos.get(holder.position).get("codigo_rastreo"));
+                bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
+
+                Log.d(TAG, "codigo enviado " + codigos.get(holder.position).get("no_guia"));
+                Log.d(TAG, "codigo enviado " + codigos.get(holder.position).get("codigo_rastreo"));
+
                 FragmentDialogEditFavorite fdfe = new FragmentDialogEditFavorite();
+                fdfe.setArguments(bundle);
                 fdfe.show(fragmentManager,"FRAG_DIALOG_FAVORITE_EDIT");
 
             }
