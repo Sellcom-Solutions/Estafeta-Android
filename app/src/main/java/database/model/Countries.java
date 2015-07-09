@@ -68,6 +68,29 @@ public class Countries {
         return null;
     }
 
+    public static Map<String,String> getIdPaisById(Context context, String id) {
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, "id = ?",
+                new String[] { id},
+                null,
+                null,
+                ID);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+
+            Map<String, String> map = new HashMap<String, String>();
+
+            map.put(ID, cursor.getString(cursor.getColumnIndexOrThrow(ID)));
+            map.put(IDPAIS, cursor.getString(cursor.getColumnIndexOrThrow(IDPAIS)));
+            map.put(NOMBREPAIS_ESP,cursor.getString(cursor.getColumnIndexOrThrow(NOMBREPAIS_ESP)));
+            map.put(NOMBREPAIS_ING, cursor.getString(cursor.getColumnIndexOrThrow(NOMBREPAIS_ING)));
+            cursor.close();
+            return map;
+        }
+        return null;
+    }
+
     public static void removeAll(Context context){
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ID);
         if (cursor != null && cursor.getCount() > 0) {

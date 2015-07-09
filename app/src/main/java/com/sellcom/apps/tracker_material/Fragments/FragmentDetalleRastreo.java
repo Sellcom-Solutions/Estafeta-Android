@@ -92,7 +92,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
         String code = getArguments().getString("code");
         Log.d(TAG,"cod_rastreo: "+code);
-        codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
+        codes_info =  (Map<String, String>) getArguments().getSerializable("code_array");
         Log.d(TAG, "size: "+codes_info.size());
 
         data = Favorites.getFavoriteByWayBill(context,code);

@@ -17,11 +17,5 @@
         android:alpha               ="0.87"
         android:gravity             ="center_vertical"
         android:textColor           ="@color/white"/>
-    <View
-    android:layout_width="match_parent"
-    android:layout_height="5dp"
-    android:background="@color/white"
-    android:layout_marginLeft="1dp"
-    android:layout_marginRight="1dp"/>
 
 </LinearLayout>

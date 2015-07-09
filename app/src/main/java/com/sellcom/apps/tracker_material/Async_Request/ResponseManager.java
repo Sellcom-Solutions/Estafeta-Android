@@ -701,7 +701,7 @@ public class ResponseManager {
                         continue;
                     }
                     if ("a:CostoReexpedicion".equals(nodeName)) {
-                        map.put("CostoReexpedicion", nodeName);
+                        map.put("CostoReexpedicion", nodeValue);
                         Log.v("CostoReexpedicion", nodeValue);
                         continue;
                     }
@@ -837,81 +837,87 @@ public class ResponseManager {
                                 continue;
                             }
                         }
+                        Log.v("ADD MAP","-------------------------------------------");
                         cotizadorMap.add(map);
                         continue;
                     }
                     if ("a:TipoServicio".equals(nodeName)) {
-                        map  = new HashMap<String, String>();
+
                         NodeList respuestacotiza = nodeitem.getChildNodes();
                         Node eachservice;
                         NodeList eachServNode;
                         for (int f = 0; f < respuestacotiza.getLength(); f++) {
+                            map  = new HashMap<String, String>();
                             eachservice = respuestacotiza.item(f);
                             eachServNode = eachservice.getChildNodes();
                             for (int d = 0; d < eachServNode.getLength(); d++) {
+
+
                                 String charac = eachServNode.item(d)
                                         .getNodeName();
                                 String nodeValue2 = eachServNode
                                         .item(d).getFirstChild()
                                         .getNodeValue();
                                 if ("a:CCSobrePeso".equals(charac)) {
-                                    map.put("CCSobrePeso", nodeValue2);
+                                    map.put("CCSobrePeso", ""+nodeValue2);
                                     Log.v("CCSobrePeso", nodeValue2);
                                     continue;
                                 }
                                 if ("a:CCTarifaBase".equals(charac)) {
-                                    map.put("CCTarifaBase", nodeValue2);
+                                    map.put("CCTarifaBase", ""+nodeValue2);
                                     Log.v("CCTarifaBase", nodeValue2);
                                     continue;
                                 }
                                 if ("a:CargosExtra".equals(charac)) {
-                                    map.put("CargosExtra", nodeValue2);
+                                    map.put("CargosExtra", ""+nodeValue2);
                                     Log.v("CargosExtra", nodeValue2);
                                     continue;
                                 }
                                 if ("a:CostoTotal".equals(charac)) {
-                                    map.put("CostoTotal", nodeValue2);
+                                    map.put("CostoTotal", ""+nodeValue2);
                                     Log.v("CostoTotal", nodeValue2);
 
                                     continue;
                                 }
                                 if ("a:DescripcionServicio".equals(charac)) {
-                                    map.put("DescripcionServicio", nodeValue2);
+                                    map.put("DescripcionServicio", ""+nodeValue2);
                                     Log.v("DescripcionServicio", nodeValue2);
                                     continue;
                                 }
                                 if ("a:Peso".equals(charac)) {
-                                    map.put("Peso", nodeValue2);
+                                    map.put("Peso", ""+nodeValue2);
                                     Log.v("Peso", nodeValue2);
                                     continue;
                                 }
                                 if ("a:SobrePeso".equals(charac)) {
-                                    map.put("SobrePeso", nodeValue2);
+                                    map.put("SobrePeso", ""+nodeValue2);
                                     Log.v("SobrePeso", nodeValue2);
                                     continue;
                                 }
                                 if ("a:TarifaBase".equals(charac)) {
-                                    map.put("TarifaBase", nodeValue2);
+                                    map.put("TarifaBase", ""+nodeValue2);
                                     Log.v("TarifaBase", nodeValue2);
                                     continue;
                                 }
                                 if ("a:TipoEnvioRes".equals(charac)) {
-                                    map.put("TipoEnvioRes", nodeValue2);
+                                    map.put("TipoEnvioRes", ""+nodeValue2);
                                     Log.v("TipoEnvioRes", nodeValue2);
                                     continue;
                                 }
 
                                 if ("a:AplicaCotizacion".equals(charac)) {
-                                    map.put("AplicaCotizacion", nodeValue2);
+                                    map.put("AplicaCotizacion", ""+nodeValue2);
                                     Log.v("AplicaCotizacion", nodeValue2);
                                     continue;
                                 }
 
                                 if ("a:AplicaServicio".equals(charac)) {
-                                    map.put("AplicaServicio", nodeValue2);
+                                    map.put("AplicaServicio", ""+nodeValue2);
                                     Log.v("AplicaServicio", nodeValue2);
                                     continue;
                                 }
+                                Log.v("ADD MAP", "-------------------------------------------");
+
                             }
                             cotizadorMap.add(map);
                         }
@@ -931,6 +937,89 @@ public class ResponseManager {
 
         return null;
 
+    }
+
+    public ArrayList<Map<String,String>> parseCotizadorInternational(Document doc) throws SAXException, IOException, ParserConfigurationException {
+        ArrayList<Map<String, String>> cotizadorMap = new ArrayList<>();
+        Map<String, String> map = new HashMap<String, String>();
+        Node nodeitem;
+        String nodeName = "";
+        String nodeValue = "";
+
+
+        Node subNode;
+        NodeList errores = doc.getElementsByTagName("HasError");
+        if(errores.getLength()>0){
+            subNode = errores.item(0);
+            String value=subNode.getNodeValue();
+            if ("true".equals(value)) {
+                Log.v("HasError",value);
+                return null;
+            }
+        }
+
+        NodeList response = doc.getElementsByTagName("CotizaPlanoResult");
+        if (response != null) {
+            if (response.getLength() == 0) {
+                return null;
+            }
+        }
+
+
+        Node node = null;
+        node = response.item(0);
+        NodeList all = node.getChildNodes();
+
+
+        for (int i = 0; i < all.getLength(); i++) {
+            nodeitem = all.item(i);
+            nodeName = nodeitem.getNodeName();
+            Log.d("Node name", nodeName);
+
+            if (nodeitem.hasChildNodes()) {
+
+                subNode = nodeitem.getFirstChild();
+
+                if (subNode.getNodeValue() != null) {
+                    nodeValue = subNode.getNodeValue();
+                }
+
+                if ("HasError".equals(nodeName)) {
+                    if (subNode.getNodeValue().equals("true"))
+                        map.put("HasError",nodeValue);
+                        Log.d("HasError", "" + nodeValue);
+                    continue;
+                }
+
+                if ("PrecioCombustible".equals(nodeName)) {
+                    Log.d("PrecioCombustible", "" + nodeValue);
+                    map.put("PrecioCombustible", nodeValue);
+                    continue;
+                }
+
+                if ("PrecioPaquete".equals(nodeName)) {
+                    Log.d("PrecioPaquete", nodeValue);
+                    map.put("PrecioPaquete", nodeValue);
+                    continue;
+                }
+
+                if ("PrecioCotizado".equals(nodeName)) {
+                    Log.d("PrecioCotizado", nodeValue);
+                    map.put("PrecioCotizado", nodeValue);
+                    continue;
+                }
+            }
+        }
+        cotizadorMap.add(map);
+
+        if(cotizadorMap.size()>0){
+           /* for(int i=0;i<officeMap.size();i++)
+            Log.d("ArrayList",officeMap.get(i).get("nombreOficina"));*/
+            Log.d("Response Manager","end");
+            return cotizadorMap;
+        }
+
+        return null;
     }
 
 

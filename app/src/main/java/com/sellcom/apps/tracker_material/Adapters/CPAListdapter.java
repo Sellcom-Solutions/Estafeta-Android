@@ -35,7 +35,6 @@ public class CPAListdapter extends BaseAdapter{
 
 
     private int lastSelectedItemPosition = 0;
-    public String currentCP="";
 
     private View lastSelectedView;
 

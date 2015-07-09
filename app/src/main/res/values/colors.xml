@@ -1,6 +1,8 @@
 <resources>
 
     <color name="estafeta_red">#A91F20</color>
+    <color name="estafeta_dark_red">#8d1819</color>
+
     <color name="estafeta_blue">#33669A</color>
     <color name="estafeta_soft_gray">#B8B8B8</color>
     <color name="estafeta_text">#555555</color>

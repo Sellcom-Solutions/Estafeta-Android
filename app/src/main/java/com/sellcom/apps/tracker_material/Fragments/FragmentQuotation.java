@@ -2,6 +2,8 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,6 +12,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -45,6 +48,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import database.model.Countries;
+
 /**
  * Created by jonathan.vazquez on 25/05/15.
  */
@@ -58,6 +63,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     public static final String TAG = "FRAG_QUOTATION";
     protected static final int REQ_GET_CONTACT_ORIGIN = 0;
     protected static final int REQ_GET_CONTACT_DESTINATION = 1;
+
+    private TrackerFragment fragment;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
 
     private ToggleButton    tbtn_nat,
                             tbtn_inter;
@@ -122,9 +132,13 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             alto = "",
                             largo = "",
                             ancho = "",
-                            typeSend = "",
-                            method = "";
+                            typeSend = "";
 
+    private int             contEUA_Canada = 0;
+
+    private Map<String,String> pais;
+
+    private Bundle          bundle;
 
     private ArrayList<Map<String,String>> colonias,respCotizador;
 
@@ -132,6 +146,9 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
+
+        fragmentManager = getActivity().getSupportFragmentManager();
+
     }
 
     @Override
@@ -436,6 +453,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private void requestQuote(){
 
+        if(!isNetworkAvailable()){
+            Toast.makeText(context,"Debe tener acceso a Internet",Toast.LENGTH_SHORT).show();
+        }else{
+
             if(ll_for_package.getVisibility() == View.VISIBLE) {
 
                     if (lin_nacional_cp.getVisibility() == View.VISIBLE) {
@@ -469,7 +490,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         }
                     } else if (lin_internacional_pais.getVisibility() == View.VISIBLE) {
-                        if(spn_state.getSelectedItemPosition() == 0){
+                        if(spn_countrie.getSelectedItemPosition() == 0){
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noCountry), 3000);
                             return;
                         }else if (edt_weigth.getText().toString().equals("")) {
@@ -486,18 +507,27 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             return;
                         }else{
 
-                            if(!isNetworkAvailable()){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noWidth), 3000);
-                                return;
-                            }else{
+                            int numCountrie = spn_countrie.getSelectedItemPosition();
+                            peso    = edt_weigth.getText().toString();
+                            alto    = edt_high.getText().toString();
+                            largo   = edt_long.getText().toString();
+                            ancho   = edt_width.getText().toString();
 
-                                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                            if(numCountrie == 39 || numCountrie == 63){
+                                contEUA_Canada = 0;
+                                cotizar("internacional_paquete_eua_canada");
+
+                                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                            }else{
+                                contEUA_Canada = 0;
+                                cotizar("internacional_paquete");
                             }
+
 
 
                         }
                     }
-                } else {
+            } else {
 
                     if (lin_nacional_cp.getVisibility() == View.VISIBLE) {
                         if (edt_zc_origin.getText().toString().equals("") || edt_zc_origin.getText().toString().length() != 5) {
@@ -513,26 +543,31 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             cotizar("nacional_sobre");
                             //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
 
-
                         }
                     } else if (lin_internacional_pais.getVisibility() == View.VISIBLE) {
-                        if(spn_state.getSelectedItemPosition() == 0){
+                        if(spn_countrie.getSelectedItemPosition() == 0){
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noCountry), 3000);
                             return;
                         }else{
+                            int numCountrie = spn_countrie.getSelectedItemPosition();
 
-                            if(!isNetworkAvailable()){
+                            if(numCountrie == 39 || numCountrie == 63){
+                                contEUA_Canada = 0;
+                                cotizar("internacional_sobre_eua_canada");
 
+                                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
                             }else{
-                                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                                contEUA_Canada = 0;
+                                cotizar("internacional_sobre");
                             }
-
                         }
                     }
 
                 }
 
-                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+        }
+
 
 
     }
@@ -543,7 +578,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
         switch (type){
             case "nacional_sobre":
-                typeSend = "nacional_sobre";
 
                 requestData.put("Peso","0.0");
                 requestData.put("Alto","0.0");
@@ -554,7 +588,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 requestData.put("datosOrigen",origen);
                 requestData.put("datosDestino",destino);
 
-                method = "nacional";
+                typeSend = "nacional";
 
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_NATIONAL_DELIVERY, requestData);
@@ -563,7 +597,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
             case "nacional_paquete":
 
-                typeSend = "nacional_paquete";
 
                 requestData.put("Peso",peso);
                 requestData.put("Alto",alto);
@@ -574,12 +607,114 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 requestData.put("datosOrigen",origen);
                 requestData.put("datosDestino",destino);
 
-                method = "internacional";
+                typeSend = "nacional";
 
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_NATIONAL_DELIVERY, requestData);
 
                 break;
+
+            case "internacional_sobre":
+
+
+                requestData.put("peso","1");
+                requestData.put("alto","0.0");
+                requestData.put("largo","0.0");
+                requestData.put("ancho","0.0");
+
+                requestData.put("envio","0");
+                requestData.put("servicio", "1");
+
+                pais = Countries.getIdPaisById(context,""+spn_countrie.getSelectedItemPosition());
+
+                requestData.put("paisDestino","" + pais.get("idpais"));
+
+                typeSend = "internacional_sobre";
+
+                RequestManager.sharedInstance().setListener(this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
+
+                break;
+
+
+            case "internacional_sobre_eua_canada":
+
+
+                requestData.put("peso","1");
+                requestData.put("alto","0.0");
+                requestData.put("largo","0.0");
+                requestData.put("ancho","0.0");
+
+                requestData.put("envio","0");
+                if(contEUA_Canada == 0) {//Primer Envio
+                    requestData.put("servicio", "1");
+                }else{//Segundo Envio
+                    requestData.put("servicio", "0");
+                }
+
+                pais = Countries.getIdPaisById(context,""+spn_countrie.getSelectedItemPosition());
+
+                requestData.put("paisDestino","" + pais.get("idpais"));
+
+                typeSend = "internacional_sobre_eua_canada";
+
+                RequestManager.sharedInstance().setListener(this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
+
+                break;
+
+            case "internacional_paquete":
+
+                requestData.put("peso", peso);
+
+                requestData.put("alto",alto);
+                requestData.put("largo",largo);
+                requestData.put("ancho",ancho);
+
+                requestData.put("envio","1");
+                requestData.put("servicio", "1");
+                pais = Countries.getIdPaisById(context,""+spn_countrie.getSelectedItemPosition());
+
+                requestData.put("paisDestino","" + pais.get("idpais"));
+
+                typeSend = "internacional_paquete";
+
+                Log.v(TAG,"Peso: " + requestData.get("peso") + ", Alto: "+ requestData.get("alto")+", Largo: "+requestData.get("largo")+", Ancho: "+requestData.get("ancho")+", Envio: "+requestData.get("envio")+", Servicio: "+requestData.get("servicio")+", PaisDestino: "+requestData.get("paisDestino"));
+
+                RequestManager.sharedInstance().setListener(this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
+
+                break;
+
+            case "internacional_paquete_eua_canada":
+
+
+                requestData.put("peso", peso);
+
+                requestData.put("alto",alto);
+                requestData.put("largo",largo);
+                requestData.put("ancho",ancho);
+
+                requestData.put("envio","1");
+                if(contEUA_Canada == 0) {//Primer Envio
+                    requestData.put("servicio", "1");
+                }else{//Segundo Envio
+                    requestData.put("servicio", "0");
+                }
+
+                pais = Countries.getIdPaisById(context,""+spn_countrie.getSelectedItemPosition());
+
+                requestData.put("paisDestino","" + pais.get("idpais"));
+
+                typeSend = "internacional_paquete_eua_canada";
+
+                Log.v(TAG,"Peso: " + requestData.get("peso") + ", Alto: "+ requestData.get("alto")+", Largo: "+requestData.get("largo")+", Ancho: "+requestData.get("ancho")+", Envio: "+requestData.get("envio")+", Servicio: "+requestData.get("servicio")+", PaisDestino: "+requestData.get("paisDestino"));
+
+                RequestManager.sharedInstance().setListener(this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
+
+                break;
+
         }
 
     }
@@ -629,7 +764,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             requestData.put("ciudad", ciudadString);
             requestData.put("localidad", coloniaString);
 
-            method = "codigo_postal";
+            typeSend = "codigo_postal";
 
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
             RequestManager.sharedInstance().setListener(this);
@@ -676,7 +811,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         }
 
 
-
         lin_capturar_datos.setVisibility(View.GONE);
         lin_escoger_cp.setVisibility(View.VISIBLE);
 
@@ -692,11 +826,18 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     public void decodeResponse(String response){
         Log.d(TAG,""+response);
 
+        bundle = new Bundle();
+        String currentTag = "";
+
+        respCotizador = RequestManager.sharedInstance().getResponseArray();
+
+        if(respCotizador != null) {
 
             if (response != null && response.length() > 0) {
 
-                if(!method.equals("codigo_postal")) {
-                    respCotizador = RequestManager.sharedInstance().getResponseArray();
+                if (typeSend.equals("nacional")) {
+
+
                     Map<String, String> map = respCotizador.get(0);
 
 
@@ -709,20 +850,62 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                     } else {
                         String EsPaquete = map.get("EsPaquete");
                         if (EsPaquete.equals("false")) {
-                            if (typeSend.equals("nacional_sobre")) {
-                                Toast.makeText(context, "Módulo en Desarrollo,sobre N", Toast.LENGTH_SHORT).show();
-                            }
+
+                            bundle.putString("type", "nacional_sobre");
+
 
                         } else if (EsPaquete.equals("true")) {
-                            if (typeSend.equals("nacional_paquete")) {
-                                Toast.makeText(context, "Módulo en Desarrollo,paquete N", Toast.LENGTH_SHORT).show();
-                            }
+
+                            bundle.putString("type", "nacional_paquete");
+
+
                         }
 
+                        Log.d("aqui",""+respCotizador.get(1).get("AplicaCotizacion"));
+
+                        bundle.putSerializable("respCotizador", respCotizador);
+                        fragment = new FragmentDetailQuoatation();
+                        fragment.addFragmentToStack(getActivity());
+                        fragment.setArguments(bundle);
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.replace(R.id.container, fragment, FragmentDetailQuoatation.TAG);
+                        fragmentTransaction.commit();
+
                     }
-                }else{
+                }else if(typeSend.equals("internacional_sobre")){
+
+                    bundle.putString("type", "internacional_sobre");
+
+                }else if (typeSend.equals("internacional_sobre_eua_canada")) {
+
+                        if (contEUA_Canada == 0) {
+                            contEUA_Canada++;
+                            cotizar("internacional_sobre_eua_canada");
+                        } else {
+                            bundle.putString("type", "internacional_sobre_eua_canada");
+                        }
+
+
+                } else if(typeSend.equals("internacional_paquete_eua_canada")){
+
+
+                    if (contEUA_Canada == 0) {
+                        contEUA_Canada++;
+                        cotizar("internacional_paquete_eua_canada");
+                    } else {
+                        bundle.putString("type", "internacional_paquete_eua_canada");
+                    }
+
+                }else if(typeSend.equals("internacional_paquete")){
+                    bundle.putString("type", "internacional_paquete");
+
+                }else if (typeSend.equals("codigo_postal")) {
                     showCP(RequestManager.sharedInstance().getResponseArray());
                 }
+
+
+
             } else {
                 try {
                     DialogManager.sharedInstance().dismissDialog();
@@ -732,6 +915,15 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio), 2000);
                 Log.v("FragmentQuotation", "El servidor devolvio null");
             }
+        }else{
+            try {
+                DialogManager.sharedInstance().dismissDialog();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 2000);
+            Log.v("FragmentQuotation", "respCotizador es igual a null");
+        }
 
 
 

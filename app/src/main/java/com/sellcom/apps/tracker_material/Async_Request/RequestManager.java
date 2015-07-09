@@ -66,7 +66,7 @@ public class RequestManager implements ResponseListenerInterface {
         this.responseArray = responseArray;
     }
 
-    private static ArrayList<Map<String,String>> responseArray= new ArrayList<>();
+    private static ArrayList<Map<String,String>> responseArray = new ArrayList<>();
 
     private         ProgressDialog                          progressDialog;
 
@@ -208,9 +208,9 @@ public class RequestManager implements ResponseListenerInterface {
             JSONObject jsonResponse = null;
 
             HttpParams httpParameters = new BasicHttpParams();
-            int timeoutConnection = 10000;
+            int timeoutConnection = 5000;
             HttpConnectionParams.setConnectionTimeout(httpParameters, timeoutConnection);
-            int timeoutSocket = 10000;
+            int timeoutSocket = 5000;
             HttpConnectionParams.setSoTimeout(httpParameters, timeoutSocket);
 
             //create a new instance of HttpClient request POST
@@ -223,8 +223,10 @@ public class RequestManager implements ResponseListenerInterface {
                // List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
                 List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
 
-                for (Map.Entry<String, String> entry : credentials.entrySet())
+                for (Map.Entry<String, String> entry : credentials.entrySet()) {
+                    Log.d("credentials: ",""+entry.getKey()+" ----- "+ entry.getValue().toString());
                     params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+                }
 
                 for (Map.Entry<String, String> entry : requestData.entrySet())
                     params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
@@ -328,6 +330,7 @@ public class RequestManager implements ResponseListenerInterface {
                 try {
                     responseArray = ResponseManager.sharedInstance().parseCotizador(doc);
                     setResponseArray(responseArray);
+                    Log.d("responseParse", "NATIONAL_DELIVERY");
 
                     //Log.d("responseParse","ok size: "+responseArray.size());
                 } catch (SAXException e) {
@@ -342,7 +345,20 @@ public class RequestManager implements ResponseListenerInterface {
                 break;
             case REQUEST_INTERNATIONAL_DELIVERY:
 
-                Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(),"");
+                try {
+                    responseArray = ResponseManager.sharedInstance().parseCotizadorInternational(doc);
+                    setResponseArray(responseArray);
+                    Log.d("responseParse", "INTERNATIONAL_DELIVERY");
+
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
+
+                //Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(),"");
                 break;
             case REQUEST_OFFICES:
                 try {

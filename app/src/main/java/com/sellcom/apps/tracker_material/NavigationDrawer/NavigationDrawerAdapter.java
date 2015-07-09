@@ -75,12 +75,12 @@ public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDraw
         );
 
         if (mSelectedPosition == i || mTouchedPosition == i) {
-            viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(R.color.estafeta_light_gray));
-            viewHolder.textView.setTextColor(viewHolder.textView.getContext().getResources().getColor(R.color.estafeta_red));
+            viewHolder.itemView.setBackgroundColor(viewHolder.itemView.getContext().getResources().getColor(R.color.estafeta_dark_red));
+            viewHolder.textView.setTextColor(viewHolder.textView.getContext().getResources().getColor(R.color.white));
 
         } else {
             viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT);
-            viewHolder.textView.setTextColor(viewHolder.textView.getContext().getResources().getColor(R.color.estafeta_text));
+            viewHolder.textView.setTextColor(viewHolder.textView.getContext().getResources().getColor(R.color.white));
         }
     }
 
