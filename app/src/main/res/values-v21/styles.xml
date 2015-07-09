@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/estafeta_red</item>
-        <item name="colorPrimaryDark">@color/estafeta_red</item>
+        <item name="colorPrimaryDark">@color/estafeta_dark_red</item>
         <item name="colorAccent">@color/estafeta_red</item>
         <item name="android:textColorPrimary">@color/estafeta_text</item>
         <item name="android:navigationBarColor">@color/estafeta_red</item>
