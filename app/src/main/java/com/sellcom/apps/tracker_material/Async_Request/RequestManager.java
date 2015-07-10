@@ -49,8 +49,6 @@ public class RequestManager implements ResponseListenerInterface {
 
     public  final   boolean                                 TEST_MODE          = false;
 
-    private boolean bool;
-
     public  final   String 	                                LOG_TAG_MANAGER    = "requestManager";
     public  final   String 	                                LOG_TAG_REQUEST    = "asyncRequest";
 
@@ -521,6 +519,9 @@ public class RequestManager implements ResponseListenerInterface {
 
 
             default:
+                requestData.put("idUsuario","1");
+                requestData.put("medicion","1");
+                Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), "");
                 break;
         }
     return requestData;
