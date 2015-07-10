@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -32,6 +33,7 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
@@ -202,7 +204,7 @@ public class RequestManager implements ResponseListenerInterface {
         }
 
         @Override
-        protected String doInBackground(Void... voids){
+        protected String doInBackground(Void... voids) {
 
             String stringResponse = null;
             JSONObject jsonResponse = null;
@@ -219,9 +221,58 @@ public class RequestManager implements ResponseListenerInterface {
             HttpPost httppost = new HttpPost(getRequestURL(this.method));
             credentials = getCredentials(this.method);
 
-            try {
-               // List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
-                List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
+            if (this.method == METHOD.TEST) {
+
+                try {
+                    Thread.sleep(5000);
+                    jsonResponse = new JSONObject();
+                    try {
+                        jsonResponse.put("method",method.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                        try {
+                            jsonResponse.put("success",true);
+                            jsonResponse.put("resp","OK");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.COSTO.toString(),"300.00");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_DESTINO.toString(),"11500");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_ORIGEN.toString(),"56736");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINATARIO.toString(),"Usuario demo 2");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINO.toString(),"Ciudad de México, Miguel Hidalgo");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.GARANTIA.toString(),"Zona 3, Tercer día hábil");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.ORIGEN.toString(),"Edo. de México, Huixquilucan");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.REFERENCIA.toString(),"12345678");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.REMITENTE.toString(),"Usuario demo 1");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.TIPO_SERVICIO.toString(),"2 Días");
+
+
+                            Map<String,String> response = new HashMap<String,String>();
+                            Iterator<?> keys = jsonResponse.keys();
+                            while( keys.hasNext() ) {
+                                String key = (String)keys.next();
+                                response.put(key,jsonResponse.getString(key));
+                            }
+                            ArrayList<Map<String, String>> responseArray = new ArrayList<>();
+                            responseArray.add(response);
+                            setResponseArray(responseArray);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                return jsonResponse.toString();
+
+            }
+
+
+            else {
+                try {
+                    // List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
+                    List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
 
                 for (Map.Entry<String, String> entry : credentials.entrySet()) {
                     Log.d("credentials: ",""+entry.getKey()+" ----- "+ entry.getValue().toString());
@@ -240,29 +291,30 @@ public class RequestManager implements ResponseListenerInterface {
                 HttpResponse response = httpclient.execute(httppost);
                 Log.d(LOG_TAG_REQUEST+"response",response.toString());
 
-                HttpEntity entity = response.getEntity();
-                if(entity != null) {
-                    InputStream streamZipCodes = entity.getContent();
-                    try {
-                        stringResponse = parseToStringZipCodes(streamZipCodes);
-                        //responseArray = responseParse(streamZipCodes,this.method);
-                        Log.d(LOG_TAG_REQUEST+"Method",":"+this.method);
-                        Log.v(LOG_TAG_REQUEST+"Response",stringResponse);
-                    } catch (SAXException e) {
-                        e.printStackTrace();
-                    } catch (ParserConfigurationException e) {
-                        e.printStackTrace();
+                    HttpEntity entity = response.getEntity();
+                    if (entity != null) {
+                        InputStream streamZipCodes = entity.getContent();
+                        try {
+                            stringResponse = parseToStringZipCodes(streamZipCodes);
+                            //responseArray = responseParse(streamZipCodes,this.method);
+                            Log.d(LOG_TAG_REQUEST + "Method", ":" + this.method);
+                            Log.v(LOG_TAG_REQUEST + "Response", stringResponse);
+                        } catch (SAXException e) {
+                            e.printStackTrace();
+                        } catch (ParserConfigurationException e) {
+                            e.printStackTrace();
+                        }
+
                     }
 
+                } catch (ClientProtocolException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
 
-            } catch (ClientProtocolException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+                return stringResponse;
             }
-
-            return stringResponse;
         }
 
         @Override
@@ -452,6 +504,7 @@ public class RequestManager implements ResponseListenerInterface {
             break;
 
             default:
+                url =  "http://clavexcs.estafeta.com/RestService.svc/consultaConFechaMovilidadPlano";
                 break;
         }
         return url;
@@ -519,6 +572,11 @@ public class RequestManager implements ResponseListenerInterface {
 
 
             default:
+                requestData.put("idUsuario","1");
+                requestData.put("usuario","AdminUser");
+                requestData.put("pass","zi+Eybk8");
+                requestData.put("modalidad","0");
+                requestData.put("medicion","1");
                 break;
         }
     return requestData;

@@ -8,6 +8,7 @@ public enum METHOD {
     REQUEST_NATIONAL_DELIVERY ("r_national_delivery"),
     REQUEST_INTERNATIONAL_DELIVERY ("r_international_delivery"),
     REQUEST_OFFICES ("r_offices"),
+    TEST ("test"),
     REQUEST_EXCEPTION_CODES ("r_exception_codes");
 
     private final String name;

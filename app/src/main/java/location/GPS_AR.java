@@ -1,11 +1,8 @@
-package com.sellcom.apps.tracker_material.Augmented_Reality_Items;
+package location;
 
-import android.app.Service;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -15,13 +12,10 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by juan.guerra on 23/06/2015.
  */
-public class GPS implements
+public class GPS_AR implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -30,11 +24,11 @@ public class GPS implements
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location loc;
-    private static GPS gps;
+    private static GPS_AR gps;
 
-    public synchronized static GPS getInstance(Context context){
+    public synchronized static GPS_AR getInstance(Context context){
         if(gps==null){
-           gps=new GPS();
+           gps=new GPS_AR();
             gps.createGPSService(context);
         }
         return gps;

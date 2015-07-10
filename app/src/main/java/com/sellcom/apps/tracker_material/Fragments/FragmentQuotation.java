@@ -76,8 +76,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     private CheckBox        cb_packet,
                             cb_package;
 
-    private Button btn_btn;
-
 
     private EditText        edt_zc_origin,
                             edt_zc_destination,
@@ -95,6 +93,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             btn_zc_dest_phonebook;
 
     private Button          btn_quote;
+
+    private Button          btn_test;
 
     private LinearLayout    ll_for_package,
                             lin_nacional_cp,
@@ -182,6 +182,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             btn_zc_dest_phonebook   = (ImageButton) view.findViewById(R.id.btn_zc_dest_phonebook);
 
             btn_quote               = (Button) view.findViewById(R.id.btn_quote);
+            btn_test = (Button) view.findViewById(R.id.btn_test);
 
             ll_for_package      = (LinearLayout) view.findViewById(R.id.ll_for_package);
             lin_nacional_cp      = (LinearLayout) view.findViewById(R.id.lin_nacional_cp);
@@ -206,6 +207,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             btn_zc_dest_search.setOnClickListener(this);
             btn_zc_dest_phonebook.setOnClickListener(this);
             btn_quote.setOnClickListener(this);
+            btn_test.setOnClickListener(this);
 
             ll_for_package.setVisibility(View.GONE);
 
@@ -364,6 +366,23 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
                 requestQuote();
                 break;
+
+            case R.id.btn_test:
+                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+                FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment fragment   = new FragmentQuotationBuy();
+                Bundle b = new Bundle();
+                b.putString(FragmentQuotationBuy.EXTRAS.CP_ORIGEN.toString(), "543");
+                b.putString(FragmentQuotationBuy.EXTRAS.CP_DESTINO.toString(), "542");
+                b.putString(FragmentQuotationBuy.EXTRAS.COSTO.toString(),"350.00");
+                fragment.setArguments(b);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, fragment, "");
+                fragmentTransaction.commit();
+                break;
+
+
         }
     }
 
@@ -457,7 +476,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     private void requestQuote(){
 
         if(!isNetworkAvailable()){
-            Toast.makeText(context,"Debe tener acceso a Internet",Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Debe tener acceso a Internet", Toast.LENGTH_SHORT).show();
         }else{
 
             if(ll_for_package.getVisibility() == View.VISIBLE) {

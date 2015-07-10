@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Activities;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.nfc.Tag;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +25,8 @@ import com.sellcom.apps.tracker_material.Fragments.FragmentAR;
 import com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad;
 import com.sellcom.apps.tracker_material.Fragments.FragmentCodigoPostal;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotation;
+import com.sellcom.apps.tracker_material.Fragments.FragmentQuotationBuy;
+import com.sellcom.apps.tracker_material.Fragments.FragmentQuotationBuyFields;
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreo;
 import com.sellcom.apps.tracker_material.Fragments.FragmentOffices;
 
@@ -94,6 +97,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             getSupportActionBar().show();
             mNavigationDrawerFragment.selectItem(NavigationDrawerFragment.OFICINAS);
             //System.gc();
+            return;
+        }
+
+        else if (currentFragment instanceof FragmentQuotationBuy){
+            if ( ((FragmentQuotationBuy)currentFragment).getCurrent() == FragmentQuotationBuyFields.DESTINY)
+                ((FragmentQuotationBuy)currentFragment).handleBackPressed();
+            else
+                super.onBackPressed();
             return;
         }
 
@@ -188,14 +199,32 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 }
                 break;
 
+            case NavigationDrawerFragment.PRELLENADO:
+                fragment = null;
+                break;
+
+            case NavigationDrawerFragment.HISTORIAL:
+                fragment = null;
+                break;
+
+
+
+
+
+
+
             default:
                 //Toast.makeText(this,"Módulo no implementado",Toast.LENGTH_SHORT).show();
                 return;
         }
-        prepareTransaction();
+        if (fragment != null)
+            prepareTransaction();
+        else
+            Toast.makeText(this,"Modulo en desarrollo",Toast.LENGTH_SHORT).show();
     }
 
     public void prepareTransaction(){
+
         fragment.section_index  = position;
         fragment.tag            = CURRENT_FRAGMENT_TAG;
         /*
@@ -216,6 +245,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             fragment = Fragment_Default;
 
         fragmentTransaction.replace(R.id.container, fragment, CURRENT_FRAGMENT_TAG).commit();
+
     }
 
     public void onSectionAttached(int number) {

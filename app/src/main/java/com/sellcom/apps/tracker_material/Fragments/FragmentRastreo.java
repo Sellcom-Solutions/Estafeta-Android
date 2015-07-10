@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.content.Context;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.RastreoListAdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
@@ -31,7 +34,9 @@ import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import database.model.Favorites;
@@ -174,8 +179,13 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 fdh.show(fragmentManager,"FRAG_DIALOG_HELP");
                 break;
 
+            //15000
             case R.id.btn_escanear:
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                List<String> oDesiredFormats = Arrays.asList("PDF_417".split(","));
+                IntentIntegrator integrator= IntentIntegrator.forSupportFragment(this);
+                integrator.initiateScan(oDesiredFormats);
+                codigo.setText("");
                 break;
 
             case R.id.btn_rastrear:
@@ -241,6 +251,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
 
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -407,5 +418,32 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         }
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if (resultCode == getActivity().RESULT_OK) {
+            if (requestCode == IntentIntegrator.REQUEST_CODE) {
+                IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+                scanResult(scanningResult);
+            }
+        }
+    }
+
+    public void scanResult(IntentResult scanResult) {
+        if (scanResult != null) {
+            String preCod = scanResult.getContents().trim();
+            Log.d("Longitud",String.valueOf(preCod.length()));
+            Log.d("Codigo",preCod);
+            if ( Utilities.validateCode(preCod,context) )
+                codigo.setText(scanResult.getContents());
+            else
+                Toast.makeText(context,context.getResources().getString(R.string.code_incorrect),Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
 

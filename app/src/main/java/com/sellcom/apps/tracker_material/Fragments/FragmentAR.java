@@ -1,27 +1,23 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.gc.materialdesign.widgets.Dialog;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.CajaDeTexto;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.Camara;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.ContenedorCajas;
-import com.sellcom.apps.tracker_material.Augmented_Reality_Items.GPS;
+import location.GPS_AR;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.ListaMarcadores;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.Marcador;
 import com.sellcom.apps.tracker_material.Augmented_Reality_Items.Pantalla;
@@ -33,7 +29,6 @@ import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import android.view.View.OnClickListener;
 
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,7 +53,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     private Context context;
     private View view;
     private RelativeLayout contenedorCajas;
-    private GPS gps;
+    private GPS_AR gps;
 ///////////////////////////////////////////////////////////////////
 
 
@@ -84,7 +79,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
 
     public void inicializar(){
         ListaMarcadores.actualizarMarcadores(context);
-        gps=GPS.getInstance(context);
+        gps= GPS_AR.getInstance(context);
         //RRA.getId();
         contenedorCajas=new RelativeLayout(getActivity());
         RelativeLayout.LayoutParams parametros=new RelativeLayout.LayoutParams(
@@ -194,7 +189,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
 
     public void finalizar(){
         try {
-            GPS.getInstance(context).finalize();
+            GPS_AR.getInstance(context).finalize();
 
             Sensores.getInstance(context,this).setListener(null);
             //Sensores.getInstance(context,this).finalize();

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string-array name="drawer_items">
         <item>Rastreo</item>
         <item>Oficinas</item>
+        <item>Prellenado de Guías</item>
         <item>Cotizador</item>
+        <item>Historial de operaciones</item>
         <item>Código Postal</item>
         <item>Aviso de Privacidad</item>
-
     </string-array>
 
     <!-- Dialog messages-->
@@ -41,6 +43,7 @@
     <string name="aviso_codigo">Puedes ingresar hasta 10 envíos (uno por línea)</string>
     <string name="boton_escanear">Escanear</string>
     <string name="boton_rastrear">Rastrear</string>
+    <string name="code_incorrect">El código leído es incorrecto</string>
 
     <!-- Oficinas -->
     <string name="view_ar">Ver AR</string>

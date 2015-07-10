@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><LinearLayout
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -388,6 +389,18 @@
                             android:background          ="@android:color/transparent"
                             android:gravity="center"
                             android:layout_gravity="bottom|center_horizontal"  />
+
+                <Button
+                    android:id                  ="@+id/btn_test"
+                    android:layout_width        ="match_parent"
+                    android:layout_height       ="match_parent"
+                    android:paddingTop          ="35dp"
+                    android:text                ="nuevo"
+                    android:textSize            ="@dimen/sizeNormalText"
+                    android:textColor           ="@color/estafeta_red"
+                    android:background          ="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_gravity="bottom|center_horizontal"  />
                 </LinearLayout>
 
 

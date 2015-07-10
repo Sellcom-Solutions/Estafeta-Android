@@ -7,8 +7,11 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.R;
 
@@ -99,6 +102,42 @@ public class Utilities {
         else if(type.equals("CA"))
                 return BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_gris);
         return bMap;
+    }
+
+
+    public static boolean validateCommonField(Context context,String field,EditText view){
+        if(field.isEmpty()){
+            view.setError(context.getResources().getText(R.string.error_empty_field).toString());
+            view.requestFocus();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean validateCode(String preCode,Context context){
+        if (preCode.length() == 10)
+            return validatedigits(preCode);
+
+        else if (preCode.length() == 22)
+            return validatetext(preCode);
+
+        Log.d("Longitud: ",String.valueOf(preCode));
+        return false;
+    }
+
+    private static boolean validatedigits(String code){
+        String pattern = "[0-9]+";
+        if (code.matches(pattern))
+            return true;
+        return false;
+    }
+
+    private static boolean validatetext(String code){
+        String pattern = "[a-zA-Z0-9]+";
+        if (code.matches(pattern))
+            return true;
+        return false;
+
     }
 
 }
