@@ -24,7 +24,7 @@
     <!-- Globals -->
     <string name="Search">Buscar</string>
     <string name="offices_search_by_address">Buscar por dirección</string>
-    <string name="city_etc">Ciudad, municipio, delegación</string>
+    <string name="city_etc">Ciudad, municipio, delegación*</string>
     <string name="locality">Colonia</string>
     <string name="zip_code">C.P.</string>
     <string name="mandatory_fields">Campos Obligatorios *</string>
@@ -88,14 +88,14 @@
     <string name="quotation_international">Internacional</string>
     <string name="quotation_packet">SOBRE</string>
     <string name="quotation_package">PAQUETE</string>
-    <string name="quotation_zip_origin">C.P. Origen*</string>
-    <string name="quotation_zip_destination">C.P. Destino*</string>
+    <string name="quotation_zip_origin">C.P. Origen</string>
+    <string name="quotation_zip_destination">C.P. Destino</string>
     <string name="quotation_quote">Cotizar</string>
 
-    <string name="quotation_weigth">Peso(kg)*</string>
-    <string name="quotation_high">Alto(cm)*</string>
-    <string name="quotation_long">Largo(cm)*</string>
-    <string name="quotation_width">Ancho(cm)*</string>
+    <string name="quotation_weigth">Peso(kg)</string>
+    <string name="quotation_high">Alto(cm)</string>
+    <string name="quotation_long">Largo(cm)</string>
+    <string name="quotation_width">Ancho(cm)</string>
 
     <string name="quotation_search_zc">Buscar Código Postal</string>
 
@@ -137,7 +137,7 @@
 
     <!-- Dialog messages-->
     <string name="error_codigo">Error, código postal no válido.</string>
-    <string name="error_ciudad">Error, el campo ciudad es obligatorio.</string>
+    <string name="error_ciudad">Error, la ciudad es obligatoria.</string>
     <string name="error_estado">Error, debes seleccionar un estado.</string>
     <string name="cargando_oficinas">Cargando Oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>

@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.sellcom.apps.tracker_material.Adapters.DetailQuotationAdapter;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 import java.util.ArrayList;
@@ -54,6 +55,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
     private ListView        lv_quotation;
 
+    private LinearLayout    lin_dimensiones;
+
     private List<Map<String,String>> list;
 
     private ArrayList<String>  servicioList;
@@ -61,8 +64,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
     private Map<String,String> map;
 
     private String type;
-
-    private DetailQuotationAdapter adapter;
 
 
     @Override
@@ -78,6 +79,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         View view = inflater.inflate(R.layout.fragment_detail_quoatation, container, false);
 
         list    = (List<Map<String,String>>) getArguments().getSerializable("respCotizador");
+        checkList(list);
+
         type    = getArguments().getString("type");
 
         txv_send_type           = (TextView)view.findViewById(R.id.txv_send_type);
@@ -97,6 +100,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
         imv_send_type           = (ImageView)view.findViewById(R.id.imv_send_type);
 
+        lin_dimensiones         = (LinearLayout)view.findViewById(R.id.lin_dimensiones);
+
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
 
@@ -104,11 +109,57 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         btn_share.setOnClickListener(this);
 
         lv_quotation            = (ListView)view.findViewById(R.id.lv_quotation);
+
+
+
+
+
+        printInformation(type);
+
+        return view;
+    }
+
+    public void checkList(List<Map<String,String>> list){
+
+        servicioList = new ArrayList<String>();
+
+        for (int i = 1; i<list.size(); i++){
+            if(list.get(i).get("AplicaCotizacion") != null &&
+                    list.get(i).get("AplicaCotizacion").equalsIgnoreCase("Si") &&
+                    list.get(i).get("AplicaServicio").equalsIgnoreCase("Si") &&
+                    !list.get(i).get("TarifaBase").equalsIgnoreCase("0")){
+
+                servicioList.add(list.get(i).get("DescripcionServicio"));
+
+            }else{
+                Log.d(TAG, "Tamaño lista: " + list.size());
+                Log.d(TAG,"i: "+list.size());
+                list.remove(i);
+                i--;
+
+            }
+        }
+
+    }
+
+    public void printInformation(String type){
+
+        final DetailQuotationAdapter adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
+        lv_quotation.setAdapter(adapter);
+
         lv_quotation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView selection = (TextView)view.findViewById(R.id.txv_selection);
+                TextView description = (TextView)view.findViewById(R.id.txv_descripcion_servicio);
 
-                //view.setSelected(true);
+
+                Log.d(TAG," --- " + view);
+
+
+                adapter.setSelectionState(true, view, selection, description);
+                adapter.setLastSelectedItemPosition(position);
+
                 lv_quotation.setSelection(position);
 
                 map = new HashMap<String,String>();
@@ -122,39 +173,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_sobrepeso.setText("$" + Double.parseDouble(map.get("CCSobrePeso")));
 
                 txv_costo_total.setText("$" + Double.parseDouble(map.get("CostoTotal")));
-
-                TextView selection = (TextView)view.findViewById(R.id.txv_selection);
-                TextView description = (TextView)view.findViewById(R.id.txv_descripcion_servicio);
-
-
-                adapter.setSelectionState(true, view, selection, description);
-                adapter.setLastSelectedItemPosition(position+1);
-
-
             }
         });
-
-
-
-
-        printInformation(type);
-
-        return view;
-    }
-
-    public void printInformation(String type){
-
-        servicioList = new ArrayList<String>();
-
-        for (int i = 1; i<list.size(); i++){
-
-            if(list.get(i).get("AplicaCotizacion") != null &&
-                    list.get(i).get("AplicaCotizacion").equalsIgnoreCase("Si") &&
-                    list.get(i).get("AplicaServicio").equalsIgnoreCase("Si")){
-
-                servicioList.add(list.get(i).get("DescripcionServicio"));
-            }
-        }
 
         switch (type){
 
@@ -164,6 +184,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.sobre));
                 txv_send_type.setText("Sobre");
+                lin_dimensiones.setVisibility(View.GONE);
 
                 txv_guia.setText("$"+Double.parseDouble(map.get("TarifaBase")));
                 txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
@@ -177,12 +198,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 map = new HashMap<String,String>();
                 map = list.get(0);
-
-                txv_dimensiones.setText("No aplica");
-
-                adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
-                lv_quotation.setAdapter(adapter);
-
 
                 break;
 
@@ -193,6 +208,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.paquete));
                 txv_send_type.setText("Paquete");
+                lin_dimensiones.setVisibility(View.VISIBLE);
 
                 txv_guia.setText("$"+Double.parseDouble(map.get("TarifaBase")));
                 txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
@@ -207,10 +223,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 map = new HashMap<String,String>();
                 map = list.get(0);
 
-                txv_dimensiones.setText(""+map.get("Alto")+"cm x "+map.get("Ancho")+"cm x "+map.get("Largo")+", "+map.get("Peso")+"kg");
+                txv_dimensiones.setText("" + map.get("Alto") + "cm x " + map.get("Ancho") + "cm x " + map.get("Largo") + ", " + map.get("Peso") + "kg");
 
-                adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
-                lv_quotation.setAdapter(adapter);
 
 
                 break;
@@ -266,11 +280,11 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
             txv_dias_entrega.setText("" + dias);
 
-            txv_frecuencia.setText("" + map.get("Frecuencia"));
+        txv_frecuencia.setText("" + map.get("Frecuencia"));
             txv_ocurre_forzoso.setText("" + map.get("OcurreForzoso"));
-            txv_costo_reexpedicion.setText("" + map.get("CostoReexpedicion"));
+        txv_costo_reexpedicion.setText("" + map.get("CostoReexpedicion"));
 
-
+        DialogManager.sharedInstance().dismissDialog();
 
     }
 

@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
@@ -435,7 +436,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     private String getCP(String contactId) {
         String postalCode = null;
         String where = ContactsContract.Data.CONTACT_ID + " =  ? "
-                + " AND ContactsContract.Data.MIMETYPE = ? ";
+                + " AND "+ ContactsContract.Data.MIMETYPE +" = ? ";
 
         String[] projection = new String[] { ContactsContract.CommonDataKinds.StructuredPostal.POSTCODE };
         String[] params = new String[] {
@@ -572,13 +573,21 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        cb_packet.setChecked(true);
+        cb_package.setChecked(false);
+    }
+
     private void cotizar(String type){
 
         Map<String, String> requestData = new HashMap<>();
 
+
         switch (type){
             case "nacional_sobre":
-
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
                 requestData.put("Peso","0.0");
                 requestData.put("Alto","0.0");
                 requestData.put("Largo","0.0");
@@ -596,7 +605,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case "nacional_paquete":
-
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
 
                 requestData.put("Peso",peso);
                 requestData.put("Alto",alto);
@@ -631,9 +640,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 typeSend = "internacional_sobre";
 
+                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                /*
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-
+                */
                 break;
 
 
@@ -658,9 +669,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 typeSend = "internacional_sobre_eua_canada";
 
+                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                /*
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-
+                */
                 break;
 
             case "internacional_paquete":
@@ -681,9 +694,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 Log.v(TAG,"Peso: " + requestData.get("peso") + ", Alto: "+ requestData.get("alto")+", Largo: "+requestData.get("largo")+", Ancho: "+requestData.get("ancho")+", Envio: "+requestData.get("envio")+", Servicio: "+requestData.get("servicio")+", PaisDestino: "+requestData.get("paisDestino"));
 
+                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                /*
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-
+                */
                 break;
 
             case "internacional_paquete_eua_canada":
@@ -710,12 +725,15 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 Log.v(TAG,"Peso: " + requestData.get("peso") + ", Alto: "+ requestData.get("alto")+", Largo: "+requestData.get("largo")+", Ancho: "+requestData.get("ancho")+", Envio: "+requestData.get("envio")+", Servicio: "+requestData.get("servicio")+", PaisDestino: "+requestData.get("paisDestino"));
 
+                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                /*
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-
+                */
                 break;
 
         }
+
 
     }
 
@@ -848,7 +866,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                     } else if (error.equals("E009")) {
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noCpDestination), 3000);
                     } else {
+
+
                         String EsPaquete = map.get("EsPaquete");
+
                         if (EsPaquete.equals("false")) {
 
                             bundle.putString("type", "nacional_sobre");
@@ -861,7 +882,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         }
 
-                        Log.d("aqui",""+respCotizador.get(1).get("AplicaCotizacion"));
 
                         bundle.putSerializable("respCotizador", respCotizador);
                         fragment = new FragmentDetailQuoatation();
@@ -869,9 +889,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                         fragment.setArguments(bundle);
                         fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.replace(R.id.container, fragment, FragmentDetailQuoatation.TAG);
-                        fragmentTransaction.commit();
 
+
+
+                        new AsynTask().execute();
                     }
                 }else if(typeSend.equals("internacional_sobre")){
 
@@ -934,6 +955,20 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         NetworkInfo activeNetworkInfo = connectivityManager
                 .getActiveNetworkInfo();
         return activeNetworkInfo != null;
+    }
+
+
+    class AsynTask extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            fragmentTransaction.replace(R.id.container, fragment, FragmentDetailQuoatation.TAG);
+            fragmentTransaction.commit();
+            return null;
+        }
+
+
     }
 
 }

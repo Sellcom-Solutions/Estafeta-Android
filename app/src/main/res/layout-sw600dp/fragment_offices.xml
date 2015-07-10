@@ -158,24 +158,17 @@
                         android:id                  ="@+id/edt_city"
                         android:layout_width        ="0dp"
                         android:layout_height       ="wrap_content"
-                        android:layout_weight       ="90"
+                        android:layout_weight       ="100"
                         android:textColor           ="@color/estafeta_text"
                         android:textSize            ="@dimen/sizeLargeText"
                         android:hint                ="@string/city_etc"
                         android:textColorHint       ="@color/estafeta_soft_gray"
-
+                        android:layout_marginRight  ="10dp"
+                        android:layout_marginTop    ="10dp"
+                        android:layout_marginLeft   ="20dp"
                         android:nextFocusDown       ="@+id/edt_colony"
 />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="5"
-                        android:textColor="@color/estafeta_red"
-                        android:layout_marginRight  ="10dp"
-                        android:text="*"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/sizeLargeText"/>
 
 
                 </LinearLayout>
