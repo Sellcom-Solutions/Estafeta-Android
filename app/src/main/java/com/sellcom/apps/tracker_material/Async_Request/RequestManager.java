@@ -49,6 +49,8 @@ public class RequestManager implements ResponseListenerInterface {
 
     public  final   boolean                                 TEST_MODE          = false;
 
+    private boolean bool;
+
     public  final   String 	                                LOG_TAG_MANAGER    = "requestManager";
     public  final   String 	                                LOG_TAG_REQUEST    = "asyncRequest";
 
