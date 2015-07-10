@@ -76,6 +76,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     private CheckBox        cb_packet,
                             cb_package;
 
+    private Button btn_btn;
+
 
     private EditText        edt_zc_origin,
                             edt_zc_destination,
@@ -947,7 +949,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         }
 
 
-
     }
 
     private boolean isNetworkAvailable() {
@@ -962,7 +963,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
         @Override
         protected String doInBackground(String... params) {
-
             fragmentTransaction.replace(R.id.container, fragment, FragmentDetailQuoatation.TAG);
             fragmentTransaction.commit();
             return null;
