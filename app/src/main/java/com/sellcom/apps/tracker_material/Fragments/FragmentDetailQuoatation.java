@@ -22,6 +22,7 @@ import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -49,13 +50,20 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             txv_dias_entrega,
                             txv_frecuencia,
                             txv_ocurre_forzoso,
-                            txv_costo_reexpedicion;
+                            txv_costo_reexpedicion,
+                            txv_guia_internacional,
+                            txv_cc_tarifa_internacional,
+                            txv_costo_total_internacional,
+                            txv_terminos;
 
     private ImageView       imv_send_type;
 
     private ListView        lv_quotation;
 
-    private LinearLayout    lin_dimensiones;
+    private LinearLayout    lin_dimensiones,
+                            lin_detail_international,
+                            lin_detail_national,
+                            lin_terminos_internacional;
 
     private List<Map<String,String>> list;
 
@@ -64,6 +72,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
     private Map<String,String> map;
 
     private String type;
+    private DecimalFormat   decimales;
+    private double          numero;
 
 
     @Override
@@ -78,8 +88,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_detail_quoatation, container, false);
 
-        list    = (List<Map<String,String>>) getArguments().getSerializable("respCotizador");
-        checkList(list);
+        list    = (List<Map<String,String>>) getArguments().getSerializable("auxResp");
+
 
         type    = getArguments().getString("type");
 
@@ -97,10 +107,18 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         txv_frecuencia          = (TextView)view.findViewById(R.id.txv_frecuencia);
         txv_ocurre_forzoso      = (TextView)view.findViewById(R.id.txv_ocurre_forzoso);
         txv_costo_reexpedicion  = (TextView)view.findViewById(R.id.txv_costo_reexpedicion);
+        txv_guia_internacional  = (TextView)view.findViewById(R.id.txv_guia_internacional);
+        txv_cc_tarifa_internacional  = (TextView)view.findViewById(R.id.txv_cc_tarifa_internacional);
+        txv_costo_total_internacional  = (TextView)view.findViewById(R.id.txv_costo_total_internacional);
+        txv_terminos            = (TextView)view.findViewById(R.id.txv_terminos);
 
         imv_send_type           = (ImageView)view.findViewById(R.id.imv_send_type);
 
         lin_dimensiones         = (LinearLayout)view.findViewById(R.id.lin_dimensiones);
+
+        lin_detail_international = (LinearLayout)view.findViewById(R.id.lin_detail_international);
+        lin_detail_national     = (LinearLayout)view.findViewById(R.id.lin_detail_national);
+        lin_terminos_internacional = (LinearLayout)view.findViewById(R.id.lin_terminos_internacional);
 
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
@@ -119,7 +137,11 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         return view;
     }
 
-    public void checkList(List<Map<String,String>> list){
+    public void checkListNational(final List<Map<String,String>> list){
+
+        lin_detail_national.setVisibility(View.VISIBLE);
+        lin_detail_international.setVisibility(View.GONE);
+        lin_terminos_internacional.setVisibility(View.GONE);
 
         servicioList = new ArrayList<String>();
 
@@ -140,32 +162,28 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
             }
         }
 
-    }
-
-    public void printInformation(String type){
-
         final DetailQuotationAdapter adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
         lv_quotation.setAdapter(adapter);
 
         lv_quotation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView selection = (TextView)view.findViewById(R.id.txv_selection);
-                TextView description = (TextView)view.findViewById(R.id.txv_descripcion_servicio);
+                TextView selection = (TextView) view.findViewById(R.id.txv_selection);
+                TextView description = (TextView) view.findViewById(R.id.txv_descripcion_servicio);
 
 
-                Log.d(TAG," --- " + view);
+                Log.d(TAG, " --- " + view);
 
 
                 adapter.setSelectionState(true, view, selection, description);
-                adapter.setLastSelectedItemPosition(position);
+                adapter.setLastSelectedItemPosition(position + 1);
 
                 lv_quotation.setSelection(position);
 
-                map = new HashMap<String,String>();
-                map = list.get((position+1));
+                map = new HashMap<String, String>();
+                map = list.get((position + 1));
 
-                txv_guia.setText("$"+Double.parseDouble(map.get("TarifaBase")));
+                txv_guia.setText("$" + Double.parseDouble(map.get("TarifaBase")));
                 txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
                 txv_cargo_extra.setText("$" + Double.parseDouble(map.get("CargosExtra")));
 
@@ -173,12 +191,82 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_sobrepeso.setText("$" + Double.parseDouble(map.get("CCSobrePeso")));
 
                 txv_costo_total.setText("$" + Double.parseDouble(map.get("CostoTotal")));
+
+
             }
         });
+
+    }
+
+    public void checkListInternational(final List<Map<String,String>> list){
+
+        lin_detail_national.setVisibility(View.GONE);
+        lin_detail_international.setVisibility(View.VISIBLE);
+        lin_terminos_internacional.setVisibility(View.VISIBLE);
+
+        servicioList = new ArrayList<String>();
+
+        for (int i = 0; i<list.size(); i++){
+
+            servicioList.add(list.get(i).get("DescripcionServicio"));
+
+        }
+
+        final DetailQuotationAdapter adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
+        lv_quotation.setAdapter(adapter);
+
+        lv_quotation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                TextView selection = (TextView) view.findViewById(R.id.txv_selection);
+                TextView description = (TextView) view.findViewById(R.id.txv_descripcion_servicio);
+
+
+                Log.d(TAG, " --- " + view);
+
+
+                adapter.setSelectionState(true, view, selection, description);
+                adapter.setLastSelectedItemPosition(position + 1);
+
+                lv_quotation.setSelection(position);
+
+                map = new HashMap<String, String>();
+                map = list.get((position));
+
+                txv_guia_internacional.setText("USD ");
+                txv_cc_tarifa_internacional.setText("USD ");
+                txv_costo_total_internacional.setText("USD ");
+
+
+                decimales = new DecimalFormat("0.00");
+                numero = Double.parseDouble(map.get("PrecioPaquete"));
+                txv_guia_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCombustible"));
+                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCotizado"));
+                txv_costo_total_internacional.append("" + decimales.format(numero));
+
+                if(position == 0){
+                    txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
+                }else{
+                    txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_2));
+                }
+
+            }
+        });
+
+    }
+
+    public void printInformation(String type){
 
         switch (type){
 
             case "nacional_sobre":
+                checkListNational(list);
+
+
                 map = new HashMap<String,String>();
                 map = list.get(1);
 
@@ -186,7 +274,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_send_type.setText("Sobre");
                 lin_dimensiones.setVisibility(View.GONE);
 
-                txv_guia.setText("$"+Double.parseDouble(map.get("TarifaBase")));
+                txv_guia.setText("$" + Double.parseDouble(map.get("TarifaBase")));
                 txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
                 txv_cargo_extra.setText("$"+Double.parseDouble(map.get("CargosExtra")));
 
@@ -195,14 +283,18 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 txv_costo_total.setText("$"+Double.parseDouble(map.get("CostoTotal")));
 
+                txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
+
 
                 map = new HashMap<String,String>();
                 map = list.get(0);
 
+                addExtraData();
+
                 break;
 
             case "nacional_paquete":
-
+                checkListNational(list);
                 map = new HashMap<String,String>();
                 map = list.get(1);
 
@@ -210,7 +302,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_send_type.setText("Paquete");
                 lin_dimensiones.setVisibility(View.VISIBLE);
 
-                txv_guia.setText("$"+Double.parseDouble(map.get("TarifaBase")));
+                txv_guia.setText("$" + Double.parseDouble(map.get("TarifaBase")));
                 txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
                 txv_cargo_extra.setText("$"+Double.parseDouble(map.get("CargosExtra")));
 
@@ -219,37 +311,141 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 txv_costo_total.setText("$"+Double.parseDouble(map.get("CostoTotal")));
 
+                txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
                 map = new HashMap<String,String>();
                 map = list.get(0);
 
                 txv_dimensiones.setText("" + map.get("Alto") + "cm x " + map.get("Ancho") + "cm x " + map.get("Largo") + ", " + map.get("Peso") + "kg");
 
-
+                addExtraData();
 
                 break;
 
             case "internacional_sobre":
+                checkListInternational(list);
 
+                map = new HashMap<String,String>();
+                map = list.get(0);
+
+                imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.sobre));
+                txv_send_type.setText("Sobre");
+                lin_dimensiones.setVisibility(View.GONE);
+
+                decimales = new DecimalFormat("0.00");
+                numero = Double.parseDouble(map.get("PrecioPaquete"));
+                txv_guia_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCombustible"));
+                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCotizado"));
+                txv_costo_total_internacional.append("" + decimales.format(numero));
+
+                txv_origen.setText("México");
+                txv_destino.setText("" + getArguments().getString("destino"));
+
+                txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
                 break;
 
             case "internacional_paquete":
 
+                checkListInternational(list);
+
+                map = new HashMap<String,String>();
+                map = list.get(0);
+
+                imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.paquete));
+                txv_send_type.setText("Paquete");
+                lin_dimensiones.setVisibility(View.VISIBLE);
+
+                decimales = new DecimalFormat("0.00");
+                numero = Double.parseDouble(map.get("PrecioPaquete"));
+                txv_guia_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCombustible"));
+                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCotizado"));
+                txv_costo_total_internacional.append("" + decimales.format(numero));
+
+                txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
+
+                txv_origen.setText("México");
+                txv_destino.setText(""+getArguments().getString("destino"));
+
+                txv_dimensiones.setText("" + getArguments().getString("alto") + "cm x " + getArguments().getString("ancho") + "cm x " + getArguments().getString("largo") + ", " + getArguments().getString("peso") + "kg");
 
                 break;
 
             case "internacional_sobre_eua_canada":
 
+                checkListInternational(list);
+
+                map = new HashMap<String,String>();
+                map = list.get(0);
+
+                imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.sobre));
+                txv_send_type.setText("Sobre");
+                lin_dimensiones.setVisibility(View.GONE);
+
+                decimales = new DecimalFormat("0.00");
+                numero = Double.parseDouble(map.get("PrecioPaquete"));
+                txv_guia_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCombustible"));
+                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCotizado"));
+                txv_costo_total_internacional.append("" + decimales.format(numero));
+
+                txv_origen.setText("México");
+                txv_destino.setText(""+getArguments().getString("destino"));
+
+                txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
                 break;
 
             case "internacional_paquete_eua_canada":
 
+                checkListInternational(list);
+
+                map = new HashMap<String,String>();
+                map = list.get(0);
+
+                imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.paquete));
+                txv_send_type.setText("Paquete");
+                lin_dimensiones.setVisibility(View.VISIBLE);
+
+                decimales = new DecimalFormat("0.00");
+                numero = Double.parseDouble(map.get("PrecioPaquete"));
+                txv_guia_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCombustible"));
+                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("PrecioCotizado"));
+                txv_costo_total_internacional.append("" + decimales.format(numero));
+
+                txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
+
+                txv_origen.setText("México");
+                txv_destino.setText(""+getArguments().getString("destino"));
+
+                txv_dimensiones.setText("" + getArguments().getString("alto") + "cm x " + getArguments().getString("ancho") + "cm x " + getArguments().getString("largo") + ", " + getArguments().getString("peso") + "kg");
 
                 break;
 
         }
+
+
+        DialogManager.sharedInstance().dismissDialog();
+
+    }
+
+
+    public void addExtraData(){
 
             txv_origen.setText(""+map.get("CodigoPosOri")+", "+map.get("MunicipioOri")+", "+map.get("EstadoOri"));
             txv_destino.setText(""+map.get("CpDestino")+", "+map.get("Municipio")+", "+map.get("Estado"));
@@ -280,12 +476,9 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
             txv_dias_entrega.setText("" + dias);
 
-        txv_frecuencia.setText("" + map.get("Frecuencia"));
+            txv_frecuencia.setText("" + map.get("Frecuencia"));
             txv_ocurre_forzoso.setText("" + map.get("OcurreForzoso"));
-        txv_costo_reexpedicion.setText("" + map.get("CostoReexpedicion"));
-
-        DialogManager.sharedInstance().dismissDialog();
-
+            txv_costo_reexpedicion.setText("" + map.get("CostoReexpedicion"));
     }
 
 

@@ -143,7 +143,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private Bundle          bundle;
 
-    private ArrayList<Map<String,String>> colonias,respCotizador;
+    private ArrayList<Map<String,String>> colonias,respCotizador,auxResp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -268,6 +268,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 }
             });
 
+
+
         }
 
         return view;
@@ -364,6 +366,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
             case R.id.btn_quote:
                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                auxResp = new ArrayList<Map<String,String>>();
                 requestQuote();
                 break;
 
@@ -537,6 +540,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                             if(numCountrie == 39 || numCountrie == 63){
                                 contEUA_Canada = 0;
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
                                 cotizar("internacional_paquete_eua_canada");
 
                                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
@@ -575,6 +579,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                             if(numCountrie == 39 || numCountrie == 63){
                                 contEUA_Canada = 0;
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
                                 cotizar("internacional_sobre_eua_canada");
 
                                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
@@ -599,9 +604,12 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         super.onResume();
         cb_packet.setChecked(true);
         cb_package.setChecked(false);
+        tbtn_nat.setChecked(true);
+        tbtn_inter.setChecked(false);
     }
 
     private void cotizar(String type){
+
 
         Map<String, String> requestData = new HashMap<>();
 
@@ -609,6 +617,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         switch (type){
             case "nacional_sobre":
                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+
                 requestData.put("Peso","0.0");
                 requestData.put("Alto","0.0");
                 requestData.put("Largo","0.0");
@@ -645,6 +654,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case "internacional_sobre":
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
 
 
                 requestData.put("peso","1");
@@ -661,11 +671,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 typeSend = "internacional_sobre";
 
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                /*
+                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-                */
+
                 break;
 
 
@@ -690,14 +700,15 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 typeSend = "internacional_sobre_eua_canada";
 
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                /*
+                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-                */
+
                 break;
 
             case "internacional_paquete":
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
 
                 requestData.put("peso", peso);
 
@@ -715,11 +726,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 Log.v(TAG,"Peso: " + requestData.get("peso") + ", Alto: "+ requestData.get("alto")+", Largo: "+requestData.get("largo")+", Ancho: "+requestData.get("ancho")+", Envio: "+requestData.get("envio")+", Servicio: "+requestData.get("servicio")+", PaisDestino: "+requestData.get("paisDestino"));
 
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                /*
+                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-                */
+
                 break;
 
             case "internacional_paquete_eua_canada":
@@ -746,11 +757,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                 Log.v(TAG,"Peso: " + requestData.get("peso") + ", Alto: "+ requestData.get("alto")+", Largo: "+requestData.get("largo")+", Ancho: "+requestData.get("ancho")+", Envio: "+requestData.get("envio")+", Servicio: "+requestData.get("servicio")+", PaisDestino: "+requestData.get("paisDestino"));
 
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                /*
+                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+
                 RequestManager.sharedInstance().setListener(this);
                 RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_INTERNATIONAL_DELIVERY, requestData);
-                */
+
                 break;
 
         }
@@ -883,8 +894,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                     String error = map.get("Error");
 
                     if (error.equals("E008")) {
+                        DialogManager.sharedInstance().dismissDialog();
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noCpOrigin), 3000);
                     } else if (error.equals("E009")) {
+                        DialogManager.sharedInstance().dismissDialog();
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noCpDestination), 3000);
                     } else {
 
@@ -903,46 +916,120 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         }
 
+                        auxResp = respCotizador;
 
-                        bundle.putSerializable("respCotizador", respCotizador);
+                        bundle.putSerializable("auxResp", auxResp);
                         fragment = new FragmentDetailQuoatation();
                         fragment.addFragmentToStack(getActivity());
                         fragment.setArguments(bundle);
                         fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.addToBackStack(null);
 
-
-
                         new AsynTask().execute();
+
                     }
                 }else if(typeSend.equals("internacional_sobre")){
 
+                    respCotizador.get(0).put("DescripcionServicio", "Global Express");
+
+                    auxResp.add(respCotizador.get(0));
+
                     bundle.putString("type", "internacional_sobre");
+
+                    bundle.putString("destino",spn_countrie.getSelectedItem().toString());
+
+
+                    bundle.putSerializable("auxResp", auxResp);
+                    fragment = new FragmentDetailQuoatation();
+                    fragment.addFragmentToStack(getActivity());
+                    fragment.setArguments(bundle);
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+
+                    new AsynTask().execute();
 
                 }else if (typeSend.equals("internacional_sobre_eua_canada")) {
 
+
+
+
+
                         if (contEUA_Canada == 0) {
                             contEUA_Canada++;
+                            respCotizador.get(0).put("DescripcionServicio", "Global Express");
+                            auxResp.add(respCotizador.get(0));
                             cotizar("internacional_sobre_eua_canada");
                         } else {
+                            respCotizador.get(0).put("DescripcionServicio","USA-Canadá-Estandar");
+                            auxResp.add(respCotizador.get(0));
                             bundle.putString("type", "internacional_sobre_eua_canada");
+                            bundle.putString("destino",spn_countrie.getSelectedItem().toString());
+
+                            bundle.putSerializable("auxResp", auxResp);
+                            fragment = new FragmentDetailQuoatation();
+                            fragment.addFragmentToStack(getActivity());
+                            fragment.setArguments(bundle);
+                            fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.addToBackStack(null);
+
+                            new AsynTask().execute();
                         }
 
 
                 } else if(typeSend.equals("internacional_paquete_eua_canada")){
 
-
                     if (contEUA_Canada == 0) {
                         contEUA_Canada++;
+                        respCotizador.get(0).put("DescripcionServicio", "Global Express");
+                        auxResp.add(respCotizador.get(0));
                         cotizar("internacional_paquete_eua_canada");
                     } else {
+                        respCotizador.get(0).put("DescripcionServicio", "USA-Canadá-Estandar");
+                        auxResp.add(respCotizador.get(0));
                         bundle.putString("type", "internacional_paquete_eua_canada");
+
+                        bundle.putString("destino",spn_countrie.getSelectedItem().toString());
+                        bundle.putString("peso",peso);
+                        bundle.putString("alto",alto);
+                        bundle.putString("largo",largo);
+                        bundle.putString("ancho",ancho);
+
+                        bundle.putSerializable("auxResp", auxResp);
+                        fragment = new FragmentDetailQuoatation();
+                        fragment.addFragmentToStack(getActivity());
+                        fragment.setArguments(bundle);
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.addToBackStack(null);
+
+                        new AsynTask().execute();
                     }
 
                 }else if(typeSend.equals("internacional_paquete")){
+
+                    respCotizador.get(0).put("DescripcionServicio","Global Express");
+
+                    auxResp.add(respCotizador.get(0));
+
                     bundle.putString("type", "internacional_paquete");
 
-                }else if (typeSend.equals("codigo_postal")) {
+                    bundle.putString("destino",spn_countrie.getSelectedItem().toString());
+                    bundle.putString("peso",peso);
+                    bundle.putString("alto",alto);
+                    bundle.putString("largo",largo);
+                    bundle.putString("ancho",ancho);
+
+                    bundle.putSerializable("auxResp", auxResp);
+                    fragment = new FragmentDetailQuoatation();
+                    fragment.addFragmentToStack(getActivity());
+                    fragment.setArguments(bundle);
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.addToBackStack(null);
+
+                    new AsynTask().execute();
+
+                }
+
+                if (typeSend.equals("codigo_postal")) {
                     showCP(RequestManager.sharedInstance().getResponseArray());
                 }
 

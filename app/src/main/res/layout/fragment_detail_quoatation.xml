@@ -149,10 +149,98 @@
                     android:dividerHeight="1dp"
                     android:layout_height="match_parent"/>
 
+
                 <LinearLayout
+                    android:id="@+id/lin_detail_international"
                     android:layout_width="0dp"
                     android:layout_weight="70"
                     android:paddingLeft="10dp"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="40dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sizeXSmallText"
+                        android:textStyle="bold"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@color/estafeta_text"
+                        android:text="Tarifa"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:layout_marginRight="5dp"
+                            android:textColor="@color/estafeta_text"
+                            android:text="Guía: "/>
+
+                        <TextView
+                            android:id="@+id/txv_guia_internacional"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:textColor="@color/estafeta_text"
+                            android:text="USD "/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:textColor="@color/estafeta_text"
+                            android:layout_marginRight="5dp"
+                            android:text="CC: "/>
+
+                        <TextView
+                            android:id="@+id/txv_cc_tarifa_internacional"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/estafeta_text"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:text="USD "/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:textColor="@color/estafeta_text"
+                            android:layout_marginRight="5dp"
+                            android:text="Costo Total:"/>
+
+                        <TextView
+                            android:id="@+id/txv_costo_total_internacional"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/estafeta_text"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:text="USD "/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin_detail_national"
+                    android:layout_width="0dp"
+                    android:layout_weight="70"
+                    android:paddingLeft="10dp"
+                    android:visibility="visible"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
@@ -415,7 +503,65 @@
                     </LinearLayout>
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:textColor="@color/estafeta_soft_gray"
+                            android:text="@string/cambion_sin_aviso"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:layout_marginRight="5dp"
+                            android:textColor="@color/estafeta_soft_gray"
+                            android:text="@string/no_iva"/>
+                    </LinearLayout>
+
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lin_terminos_internacional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/sizeSmallText"
+                    android:textColor="@color/estafeta_text"
+                    android:text="Tiempo de Entrega:"/>
+
+                <TextView
+                    android:id="@+id/txv_terminos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/estafeta_soft_gray"
+                    android:textSize="@dimen/sizeXSmallText"
+                    android:text="@string/terminos_internacional_1"/>
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/estafeta_soft_gray"
+                    android:textSize="@dimen/sizeXSmallText"
+                    android:text="@string/terminos_internacional_2"/>
 
             </LinearLayout>
 

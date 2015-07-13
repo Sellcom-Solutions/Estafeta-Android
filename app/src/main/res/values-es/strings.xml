@@ -97,4 +97,8 @@
     <string name="ext">Ext.</string>
     <string name="horario">Horario</string>
 
+    <!-- FragmentDetailQuotation -->
+    <string name="no_iva">Los precios no incluyen IVA.</string>
+    <string name="cambion_sin_aviso">Precios sujetos a cambios sin previo aviso.</string>
+
 </resources>

@@ -29,6 +29,7 @@ public class DetailQuotationAdapter extends BaseAdapter {
 
     public DetailQuotationAdapter(Context context, Activity activity, ArrayList<String> list){
 
+        lastSelectedItemPosition = 0;
         this.context = context;
         this.activity = activity;
         this.list = list;

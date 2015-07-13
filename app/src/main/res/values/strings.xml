@@ -257,6 +257,14 @@
     <string name="noCpOrigin">Error, Código postal origen no existe.</string>
     <string name="noCpDestination">Error, Código postal destino no existe.</string>
 
+    <!-- FragmentDetailQuotation -->
+    <string name="no_iva">Los precios no incluyen IVA.</string>
+    <string name="cambion_sin_aviso">Precios sujetos a cambios sin previo aviso.</string>
+    <string name="terminos_internacional_1">USA-Canadá-Estándar\n    *Documentos de 3 a 5 días habiles de lunes a viernes (entrega en apartados postales,cárceles y cuarteles militares solamente en este servicio).
+    \n    *Paquetes, a partir de 3 días hábiles dependiendo del trámite aduanal.</string>
+    <string name="terminos_internacional_2">Servicios no garantizados por revisión de aduanas.\nArtículos prohibidos y restringidos: Ver lista de artículos
+    restringidos o con condición especial para su envío.\nPrecios sujetos a cambio sin previo aviso.</string>
+    <string name="terminos_internacional_3">Global exprés\n    *Estados Unidos y Canadá (1 a 3 días hábiles).\n    *Resto del mundo (2 a 5 días hábiles).</string>
 
     <!-- Edit Favorite -->
     <string name="EditFavorite">Editar</string>
