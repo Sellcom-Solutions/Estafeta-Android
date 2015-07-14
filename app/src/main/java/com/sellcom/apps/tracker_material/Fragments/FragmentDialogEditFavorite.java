@@ -1,4 +1,5 @@
 package com.sellcom.apps.tracker_material.Fragments;
+import android.content.ContentValues;
 import android.content.Context;
 import android.support.v4.app.DialogFragment;
 
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.util.Log;
 import android.widget.TextView;
@@ -35,6 +37,12 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
     Switch swch_confirmacion;
     TextView fav_no_guia;
     TextView fav_codigo;
+    EditText fav_edit_referencia;
+    boolean notify;
+    String
+            alias,
+            no_guia,
+            codigo_rastreo;
 
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
@@ -57,10 +65,26 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
         swch_confirmacion = (Switch) view.findViewById(R.id.swch_confirmar);
         fav_no_guia = (TextView) view.findViewById(R.id.fav_edit_no_guia);
         fav_codigo = (TextView) view.findViewById(R.id.fav_edit_cod_rastreo);
+        fav_edit_referencia= (EditText)view.findViewById(R.id.fav_edit_referencia);
+
 
         btn_cancel.setOnClickListener(this);
         btn_save.setOnClickListener(this);
-        swch_confirmacion.setChecked(false);
+      //  swch_confirmacion.setChecked(false);
+
+        no_guia = getArguments().getString("no_guia");
+        codigo_rastreo = getArguments().getString("codigo_rastreo");
+        Log.d(TAG, "no_guia: " + no_guia);
+        Log.d(TAG, "cod_rastreo: " + codigo_rastreo);
+        codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
+        Log.d(TAG, "size: " + codes_info.size());
+
+
+        fav_no_guia.setText(codes_info.get("no_guia"));
+        fav_codigo.setText(codes_info.get("codigo_rastreo"));
+        swch_confirmacion.setChecked(Boolean.parseBoolean(codes_info.get("notifica")));
+
+
 
         swch_confirmacion.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
@@ -69,9 +93,13 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
                                          boolean isChecked) {
 
                 if (isChecked) {
-                    Toast.makeText(context, "Switch is currently ON", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Switch is currently ON" + isChecked, Toast.LENGTH_SHORT).show();
+                    notify=isChecked;
+                    return;
                 } else {
-                    Toast.makeText(context, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Switch is currently OFF" + isChecked, Toast.LENGTH_SHORT).show();
+                    notify=isChecked;
+                    return;
                 }
 
             }
@@ -83,20 +111,6 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
             Toast.makeText(context, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
         }
 
-
-
-
-        String no_guia = getArguments().getString("no_guia");
-        String codigo_rastreo = getArguments().getString("codigo_rastreo");
-        Log.d(TAG,"no_guia: "+no_guia);
-        Log.d(TAG,"cod_rastreo: "+codigo_rastreo);
-        codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
-        Log.d(TAG, "size: " + codes_info.size());
-
-
-        fav_no_guia.setText(codes_info.get("no_guia"));
-        fav_codigo.setText(codes_info.get("codigo_rastreo"));
-
        return view;
     }
 
@@ -104,15 +118,39 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_cancel_edit:
-                Log.d("Cancel",""+getId());
+                Log.d("Cancel", "" + getId());
                 getDialog().dismiss();
+                Log.d(TAG, "Data" + codes_info);
                 break;
 
             case R.id.btn_save:
-                Log.d("SAVE","" + getId());
+                Log.d("SAVE", "" + getId());
+                context = getActivity();
+
+                codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
+                Log.d(TAG, "Data" + codes_info);
+
+
+                alias  = fav_edit_referencia.getText().toString();
+                codigo_rastreo = getArguments().getString("codigo_rastreo");
+
+                codes_info.put("notifica", String.valueOf(notify));
+                codes_info.put("alias", alias);
+
+                Log.d(TAG, "alias: " + alias);
+                Log.d(TAG, "notify: " + notify);
+
+
+                Log.d(TAG, "Data" + codes_info);
+                Favorites.update(context, codes_info);
+                Log.d(TAG, "context" + context);
+                Log.d(TAG, "Data" + codes_info);
+
                 getDialog().dismiss();
                 break;
             }
 
         }
     }
+
+

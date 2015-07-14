@@ -54,7 +54,6 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_rastreo_efectuado, container, false);
         context = getActivity();
         lst_rastreo_efectuado = (ListView)view.findViewById(R.id.lst_rastreo_efectuado);
@@ -63,7 +62,6 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
 
         efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),context ,codes_info,getActivity().getSupportFragmentManager());
         lst_rastreo_efectuado.setAdapter(efectuadoAdapter);
-        //lst_rastreo_efectuado.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
         try {
             DialogManager.sharedInstance().dismissDialog();
@@ -71,7 +69,6 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
             e.printStackTrace();
         }
 
-        //lst_rastreo_efectuado.setOnItemClickListener(this);
         return view;
     }
 

@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import database.model.Codes;
+import database.model.Favorites;
 
 /**
  * Created by anel on 30/06/2015.
@@ -79,7 +80,7 @@ public class FavoriteListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final CodigosViewHolder holder;
             if (convertView == null) {
@@ -102,6 +103,8 @@ public class FavoriteListAdapter extends BaseAdapter{
         Map<String, String> codigos_copy = new HashMap<>();
         codigos_copy = codigos.get(position);
 
+        Log.d("Reference FA codigocopy", "" + codigos_copy);
+
         String reference = codigos_copy.get("referencia");
         Log.d("Reference FA Adapter", "" + reference);
         holder.referencia.setText(reference);
@@ -120,12 +123,6 @@ public class FavoriteListAdapter extends BaseAdapter{
         holder.estatus.setText(estatusStr);
 
 
-        String favorite = codigos_copy.get("favorites");
-
-        Log.d("favorite FA Adapter", "" + favorite);
-
-
-
         holder.btn_editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,12 +130,8 @@ public class FavoriteListAdapter extends BaseAdapter{
 
                 Bundle bundle = new Bundle();
                 bundle.putString("code", codigos.get(holder.position).get("no_guia"));
-                bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
                 bundle.putString("code", codigos.get(holder.position).get("codigo_rastreo"));
                 bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
-
-                Log.d(TAG, "codigo enviado " + codigos.get(holder.position).get("no_guia"));
-                Log.d(TAG, "codigo enviado " + codigos.get(holder.position).get("codigo_rastreo"));
 
                 FragmentDialogEditFavorite fdfe = new FragmentDialogEditFavorite();
                 fdfe.setArguments(bundle);
@@ -151,7 +144,14 @@ public class FavoriteListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "list edit: ");
+
+                Bundle bundle = new Bundle();
+                Map<String,String> map = Favorites.getFavoriteByWayBill(context, codigos.get(position).get("no_guia"));
+                bundle.putSerializable("code_array", (java.io.Serializable) map);
+                Log.d(TAG, "codigo MAP  " + String.valueOf(map));
+
                 FragmentDialogFavorite fdf = new FragmentDialogFavorite();
+                fdf.setArguments(bundle);
                 fdf.show(fragmentManager, "FRAG_DIALOG_FAVORITE");
             }
         });

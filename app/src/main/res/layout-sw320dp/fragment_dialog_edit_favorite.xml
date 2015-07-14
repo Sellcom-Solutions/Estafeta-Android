@@ -89,7 +89,7 @@
                     android:paddingTop="5dp"/>
 
                 <EditText
-                    android:id                      ="@+id/edit_name_guia"
+                    android:id                      ="@+id/fav_edit_referencia"
                     style                           ="@style/EditStyle"
                     android:layout_width            ="match_parent"
                     android:layout_height           ="wrap_content"
