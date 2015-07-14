@@ -94,8 +94,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private Button          btn_quote;
 
-    private Button          btn_test;
-
     private LinearLayout    ll_for_package,
                             lin_nacional_cp,
                             lin_internacional_pais,
@@ -182,7 +180,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             btn_zc_dest_phonebook   = (ImageButton) view.findViewById(R.id.btn_zc_dest_phonebook);
 
             btn_quote               = (Button) view.findViewById(R.id.btn_quote);
-            btn_test = (Button) view.findViewById(R.id.btn_test);
 
             ll_for_package      = (LinearLayout) view.findViewById(R.id.ll_for_package);
             lin_nacional_cp      = (LinearLayout) view.findViewById(R.id.lin_nacional_cp);
@@ -207,7 +204,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             btn_zc_dest_search.setOnClickListener(this);
             btn_zc_dest_phonebook.setOnClickListener(this);
             btn_quote.setOnClickListener(this);
-            btn_test.setOnClickListener(this);
 
             ll_for_package.setVisibility(View.GONE);
 
@@ -369,22 +365,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 auxResp = new ArrayList<Map<String,String>>();
                 requestQuote();
                 break;
-
-            case R.id.btn_test:
-                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-                FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                Fragment fragment   = new FragmentQuotationBuy();
-                Bundle b = new Bundle();
-                b.putString(FragmentQuotationBuy.EXTRAS.CP_ORIGEN.toString(), "543");
-                b.putString(FragmentQuotationBuy.EXTRAS.CP_DESTINO.toString(), "542");
-                b.putString(FragmentQuotationBuy.EXTRAS.COSTO.toString(),"350.00");
-                fragment.setArguments(b);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.container, fragment, "");
-                fragmentTransaction.commit();
-                break;
-
 
         }
     }

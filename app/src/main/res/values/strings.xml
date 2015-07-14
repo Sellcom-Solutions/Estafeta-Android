@@ -125,6 +125,25 @@
     <string name="receiver_name">Nombre Destinatario</string>
     <string name="cp_receiver">C.P. Destino</string>
     <string name="continue_buy">Continuar Compra</string>
+    <string name="buy">Comprar</string>
+
+
+    <!-- Fragment comprobante -->
+
+    <string name="comprobante_compra">Comprobante de Compra</string>
+    <string name="sender">Remitente: </string>
+    <string name="origin">Origen: </string>
+    <string name="cp_origin">C.P. Origen: </string>
+
+    <string name="receiver">Destinatario: </string>
+    <string name="destiny">Destino: </string>
+    <string name="cp_destiny">C.P. Destino: </string>
+
+    <string name="type_of_service">Tipo de servicio: </string>
+    <string name="quarantee">Garantía de Entrega: </string>
+
+    <string name="total_cost">Costo Total: </string>
+    <string name="payment_reference">Referencia de Pago: </string>
 
 
 
@@ -223,6 +242,11 @@
     <string name="db_recurrente">CREATE TABLE "recurrente" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "Nombre" TEXT, "Telefono" TEXT,
          "correo_electronico" TEXT, "razon_social" TEXT, "Telefono" TEXT, "Telefono" TEXT, "Telefono" TEXT)</string>
 
+    <string name="db_compra">CREATE TABLE "compra" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        "Nombre_remitente" TEXT, "Origen" TEXT, "CPO" TEXT,
+        "Nombre_destinatario" TEXT, "Destino" TEXT, "CPD" TEXT,
+        "Tipo_servicio" TEXT, "Garantia" TEXT, "Costo" TEXT,
+        "Referencia" TEXT)</string>
 
 
     <!-- ********************   Strings aplicación anterior   ************************** -->

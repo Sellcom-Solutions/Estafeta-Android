@@ -55,6 +55,8 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
     public static final int ORIGIN = 0;
     public static final int DESTINY = 1;
 
+    private Map<String,Map<String,String>> fromInflate;
+
 
     public static enum EXTRAS{
         NAME ("name"),
@@ -66,7 +68,9 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
         COLONY ("colony"),
         STREET ("street"),
         VERSION ("version"),
-        STREET_NUMBER ("street_number");
+        STREET_NUMBER ("street_number"),
+        DATA ("data");
+
         private final String name;
         private EXTRAS(String s) {
             name = s;
@@ -89,6 +93,7 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
         CP = b.getString(FragmentQuotationBuy.EXTRAS.CP.toString());
         version = b.getInt(EXTRAS.VERSION.toString());
         data = (Map<String, String>) b.getSerializable(FragmentQuotationBuy.EXTRAS.DATOS.toString());
+        fromInflate = (Map<String,Map<String,String>>)b.getSerializable(EXTRAS.DATA.toString());
         setParametersToVariables();
         setPreviousData();
         return view;
@@ -128,63 +133,87 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
     }
 
     private void inflateEstados(){
-        ArrayList<Map<String,String>> states = new ArrayList<Map<String,String>>();
-        ArrayList<Map<String,String>> auxStates = States.getStatesNames(context);
-        Map<String,String> mapa  = new HashMap<String,String>();
-        String items[] = new String[auxStates.size()];
-        states.add(mapa);
-        Map<String,String> auxMapa;
-        for(int i = 0; i<auxStates.size(); i++){
-            auxMapa  = new HashMap<String,String>();
-            auxMapa.put("ZNOMBRE",auxStates.get(i).get("ZNOMBRE"));
-            items[i] = auxStates.get(i).get("ZNOMBRE");
-            states.add(auxMapa);
+        String items[];
+        ArrayAdapter<String> adapter;
+        switch (version){
+            case ORIGIN:
+                items = new String[1];
+                items[0] = fromInflate.get(FragmentQuotationBuy.ESTADO_ORIGEN).get("0");
+                adapter = new ArrayAdapter<String>(getActivity(),
+                        R.layout.spinner_item, items);
+                adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                estados.setAdapter(adapter);
+                break;
+
+            case DESTINY:
+                items = new String[1];
+                items[0] = fromInflate.get(FragmentQuotationBuy.ESTADO_DESTINO).get("0");
+                adapter = new ArrayAdapter<String>(getActivity(),
+                        R.layout.spinner_item, items);
+                adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                estados.setAdapter(adapter);
+                break;
+
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.spinner_item, items);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        estados.setAdapter(adapter);
     }
 
     private void inflateMunicipios(){
-        ArrayList<Map<String,String>> states = new ArrayList<Map<String,String>>();
-        ArrayList<Map<String,String>> auxStates = States.getStatesNames(context);
-        Map<String,String> mapa  = new HashMap<String,String>();
-        String items[] = new String[auxStates.size()];
-        states.add(mapa);
-        Map<String,String> auxMapa;
-        for(int i = 0; i<auxStates.size(); i++){
-            auxMapa  = new HashMap<String,String>();
-            auxMapa.put("ZNOMBRE",auxStates.get(i).get("ZNOMBRE"));
-            items[i] = auxStates.get(i).get("ZNOMBRE");
-            states.add(auxMapa);
-        }
+        String items[];
+        ArrayAdapter<String> adapter;
+        switch (version){
+            case ORIGIN:
+                items = new String[1];
+                items[0] = fromInflate.get(FragmentQuotationBuy.MUNICIPIO_ORIGEN).get("0");
+                adapter = new ArrayAdapter<String>(getActivity(),
+                        R.layout.spinner_item, items);
+                adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                municipios.setAdapter(adapter);
+                break;
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.spinner_item, items);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        municipios.setAdapter(adapter);
+            case DESTINY:
+                items = new String[1];
+                items[0] = fromInflate.get(FragmentQuotationBuy.MUNICIPIO_DESTINO).get("0");
+                adapter = new ArrayAdapter<String>(getActivity(),
+                        R.layout.spinner_item, items);
+                adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                municipios.setAdapter(adapter);
+                break;
+
+        }
 
     }
 
     private void inflateColonias(){
-        ArrayList<Map<String,String>> states = new ArrayList<Map<String,String>>();
-        ArrayList<Map<String,String>> auxStates = States.getStatesNames(context);
-        Map<String,String> mapa  = new HashMap<String,String>();
-        String items[] = new String[auxStates.size()];
-        states.add(mapa);
-        Map<String,String> auxMapa;
-        for(int i = 0; i<auxStates.size(); i++){
-            auxMapa  = new HashMap<String,String>();
-            auxMapa.put("ZNOMBRE",auxStates.get(i).get("ZNOMBRE"));
-            items[i] = auxStates.get(i).get("ZNOMBRE");
-            states.add(auxMapa);
+        String items[];
+        ArrayAdapter<String> adapter;
+        Map<String,String> cols;
+        switch (version){
+            case ORIGIN:
+                cols = fromInflate.get(FragmentQuotationBuy.COLONIA_ORIGEN);
+                items = new String[cols.size()];
+                for (int index = 0; index < cols.size(); index++){
+                    items[index] = cols.get(String.valueOf(index));
+                }
+                adapter = new ArrayAdapter<String>(getActivity(),
+                        R.layout.spinner_item, items);
+                adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                colonias.setAdapter(adapter);
+                break;
+
+            case DESTINY:
+                cols = fromInflate.get(FragmentQuotationBuy.COLONIA_DESTINO);
+                items = new String[cols.size()];
+                for (int index = 0; index < cols.size(); index++){
+                    items[index] = cols.get(String.valueOf(index));
+                }
+                adapter = new ArrayAdapter<String>(getActivity(),
+                        R.layout.spinner_item, items);
+                adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
+                colonias.setAdapter(adapter);
+                break;
+
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
-                R.layout.spinner_item, items);
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-        colonias.setAdapter(adapter);
     }
 
     private void setHintToEditTexts(){
@@ -210,6 +239,18 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
         bussines_name.setText(data.get(EXTRAS.BUSSINESS_NAME.toString()));
         street.setText(data.get(EXTRAS.STREET.toString()));
         number.setText(data.get(EXTRAS.STREET_NUMBER.toString()));
+        String lastColony = data.get((EXTRAS.COLONY.toString()));
+        for (int i = 0; i< colonias.getCount(); i++){
+            if (colonias.getItemAtPosition(i).toString().equals(lastColony)){
+                colonias.setSelection(i);
+                break;
+            }
+        }
+
+
+
+
+
     }
 
 

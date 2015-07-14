@@ -9,5 +9,4 @@
     android:paddingBottom="8dp"
     android:ellipsize="marquee"
     android:textSize="@dimen/sizeNormalText"
-    android:background="@drawable/underline_text"
-    />
+    android:background="@drawable/underline_text"/>

@@ -207,12 +207,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 fragment = null;
                 break;
 
-
-
-
-
-
-
             default:
                 //Toast.makeText(this,"Módulo no implementado",Toast.LENGTH_SHORT).show();
                 return;

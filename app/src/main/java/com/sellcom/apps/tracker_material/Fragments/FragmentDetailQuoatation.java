@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -65,6 +68,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             lin_detail_national,
                             lin_terminos_internacional;
 
+    private Button          btn_buy;
+
     private List<Map<String,String>> list;
 
     private ArrayList<String>  servicioList;
@@ -74,6 +79,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
     private String type;
     private DecimalFormat   decimales;
     private double          numero;
+
+    private String cpo,cpd;
 
 
     @Override
@@ -120,11 +127,14 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         lin_detail_national     = (LinearLayout)view.findViewById(R.id.lin_detail_national);
         lin_terminos_internacional = (LinearLayout)view.findViewById(R.id.lin_terminos_internacional);
 
+        btn_buy = (Button) view.findViewById(R.id.btn_buy);
+
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
 
         btn_call.setOnClickListener(this);
         btn_share.setOnClickListener(this);
+        btn_buy.setOnClickListener(this);
 
         lv_quotation            = (ListView)view.findViewById(R.id.lv_quotation);
 
@@ -448,6 +458,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
     public void addExtraData(){
 
             txv_origen.setText(""+map.get("CodigoPosOri")+", "+map.get("MunicipioOri")+", "+map.get("EstadoOri"));
+            cpo = map.get("CodigoPosOri");
+            cpd = map.get("CpDestino");
             txv_destino.setText(""+map.get("CpDestino")+", "+map.get("Municipio")+", "+map.get("Estado"));
 
             String dias = "";
@@ -507,6 +519,26 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
+                break;
+
+            case R.id.btn_buy:
+
+
+
+
+
+
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.addToBackStack(null);
+                TrackerFragment fragment = new FragmentQuotationBuy();
+                Bundle b = new Bundle();
+                b.putString(FragmentQuotationBuy.EXTRAS.CP_ORIGEN.toString(), cpo);
+                b.putString(FragmentQuotationBuy.EXTRAS.CP_DESTINO.toString(), cpd);
+                b.putString(FragmentQuotationBuy.EXTRAS.COSTO.toString(),txv_costo_total.getText().toString());
+                fragment.setArguments(b);
+                fragment.addFragmentToStack(getActivity());
+                fragmentTransaction.replace(R.id.container, fragment, "");
+                fragmentTransaction.commit();
                 break;
 
         }

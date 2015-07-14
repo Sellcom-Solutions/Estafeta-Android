@@ -89,6 +89,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
+        try {
+            db.execSQL(mContext.getString(R.string.db_compra));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         /*try {
             db.execSQL(mContext.getString(R.string.db_rastreo_tmp));
         } catch (SQLException e) {
@@ -101,6 +107,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        // NOTE: This switch statement is designed to handle cascading database
+        // updates, starting at the current version and falling through to all
+        // future upgrade cases. Only use "break;" when you want to drop and
+        // recreate the entire database.
+
+        db.execSQL("DROP TABLE IF EXISTS trackdata");
+        db.execSQL("DROP TABLE IF EXISTS history");
+        db.execSQL("DROP TABLE IF EXISTS favorites");
+        db.execSQL("DROP TABLE IF EXISTS estados");
+        db.execSQL("DROP TABLE IF EXISTS offices");
+        db.execSQL("DROP TABLE IF EXISTS codigos");
+        db.execSQL("DROP TABLE IF EXISTS paises");
+        db.execSQL("DROP TABLE IF EXISTS rastreo_tmp");
+        db.execSQL("DROP TABLE IF EXISTS recurrente");
+        db.execSQL("DROP TABLE IF EXISTS compra");
+        onCreate(db);
 
     }
 

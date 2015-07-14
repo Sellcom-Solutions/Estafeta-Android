@@ -390,17 +390,6 @@
                             android:gravity="center"
                             android:layout_gravity="bottom|center_horizontal"  />
 
-                <Button
-                    android:id                  ="@+id/btn_test"
-                    android:layout_width        ="match_parent"
-                    android:layout_height       ="match_parent"
-                    android:paddingTop          ="35dp"
-                    android:text                ="nuevo"
-                    android:textSize            ="@dimen/sizeNormalText"
-                    android:textColor           ="@color/estafeta_red"
-                    android:background          ="@android:color/transparent"
-                    android:gravity="center"
-                    android:layout_gravity="bottom|center_horizontal"  />
                 </LinearLayout>
 
 
