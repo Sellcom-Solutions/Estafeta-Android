@@ -69,9 +69,9 @@ public class RastreoListAdapter extends BaseAdapter {
             cod = codigos.get(position);
             final String codStr = cod.get("codigo");
             if(codStr.length() == 10)
-                holder.tipo_codigo.setText(context.getString(R.string.no_guia));
+                holder.tipo_codigo.setText(context.getString(R.string.cod_rastreo) );
             else
-                holder.tipo_codigo.setText(context.getString(R.string.cod_rastreo));
+                holder.tipo_codigo.setText(context.getString(R.string.no_guia));
 
             holder.no_codigo.setText(codStr);
 

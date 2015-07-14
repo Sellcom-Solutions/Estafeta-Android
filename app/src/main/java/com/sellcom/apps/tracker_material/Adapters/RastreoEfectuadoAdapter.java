@@ -22,6 +22,7 @@ import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,12 +44,13 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
     private FragmentTransaction fragmentTransaction;
     private TrackerFragment fragment;
 
+
     Context context;
     Activity activity;
-    private ArrayList<Map<String,String>> codigos;
+    private ArrayList<ArrayList<Map<String,String>>> codigos;
 
 
-    public  RastreoEfectuadoAdapter (Activity activity,Context context, ArrayList<Map<String,String>> codigos, FragmentManager fragmentManager){
+    public  RastreoEfectuadoAdapter (Activity activity,Context context, ArrayList<ArrayList<Map<String,String>>> codigos, FragmentManager fragmentManager){
         this.context        = context;
         this.codigos        = codigos;
         this.activity       =activity;
@@ -84,7 +86,8 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
+
         final CodigosViewHolder   holder;
         if (convertView == null){
             holder                  = new CodigosViewHolder();
@@ -100,10 +103,11 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         }
         else{
             holder  = (CodigosViewHolder)convertView.getTag();
+            holder.position         = position;
         }
 
         Map<String,String> codigos_copy=new HashMap<>();
-        codigos_copy= codigos.get(position);
+        codigos_copy= codigos.get(position).get(0);
 
         String noGuia = codigos_copy.get("wayBill");
         Log.d("Codigo RE Adapter",""+noGuia);
@@ -162,14 +166,14 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                     }
                     else {
                         try {
-                            long idHistory = History.insertMap(context, codigos.get(holder.position));
-                            Log.d(TAG,"Despues de insertar en History");
-                            codigos.get(holder.position).put("history_id",String.valueOf(idHistory));
+                            long idHistory = History.insertMap(context, codigos.get(holder.position).get(0));
+                            Log.d(TAG, "Despues de insertar en History");
+                            codigos.get(holder.position).get(0).put("history_id", String.valueOf(idHistory));
 
-                            Favorites.insertMap(context, codigos.get(holder.position));
+                            Favorites.insertMap(context, codigos.get(holder.position).get(0));
                             Log.d(TAG,"Despues de insertar en fav");
 
-                            String id= Favorites.getIdByWayBill(context,codigos.get(holder.position).get("wayBill"));
+                            String id= Favorites.getIdByWayBill(context, codigos.get(holder.position).get(0).get("wayBill"));
                             Log.d(TAG,"Recuperar id favorites"+id);
 
                             ArrayList<Map<String, String>> auxFav= Favorites.getAll(context);
@@ -192,14 +196,14 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
             public void onClick(View v) {
 
 
-                if(codigos.get(holder.position).get("statusSPA").equals("Sin información")){
+                if(codigos.get(holder.position).get(0).get("statusSPA").equals("Sin información")){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),3000);
                 }else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("code",codigos.get(holder.position).get("wayBill"));
-                    bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
+                    bundle.putString("code", codigos.get(holder.position).get(0).get("wayBill"));
+                    bundle.putSerializable("code_array", codigos.get(holder.position));
 
-                    Log.d(TAG, "codigo enviado" + codigos.get(holder.position).get("wayBill"));
+                    Log.d(TAG, "codigo enviado" + codigos.get(holder.position).get(0).get("wayBill"));
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragment = new FragmentDetalleRastreo();
                     fragment.addFragmentToStack(activity);

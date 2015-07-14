@@ -185,20 +185,20 @@ public class FragmentQuotationBuy extends TrackerFragment implements View.OnClic
             if (estadoO.equalsIgnoreCase("Baja California Norte")) {
                 estadoO = "BAJA CALIFORNIA";
             }
-            else if (estadoO.equalsIgnoreCase("Estado de México")) {
+            else if (estadoO.equalsIgnoreCase("Estado de MÃ©xico")) {
                 estadoO = "EDO. DE MEXICO";
             }
-            else if (estadoO.equalsIgnoreCase("México, D.F.")) {
+            else if (estadoO.equalsIgnoreCase("MÃ©xico, D.F.")) {
                 estadoO = "DISTRITO FEDERAL";
             }
 
             if (estadoD.equalsIgnoreCase("Baja California Norte")) {
                 estadoD = "BAJA CALIFORNIA";
             }
-            else if (estadoD.equalsIgnoreCase("Estado de México")) {
+            else if (estadoD.equalsIgnoreCase("Estado de MÃ©xico")) {
                 estadoD = "EDO. DE MEXICO";
             }
-            else if (estadoD.equalsIgnoreCase("México, D.F.")) {
+            else if (estadoD.equalsIgnoreCase("MÃ©xico, D.F.")) {
                 estadoD = "DISTRITO FEDERAL";
             }
 

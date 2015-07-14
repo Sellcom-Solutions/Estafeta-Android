@@ -143,7 +143,7 @@ public class ResponseManager {
             for (j = 0; j < list2.getLength(); j++) {
                 nodoItem=list2.item(j);
                 nodeName = nodoItem.getNodeName();
-                //Log.d("nodeName",nodeName);
+                Log.d("nodeName",""+nodeName);
 
                 if(!nodeName.startsWith("#"))
                     if (nodeName != null) {
@@ -153,44 +153,54 @@ public class ResponseManager {
                         if(subNode==null){
                             continue;
                         }else
-                           // Log.d("nodeNameSub",subNode.getNodeName());
+                            //Log.d("nodeNameSub",subNode.getNodeName());
 
                         value=subNode.getNodeValue();
-                       // Log.d("subNode","value: "+value);
+                        //Log.d("subNode","value: "+value);
 
                         if ("a:waybill".equals(nodeName)) {
                             map.put("wayBill",value);
+                            Log.d("waybill", ""+value);
                         }
                         if ("a:shortWaybillId".equals(nodeName)) {
                             map.put("shortWayBillId",value);
+                            Log.d("shortWayBillId", ""+value);
                         }
                         if ("a:serviceId".equals(nodeName)) {
                             map.put("serviceId",value);
+                            Log.d("serviceId", ""+value);
                         }
                         if ("a:serviceDescriptionSPA".equals(nodeName)) {
                             map.put("serviceDescriptionSPA",value);
+                            Log.d("serviceDescriptionSPA", ""+value);
                         }
                         if ("a:serviceDescriptionENG".equals(nodeName)) {
                             map.put("serviceDescriptionENG",value);
+                            Log.d("serviceDescriptionENG", ""+value);
                         }
                         if ("a:customerNumber".equals(nodeName)) {
                             map.put("customerNumber",value);
+                            Log.d("customerNumber", ""+value);
                         }
                         if ("a:packageType".equals(nodeName)) {
                             map.put("packageType",value);
+                            Log.d("packageType", ""+value);
                         }
                         if ("a:additionalInformation".equals(nodeName)) {
                             map.put("additionalInformation",value);
+                            Log.d("additionalInformation", ""+value);
                         }
                         if ("a:statusSPA".equals(nodeName)) {
                             map.put("statusSPA",value);
+                            Log.d("statusSPA", ""+value);
                         }
                         if ("a:statusENG".equals(nodeName)) {
                             map.put("statusENG",value);
+                            Log.d("statusENG", ""+value);
                         }
                         if ("a:signature".equals(nodeName)) {
-                            Log.d("signature",value);
-                            map.put("signature",value);
+                            map.put("signature", value);
+                            Log.d("signature", ""+value);
                         }
 
                         ////
@@ -202,7 +212,7 @@ public class ResponseManager {
                             for (int l = 0; l < listpk.getLength(); l++) {
                                 Node dataNode = listpk.item(l);
                                 nameElement = dataNode.getNodeName();
-                                //Log.d("nameElement PK",nameElement);
+                                Log.d("nameElement PK",""+nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodepk=dataNode.getFirstChild();
@@ -212,14 +222,17 @@ public class ResponseManager {
                                         valuePk=subNodepk.getNodeValue();
                                         if (nameElement.equals("originAcronym")) {
                                             map.put("PK_originAcronym",valuePk);
+                                            Log.d("PK_originAcronym", ""+valuePk);
                                             continue;
                                         }
                                         if (nameElement.equals("a:originName")) {
                                             map.put("PK_originName",valuePk);
+                                            Log.d("PK_originName", ""+valuePk);
                                             continue;
                                         }
                                         if (nameElement.equals("a:pickupDateTime")) {
                                             map.put("PK_pickupDateTime",valuePk);
+                                            Log.d("PK_pickupDateTime", ""+valuePk);
                                             continue;
                                         }
                                     }
@@ -234,7 +247,7 @@ public class ResponseManager {
                             for (int l = 0; l < listdd.getLength(); l++) {
                                 Node dataNode = listdd.item(l);
                                 nameElement = dataNode.getNodeName();
-                               // Log.d("nameElement DD",nameElement);
+                                Log.d("nameElement DD",""+nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodeDD=dataNode.getFirstChild();
@@ -244,22 +257,27 @@ public class ResponseManager {
                                         valueDD=subNodeDD.getNodeValue();
                                         if (nameElement.equals("a:destinationAcronym")) {
                                             map.put("DD_destinationAcronym",valueDD);
+                                            Log.d("DD_destinationAcronym",""+ valueDD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:destinationName")) {
                                             map.put("DD_destinationName",valueDD);
+                                            Log.d("DD_destinationName", ""+valueDD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:deliveryDateTime")) {
                                             map.put("DD_deliveryDateTime",valueDD);
+                                            Log.d("DD_deliveryDateTime", ""+valueDD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:zipCode")) {
                                             map.put("DD_zipCode",valueDD);
+                                            Log.d("DD_zipCode", ""+valueDD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:receiverName")) {
                                             map.put("DD_receiverName",valueDD);
+                                            Log.d("DD_receiverName", ""+valueDD);
                                             continue;
                                         }
                                     }
@@ -274,7 +292,7 @@ public class ResponseManager {
                             for (int l = 0; l < listD.getLength(); l++) {
                                 Node dataNode = listD.item(l);
                                 nameElement = dataNode.getNodeName();
-                                //Log.d("nameElement Dim",nameElement);
+                                Log.d("nameElement Dim",""+nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodeD=dataNode.getFirstChild();
@@ -284,22 +302,27 @@ public class ResponseManager {
                                         valueD=subNode.getNodeValue();
                                         if (nameElement.equals("a:weight")) {
                                             map.put("Dim_weight",valueD);
+                                            Log.d("Dim_weight", ""+valueD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:volumetricWeight")) {
                                             map.put("Dim_volumetricWeight",valueD);
+                                            Log.d("Dim_volumetricWeight", ""+valueD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:width")) {
                                             map.put("Dim_width",valueD);
+                                            Log.d("Dim_width", ""+valueD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:length")) {
                                             map.put("Dim_length",valueD);
+                                            Log.d("Dim_length", ""+valueD);
                                             continue;
                                         }
                                         if (nameElement.equals("a:height")) {
                                             map.put("Dim_height",valueD);
+                                            Log.d("Dim_height", ""+valueD);
                                             continue;
                                         }
                                     }
@@ -314,7 +337,7 @@ public class ResponseManager {
                             for (int l = 0; l < listCI.getLength(); l++) {
                                 Node dataNode = listCI.item(l);
                                 nameElement = dataNode.getNodeName();
-                                //Log.d("nameElement CI",nameElement);
+                                Log.d("nameElement CI",""+nameElement);
                                 if(!nameElement.startsWith("#"))
                                     if (nameElement != null) {
                                         Node subNodeCI=dataNode.getFirstChild();
@@ -323,15 +346,19 @@ public class ResponseManager {
                                         }
                                         valueCI=subNode.getNodeValue();
                                         if (nameElement.equals("a:reference")) {
-                                            map.put("CI_reference",valueCI);
+                                            map.put("CI_reference", valueCI);
+                                            Log.d("CI_reference", ""+valueCI);
                                             continue;
                                         }
                                         if (nameElement.equals("a:costsCentre")) {
                                             map.put("CI_costsCentre",valueCI);
+                                            Log.d("CI_costsCentre", ""+valueCI);
                                             continue;
                                         }
                                     }
                             }
+
+
                             continue;
                         }
                         if ("a:history".equals(nodeName)) {
@@ -342,6 +369,7 @@ public class ResponseManager {
                                 Map<String,String> list_history = new HashMap<>();
                                 Node nodeHist = listHistory.item(k);
                                 String name = nodeHist.getNodeName();
+                                Log.e("name History", "" + name);
                                 if(!name.startsWith("#"))
                                     if (name != null) {
                                         NodeList historyData = nodeHist.getChildNodes();
@@ -349,7 +377,7 @@ public class ResponseManager {
                                         for (int l = 0; l < historyData.getLength(); l++) {
                                             Node dataNode = historyData.item(l);
                                             nameElement = dataNode.getNodeName();
-                                            Log.d("nameElement History",nameElement);
+                                            //Log.e("nameElement History",""+nameElement);
                                             if(!nameElement.startsWith("#"))
                                                 if (nameElement != null) {
                                                     Node subNodeH=dataNode.getFirstChild();
@@ -357,61 +385,62 @@ public class ResponseManager {
                                                         continue;
                                                     }
                                                     value=subNodeH.getNodeValue();
-                                                    Log.d("Value",value);
                                                     if (nameElement.equals("a:eventDateTime")) {
-                                                        map.put("H_eventDateTime",value);
-                                                        //list_history.put("H_eventDateTime",value);
+                                                        list_history.put("H_eventDateTime",value);
+                                                        Log.v("H_eventDateTime", ""+value);
                                                         //history.setEventDateTime(value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventId")) {
-                                                        map.put("H_eventId",value);
-                                                        //list_history.put("H_eventId",value);
+                                                        list_history.put("H_eventId",value);
+                                                        Log.v("H_eventId", ""+value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventDescriptionSPA")) {
-                                                        map.put("H_eventDescriptionSPA",value);
-                                                        //list_history.put("H_eventDescriptionSPA",value);
+                                                        list_history.put("H_eventDescriptionSPA",value);
+                                                        Log.v("H_eventDescriptionSPA", ""+value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventDescriptionENG")) {
-                                                        //map.put("H_eventDescriptionENG",value);
                                                         list_history.put("H_eventDescriptionENG",value);
+                                                        Log.v("H_eventDescriptionENG", ""+value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventPlaceAcronym")) {
-                                                        map.put("H_eventPlaceAcronym",value);
-                                                        //list_history.put("H_eventPlaceAcronym",value);
+                                                        list_history.put("H_eventPlaceAcronym",value);
+                                                        Log.v("H_eventPlaceAcronym", ""+value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:eventPlaceName")) {
-                                                        map.put("H_eventPlaceName",value);
-                                                        //list_history.put("H_eventPlaceName",value);
+                                                        list_history.put("H_eventPlaceName",value);
+                                                        Log.v("H_eventPlaceName", ""+value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCode")) {
-                                                        map.put("H_exceptionCode",value);
-                                                        //list_history.put("H_exceptionCode",value);
+                                                        list_history.put("H_exceptionCode",value);
+                                                        Log.v("H_exceptionCode",""+ value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCodeDescriptionSPA")) {
-                                                        map.put("H_exceptionCodeDescriptionSPA",value);
-                                                        //list_history.put("H_exceptionCodeDescriptionSPA",value);
+                                                        list_history.put("H_exceptionCodeDescriptionSPA",value);
+                                                        Log.v("H_exceptionCodeDescriptionSPA", ""+value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCodeDescriptionENG")) {
-                                                        map.put("H_exceptionCodeDescriptionENG",value);
-                                                        //list_history.put("H_exceptionCodeDescriptionENG",value);
+                                                        list_history.put("H_exceptionCodeDescriptionENG",value);
+                                                        Log.v("H_exceptionCodeDescriptionENG", ""+value);
                                                         continue;
                                                     }
                                                     if (nameElement.equals("a:exceptionCodeDetails")) {
-                                                        map.put("H_exceptionCodeDetails",value);
-                                                        //list_history.put("H_exceptionCodeDetails",value);
+                                                        list_history.put("H_exceptionCodeDetails",value);
+                                                        Log.v("H_exceptionCodeDetails", ""+value);
                                                         continue;
                                                     }
                                                 }
                                         }
+                                        data.add(list_history);
                                     }
+
                                 //data.add(list_history);
                             }
 
@@ -419,9 +448,10 @@ public class ResponseManager {
                         }
                     }
             }
-            data.add(map);
 
         }
+
+        data.add(0,map);
 
         if (data.size() <0)
             return null;

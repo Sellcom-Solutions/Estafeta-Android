@@ -45,7 +45,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
 
     RastreoEfectuadoAdapter efectuadoAdapter;
     ArrayList<Map<String,String>> codes= new ArrayList<>();
-    ArrayList<Map<String, String>> codes_info = new ArrayList<>();
+    ArrayList<ArrayList<Map<String, String>>> codes_info = new ArrayList<>();
 
     public FragmentRastreoEfectuado() {
         // Required empty public constructor
@@ -59,7 +59,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
         context = getActivity();
         lst_rastreo_efectuado = (ListView)view.findViewById(R.id.lst_rastreo_efectuado);
 
-        codes_info = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes_info");
+        codes_info = (ArrayList<ArrayList<Map<String,String>>>) getArguments().getSerializable("codes_info");
 
         efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),context ,codes_info,getActivity().getSupportFragmentManager());
         lst_rastreo_efectuado.setAdapter(efectuadoAdapter);

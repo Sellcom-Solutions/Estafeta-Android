@@ -22,6 +22,7 @@ import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +57,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
     Button btn_historia;
 
     Map<String, String> data = new HashMap<>();
-    Map<String, String> codes_info = new HashMap<>();
+    ArrayList<Map<String, String>> codes_info = new ArrayList<>();
 
     public FragmentDetalleRastreo() {
         // Required empty public constructor
@@ -92,7 +93,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
         String code = getArguments().getString("code");
         Log.d(TAG,"cod_rastreo: "+code);
-        codes_info =  (Map<String, String>) getArguments().getSerializable("code_array");
+        codes_info =  (ArrayList<Map<String, String>>) getArguments().getSerializable("code_array");
         Log.d(TAG, "size: "+codes_info.size());
 
         data = Favorites.getFavoriteByWayBill(context,code);
@@ -139,17 +140,19 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
         }
        // else {
-            no_guia.setText(codes_info.get("wayBill"));
-            cod_rastreo.setText(codes_info.get("shortWayBillId"));
-            origen.setText(codes_info.get("PK_originName"));
-            fecha_recol.setText(codes_info.get("PK_pickupDateTime"));
-            destino.setText(codes_info.get("DD_destinationName"));
-            cp_destino.setText(codes_info.get("DD_zipCode"));
-            fecha_hora_entrega.setText(codes_info.get("DD_deliveryDateTime"));
-            recibio.setText(codes_info.get("DD_receiverName"));
+            no_guia.setText(codes_info.get(0).get("wayBill"));
+            cod_rastreo.setText(codes_info.get(0).get("shortWayBillId"));
+            origen.setText(codes_info.get(0).get("PK_originName"));
+            fecha_recol.setText(codes_info.get(0).get("PK_pickupDateTime"));
+            destino.setText(codes_info.get(0).get("DD_destinationName"));
+            cp_destino.setText(codes_info.get(0).get("DD_zipCode"));
+            fecha_hora_entrega.setText(codes_info.get(0).get("DD_deliveryDateTime"));
+            recibio.setText(codes_info.get(0).get("DD_receiverName"));
 
-            String statusStr = codes_info.get("statusSPA");
-            String codigoExcStr = codes_info.get("H_exceptionCode");
+            String statusStr = codes_info.get(0).get("statusSPA");
+            String codigoExcStr = codes_info.get(0).get("H_exceptionCode");
+
+        Log.e(TAG,""+codes_info.get(1).get("H_eventDateTime"));
 
         String estatus_aux= selectImageOnStatus(statusStr, codigoExcStr);
 
@@ -191,7 +194,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 //Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
 
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("codes_info",(java.io.Serializable) codes_info);
+                bundle.putSerializable("codes_info",codes_info);
 
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -207,10 +210,10 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 Log.d(TAG, "btn favorito: ");
                 if (btn_favorito.isChecked()) {
                     try {
-                        long idHistory = History.insertMap(context, codes_info);
+                        long idHistory = History.insertMap(context, codes_info.get(0));
                         Log.d(TAG, "Despues de insertar en History");
-                        codes_info.put("history_id", String.valueOf(idHistory));
-                        Favorites.insert(context, codes_info);
+                        codes_info.get(0).put("history_id", String.valueOf(idHistory));
+                        Favorites.insert(context, codes_info.get(0));
                         Log.d(TAG, "Despues de insertar en Favorites");
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
                         btn_favorito.setEnabled(false);

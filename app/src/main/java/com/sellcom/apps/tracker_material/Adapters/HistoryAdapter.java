@@ -30,12 +30,11 @@ public class HistoryAdapter extends BaseAdapter {
         TextView    date_time,
                     place,
                     comments;
-        int position;
     }
 
     @Override
     public int getCount() {
-        return history.size();
+        return history.size()-1;
     }
 
     @Override
@@ -45,11 +44,12 @@ public class HistoryAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         final HistoryViewHolder   holder;
         if (convertView == null){
             holder              = new HistoryViewHolder();
@@ -65,7 +65,7 @@ public class HistoryAdapter extends BaseAdapter {
 
         try {
             Map<String, String> item = new HashMap<>();
-            item = history.get(position);
+            item = history.get(position+1);
             Log.d("HistoryAdapter", "size"+item.size());
             String dateStr = item.get("H_eventDateTime");
             holder.date_time.setText(dateStr);

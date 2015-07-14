@@ -152,7 +152,6 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             case R.id.add_favorite:
                 //Log.d(TAG,"item selected");
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
                // Bundle bundle= new Bundle();
                // bundle.putSerializable("codes_info", codes_info);
                 fragmentManager = getActivity().getSupportFragmentManager();
@@ -262,7 +261,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public class GetCodesInfo extends AsyncTask<Void, Void, String> implements UIResponseListenerInterface {
 
         int j = 0;
-        ArrayList<Map<String, String>> aux = new ArrayList<>();
+        ArrayList<ArrayList<Map<String, String>>> aux = new ArrayList<ArrayList<Map<String,String>>>();
         boolean flag = false;
 
         protected void onPreExecute() {
@@ -332,6 +331,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     if (stringResponse.equals("0")) {
                         Log.v(TAG, "El servidor devolvió null o 0");
                         String cod_aux = codes_array.get(j).get("codigo");
+                        ArrayList<Map<String,String>> auxResponseList  = new ArrayList<Map<String, String>>();
                         Map<String, String> auxResponse = new HashMap<>();
                         if (cod_aux.length() == 10) {
                             auxResponse.put("shortWayBillId", cod_aux);
@@ -342,17 +342,20 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                             auxResponse.put("wayBill", cod_aux);
                             auxResponse.put("statusSPA", "Sin información");
                         }
-                        aux.add(auxResponse);
+                        auxResponseList.add(auxResponse);
+                        aux.add(auxResponseList);
                         Log.v(TAG + "aux", "" + aux.size());
 
                     } else {
                         Log.v(TAG, stringResponse);
-                        Map<String, String> auxResponse = new HashMap<>();
-                        auxResponse = RequestManager.sharedInstance().getResponseArray().get(0);
-                        if (auxResponse != null) {
+                        ArrayList<Map<String,String>> auxResponseList;
+                        auxResponseList = RequestManager.sharedInstance().getResponseArray();
+                        if (auxResponseList != null) {
                             // Log.v(TAG + "auxResponse", "" + auxResponse.size());
-                            if (auxResponse.size() > 0)
-                                aux.add(auxResponse);
+                            if (auxResponseList.size() > 0){
+                                aux.add(auxResponseList);
+                            }
+
                             //   Log.v(TAG + "aux", "" + aux.size());
                         }
 
@@ -361,7 +364,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     Log.d(TAG, "contador:" + j);
                     if (j == codes_array.size()) {
                         Log.d(TAG, "flag " + flag + " j " + j);
-                        ArrayList<Map<String, String>> codes_ver = new ArrayList<>();
+                        ArrayList<ArrayList<Map<String, String>>> codes_ver;
                         codes_ver = verifyFavorites(aux);
 
                         Bundle bundle = new Bundle();
@@ -384,30 +387,40 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
 
         }
-        public ArrayList<Map<String, String>> verifyFavorites(ArrayList<Map<String, String>> values){
+        public ArrayList<ArrayList<Map<String, String>>> verifyFavorites(ArrayList<ArrayList<Map<String, String>>> values){
             Log.d(TAG, "verifyFavorites");
-            ArrayList<Map<String, String>> resp = new ArrayList<>();
-            for(int i = 0; i < values.size(); i++){
-                Map<String, String> item = new HashMap<>();
-                item= values.get(i);
+            ArrayList<ArrayList<Map<String, String>>> resp = new ArrayList<ArrayList<Map<String, String>>>();
+            for (int j = 0; j<values.size(); j++) {
+                Log.d(TAG, "verifyFavorites111111");
+                //for (int i = 0; i < values.get(j).size(); i++) {
+                ArrayList<Map<String, String>> respList = new ArrayList<>();
+                    Map<String, String> item = new HashMap<>();
+                    item = values.get(j).get(0);
 
-                if(item.get("wayBill")!= null) {
-                    String auxFavId = Favorites.getIdByWayBill(context, item.get("wayBill"));
-                    //Log.d(TAG, "DB aux = "+auxFavId);
-                    if (auxFavId != null) {
-                        item.put("favorites", "true");
-                        //Log.d(TAG, "item true");
-                    }
-                    else {
+                    if (item.get("wayBill") != null) {
+                        String auxFavId = Favorites.getIdByWayBill(context, item.get("wayBill"));
+                        //Log.d(TAG, "DB aux = "+auxFavId);
+                        if (auxFavId != null) {
+                            item.put("favorites", "true");
+                            //Log.d(TAG, "item true");
+                        } else {
+                            item.put("favorites", "false");
+                            //Log.d(TAG, "item false");
+                        }
+                    } else {
                         item.put("favorites", "false");
                         //Log.d(TAG, "item false");
                     }
+                respList.add(item);
+
+                for (int k = 1; k < values.get(j).size(); k++) {
+                    item = new HashMap<>();
+                    item = values.get(j).get(k);
+
+                    respList.add(item);
                 }
-                else {
-                    item.put("favorites", "false");
-                    //Log.d(TAG, "item false");
-                }
-                resp.add(item);
+                resp.add(respList);
+                //}
             }
             return resp;
         }

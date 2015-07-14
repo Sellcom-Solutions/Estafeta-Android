@@ -26,8 +26,8 @@ public class FragmentHistory extends TrackerFragment {
     String TAG = "FRAG_HISTORY";
 
     ListView history_lst;
-    ArrayList<Map<String, String>> history_data = new ArrayList<>();
-    Map<String, String> codes_info = new HashMap<>();
+    //ArrayList<Map<String, String>> history_data = new ArrayList<>();
+    ArrayList<Map<String, String>> codes_info;
 
     public FragmentHistory() {
         // Required empty public constructor
@@ -41,7 +41,9 @@ public class FragmentHistory extends TrackerFragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         history_lst = (ListView) view.findViewById(R.id.history_lst);
 
-        codes_info = (Map<String, String>) getArguments().getSerializable("codes_info");
+        codes_info = (ArrayList<Map<String, String>>) getArguments().getSerializable("codes_info");
+
+
 
         try {
             Log.d(TAG, "size" + codes_info.size());
@@ -49,10 +51,12 @@ public class FragmentHistory extends TrackerFragment {
             e.printStackTrace();
         }
 
-        history_data.add(codes_info);
+        //history_data.add(codes_info);
 
 
-        HistoryAdapter adapter = new HistoryAdapter(getActivity(),history_data);
+        //HistoryAdapter adapter = new HistoryAdapter(getActivity(),history_data);
+        HistoryAdapter adapter = new HistoryAdapter(getActivity(),codes_info);
+
         history_lst.setAdapter(adapter);
 
         return view;
