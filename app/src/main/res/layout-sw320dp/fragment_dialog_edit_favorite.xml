@@ -41,7 +41,8 @@
                     android:layout_height="match_parent"
                     android:textColor="@color/estafeta_text"
                     android:text="@string/fav_no_guia"
-                    android:textSize="@dimen/sizeMediumText"/>
+                    android:textSize="@dimen/sizeMediumText"
+                    android:gravity="top"/>
                 <TextView
                     android:id                  ="@+id/fav_edit_no_guia"
                     android:layout_width        ="wrap_content"
@@ -49,7 +50,7 @@
                     android:textColor           ="@color/estafeta_text"
                     android:textSize            ="@dimen/sizeSmallText"
                     android:text=""
-                    android:gravity="bottom"/>
+                    android:gravity="top"/>
             </LinearLayout>
 
             <LinearLayout
@@ -119,16 +120,14 @@
                         android:textSize="@dimen/sizeSmallText"
                         android:paddingTop="5dp"
                         android:layout_weight="50"/>
-
                     <Switch
                         android:id="@+id/swch_confirmar"
-                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
                         style="@style/AppTheme"
-                        android:background="@color/white"
-                        android:layout_weight="50"
-                        android:checked="false" />
+                        android:background="@color/white"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
