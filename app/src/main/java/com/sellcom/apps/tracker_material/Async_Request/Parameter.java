@@ -25,7 +25,8 @@ public class Parameter {
         CIUDAD_DESTINO ("ciudad_destino"),
         COLONIA_DESTINO ("colonia_destino"),
         CALLE_DESTINO ("calle_destino"),
-        NO_DESTINO ("no_destino");
+        NO_DESTINO ("no_destino"),
+        GARANTIA ("garantia");
 
         private final String name;
 

@@ -34,8 +34,10 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         context = this;
-        /*DataBaseHelper db=new DataBaseHelper(this);
-        db.onUpgrade(db.getWritableDatabase(), 1, 2);*/
+        /*
+        DataBaseHelper db=new DataBaseHelper(this);
+        db.onUpgrade(db.getWritableDatabase(), 1, 2);
+        */
         DialogManager.sharedInstance().setActivity(this);
         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.cargando),0);
 

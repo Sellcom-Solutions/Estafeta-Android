@@ -276,9 +276,9 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
     public boolean validateData(){
         if ( !(Utilities.validateCommonField(context, name.getText().toString(), name)) )
             return false;
-        if ( !(Utilities.validateCommonField(context, phone.getText().toString(), phone)) )
+        if ( !(Utilities.validateNumber(context, phone.getText().toString(), phone)) )
             return false;
-        if ( !(Utilities.validateCommonField(context, email.getText().toString(), email)) )
+        if ( !(Utilities.validateEmail(context, email.getText().toString(), email)) )
             return false;
         if ( !(Utilities.validateCommonField(context, bussines_name.getText().toString(), bussines_name)) )
             return false;

@@ -31,12 +31,13 @@ public class Buys {
     public static final String GARANTIA = "Garantia";
     public static final String COSTO = "Costo";
     public static final String REFERENCIA = "Referencia";
+    public static final String DATE = "Fecha";
 
 
 
     public static List<Map<String,String>> getAll(Context context)
     {
-        List <Map<String,String>> returned=new LinkedList<>();
+        List <Map<String,String>> returned=new ArrayList<>();
         Map<String,String> object;
         Cursor cursor= DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null, null, null);
 
@@ -67,6 +68,8 @@ public class Buys {
                     object.put(COSTO,cursor.getString(cursor.getColumnIndexOrThrow(COSTO)));
                 if (cursor.getColumnIndexOrThrow(REFERENCIA) != -1)
                     object.put(REFERENCIA,cursor.getString(cursor.getColumnIndexOrThrow(REFERENCIA)));
+                if (cursor.getColumnIndexOrThrow(DATE) != -1)
+                    object.put(DATE,cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
                 returned.add(object);
             }
             while(cursor.moveToNext());
@@ -101,7 +104,7 @@ public class Buys {
 
     public static List<Map<String,String>> getByArguments(Context context,Map<String,String> arguments)
     {
-        List<Map<String,String>> returned=new LinkedList<>();
+        List<Map<String,String>> returned=new ArrayList<>();
         Map<String,String> object;
         String selection="";
         String selectionArgs[]=new String[arguments.size()];
@@ -142,6 +145,8 @@ public class Buys {
                     object.put(COSTO,cursor.getString(cursor.getColumnIndexOrThrow(COSTO)));
                 if (cursor.getColumnIndexOrThrow(REFERENCIA) != -1)
                     object.put(REFERENCIA,cursor.getString(cursor.getColumnIndexOrThrow(REFERENCIA)));
+                if (cursor.getColumnIndexOrThrow(DATE) != -1)
+                    object.put(DATE,cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
                 returned.add(object);
             }
             while(cursor.moveToNext());
