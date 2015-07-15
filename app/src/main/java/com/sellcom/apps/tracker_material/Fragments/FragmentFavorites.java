@@ -57,7 +57,7 @@ public class FragmentFavorites extends TrackerFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
         context = getActivity();
-        notify=true;
+        notify=false;
 
         swch_notifica= (Switch)view.findViewById((R.id.swch_notifica));
         swch_notifica.setChecked(notify);
@@ -87,7 +87,12 @@ public class FragmentFavorites extends TrackerFragment {
                     Toast.makeText(context, "Alarma Desactivada ", Toast.LENGTH_SHORT).show();
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
-                    Log.d(TAG, "notify: " + notify);
+
+                    for(int i = 0; i <codes_info.size(); i++) {
+
+                        codes_info.get(i).put("notifica", String.valueOf(notify));
+                        Log.e(TAG, "codes_info:  ---->  " + codes_info.get(i));
+                    }
                     return;
                 }
 
@@ -95,9 +100,9 @@ public class FragmentFavorites extends TrackerFragment {
         });
 
         if (swch_notifica.isChecked()) {
-            Toast.makeText(context, "Switch is currently ON", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, "Switch is currently ON", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
+          //  Toast.makeText(context, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
         }
 
 

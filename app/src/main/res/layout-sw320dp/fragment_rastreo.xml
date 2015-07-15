@@ -203,7 +203,7 @@
                 <ListView
                     android:id                      ="@+id/liv_rastreo"
                     android:layout_width            ="match_parent"
-                    android:layout_height           ="68dp"
+                    android:layout_height           ="120dp"
                     android:visibility              ="visible">
 
                 </ListView>
