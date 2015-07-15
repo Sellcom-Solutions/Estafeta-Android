@@ -81,8 +81,8 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
         Log.d(TAG, "size: " + codes_info.size());
 
 
-        fav_no_guia.setText(codes_info.get("no_guia"));
-        fav_codigo.setText(codes_info.get("codigo_rastreo"));
+        fav_no_guia.setText(" " + codes_info.get("no_guia"));
+        fav_codigo.setText(" "+codes_info.get("codigo_rastreo"));
         swch_confirmacion.setChecked(Boolean.parseBoolean(codes_info.get("notifica")));
 
 

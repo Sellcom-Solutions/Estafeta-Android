@@ -23,52 +23,54 @@
             android:textColor="@color/estafeta_text"
             android:text="@string/EditFavorite"
             android:textSize="@dimen/sizeLargeText"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="left"
             android:paddingTop="20dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/fav_edit_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/estafeta_text"
                     android:text="@string/fav_no_guia"
                     android:textSize="@dimen/sizeMediumText"/>
                 <TextView
                     android:id                  ="@+id/fav_edit_no_guia"
                     android:layout_width        ="wrap_content"
-                    android:layout_height       ="wrap_content"
+                    android:layout_height       ="match_parent"
                     android:textColor           ="@color/estafeta_text"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:text=""/>
+                    android:textSize            ="@dimen/sizeSmallText"
+                    android:text=""
+                    android:gravity="bottom"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/estafeta_text"
                     android:text="@string/favorite_cod_rastreo"
                     android:textSize="@dimen/sizeMediumText"/>
                 <TextView
                     android:id                  ="@+id/fav_edit_cod_rastreo"
                     android:layout_width        ="wrap_content"
-                    android:layout_height       ="wrap_content"
+                    android:layout_height       ="match_parent"
                     android:textColor           ="@color/estafeta_text"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:text=""/>
+                    android:textSize            ="@dimen/sizeSmallText"
+                    android:text=""
+                    android:gravity="bottom"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -98,7 +100,7 @@
                     android:drawablePadding         ="5dp"
                     android:focusableInTouchMode    ="true"
                     android:hint                    ="@string/edit_name_guia"
-                    android:inputType               ="number"
+                    android:inputType=              "text"
                     android:maxLength               ="22"
                     android:padding                 ="3dp"
                     android:textColor               ="@color/estafeta_text"
@@ -142,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/edit_save"
-                android:textSize="@dimen/sizeNormalText"
+                android:textSize="@dimen/sizeMediumText"
                 android:layout_gravity="right"
                 android:gravity="right|center_vertical"
                 android:paddingRight="20dp"
@@ -153,7 +155,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/edit_cancel"
-                android:textSize="@dimen/sizeNormalText"
+                android:textSize="@dimen/sizeMediumText"
                 android:layout_gravity="right"
                 android:gravity="right|center_vertical"
                 android:background="@color/zxing_transparent"

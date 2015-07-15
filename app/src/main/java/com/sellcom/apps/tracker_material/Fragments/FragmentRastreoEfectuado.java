@@ -95,18 +95,24 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
         switch (item.getItemId()) {
 
             case R.id.add_favorite:
-                //Log.d(TAG,"item selected");
-                Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                Bundle bundle= new Bundle();
-                bundle.putSerializable("codes_info", codes_info);
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragment = new FragmentFavorites();
-                fragment.addFragmentToStack(getActivity());
-                fragment.setArguments(bundle);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.container, fragment, TAG);
-                fragmentTransaction.commit();
+                ArrayList<Map<String,String>> listFavorites= Favorites.getAll(context);
+                if(listFavorites==null){
+                    Toast.makeText(context,"No existen favoritos.", Toast.LENGTH_SHORT).show();
+
+                }else {
+                    //Log.d(TAG,"item selected");
+                    Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("codes_info", codes_info);
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragment = new FragmentFavorites();
+                    fragment.addFragmentToStack(getActivity());
+                    fragment.setArguments(bundle);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.container, fragment, TAG);
+                    fragmentTransaction.commit();
+                }
                 return true;
 
             default: return super.onOptionsItemSelected(item);

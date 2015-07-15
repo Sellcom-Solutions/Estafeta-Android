@@ -133,7 +133,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable("codes",codes_array);
+        outState.putSerializable("codes", codes_array);
     }
 
         @Override
@@ -151,17 +151,25 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         switch (item.getItemId()) {
 
             case R.id.add_favorite:
-                //Log.d(TAG,"item selected");
-               // Bundle bundle= new Bundle();
-               // bundle.putSerializable("codes_info", codes_info);
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragment = new FragmentFavorites();
-                fragment.addFragmentToStack(getActivity());
-             //   fragment.setArguments(bundle);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.container, fragment, TAG);
-                fragmentTransaction.commit();
+
+                ArrayList<Map<String,String>> listFavorites= Favorites.getAll(context);
+                if(listFavorites==null){
+                    Toast.makeText(context,"No existen favoritos.", Toast.LENGTH_SHORT).show();
+
+                }else {
+
+                    //Log.d(TAG,"item selected");
+                    // Bundle bundle= new Bundle();
+                    // bundle.putSerializable("codes_info", codes_info);
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragment = new FragmentFavorites();
+                    fragment.addFragmentToStack(getActivity());
+                    //   fragment.setArguments(bundle);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.container, fragment, TAG);
+                    fragmentTransaction.commit();
+                }
                 return true;
 
             default: return super.onOptionsItemSelected(item);
