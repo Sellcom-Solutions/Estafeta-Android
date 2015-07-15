@@ -110,8 +110,8 @@ public class FragmentDialogFavorite  extends DialogFragment implements View.OnCl
                 sendIntent.setAction(Intent.ACTION_SEND);
 
                 String sendText = "Referencia: "+ fav_reference.getText()+". "
-                        +"No.Guía: "+ fav_no_guia.getText()+". "
-                        +"Código Rastreo: "+fav_codigo.getText()+". "
+                        +"No.GuÃ­a: "+ fav_no_guia.getText()+". "
+                        +"CÃ³digo Rastreo: "+fav_codigo.getText()+". "
                         +"Estatus: "+fav_estatus.getText()+". "
                         +"Origen: "+fav_origen.getText()+". "
                         +"Destino: "+fav_destino.getText()+". "

@@ -135,7 +135,7 @@ public class FavoriteListAdapter extends BaseAdapter{
 
                 FragmentDialogEditFavorite fdfe = new FragmentDialogEditFavorite();
                 fdfe.setArguments(bundle);
-                fdfe.show(fragmentManager,"FRAG_DIALOG_FAVORITE_EDIT");
+                fdfe.show(fragmentManager, fdfe.TAG);
 
             }
         });

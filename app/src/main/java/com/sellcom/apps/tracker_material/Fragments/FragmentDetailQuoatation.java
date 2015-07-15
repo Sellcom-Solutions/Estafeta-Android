@@ -523,11 +523,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
             case R.id.btn_buy:
 
-
-
-
-
-
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 TrackerFragment fragment = new FragmentQuotationBuy();

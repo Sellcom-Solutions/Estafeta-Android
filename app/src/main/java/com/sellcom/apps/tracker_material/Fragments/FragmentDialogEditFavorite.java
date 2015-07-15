@@ -28,7 +28,8 @@ import database.model.Favorites;
 
 public class FragmentDialogEditFavorite extends DialogFragment implements View.OnClickListener {
 
-    String TAG = "FRAG_DIALOG_FAVORITE_EDIT";
+
+    public static final String TAG = "FRAG_DIALOG_FAVORITE_EDIT";
 
     Context context;
 
