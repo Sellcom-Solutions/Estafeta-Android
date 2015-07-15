@@ -94,11 +94,11 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
                                          boolean isChecked) {
 
                 if (isChecked) {
-                    Toast.makeText(context, "Switch is currently ON" + isChecked, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Confirmacion Activado" , Toast.LENGTH_SHORT).show();
                     notify=isChecked;
                     return;
                 } else {
-                    Toast.makeText(context, "Switch is currently OFF" + isChecked, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Confirmacion Desactivado", Toast.LENGTH_SHORT).show();
                     notify=isChecked;
                     return;
                 }
@@ -107,9 +107,9 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
         });
 
         if (swch_confirmacion.isChecked()) {
-            Toast.makeText(context, "Switch is currently ON", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, "Switch is currently ON", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(context, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
         }
 
        return view;
