@@ -1,10 +1,15 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -141,8 +146,16 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                 break;
 
             case R.id.btn_ar:
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.loading_AR_elements),0);
-                openFragmentAR();
+
+                if ( !(((LocationManager)context.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) ){
+                    showSettingsAlert();
+                }
+                else{
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.loading_AR_elements),0);
+                    openFragmentAR();
+                }
+
+
                 break;
         }
     }
@@ -157,6 +170,33 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
         fragmentTransaction.commit();
+    }
+
+    public void showSettingsAlert(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        alertDialog.setTitle(context.getResources().getString(R.string.gps_alert_title));
+
+        // Setting Dialog Message
+        alertDialog.setMessage(context.getResources().getString(R.string.gps_alert_message));
+
+        // On pressing Settings button
+        alertDialog.setPositiveButton(context.getResources().getString(R.string.gps_alert_go), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                context.startActivity(intent);
+            }
+        });
+
+        // on pressing cancel button
+        alertDialog.setNegativeButton(context.getResources().getString(R.string.gps_alert_cancel),
+                new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        // Showing Alert Message
+        alertDialog.show();
     }
 
     private void nearOffice(){

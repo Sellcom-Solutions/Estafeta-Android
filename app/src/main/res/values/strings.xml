@@ -328,4 +328,12 @@
     <string name="hist_pre">Prellenados</string>
     <string name="hist_buy">Compras</string>
 
+    <!-- Fragment AR-->
+    <string name="gps_alert_title">GPS Desactivado</string>
+    <string name="gps_alert_message">El GPS no esta activado. ¿Deseas ir a ajustes para activarlo ahora?</string>
+    <string name="gps_alert_go">Ir a Ajustes</string>
+    <string name="gps_alert_cancel">Cancelar</string>
+
+
+
 </resources>
