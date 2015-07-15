@@ -7,20 +7,27 @@ import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by anel 01/07/2015.
  */
-public class FragmentDialogFavorite  extends DialogFragment implements View.OnClickListener {
+public class FragmentDialogFavorite  extends TrackerFragment implements View.OnClickListener {
 
     String TAG = "FRAG_DIALOG_FAVORITE";
 
@@ -42,10 +49,13 @@ public class FragmentDialogFavorite  extends DialogFragment implements View.OnCl
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
 
+    public FragmentDialogFavorite() {
+        // Required empty public constructor
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState) ;
-        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Dialog_MinWidth);
+        //setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Dialog_MinWidth);
         //setCancelable(false);
 
     }
@@ -92,6 +102,44 @@ public class FragmentDialogFavorite  extends DialogFragment implements View.OnCl
         return view;
     }
 
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+
+        }
+        setHasOptionsMenu(true);
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Toast.makeText(context,"History", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        if (!((MainActivity) getActivity()).isDrawerOpen) {
+            menu.clear();
+            inflater.inflate(R.menu.menu_history, menu);
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "Selected:  " + item.getItemId());
+        switch (item.getItemId()) {
+
+            case R.id.add_history:
+                    Toast.makeText(context,"History", Toast.LENGTH_SHORT).show();
+
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -126,8 +174,8 @@ public class FragmentDialogFavorite  extends DialogFragment implements View.OnCl
                 break;
 
             case R.id.btn_fav_closed:
-                Log.d("Closed","" + getId());
-                getDialog().dismiss();
+                Log.d("Closed", "" + getId());
+               // getDialog().dismiss();
                 break;
         }
 
