@@ -24,6 +24,7 @@ import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterfa
 import com.sellcom.apps.tracker_material.Fragments.FragmentAR;
 import com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad;
 import com.sellcom.apps.tracker_material.Fragments.FragmentCodigoPostal;
+import com.sellcom.apps.tracker_material.Fragments.FragmentHistorial;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotation;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotationBuy;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotationBuyFields;
@@ -204,7 +205,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             case NavigationDrawerFragment.HISTORIAL:
-                fragment = null;
+                CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_HISTORIAL.toString();
+                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
+                    fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
+                }else{
+                    fragment = new FragmentHistorial();
+                }
                 break;
 
             default:

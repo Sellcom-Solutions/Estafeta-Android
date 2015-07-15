@@ -31,6 +31,7 @@ import org.w3c.dom.Text;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -213,29 +214,56 @@ public class FragmentQuotationBuy extends TrackerFragment implements View.OnClic
 
     private void setParametersToWebService(){
         requestData = new HashMap<>();
-
+        String str;
         requestData.put(Parameter.BUY_REQUEST.COSTO.toString(), COSTO);
-        requestData.put(Parameter.BUY_REQUEST.NOMBRE_REMITENTE.toString(),origin.get(FragmentQuotationBuyFields.EXTRAS.NAME));
-        requestData.put(Parameter.BUY_REQUEST.TELEFONO_REMITENTE.toString(),origin.get(FragmentQuotationBuyFields.EXTRAS.PHONE));
-        requestData.put(Parameter.BUY_REQUEST.EMAIL_REMITENTE.toString(),origin.get(FragmentQuotationBuyFields.EXTRAS.EMAIL));
-        requestData.put(Parameter.BUY_REQUEST.RAZON_REMITENTE.toString(),origin.get(FragmentQuotationBuyFields.EXTRAS.BUSSINESS_NAME));
+        requestData.put(Parameter.BUY_REQUEST.NOMBRE_REMITENTE.toString(), origin.get(FragmentQuotationBuyFields.EXTRAS.NAME.toString()));
+        requestData.put(Parameter.BUY_REQUEST.TELEFONO_REMITENTE.toString(), origin.get(FragmentQuotationBuyFields.EXTRAS.PHONE.toString()));
+        requestData.put(Parameter.BUY_REQUEST.EMAIL_REMITENTE.toString(),origin.get(FragmentQuotationBuyFields.EXTRAS.EMAIL.toString()));
+        requestData.put(Parameter.BUY_REQUEST.RAZON_REMITENTE.toString(),origin.get(FragmentQuotationBuyFields.EXTRAS.BUSSINESS_NAME.toString()));
         requestData.put(Parameter.BUY_REQUEST.CP_ORIGEN.toString(),CPO);
-        requestData.put(Parameter.BUY_REQUEST.ESTADO_ORIGEN.toString(),convertNonAscii(estadoO).toUpperCase());
-        requestData.put(Parameter.BUY_REQUEST.CIUDAD_ORIGEN.toString(),convertNonAscii(municipioO).toUpperCase());
-        requestData.put(Parameter.BUY_REQUEST.COLONIA_ORIGEN.toString(),convertNonAscii(coloniaO).toUpperCase());
-        requestData.put(Parameter.BUY_REQUEST.CALLE_ORIGEN.toString(), origin.get(FragmentQuotationBuyFields.EXTRAS.STREET));
-        requestData.put(Parameter.BUY_REQUEST.NO_ORIGEN.toString(), origin.get(FragmentQuotationBuyFields.EXTRAS.STREET_NUMBER));
-        requestData.put(Parameter.BUY_REQUEST.NOMBRE_DESTINATARIO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.NAME));
-        requestData.put(Parameter.BUY_REQUEST.TELEFONO_DESTINATARIO.toString(), destiny.get(FragmentQuotationBuyFields.EXTRAS.PHONE));
-        requestData.put(Parameter.BUY_REQUEST.EMAIL_DESTINATARIO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.EMAIL));
-        requestData.put(Parameter.BUY_REQUEST.RAZON_DESTINATARIO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.BUSSINESS_NAME));
+        str = convertNonAscii(estadoO).toUpperCase();
+        str = normalizarStr(str);
+        requestData.put(Parameter.BUY_REQUEST.ESTADO_ORIGEN.toString(), str);
+
+        str = convertNonAscii(municipioO).toUpperCase();
+        str = normalizarStr(str);
+        requestData.put(Parameter.BUY_REQUEST.CIUDAD_ORIGEN.toString(),str);
+        str = convertNonAscii(coloniaO).toUpperCase();
+        str = normalizarStr(str);
+        requestData.put(Parameter.BUY_REQUEST.COLONIA_ORIGEN.toString(),str);
+        requestData.put(Parameter.BUY_REQUEST.CALLE_ORIGEN.toString(), origin.get(FragmentQuotationBuyFields.EXTRAS.STREET.toString()));
+        requestData.put(Parameter.BUY_REQUEST.NO_ORIGEN.toString(), origin.get(FragmentQuotationBuyFields.EXTRAS.STREET_NUMBER.toString()));
+        requestData.put(Parameter.BUY_REQUEST.NOMBRE_DESTINATARIO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.NAME.toString()));
+        requestData.put(Parameter.BUY_REQUEST.TELEFONO_DESTINATARIO.toString(), destiny.get(FragmentQuotationBuyFields.EXTRAS.PHONE.toString()));
+        requestData.put(Parameter.BUY_REQUEST.EMAIL_DESTINATARIO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.EMAIL.toString()));
+        requestData.put(Parameter.BUY_REQUEST.RAZON_DESTINATARIO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.BUSSINESS_NAME.toString()));
         requestData.put(Parameter.BUY_REQUEST.CP_DESTINO.toString(), CPD);
-        requestData.put(Parameter.BUY_REQUEST.ESTADO_DESTINO.toString(),convertNonAscii(estadoD).toUpperCase());
-        requestData.put(Parameter.BUY_REQUEST.CIUDAD_DESTINO.toString(),convertNonAscii(municipioD).toUpperCase());
-        requestData.put(Parameter.BUY_REQUEST.COLONIA_DESTINO.toString(),convertNonAscii(coloniaD).toUpperCase());
-        requestData.put(Parameter.BUY_REQUEST.CALLE_DESTINO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.STREET));
-        requestData.put(Parameter.BUY_REQUEST.NO_DESTINO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.STREET_NUMBER));
+        str = convertNonAscii(estadoD).toUpperCase();
+        str = normalizarStr(str);
+        requestData.put(Parameter.BUY_REQUEST.ESTADO_DESTINO.toString(),str);
+        str = convertNonAscii(municipioD).toUpperCase();
+        str = normalizarStr(str);
+        requestData.put(Parameter.BUY_REQUEST.CIUDAD_DESTINO.toString(),str);
+        str = convertNonAscii(coloniaD).toUpperCase();
+        str = normalizarStr(str);
+        requestData.put(Parameter.BUY_REQUEST.COLONIA_DESTINO.toString(),str);
+        requestData.put(Parameter.BUY_REQUEST.CALLE_DESTINO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.STREET.toString()));
+        requestData.put(Parameter.BUY_REQUEST.NO_DESTINO.toString(),destiny.get(FragmentQuotationBuyFields.EXTRAS.STREET_NUMBER.toString()));
     }
+
+    public String normalizarStr(String str){
+
+        while (str.charAt(0)== ' ') {
+            str = str.substring(1,str.length());
+        }
+
+        while (str.charAt(str.length()-1)==' '){
+            str = str.substring(0,str.length()-1);
+        }
+
+        return str;
+    }
+
 
     public void handleBackPressed(){
         switch (fragment.getVersion()){
@@ -387,6 +415,7 @@ public class FragmentQuotationBuy extends TrackerFragment implements View.OnClic
 
     public String saveInDataBase(Map<String,String> arguments){
         Map<String,String> values = new HashMap<>();
+        String str;
         values.put(Buys.NOMBRE_REMITENTE,arguments.get(Parameter.BUY_RESPONSE.REMITENTE.toString()));
         values.put(Buys.ORIGEN,arguments.get(Parameter.BUY_RESPONSE.ORIGEN.toString()));
         values.put(Buys.CPO,arguments.get(Parameter.BUY_RESPONSE.CP_ORIGEN.toString()));
@@ -399,10 +428,32 @@ public class FragmentQuotationBuy extends TrackerFragment implements View.OnClic
         values.put(Buys.REFERENCIA, arguments.get(Parameter.BUY_RESPONSE.REFERENCIA.toString()));
         Log.d("vbeifhadjnk", values.get(Buys.REFERENCIA));
         Log.d("efeujntrfdjnef", Parameter.BUY_RESPONSE.COSTO.toString());
-
+        values.put(Buys.DATE,setFecha());
         Buys.insert(context, values);
-
         return values.get(Buys.REFERENCIA);
+    }
+
+    private String setFecha(){
+        Calendar calendar = Calendar.getInstance();
+        int dia,mes,anio;
+        dia=calendar.get(Calendar.DATE);
+        mes=calendar.get(Calendar.MONTH)+1;
+        anio=calendar.get(Calendar.YEAR);
+        String Fecha="";
+        if (dia<10){
+            Fecha=Fecha+"0"+dia;
+        }
+        else
+            Fecha=Fecha+dia;
+        Fecha = Fecha +"/";
+        if (mes<10){
+            Fecha=Fecha+"0"+mes;
+        }
+        else
+            Fecha=Fecha+mes;
+        Fecha = Fecha + "/";
+        Fecha=Fecha+anio;
+        return Fecha;
     }
 
 }

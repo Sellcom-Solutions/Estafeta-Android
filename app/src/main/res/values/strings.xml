@@ -6,7 +6,10 @@
     <string name="drawer_close">Menu closed</string>
     <string name="action_settings">Settings</string>
 
+
+    <string name="error_invalid_email_address">Verifica que el email este escrito correctamente</string>
     <string name="error_empty_field">Este campo no puede estar vacío</string>
+    <string name="error_phone_field">El número debe de ser de 10 dígitos</string>
 
     <!-- RequestManager -->
     <string name="done">Aceptar</string>
@@ -246,7 +249,7 @@
         "Nombre_remitente" TEXT, "Origen" TEXT, "CPO" TEXT,
         "Nombre_destinatario" TEXT, "Destino" TEXT, "CPD" TEXT,
         "Tipo_servicio" TEXT, "Garantia" TEXT, "Costo" TEXT,
-        "Referencia" TEXT)</string>
+        "Referencia" TEXT, Fecha TEXT)</string>
 
 
     <!-- ********************   Strings aplicación anterior   ************************** -->
@@ -318,5 +321,11 @@
     <string name="fav_btn_call">Llamar </string>
     <string name="fav_btn_share">Compartir </string>
     <string name="fav_btn_closed">Cerrar </string>
+
+
+    <!-- fragment history -->
+    <string name="history_title">Historial (Cambiar Imagen)</string>
+    <string name="hist_pre">Prellenados</string>
+    <string name="hist_buy">Compras</string>
 
 </resources>

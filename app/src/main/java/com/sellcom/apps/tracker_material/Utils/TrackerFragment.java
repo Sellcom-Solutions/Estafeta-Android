@@ -41,9 +41,8 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         FRAG_OFFICES ("officinas"),
         FRAG_CODIGO_POSTAL("codigo_postal"),
         FRAG_QUOTATION("cotizador"),
-        FRAG_AVISO_PRIVACIDAD("aviso_privacidad")
-
-        ;
+        FRAG_AVISO_PRIVACIDAD("aviso_privacidad"),
+        FRAG_HISTORIAL("historial");
 
         private final String name;
 

@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 import android.app.Activity;
@@ -234,16 +235,32 @@ public class RequestManager implements ResponseListenerInterface {
                         try {
                             jsonResponse.put("success",true);
                             jsonResponse.put("resp","OK");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.COSTO.toString(),"300.00");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_DESTINO.toString(),"11500");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_ORIGEN.toString(),"56736");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINATARIO.toString(),"Usuario demo 2");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINO.toString(),"Ciudad de México, Miguel Hidalgo");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.COSTO.toString(),
+                                    requestData.get(Parameter.BUY_REQUEST.COSTO.toString()));
+                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_DESTINO.toString(),
+                                    requestData.get(Parameter.BUY_REQUEST.CP_DESTINO.toString()));
+                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_ORIGEN.toString(),
+                                    requestData.get(Parameter.BUY_REQUEST.CP_ORIGEN.toString()));
+                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINATARIO.toString(),
+                                    requestData.get(Parameter.BUY_REQUEST.NOMBRE_DESTINATARIO.toString()));
+                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINO.toString(),
+                                    requestData.get(Parameter.BUY_REQUEST.ESTADO_DESTINO.toString())+","+
+                                            requestData.get(Parameter.BUY_REQUEST.CIUDAD_DESTINO.toString())+".");
+
                             jsonResponse.put(Parameter.BUY_RESPONSE.GARANTIA.toString(),"Zona 3, Tercer día hábil");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.ORIGEN.toString(),"Edo. de México, Huixquilucan");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.REFERENCIA.toString(),"12345678");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.REMITENTE.toString(),"Usuario demo 1");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.TIPO_SERVICIO.toString(),"2 Días");
+                            jsonResponse.put(Parameter.BUY_RESPONSE.ORIGEN.toString(),
+                                    requestData.get(Parameter.BUY_REQUEST.ESTADO_ORIGEN.toString())+","+
+                                            requestData.get(Parameter.BUY_REQUEST.CIUDAD_ORIGEN.toString())+".");
+
+
+                            Random rnd = new Random();
+                            long n = (long)(rnd.nextDouble() * new Double("9999999999") + new Double("1000000000"));
+                            jsonResponse.put(Parameter.BUY_RESPONSE.REFERENCIA.toString(),
+                                    String.valueOf(n));
+                            jsonResponse.put(Parameter.BUY_RESPONSE.REMITENTE.toString(),
+                                    requestData.get(Parameter.BUY_REQUEST.NOMBRE_REMITENTE.toString()));
+                            jsonResponse.put(Parameter.BUY_RESPONSE.TIPO_SERVICIO.toString(),
+                                    "2 Días");
 
 
                             Map<String,String> response = new HashMap<String,String>();

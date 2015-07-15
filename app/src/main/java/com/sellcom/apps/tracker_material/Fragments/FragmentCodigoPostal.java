@@ -137,6 +137,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
 
                     requestData.put("estado", convertNonAscii(estadoString).toUpperCase());
+                    Log.d("ESTADOREQUEST",requestData.get("estado")+".");
                     Log.d("Estado",estadoString);
 
                     requestData.put("ciudad", convertNonAscii(ciudadString).trim());

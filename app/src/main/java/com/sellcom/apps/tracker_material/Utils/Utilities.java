@@ -105,6 +105,42 @@ public class Utilities {
     }
 
 
+    public static boolean validateEmail(Context context, String email, EditText view){
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-z]+";
+        email=email.trim();
+        if (email.isEmpty()){
+            view.setError(context.getResources().getText(R.string.error_empty_field).toString());
+            view.requestFocus();
+            return false;
+        }
+
+        if (email.matches(emailPattern))
+        {
+            return true;
+        }
+        else{
+            view.setError(context.getResources().getText(R.string.error_invalid_email_address).toString());
+            view.requestFocus();
+            return false;
+        }
+
+    }
+
+    public static boolean validateNumber(Context context, String email, EditText view){
+        if (email.isEmpty()){
+            view.setError(context.getResources().getText(R.string.error_empty_field).toString());
+            view.requestFocus();
+            return false;
+        }
+        if (email.length()!=10){
+            view.setError(context.getResources().getText(R.string.error_phone_field).toString());
+            view.requestFocus();
+            return false;
+        }
+            return true;
+    }
+
+
     public static boolean validateCommonField(Context context,String field,EditText view){
         if(field.isEmpty()){
             view.setError(context.getResources().getText(R.string.error_empty_field).toString());
