@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:weightSum="100"
     android:paddingTop="10dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="10dp"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -69,6 +70,7 @@
                 android:layout_height="match_parent"
                 android:textSize="@dimen/sizeSmallText"
                 android:text="No. Guía: "
+                android:textColor="@color/estafeta_text"
                 android:textStyle="bold"/>
 
             <TextView
@@ -76,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/sizeSmallText"
+                android:textColor="@color/estafeta_text"
                 android:text="7463829504302853856472"/>
 
 
@@ -90,6 +93,7 @@
                 android:layout_height="match_parent"
                 android:textSize="@dimen/sizeSmallText"
                 android:text="C.P. Origen: "
+                android:textColor="@color/estafeta_text"
                 android:textStyle="bold"/>
 
             <TextView
@@ -97,6 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/sizeSmallText"
+                android:textColor="@color/estafeta_text"
                 android:text="55790, Huixquilucan, Estado de México"/>
 
 
@@ -111,6 +116,7 @@
                 android:layout_height="match_parent"
                 android:textSize="@dimen/sizeSmallText"
                 android:text="C.P. Destino: "
+                android:textColor="@color/estafeta_text"
                 android:textStyle="bold"/>
 
             <TextView
@@ -118,6 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textSize="@dimen/sizeSmallText"
+                android:textColor="@color/estafeta_text"
                 android:text="55790. San Jeronimo Baja California Sur"/>
 
 
