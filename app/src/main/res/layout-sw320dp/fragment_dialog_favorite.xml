@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="@color/estafeta_light_gray"
+    android:background="@color/white"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
     <LinearLayout
         android:orientation="vertical"

@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.sellcom.apps.tracker_material.Fragments.FragmentDialogEditFavorite;
 import com.sellcom.apps.tracker_material.Fragments.FragmentDialogFavorite;
-import com.sellcom.apps.tracker_material.Fragments.FragmentFavorites;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import database.model.Codes;
 import database.model.Favorites;
 
 /**
@@ -150,9 +148,15 @@ public class FavoriteListAdapter extends BaseAdapter{
                 bundle.putSerializable("code_array", (java.io.Serializable) map);
                 Log.d(TAG, "codigo MAP  " + String.valueOf(map));
 
+
+                fragmentTransaction = fragmentManager.beginTransaction();
                 FragmentDialogFavorite fdf = new FragmentDialogFavorite();
                 fdf.setArguments(bundle);
-                fdf.show(fragmentManager, "FRAG_DIALOG_FAVORITE");
+              //  fdf.show(fragmentManager, "FRAG_DIALOG_FAVORITE");
+                fragmentTransaction.addToBackStack(null);
+                fdf.addFragmentToStack(activity);
+                fragmentTransaction.replace(R.id.container, fdf, TAG);
+                fragmentTransaction.commit();
             }
         });
         return convertView;
