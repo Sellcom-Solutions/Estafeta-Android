@@ -31,8 +31,10 @@
                         <CheckBox
                             android:id="@+id/fd_btn_favorito"
                             style="@style/StarCheckBox"
-                            android:layout_width        ="25dp"
-                            android:layout_height       ="25dp"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:scaleY="1"
+                            android:scaleX="1"
                             android:layout_gravity="top|center_horizontal"
                             android:gravity="center"/>
                         </LinearLayout>

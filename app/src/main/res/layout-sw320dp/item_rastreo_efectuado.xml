@@ -14,8 +14,8 @@
         android:layout_marginLeft="10dp">
     <CheckBox
         android:id="@+id/btn_favorito"
-        android:layout_width        ="25dp"
-        android:layout_height       ="25dp"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="match_parent"
         android:layout_gravity="center"
         android:scaleY="1"
         android:scaleX="1"
