@@ -1,10 +1,12 @@
 package com.sellcom.apps.tracker_material.Fragments;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v4.app.DialogFragment;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
@@ -33,9 +36,6 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
 
     Context context;
 
-    Button fav_call;
-    Button fav_share;
-    Button fav_closed;
     TextView fav_no_guia;
     TextView fav_codigo;
     TextView fav_reference;
@@ -49,14 +49,17 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
 
-    public FragmentDialogFavorite() {
-        // Required empty public constructor
-    }
+    TrackerFragment fragment;
+    FragmentManager fragmentManager;
+    FragmentTransaction fragmentTransaction;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState) ;
         //setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Dialog_MinWidth);
         //setCancelable(false);
+        fragmentManager = getActivity().getSupportFragmentManager();
 
     }
     @Override
@@ -75,29 +78,30 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         fav_fecha = (TextView) view.findViewById(R.id.fav_fecha);
         fav_recibio = (TextView) view.findViewById(R.id.fav_recibio);
 
-        fav_call=(Button)view.findViewById(R.id.btn_fav_call);
-        fav_share=(Button)view.findViewById(R.id.btn_fav_share);
-        fav_closed=(Button)view.findViewById(R.id.btn_fav_closed);
 
+        final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.btn_fav_call);
+        final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.btn_fav_share);
 
-        fav_call.setOnClickListener(this);
-        fav_share.setOnClickListener(this);
-        fav_closed.setOnClickListener(this);
+        btn_call.setOnClickListener(this);
+        btn_share.setOnClickListener(this);
 
 
         codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
         Log.d(TAG, "size: " + codes_info.size());
 
 
-        fav_reference.setText(codes_info.get("referencia"));
-        fav_no_guia.setText(codes_info.get("no_guia"));
-        fav_codigo.setText(codes_info.get("codigo_rastreo"));
-        fav_origen.setText(codes_info.get("origen" ));
-        fav_destino.setText(codes_info.get("destino"));
-        fav_cp_destino.setText(codes_info.get("cp_destino"));
-        fav_estatus.setText(codes_info.get("estatus"));
+        if(!(codes_info.get("referencia") == null)){
+            fav_reference.setText(" " + codes_info.get("referencia"));
+        }
+
+        fav_no_guia.setText(" "+codes_info.get("no_guia"));
+        fav_codigo.setText(" "+codes_info.get("codigo_rastreo"));
+        fav_origen.setText(" "+codes_info.get("origen" ));
+        fav_destino.setText(" "+codes_info.get("destino"));
+        fav_cp_destino.setText(" "+codes_info.get("cp_destino"));
+        fav_estatus.setText(" "+codes_info.get("estatus"));
         fav_fecha.setText(codes_info.get("fechaHoraEntrega"));
-        fav_recibio.setText(codes_info.get("recibio"));
+        fav_recibio.setText(" "+codes_info.get("recibio"));
 
         return view;
     }
@@ -132,7 +136,19 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         switch (item.getItemId()) {
 
             case R.id.add_history:
-                    Toast.makeText(context,"History", Toast.LENGTH_SHORT).show();
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("codes_info", (java.io.Serializable) codes_info);
+                    bundle.putString("origin","detalle_favorito");
+
+                    fragmentManager = getActivity().getSupportFragmentManager();
+                    fragmentTransaction = fragmentManager.beginTransaction();
+                    fragment = new FragmentHistory();
+                    fragment.addFragmentToStack(getActivity());
+                    fragment.setArguments(bundle);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.container, fragment, TAG);
+                    fragmentTransaction.commit();
 
                 return true;
 
@@ -171,11 +187,6 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
-                break;
-
-            case R.id.btn_fav_closed:
-                Log.d("Closed", "" + getId());
-               // getDialog().dismiss();
                 break;
         }
 

@@ -112,17 +112,20 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         // future upgrade cases. Only use "break;" when you want to drop and
         // recreate the entire database.
 
-        db.execSQL("DROP TABLE IF EXISTS trackdata");
-        db.execSQL("DROP TABLE IF EXISTS history");
-        db.execSQL("DROP TABLE IF EXISTS favorites");
-        db.execSQL("DROP TABLE IF EXISTS estados");
-        db.execSQL("DROP TABLE IF EXISTS offices");
-        db.execSQL("DROP TABLE IF EXISTS codigos");
-        db.execSQL("DROP TABLE IF EXISTS paises");
-        db.execSQL("DROP TABLE IF EXISTS rastreo_tmp");
-        db.execSQL("DROP TABLE IF EXISTS recurrente");
-        db.execSQL("DROP TABLE IF EXISTS compra");
-        onCreate(db);
+        if (oldVersion != newVersion) {
+
+            db.execSQL("DROP TABLE IF EXISTS trackdata");
+            db.execSQL("DROP TABLE IF EXISTS history");
+            db.execSQL("DROP TABLE IF EXISTS favorites");
+            db.execSQL("DROP TABLE IF EXISTS estados");
+            db.execSQL("DROP TABLE IF EXISTS offices");
+            db.execSQL("DROP TABLE IF EXISTS codigos");
+            db.execSQL("DROP TABLE IF EXISTS paises");
+            db.execSQL("DROP TABLE IF EXISTS rastreo_tmp");
+            db.execSQL("DROP TABLE IF EXISTS recurrente");
+            db.execSQL("DROP TABLE IF EXISTS compra");
+            onCreate(db);
+        }
 
     }
 

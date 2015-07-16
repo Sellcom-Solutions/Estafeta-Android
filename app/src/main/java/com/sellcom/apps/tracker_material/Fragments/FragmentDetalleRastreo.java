@@ -96,6 +96,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         codes_info =  (ArrayList<Map<String, String>>) getArguments().getSerializable("code_array");
         Log.d(TAG, "size: "+codes_info.size());
 
+
         data = Favorites.getFavoriteByWayBill(context,code);
             //Log.d(TAG,"data: "+data.size());
 
@@ -195,6 +196,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("codes_info",codes_info);
+                bundle.putString("origin","detalle_rastreo");
 
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
@@ -210,13 +212,21 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 Log.d(TAG, "btn favorito: ");
                 if (btn_favorito.isChecked()) {
                     try {
-                        long idHistory = History.insertMap(context, codes_info.get(0));
-                        Log.d(TAG, "Despues de insertar en History");
-                        codes_info.get(0).put("history_id", String.valueOf(idHistory));
-                        Favorites.insert(context, codes_info.get(0));
-                        Log.d(TAG, "Despues de insertar en Favorites");
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
+
+                        long idFavorite = Favorites.insertMap(context, codes_info.get(0));
+
+                        for(int i = 1; i<codes_info.size(); i++){
+
+                            codes_info.get(i).put("favorite_id", String.valueOf(idFavorite));
+                            History.insertMap(context, codes_info.get(i));
+
+
+                        }
+
                         btn_favorito.setEnabled(false);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
+
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

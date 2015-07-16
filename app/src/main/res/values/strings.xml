@@ -26,6 +26,7 @@
         <item>Historial de operaciones</item>
         <item>Código Postal</item>
         <item>Aviso de Privacidad</item>
+        <item>Favoritos</item>
     </string-array>
 
     <!-- Globals -->
@@ -213,8 +214,8 @@
         "evnt_desc_spa" TEXT(200), "evnt_desc_eng" TEXT(200), "evnt_place_acronym" TEXT(200), "evnt_place_name"  TEXT(200), "except_code"  TEXT(3),
         "except_descspa" TEXT(200), "except_desceng" TEXT(200), "except_details"  TEXT(200), "id_trackdata"  INTEGER NOT NULL)</string>-->
 
-    <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "add_date"  TEXT(20),
-                              "code_number" TEXT(50), "mov_coms" TEXT(200), "mov_date" TEXT(200), "mov_place" TEXT(200))</string>
+    <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "add_date"  TEXT(30),
+                              "code_number" TEXT(50), "favorite"  TEXT(24), "H_eventDescriptionSPA" TEXT(200), "H_eventDateTime" TEXT(200), "H_eventPlaceName" TEXT(200))</string>
 
     <!-- <string name="db_ctlfavoritos">CREATE TABLE "ctl_favoritos" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"guia"  TEXT(24),"rastreo"
         TEXT(24),"alias"  TEXT(100),"fecha_registro"  TEXT(20) NOT NULL, "notifica" integer not null default(0))</string>-->
@@ -315,8 +316,8 @@
     <string name="fav_origen">Origen: </string>
     <string name="fav_destino">Destino:</string>
     <string name="fav_cp_destino">C.R. Destino:</string>
-    <string name="fav_estatus">Estatus del Srvicio:</string>
-    <string name="fav_fecha">Fecha y hora de entrega</string>
+    <string name="fav_estatus">Estatus del Servicio:</string>
+    <string name="fav_fecha">Fecha y hora de entrega:</string>
     <string name="fav_recibio">Recibio: </string>
     <string name="fav_btn_call">Llamar </string>
     <string name="fav_btn_share">Compartir </string>

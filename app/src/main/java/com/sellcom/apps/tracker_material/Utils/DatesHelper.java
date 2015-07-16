@@ -25,11 +25,12 @@ public class DatesHelper {
             date.add(Calendar.DAY_OF_MONTH, 1);
             daysBetween++;
         }
+        Log.d("TAG",daysBetween+ " days of difference");
         return daysBetween;
     }
 
     public static String getStringDate (Date date){
-        return new SimpleDateFormat("yyyy-MM-dd HH:mm").format(date);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(date);
     }
 
     public static String getStringDateDays (Date date){

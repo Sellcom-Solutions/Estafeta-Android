@@ -5,10 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.sellcom.apps.tracker_material.Utils.DatesHelper;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,11 +41,13 @@ public class Favorites {
     public static final String NOTIFICA = "notifica";
 
     public static long insert(Context context, Map<String, String> values){
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-        String date = df.format(Calendar.getInstance().getTime());
+
+        String date = DatesHelper.getStringDate(new Date());
+
+        Log.d(TABLE_NAME, "fecha insertada en favorito: " + date);
 
         ContentValues cv = new ContentValues();
-        cv.put(FECHA_REGISTRO,date);
+        cv.put(FECHA_REGISTRO,""+date);
         cv.put(ALIAS, " ");
         cv.put(RASTREO, values.get("shortWayBillId"));
         cv.put(CP_DESTINO, values.get("DD_zipCode"));
@@ -50,7 +55,7 @@ public class Favorites {
         cv.put(ESTATUS, values.get("statusSPA"));
         cv.put(FECHA_RECOLECCION, values.get("PK_pickupDateTime"));
         cv.put(FECHA_HORA_ENTREGA, values.get("DD_deliveryDateTime"));
-        cv.put(HISTORIA, values.get("history_id"));
+        cv.put(HISTORIA, " ");
         cv.put(ORIGEN , values.get("PK_originName"));
         cv.put(GUIA, values.get("wayBill"));
         cv.put(RECIBIO, values.get("DD_receiverName"));
@@ -80,7 +85,7 @@ public class Favorites {
         cv.put(SIGNATURE, values.get("signature"));
         cv.put(NOTIFICA,"false");
 
-        long response = DataBaseAdapter.getDB(context).update(TABLE_NAME,cv,GUIA +"=?",new String[] {values.get("wayBill")});
+        long response = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, GUIA + "=?", new String[]{values.get("wayBill")});
         Log.d(TABLE_NAME,"update: "+response);
         return response;
     }
@@ -102,7 +107,7 @@ public class Favorites {
 
     public static ArrayList<Map<String,String>> getAll(Context context){
 
-        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null && cursor.getCount() > 0) {
             ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
 
@@ -113,6 +118,7 @@ public class Favorites {
                 map.put(ALIAS,cursor.getString(cursor.getColumnIndexOrThrow(ALIAS)));
                 map.put(ID_CTL_FAVORITOS,cursor.getString(cursor.getColumnIndexOrThrow(ID_CTL_FAVORITOS)));
                 map.put(RASTREO,cursor.getString(cursor.getColumnIndexOrThrow(RASTREO)));
+                map.put(FECHA_REGISTRO,cursor.getString(cursor.getColumnIndexOrThrow(FECHA_REGISTRO)));
                 map.put(CP_DESTINO,cursor.getString(cursor.getColumnIndexOrThrow(CP_DESTINO)));
                 map.put(DESTINO,cursor.getString(cursor.getColumnIndexOrThrow(DESTINO)));
                 map.put(ESTATUS,cursor.getString(cursor.getColumnIndexOrThrow(ESTATUS)));
@@ -183,6 +189,12 @@ public class Favorites {
             cursor.close();
             return null;
         }
+    }
+
+    public static int delete(Context context, String id) {
+        int resp = DataBaseAdapter.getDB(context).delete(TABLE_NAME, ID_CTL_FAVORITOS + "=?" , new String[]{ id });
+        //Log.d(TABLE_NAME,"delete resp:"+resp);
+        return resp;
     }
 
 }

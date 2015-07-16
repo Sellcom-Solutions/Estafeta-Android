@@ -1,6 +1,7 @@
 package com.sellcom.apps.tracker_material.Fragments;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import database.model.History;
+
 /**
  * Created by rebecalopezmartinez on 19/06/15.
  */
@@ -28,11 +31,17 @@ public class FragmentHistory extends TrackerFragment {
     ListView history_lst;
     //ArrayList<Map<String, String>> history_data = new ArrayList<>();
     ArrayList<Map<String, String>> codes_info;
+    Map<String,String> map;
+    String origin = "";
 
-    public FragmentHistory() {
-        // Required empty public constructor
+    Context context;
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = getActivity();
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +50,19 @@ public class FragmentHistory extends TrackerFragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         history_lst = (ListView) view.findViewById(R.id.history_lst);
 
-        codes_info = (ArrayList<Map<String, String>>) getArguments().getSerializable("codes_info");
+        origin = getArguments().getString("origin");
+
+        if(origin.equalsIgnoreCase("detalle_rastreo")){
+            codes_info = (ArrayList<Map<String, String>>) getArguments().getSerializable("codes_info");
+        }else if(origin.equalsIgnoreCase("detalle_favorito")){
+            map = (Map<String, String>) getArguments().getSerializable("codes_info");
+
+            codes_info = History.getHistotyByFavoriteId(context,map.get("id_favoritos"));
+            Log.d(TAG,"size code_info: "+codes_info.size());
+            codes_info.add(0, new HashMap<String, String>());
+
+        }
+
 
 
 
