@@ -52,12 +52,13 @@ public class FragmentComprobanteCompra extends DialogFragment implements View.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Dialog_MinWidth);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_comprobante_compra, container, false);
-        setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Dialog);
+
         initvariables();
         Bundle b = getArguments();
         String noReferencia = b.getString(Buys.REFERENCIA);

@@ -29,12 +29,16 @@ import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DatesHelper;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import com.sellcom.apps.tracker_material.Utils.Utilities;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,9 +68,9 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
     Context context;
 
-    public FragmentRastreo() {
-        // Required empty public constructor
-    }
+    private ArrayList<Map<String,String>> listFavorites;
+
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -75,7 +79,9 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
        // codes_array = Rastreo_tmp.getAllInMaps(context);
         lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
 
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,6 +89,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_rastreo, container, false);
         context = getActivity();
+        TrackerFragment.section_index = 0;
 
         info        = (Button)view.findViewById(R.id.btn_help);
         rastreo     = (Button)view.findViewById(R.id.btn_rastrear);
@@ -154,21 +161,16 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
                 ArrayList<Map<String,String>> listFavorites= Favorites.getAll(context);
                 if(listFavorites==null){
-                    Toast.makeText(context,"No existen favoritos.", Toast.LENGTH_SHORT).show();
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
 
                 }else {
 
                     //Log.d(TAG,"item selected");
                     // Bundle bundle= new Bundle();
                     // bundle.putSerializable("codes_info", codes_info);
-                    fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragment = new FragmentFavorites();
-                    fragment.addFragmentToStack(getActivity());
-                    //   fragment.setArguments(bundle);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.container, fragment, TAG);
-                    fragmentTransaction.commit();
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Favoritos...",0);
+
+                    new CheckDateFavorite().execute();
                 }
                 return true;
 
@@ -465,6 +467,83 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 Toast.makeText(context,context.getResources().getString(R.string.code_incorrect),Toast.LENGTH_SHORT).show();
         }
     }
+
+    public class CheckDateFavorite extends AsyncTask<Void, Void, Void>{
+
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+
+            listFavorites = Favorites.getAll(context);
+            Log.d(TAG,"Tamaño ListFavorites: "+listFavorites.size());
+
+
+            Log.d(TAG, "Código: "+listFavorites.get(0).get("codigo_rastreo"));
+
+
+
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            String dateInString = "";
+            long days = 0;
+
+            for(int i = 0; i<listFavorites.size(); i++){
+
+                dateInString = listFavorites.get(i).get("add_date");
+                Log.d(TAG,""+dateInString);
+
+                try {
+
+                    Date date = formatter.parse(dateInString);
+                    days = DatesHelper.daysFromLastUpdate(date);
+
+                    if(days > 30){
+                        Favorites.delete(context,listFavorites.get(i).get("id_favoritos"));
+                        Log.d(TAG,"+ de 30 días, favorito eliminado!! Código: "+listFavorites.get(i).get("codigo_rastreo"));
+                    }
+
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            listFavorites = Favorites.getAll(context);
+
+            if(listFavorites == null){
+                DialogManager.sharedInstance().dismissDialog();
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
+            }else {
+
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragment = new FragmentFavorites();
+                fragment.addFragmentToStack(getActivity());
+                //   fragment.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, fragment, TAG);
+                fragmentTransaction.commit();
+            }
+
+        }
+    }
+
+
 
 }
 

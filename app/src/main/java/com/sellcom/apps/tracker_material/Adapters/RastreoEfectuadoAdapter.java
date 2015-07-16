@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -166,21 +167,21 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                     }
                     else {
                         try {
-                            long idHistory = History.insertMap(context, codigos.get(holder.position).get(0));
-                            Log.d(TAG, "Despues de insertar en History");
-                            codigos.get(holder.position).get(0).put("history_id", String.valueOf(idHistory));
+                            holder.btn_favoritos.setEnabled(false);
 
-                            Favorites.insertMap(context, codigos.get(holder.position).get(0));
-                            Log.d(TAG,"Despues de insertar en fav");
+                            long idFavorite = Favorites.insertMap(context, codigos.get(holder.position).get(0));
 
-                            String id= Favorites.getIdByWayBill(context, codigos.get(holder.position).get(0).get("wayBill"));
-                            Log.d(TAG,"Recuperar id favorites"+id);
+                            for(int i = 1; i<codigos.get(holder.position).size(); i++){
 
-                            ArrayList<Map<String, String>> auxFav= Favorites.getAll(context);
-                            Log.d(TAG,"Recuperar tamaño fav"+auxFav.size());
+                                codigos.get(holder.position).get(i).put("favorite_id", String.valueOf(idFavorite));
+                                History.insertMap(context, codigos.get(holder.position).get(i));
+                                Log.d(TAG,"INSERT IN HISTORY");
+
+
+                            }
+
 
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
-                            holder.btn_favoritos.setEnabled(false);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -243,6 +244,9 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         }
         return imagen;
     }
+
+
+
 
 
 }
