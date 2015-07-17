@@ -64,6 +64,7 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
         context = getActivity();
         fragmentManager = getChildFragmentManager();
         setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Dialog_MinWidth);
+        setCancelable(false);
 
     }
 

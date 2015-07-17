@@ -98,17 +98,20 @@ public class DialogManager {
                 }else if(type == TYPE_DIALOG.SUCCESS){
                     pgb.setIndeterminateDrawable(activity.getResources().getDrawable(R.drawable.success_drawable_dialog));
                 }
-               dialogLoadig.show();
 
-                if(time != 0) {
+               if(!isShowingDialog()) {
+                   dialogLoadig.show();
+                   if (time != 0) {
 
-                    Handler handler = new Handler();//Para dar un tiempo al dialog
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            dismissDialog();
-                        }
-                    }, time);
-                }
+                       Handler handler = new Handler();//Para dar un tiempo al dialog
+                       handler.postDelayed(new Runnable() {
+                           public void run() {
+                               dismissDialog();
+                           }
+                       }, time);
+                   }
+
+               }
 
 
        }

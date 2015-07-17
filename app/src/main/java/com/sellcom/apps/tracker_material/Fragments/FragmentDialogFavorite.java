@@ -93,15 +93,30 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         if(!(codes_info.get("referencia") == null)){
             fav_reference.setText(" " + codes_info.get("referencia"));
         }
-
-        fav_no_guia.setText(" "+codes_info.get("no_guia"));
-        fav_codigo.setText(" "+codes_info.get("codigo_rastreo"));
-        fav_origen.setText(" "+codes_info.get("origen" ));
-        fav_destino.setText(" "+codes_info.get("destino"));
-        fav_cp_destino.setText(" "+codes_info.get("cp_destino"));
-        fav_estatus.setText(" "+codes_info.get("estatus"));
-        fav_fecha.setText(codes_info.get("fechaHoraEntrega"));
-        fav_recibio.setText(" "+codes_info.get("recibio"));
+        if(!(codes_info.get("no_guia") == null)) {
+            fav_no_guia.setText(" " + codes_info.get("no_guia"));
+        }
+        if(!(codes_info.get("codigo_rastreo") == null)) {
+            fav_codigo.setText(" " + codes_info.get("codigo_rastreo"));
+        }
+        if(!(codes_info.get("origen") == null)) {
+            fav_origen.setText(" " + codes_info.get("origen"));
+        }
+        if(!(codes_info.get("destino") == null)) {
+            fav_destino.setText(" " + codes_info.get("destino"));
+        }
+        if(!(codes_info.get("cp_destino") == null)) {
+            fav_cp_destino.setText(" " + codes_info.get("cp_destino"));
+        }
+        if(!(codes_info.get("estatus") == null)) {
+            fav_estatus.setText(" " + codes_info.get("estatus"));
+        }
+        if(!(codes_info.get("fechaHoraEntrega") == null)) {
+            fav_fecha.setText(codes_info.get("fechaHoraEntrega"));
+        }
+        if(!(codes_info.get("recibio") == null)) {
+            fav_recibio.setText(" " + codes_info.get("recibio"));
+        }
 
         return view;
     }

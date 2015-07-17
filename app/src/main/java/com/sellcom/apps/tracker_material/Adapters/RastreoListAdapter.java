@@ -23,6 +23,8 @@ public class RastreoListAdapter extends BaseAdapter {
 
     Context context;
     private ArrayList<Map<String,String>> codigos;
+    setNumCodes setNumCodes;
+
 
     public  RastreoListAdapter (Context context, ArrayList<Map<String,String>> codigos){
         this.context        = context;
@@ -65,13 +67,20 @@ public class RastreoListAdapter extends BaseAdapter {
         }
 
         try {
+
+
             Map<String, String> cod = new HashMap<>();
             cod = codigos.get(position);
             final String codStr = cod.get("codigo");
             if(codStr.length() == 10)
                 holder.tipo_codigo.setText(context.getString(R.string.cod_rastreo) );
-            else
+            else {
                 holder.tipo_codigo.setText(context.getString(R.string.no_guia));
+
+            }
+
+            int size = 10-codigos.size();
+            setNumCodes.setCodes(size);
 
             holder.no_codigo.setText(codStr);
 
@@ -81,4 +90,13 @@ public class RastreoListAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    public interface setNumCodes{
+        public void setCodes(int restantes);
+    }
+
+    public void setCodesNumbers(setNumCodes listener) {
+        setNumCodes = listener;
+    }
+
 }

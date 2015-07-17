@@ -116,5 +116,11 @@ public class History {
         return null;
     }
 
+    public static int delete(Context context, String favorite) {
+        int resp = DataBaseAdapter.getDB(context).delete(TABLE_NAME, FAVORITE + "=?", new String[]{favorite});
+        //Log.d(TABLE_NAME,"delete resp:"+resp);
+        return resp;
+    }
+
 
 }

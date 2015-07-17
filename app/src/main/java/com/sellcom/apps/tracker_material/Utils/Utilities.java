@@ -150,7 +150,7 @@ public class Utilities {
         return true;
     }
 
-    public static boolean validateCode(String preCode,Context context){
+    public static boolean validateCode(String preCode){
         if (preCode.length() == 10)
             return validatedigits(preCode);
 
@@ -173,7 +173,6 @@ public class Utilities {
         if (code.matches(pattern))
             return true;
         return false;
-
     }
 
     public static double getSaveString(String cadena){

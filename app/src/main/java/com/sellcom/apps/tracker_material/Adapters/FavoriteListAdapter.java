@@ -10,9 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.CheckBox;
 
 import com.sellcom.apps.tracker_material.Fragments.FragmentDialogEditFavorite;
 import com.sellcom.apps.tracker_material.Fragments.FragmentDialogFavorite;
@@ -41,13 +43,16 @@ public class FavoriteListAdapter extends BaseAdapter{
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private TrackerFragment fragment;
+    private String type = "";
+    delete  delete;
 
 
-    public FavoriteListAdapter(Activity activity,Context context, ArrayList<Map<String,String>> codigos, FragmentManager fragmentManager) {
+    public FavoriteListAdapter(Activity activity,Context context, ArrayList<Map<String,String>> codigos, FragmentManager fragmentManager,String type) {
         this.codigos        =codigos;
         this.activity       =activity;
         this.context        = context;
         this.fragmentManager=fragmentManager;
+        this.type           = type;
     }
     class CodigosViewHolder{
 
@@ -57,6 +62,7 @@ public class FavoriteListAdapter extends BaseAdapter{
         TextView    codigo;
         TextView    estatus;
         ImageButton btn_editar;
+        CheckBox check_delete;
 
         LinearLayout    linear_favorite;
 
@@ -90,6 +96,7 @@ public class FavoriteListAdapter extends BaseAdapter{
                 holder.estatus = (TextView) convertView.findViewById(R.id.favorite_ServiceStatus);
                 holder.btn_editar = (ImageButton) convertView.findViewById(R.id.btn_editar);
                 holder.linear_favorite=(LinearLayout)convertView.findViewById((R.id.linear_favorite));
+                holder.check_delete = (CheckBox)convertView.findViewById(R.id.check_delete);
 
                 holder.position = position;
                 convertView.setTag(holder);
@@ -120,6 +127,15 @@ public class FavoriteListAdapter extends BaseAdapter{
         Log.d("estatus FA Adapter", "" + estatusStr);
         holder.estatus.setText(estatusStr);
 
+        if(type.equalsIgnoreCase("favorite")){
+            holder.linear_favorite.setEnabled(true);
+            holder.check_delete.setVisibility(View.GONE);
+            holder.btn_editar.setVisibility(View.VISIBLE);
+        }else if(type.equalsIgnoreCase("delete")){
+            holder.linear_favorite.setEnabled(false);
+            holder.btn_editar.setVisibility(View.GONE);
+            holder.check_delete.setVisibility(View.VISIBLE);
+        }
 
         holder.btn_editar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,6 +151,18 @@ public class FavoriteListAdapter extends BaseAdapter{
                 fdfe.setArguments(bundle);
                 fdfe.show(fragmentManager, fdfe.TAG);
 
+            }
+        });
+
+
+        holder.check_delete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    delete.deleteFavoriteById(codigos.get(holder.position));
+                }else{
+                    delete.cancelDeleteById(codigos.get(holder.position));
+                }
             }
         });
 
@@ -160,5 +188,19 @@ public class FavoriteListAdapter extends BaseAdapter{
             }
         });
         return convertView;
+
+
+
+
     }
+
+    public interface delete{
+        public void deleteFavoriteById(Map<String,String> favoriteDelete);
+        public void cancelDeleteById(Map<String,String> favoriteDelete);
+    }
+
+    public void setDelete(delete listener) {
+        delete = listener;
+    }
+
 }

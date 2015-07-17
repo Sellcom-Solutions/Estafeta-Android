@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,11 +21,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.TextView;
 import android.content.Context;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
+import com.sellcom.apps.tracker_material.Adapters.FavoriteListAdapter;
 import com.sellcom.apps.tracker_material.Adapters.RastreoListAdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
@@ -49,7 +53,7 @@ import database.model.History;
 /**
  * Created by rebecalopezmartinez on 21/05/15.
  */
-public class FragmentRastreo extends TrackerFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class FragmentRastreo extends TrackerFragment implements View.OnClickListener, AdapterView.OnItemClickListener,RastreoListAdapter.setNumCodes {
 
     String TAG= "FRAG_RASTREO";
 
@@ -62,6 +66,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     Button                          escanear;
     Button                     agregar;
     EditText                        codigo;
+    TextView    txv_num_sends;
+
+    MenuItem favorite;
+
 
 
     ListView lst_rastreo;
@@ -80,6 +88,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         context = getActivity();
        // codes_array = Rastreo_tmp.getAllInMaps(context);
         lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
+        lstAdapter.setCodesNumbers(this);
 
 
     }
@@ -91,6 +100,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_rastreo, container, false);
         context = getActivity();
+
+
         TrackerFragment.section_index = 0;
 
         info        = (Button)view.findViewById(R.id.btn_help);
@@ -99,6 +110,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         agregar     = (Button) view.findViewById(R.id.btn_agregar);
         lst_rastreo = (ListView)view.findViewById(R.id.liv_rastreo);
         codigo      = (EditText)view.findViewById(R.id.edt_codigo);
+        txv_num_sends = (TextView)view.findViewById(R.id.txv_num_sends);
 
         Utilities.hideKeyboard(context,codigo);
         //codes_array = Rastreo_tmp.getAllInMaps(context);
@@ -112,6 +124,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 escanear.setEnabled(false);
             }
             lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
+            lstAdapter.setCodesNumbers(this);
             lst_rastreo.setAdapter(lstAdapter);
             lstAdapter.notifyDataSetChanged();
         }
@@ -155,6 +168,13 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     }
 
     @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+
+        favorite = menu.findItem(R.id.add_favorite);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "Selected:  " + item.getItemId());
         switch (item.getItemId()) {
@@ -166,7 +186,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
 
                 }else {
-
+                    favorite.setEnabled(false);
                     //Log.d(TAG,"item selected");
                     // Bundle bundle= new Bundle();
                     // bundle.putSerializable("codes_info", codes_info);
@@ -185,9 +205,12 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
         switch (v.getId()){
             case R.id.btn_help:
+
                 fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentDialogHelp fdh = new FragmentDialogHelp();
                 fdh.show(fragmentManager,"FRAG_DIALOG_HELP");
+
+
                 break;
 
             //15000
@@ -219,6 +242,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     }
 
     public void addCode(){
+
+
         String codigoStr = codigo.getText().toString();
         //codes_array = Rastreo_tmp.getAllInMaps(context);
 
@@ -238,12 +263,13 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             Map<String,String> item = new HashMap<>();
             item.put("codigo",codigoStr);
-            item.put("favorito","false");
+            item.put("favorito", "false");
             //Rastreo_tmp.insert(context, item);
             codes_array.add(item);
             //codes_array = Rastreo_tmp.getAllInMaps(context);
 
             lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
+            lstAdapter.setCodesNumbers(this);
             lst_rastreo.setAdapter(lstAdapter);
             //lst_rastreo.setOnItemClickListener(this);
 
@@ -266,6 +292,13 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void setCodes(int restantes) {
+
+        txv_num_sends.setText("Puedes ingresar hasta "+ restantes + " envíos (uno por línea)");
 
     }
 
@@ -337,7 +370,9 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     Log.d(TAG, "contador:" + j);
                     if (j == codes_array.size()) {
                         DialogManager.sharedInstance().dismissDialog();
+                        favorite.setEnabled(true);
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
+
                     }
                 } else {
                     if (stringResponse.equals("0")) {
@@ -375,11 +410,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     j++;
                     Log.d(TAG, "contador:" + j);
                     if (j == codes_array.size()) {
-                        ArrayList<ArrayList<Map<String, String>>> codes_ver;
-                        codes_ver = verifyFavorites(aux);
+                        /*ArrayList<ArrayList<Map<String, String>>> codes_ver;
+                        codes_ver = verifyFavorites(aux);*/
 
                         Bundle bundle = new Bundle();
-                        bundle.putSerializable("codes_info", codes_ver);
+                        bundle.putSerializable("codes_info", aux);
 
                         fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentTransaction = fragmentManager.beginTransaction();
@@ -395,48 +430,6 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
-        }
-        public ArrayList<ArrayList<Map<String, String>>> verifyFavorites(ArrayList<ArrayList<Map<String, String>>> values){
-            Log.d(TAG, "verifyFavorites");
-            ArrayList<ArrayList<Map<String, String>>> resp = new ArrayList<ArrayList<Map<String, String>>>();
-            for (int j = 0; j<values.size(); j++) {
-                Log.d(TAG, "verifyFavorites111111");
-                //for (int i = 0; i < values.get(j).size(); i++) {
-                ArrayList<Map<String, String>> respList = new ArrayList<>();
-                    Map<String, String> item = new HashMap<>();
-                    item = values.get(j).get(0);
-
-                    if (item.get("wayBill") != null) {
-                        String auxFavId = Favorites.getIdByWayBill(context, item.get("wayBill"));
-                        //Log.d(TAG, "DB aux = "+auxFavId);
-                        if (auxFavId != null) {
-                            item.put("favorites", "true");
-                            //Log.d(TAG, "item true");
-                        } else {
-                            item.put("favorites", "false");
-                            //Log.d(TAG, "item false");
-                        }
-                    } else {
-                        item.put("favorites", "false");
-                        //Log.d(TAG, "item false");
-                    }
-                respList.add(item);
-
-                for (int k = 1; k < values.get(j).size(); k++) {
-                    item = new HashMap<>();
-                    item = values.get(j).get(k);
-
-                    respList.add(item);
-                }
-                resp.add(respList);
-                //}
-            }
-            return resp;
-        }
-
-        protected void onPostExecute(String result) {
 
 
         }
@@ -462,7 +455,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             String preCod = scanResult.getContents().trim();
             Log.d("Longitud",String.valueOf(preCod.length()));
             Log.d("Codigo",preCod);
-            if ( Utilities.validateCode(preCod,context) )
+            if ( Utilities.validateCode(preCod) )
                 codigo.setText(scanResult.getContents());
             else
                 Toast.makeText(context,context.getResources().getString(R.string.code_incorrect),Toast.LENGTH_SHORT).show();
