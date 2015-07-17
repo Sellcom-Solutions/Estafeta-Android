@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="100"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="25"
+        android:orientation="vertical"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/txt_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="22/06/2015"
+                android:gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@color/estafeta_red"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+
+            android:paddingBottom="15dp"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp">
+
+            <ImageView
+                android:id="@+id/img_barcode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/estafeta_red"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="75"
+        android:orientation="vertical"
+        android:paddingRight="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sizeSmallText"
+                android:text="No. Guía: "
+                android:textColor="@color/estafeta_text"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txt_guia"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sizeSmallText"
+                android:textColor="@color/estafeta_text"
+                android:text="7463829504302853856472"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sizeSmallText"
+                android:text="C.P. Origen: "
+                android:textColor="@color/estafeta_text"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txt_origen"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sizeSmallText"
+                android:textColor="@color/estafeta_text"
+                android:text="55790, Huixquilucan, Estado de México"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sizeSmallText"
+                android:text="C.P. Destino: "
+                android:textColor="@color/estafeta_text"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/txt_destino"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/sizeSmallText"
+                android:textColor="@color/estafeta_text"
+                android:text="55790. San Jeronimo Baja California Sur"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>
