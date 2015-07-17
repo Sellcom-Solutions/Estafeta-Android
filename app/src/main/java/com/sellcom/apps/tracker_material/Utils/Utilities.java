@@ -181,7 +181,8 @@ public class Utilities {
 
         try{
 
-            Double d = Double.parseDouble(cadena);
+            Double d = Double.parseDouble(""+cadena);
+            saveString = d;
 
         }catch (Exception e){
             return saveString;
