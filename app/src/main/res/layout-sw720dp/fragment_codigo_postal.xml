@@ -36,7 +36,7 @@
                         android:src="@drawable/head_cpostal"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:paddingBottom="100dp"
+                        android:paddingBottom="120dp"
                         android:layout_gravity="top|center_horizontal"/>
 
                     <FrameLayout

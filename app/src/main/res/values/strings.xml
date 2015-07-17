@@ -85,7 +85,7 @@
     <string name="delivery_confirmation">Confirmación de Entrega</string>
 
     <!-- Oficinas -->
-    <string name="view_ar">Ver AR</string>
+    <string name="view_ar">Ver a mi alrededor</string>
     <string name="loading_AR_elements">Cargando Componentes</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>

@@ -1,17 +1,24 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="@color/estafeta_light_gray"
+    android:background="@color/white"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:weightSum="100"
+        android:paddingTop="20dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
@@ -25,9 +32,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fav_favorite"
                 android:textSize="@dimen/sizeLargeText"
-                android:layout_gravity="center_horizontal"
-                android:paddingTop="20dp"
-                android:textColor="@color/estafeta_text"/>
+                android:layout_gravity="left"
+                android:textStyle="bold"
+                android:textColor="@color/estafeta_text"
+                android:layout_marginBottom="20dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -36,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -49,7 +57,7 @@
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
 
                 </LinearLayout>
@@ -57,40 +65,40 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/estafeta_text"
                         android:text="@string/fav_no_guia"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_no_guia"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/estafeta_text"
                         android:text="@string/fav_cod_rastreo"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_cod_rastreo"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
 
                 </LinearLayout>
@@ -98,20 +106,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/estafeta_text"
                         android:text="@string/fav_origen"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_origen"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
 
                 </LinearLayout>
@@ -120,12 +129,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="15dp">
+                android:layout_marginTop="30dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/estafeta_text">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -138,14 +148,14 @@
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -158,27 +168,28 @@
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/estafeta_text"
                         android:text="@string/fav_estatus"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_estatus"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
                 </LinearLayout>
             </LinearLayout>
@@ -186,104 +197,110 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingTop="15dp">
+                android:layout_marginTop="20dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="30dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/fav_fecha"
-                        android:textColor="@color/estafeta_text"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_fecha"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:paddingTop="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/estafeta_text"
                         android:text="@string/fav_recibio"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_recibio"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeMediumText"
+                        android:textSize            ="@dimen/sizeSmallText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:background="@drawable/border_gray" />
+                        android:layout_height="120dp"
+                        android:background="@drawable/border_gray"
+                        android:textColor="@color/estafeta_text"/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:weightSum="90">
-                    <Button
-                        android:id="@+id/btn_fav_call"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fav_btn_call"
-                        android:textSize="@dimen/sizeMediumText"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical"
-                        android:background="@color/zxing_transparent"
-                        android:textColor="@color/estafeta_red"
-                        android:layout_weight="30"/>
-                    <Button
-                        android:id="@+id/btn_fav_share"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fav_btn_share"
-                        android:textSize="@dimen/sizeMediumText"
-                        android:layout_gravity="right"
-                        android:gravity="center_vertical"
-                        android:background="@color/zxing_transparent"
-                        android:textColor="@color/estafeta_red"
-                        android:layout_weight="30"/>
 
-                    <Button
-                        android:id="@+id/btn_fav_closed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fav_btn_closed"
-                        android:textSize="@dimen/sizeMediumText"
-                        android:layout_gravity="right"
-                        android:gravity="right|center_vertical"
-                        android:background="@color/zxing_transparent"
-                        android:textColor="@color/estafeta_red"
-                        android:layout_weight="30"/>
 
-                </LinearLayout>
 
             </LinearLayout>
 
+
+
         </LinearLayout>
-
-
 
      </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/history_more"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            fab:fab_addButtonColorNormal="@color/estafeta_blue"
+            fab:fab_addButtonColorPressed="@color/estafeta_blue"
+            fab:fab_addButtonSize="normal"
+            fab:fab_addButtonPlusIconColor="@color/white"
+            fab:fab_expandDirection="up"
+            android:layout_gravity="bottom|right"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_fav_share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white"
+                fab:fab_icon="@drawable/ic_share"
+                fab:fab_title="Share"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_fav_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_colorPressed="@color/white"
+                fab:fab_icon="@drawable/ic_call"
+                fab:fab_title="Call"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+    </FrameLayout>
+
+</FrameLayout>

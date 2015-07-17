@@ -54,7 +54,18 @@
                 android:focusableInTouchMode="false"
                 android:orientation="vertical">
 
+                <ScrollView
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/scrollView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="50"
+                    android:fillViewport="true">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
 
 
@@ -63,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/sizeLargeText"
                     android:textColor="@color/estafeta_text"
-                    android:text="Ver"/>
+                    android:text="@string/ver"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -74,10 +85,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/sizeMediumText"
+                    android:textSize="25sp"
                     android:textColor="@color/estafeta_soft_gray"
                     android:layout_marginBottom="5dp"
-                    android:text="Estafeta"/>
+                    android:text="@string/seccion_estafeta"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -102,7 +113,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="35"
+                                android:layout_weight="40"
                                 android:orientation="horizontal">
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -130,10 +141,10 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="65"
-                                android:text="Sucursal"
+                                android:layout_weight="60"
+                                android:text="@string/sucursal"
                                 android:gravity="center"
-                                android:textSize="@dimen/sizeMediumText"
+                                android:textSize="25sp"
                                 android:textColor="@color/estafeta_text"/>
 
 
@@ -150,7 +161,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="35"
+                                android:layout_weight="40"
                                 android:orientation="horizontal">
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -177,10 +188,10 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="65"
-                                android:text="Concesionaria autorizada"
+                                android:layout_weight="60"
+                                android:text="@string/consesionaria_autorizada"
                                 android:gravity="center"
-                                android:textSize="@dimen/sizeMediumText"
+                                android:textSize="25sp"
                                 android:textColor="@color/estafeta_text"/>
 
 
@@ -196,7 +207,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="35"
+                                android:layout_weight="40"
                                 android:orientation="horizontal">
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -223,10 +234,10 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="0dp"
-                                android:layout_weight="65"
-                                android:text="Centro operativo y sucursal"
+                                android:layout_weight="60"
+                                android:text="@string/centro_operativo"
                                 android:gravity="center"
-                                android:textSize="@dimen/sizeMediumText"
+                                android:textSize="25sp"
                                 android:textColor="@color/estafeta_text"/>
 
 
@@ -251,9 +262,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeMediumText"
+                            android:textSize="25sp"
                             android:textColor="@color/estafeta_soft_gray"
-                            android:text="Afiliados"/>
+                            android:text="@string/afiliados"/>
 
 
 
@@ -261,7 +272,8 @@
 
                 </LinearLayout>
 
-
+            </LinearLayout>
+                </ScrollView>
             </LinearLayout>
 
 
@@ -276,7 +288,7 @@
         android:id="@+id/txv_footer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="@dimen/footerSizeMedium"
+        android:textSize="@dimen/footerSize"
         android:text="@string/footer"
         android:gravity="center|bottom"
         android:visibility="gone"
@@ -334,6 +346,7 @@
             </com.getbase.floatingactionbutton.FloatingActionButton>
 
     </FrameLayout>
+
 
 
 

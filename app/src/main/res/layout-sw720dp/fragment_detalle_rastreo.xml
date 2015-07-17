@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,23 +22,29 @@
                         android:orientation="horizontal"
                         android:weightSum="100">
 
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="10"
+                            android:layout_marginLeft="10dp">
+
                         <CheckBox
                             android:id="@+id/fd_btn_favorito"
                             style="@style/StarCheckBox"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="wrap_content"
+                            android:scaleY=".7"
+                            android:scaleX=".7"
                             android:layout_gravity="top|center_horizontal"
-                            android:gravity="center_horizontal"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_weight="10"
-                            />
+                            android:gravity="center"/>
+                        </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="85"
-                            android:orientation="vertical">
+                            android:layout_weight="90"
+                            android:orientation="vertical"
+                            android:layout_marginRight="30dp">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -47,9 +54,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="10dp">
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -65,15 +71,14 @@
                                         android:layout_height="wrap_content"
                                         android:text=""
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeNormalText" />
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="10dp">
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -89,15 +94,14 @@
                                         android:layout_height="wrap_content"
                                         android:text=""
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeNormalText" />
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="10dp">
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -113,16 +117,16 @@
                                         android:layout_height="wrap_content"
                                         android:text=""
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeNormalText" />
                                 </LinearLayout>
 
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
+                                    android:layout_marginBottom="10dp"
                                     android:orientation="horizontal"
-                                    android:paddingBottom="10dp">
+                                    android:layout_marginTop="0dp">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -138,17 +142,16 @@
                                         android:layout_height="wrap_content"
                                         android:text=" "
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeNormalText" />
                                 </LinearLayout>
 
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginBottom="5dp"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="10dp">
+                                    android:layout_marginTop="50dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -164,15 +167,14 @@
                                         android:layout_height="wrap_content"
                                         android:text=" "
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeNormalText" />
                                 </LinearLayout>
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="10dp">
+                                    android:layout_marginBottom="10dp"
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -188,7 +190,7 @@
                                         android:layout_height="wrap_content"
                                         android:text=""
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeNormalText" />
                                 </LinearLayout>
 
                                 <TextView
@@ -204,7 +206,6 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="5dp"
                                     android:orientation="horizontal"
-                                    android:paddingBottom="10dp"
                                     >
 
                                     <TextView
@@ -214,12 +215,12 @@
                                         android:text=""
                                         android:textColor="@color/estafeta_text"
                                         android:layout_weight="1"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeNormalText" />
 
                                     <ImageView
                                         android:id="@+id/fd_img_status"
-                                        android:layout_width="50dp"
-                                        android:layout_height="50dp"
+                                        android:layout_width="60dp"
+                                        android:layout_height="60dp"
                                         android:layout_gravity="center"
                                         android:scaleType="centerInside"
                                         android:layout_weight="0"
@@ -230,9 +231,8 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:orientation="vertical"
-                                    android:paddingBottom="10dp">
+                                    android:layout_marginTop="50dp"
+                                    android:orientation="vertical">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                                         android:layout_height="wrap_content"
                                         android:text=""
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeMediumText" />
+                                        android:textSize="@dimen/sizeSmallText" />
 
                                 </LinearLayout>
 
@@ -256,8 +256,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
-                                    android:orientation="horizontal"
-                                    android:paddingBottom="10dp">
+                                    android:orientation="horizontal">
 
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -273,14 +272,15 @@
                                         android:layout_height="wrap_content"
                                         android:text=""
                                         android:textColor="@color/estafeta_text"
-                                        android:textSize="@dimen/sizeSmallText" />
+                                        android:textSize="@dimen/sizeNormalText"/>
 
                                 </LinearLayout>
 
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="120dp"
-                                    android:background="@drawable/border_gray" />
+                                    android:background="@drawable/border_gray"
+                                    android:layout_marginTop="20dp"/>
 
 
                             </LinearLayout>
@@ -290,9 +290,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="bottom"
+                        android:layout_marginBottom="10dp"
                         android:layout_gravity="bottom"
-                        android:orientation="vertical"
-                        android:paddingTop="10dp">
+                        android:orientation="vertical">
                         <Button
                             android:id="@+id/btn_historia"
                             android:layout_width="match_parent"
@@ -300,11 +300,11 @@
                             android:layout_gravity="bottom|center"
                             android:background="@color/zxing_transparent"
                             android:text="@string/ver_historia"
-                            android:paddingTop="20dp"
+                            android:paddingTop="50dp"
                             android:gravity="bottom|center_horizontal"
                             android:layout_marginBottom="25dp"
-                            android:textSize="@dimen/sizeLargeText"
-                            android:textColor="@color/estafeta_red" />
+                            android:textColor="@color/estafeta_red"
+                            android:textSize="@dimen/sizeLargeText"/>
 
 
 

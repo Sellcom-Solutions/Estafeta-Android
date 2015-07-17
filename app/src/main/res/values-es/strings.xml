@@ -47,7 +47,7 @@
     <string name="code_incorrect">El código leído es incorrecto</string>
 
     <!-- Oficinas -->
-    <string name="view_ar">Ver AR</string>
+    <string name="view_ar">Ver a mi alrededor</string>
     <string name="loading_AR_elements">Cargando Componentes</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="ubicar_oficinas">Ubicar Oficinas</string>
