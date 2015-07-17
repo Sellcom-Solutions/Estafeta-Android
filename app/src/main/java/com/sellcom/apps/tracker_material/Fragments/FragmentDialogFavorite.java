@@ -118,7 +118,6 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
 
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        Toast.makeText(context,"History", Toast.LENGTH_SHORT).show();
     }
 
     @Override

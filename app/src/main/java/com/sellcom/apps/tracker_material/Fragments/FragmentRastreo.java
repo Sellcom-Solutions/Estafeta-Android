@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 import database.model.Favorites;
+import database.model.History;
 
 /**
  * Created by rebecalopezmartinez on 21/05/15.
@@ -61,6 +62,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     Button                          escanear;
     Button                     agregar;
     EditText                        codigo;
+
 
     ListView lst_rastreo;
     RastreoListAdapter lstAdapter;
@@ -327,21 +329,21 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
         @Override
         public void decodeResponse(String stringResponse) {
+
             try {
-                if(stringResponse == null){
-                    Log.d(TAG,"respuesta null");
+                if (stringResponse == null) {
+                    Log.d(TAG, "respuesta null");
                     j++;
                     Log.d(TAG, "contador:" + j);
                     if (j == codes_array.size()) {
                         DialogManager.sharedInstance().dismissDialog();
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
                     }
-                }
-                else {
+                } else {
                     if (stringResponse.equals("0")) {
                         Log.v(TAG, "El servidor devolvió null o 0");
                         String cod_aux = codes_array.get(j).get("codigo");
-                        ArrayList<Map<String,String>> auxResponseList  = new ArrayList<Map<String, String>>();
+                        ArrayList<Map<String, String>> auxResponseList = new ArrayList<Map<String, String>>();
                         Map<String, String> auxResponse = new HashMap<>();
                         if (cod_aux.length() == 10) {
                             auxResponse.put("shortWayBillId", cod_aux);
@@ -358,11 +360,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
                     } else {
                         Log.v(TAG, stringResponse);
-                        ArrayList<Map<String,String>> auxResponseList;
+                        ArrayList<Map<String, String>> auxResponseList;
                         auxResponseList = RequestManager.sharedInstance().getResponseArray();
                         if (auxResponseList != null) {
                             // Log.v(TAG + "auxResponse", "" + auxResponse.size());
-                            if (auxResponseList.size() > 0){
+                            if (auxResponseList.size() > 0) {
                                 aux.add(auxResponseList);
                             }
 
@@ -373,7 +375,6 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     j++;
                     Log.d(TAG, "contador:" + j);
                     if (j == codes_array.size()) {
-                        Log.d(TAG, "flag " + flag + " j " + j);
                         ArrayList<ArrayList<Map<String, String>>> codes_ver;
                         codes_ver = verifyFavorites(aux);
 
@@ -474,7 +475,6 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         @Override
         protected Void doInBackground(Void... params) {
 
-
             listFavorites = Favorites.getAll(context);
             Log.d(TAG,"Tamaño ListFavorites: "+listFavorites.size());
 
@@ -510,12 +510,14 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             }
 
+
+/*
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
+*/
             return null;
         }
 
@@ -530,15 +532,136 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
             }else {
 
-                fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                fragment = new FragmentFavorites();
-                fragment.addFragmentToStack(getActivity());
-                //   fragment.setArguments(bundle);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.replace(R.id.container, fragment, TAG);
-                fragmentTransaction.commit();
+                new UpdateInfoFavorites().execute();
             }
+
+        }
+    }
+
+
+    public class UpdateInfoFavorites extends AsyncTask<Void, Void, Void> implements UIResponseListenerInterface{
+
+        int j = 0;
+        ArrayList<Map<String,String>> aux = new ArrayList<Map<String,String>>();
+        String favorite_id = "";
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            aux = Favorites.getAll(context);
+
+            for (int i = 0; i < aux.size(); i++) {
+                Map<String, String> requestData = new HashMap<>();
+                Map<String, String> code_item = new HashMap<>();
+                code_item = aux.get(i);
+
+                favorite_id = code_item.get("id_favoritos");
+
+                Log.d("Codigo for", code_item.get("codigo_rastreo"));
+
+                requestData.put("initialWaybill", "");
+                requestData.put("finalWaybill", "");
+
+                if (code_item.get("codigo_rastreo").length() == 10)
+                    requestData.put("waybillType", "R");
+                else
+                    requestData.put("waybillType", "G");
+
+                requestData.put("wayBills", code_item.get("codigo_rastreo"));
+
+                requestData.put("type", "L");
+                requestData.put("includeDimensions", "true");
+                requestData.put("includeWaybillReplaceData", "true");
+                requestData.put("includeReturnDocumentData", "true");
+                requestData.put("includeMultipleServiceData", "true");
+                requestData.put("includeInternationalData", "true");
+                requestData.put("includeSignature", "true");
+                requestData.put("includeCustomerInfo", "true");
+                requestData.put("includeHistory", "true");
+                requestData.put("historyType", "ALL");
+                requestData.put("filterInformation", "false");
+                requestData.put("filterType", "");
+
+                RequestManager.sharedInstance().setListener(this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_TRACKING_LIST_CODES, requestData);
+
+            }
+
+            return null;
+        }
+
+
+        @Override
+        public void prepareRequest(METHOD method, Map<String, String> params, boolean includeCredentials) {
+
+        }
+
+        @Override
+        public void decodeResponse(String stringResponse) {
+
+
+            try {
+                if (stringResponse == null) {
+                    Log.d(TAG, "respuesta null");
+                    j++;
+                    Log.d(TAG, "contador:" + j);
+                    if (j == aux.size()) {
+
+                        fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragment = new FragmentFavorites();
+                        fragment.addFragmentToStack(getActivity());
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.replace(R.id.container, fragment, FragmentFavorites.TAG);
+                        fragmentTransaction.commit();
+
+                    }
+                } else {
+                    {
+                        Log.v(TAG, stringResponse);
+                        ArrayList<Map<String, String>> auxResponseList;
+                        auxResponseList = RequestManager.sharedInstance().getResponseArray();
+                        if (auxResponseList != null) {
+                            // Log.v(TAG + "auxResponse", "" + auxResponse.size());
+/*
+                            Map<String,String> map = new HashMap<String,String>();
+
+                            map.put("H_eventDateTime","7/8/2015 2:32:00 PM");
+                            map.put("H_eventDescriptionSPA","Llegada al centro de distribución X");
+                            map.put("H_eventPlaceName","Morelos");
+                            auxResponseList.add(map);
+*/
+                            if (auxResponseList.size() > 0) {
+                                for(int i=1; i<auxResponseList.size(); i++){
+
+                                    auxResponseList.get(i).put("favorite_id",favorite_id);
+                                    History.insertMapByFavorite(context, auxResponseList.get(i));
+
+                                }
+                            }
+
+                            //   Log.v(TAG + "aux", "" + aux.size());
+                        }
+
+                    }
+                    j++;
+                    Log.d(TAG, "contador:" + j);
+                    if (j == aux.size()) {
+
+                        fragmentManager = getActivity().getSupportFragmentManager();
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragment = new FragmentFavorites();
+                        fragment.addFragmentToStack(getActivity());
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.replace(R.id.container, fragment, FragmentFavorites.TAG);
+                        fragmentTransaction.commit();
+                    }
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
 
         }
     }

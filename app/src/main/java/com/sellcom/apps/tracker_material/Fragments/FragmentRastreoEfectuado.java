@@ -102,7 +102,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
             case R.id.add_favorite:
                 ArrayList<Map<String,String>> listFavorites= Favorites.getAll(context);
                 if(listFavorites==null){
-                    Toast.makeText(context,"No existen favoritos.", Toast.LENGTH_SHORT).show();
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
 
                 }else {
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Favoritos...",0);

@@ -29,7 +29,7 @@ import database.model.Favorites;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentFavorites extends TrackerFragment {
-    String TAG = "FRAG_FAVORITES";
+    public static final String TAG = "FRAG_FAVORITES";
     Context context;
     ListView lst_favorite;
     Switch swch_notifica;

@@ -19,6 +19,7 @@ import com.sellcom.apps.tracker_material.R;
 import com.google.android.gms.maps.model.LatLng;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -345,8 +346,8 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
                 for (int i = 0; i < listOficinas.size(); i++) {
                     try {
-                        latitud = Double.parseDouble(listOficinas.get(i).get("latitud"));
-                        longitud = Double.parseDouble(listOficinas.get(i).get("longitud"));
+                        latitud = Utilities.getSaveString(listOficinas.get(i).get("latitud"));
+                        longitud = Utilities.getSaveString(listOficinas.get(i).get("longitud"));
 
 
                         distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
@@ -376,8 +377,8 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
                 LatLng position;
                 for (int i = 0; i < listOficinas.size(); i++) {
-                    latitud = Double.parseDouble(listOficinas.get(i).get("latitud"));
-                    longitud = Double.parseDouble(listOficinas.get(i).get("longitud"));
+                    latitud = Utilities.getSaveString(listOficinas.get(i).get("latitud"));
+                    longitud = Utilities.getSaveString(listOficinas.get(i).get("longitud"));
 
                     //distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
                     //Log.d("Distancia", distanceM + "");
@@ -390,11 +391,10 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
                     //}
 
-
                 }
 
             }else if(typeSearch.equals("nada")){
-                currentPosition = new LatLng((Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLATITUD"))), Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLONGITUD")));
+                currentPosition = new LatLng((Utilities.getSaveString(listStates.get((Integer.parseInt(state) - 1)).get("ZLATITUD"))), Utilities.getSaveString(listStates.get((Integer.parseInt(state) - 1)).get("ZLONGITUD")));
                 listPositions.add(currentPosition);
                 listOficinasFiltradas.add(new HashMap<String, String>());
                 listType.add("0");

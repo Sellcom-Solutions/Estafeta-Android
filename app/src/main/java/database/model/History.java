@@ -33,6 +33,7 @@ public class History {
 
 
     public static long insertMap(Context context, Map<String, String> values){
+
         String date = DatesHelper.getStringDate(new Date());
 
         ContentValues cv = new ContentValues();
@@ -44,6 +45,48 @@ public class History {
         cv.put(MOV_PLACE, values.get("H_eventPlaceName"));
 
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
+    }
+
+
+    public static void insertMapByFavorite(Context context, Map<String, String> values){
+
+        String aux= getIdById_history(context, values.get("H_eventDateTime"));
+        Log.d(TABLE_NAME, "id: " + aux);
+        if(aux != null){
+            Log.d(TABLE_NAME,"row exist!!");
+        }else{
+            insertMap(context,values);
+        }
+
+    }
+
+    public static String getIdById_history(Context context,String H_eventDateTime){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                null,
+                MOV_DATE + "=?",
+                new String[]{H_eventDateTime}, null, null, null);
+
+        if(cursor != null & cursor.getCount() > 0){
+            cursor.moveToFirst();
+            String response = cursor.getString(cursor.getColumnIndexOrThrow(ID_HISTORY));
+            cursor.close();
+            return response;
+        }else
+            return null;
+    }
+
+    public static long update(Context context, Map<String, String> values){
+
+        ContentValues cv = new ContentValues();
+        cv.put(CODE_NUMBER, values.get("shortWayBillId"));
+        cv.put(MOV_COMS, values.get("H_eventDescriptionSPA"));
+        cv.put(MOV_DATE, values.get("H_eventDateTime"));
+        cv.put(MOV_PLACE, values.get("H_eventPlaceName"));
+
+        long response = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, FAVORITE + "=?", new String[]{values.get("favorite_id")});
+        Log.d(TABLE_NAME,"update: "+response);
+        return response;
     }
 
     public static ArrayList<Map<String,String>> getHistotyByFavoriteId(Context context, String favorite){

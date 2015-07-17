@@ -80,6 +80,7 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
             settings.setAllGesturesEnabled(true);
             settings.setZoomGesturesEnabled(true);
             settings.setZoomControlsEnabled(false);
+            settings.setCompassEnabled(true);
             settings.setScrollGesturesEnabled(true);
             settings.setMyLocationButtonEnabled(false);
             Log.d("CustomMapFragment", " list.size " + list.size());

@@ -126,12 +126,12 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_estado), 3000);
                     return;
-                }else if(edt_city.getText().toString().equals("")) {
+                }/*else if(edt_city.getText().toString().equals("")) {
 
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_ciudad), 3000);
                     return;
 
-                }else{
+                }*/else{
                     Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
                     if(myLocationAdvance != null){
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando_oficinas),0);

@@ -176,4 +176,18 @@ public class Utilities {
 
     }
 
+    public static double getSaveString(String cadena){
+        double saveString = 0;
+
+        try{
+
+            Double d = Double.parseDouble(cadena);
+
+        }catch (Exception e){
+            return saveString;
+        }
+
+        return saveString;
+    }
+
 }
