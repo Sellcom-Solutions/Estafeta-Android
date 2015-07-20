@@ -116,7 +116,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                     ViewGroup.MarginLayoutParams lv = (ViewGroup.MarginLayoutParams) lst_favorite.getLayoutParams();
                     float d = context.getResources().getDisplayMetrics().density;
-                    lv.setMargins(0, 0, 0, (int) (20 * d));
+                    lv.setMargins(0, 0, 0, (int) (10 * d));
                     lst_favorite.setLayoutParams(lv);
 
                     lin_delete.setVisibility(View.GONE);
@@ -241,6 +241,9 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                 actionBarActivity.hide();
 
+
+
+
                 mToolbar = (Toolbar) view.findViewById(R.id.toolbar_actionbar_favorites);
                 mToolbar.setNavigationIcon(R.drawable.ic_arrow_left);
                 mToolbar.setTitle("0 Seleccionados");
@@ -248,11 +251,16 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                     @Override
                     public void onClick(View v) {
 
-                        listAdapter = new FavoriteListAdapter(getActivity(), context, codes_info, getActivity().getSupportFragmentManager(),"favorite");
+                        listAdapter = new FavoriteListAdapter(getActivity(), context, codes_info, getActivity().getSupportFragmentManager(), "favorite");
                         listAdapter.setDelete(FragmentFavorites.this);
                         lst_favorite.setAdapter(listAdapter);
 
                         swch_notifica.setEnabled(true);
+
+                        ViewGroup.MarginLayoutParams lv = (ViewGroup.MarginLayoutParams) lst_favorite.getLayoutParams();
+                        float d = context.getResources().getDisplayMetrics().density;
+                        lv.setMargins(0, 0, 0, (int) (10 * d));
+                        lst_favorite.setLayoutParams(lv);
 
                         lin_delete.setVisibility(View.GONE);
                         txv_footer.setVisibility(View.VISIBLE);

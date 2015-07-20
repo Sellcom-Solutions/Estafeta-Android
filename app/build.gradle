@@ -53,4 +53,6 @@ dependencies {
     compile 'com.embarkmobile:zxing-android-integration:2.0.0@aar'
     compile 'com.google.zxing:core:3.0.1'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
 }

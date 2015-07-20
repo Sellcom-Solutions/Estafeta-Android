@@ -237,10 +237,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.shrink_out, R.anim.slide_from_left, R.anim.shrink_out);
         depthCounter = 0;
-
+/*
         if(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString()) != null)
             fragmentTransaction.remove(fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString()));
-
+*/
         if(Fragment_Default != null)
             fragment = Fragment_Default;
 

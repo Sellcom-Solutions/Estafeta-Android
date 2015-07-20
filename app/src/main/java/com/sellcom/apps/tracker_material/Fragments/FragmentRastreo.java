@@ -24,10 +24,12 @@ import android.widget.Toast;
 import android.widget.TextView;
 import android.content.Context;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.FavoriteListAdapter;
+import com.sellcom.apps.tracker_material.Adapters.RastreoAdapter;
 import com.sellcom.apps.tracker_material.Adapters.RastreoListAdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
@@ -53,7 +55,7 @@ import database.model.History;
 /**
  * Created by rebecalopezmartinez on 21/05/15.
  */
-public class FragmentRastreo extends TrackerFragment implements View.OnClickListener, AdapterView.OnItemClickListener,RastreoListAdapter.setNumCodes {
+public class FragmentRastreo extends TrackerFragment implements View.OnClickListener, AdapterView.OnItemClickListener,RastreoAdapter.setNumCodes {
 
     String TAG= "FRAG_RASTREO";
 
@@ -73,7 +75,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
 
     ListView lst_rastreo;
-    RastreoListAdapter lstAdapter;
+    RastreoAdapter lstAdapter;
     static ArrayList<Map<String,String>> codes_array = new ArrayList<Map<String,String>>();
 
     Context context;
@@ -87,8 +89,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         super.onAttach(activity);
         context = getActivity();
        // codes_array = Rastreo_tmp.getAllInMaps(context);
-        lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
-        lstAdapter.setCodesNumbers(this);
+        //lstAdapter = new RastreoAdapter(getActivity(),codes_array);
+        //lstAdapter.setCodesNumbers(this);
 
 
     }
@@ -123,7 +125,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 codigo.setEnabled(false);
                 escanear.setEnabled(false);
             }
-            lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
+            lstAdapter = new RastreoAdapter(getActivity(),codes_array);
             lstAdapter.setCodesNumbers(this);
             lst_rastreo.setAdapter(lstAdapter);
             lstAdapter.notifyDataSetChanged();
@@ -139,6 +141,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         escanear.setOnClickListener(this);
         rastreo.setOnClickListener(this);
         agregar.setOnClickListener(this);
+
+
 
         return view;
     }
@@ -268,7 +272,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             codes_array.add(item);
             //codes_array = Rastreo_tmp.getAllInMaps(context);
 
-            lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
+            lstAdapter = new RastreoAdapter(getActivity(),codes_array);
             lstAdapter.setCodesNumbers(this);
             lst_rastreo.setAdapter(lstAdapter);
             //lst_rastreo.setOnItemClickListener(this);
