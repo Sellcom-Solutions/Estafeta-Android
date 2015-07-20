@@ -2,12 +2,16 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -45,7 +49,8 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
     ListView lst_favorite;
     LinearLayout lin_margin,lin_delete,lin_toolbar;
     TextView txv_footer;
-    Switch swch_notifica;
+    SwitchCompat swch_notifica;
+
     ImageView imgbtn_delete;
     Boolean notify;
     FavoriteListAdapter listAdapter;
@@ -75,8 +80,16 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
         lin_toolbar = (LinearLayout)view.findViewById(R.id.lin_toolbar);
         lin_toolbar.setVisibility(View.GONE);
-        swch_notifica= (Switch)view.findViewById((R.id.swch_notifica));
+
+        ContextThemeWrapper ctw = new ContextThemeWrapper(getActivity(), R.style.Color1SwitchStyle);
+
+
+        swch_notifica= (SwitchCompat)view.findViewById((R.id.swch_notifica));
         swch_notifica.setChecked(notify);
+
+        swch_notifica = new SwitchCompat(ctw);
+
+
         lst_favorite = (ListView) view.findViewById(R.id.liv_favorite);
         lin_margin = (LinearLayout)view.findViewById(R.id.lin_margin);
         lin_delete = (LinearLayout)view.findViewById(R.id.lin_delete);
@@ -246,7 +259,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                 mToolbar = (Toolbar) view.findViewById(R.id.toolbar_actionbar_favorites);
                 mToolbar.setNavigationIcon(R.drawable.ic_arrow_left);
-                mToolbar.setTitle("0 Seleccionados");
+                mToolbar.setTitle("0 seleccionado(s)");
                 mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -298,9 +311,9 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
         list_delete.add(favoriteDelete);
         if(list_delete.size() == 1){
-            mToolbar.setTitle(list_delete.size()+ " Seleccionado");
+            mToolbar.setTitle(list_delete.size()+ " seleccionado(s)");
         }else {
-            mToolbar.setTitle(list_delete.size()+ " Seleccionados");
+            mToolbar.setTitle(list_delete.size()+ " seleccionado(s)");
         }
 
     }
@@ -317,9 +330,9 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
         }
 
         if(list_delete.size() == 1){
-            mToolbar.setTitle(list_delete.size()+ " Seleccionado");
+            mToolbar.setTitle(list_delete.size()+ " seleccionado(s)");
         }else {
-            mToolbar.setTitle(list_delete.size()+ " Seleccionados");
+            mToolbar.setTitle(list_delete.size()+ " seleccionado(s)");
         }
 
     }

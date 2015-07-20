@@ -118,14 +118,13 @@
                         android:textSize="@dimen/sizeMediumText"
                         android:background="@color/white"/>
 
-                    <Switch
+                    <android.support.v7.widget.SwitchCompat
                         android:id="@+id/swch_notifica"
                         android:layout_weight="20"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
-                        style="@style/AppTheme"
-                        android:background="@color/white"/>
+                        android:theme="@style/Color1SwitchStyle"/>
 
                 </LinearLayout>
 

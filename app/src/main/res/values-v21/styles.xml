@@ -50,6 +50,9 @@
         <item name="android:button">@drawable/checkbox_style</item>
     </style>
 
+    <style name="Color1SwitchStyle">
+        <item name="colorControlActivated">@color/estafeta_red</item>
+    </style>
 
     <style name="mySpinnerItemStyle" parent="@android:style/Widget.Spinner">
         <item name="android:background">@android:color/transparent</item>

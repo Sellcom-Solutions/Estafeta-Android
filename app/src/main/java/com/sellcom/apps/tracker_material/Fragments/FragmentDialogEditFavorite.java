@@ -3,7 +3,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.support.v4.app.DialogFragment;
 
+import android.support.v7.widget.SwitchCompat;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +37,7 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
 
     Button btn_cancel;
     Button btn_save;
-    Switch swch_confirmacion;
+    SwitchCompat swch_confirmacion;
     TextView fav_no_guia;
     TextView fav_codigo;
     EditText fav_edit_referencia;
@@ -63,10 +65,17 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
 
         btn_cancel = (Button) view.findViewById(R.id.btn_cancel_edit);
         btn_save = (Button) view.findViewById(R.id.btn_save);
-        swch_confirmacion = (Switch) view.findViewById(R.id.swch_confirmar);
+
+        ContextThemeWrapper ctw = new ContextThemeWrapper(getActivity(), R.style.Color1SwitchStyle);
+
+        swch_confirmacion = (SwitchCompat) view.findViewById(R.id.swch_confirmar);
+
+        swch_confirmacion = new SwitchCompat(ctw);
+
         fav_no_guia = (TextView) view.findViewById(R.id.fav_edit_no_guia);
         fav_codigo = (TextView) view.findViewById(R.id.fav_edit_cod_rastreo);
         fav_edit_referencia= (EditText)view.findViewById(R.id.fav_edit_referencia);
+        fav_edit_referencia.setFocusable(false);
 
 
         btn_cancel.setOnClickListener(this);
@@ -133,6 +142,7 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
 
 
                 alias  = fav_edit_referencia.getText().toString();
+
                 codigo_rastreo = getArguments().getString("codigo_rastreo");
 
                 codes_info.put("notifica", String.valueOf(notify));

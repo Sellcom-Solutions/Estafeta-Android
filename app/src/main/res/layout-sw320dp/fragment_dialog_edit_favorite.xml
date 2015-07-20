@@ -105,7 +105,8 @@
                     android:padding                 ="3dp"
                     android:textColor               ="@color/estafeta_text"
                     android:textColorHint           ="@color/estafeta_red"
-                    android:textSize                ="@dimen/sizeNormalText"/>
+                    android:textSize                ="@dimen/sizeNormalText"
+                    style                           ="@style/EditStyle"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -119,14 +120,15 @@
                         android:textSize="@dimen/sizeSmallText"
                         android:paddingTop="5dp"
                         android:layout_weight="50"/>
-                    <Switch
+
+                    <android.support.v7.widget.SwitchCompat
                         android:id="@+id/swch_confirmar"
                         android:layout_weight="20"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
-                        style="@style/AppTheme"
-                        android:background="@color/white"/>
+                        android:theme="@style/Color1SwitchStyle"/>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

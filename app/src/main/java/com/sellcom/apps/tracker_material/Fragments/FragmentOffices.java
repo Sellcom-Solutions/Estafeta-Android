@@ -90,8 +90,11 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             spn_state = (Spinner) view.findViewById(R.id.spn_state);
 
             edt_city = (EditText) view.findViewById(R.id.edt_city);
+            edt_city.setFocusable(false);
             edt_colony = (EditText) view.findViewById(R.id.edt_colony);
+            edt_colony.setFocusable(false);
             edt_zip_code = (EditText) view.findViewById(R.id.edt_zip_code);
+            edt_zip_code.setFocusable(false);
 
             btn_near.setOnClickListener(this);
             btn_search.setOnClickListener(this);

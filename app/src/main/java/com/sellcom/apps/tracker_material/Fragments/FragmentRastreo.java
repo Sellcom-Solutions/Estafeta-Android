@@ -306,6 +306,14 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
     }
 
+    @Override
+    public void removeCode(int position) {
+        codes_array.remove(position);
+        lstAdapter = new RastreoAdapter(getActivity(),codes_array);
+        lstAdapter.setCodesNumbers(this);
+        lst_rastreo.setAdapter(lstAdapter);
+    }
+
 
     public class GetCodesInfo extends AsyncTask<Void, Void, String> implements UIResponseListenerInterface {
 

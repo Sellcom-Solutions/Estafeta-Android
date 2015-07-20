@@ -61,16 +61,15 @@ public class RastreoAdapter extends BaseSwipeAdapter {
         final SwipeLayout swipeLayout = (SwipeLayout)convertView.findViewById(getSwipeLayoutResourceId(position));
         //swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
 
-        swipeLayout.addDrag(SwipeLayout.DragEdge.Left, convertView.findViewById(R.id.bottom_wrapper));
-        swipeLayout.setRightSwipeEnabled(false);
+        swipeLayout.addDrag(SwipeLayout.DragEdge.Right, convertView.findViewById(R.id.bottom_wrapper));
+        swipeLayout.setLeftSwipeEnabled(false);
 
         txv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                codigos.remove(position);
-
-                notifyDataSetChanged();
                 swipeLayout.close();
+                setNumCodes.removeCode(position);
+
             }
         });
 
@@ -115,6 +114,7 @@ public class RastreoAdapter extends BaseSwipeAdapter {
 
     public interface setNumCodes{
         public void setCodes(int restantes);
+        public void removeCode(int position);
     }
 
     public void setCodesNumbers(setNumCodes listener) {

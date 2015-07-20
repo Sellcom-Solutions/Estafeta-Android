@@ -13,9 +13,11 @@
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:spinnerStyle">@style/mySpinnerItemStyle</item>
+        <item name="android:switchStyle">@style/Color1SwitchStyle</item>
+        <item name="android:editTextStyle">@style/EditStyle</item>
         <item name="android:checkboxStyle">@style/CheckBox</item>
         <item name="colorControlNormal">@color/estafeta_soft_gray</item>
-        <item name="colorControlActivated">@color/estafeta_text</item>
+        <item name="colorControlActivated">@color/estafeta_red</item>
         <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
     </style>
 
@@ -42,13 +44,18 @@
 
     <style name="EditStyle" parent="Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/estafeta_soft_gray</item>
-        <item name="colorControlActivated">@color/estafeta_soft_gray</item>
+        <item name="colorControlActivated">@color/estafeta_text</item>
         <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
     </style>
 
 
     <style name="CheckBox" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+
+    <style name="Color1SwitchStyle">
+        <item name="colorControlActivated">@color/estafeta_red</item>
+        <item name="colorControlNormal">@color/estafeta_soft_gray</item>
     </style>
 
     <style name="StarCheckBox" parent="">
