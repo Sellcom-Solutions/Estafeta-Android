@@ -7,8 +7,8 @@
 
     <LinearLayout
         android:gravity="center"
-        android:layout_width="500dp"
-        android:layout_height="500dp"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -19,8 +19,8 @@
 
     <ProgressBar
         android:id="@+id/pgb_general_dialog"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -28,8 +28,8 @@
 
     <TextView
         android:id="@+id/txv_general_name_dialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:textColor="@color/estafeta_text"
         android:gravity="center"
         android:textSize="@dimen/sizeMediumText"

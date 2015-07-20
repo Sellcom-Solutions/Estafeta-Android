@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/estafeta_red"
                 android:padding="10dp"
-                android:src="@android:drawable/ic_menu_delete"/>
+                android:src="@drawable/delete"/>
         </LinearLayout>
 
         <TextView
