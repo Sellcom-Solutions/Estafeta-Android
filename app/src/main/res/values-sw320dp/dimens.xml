@@ -24,6 +24,7 @@
     <dimen name="size_button_dialog">12sp</dimen>
     <dimen name="dimen_photo">200dp</dimen>
 
+    <dimen name="sizeXXSmallText">8sp</dimen>
     <dimen name="sizeXSmallText">12sp</dimen>
     <dimen name="sizeSmallText">15sp</dimen>
     <dimen name="sizeMediumText">18sp</dimen>
