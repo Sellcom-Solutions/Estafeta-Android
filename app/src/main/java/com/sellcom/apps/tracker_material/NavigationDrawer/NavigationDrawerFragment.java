@@ -1,6 +1,8 @@
 package com.sellcom.apps.tracker_material.NavigationDrawer;
 
 import android.app.Activity;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -9,9 +11,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.ProfileManager;
@@ -40,6 +45,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private boolean mFromSavedInstanceState;
     private int mCurrentSelectedPosition    = -1;
+    private TextView txv_version;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -50,12 +56,27 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mDrawerList.setLayoutManager(layoutManager);
         mDrawerList.setHasFixedSize(true);
 
+        txv_version= (TextView)view.findViewById(R.id.versionName);
+
+
         final List<NavigationItem> navigationItems = ProfileManager.getDrawerModulesFromProfile(getActivity());
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems);
         adapter.setNavigationDrawerCallbacks(this);
         mDrawerList.setAdapter(adapter);
         selectItem(mCurrentSelectedPosition);
+
+        try {
+            PackageManager manager = getActivity().getPackageManager();
+            PackageInfo info = manager.getPackageInfo(getActivity().getPackageName(), 0);
+            txv_version.setText("Version: "+info.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
         return view;
+
     }
 
     @Override
@@ -123,6 +144,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public void closeDrawer() {
         mDrawerLayout.closeDrawer(mFragmentContainerView);
+        Log.e( "cerro: " , String.valueOf(mFragmentContainerView));
     }
 
     @Override
