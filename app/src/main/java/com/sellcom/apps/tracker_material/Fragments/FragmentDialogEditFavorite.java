@@ -73,9 +73,9 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
         swch_confirmacion = new SwitchCompat(ctw);
 
         fav_no_guia = (TextView) view.findViewById(R.id.fav_edit_no_guia);
+        fav_no_guia.requestFocus();
         fav_codigo = (TextView) view.findViewById(R.id.fav_edit_cod_rastreo);
         fav_edit_referencia= (EditText)view.findViewById(R.id.fav_edit_referencia);
-        fav_edit_referencia.setFocusable(false);
 
 
         btn_cancel.setOnClickListener(this);

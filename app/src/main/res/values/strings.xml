@@ -21,15 +21,15 @@
     <string-array name="drawer_items">
         <item>Rastreo</item>
         <item>Oficinas</item>
-        <item>Prellenado de Guías</item>
-        <item>Cotizador</item>
-        <item>Historial de operaciones</item>
-        <item>Código Postal</item>
-        <item>Aviso de Privacidad</item>
-        <item>Favoritos</item>
-    </string-array>
+        <!--<item>Prellenado de Guías</item> -->
+       <item>Cotizador</item>
+        <!--<item>Historial de operaciones</item>-->
+       <item>Código Postal</item>
+       <item>Aviso de Privacidad</item>
+       <item>Favoritos</item>
+</string-array>
 
-    <!-- Globals -->
+<!-- Globals -->
     <string name="Search">Buscar</string>
     <string name="offices_search_by_address">Buscar por dirección</string>
     <string name="city_etc">Ciudad, municipio, delegación*</string>
@@ -83,6 +83,7 @@
     <!-- Favorites -->
     <string name="notification_alarm">Alarma de Notificación</string>
     <string name="delivery_confirmation">Confirmación de Entrega</string>
+    <string name="maximo_favoritos">La información de favoritos se almacena durante un periodo máximo de 30 días.</string>
 
     <!-- Oficinas -->
     <string name="view_ar">Ver a mi alrededor</string>
