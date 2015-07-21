@@ -1,17 +1,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:fillViewport="true"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="@color/estafeta_light_gray"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    android:background="@color/estafeta_light_gray">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        android:weightSum="100"
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
@@ -27,7 +25,7 @@
             android:paddingTop="20dp"/>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
             <LinearLayout
@@ -76,7 +74,7 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="10dp">
             <LinearLayout
@@ -106,10 +104,11 @@
                     android:textColor               ="@color/estafeta_text"
                     android:textColorHint           ="@color/estafeta_red"
                     android:textSize                ="@dimen/sizeNormalText"
-                    style                           ="@style/EditStyle"/>
+                    style                           ="@style/EditStyle"
+                    android:theme="@style/EditStyle"/>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:weightSum="100">
 
                     <TextView
@@ -125,7 +124,7 @@
                         android:id="@+id/swch_confirmar"
                         android:layout_weight="20"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:theme="@style/Color1SwitchStyle"/>
 
@@ -135,10 +134,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="right"
             android:paddingTop="20dp">
+            <Button
+                android:id="@+id/btn_cancel_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit_cancel"
+                android:textSize="@dimen/sizeMediumText"
+                android:layout_gravity="right"
+                android:paddingRight="20dp"
+                android:background="@color/zxing_transparent"
+                android:textColor="@color/estafeta_red"/>
+
             <Button
                 android:id="@+id/btn_save"
                 android:layout_width="wrap_content"
@@ -147,19 +157,9 @@
                 android:textSize="@dimen/sizeMediumText"
                 android:layout_gravity="right"
                 android:gravity="right|center_vertical"
-                android:paddingRight="20dp"
                 android:background="@color/zxing_transparent"
                 android:textColor="@color/estafeta_red"/>
-            <Button
-                android:id="@+id/btn_cancel_edit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/edit_cancel"
-                android:textSize="@dimen/sizeMediumText"
-                android:layout_gravity="right"
-                android:gravity="right|center_vertical"
-                android:background="@color/zxing_transparent"
-                android:textColor="@color/estafeta_red"/>
+
             </LinearLayout>
     </LinearLayout>
 </ScrollView>

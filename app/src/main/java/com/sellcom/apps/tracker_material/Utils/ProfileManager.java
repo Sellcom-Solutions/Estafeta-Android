@@ -21,8 +21,15 @@ public class ProfileManager {
 
         String[] titlesArray    = context.getResources().getStringArray(R.array.drawer_items);
 
-            for (int i=0; i<titlesArray.length; i++)
-                items.add(new NavigationItem(titlesArray[i]));
+            for (int i=0; i<titlesArray.length-1; i++){
+                /*if(i==2 || i==4){
+                    //Nothing
+                }else{*/
+                    items.add(new NavigationItem(titlesArray[i]));
+                //}
+
+            }
+
         return items;
     }
 }

@@ -377,17 +377,22 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
                 LatLng position;
                 for (int i = 0; i < listOficinas.size(); i++) {
+
                     latitud = Utilities.getSaveString(listOficinas.get(i).get("latitud"));
                     longitud = Utilities.getSaveString(listOficinas.get(i).get("longitud"));
 
-                    //distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
-                    //Log.d("Distancia", distanceM + "");
-
-                   // if (distanceM <= distancia_max_deteccion) {
+                    if(latitud == 0 && longitud == 0){
+                        //NOTHING
+                    }else{
                         listOficinasFiltradas.add(listOficinas.get(i));
                         position = new LatLng(latitud, longitud);
                         listPositions.add(position);
                         listType.add(listOficinas.get(i).get("tipo_oficina"));
+                    }
+                    //distanceM = (int) distFrom((float) myLocation.getLatitude(), (float) myLocation.getLongitude(), (float) latitud, (float) longitud);
+                    //Log.d("Distancia", distanceM + "");
+
+                   // if (distanceM <= distancia_max_deteccion) {
 
                     //}
 

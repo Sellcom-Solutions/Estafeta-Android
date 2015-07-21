@@ -111,7 +111,6 @@
                     android:drawablePadding         ="5dp"
                     android:focusableInTouchMode    ="true"
                     android:hint                    ="@string/codigo"
-                    android:inputType               ="number"
                     android:maxLength               ="22"
                     android:padding                 ="3dp"
                     android:textColor               ="@color/estafeta_text"

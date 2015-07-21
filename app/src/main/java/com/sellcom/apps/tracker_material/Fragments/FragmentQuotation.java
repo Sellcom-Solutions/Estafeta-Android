@@ -173,6 +173,43 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             edt_width           = (EditText) view.findViewById(R.id.edt_width);
             edt_width.setOnEditorActionListener(this);
             edt_dummy  = (EditText) view.findViewById(R.id.edt_dummy);
+/*
+            edt_weigth.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+                @Override
+                public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+
+                    if(event.getAction()==KeyEvent.ACTION_DOWN ) {
+
+                        if (Integer.parseInt(edt_weigth.getText().toString()) > 70) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            });/*
+            edt_weigth.setOnKeyListener(new View.OnKeyListener() {
+
+
+                @Override
+                public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                    if(event.getAction()==KeyEvent.ACTION_DOWN ) {
+
+                        if (Integer.parseInt(edt_weigth.getText().toString()) > 70) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+            });*/
+
+
 
             btn_zc_ori_search       = (ImageButton) view.findViewById(R.id.btn_zc_ori_search);
             btn_zc_ori_phonebook    = (ImageButton) view.findViewById(R.id.btn_zc_ori_phonebook);
@@ -485,13 +522,37 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             return;
                         }else{
 
-                            origen  = edt_zc_origin.getText().toString();
-                            destino = edt_zc_destination.getText().toString();
-                            peso    = edt_weigth.getText().toString();
-                            alto    = edt_high.getText().toString();
-                            largo   = edt_long.getText().toString();
-                            ancho   = edt_width.getText().toString();
-                            cotizar("nacional_paquete");
+
+
+                            if(Integer.parseInt(edt_weigth.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso no debe superar los 70kg.", 3000);
+                            }else if(Integer.parseInt(edt_high.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "La altura no debe superar los 70cm.", 3000);
+                            }else if(Integer.parseInt(edt_long.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El largo no debe superar los 70cm.", 3000);
+                            }else if(Integer.parseInt(edt_width.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El ancho no debe superar los 70cm.", 3000);
+                            }else{
+
+                                int pesoVolumetrico = (Integer.parseInt(edt_high.getText().toString()) * Integer.parseInt(edt_long.getText().toString()) * Integer.parseInt(edt_width.getText().toString()))/5000;
+
+                                if(pesoVolumetrico > 70){
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumetrico no debe ser mayor que 70, verifique los datos ingresados.", 3000);
+                                }else{
+                                    origen  = edt_zc_origin.getText().toString();
+                                    destino = edt_zc_destination.getText().toString();
+                                    peso    = edt_weigth.getText().toString();
+                                    alto    = edt_high.getText().toString();
+                                    largo   = edt_long.getText().toString();
+                                    ancho   = edt_width.getText().toString();
+                                    cotizar("nacional_paquete");
+                                }
+
+
+                            }
+
+
+
 
                         }
                     } else if (lin_internacional_pais.getVisibility() == View.VISIBLE) {
@@ -512,22 +573,46 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             return;
                         }else{
 
-                            int numCountrie = spn_countrie.getSelectedItemPosition();
-                            peso    = edt_weigth.getText().toString();
-                            alto    = edt_high.getText().toString();
-                            largo   = edt_long.getText().toString();
-                            ancho   = edt_width.getText().toString();
 
-                            if(numCountrie == 39 || numCountrie == 63){
-                                contEUA_Canada = 0;
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
-                                cotizar("internacional_paquete_eua_canada");
-
-                                //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                            if(Integer.parseInt(edt_weigth.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso no debe superar los 70kg.", 3000);
+                            }else if(Integer.parseInt(edt_high.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "La altura no debe superar los 70cm.", 3000);
+                            }else if(Integer.parseInt(edt_long.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El largo no debe superar los 70cm.", 3000);
+                            }else if(Integer.parseInt(edt_width.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El ancho no debe superar los 70cm.", 3000);
                             }else{
-                                contEUA_Canada = 0;
-                                cotizar("internacional_paquete");
+
+                                int pesoVolumetrico = (Integer.parseInt(edt_high.getText().toString()) * Integer.parseInt(edt_long.getText().toString()) * Integer.parseInt(edt_width.getText().toString()))/5000;
+
+                                if(pesoVolumetrico > 70){
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumetrico no debe ser mayor que 70, verifique los datos ingresados.", 3000);
+                                }else{
+
+                                    int numCountrie = spn_countrie.getSelectedItemPosition();
+                                    peso    = edt_weigth.getText().toString();
+                                    alto    = edt_high.getText().toString();
+                                    largo   = edt_long.getText().toString();
+                                    ancho   = edt_width.getText().toString();
+
+                                    if(numCountrie == 63){
+                                        contEUA_Canada = 0;
+                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+                                        cotizar("internacional_paquete_eua_canada");
+
+                                        //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        contEUA_Canada = 0;
+                                        cotizar("internacional_paquete");
+                                    }
+
+                                }
+
+
                             }
+
+
 
 
 

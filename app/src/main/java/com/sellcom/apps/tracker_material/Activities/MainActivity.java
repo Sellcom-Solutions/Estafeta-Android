@@ -173,7 +173,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             //Created by Jose Luis 26/05/2015
-            case NavigationDrawerFragment.CODIGO_POSTAL:
+            case NavigationDrawerFragment.CODIGO_POSTAL://codigo postal //prellenado
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_CODIGO_POSTAL.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -182,7 +182,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 }
                 break;
 
-            case NavigationDrawerFragment.AVISO_PRIVACIDAD:
+            case NavigationDrawerFragment.AVISO_PRIVACIDAD://aviso de privasidad HISTORIA
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_AVISO_PRIVACIDAD.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -191,7 +191,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 }
                 break;
 
-            case NavigationDrawerFragment.COTIZADOR:
+            case NavigationDrawerFragment.COTIZADOR://cotizador
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_QUOTATION.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -200,11 +200,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 }
                 break;
 
-            case NavigationDrawerFragment.PRELLENADO:
+            /*case NavigationDrawerFragment.PRELLENADO://prellenado COTIZADOR
                 fragment = null;
                 break;
 
-            case NavigationDrawerFragment.HISTORIAL:
+            case NavigationDrawerFragment.HISTORIAL://historial AVISO DE PRIVACIDAD
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_HISTORIAL.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -212,7 +212,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragment = new FragmentHistorial();
                 }
                 break;
-
+*/
             default:
                 //Toast.makeText(this,"Módulo no implementado",Toast.LENGTH_SHORT).show();
                 return;

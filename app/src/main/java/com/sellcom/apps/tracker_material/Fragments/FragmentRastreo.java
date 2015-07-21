@@ -467,7 +467,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             String preCod = scanResult.getContents().trim();
             Log.d("Longitud",String.valueOf(preCod.length()));
             Log.d("Codigo",preCod);
-            if ( Utilities.validateCode(preCod) )
+            if ( Utilities.validateCode(preCod.substring(0,22)) )
                 codigo.setText(scanResult.getContents());
             else
                 Toast.makeText(context,context.getResources().getString(R.string.code_incorrect),Toast.LENGTH_SHORT).show();

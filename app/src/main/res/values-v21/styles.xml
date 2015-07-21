@@ -11,8 +11,9 @@
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:spinnerStyle">@style/mySpinnerItemStyle</item>
         <item name="android:checkboxStyle">@style/CheckBox</item>
+        <item name="android:editTextStyle">@style/EditStyle</item>
         <item name="colorControlNormal">@color/estafeta_soft_gray</item>
-        <item name="colorControlActivated">@color/estafeta_text</item>
+        <item name="colorControlActivated">@color/estafeta_red</item>
         <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
         <item name="android:windowContentTransitions">true</item>
     </style>
@@ -40,9 +41,9 @@
 
     <style name="EditStyle" parent="Widget.AppCompat.EditText">
 
-        <item name="colorControlNormal">@color/estafeta_red</item>
-        <item name="colorControlActivated">@color/estafeta_red</item>
-        <item name="colorControlHighlight">@color/estafeta_red</item>
+        <item name="colorControlNormal">@color/estafeta_soft_gray</item>
+        <item name="colorControlActivated">@color/estafeta_text</item>
+        <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
 
     </style>
 

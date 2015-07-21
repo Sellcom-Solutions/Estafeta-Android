@@ -74,7 +74,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_favorites, container, false);
-        TrackerFragment.section_index = 7;
+        TrackerFragment.section_index = 5;
         context = getActivity();
         notify=false;
 
@@ -87,7 +87,6 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
         swch_notifica= (SwitchCompat)view.findViewById((R.id.swch_notifica));
         swch_notifica.setChecked(notify);
 
-        swch_notifica = new SwitchCompat(ctw);
 
 
         lst_favorite = (ListView) view.findViewById(R.id.liv_favorite);
@@ -129,7 +128,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                     ViewGroup.MarginLayoutParams lv = (ViewGroup.MarginLayoutParams) lst_favorite.getLayoutParams();
                     float d = context.getResources().getDisplayMetrics().density;
-                    lv.setMargins(0, 0, 0, (int) (10 * d));
+                    lv.setMargins(0, 0, 0, (int) (5 * d));
                     lst_favorite.setLayoutParams(lv);
 
                     lin_delete.setVisibility(View.GONE);
@@ -139,7 +138,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                     actionBarActivity.show();
 
                 }else{
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,"Escoja un elemento",3000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,"Debe escoger un elemento",3000);
                 }
 
             }
@@ -154,7 +153,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
 
-                if (isChecked) {
+                if (isChecked) {/*
                     Toast.makeText(context, "Alarma Activada ", Toast.LENGTH_SHORT).show();
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
@@ -175,7 +174,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                         codes_info.get(i).put("notifica", String.valueOf(notify));
                         Log.e(TAG, "codes_info:  ---->  " + codes_info.get(i));
-                    }
+                    }*/
                     return;
                 }
 
@@ -272,7 +271,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                         ViewGroup.MarginLayoutParams lv = (ViewGroup.MarginLayoutParams) lst_favorite.getLayoutParams();
                         float d = context.getResources().getDisplayMetrics().density;
-                        lv.setMargins(0, 0, 0, (int) (10 * d));
+                        lv.setMargins(0, 0, 0, (int) (5 * d));
                         lst_favorite.setLayoutParams(lv);
 
                         lin_delete.setVisibility(View.GONE);
@@ -296,7 +295,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                 ViewGroup.MarginLayoutParams lv = (ViewGroup.MarginLayoutParams) lst_favorite.getLayoutParams();
                 float d = context.getResources().getDisplayMetrics().density;
-                lv.setMargins(0, 0, 0, (int) (35 * d));
+                lv.setMargins(0, 0, 0, (int) (30 * d));
                 lst_favorite.setLayoutParams(lv);
 
                 return true;

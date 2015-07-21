@@ -4,9 +4,9 @@
     <string-array name="drawer_items">
         <item>Rastreo</item>
         <item>Oficinas</item>
-        <item>Prellenado de Guías</item>
+        <!--<item>Prellenado de Guías</item>-->
         <item>Cotizador</item>
-        <item>Historial de operaciones</item>
+        <!--<item>Historial de operaciones</item>-->
         <item>Código Postal</item>
         <item>Aviso de Privacidad</item>
         <item>Favoritos</item>

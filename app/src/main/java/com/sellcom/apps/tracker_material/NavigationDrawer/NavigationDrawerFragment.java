@@ -27,11 +27,11 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public static final int RASTREO             = 0;
     public static final int OFICINAS            = 1;
-    public static final int PRELLENADO          = 2;
-    public static final int COTIZADOR           = 3;
-    public static final int HISTORIAL           = 4;
-    public static final int CODIGO_POSTAL       = 5;
-    public static final int AVISO_PRIVACIDAD    = 6;
+    //public static final int PRELLENADO          = 2;
+    public static final int COTIZADOR           = 2;
+    //public static final int HISTORIAL           = 4;
+    public static final int CODIGO_POSTAL       = 3;
+    public static final int AVISO_PRIVACIDAD    = 4;
 
 
     public static final int RECOMMENDATIONS = 2;

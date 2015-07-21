@@ -10,6 +10,7 @@
         <item name="colorPrimary">@color/estafeta_red</item>
         <item name="colorPrimaryDark">@color/estafeta_red</item>
         <item name="android:textColorPrimary">@color/estafeta_text</item>
+        <item name="android:navigationBarColor">@color/estafeta_red</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:spinnerStyle">@style/mySpinnerItemStyle</item>
@@ -55,7 +56,7 @@
 
     <style name="Color1SwitchStyle">
         <item name="colorControlActivated">@color/estafeta_red</item>
-        <item name="colorControlNormal">@color/estafeta_soft_gray</item>
+        <item name="colorControlNormal">@color/estafeta_text</item>
     </style>
 
     <style name="StarCheckBox" parent="">
