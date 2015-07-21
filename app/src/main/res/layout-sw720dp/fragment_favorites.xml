@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lin_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/toolbar_actionbar_favorites"
+                layout="@layout/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+    <com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width    ="match_parent"
+                        android:layout_height   ="wrap_content"
+                        android:orientation     ="vertical"
+                        android:gravity         ="center">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/head_favorites"
+                            android:adjustViewBounds="true"
+                            android:scaleType="centerCrop"
+                            android:paddingBottom="120dp"
+                            android:layout_gravity="top|center_horizontal"/>
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="match_parent"
+                                android:text                ="@string/favoritos"
+                                android:textSize            ="@dimen/sizeLargeText"
+                                android:layout_weight       ="100"
+                                android:layout_marginTop    ="10dp"
+                                android:textColor           ="@color/estafeta_text"
+                                android:layout_gravity      ="right"
+                                android:gravity             ="center" />
+
+                        </FrameLayout>
+                    </FrameLayout>
+                </LinearLayout><!--25-->
+
+            <LinearLayout
+                android:id="@+id/lin_margin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="10dp"
+                    android:text="@string/notification_alarm"
+                    android:textColor="@color/estafeta_text"
+                    android:textSize="@dimen/sizeMediumText"
+                    android:textStyle="bold"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:weightSum="100">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="65"
+
+                        android:layout_marginBottom="2dp"
+                        android:text="@string/delivery_confirmation"
+                        android:textColor="@color/estafeta_text"
+                        android:textSize="@dimen/sizeMediumText"
+                        android:background="@color/white"/>
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/swch_notifica"
+                        android:layout_weight="30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:theme="@style/Color1SwitchStyle"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/estafeta_soft_gray"/>
+
+
+                <ListView
+                    android:id="@+id/liv_favorite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:divider="@color/estafeta_soft_gray"
+                    android:dividerHeight="1dp"/>
+
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+    </FrameLayout>
+
+    </com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/white">
+
+
+        <LinearLayout
+            android:id="@+id/lin_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imgbtn_delete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/estafeta_red"
+                android:padding="10dp"
+                android:src="@drawable/delete"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txv_footer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="@dimen/footerSize"
+            android:layout_marginLeft="10dp"
+            android:text="@string/footer"
+            android:textColor="@color/estafeta_soft_gray"
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:gravity="bottom"
+            android:layout_gravity="top|center_horizontal"
+            />
+    </FrameLayout><!--5-->
+
+    </FrameLayout>
+

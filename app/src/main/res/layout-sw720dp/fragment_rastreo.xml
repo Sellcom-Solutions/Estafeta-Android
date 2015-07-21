@@ -15,187 +15,194 @@
             android:layout_height="match_parent"
             android:background="@color/white">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <FrameLayout
-                android:layout_width    ="match_parent"
-                android:layout_height   ="wrap_content"
-                android:orientation     ="vertical"
-                android:gravity         ="center">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/head_rastreo"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:paddingBottom="120dp"
-                    android:layout_gravity="top|center_horizontal"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="wrap_content"
+                    android:orientation     ="vertical"
+                    android:gravity         ="center">
 
-                    <TextView
-                        android:layout_width        ="match_parent"
-                        android:layout_height       ="match_parent"
-                        android:text                ="@string/rastreo"
-                        android:textSize            ="@dimen/sizeLargeText"
-                        android:layout_weight       ="100"
-                        android:layout_marginLeft   ="60dp"
-                        android:textColor           ="@color/estafeta_text"
-                        android:layout_gravity      ="right"
-                        android:gravity             ="center"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/head_rastreo"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        android:paddingBottom="120dp"
+                        android:layout_gravity="top|center_horizontal"/>
 
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width        ="match_parent"
+                            android:layout_height       ="match_parent"
+                            android:text                ="@string/rastreo"
+                            android:textSize            ="@dimen/sizeLargeText"
+                            android:layout_weight       ="100"
+                            android:layout_marginLeft   ="60dp"
+                            android:textColor           ="@color/estafeta_text"
+                            android:layout_gravity      ="right"
+                            android:gravity             ="center"/>
+
+                    </FrameLayout>
                 </FrameLayout>
-            </FrameLayout>
-        </LinearLayout><!--25-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-            <LinearLayout
-                android:id                          ="@+id/info_linelayout"
-                android:layout_width                ="match_parent"
-                android:layout_height               ="wrap_content"
-                android:orientation                 ="horizontal"
-                android:minHeight                   ="@dimen/sizeNormalText">
-
-                <TextView
-                    android:layout_width            ="0dp"
-                    android:layout_height           ="wrap_content"
-                    android:layout_marginLeft       ="10dp"
-                    android:layout_marginStart      ="10dp"
-                    android:layout_weight           ="1"
-                    android:layout_gravity="center_vertical"
-                    android:text                    ="@string/aviso_rastreo"
-                    android:textColor               ="@color/estafeta_text"
-                    android:textSize                ="@dimen/sizeMediumText"
-                    android:textStyle               ="bold"/>
-                <Button
-                    android:id                      ="@+id/btn_help"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:text="\?"
-                    android:textColor="@color/white"
-                    android:layout_marginRight="11dp"
-                    android:textSize="@dimen/sizeLargeText"
-                    android:textAlignment="center"
-                    android:layout_gravity="center"
-                    android:background="@drawable/circle_border_red"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width            ="match_parent"
-                android:layout_height           ="wrap_content"
-                android:minHeight               ="@dimen/sizeNormalText">
-
-                <EditText
-                    android:id                      ="@+id/edt_codigo"
-                    style                           ="@style/EditStyle"
-                    android:layout_width            ="wrap_content"
-                    android:layout_height           ="wrap_content"
-                    android:layout_marginLeft       ="10dp"
-                    android:layout_marginTop        ="5dp"
-                    android:layout_weight           ="1"
-                    android:drawablePadding         ="5dp"
-                    android:focusableInTouchMode    ="true"
-                    android:hint                    ="@string/codigo"
-                    android:inputType               ="number"
-                    android:maxLength               ="22"
-                    android:padding                 ="3dp"
-                    android:textColor               ="@color/estafeta_text"
-                    android:textColorHint           ="@color/estafeta_red"
-                    android:textSize                ="@dimen/sizeLargeText"
-                    />
-
-                <Button
-                    android:id                      ="@+id/btn_agregar"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:text="+"
-                    android:textColor="@color/estafeta_red"
-                    android:layout_marginRight="10dp"
-                    android:textSize="@dimen/sizeXLargeText"
-                    android:layout_gravity="center_vertical"
-                    android:background="@android:color/transparent"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/sizeSmallText">
-
-                <TextView
-                    android:layout_width            ="wrap_content"
-                    android:layout_height           ="wrap_content"
-                    android:layout_gravity          ="right"
-                    android:layout_marginLeft       ="10dp"
-                    android:layout_marginTop        ="5dp"
-                    android:text                    ="@string/aviso_codigo"
-                    android:textSize                ="@dimen/sizeMediumText"
-                    android:textColor               ="@color/estafeta_text"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/estafeta_light_gray"
-                android:orientation="horizontal"
-                android:minHeight="15dp"
-                android:weightSum="100">
-
-                <Button
-                    android:id                      ="@+id/btn_escanear"
-                    android:layout_width            ="0dp"
-                    android:layout_height           ="wrap_content"
-                    android:layout_gravity          ="left"
-                    android:layout_marginBottom     ="1dp"
-                    android:layout_marginRight      ="1dp"
-                    android:layout_weight           ="50"
-                    android:background              ="@color/white"
-                    android:text                    ="@string/boton_escanear"
-                    android:textColor               ="@color/estafeta_red"
-                    android:textSize                ="@dimen/sizeLargeText"/>
-
-                <Button
-                    android:id                      ="@+id/btn_rastrear"
-                    android:layout_width            ="0dp"
-                    android:layout_height           ="wrap_content"
-                    android:layout_gravity          ="right"
-                    android:layout_marginBottom     ="1dp"
-                    android:layout_marginLeft       ="1dp"
-                    android:layout_weight           ="50"
-                    android:background              ="@color/white"
-                    android:text                    ="@string/boton_rastrear"
-                    android:textColor               ="@color/estafeta_red"
-                    android:textSize                ="@dimen/sizeLargeText"/>
-
-            </LinearLayout>
+            </LinearLayout><!--25-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="20"
-                android:background="@color/white">
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                >
+                <LinearLayout
+                    android:id                          ="@+id/info_linelayout"
+                    android:layout_width                ="match_parent"
+                    android:layout_height               ="wrap_content"
+                    android:orientation                 ="horizontal"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:minHeight                   ="@dimen/sizeNormalText">
 
-                <ListView
-                    android:id                      ="@+id/liv_rastreo"
+                    <TextView
+                        android:layout_width            ="0dp"
+                        android:layout_height           ="wrap_content"
+                        android:layout_marginLeft       ="10dp"
+                        android:layout_marginStart      ="10dp"
+                        android:layout_weight           ="1"
+                        android:layout_gravity="center_vertical"
+                        android:text                    ="@string/aviso_rastreo"
+                        android:textColor               ="@color/estafeta_text"
+                        android:textSize                ="@dimen/sizeMediumText"
+                        android:textStyle               ="bold"/>
+                    <Button
+                        android:id                      ="@+id/btn_help"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="\?"
+                        android:textColor="@color/white"
+                        android:layout_marginRight="11dp"
+                        android:textSize="@dimen/sizeLargeText"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:background="@drawable/circle_border_red"/>
+
+                </LinearLayout>
+                <LinearLayout
                     android:layout_width            ="match_parent"
-                    android:layout_height           ="match_parent"
-                    android:visibility              ="visible"
-                    android:divider="@color/estafeta_soft_gray"
-                    android:dividerHeight="1dp">
+                    android:layout_height           ="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:minHeight               ="@dimen/sizeNormalText">
 
-                </ListView>
+                    <EditText
+                        android:id                      ="@+id/edt_codigo"
+                        style                           ="@style/EditStyle"
+                        android:layout_width            ="wrap_content"
+                        android:layout_height           ="wrap_content"
+                        android:layout_marginLeft       ="10dp"
+                        android:layout_marginTop        ="5dp"
+                        android:layout_weight           ="1"
+                        android:drawablePadding         ="5dp"
+                        android:focusableInTouchMode    ="true"
+                        android:hint                    ="@string/codigo"
+                        android:inputType               ="number"
+                        android:maxLength               ="22"
+                        android:padding                 ="3dp"
+                        android:textColor               ="@color/estafeta_text"
+                        android:textColorHint           ="@color/estafeta_red"
+                        android:textSize                ="@dimen/sizeLargeText"
+                        />
 
+                    <Button
+                        android:id                      ="@+id/btn_agregar"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="+"
+                        android:textColor="@color/estafeta_red"
+                        android:layout_marginRight="10dp"
+                        android:textSize="@dimen/sizeXLargeText"
+                        android:layout_gravity="center_vertical"
+                        android:background="@android:color/transparent"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:minHeight="@dimen/sizeSmallText">
+
+                    <TextView
+                        android:id="@+id/txv_num_sends"
+                        android:layout_width            ="wrap_content"
+                        android:layout_height           ="wrap_content"
+                        android:layout_gravity          ="right"
+                        android:layout_marginLeft       ="10dp"
+                        android:layout_marginTop        ="5dp"
+                        android:text                    ="@string/aviso_codigo"
+                        android:textSize                ="@dimen/sizeSmallText"
+                        android:textColor               ="@color/estafeta_text"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/estafeta_light_gray"
+                    android:orientation="horizontal"
+                    android:minHeight="15dp"
+                    android:layout_marginTop="20dp"
+                    android:weightSum="100">
+
+                    <Button
+                        android:id                      ="@+id/btn_escanear"
+                        android:layout_width            ="0dp"
+                        android:layout_height           ="wrap_content"
+                        android:layout_gravity          ="left"
+                        android:layout_marginBottom     ="1dp"
+                        android:layout_marginRight      ="1dp"
+                        android:layout_weight           ="50"
+                        android:background              ="@color/white"
+                        android:text                    ="@string/boton_escanear"
+                        android:textColor               ="@color/estafeta_red"
+                        android:textSize                ="@dimen/sizeLargeText"/>
+
+                    <Button
+                        android:id                      ="@+id/btn_rastrear"
+                        android:layout_width            ="0dp"
+                        android:layout_height           ="wrap_content"
+                        android:layout_gravity          ="right"
+                        android:layout_marginBottom     ="1dp"
+                        android:layout_marginLeft       ="1dp"
+                        android:layout_weight           ="50"
+                        android:background              ="@color/white"
+                        android:text                    ="@string/boton_rastrear"
+                        android:textColor               ="@color/estafeta_red"
+                        android:textSize                ="@dimen/sizeLargeText"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="20"
+                    android:background="@color/white">
+
+                    <ListView
+                        android:id                      ="@+id/liv_rastreo"
+                        android:layout_width            ="match_parent"
+                        android:layout_height           ="match_parent"
+                        android:visibility              ="visible"
+                        android:divider="@color/estafeta_soft_gray"
+                        android:dividerHeight="1dp">
+
+                    </ListView>
+
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
         </LinearLayout>
         <FrameLayout
