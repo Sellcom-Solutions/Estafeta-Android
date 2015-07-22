@@ -22,12 +22,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="25">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width    ="match_parent"
-                    android:layout_height   ="match_parent"
+                    android:layout_height   ="wrap_content"
+                    android:orientation     ="vertical"
                     android:gravity         ="center">
 
                     <ImageView
@@ -36,7 +37,7 @@
                         android:src="@drawable/head_cpostal"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:paddingBottom="50dp"
+                        android:paddingBottom="30dp"
                         android:layout_gravity="top|center_horizontal"/>
 
                     <FrameLayout
@@ -50,9 +51,10 @@
                             android:textSize            ="@dimen/sizeLargeText"
                             android:layout_weight       ="100"
                             android:paddingLeft         ="60dp"
+                            android:layout_marginTop    ="40dp"
                             android:textColor           ="@color/estafeta_text"
                             android:layout_gravity      ="right"
-                            android:gravity             ="center" />
+                            android:gravity             ="center"/>
 
                     </FrameLayout>
                 </FrameLayout>
