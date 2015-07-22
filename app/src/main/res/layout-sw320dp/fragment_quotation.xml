@@ -213,7 +213,7 @@
                                 android:textColor           ="@color/estafeta_text"
                                 android:textSize            ="@dimen/sizeMediumText"
                                 android:hint                ="@string/quotation_zip_destination"
-                                android:imeOptions          ="actionDone"
+                                android:imeOptions          ="actionNext"
                                 android:textColorHint       ="@color/estafeta_soft_gray"
                                 android:layout_weight       ="1"
                                 android:maxLength           ="5"
@@ -261,6 +261,7 @@
                                 android:textColor           ="@color/estafeta_text"
                                 android:layout_marginLeft   ="20dp"
                                 android:layout_marginRight  ="20dp"
+                                android:enabled             ="false"
                                 android:clickable           ="false"
                                 style                       ="@style/EditStyle"/>
                         </LinearLayout>

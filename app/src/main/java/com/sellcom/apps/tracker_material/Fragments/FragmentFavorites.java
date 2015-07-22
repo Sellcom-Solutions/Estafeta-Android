@@ -116,6 +116,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                     if(codes_info == null){
                         codes_info = new ArrayList<>();
                         delete.setEnabled(false);
+
                         swch_notifica.setEnabled(false);
                     }else{
                         delete.setEnabled(true);
@@ -153,8 +154,20 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
 
-                if (isChecked) {/*
+                if (isChecked) {
                     Toast.makeText(context, "Alarma Activada ", Toast.LENGTH_SHORT).show();
+                    listAdapter.notifyDataSetChanged();
+                    notify = isChecked;
+
+                    for(int i = 0; i <codes_info.size(); i++) {
+
+                        codes_info.get(i).put("notifica", String.valueOf(notify));
+                        Log.e(TAG, "Activada codes_info:  ---->  " + codes_info.get(i));
+                    }
+
+                    return;
+                } else {
+                    Toast.makeText(context, "Desactivada Alarma Desactivada ", Toast.LENGTH_SHORT).show();
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
 
@@ -163,18 +176,6 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                         codes_info.get(i).put("notifica", String.valueOf(notify));
                         Log.e(TAG, "codes_info:  ---->  " + codes_info.get(i));
                     }
-
-                    return;
-                } else {
-                    Toast.makeText(context, "Alarma Desactivada ", Toast.LENGTH_SHORT).show();
-                    listAdapter.notifyDataSetChanged();
-                    notify = isChecked;
-
-                    for(int i = 0; i <codes_info.size(); i++) {
-
-                        codes_info.get(i).put("notifica", String.valueOf(notify));
-                        Log.e(TAG, "codes_info:  ---->  " + codes_info.get(i));
-                    }*/
                     return;
                 }
 

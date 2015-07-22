@@ -71,24 +71,24 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     private FragmentTransaction fragmentTransaction;
 
     private ToggleButton    tbtn_nat,
-                            tbtn_inter;
+            tbtn_inter;
 
     private CheckBox        cb_packet,
-                            cb_package;
+            cb_package;
 
 
     private EditText        edt_zc_origin,
-                            edt_zc_destination,
-                            edt_weigth,
-                            edt_high,
-                            edt_long,
-                            edt_width,
-                            edt_dummy,
-                            edt_city,
-                            edt_colony;
+            edt_zc_destination,
+            edt_weigth,
+            edt_high,
+            edt_long,
+            edt_width,
+            edt_dummy,
+            edt_city,
+            edt_colony;
 
     private ImageButton     btn_zc_ori_search,
-                            btn_zc_ori_phonebook,
+            btn_zc_ori_phonebook,
                             btn_zc_dest_search,
                             btn_zc_dest_phonebook;
 
@@ -167,6 +167,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
             edt_zc_origin       = (EditText) view.findViewById(R.id.edt_zc_origin);
             edt_zc_destination  = (EditText) view.findViewById(R.id.edt_zc_destination);
+            edt_zc_destination.setOnEditorActionListener(this);
             edt_weigth          = (EditText) view.findViewById(R.id.edt_weigth);
             edt_high            = (EditText) view.findViewById(R.id.edt_high);
             edt_long            = (EditText) view.findViewById(R.id.edt_long);
@@ -313,9 +314,13 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
 
         if (actionId == EditorInfo.IME_ACTION_DONE) {
-            btn_quote.performClick();
             Utilities.hideKeyboard(context,edt_width);
             return true;
+        }if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            if(ll_for_package.getVisibility() != View.VISIBLE) {
+                Utilities.hideKeyboard(context,edt_zc_destination);
+                return true;
+        }
         }
         return false;
     }

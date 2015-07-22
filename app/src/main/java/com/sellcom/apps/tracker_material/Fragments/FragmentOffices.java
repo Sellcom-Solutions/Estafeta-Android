@@ -13,14 +13,17 @@ import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -29,6 +32,7 @@ import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +45,7 @@ import location.GPSTracker;
 /**
  * Created by jonathan.vazquez on 21/05/15.
  */
-public class FragmentOffices extends TrackerFragment implements View.OnClickListener{
+public class FragmentOffices extends TrackerFragment implements View.OnClickListener,EditText.OnEditorActionListener{
 
     public static final String TAG = "FRAG_OFFICES";
 
@@ -93,6 +97,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             edt_city = (EditText) view.findViewById(R.id.edt_city);
             edt_colony = (EditText) view.findViewById(R.id.edt_colony);
             edt_zip_code = (EditText) view.findViewById(R.id.edt_zip_code);
+            edt_zip_code.setOnEditorActionListener(this);
 
             btn_near.setOnClickListener(this);
             btn_search.setOnClickListener(this);
@@ -279,4 +284,12 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         }
     }
 
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            Utilities.hideKeyboard(context, edt_zip_code);
+            return true;
+        }
+        return false;
+    }
 }
