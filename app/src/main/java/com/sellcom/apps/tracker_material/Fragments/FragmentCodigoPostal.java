@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
@@ -19,6 +22,7 @@ import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterfa
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,7 +32,7 @@ import java.util.Map;
 /**
  * Created by Jose Luis 26/05/2015
  */
-public class FragmentCodigoPostal extends TrackerFragment implements OnClickListener, UIResponseListenerInterface{
+public class FragmentCodigoPostal extends TrackerFragment implements OnClickListener, UIResponseListenerInterface, EditText.OnEditorActionListener{
 
     Context context;
     private FragmentManager fragmentManager;
@@ -53,6 +57,8 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -191,4 +197,12 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     }
 
 
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            Utilities.hideKeyboard(context, colonia);
+            return true;
+        }
+        return false;
+    }
 }

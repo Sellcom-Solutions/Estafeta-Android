@@ -70,7 +70,6 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
 
         swch_confirmacion = (SwitchCompat) view.findViewById(R.id.swch_confirmar);
 
-        swch_confirmacion = new SwitchCompat(ctw);
 
         fav_no_guia = (TextView) view.findViewById(R.id.fav_edit_no_guia);
         fav_no_guia.requestFocus();
@@ -92,8 +91,10 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
 
         fav_no_guia.setText(" " + codes_info.get("no_guia"));
         fav_codigo.setText(" "+codes_info.get("codigo_rastreo"));
-        swch_confirmacion.setChecked(Boolean.parseBoolean(codes_info.get("notifica")));
 
+
+        swch_confirmacion.setChecked(Boolean.parseBoolean(codes_info.get("notifica")));
+        Log.d(TAG, "size: " +codes_info.get("notifica"));
 
 
         swch_confirmacion.setOnCheckedChangeListener(new OnCheckedChangeListener() {

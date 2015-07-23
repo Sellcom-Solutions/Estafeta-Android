@@ -110,6 +110,7 @@
                                 android:textColorHint       ="@color/estafeta_soft_gray"
                                 android:layout_weight       ="3"
                                 android:maxLength           ="5"
+                                android:imeOptions          ="actionNext"
                                 android:inputType           ="number"
                                 android:layout_marginRight  ="20dp"/>
 
@@ -166,8 +167,12 @@
                             android:textSize            ="@dimen/sizeMediumText"
                             android:hint                ="@string/city_etc"
                             android:textColorHint       ="@color/estafeta_soft_gray"
+                            android:inputType           ="text"
+                            android:imeOptions          ="actionNext"
                             android:layout_marginLeft   ="20dp"
-                            android:layout_marginRight  ="20dp" />
+                            android:layout_marginRight  ="20dp"/>
+
+
                         <EditText
                             android:id                  ="@+id/colonia"
                             android:layout_width        ="match_parent"
@@ -176,8 +181,11 @@
                             android:textSize            ="@dimen/sizeMediumText"
                             android:hint                ="@string/locality"
                             android:textColorHint       ="@color/estafeta_soft_gray"
+                            android:inputType           ="text"
+                            android:imeOptions          ="actionDone"
                             android:layout_marginLeft   ="20dp"
-                            android:layout_marginRight  ="20dp" />
+                            android:layout_marginRight  ="20dp"/>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
