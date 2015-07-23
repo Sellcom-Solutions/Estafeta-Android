@@ -39,7 +39,7 @@
     <string name="oficinas">Oficinas</string>
 
     <!-- Rastreo-->
-    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de Guía debe tener 22 dígitos</string>
+    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de guía debe tener 22 dígitos</string>
     <string name="codigo">Código</string>
     <string name="aviso_codigo">Puedes ingresar hasta 10 envíos (uno por línea)</string>
     <string name="boton_escanear">Escanear</string>

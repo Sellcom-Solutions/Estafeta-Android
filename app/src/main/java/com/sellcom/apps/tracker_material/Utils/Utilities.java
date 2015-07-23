@@ -26,6 +26,8 @@ import database.model.Offices;
 
 public class Utilities {
 
+    public static boolean flag = true;
+
     public static boolean isHandset(Context context) {
         return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK)
                 < Configuration.SCREENLAYOUT_SIZE_LARGE;
@@ -151,24 +153,51 @@ public class Utilities {
     }
 
     public static boolean validateCode(String preCode){
-        if (preCode.length() == 10)
+
+        Log.d("Longitud: ",""+preCode.length());
+
+        if (preCode.length() == 10) {
             return validatedigits(preCode);
 
-        else if (preCode.length() == 22)
-            return validatetext(preCode);
+        }else if (preCode.length() == 22){
+            boolean correctCode = false;
+            for(int i = 0; i<preCode.length(); i++) {
+                if (i == 0) {
+                    correctCode = Utilities.validatetext("" + preCode.charAt(i));
+                } else if (i > 0 && i < 3) {
+                    correctCode = Utilities.validatetext("" + preCode.charAt(i));
+                } else if (i > 2 && i < 10) {
+                    correctCode = Utilities.validatedigits("" + preCode.charAt(i));
+                } else if (i > 9 && i < 13) {
+                    correctCode = Utilities.validatetext("" + preCode.charAt(i));
+                } else if (i > 12 && i < 15) {
+                    correctCode = Utilities.validatetext("" + preCode.charAt(i));
+                } else if (i > 14 && i < 22) {
+                    correctCode = Utilities.validatedigits("" + preCode.charAt(i));
+                }
 
-        Log.d("Longitud: ",String.valueOf(preCode));
-        return false;
+                if(!correctCode){
+                    return false;
+                }
+            }
+            return correctCode;
+
+        }else{
+            Log.d("Longitud: ",""+String.valueOf(preCode));
+            return false;
+        }
+
+
     }
 
-    private static boolean validatedigits(String code){
+    public static boolean validatedigits(String code){
         String pattern = "[0-9]+";
         if (code.matches(pattern))
             return true;
         return false;
     }
 
-    private static boolean validatetext(String code){
+    public static boolean validatetext(String code){
         String pattern = "[a-zA-Z0-9]+";
         if (code.matches(pattern))
             return true;

@@ -14,6 +14,7 @@ import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,32 +30,39 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
     String TAG= "SPLASH_SCREEN";
     Context context;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        context = this;
+
+
         /*
         DataBaseHelper db=new DataBaseHelper(this);
         db.onUpgrade(db.getWritableDatabase(), 1, 2);
         */
-        DialogManager.sharedInstance().setActivity(this);
-        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.cargando),0);
+            DialogManager.sharedInstance().setActivity(this);
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.cargando), 0);
+        if(Utilities.flag) {
+            Utilities.flag = false;
 
-        Log.d(TAG,"crea dbHelper");
-        DataBaseManager.sharedInstance().insert(context);
+            context = this;
 
-        //Actualizar oficinas
-        Map<String, String> requestData =  new HashMap<>();
-        String fecha = Offices.getVersion(context);
-        requestData.put("ultimaAct",fecha);
+            Log.d(TAG, "crea dbHelper");
+            DataBaseManager.sharedInstance().insert(context);
 
-        Log.d(TAG, "Llama al servicio");
-        DialogManager.sharedInstance().dismissDialog();
-        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.actualizando),0);
-        RequestManager.sharedInstance().setListener(this);
-        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
+            //Actualizar oficinas
+            Map<String, String> requestData = new HashMap<>();
+            String fecha = Offices.getVersion(context);
+            requestData.put("ultimaAct", fecha);
 
+            Log.d(TAG, "Llama al servicio");
+            DialogManager.sharedInstance().dismissDialog();
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.actualizando), 0);
+            RequestManager.sharedInstance().setListener(this);
+            RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
+        }
     }
 
     protected void onResume(){
@@ -102,7 +110,9 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
                 if (item.get("method").equals(METHOD.REQUEST_OFFICES.toString())){
                     Log.d(TAG,"metodo oficinas");
                     final UpdateOffices updateOffices = new UpdateOffices(auxResponse);
-                    updateOffices.execute();
+
+                        updateOffices.execute();
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
