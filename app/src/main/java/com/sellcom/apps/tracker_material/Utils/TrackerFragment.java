@@ -111,7 +111,12 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         for(int i = 0; i<auxStates.size(); i++){
 
             auxMapa  = new HashMap<String,String>();
-            auxMapa.put("ZNOMBRE",auxStates.get(i).get("ZNOMBRE"));
+          //  if(auxStates.get(i).get("ZNOMBRE").equals("Mexico, D.F.")){
+            //    auxMapa.put("ZNOMBRE","México, D.F.");
+           // }else{
+                auxMapa.put("ZNOMBRE",auxStates.get(i).get("ZNOMBRE"));
+        //    }
+
             states.add(auxMapa);
 
         }

@@ -286,7 +286,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
+        if (actionId == EditorInfo.IME_ACTION_NEXT) {
             Utilities.hideKeyboard(context, edt_zip_code);
             return true;
         }

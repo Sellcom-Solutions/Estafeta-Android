@@ -23,52 +23,55 @@
             android:textColor="@color/estafeta_text"
             android:text="@string/EditFavorite"
             android:textSize="@dimen/sizeLargeText"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="left"
             android:paddingTop="20dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/fav_edit_info"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:paddingTop="10dp">
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/estafeta_text"
                     android:text="@string/fav_no_guia"
-                    android:textSize="@dimen/sizeMediumText"/>
+                    android:textSize="@dimen/sizeMediumText"
+                    android:gravity="top"/>
                 <TextView
                     android:id                  ="@+id/fav_edit_no_guia"
                     android:layout_width        ="wrap_content"
-                    android:layout_height       ="wrap_content"
+                    android:layout_height       ="match_parent"
                     android:textColor           ="@color/estafeta_text"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:text=""/>
+                    android:textSize            ="@dimen/sizeSmallText"
+                    android:text=""
+                    android:gravity="top"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingTop="5dp">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:textColor="@color/estafeta_text"
                     android:text="@string/favorite_cod_rastreo"
                     android:textSize="@dimen/sizeMediumText"/>
                 <TextView
                     android:id                  ="@+id/fav_edit_cod_rastreo"
                     android:layout_width        ="wrap_content"
-                    android:layout_height       ="wrap_content"
+                    android:layout_height       ="match_parent"
                     android:textColor           ="@color/estafeta_text"
-                    android:textSize            ="@dimen/sizeMediumText"
-                    android:text=""/>
+                    android:textSize            ="@dimen/sizeSmallText"
+                    android:text=""
+                    android:gravity="bottom"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -85,12 +88,11 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/estafeta_text"
                     android:text="@string/name_guia"
-                    android:textSize="@dimen/sizeNormalText"
+                    android:textSize="@dimen/sizeSmallText"
                     android:paddingTop="5dp"/>
 
                 <EditText
-                    android:id                      ="@+id/edit_name_guia"
-                    style                           ="@style/EditStyle"
+                    android:id                      ="@+id/fav_edit_referencia"
                     android:layout_width            ="match_parent"
                     android:layout_height           ="wrap_content"
                     android:layout_marginTop        ="5dp"
@@ -98,12 +100,13 @@
                     android:drawablePadding         ="5dp"
                     android:focusableInTouchMode    ="true"
                     android:hint                    ="@string/edit_name_guia"
-                    android:inputType               ="number"
+                    android:inputType=              "text"
                     android:maxLength               ="22"
                     android:padding                 ="3dp"
                     android:textColor               ="@color/estafeta_text"
                     android:textColorHint           ="@color/estafeta_red"
-                    android:textSize                ="@dimen/sizeLargeText"/>
+                    android:textSize                ="@dimen/sizeNormalText"
+                    style                           ="@style/EditStyle"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -114,19 +117,18 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/estafeta_text"
                         android:text="@string/delivery_confirmation"
-                        android:textSize="@dimen/sizeNormalText"
+                        android:textSize="@dimen/sizeSmallText"
                         android:paddingTop="5dp"
                         android:layout_weight="50"/>
 
-                    <Switch
+                    <android.support.v7.widget.SwitchCompat
                         android:id="@+id/swch_confirmar"
-                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
                         android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginBottom="10dp"
-                        style="@style/AppTheme"
-                        android:background="@color/white"
-                        android:layout_weight="50"
-                        android:checked="false" />
+                        android:theme="@style/Color1SwitchStyle"/>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

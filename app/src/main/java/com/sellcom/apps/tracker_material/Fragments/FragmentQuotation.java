@@ -313,14 +313,19 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     @Override
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
 
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
-            Utilities.hideKeyboard(context,edt_width);
-            return true;
-        }if (actionId == EditorInfo.IME_ACTION_NEXT) {
-            if(ll_for_package.getVisibility() != View.VISIBLE) {
-                Utilities.hideKeyboard(context,edt_zc_destination);
+        if (actionId == EditorInfo.IME_ACTION_NEXT) {
+            if(ll_for_package.getVisibility() == View.VISIBLE) {
+                Utilities.hideKeyboard(context,edt_width);
+                if(edt_zc_destination.isFocusable()){
+                    edt_weigth.requestFocus();
+                }
                 return true;
-        }
+            }else{
+                Utilities.hideKeyboard(context, edt_zc_destination);
+                Toast.makeText(context,"BAKA",Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
         }
         return false;
     }

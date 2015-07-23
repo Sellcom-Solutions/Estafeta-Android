@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="100">
-<com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation     ="vertical"
     android:layout_width    ="match_parent"
@@ -18,45 +18,46 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:weightSum="100">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="25">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <FrameLayout
                 android:layout_width    ="match_parent"
-                android:layout_height   ="match_parent"
+                android:layout_height   ="wrap_content"
+                android:orientation     ="vertical"
                 android:gravity         ="center">
 
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/head_oficinas"
-                        android:adjustViewBounds="true"
-                        android:scaleType="centerCrop"
-                        android:paddingBottom="50dp"
-                        android:layout_gravity="top|center_horizontal"/>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/head_oficinas"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    android:paddingBottom="80dp"
+                    android:layout_gravity="top|center_horizontal"/>
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                        <TextView
-                            android:layout_width        ="match_parent"
-                            android:layout_height       ="match_parent"
-                            android:text                ="@string/ubicar_oficinas"
-                            android:layout_marginTop    ="10dp"
-                            android:textSize            ="@dimen/sizeLargeText"
-                            android:layout_weight       ="100"
-                            android:paddingLeft         ="80dp"
-                            android:textColor           ="@color/estafeta_text"
-                            android:layout_gravity      ="right"
-                            android:gravity             ="center" />
+                    <TextView
+                        android:layout_width        ="match_parent"
+                        android:layout_height       ="match_parent"
+                        android:text                ="@string/ubicar_oficinas"
+                        android:textSize            ="@dimen/sizeLargeText"
+                        android:layout_weight       ="100"
+                        android:layout_marginTop    ="30dp"
+                        android:layout_marginLeft   ="60dp"
+                        android:textColor           ="@color/estafeta_text"
+                        android:layout_gravity      ="right"
+                        android:gravity             ="center"/>
 
                 </FrameLayout>
             </FrameLayout>
-            </LinearLayout><!--25-->
+        </LinearLayout><!--25-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -238,7 +239,7 @@
 
 
     </LinearLayout>
-</com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+</ScrollView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -56,6 +56,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        context = getActivity();
     }
 
 
@@ -72,9 +73,11 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             ciudad          = (EditText) view.findViewById(R.id.ciudad);
             colonia         = (EditText) view.findViewById(R.id.colonia);
 
+
             //setStates to Spinner
             setStatesToSpinner(spinner_state,context);
-
+            zipCode.setOnEditorActionListener(this);
+            colonia.setOnEditorActionListener(this);
 
             validateZipCode.setOnClickListener(this);
             buscarZipCode.setOnClickListener(this);
@@ -125,7 +128,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     estadoString = spinner_state.getSelectedItem().toString();
 
 
-                    if (estadoString.equalsIgnoreCase("Baja California Norte")) {
+                    if (estadoString.equalsIgnoreCase("Baja California")) {
                         estadoString = "BAJA CALIFORNIA";
                     }
                     else if (estadoString.equalsIgnoreCase("Estado de México")) {
@@ -196,11 +199,13 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
         fdh.show(fragmentManager,"FRAG_DIALOG_CP");
     }
 
-
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_DONE) {
+        if (actionId == EditorInfo.IME_ACTION_NEXT) {
             Utilities.hideKeyboard(context, colonia);
+            return true;
+        }else if(actionId == EditorInfo.IME_ACTION_DONE) {
+            Utilities.hideKeyboard(context, zipCode);
             return true;
         }
         return false;

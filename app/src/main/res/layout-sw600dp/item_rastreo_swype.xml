@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/swipe"
+    android:layout_height="70dp"
+    android:weightSum="100"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/estafeta_red"
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="140dp"
+        android:weightSum="1"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <!--What you want to show-->
+
+        <TextView
+            android:id="@+id/txv_delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Eliminar"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sizeSmallText"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft       ="20dp"
+        android:layout_marginRight      ="10dp"
+        android:orientation             ="vertical"
+        android:weightSum               ="100">
+        <!--What you want to show in SurfaceView-->
+
+        <TextView
+            android:id                  ="@+id/li_tipo_codigo"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="0dp"
+            android:layout_marginTop    ="5dp"
+            android:layout_weight       ="50"
+            android:layout_marginLeft       ="20dp"
+            android:textStyle           ="bold"
+            android:textColor           ="@color/estafeta_text"
+            android:textSize            ="@dimen/sizeSmallText"
+            android:text                =""/>
+
+        <TextView
+            android:id                  ="@+id/li_codigo"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="0dp"
+            android:layout_weight       ="50"
+            android:layout_marginLeft       ="20dp"
+            android:layout_marginBottom ="5dp"
+            android:textColor           ="@color/estafeta_text"
+            android:textSize            ="@dimen/sizeSmallText"
+            android:text=""/>
+
+    </LinearLayout>
+
+
+
+</com.daimajia.swipe.SwipeLayout>

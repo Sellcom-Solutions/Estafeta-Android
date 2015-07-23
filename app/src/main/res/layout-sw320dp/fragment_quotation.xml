@@ -363,7 +363,7 @@
                                 android:textColor           ="@color/estafeta_text"
                                 android:inputType           ="numberDecimal"
                                 android:maxLength           ="5"
-                                android:imeOptions          ="actionDone"
+                                android:imeOptions          ="actionNext"
                                 android:gravity             ="center"
                                 android:textSize            ="@dimen/sizeMediumText"
                                 android:hint                ="@string/quotation_width"
