@@ -313,20 +313,19 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     @Override
     public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
 
-        if (actionId == EditorInfo.IME_ACTION_NEXT) {
-            if(ll_for_package.getVisibility() == View.VISIBLE) {
-                if(edt_zc_destination.isFocused()){
-                    edt_weigth.requestFocus();
-                    edt_weigth.callOnClick();
-                }else{
-                    Utilities.hideKeyboard(context,edt_width);
+            if (actionId == EditorInfo.IME_ACTION_NEXT) {
+                if(ll_for_package.getVisibility() == View.VISIBLE) {
+                    if(edt_zc_destination.isFocused()){
+                        edt_weigth.requestFocus();
+                        edt_weigth.callOnClick();
+                    }else{
+                        Utilities.hideKeyboard(context,edt_width);
+                    }
+                    return true;}else{
+                    Utilities.hideKeyboard(context, edt_zc_destination);
+                    return true;
                 }
-                return true;
-            }else{
-                Utilities.hideKeyboard(context, edt_zc_destination);
-                return true;
             }
-        }
         return false;
     }
 
@@ -652,7 +651,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                         }else{
                             int numCountrie = spn_countrie.getSelectedItemPosition();
 
-                            if(numCountrie == 63){
+                            if(numCountrie == 39 || numCountrie == 63){
                                 contEUA_Canada = 0;
                                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
                                 cotizar("internacional_sobre_eua_canada");
