@@ -3,6 +3,7 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -29,7 +30,6 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.FavoriteListAdapter;
-import com.sellcom.apps.tracker_material.Adapters.RastreoAdapter;
 import com.sellcom.apps.tracker_material.Adapters.RastreoListAdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
@@ -55,7 +55,7 @@ import database.model.History;
 /**
  * Created by rebecalopezmartinez on 21/05/15.
  */
-public class FragmentRastreo extends TrackerFragment implements View.OnClickListener, AdapterView.OnItemClickListener,RastreoAdapter.setNumCodes {
+public class FragmentRastreo extends TrackerFragment implements View.OnClickListener, AdapterView.OnItemClickListener,RastreoListAdapter.setNumCodes {
 
     String TAG= "FRAG_RASTREO";
 
@@ -70,12 +70,14 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     EditText                        codigo;
     TextView    txv_num_sends;
 
+    private int restantes = 10;
+
     MenuItem favorite;
 
 
 
     ListView lst_rastreo;
-    RastreoAdapter lstAdapter;
+    RastreoListAdapter lstAdapter;
     static ArrayList<Map<String,String>> codes_array = new ArrayList<Map<String,String>>();
 
     Context context;
@@ -111,6 +113,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         escanear    = (Button) view.findViewById(R.id.btn_escanear);
         agregar     = (Button) view.findViewById(R.id.btn_agregar);
         lst_rastreo = (ListView)view.findViewById(R.id.liv_rastreo);
+        lst_rastreo.setOnItemClickListener(this);
         codigo      = (EditText)view.findViewById(R.id.edt_codigo);
         txv_num_sends = (TextView)view.findViewById(R.id.txv_num_sends);
 
@@ -125,7 +128,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 codigo.setEnabled(false);
                 escanear.setEnabled(false);
             }
-            lstAdapter = new RastreoAdapter(getActivity(),codes_array);
+            lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
             lstAdapter.setCodesNumbers(this);
             lst_rastreo.setAdapter(lstAdapter);
             lstAdapter.notifyDataSetChanged();
@@ -194,7 +197,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     //Log.d(TAG,"item selected");
                     // Bundle bundle= new Bundle();
                     // bundle.putSerializable("codes_info", codes_info);
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Favoritos...",0);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando...",0);
 
                     new CheckDateFavorite().execute();
                 }
@@ -220,7 +223,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             //15000
             case R.id.btn_escanear:
                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                List<String> oDesiredFormats = Arrays.asList("PDF_417".split(","));
+                List<String> oDesiredFormats = Arrays.asList("PDF_417,CODE_128".split(","));
                 IntentIntegrator integrator= IntentIntegrator.forSupportFragment(this);
                 integrator.initiateScan(oDesiredFormats);
                 codigo.setText("");
@@ -248,49 +251,114 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public void addCode(){
 
 
-        String codigoStr = codigo.getText().toString();
+        String codigoStr = codigo.getText().toString().trim();
         //codes_array = Rastreo_tmp.getAllInMaps(context);
 
-        if(codigoStr.length()== 10 || codigoStr.length()== 22){
-            if(codes_array != null) {
-                for (int i = 0; i < codes_array.size(); i++) {
-                    Map<String, String> aux = new HashMap<>();
-                    aux = codes_array.get(i);
-                    String c = aux.get("codigo");
-                    if (c.equals(codigoStr)) {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido),3000);
-                        return;
-                    }
+        if(codigoStr.length() == 10){
 
+            boolean correctCode = false;
+
+            for(int i = 0; i<codigoStr.length(); i++){
+                correctCode = Utilities.validatedigits("" + codigoStr.charAt(i));
+
+                if(!correctCode){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.code_invalid),3000);
+                    return;
                 }
             }
 
-            Map<String,String> item = new HashMap<>();
-            item.put("codigo",codigoStr);
-            item.put("favorito", "false");
-            //Rastreo_tmp.insert(context, item);
-            codes_array.add(item);
-            //codes_array = Rastreo_tmp.getAllInMaps(context);
 
-            lstAdapter = new RastreoAdapter(getActivity(),codes_array);
-            lstAdapter.setCodesNumbers(this);
-            lst_rastreo.setAdapter(lstAdapter);
-            //lst_rastreo.setOnItemClickListener(this);
 
-             if(codes_array.size() == 10) {
-                  agregar.setEnabled(false);
-                  codigo.setText("");
-                  codigo.setEnabled(false);
-                  escanear.setEnabled(false);
-              }
-            codigo.setText("");
-        }
-        else {
+            if(!compareCodeRepeat(codigoStr)){
+                return;
+            }
+            setCodeRatreo(codigoStr);
+
+        }else if(codigoStr.length() == 22){
+
+            boolean correctCode = false;
+
+            for(int i = 0; i<codigoStr.length(); i++){
+
+                if(i == 0){
+                    correctCode = Utilities.validatetext(""+codigoStr.charAt(i));
+                }else if(i > 0 && i < 3){
+                    correctCode = Utilities.validatetext(""+codigoStr.charAt(i));
+                }else if(i > 2 && i < 10){
+                    correctCode = Utilities.validatedigits("" + codigoStr.charAt(i));
+                }else if(i > 9 && i < 13){
+                    correctCode = Utilities.validatetext("" + codigoStr.charAt(i));
+                }else if(i > 12 && i < 15){
+                    correctCode = Utilities.validatetext(""+codigoStr.charAt(i));
+                }else if(i > 14 && i < 22){
+                    correctCode = Utilities.validatedigits(""+codigoStr.charAt(i));
+                }
+
+                if(!correctCode){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.code_invalid),3000);
+                    return;
+                }
+
+            }
+
+
+
+            if(!compareCodeRepeat(codigoStr)){
+                return;
+            }
+
+            setCodeRatreo(codigoStr);
+
+        } else {
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_tamaño_codigo),3000);
 
         }
 
 
+    }
+
+    public boolean compareCodeRepeat(String code){
+        if(codes_array != null) {
+            for (int j = 0; j < codes_array.size(); j++) {
+                Map<String, String> aux = new HashMap<>();
+                aux = codes_array.get(j);
+                String c = aux.get("codigo");
+                if (c.equals(code)) {
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido),3000);
+                    return false;
+                }
+
+            }
+            return true;
+
+        }
+        return false;
+    }
+
+    public void setCodeRatreo(String codeRatreo){//Agrega el código a la lista de rastreo una vez que ya se validó.
+
+        Map<String,String> item = new HashMap<>();
+        item.put("codigo", codeRatreo);
+        item.put("favorito", "false");
+        //Rastreo_tmp.insert(context, item);
+        codes_array.add(item);
+        //codes_array = Rastreo_tmp.getAllInMaps(context);
+        lstAdapter.notifyDataSetChanged();
+        /*
+        lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
+        lstAdapter.setCodesNumbers(this);
+        lst_rastreo.setAdapter(lstAdapter);*/
+        //lst_rastreo.setOnItemClickListener(this);
+
+        if(codes_array.size() == 10) {
+            agregar.setEnabled(false);
+            codigo.setText("");
+            codigo.setEnabled(false);
+            escanear.setEnabled(false);
+        }
+        codigo.setText("");
+
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
 
@@ -302,16 +370,30 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     @Override
     public void setCodes(int restantes) {
 
-        txv_num_sends.setText("Puedes ingresar hasta "+ restantes + " envíos (uno por línea)");
+            txv_num_sends.setText("Puedes ingresar hasta " + restantes + " envíos (uno por línea)");
 
     }
 
     @Override
     public void removeCode(int position) {
+
         codes_array.remove(position);
-        lstAdapter = new RastreoAdapter(getActivity(),codes_array);
+
+        if(codes_array.size() != 10) {
+            agregar.setEnabled(true);
+            codigo.setText("");
+            codigo.setEnabled(true);
+            escanear.setEnabled(true);
+        }
+
+        setCodes(10-codes_array.size());
+        lstAdapter.stateDelete[position] = 0;
+        lstAdapter.notifyDataSetChanged();
+        /*
+        lstAdapter = new RastreoListAdapter(getActivity(),codes_array);
         lstAdapter.setCodesNumbers(this);
         lst_rastreo.setAdapter(lstAdapter);
+        */
     }
 
 
@@ -456,6 +538,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
         if (resultCode == getActivity().RESULT_OK) {
             if (requestCode == IntentIntegrator.REQUEST_CODE) {
+                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
                 scanResult(scanningResult);
             }
@@ -465,12 +548,17 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public void scanResult(IntentResult scanResult) {
         if (scanResult != null) {
             String preCod = scanResult.getContents().trim();
-            Log.d("Longitud",String.valueOf(preCod.length()));
-            Log.d("Codigo",preCod);
-            if ( Utilities.validateCode(preCod.substring(0,22)) )
-                codigo.setText(scanResult.getContents());
+            Log.d("Longitud", String.valueOf(preCod.length()));
+            Log.d("Codigo", preCod);
+            if (Utilities.validateCode(preCod.substring(0,22))) {
+                if(!compareCodeRepeat(scanResult.getContents().trim())){
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido),3000);
+                }else{
+                    setCodeRatreo(preCod.substring(0,22));
+                }
+            }
             else
-                Toast.makeText(context,context.getResources().getString(R.string.code_incorrect),Toast.LENGTH_SHORT).show();
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.code_invalid), 3000);
         }
     }
 

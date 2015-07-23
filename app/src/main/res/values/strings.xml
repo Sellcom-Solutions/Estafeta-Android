@@ -49,7 +49,8 @@
     <string name="footer">©2012-2015 Estafeta Mexicana, S.A. de C.V.</string>
 
     <!-- Rastreo -->
-    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de Guía debe tener 22 dígitos</string>
+    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de guía debe tener 22 dígitos</string>
+    <string name="code_invalid">Código invalido, favor de verificarlo.</string>
     <string name="codigo">Código</string>
     <string name="aviso_codigo">Puedes ingresar hasta 10 envíos (uno por línea)</string>
     <string name="boton_escanear">ESCANEAR</string>

@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:fillViewport="true">
 
     <FrameLayout
@@ -120,13 +121,14 @@
 
                 <Button
                     android:id                      ="@+id/btn_agregar"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:text="+"
                     android:textColor="@color/estafeta_red"
                     android:layout_marginRight="10dp"
                     android:textSize="@dimen/sizeXLargeText"
                     android:layout_gravity="center_vertical"
+                    android:gravity="center"
                     android:background="@android:color/transparent"/>
 
             </LinearLayout>

@@ -4,8 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.sellcom.apps.tracker_material.R;
 
@@ -24,6 +27,7 @@ public class RastreoListAdapter extends BaseAdapter {
     Context context;
     private ArrayList<Map<String,String>> codigos;
     setNumCodes setNumCodes;
+    public static int[] stateDelete = {0,0,0,0,0,0,0,0,0,0};
 
 
     public  RastreoListAdapter (Context context, ArrayList<Map<String,String>> codigos){
@@ -34,6 +38,8 @@ public class RastreoListAdapter extends BaseAdapter {
     class CodigosViewHolder{
         TextView        tipo_codigo;
         TextView        no_codigo;
+        LinearLayout    lin_delete;
+        LinearLayout    lin_container_codes;
         int             position;
 
     }
@@ -54,35 +60,80 @@ public class RastreoListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final CodigosViewHolder   holder;
-        if (convertView == null){
-            holder                      = new CodigosViewHolder();
+        //final CodigosViewHolder   holder;
+        //if (convertView == null){
+            //holder                      = new CodigosViewHolder();
             convertView                 = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_rastreo,parent,false);
-            holder.tipo_codigo          = (TextView)convertView.findViewById(R.id.li_tipo_codigo);
-            holder.no_codigo            = (TextView)convertView.findViewById(R.id.li_codigo);
-            convertView.setTag(holder);
-        }
-        else{
-            holder  = (CodigosViewHolder)convertView.getTag();
-        }
+            final TextView tipo_codigo          = (TextView)convertView.findViewById(R.id.li_tipo_codigo);
+        final TextView no_codigo            = (TextView)convertView.findViewById(R.id.li_codigo);
+        final LinearLayout lin_delete           = (LinearLayout)convertView.findViewById(R.id.lin_delete);
+        final LinearLayout lin_container_codes  = (LinearLayout)convertView.findViewById(R.id.lin_container_codes);
+            //convertView.setTag(holder);
+        //}
+        //else{
+          //  holder  = (CodigosViewHolder)convertView.getTag();
+        //}
 
         try {
 
+            if(stateDelete[position] == 1){
+                lin_delete.setVisibility(View.VISIBLE);
+            }else{
+                lin_delete.setVisibility(View.GONE);
+            }
+
+            lin_container_codes.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if(lin_delete.getVisibility() == View.GONE){
+                        stateDelete[position] = 1;
+                        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_from_right);
+                        lin_delete.startAnimation(animation);
+                        lin_delete.setVisibility(View.VISIBLE);
+                    }else if(lin_delete.getVisibility() == View.VISIBLE){
+                        stateDelete[position] = 0;
+                        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_to_right);
+                        lin_delete.startAnimation(animation);
+                        lin_delete.setVisibility(View.GONE);
+                    }
+                    return true;
+                }
+            });
+
+            lin_container_codes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(lin_delete.getVisibility() == View.VISIBLE){
+                        stateDelete[position] = 0;
+                        Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_to_right);
+                        lin_delete.startAnimation(animation);
+                        lin_delete.setVisibility(View.GONE);
+                    }
+                }
+            });
+
+
+            lin_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    setNumCodes.removeCode(position);
+                }
+            });
 
             Map<String, String> cod = new HashMap<>();
             cod = codigos.get(position);
             final String codStr = cod.get("codigo");
             if(codStr.length() == 10)
-                holder.tipo_codigo.setText(context.getString(R.string.cod_rastreo) );
+                tipo_codigo.setText(context.getString(R.string.cod_rastreo) );
             else {
-                holder.tipo_codigo.setText(context.getString(R.string.no_guia));
+                tipo_codigo.setText(context.getString(R.string.no_guia));
 
             }
 
             int size = 10-codigos.size();
             setNumCodes.setCodes(size);
 
-            holder.no_codigo.setText(codStr);
+            no_codigo.setText(codStr);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -91,8 +142,10 @@ public class RastreoListAdapter extends BaseAdapter {
         return convertView;
     }
 
+
     public interface setNumCodes{
         public void setCodes(int restantes);
+        public void removeCode(int position);
     }
 
     public void setCodesNumbers(setNumCodes listener) {

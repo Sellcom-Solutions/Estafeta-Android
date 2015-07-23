@@ -5,7 +5,7 @@
         <item name="colorControlActivated">@color/estafeta_soft_gray</item>
         <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
         -->
-    <style name="AppTheme" parent="Theme.AppCompat.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/estafeta_red</item>
         <item name="colorPrimaryDark">@color/estafeta_red</item>

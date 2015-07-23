@@ -1,6 +1,7 @@
 package com.sellcom.apps.tracker_material.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -88,7 +89,6 @@ public class RastreoAdapter extends BaseSwipeAdapter {
 
             int size = 10-codigos.size();
             setNumCodes.setCodes(size);
-
             no_codigo.setText(codStr);
 
         } catch (Exception e) {

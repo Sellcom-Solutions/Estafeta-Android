@@ -15,11 +15,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.ProfileManager;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.util.List;
 
@@ -123,8 +125,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 if (!isAdded()) return;
-
+                //Utilities.hideKeyboard(getActivity(), new EditText(getActivity()));
                 getActivity().invalidateOptionsMenu();
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             }
         };
 
@@ -154,6 +157,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     public void selectItem(int position) {
+
         mCurrentSelectedPosition = position;
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
