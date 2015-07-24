@@ -36,6 +36,7 @@ import com.sellcom.apps.tracker_material.NavigationDrawer.NavigationDrawerFragme
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 
 import java.util.Map;
@@ -297,7 +298,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     @Override
     public void responseFromDecisionDialog(String confirmMessage, String option) {
         if (option.equalsIgnoreCase("OK")){
-            moveTaskToBack(true);
+            Utilities.flag = true;
+            //android.os.Process.killProcess(android.os.Process.myPid());
             this.finish();
         }
 

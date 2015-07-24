@@ -1,5 +1,5 @@
 insert into estados ("Z_PK", "ZNUMEROESTADO", "ZLATITUD", "ZLONGITUD", "ZNOMBRE") values ('1', '1', '21.8817964', '-102.2912701', 'Aguascalientes');
-insert into estados ("Z_PK", "ZNUMEROESTADO", "ZLATITUD", "ZLONGITUD", "ZNOMBRE") values ('2', '2', '30.8406338', '-115.2837585', 'Baja California');
+insert into estados ("Z_PK", "ZNUMEROESTADO", "ZLATITUD", "ZLONGITUD", "ZNOMBRE") values ('2', '2', '30.8406338', '-115.2837585', 'Baja California Norte');
 insert into estados ("Z_PK", "ZNUMEROESTADO", "ZLATITUD", "ZLONGITUD", "ZNOMBRE") values ('3', '3', '26.0444446', '-111.6660725', 'Baja California Sur');
 insert into estados ("Z_PK", "ZNUMEROESTADO", "ZLATITUD", "ZLONGITUD", "ZNOMBRE") values ('4', '4', '18.931225', '-90.2618068', 'Campeche');
 insert into estados ("Z_PK", "ZNUMEROESTADO", "ZLATITUD", "ZLONGITUD", "ZNOMBRE") values ('5', '5', '16.7569318', '-93.1292353', 'Chiapas');

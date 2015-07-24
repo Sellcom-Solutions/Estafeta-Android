@@ -228,6 +228,18 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         String sql = "select * from offices where estado=? ";
 
         state   = "" + (spn_state.getSelectedItemPosition());
+        switch (state){
+            case "15":
+                state = "17";
+                break;
+            case "16":
+                state = "15";
+                break;
+            case "17":
+                state = "16";
+                break;
+        }
+
         Log.e("Prompt"," ------ "+(spn_state.getSelectedItemPosition() + 1));
         args.add("" + state);
 
@@ -251,6 +263,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         selectionArgs = args.toArray(new String[args.size()]);
 
         mapList = Offices.getOfficesByCity(context, sql, selectionArgs);
+
         if(mapList != null) {
 
             bundle.putString("typeSearch","busqueda_avanzada");

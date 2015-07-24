@@ -367,7 +367,6 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
                 }
             }else if(typeSearch.equals("busqueda_avanzada")){
-
                 currentPosition = new LatLng((Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLATITUD"))), Double.parseDouble(listStates.get((Integer.parseInt(state)-1)).get("ZLONGITUD")));
                 listPositions.add(currentPosition);
                 listOficinasFiltradas.add(new HashMap<String, String>());
@@ -381,6 +380,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
                     latitud = Utilities.getSaveString(listOficinas.get(i).get("latitud"));
                     longitud = Utilities.getSaveString(listOficinas.get(i).get("longitud"));
 
+                    Log.d("offices map: ","Estado "+ listOficinas.get(i).get("estado") +" Colonia "+ listOficinas.get(i).get("colonia")+" Latitud "+latitud+ " Longitud "+longitud);
                     if(latitud == 0 && longitud == 0){
                         //NOTHING
                     }else{

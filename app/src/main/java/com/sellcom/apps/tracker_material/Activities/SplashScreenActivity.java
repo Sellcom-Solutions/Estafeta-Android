@@ -122,6 +122,7 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             Log.d(TAG,"response null");
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
             startActivity(intent);
+            finish();
         }
 
        /* Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);

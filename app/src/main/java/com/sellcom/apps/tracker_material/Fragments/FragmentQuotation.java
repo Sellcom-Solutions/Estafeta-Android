@@ -505,7 +505,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     private void requestQuote(){
 
         if(!isNetworkAvailable()){
-            Toast.makeText(context, "Debe tener acceso a Internet", Toast.LENGTH_SHORT).show();
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "Necesita tener acceso a Internet", 3000);
         }else{
 
             if(ll_for_package.getVisibility() == View.VISIBLE) {
@@ -680,6 +680,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         cb_package.setChecked(false);
         tbtn_nat.setChecked(true);
         tbtn_inter.setChecked(false);
+        edt_weigth.setText("");
+        edt_high.setText("");
+        edt_long.setText("");
+        edt_width.setText("");
     }
 
     private void cotizar(String type){

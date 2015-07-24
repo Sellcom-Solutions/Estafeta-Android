@@ -80,7 +80,7 @@ public class States {
 
     public static ArrayList<Map<String,String>> getStatesNames(Context context){
 
-        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ZNUMEROESTADO);
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ZNOMBRE + " COLLATE UNICODE");
         if (cursor != null && cursor.getCount() > 0) {
             ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
 
