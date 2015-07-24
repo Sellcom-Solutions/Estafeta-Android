@@ -193,14 +193,27 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 map = new HashMap<String, String>();
                 map = list.get((position + 1));
 
-                txv_guia.setText("$" + Double.parseDouble(map.get("TarifaBase")));
-                txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
-                txv_cargo_extra.setText("$" + Double.parseDouble(map.get("CargosExtra")));
+                decimales = new DecimalFormat("0.00");
 
-                txv_costo.setText("$" + Double.parseDouble(map.get("SobrePeso")));
-                txv_cc_sobrepeso.setText("$" + Double.parseDouble(map.get("CCSobrePeso")));
+                numero = Double.parseDouble(map.get("TarifaBase"));
+                txv_guia.setText("$" + decimales.format(numero));
 
-                txv_costo_total.setText("$" + Double.parseDouble(map.get("CostoTotal")));
+                numero = Double.parseDouble(map.get("CCTarifaBase"));
+                txv_cc_tarifa.setText("$" +decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CargosExtra"));
+                txv_cargo_extra.setText("$" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("SobrePeso"));
+                txv_costo.setText("$" +  decimales.format(numero));
+
+
+                numero = Double.parseDouble(map.get("CCSobrePeso"));
+                txv_cc_sobrepeso.setText("$" +  decimales.format(numero));
+
+
+                numero = Double.parseDouble(map.get("CostoTotal"));
+                txv_costo_total.setText("$" + decimales.format(numero));
 
 
             }
@@ -284,14 +297,27 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_send_type.setText("Sobre");
                 lin_dimensiones.setVisibility(View.GONE);
 
-                txv_guia.setText("$" + Double.parseDouble(map.get("TarifaBase")));
-                txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
-                txv_cargo_extra.setText("$"+Double.parseDouble(map.get("CargosExtra")));
+                decimales = new DecimalFormat("0.00");
 
-                txv_costo.setText("$" + Double.parseDouble(map.get("SobrePeso")));
-                txv_cc_sobrepeso.setText("$"+Double.parseDouble(map.get("CCSobrePeso")));
 
-                txv_costo_total.setText("$"+Double.parseDouble(map.get("CostoTotal")));
+                numero = Double.parseDouble(map.get("TarifaBase"));
+                txv_guia.append("$" +decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CCTarifaBase"));
+                txv_cc_tarifa.append("$" +decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CargosExtra"));
+                txv_cargo_extra.append("$" +decimales.format(numero));
+
+
+                numero = Double.parseDouble(map.get("SobrePeso"));
+                txv_costo.append("$" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CCSobrePeso"));
+                txv_cc_sobrepeso.append("$" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CostoTotal"));
+                txv_costo_total.append("$" + decimales.format(numero));
 
                 txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
@@ -312,14 +338,28 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_send_type.setText("Paquete");
                 lin_dimensiones.setVisibility(View.VISIBLE);
 
-                txv_guia.setText("$" + Double.parseDouble(map.get("TarifaBase")));
-                txv_cc_tarifa.setText("$" + Double.parseDouble(map.get("CCTarifaBase")));
-                txv_cargo_extra.setText("$"+Double.parseDouble(map.get("CargosExtra")));
 
-                txv_costo.setText("$" + Double.parseDouble(map.get("SobrePeso")));
-                txv_cc_sobrepeso.setText("$"+Double.parseDouble(map.get("CCSobrePeso")));
+                decimales = new DecimalFormat("0.00");
 
-                txv_costo_total.setText("$"+Double.parseDouble(map.get("CostoTotal")));
+
+                numero = Double.parseDouble(map.get("TarifaBase"));
+                txv_guia.setText("$" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CCTarifaBase"));
+                txv_cc_tarifa.append("$" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CargosExtra"));
+                txv_cargo_extra.append("$" +decimales.format(numero));
+
+
+                numero = Double.parseDouble(map.get("SobrePeso"));
+                txv_costo.append("$" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CCSobrePeso"));
+                txv_cc_sobrepeso.append("$" + decimales.format(numero));
+
+                numero = Double.parseDouble(map.get("CostoTotal"));
+                txv_costo_total.append("$" + decimales.format(numero));
 
                 txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
@@ -411,7 +451,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_costo_total_internacional.append("" + decimales.format(numero));
 
                 txv_origen.setText("México");
-                txv_destino.setText(""+getArguments().getString("destino"));
+                txv_destino.append(""+getArguments().getString("destino"));
 
                 txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
