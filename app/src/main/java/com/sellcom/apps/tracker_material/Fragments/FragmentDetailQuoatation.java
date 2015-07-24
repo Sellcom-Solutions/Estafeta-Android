@@ -558,22 +558,41 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 Log.d(TAG, "Action Share");
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
+                if (lin_dimensiones.getVisibility() == View.GONE) {
+                    String sendText = "Servicio: " + servicioList.get(posServicio) + "."
+                            + "Tipo: " + txv_send_type.getText() + ". "
+                            + "Origen: " + txv_origen.getText() + ". "
+                            + "Destino: " + txv_destino.getText() + ". "
+                            + "Costo Total: " + txv_costo_total.getText() + ". "
+                            + "Tarifa:" + txv_guia.getText() + ". "
+                            + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
+                            + "Cargo Combusible: " + txv_cc_tarifa.getText() + ". "
+                            + "Costo Sobrepeso: " + txv_costo.getText() + ". "
+                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". ";
 
-                String sendText ="Servicio: "+ servicioList.get(posServicio) +"."
-                        +"Tipo: "+txv_send_type.getText()+". "
-                        +"Origen: "+txv_origen.getText()+". "
-                        +"Destino: "+txv_destino.getText()+". "
-                        +"Costo Total: "+txv_costo_total.getText()+". "
-                        +"Tarifa:"+txv_guia.getText()+". "
-                        +"Cargo Extra: "+txv_cargo_extra.getText()+". "
-                        +"Cargo Combusible: "+txv_cc_tarifa.getText()+". "
-                        +"Costo Sobrepeso: "+txv_costo.getText()+". "
-                        +"CC Sobrepeso: "+txv_cc_sobrepeso.getText()+". "
-                        +"Dimenciones: "+txv_dimensiones.getText()+". ";
 
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
-          //      sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
-                sendIntent.setType("text/plain");
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
+                    //      sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+                    sendIntent.setType("text/plain");
+                }else{
+                    String sendText = "Servicio: " + servicioList.get(posServicio) + "."
+                            + "Tipo: " + txv_send_type.getText() + ". "
+                            + "Origen: " + txv_origen.getText() + ". "
+                            + "Destino: " + txv_destino.getText() + ". "
+                            + "Costo Total: " + txv_costo_total.getText() + ". "
+                            + "Tarifa:" + txv_guia.getText() + ". "
+                            + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
+                            + "Cargo Combusible: " + txv_cc_tarifa.getText() + ". "
+                            + "Costo Sobrepeso: " + txv_costo.getText() + ". "
+                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". "
+                            +"Dimenciones: "+txv_dimensiones.getText()+". ";
+
+
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
+                    //      sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+                    sendIntent.setType("text/plain");
+
+                }
                 startActivity(sendIntent);
                 break;
 
