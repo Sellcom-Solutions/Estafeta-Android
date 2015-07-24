@@ -82,6 +82,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
     private String cpo,cpd;
 
+    private static  int posServicio = 0;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -175,9 +177,14 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         final DetailQuotationAdapter adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
         lv_quotation.setAdapter(adapter);
 
+        lv_quotation.getSelectedItemPosition();
+        Log.d(TAG, "LV_QUOTATION: " +  lv_quotation.getSelectedItemPosition());
+
         lv_quotation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                posServicio = position;
                 TextView selection = (TextView) view.findViewById(R.id.txv_selection);
                 TextView description = (TextView) view.findViewById(R.id.txv_descripcion_servicio);
 
@@ -241,6 +248,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         lv_quotation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                posServicio = position;
                 TextView selection = (TextView) view.findViewById(R.id.txv_selection);
                 TextView description = (TextView) view.findViewById(R.id.txv_descripcion_servicio);
 
@@ -550,13 +559,20 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
 
-                String sendText = "No.Guía: "+ txv_guia.getText()+". "
-                        +"Código Rastreo: "+txv_cc_tarifa.getText()+". "
+                String sendText ="Servicio: "+ servicioList.get(posServicio) +"."
+                        +"Tipo: "+txv_send_type.getText()+". "
                         +"Origen: "+txv_origen.getText()+". "
-                        +"Destino: "+txv_destino.getText()+". ";
+                        +"Destino: "+txv_destino.getText()+". "
+                        +"Costo Total: "+txv_costo_total.getText()+". "
+                        +"Tarifa:"+txv_guia.getText()+". "
+                        +"Cargo Extra: "+txv_cargo_extra.getText()+". "
+                        +"Cargo Combusible: "+txv_cc_tarifa.getText()+". "
+                        +"Costo Sobrepeso: "+txv_costo.getText()+". "
+                        +"CC Sobrepeso: "+txv_cc_sobrepeso.getText()+". "
+                        +"Dimenciones: "+txv_dimensiones.getText()+". ";
 
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+          //      sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
                 break;

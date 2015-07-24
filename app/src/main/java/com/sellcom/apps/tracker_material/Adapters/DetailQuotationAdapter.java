@@ -43,8 +43,9 @@ public class DetailQuotationAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return list.get(position);
     }
+
 
     @Override
     public long getItemId(int position) {
