@@ -566,9 +566,9 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             + "Costo Total: " + txv_costo_total.getText() + ". "
                             + "Tarifa:" + txv_guia.getText() + ". "
                             + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
-                            + "Cargo Combusible: " + txv_cc_tarifa.getText() + ". "
+                            + "CC: " + txv_cc_tarifa.getText() + ". "
                             + "Costo Sobrepeso: " + txv_costo.getText() + ". "
-                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". ";
+                            + "Sobrepeso: " + txv_cc_sobrepeso.getText() + ". ";
 
 
                     sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
@@ -582,9 +582,9 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             + "Costo Total: " + txv_costo_total.getText() + ". "
                             + "Tarifa:" + txv_guia.getText() + ". "
                             + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
-                            + "Cargo Combusible: " + txv_cc_tarifa.getText() + ". "
+                            + "CC: " + txv_cc_tarifa.getText() + ". "
                             + "Costo Sobrepeso: " + txv_costo.getText() + ". "
-                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". "
+                            + "Sobrepeso: " + txv_cc_sobrepeso.getText() + ". "
                             +"Dimenciones: "+txv_dimensiones.getText()+". ";
 
 
