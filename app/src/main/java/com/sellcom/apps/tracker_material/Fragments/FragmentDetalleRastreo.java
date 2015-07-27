@@ -245,11 +245,14 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 sendIntent.setAction(Intent.ACTION_SEND);
 
                 String sendText = "No.Guía: "+ no_guia.getText()+". "
-                                  +"Código Rastreo: "+cod_rastreo.getText()+". "
-                                  +"Origen: "+origen.getText()+". "
-                                  +"Destino: "+destino.getText()+". ";
+                        +"Código Rastreo: "+cod_rastreo.getText()+". "
+                        +"Origen: "+origen.getText()+". "
+                        +"Destino: "+destino.getText()+". "
+                        +"Estatus: "+estatus.getText()+". "
+                        +"Fecha: "+fecha_hora_entrega.getText()+". "
+                        +"Recibio: "+recibio.getText()+". ";
 
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
+                //sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
