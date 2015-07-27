@@ -5,6 +5,7 @@
     <dimen name="activity_horizontal_margin">32dp</dimen>
     <dimen name="activity_vertical_margin">32dp</dimen>
     <dimen name="list_item_horizontal_margin">8dp</dimen>
+    <dimen name="sizeSmallText">18sp</dimen>
     <dimen name="sizeNormalText">20sp</dimen>
     <dimen name="sizeMediumText">25sp</dimen>
     <dimen name="sizeLargeText">35sp</dimen>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/estafeta_light_gray">
+    
+    <TextView
+        android:id="@+id/txv_descripcion_servicio"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:textSize="@dimen/sizeSmallText"/>
+
+    <TextView
+        android:id="@+id/txv_selection"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:visibility="invisible"
+        android:background="@color/estafeta_red"/>
+    
+
+</LinearLayout>

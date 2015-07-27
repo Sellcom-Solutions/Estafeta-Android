@@ -98,11 +98,11 @@ public class Utilities {
     public static Bitmap getOfficesIcon(String type,Context context){
         Bitmap bMap=null;
         if (type.equals("SU"))
-            return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_filtro_rojo);
+            return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_filtro_rojo_reality);
         else if (type.equals("CO"))
-            return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_filtro_azul);
+            return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_filtro_azul_reality);
         else if(type.equals("CA"))
-                return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_filtro_gris);
+                return BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_filtro_gris_reality);
         return bMap;
     }
 
