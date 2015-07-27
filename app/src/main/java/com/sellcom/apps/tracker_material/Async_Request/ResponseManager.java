@@ -532,7 +532,7 @@ public class ResponseManager {
                             int val=0;
 
                             if (value.equalsIgnoreCase("BAJA CALIFORNIA")) {
-                                value = "Baja California Norte";
+                                value = "Baja California";
                             }
 							else if (value.equalsIgnoreCase("EDO. DE MEXICO")) {
 								value = "Estado de Mexico";

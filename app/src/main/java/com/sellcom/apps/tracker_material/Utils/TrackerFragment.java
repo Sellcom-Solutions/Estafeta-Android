@@ -115,11 +115,8 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
             //    auxMapa.put("ZNOMBRE","México, D.F.");
            // }else{
 
-            if(i == 1){
-                auxMapa.put("ZNOMBRE","Baja California");
-            }else {
-                auxMapa.put("ZNOMBRE", auxStates.get(i).get("ZNOMBRE"));
-            }
+            auxMapa.put("ZNOMBRE", auxStates.get(i).get("ZNOMBRE"));
+
         //    }
 
             states.add(auxMapa);

@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -13,10 +14,14 @@ import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.DatesHelper;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.Utilities;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,11 +60,18 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             //Actualizar oficinas
             Map<String, String> requestData = new HashMap<>();
             String fecha = Offices.getVersion(context);
-            requestData.put("ultimaAct", fecha);
+
+            SharedPreferences sharedPref        = getPreferences(Context.MODE_PRIVATE);
+            String last_date = sharedPref.getString("last_date", fecha);
+
+            requestData.put("ultimaAct", last_date);
+
+            SharedPreferences.Editor editor     = sharedPref.edit();
+            editor.putString("last_date", DatesHelper.getStringDate(new Date()));
+            editor.commit();
+
 
             Log.d(TAG, "Llama al servicio");
-            DialogManager.sharedInstance().dismissDialog();
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.actualizando), 0);
             RequestManager.sharedInstance().setListener(this);
             RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
         }
@@ -135,15 +147,12 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         public UpdateOffices(ArrayList<Map<String, String>> values){
             this.values = values;
         }
-        @Override
-        protected void onPreExecute() {
-            DialogManager.sharedInstance().dismissDialog();
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.actualizando),0);
-        }
 
         @Override
         protected String doInBackground(String... params) {
-            Offices.updateOffices(context,values);
+            if(values.size() != 0) {
+                Offices.updateOffices(context, values);
+            }
            // dbHelper.close();
             return null;
         }

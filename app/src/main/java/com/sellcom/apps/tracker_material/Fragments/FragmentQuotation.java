@@ -694,7 +694,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
         switch (type){
             case "nacional_sobre":
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
 
                 requestData.put("Peso","0.0");
                 requestData.put("Alto","0.0");
@@ -713,7 +713,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case "nacional_paquete":
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
 
                 requestData.put("Peso",peso);
                 requestData.put("Alto",alto);
@@ -732,7 +732,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case "internacional_sobre":
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
 
 
                 requestData.put("peso","1");

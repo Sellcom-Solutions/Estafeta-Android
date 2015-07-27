@@ -351,7 +351,7 @@ public class RequestManager implements ResponseListenerInterface {
                 try {
                     responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"1");
                     setResponseArray(responseArray);
-                    Log.d("responseParse","ok"+responseArray.size());
+                    //Log.d("responseParse","ok"+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -366,7 +366,7 @@ public class RequestManager implements ResponseListenerInterface {
                 try {
                     responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"0");
                     setResponseArray(responseArray);
-                    Log.d("responseParse","ok"+responseArray.size());
+                    //Log.d("responseParse","ok"+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -381,7 +381,7 @@ public class RequestManager implements ResponseListenerInterface {
                 try {
                     responseArray = ResponseManager.sharedInstance().parseGuide(doc);
                     setResponseArray(responseArray);
-                    Log.d("responseParse","ok size: "+responseArray.size());
+                    //Log.d("responseParse","ok size: "+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -433,7 +433,7 @@ public class RequestManager implements ResponseListenerInterface {
                 try {
                     responseArray = ResponseManager.sharedInstance().parseOffices(doc);
                     setResponseArray(responseArray);
-                    Log.d("responseParse","ok size: "+responseArray.size());
+                    //Log.d("responseParse","ok size: "+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
