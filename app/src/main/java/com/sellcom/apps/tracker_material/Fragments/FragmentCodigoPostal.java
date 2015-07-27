@@ -112,7 +112,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
             case R.id.btn_buscar_zipcode:
                 ciudadString = ciudad.getText().toString();
-
+                coloniaString = colonia.getText().toString();
                 if(spinner_state.getSelectedItemPosition() == 0){
 
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_estado), 3000);
@@ -128,7 +128,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     estadoString = spinner_state.getSelectedItem().toString();
 
 
-                    if (estadoString.equalsIgnoreCase("Baja California")) {
+                    if (estadoString.equalsIgnoreCase("Baja California Norte")) {
                         estadoString = "BAJA CALIFORNIA";
                     }
                     else if (estadoString.equalsIgnoreCase("Estado de México")) {
@@ -150,7 +150,7 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     Log.d("Estado",estadoString);
 
                     requestData.put("ciudad", convertNonAscii(ciudadString).trim());
-                    requestData.put("localidad", convertNonAscii(ciudadString).trim());
+                    requestData.put("localidad", convertNonAscii(coloniaString).trim());
 
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando),0);
                     RequestManager.sharedInstance().setListener(this);

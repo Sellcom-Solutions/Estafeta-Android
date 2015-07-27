@@ -113,56 +113,59 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()) {
+        if(!isNetworkAvailable()){
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "Necesita tener acceso a Internet", 3000);
+        }else {
 
-            case R.id.btn_near:
-                Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
-                if(myLocation != null){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando_oficinas),0);
-                    nearOffice();
-                }else{
-                    Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
-                }
+            switch (v.getId()) {
 
-                break;
+                case R.id.btn_near:
+                    Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
+                    if (myLocation != null) {
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando_oficinas), 0);
+                        nearOffice();
+                    } else {
+                        Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
+                    }
 
-            case  R.id.btn_search:
+                    break;
 
-                if(spn_state.getSelectedItemPosition() == 0){
+                case R.id.btn_search:
 
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_estado), 3000);
-                    return;
-                }/*else if(edt_city.getText().toString().equals("")) {
+                    if (spn_state.getSelectedItemPosition() == 0) {
+
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_estado), 3000);
+                        return;
+                    }/*else if(edt_city.getText().toString().equals("")) {
 
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_ciudad), 3000);
                     return;
 
-                }*/else{
-                    Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
-                    if(myLocationAdvance != null){
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando_oficinas),0);
-                        searchOffice();
-                    }else{
-                        Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
+                }*/ else {
+                        Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
+                        if (myLocationAdvance != null) {
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando_oficinas), 0);
+                            searchOffice();
+                        } else {
+                            Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
 
 
+                    break;
 
-                break;
+                case R.id.btn_ar:
 
-            case R.id.btn_ar:
-
-                if ( !(((LocationManager)context.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) ){
-                    showSettingsAlert();
-                }
-                else{
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.loading_AR_elements),0);
-                    openFragmentAR();
-                }
+                    if (!(((LocationManager) context.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER))) {
+                        showSettingsAlert();
+                    } else {
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.loading_AR_elements), 0);
+                        openFragmentAR();
+                    }
 
 
-                break;
+                    break;
+            }
         }
     }
 
@@ -196,10 +199,10 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         // on pressing cancel button
         alertDialog.setNegativeButton(context.getResources().getString(R.string.gps_alert_cancel),
                 new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
 
         // Showing Alert Message
         alertDialog.show();
@@ -262,10 +265,11 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
         selectionArgs = args.toArray(new String[args.size()]);
 
+
         mapList = Offices.getOfficesByCity(context, sql, selectionArgs);
 
         if(mapList != null) {
-
+            Log.e("Oficinas:",""+sql+args.get(0));
             bundle.putString("typeSearch","busqueda_avanzada");
             bundle.putString("sql",sql);
             bundle.putStringArray("selectionArgs",selectionArgs);
@@ -295,6 +299,14 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
             fragmentTransaction.commit();
         }
+    }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager
+                .getActiveNetworkInfo();
+        return activeNetworkInfo != null;
     }
 
     @Override

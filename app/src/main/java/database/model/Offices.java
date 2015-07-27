@@ -131,7 +131,7 @@ public class Offices {
         ContentValues cv = new ContentValues();
         cv.put(ENT, ent);
         cv.put(OPT, opt);
-
+        cv.put(ESTADO,estado);
         cv.put(CALLE1, calle1);
         cv.put(CALLE2, calle2);
         cv.put(CIUDAD, ciudad);
@@ -320,12 +320,14 @@ public class Offices {
         Cursor cursor = DataBaseAdapter.getDB(context).rawQuery(sql,args);
        /* Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, "estado LIKE ? AND ciudad_n LIKE ? AND colonia_n LIKE ? AND codigo_postal LIKE ?",
                 new String[] { "%" +estado+ "%","%" +ciudad_n+ "%","%" +colonia_n+ "%",codigo_postal}, null, null, null);*/
-
+        int cont = 0;
         if (cursor != null && cursor.getCount() > 0) {
             ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
 
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
 
+                Log.d("Oficina----- ", "------"+cont);
+                cont++;
                 Map<String,String> map  = new HashMap<String, String>();
 
                 map.put(ENT,cursor.getString(cursor.getColumnIndexOrThrow(ENT)));

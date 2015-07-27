@@ -319,6 +319,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
                 selectionArgs = getArguments().getStringArray("selectionArgs");
                 state = getArguments().getString("state");
                 listOficinas = Offices.getOfficesByCity(context, sql, selectionArgs);
+                Log.e("oficinas: ",""+ listOficinas.size());
                 listStates = States.getStatesNames(context);
                 //Toast.makeText(context, "" + listOficinas.size(), Toast.LENGTH_SHORT).show();
             }else if(typeSearch.equals("nada")){
