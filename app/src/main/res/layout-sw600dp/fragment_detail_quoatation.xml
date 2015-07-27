@@ -412,7 +412,7 @@
                             android:background          ="@android:color/transparent"
                             android:gravity="right"
                             android:layout_gravity="right"
-                            android:visibility="visible"/>
+                            android:visibility="gone"/>
                     </LinearLayout>
 
                     <TextView
