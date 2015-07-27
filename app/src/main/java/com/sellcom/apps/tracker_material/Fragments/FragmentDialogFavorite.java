@@ -109,7 +109,15 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
             fav_cp_destino.setText(" " + codes_info.get("cp_destino"));
         }
         if(!(codes_info.get("estatus") == null)) {
-            fav_estatus.setText(" " + codes_info.get("estatus"));
+
+            if(codes_info.get("estatus").equals("CONFIRMADO")){
+                fav_estatus.setText("Entregado");
+            }else if(codes_info.get("estatus").equals("DEVUELTO")){
+                fav_estatus.setText("Pendiente");
+            }else if(codes_info.get("estatus").equals("EN_TRANSITO")){
+                fav_estatus.setText("Proceso de entrega");
+            }
+
         }
         if(!(codes_info.get("fechaHoraEntrega") == null)) {
             fav_fecha.setText(codes_info.get("fechaHoraEntrega"));

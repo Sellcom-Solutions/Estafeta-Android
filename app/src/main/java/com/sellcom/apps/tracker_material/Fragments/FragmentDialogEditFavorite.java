@@ -43,9 +43,11 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
     EditText fav_edit_referencia;
     boolean notify;
     String
-            alias,
+            referencia,
             no_guia,
             codigo_rastreo;
+
+    changeReference changeReference;
 
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
@@ -54,7 +56,7 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_Holo_Dialog_MinWidth);
-        //setCancelable(false);
+        setCancelable(false);
     }
 
     @Override
@@ -136,33 +138,37 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
 
             case R.id.btn_save:
                 Log.d("SAVE", "" + getId());
+
                 context = getActivity();
 
                 codes_info = (Map<String, String>) getArguments().getSerializable("code_array");
-                Log.d(TAG, "Data" + codes_info);
+                Log.d(TAG, "Data" + codes_info.get("id_favoritos"));
 
 
-                alias  = fav_edit_referencia.getText().toString();
+                referencia  = fav_edit_referencia.getText().toString();
 
-                codigo_rastreo = getArguments().getString("codigo_rastreo");
+                //codigo_rastreo = getArguments().getString("codigo_rastreo");
 
-                codes_info.put("notifica", String.valueOf(notify));
-                codes_info.put("alias", alias);
+                Favorites.updateReference(context, referencia, codes_info.get("id_favoritos"));
 
-                Log.d(TAG, "alias: " + alias);
-                Log.d(TAG, "notify: " + notify);
-
-
-                Log.d(TAG, "Data" + codes_info);
-                Favorites.update(context, codes_info);
-                Log.d(TAG, "context" + context);
-                Log.d(TAG, "Data" + codes_info);
+                changeReference.changeDBReference();
 
                 getDialog().dismiss();
                 break;
             }
 
         }
+
+    public interface changeReference{
+        public void changeDBReference();
+
+    }
+
+    public void setChangeReference(changeReference listener){
+        changeReference = listener;
+    }
+
+
     }
 
 

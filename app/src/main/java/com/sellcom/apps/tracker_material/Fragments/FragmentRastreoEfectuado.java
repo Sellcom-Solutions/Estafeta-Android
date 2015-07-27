@@ -161,7 +161,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
 
                 }else {
                     favorite.setEnabled(false);
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando Favoritos...",0);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando),0);
 
                     new CheckDateFavorite().execute();
                 }

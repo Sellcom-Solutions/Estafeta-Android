@@ -151,6 +151,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             recibio.setText(codes_info.get(0).get("DD_receiverName"));
 
             String statusStr = codes_info.get(0).get("statusSPA");
+
+        Toast.makeText(context,""+statusStr,Toast.LENGTH_LONG).show();
             String codigoExcStr = codes_info.get(0).get("H_exceptionCode");
 
         Log.e(TAG,""+codes_info.get(1).get("H_eventDateTime"));

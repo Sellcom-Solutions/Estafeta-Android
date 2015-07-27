@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 
 import com.sellcom.apps.tracker_material.Fragments.FragmentDialogEditFavorite;
 import com.sellcom.apps.tracker_material.Fragments.FragmentDialogFavorite;
+import com.sellcom.apps.tracker_material.Fragments.FragmentFavorites;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
@@ -30,7 +31,7 @@ import database.model.Favorites;
 /**
  * Created by anel on 30/06/2015.
  */
-public class FavoriteListAdapter extends BaseAdapter{
+public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEditFavorite.changeReference{
 
 
     Context context;
@@ -54,6 +55,7 @@ public class FavoriteListAdapter extends BaseAdapter{
         this.fragmentManager=fragmentManager;
         this.type           = type;
     }
+
     class CodigosViewHolder{
 
         int         position;
@@ -148,6 +150,7 @@ public class FavoriteListAdapter extends BaseAdapter{
                 bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
 
                 FragmentDialogEditFavorite fdfe = new FragmentDialogEditFavorite();
+                fdfe.setChangeReference(FavoriteListAdapter.this);
                 fdfe.setArguments(bundle);
                 fdfe.show(fragmentManager, fdfe.TAG);
 
@@ -194,9 +197,16 @@ public class FavoriteListAdapter extends BaseAdapter{
 
     }
 
+    @Override
+    public void changeDBReference() {
+        delete.changeReference();
+
+    }
+
     public interface delete{
         public void deleteFavoriteById(Map<String,String> favoriteDelete);
         public void cancelDeleteById(Map<String,String> favoriteDelete);
+        public void changeReference();
     }
 
     public void setDelete(delete listener) {
