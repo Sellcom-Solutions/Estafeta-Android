@@ -68,7 +68,6 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
         super.onCreate(savedInstanceState);
         DialogManager.sharedInstance().dismissDialog();
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -306,6 +305,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
     }
 
 
+
     @Override
     public void deleteFavoriteById(Map<String, String> favoriteDelete) {
 
@@ -336,4 +336,14 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
         }
 
     }
+
+    @Override
+    public void changeReference() {
+        codes_info = Favorites.getAll(context);
+        listAdapter = new FavoriteListAdapter(getActivity(), context, codes_info, getActivity().getSupportFragmentManager(),"favorite");
+        listAdapter.setDelete(FragmentFavorites.this);
+        lst_favorite.setAdapter(listAdapter);
+    }
+
+
 }

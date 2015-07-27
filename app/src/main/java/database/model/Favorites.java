@@ -68,6 +68,18 @@ public class Favorites {
         return response;
     }
 
+    public static long updateReference(Context context, String referencia, String id_favoritos){
+
+        ContentValues cv = new ContentValues();
+            cv.put(REFERENCIA, referencia);
+
+        long response = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, ID_CTL_FAVORITOS + "=?", new String[]{id_favoritos});
+
+        Log.d("EditDialog",""+response);
+
+        return response;
+    }
+
     public static long update(Context context, Map<String, String> values){
         ContentValues cv = new ContentValues();
         cv.put(ALIAS, " ");

@@ -55,7 +55,7 @@
                         android:id                  ="@+id/favorite_reference"
                         android:layout_width        ="match_parent"
                         android:layout_height       ="wrap_content"
-                        android:textStyle           ="bold"
+                        android:layout_marginLeft="5dp"
                         android:textColor           ="@color/estafeta_text"
                         android:textSize            ="@dimen/sizeSmallText"
                         android:text                =""/>
