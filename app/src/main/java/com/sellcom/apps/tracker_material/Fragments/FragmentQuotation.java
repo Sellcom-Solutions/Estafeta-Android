@@ -1108,7 +1108,17 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 }
 
                 if (typeSend.equals("codigo_postal")) {
-                    showCP(RequestManager.sharedInstance().getResponseArray());
+
+                    ArrayList<Map<String,String>> resp = new ArrayList<>();
+                    resp = RequestManager.sharedInstance().getResponseArray();
+
+                    if(resp != null && resp.size()>0 )
+                        showCP(resp);
+                    else {
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio),3000);
+                    }
+
+
                 }
 
 

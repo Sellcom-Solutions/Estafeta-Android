@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.support.v7.app.ActionBar;
@@ -52,12 +53,14 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
     SwitchCompat swch_notifica;
 
     ImageView imgbtn_delete;
-    Boolean notify;
+    boolean notify;
     FavoriteListAdapter listAdapter;
     ArrayList<Map<String, String>> codes_info = new ArrayList<>();
     ArrayList<Map<String, String>> list_delete = new ArrayList<>();
 
     private MenuItem delete;
+
+    SharedPreferences sharedPref;
 
     private Toolbar mToolbar;
     private ActionBar actionBarActivity;
@@ -73,9 +76,18 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_favorites, container, false);
+
+        sharedPref        = getActivity().getPreferences(Context.MODE_PRIVATE);
+        notify = sharedPref.getBoolean("notify", false);
+
+        SharedPreferences.Editor editor     = sharedPref.edit();
+        editor.putBoolean("notify", notify);
+        editor.commit();
+
+
+
         TrackerFragment.section_index = 5;
         context = getActivity();
-        notify=false;
 
         lin_toolbar = (LinearLayout)view.findViewById(R.id.lin_toolbar);
         lin_toolbar.setVisibility(View.GONE);
@@ -157,6 +169,10 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
 
+                    SharedPreferences.Editor editor     = sharedPref.edit();
+                    editor.putBoolean("notify", notify);
+                    editor.commit();
+
                     for(int i = 0; i <codes_info.size(); i++) {
 
                         codes_info.get(i).put("notifica", String.valueOf(notify));
@@ -167,6 +183,10 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                 } else {
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
+
+                    SharedPreferences.Editor editor     = sharedPref.edit();
+                    editor.putBoolean("notify", notify);
+                    editor.commit();
 
                     for(int i = 0; i <codes_info.size(); i++) {
 
