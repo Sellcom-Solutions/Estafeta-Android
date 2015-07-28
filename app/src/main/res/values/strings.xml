@@ -91,11 +91,11 @@
     <string name="loading_AR_elements">Cargando componentes</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>
-    <string name="ubicar_oficinas">Ubicar Oficinas</string>
+    <string name="ubicar_oficinas">Ubicar oficinas</string>
 
     <!--Fragment Quotation-->
     <string name="quotation_title">Cotizador</string>
-    <string name="quotation_shipping">Cotizar Envío</string>
+    <string name="quotation_shipping">Cotizar envío</string>
     <string name="quotation_national">Nacional</string>
     <string name="quotation_international">Internacional</string>
     <string name="quotation_packet">SOBRE</string>
@@ -109,7 +109,7 @@
     <string name="quotation_long">Largo(cm)</string>
     <string name="quotation_width">Ancho(cm)</string>
 
-    <string name="quotation_search_zc">Buscar Código Postal</string>
+    <string name="quotation_search_zc">Buscar código postal</string>
 
     <string name="quotation_search_zc_accept">Aceptar</string>
     <string name="quotation_search_zc_cancel">Cancelar</string>
@@ -117,10 +117,10 @@
 
     <!--Fragment Quotation_Buy-->
 
-    <string name="sender_name">Nobre Remitente</string>
+    <string name="sender_name">Nobre remitente</string>
     <string name="phone_number">Teléfono</string>
-    <string name="email">Correo Eléctronico</string>
-    <string name="bussines_name">Razón Social</string>
+    <string name="email">Correo eléctronico</string>
+    <string name="bussines_name">Razón social</string>
     <string name="cp_source">C.P. Origen</string>
     <string name="state">Estado</string>
     <string name="city_district">Ciudad, municipio, delegación</string>
@@ -129,15 +129,15 @@
     <string name="street">Calle</string>
     <string name="number">No.</string>
     <string name="next">Siguiente</string>
-    <string name="receiver_name">Nombre Destinatario</string>
+    <string name="receiver_name">Nombre destinatario</string>
     <string name="cp_receiver">C.P. Destino</string>
-    <string name="continue_buy">Continuar Compra</string>
+    <string name="continue_buy">Continuar compra</string>
     <string name="buy">Comprar</string>
 
 
     <!-- Fragment comprobante -->
 
-    <string name="comprobante_compra">Comprobante de Compra</string>
+    <string name="comprobante_compra">Comprobante de compra</string>
     <string name="sender">Remitente: </string>
     <string name="origin">Origen: </string>
     <string name="cp_origin">C.P. Origen: </string>
@@ -147,19 +147,19 @@
     <string name="cp_destiny">C.P. Destino: </string>
 
     <string name="type_of_service">Tipo de servicio: </string>
-    <string name="quarantee">Garantía de Entrega: </string>
+    <string name="quarantee">Garantía de entrega: </string>
 
-    <string name="total_cost">Costo Total: </string>
-    <string name="payment_reference">Referencia de Pago: </string>
+    <string name="total_cost">Costo total: </string>
+    <string name="payment_reference">Referencia de pago: </string>
 
 
 
     <!-- Codigo Postal -->
-    <string name="verificar_codigo">Validar un Código Postal</string>
+    <string name="verificar_codigo">Validar un código postal</string>
     <string name="abr_codigo">C.P.</string>
     <string name="validar_codigo">Validar</string>
-    <string name="buscar_codigo">Buscar un Código Postal</string>
-    <string name="search_by_zip_code">Código Postal</string>
+    <string name="buscar_codigo">Buscar un código postal</string>
+    <string name="search_by_zip_code">Código postal</string>
     <string name="estado">Estado</string>
 
     <!-- Aviso de Privacidad -->
@@ -263,7 +263,7 @@
     <!-- FragmentOffices  -->
 
     <string name="encender_gps">Favor de encender su GPS</string>
-    <string name="consesionaria_autorizada">Concecionaria Autorizada</string>
+    <string name="consesionaria_autorizada">Concecionaria autorizada</string>
     <string name="centro_operativo">Centro operativo y sucursal</string>
     <string name="sucursal">Sucursal</string>
     <string name="seccion_estafeta">Estafeta</string>
@@ -333,9 +333,9 @@
     <string name="hist_buy">Compras</string>
 
     <!-- Fragment AR-->
-    <string name="gps_alert_title">GPS Desactivado</string>
+    <string name="gps_alert_title">GPS desactivado</string>
     <string name="gps_alert_message">El GPS no esta activado. ¿Deseas ir a ajustes para activarlo ahora?</string>
-    <string name="gps_alert_go">Ir a Ajustes</string>
+    <string name="gps_alert_go">Ir a ajustes</string>
     <string name="gps_alert_cancel">Cancelar</string>
 
 
