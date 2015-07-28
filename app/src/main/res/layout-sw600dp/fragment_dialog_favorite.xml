@@ -31,14 +31,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fav_favorite"
-                android:textSize="@dimen/sizeNormalText"
+                android:textSize="@dimen/sizeLargeText"
                 android:layout_gravity="left"
                 android:textStyle="bold"
                 android:textColor="@color/estafeta_text" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -50,13 +51,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fav_reference"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"
                         android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_reference"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
 
                 </LinearLayout>
@@ -71,13 +73,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fav_no_guia"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"
                         android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_no_guia"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
@@ -91,13 +94,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fav_cod_rastreo"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"
                         android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_cod_rastreo"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
 
                 </LinearLayout>
@@ -112,13 +116,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fav_origen"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"
                         android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_origen"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
 
                 </LinearLayout>
@@ -127,12 +132,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="20dp"
                     android:textColor="@color/estafeta_text">
 
                     <TextView
@@ -140,13 +145,14 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/estafeta_text"
                         android:text="@string/fav_destino"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"/>
                     <TextView
                         android:id                  ="@+id/fav_destino"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
@@ -160,13 +166,14 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/estafeta_text"
                         android:text="@string/fav_cp_destino"
-                        android:textSize="@dimen/sizeMediumText"/>
+                        android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"/>
                     <TextView
                         android:id                  ="@+id/fav_cp_destino"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
@@ -180,13 +187,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fav_estatus"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"
                         android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_estatus"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
                 </LinearLayout>
             </LinearLayout>
@@ -194,12 +202,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="50dp">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="5dp">
 
                     <TextView
@@ -207,20 +215,21 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fav_fecha"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"
                         android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_fecha"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp">
 
                     <TextView
@@ -228,13 +237,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/fav_recibio"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textStyle="bold"
                         android:textColor="@color/estafeta_text"/>
                     <TextView
                         android:id                  ="@+id/fav_recibio"
                         android:layout_width        ="wrap_content"
                         android:layout_height       ="wrap_content"
                         android:textColor           ="@color/estafeta_text"
-                        android:textSize            ="@dimen/sizeSmallText"
+                        android:textSize            ="@dimen/sizeNormalText"
                         android:text=""/>
                 </LinearLayout>
                 <LinearLayout
@@ -244,7 +254,7 @@
                     android:layout_marginBottom="10dp">
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="150dp"
                         android:background="@drawable/border_gray"
                         android:textColor="@color/estafeta_text"/>
                 </LinearLayout>

@@ -20,14 +20,16 @@
             android:background="@color/white"
             android:weightSum="100">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="25">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <FrameLayout
                     android:layout_width    ="match_parent"
-                    android:layout_height   ="match_parent"
+                    android:layout_height   ="wrap_content"
+                    android:orientation     ="vertical"
                     android:gravity         ="center">
 
                     <ImageView
@@ -36,28 +38,38 @@
                         android:src="@drawable/head_cpostal"
                         android:adjustViewBounds="true"
                         android:scaleType="centerCrop"
-                        android:paddingBottom="120dp"
+                        android:paddingBottom="40dp"
                         android:layout_gravity="top|center_horizontal"/>
 
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:weightSum="100"
+                            android:layout_marginTop    ="100dp">
+                            <TextView
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="match_parent"
+                                android:layout_weight       ="70"
+                                />
 
-                        <TextView
-                            android:layout_width        ="match_parent"
-                            android:layout_height       ="match_parent"
-                            android:text                ="@string/codigo_postal"
-                            android:textSize            ="@dimen/sizeLargeText"
-                            android:layout_weight       ="100"
-                            android:paddingLeft         ="60dp"
-                            android:textColor           ="@color/estafeta_text"
-                            android:layout_gravity      ="right"
-                            android:gravity             ="center" />
+                            <TextView
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="match_parent"
+                                android:text                ="@string/codigo_postal"
+                                android:textSize            ="@dimen/sizeLargeText"
+                                android:layout_weight       ="30"
+                                android:layout_marginLeft   ="60dp"
+                                android:textColor           ="@color/estafeta_text"
+                                android:gravity             ="center_vertical"/>
+                        </LinearLayout>
 
                     </FrameLayout>
                 </FrameLayout>
             </LinearLayout><!--25-->
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,9 +83,7 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:weightSum="100"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginLeft="20dp">
+                    android:weightSum="100">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -84,29 +94,34 @@
                         <TextView
                             android:layout_width        ="match_parent"
                             android:layout_height       ="wrap_content"
-                            android:textSize            ="@dimen/sizeLargeText"
+                            android:textSize            ="@dimen/sizeMediumText"
                             android:textColor           ="@android:color/black"
                             android:text                ="@string/verificar_codigo"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"
                             android:layout_marginBottom ="10dp"
-                            android:layout_weight       ="50"/>
+                            android:layout_weight="50"/>
                         <LinearLayout
                             android:layout_width        ="match_parent"
                             android:layout_height       ="match_parent"
                             android:orientation         ="horizontal"
                             android:layout_gravity      ="left"
-                            android:paddingBottom="10dp"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"
+                            android:layout_marginTop    ="10dp"
                             android:layout_weight="50">
 
                             <EditText
                                 android:id                  ="@+id/verify_zip_code"
                                 android:layout_width        ="0dp"
-                                android:layout_height       ="wrap_content"
+                                android:layout_height       ="match_parent"
                                 android:textColor           ="@color/estafeta_text"
-                                android:textSize            ="@dimen/sizeLargeText"
+                                android:textSize            ="@dimen/sizeMediumText"
                                 android:hint                ="@string/search_by_zip_code"
                                 android:textColorHint       ="@color/estafeta_soft_gray"
                                 android:layout_weight       ="3"
                                 android:maxLength           ="5"
+                                android:imeOptions          ="actionDone"
                                 android:inputType           ="number"
                                 android:layout_marginRight  ="20dp"/>
 
@@ -116,7 +131,7 @@
                                 android:layout_height   ="wrap_content"
                                 android:layout_weight   ="1"
                                 android:text            ="@string/validar_codigo"
-                                android:textSize        ="@dimen/sizeLargeText"
+                                android:textSize        ="@dimen/sizeMediumText"
                                 android:textColor       ="@color/estafeta_red"
                                 android:layout_gravity  ="center_horizontal"
                                 android:background      ="@android:color/transparent"/>
@@ -134,52 +149,65 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingBottom="10dp"
-                        android:paddingTop="50dp">
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width        ="match_parent"
                             android:layout_height       ="match_parent"
-                            android:textSize            ="@dimen/sizeLargeText"
+                            android:textSize            ="@dimen/sizeMediumText"
                             android:textColor           ="@android:color/black"
                             android:text                ="@string/buscar_codigo"
-                            android:paddingBottom="10dp"/>
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"
+                            android:layout_marginTop    ="10dp"/>
 
                         <Spinner
                             android:id                  ="@+id/spinner_state"
                             android:layout_width        ="match_parent"
                             android:layout_height       ="wrap_content"
                             android:layout_gravity      ="left"
+                            android:layout_marginRight  ="20dp"
+                            android:layout_marginLeft   ="20dp"
                             android:spinnerMode         ="dialog"
-                            android:dividerHeight       ="0dp"
-                            android:paddingBottom="10dp"/>
+                            android:dividerHeight       ="0dp" />
 
                         <EditText
                             android:id                  ="@+id/ciudad"
                             android:layout_width        ="match_parent"
                             android:layout_height       ="wrap_content"
                             android:textColor           ="@color/estafeta_text"
-                            android:textSize            ="@dimen/sizeLargeText"
+                            android:textSize            ="@dimen/sizeMediumText"
                             android:hint                ="@string/city_etc"
                             android:textColorHint       ="@color/estafeta_soft_gray"
-                            android:paddingBottom="10dp"/>
+                            android:inputType           ="text"
+                            android:imeOptions          ="actionNext"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"
+                            android:layout_marginTop    ="20dp"
+                            android:layout_marginBottom ="20dp"/>
+
+
                         <EditText
                             android:id                  ="@+id/colonia"
                             android:layout_width        ="match_parent"
                             android:layout_height       ="wrap_content"
                             android:textColor           ="@color/estafeta_text"
-                            android:textSize            ="@dimen/sizeLargeText"
+                            android:textSize            ="@dimen/sizeMediumText"
                             android:hint                ="@string/locality"
                             android:textColorHint       ="@color/estafeta_soft_gray"
-                            android:paddingBottom="10dp" />
+                            android:inputType           ="text"
+                            android:imeOptions          ="actionNext"
+                            android:layout_marginLeft   ="20dp"
+                            android:layout_marginRight  ="20dp"/>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/mandatory_fields"
-                            android:textSize="@dimen/sizeSmallText"
+                            android:textSize="@dimen/sizeXSmallText"
                             android:textColor="@color/estafeta_red"
-                            android:paddingBottom="10dp"/>
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"/>
                     </LinearLayout>
 
 
@@ -191,14 +219,12 @@
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:layout_gravity="bottom|center_horizontal"
-                android:weightSum="5"
-                android:paddingBottom="10dp"
-                android:paddingTop="50dp">
+                android:weightSum="5">
                 <Button
                     android:id="@+id/btn_buscar_zipcode"
                     android:layout_width        ="match_parent"
                     android:layout_height       ="match_parent"
-                    android:paddingTop          ="35dp"
+                    android:layout_marginTop    ="50dp"
                     android:text="@string/Search"
                     android:textSize="@dimen/sizeLargeText"
                     android:textColor           ="@color/estafeta_red"
@@ -214,7 +240,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:orientation="vertical"
-        android:layout_gravity="bottom|center_horizontal">
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/white">
 
 
         <TextView
