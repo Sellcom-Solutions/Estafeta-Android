@@ -24,8 +24,8 @@
         <!--<item>Prellenado de Guías</item> -->
        <item>Cotizador</item>
         <!--<item>Historial de operaciones</item>-->
-       <item>Código Postal</item>
-       <item>Aviso de Privacidad</item>
+       <item>Código postal</item>
+       <item>Aviso de privacidad</item>
        <item>Favoritos</item>
 </string-array>
 
@@ -36,13 +36,13 @@
     <string name="city">Ciudad, municipio, delegación</string>
     <string name="locality">Colonia</string>
     <string name="zip_code">C.P.</string>
-    <string name="mandatory_fields">Campos Obligatorios *</string>
+    <string name="mandatory_fields">Campos obligatorios *</string>
 
     offices_required
 
     <!-- Headers -->
     <string name="rastreo">Rastreo</string>
-    <string name="codigo_postal">Código Postal</string>
+    <string name="codigo_postal">Código postal</string>
     <string name="favoritos">Favoritos</string>
 
     <!-- Footer -->
@@ -82,7 +82,7 @@
     <string name="title_coments">COMENTARIOS</string>
 
     <!-- Favorites -->
-    <string name="notification_alarm">Alarma de Notificación</string>
+    <string name="notification_alarm">Alarma de notificación</string>
     <string name="delivery_confirmation">Confirmación de Entrega</string>
     <string name="maximo_favoritos">La información de favoritos se almacena durante un periodo máximo de 30 días.</string>
 

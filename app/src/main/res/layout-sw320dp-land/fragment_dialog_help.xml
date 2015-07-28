@@ -24,7 +24,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/boton_codigo_guia"
-                        android:textSize="@dimen/sizeNormalText"
+                        android:textSize="@dimen/sizeMediumText"
                         android:background="@color/zxing_transparent"
                         android:textColor="@color/estafeta_red"/>
 
@@ -33,7 +33,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/codigo_factura"
-                        android:textSize="@dimen/sizeNormalText"
+                        android:textSize="@dimen/sizeMediumText"
                         android:background="@color/zxing_transparent"
                         android:textColor="@color/estafeta_text"/>
 
@@ -42,7 +42,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/codigo_ticket"
-                        android:textSize="@dimen/sizeNormalText"
+                        android:textSize="@dimen/sizeMediumText"
                         android:background="@color/zxing_transparent"
                         android:textColor="@color/estafeta_text"/>
 
@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/cerrar"
-                        android:textSize="@dimen/sizeNormalText"
+                        android:textSize="@dimen/sizeMediumText"
                         android:background="@color/zxing_transparent"
                         android:textColor="@color/estafeta_red"
                         android:layout_gravity="bottom"/>

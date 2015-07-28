@@ -150,7 +150,7 @@
         android:paddingRight="10dp"
         android:text="@string/cerrar"
         android:textColor="@color/estafeta_red"
-        android:textSize="@dimen/sizeSmallText"
+        android:textSize="@dimen/sizeMediumText"
         />
     </LinearLayout>
 </com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>

@@ -7,8 +7,8 @@
         <!--<item>Prellenado de Guías</item>-->
         <item>Cotizador</item>
         <!--<item>Historial de operaciones</item>-->
-        <item>Código Postal</item>
-        <item>Aviso de Privacidad</item>
+        <item>Código postal</item>
+        <item>Aviso de privacidad</item>
         <item>Favoritos</item>
     </string-array>
 
@@ -16,7 +16,7 @@
     <string name="error_codigo">Error, código postal no válido.</string>
     <string name="error_ciudad">Error, el campo ciudad es obligatorio.</string>
     <string name="error_estado">Error, debes seleccionar un estado.</string>
-    <string name="cargando_oficinas">Cargando Oficinas...</string>
+    <string name="cargando_oficinas">Cargando oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
     <string name="cargando">Cargando ...</string>
     <string name="actualizando">Actualizando ...</string>
@@ -50,7 +50,7 @@
     <string name="view_ar">Ver a mi alrededor</string>
     <string name="loading_AR_elements">Cargando Componentes</string>
     <string name="offices_near"> Cerca de mí</string>
-    <string name="ubicar_oficinas">Ubicar Oficinas</string>
+    <string name="ubicar_oficinas">Ubicar oficinas</string>
 
     <!-- Footer -->
     <string name="footer">©2012-2015 Estafeta Mexicana, S.A. de C.V.</string>
@@ -86,7 +86,7 @@
     <!-- FragmentOffices  -->
 
     <string name="encender_gps">Favor de encender su GPS</string>
-    <string name="consesionaria_autorizada">Concecionaria Autorizada</string>
+    <string name="consesionaria_autorizada">Concecionaria autorizada</string>
     <string name="centro_operativo">Centro operativo y sucursal</string>
     <string name="sucursal">Sucursal</string>
     <string name="seccion_estafeta">Estafeta</string>

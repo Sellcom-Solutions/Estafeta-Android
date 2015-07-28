@@ -75,7 +75,7 @@
             android:layout_width        ="match_parent"
             android:layout_height       ="wrap_content"
 
-            android:textColor           ="@color/estafeta_red"
+            android:textColor           ="@color/estafeta_text"
             android:textSize            ="@dimen/sizeMediumText"
             android:hint                ="@string/locality"
             android:textColorHint       ="@color/estafeta_soft_gray"
