@@ -32,7 +32,7 @@
     <string name="city_etc">Ciudad, municipio, delegación*</string>
     <string name="locality">Colonia</string>
     <string name="zip_code">C.P.</string>
-    <string name="mandatory_fields">Campos Obligatorios *</string>
+    <string name="mandatory_fields">Campos obligatorios *</string>
 
     <!-- Headers-->
     <string name="rastreo">Rastreo</string>
@@ -42,13 +42,13 @@
     <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de guía debe tener 22 dígitos</string>
     <string name="codigo">Código</string>
     <string name="aviso_codigo">Puedes ingresar hasta 10 envíos (uno por línea)</string>
-    <string name="boton_escanear">Escanear</string>
-    <string name="boton_rastrear">Rastrear</string>
+    <string name="boton_escanear">ESCANEAR</string>
+    <string name="boton_rastrear">RASTREAR</string>
     <string name="code_incorrect">El código leído es incorrecto</string>
 
     <!-- Oficinas -->
     <string name="view_ar">Ver a mi alrededor</string>
-    <string name="loading_AR_elements">Cargando Componentes</string>
+    <string name="loading_AR_elements">Cargando componentes</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="ubicar_oficinas">Ubicar oficinas</string>
 
@@ -92,9 +92,9 @@
     <string name="seccion_estafeta">Estafeta</string>
     <string name="ver">Ver</string>
     <string name="afiliados">Afiliados</string>
-    <string name="ir_a">IR A</string>
-    <string name="compartir_oficinas">COMPARTIR</string>
-    <string name="cerrar_oficinas">CERRAR</string>
+    <string name="ir_a">Ir a</string>
+    <string name="compartir_oficinas">Compartir</string>
+    <string name="cerrar_oficinas">Cerrar</string>
     <string name="ext">Ext.</string>
     <string name="horario">Horario</string>
 

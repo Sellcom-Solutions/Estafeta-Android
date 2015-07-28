@@ -61,8 +61,8 @@
     <string name="codigo_factura">Factura</string>
     <string name="codigo_ticket">Ticket</string>
     <string name="cerrar">Cerrar</string>
-    <string name="no_guia2">No. Guía: </string>
-    <string name="estatus_servicio">Estatus del Servicio: </string>
+    <string name="no_guia2">No. guía: </string>
+    <string name="estatus_servicio">Estatus del servicio: </string>
     <string name="origen">Origen: </string>
     <string name="fecha_recoleccion">Fecha de recolección: </string>
     <string name="destino">Destino: </string>
@@ -83,12 +83,12 @@
 
     <!-- Favorites -->
     <string name="notification_alarm">Alarma de notificación</string>
-    <string name="delivery_confirmation">Confirmación de Entrega</string>
+    <string name="delivery_confirmation">Confirmación de entrega</string>
     <string name="maximo_favoritos">La información de favoritos se almacena durante un periodo máximo de 30 días.</string>
 
     <!-- Oficinas -->
     <string name="view_ar">Ver a mi alrededor</string>
-    <string name="loading_AR_elements">Cargando Componentes</string>
+    <string name="loading_AR_elements">Cargando componentes</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>
     <string name="ubicar_oficinas">Ubicar Oficinas</string>
@@ -269,9 +269,9 @@
     <string name="seccion_estafeta">Estafeta</string>
     <string name="ver">Ver</string>
     <string name="afiliados">Afiliados</string>
-    <string name="ir_a">IR A</string>
-    <string name="compartir_oficinas">COMPARTIR</string>
-    <string name="cerrar_oficinas">CERRAR</string>
+    <string name="ir_a">Ir a</string>
+    <string name="compartir_oficinas">Compartir</string>
+    <string name="cerrar_oficinas">Cerrar</string>
     <string name="ext">Ext.</string>
     <string name="horario">Horario</string>
 
