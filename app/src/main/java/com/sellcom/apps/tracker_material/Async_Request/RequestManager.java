@@ -109,12 +109,12 @@ public class RequestManager implements ResponseListenerInterface {
     }
 
     public void showConfirmationDialogWithListener(final String confirmMessage, Context context, final ConfirmationDialogListener listener){
-        Log.d(LOG_TAG_MANAGER,"Error message: "+confirmMessage);
+        Log.d(LOG_TAG_MANAGER, "Error message: " + confirmMessage);
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Atención");
         builder.setMessage(confirmMessage);
-        builder.setNeutralButton("OK",new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog,int id) {
+        builder.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
                 listener.okFromConfirmationDialog(confirmMessage);
             }
         });
@@ -139,10 +139,6 @@ public class RequestManager implements ResponseListenerInterface {
         });
         AlertDialog alert = builder.create();
         alert.show();
-    }
-
-    public void showLoadingDialog(){
-
     }
 
     public void dismissProgressDialog(){
@@ -431,9 +427,12 @@ public class RequestManager implements ResponseListenerInterface {
                 break;
             case REQUEST_OFFICES:
                 try {
+
+                    Log.d("responseParse", "OFFICINAS");
                     responseArray = ResponseManager.sharedInstance().parseOffices(doc);
                     setResponseArray(responseArray);
-                    //Log.d("responseParse","ok size: "+responseArray.size());
+                    //Log.d("responseParse", "" + responseArray.size());
+                    setResponseArray(responseArray);;
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -441,10 +440,22 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-                Log.v( METHOD.REQUEST_OFFICES.toString(), "");
+                //Log.v( METHOD.REQUEST_OFFICES.toString(), "");
+                break;
             case REQUEST_EXCEPTION_CODES:
+                try {
 
-                Log.v( METHOD.REQUEST_EXCEPTION_CODES.toString(), "");
+                    responseArray = ResponseManager.sharedInstance().ExceptionCodes(doc);
+                    setResponseArray(responseArray);
+
+                } catch (SAXException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParserConfigurationException e) {
+                    e.printStackTrace();
+                }
+
                 break;
             default:
                 break;

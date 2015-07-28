@@ -49,6 +49,55 @@ public class Codes {
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
 
     }
+    public static long updateCodes(Context context, ArrayList<Map<String, String>> values){
+        ContentValues cv = new ContentValues();
+        long aux=0;
+
+        for(int i = 0; i <values.size(); i++) {
+            Map<String, String> item = new HashMap<>();
+            item = values.get(i);
+
+            //Log.d(TABLE_NAME,"status"+item.get("status"));
+            if (item.get("status").equals("true")) {
+
+                cv.put(ZCLAVE, item.get("clave"));
+                cv.put(ZDESCRIPCIONCLAVE, item.get("descripcion"));
+                cv.put(ZIDCATALOGO, "NULL");
+                cv.put(ZVERSION, item.get("ultimaAct"));
+
+                if(item.get("encontrado").equals("true")){
+
+                    if (item.get("modificado").equals("true")) {
+                        try {
+                            aux = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, ZCLAVE + "=?", new String[]{item.get("clave")});
+                            Log.d(TABLE_NAME, "actualizar codes aux: " + aux);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Log.d(TABLE_NAME, "No actualizado");
+                        }
+
+                    }
+
+                }else if(item.get("encontrado").equals("false")){
+                    try {
+                        aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null, cv);
+                        Log.d(TABLE_NAME, "insertar codes aux: " + aux);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.d(TABLE_NAME, "No insertado");
+                    }
+                }
+
+            }else{
+                String clave = item.get("clave");
+                //Log.d(TABLE_NAME,"idOficina: "+auxId);
+                delete(context,clave);
+            }
+        }
+
+        return aux;
+    }
+
 
     public static ArrayList<Map<String,String>> getAllInMaps(Context context){
 
@@ -76,7 +125,27 @@ public class Codes {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return null;
+    }
+
+    public static String getCodeByClave(Context context,String clave){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                null,
+                ZCLAVE + "=?",
+                new String[] {clave}, null ,null, null);
+
+        if(cursor != null & cursor.getCount() > 0){
+            cursor.moveToFirst();
+            String response= cursor.getString(cursor.getColumnIndexOrThrow(ZVERSION));
+            cursor.close();
+            return response;
+        }
+        else {
+            cursor.close();
+            return null;
+        }
     }
 
     public static boolean existsZclave(String zclave, Context context){
@@ -107,7 +176,7 @@ public class Codes {
         if (cursor != null && cursor.getCount() > 0) {
 
             for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-                int id              = cursor.getInt(cursor.getColumnIndexOrThrow(ZPK));
+                String id              = cursor.getString(cursor.getColumnIndexOrThrow(ZPK));
                 delete(context, id);
             }
         }
@@ -118,8 +187,8 @@ public class Codes {
         }
     }
 
-    public static int delete(Context context, int id) {
-        return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ZPK + "=" + id, null);
+    public static int delete(Context context, String clave) {
+        return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ZCLAVE + "=" + clave, null);
     }
 
 

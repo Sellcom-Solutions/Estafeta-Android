@@ -171,7 +171,7 @@ public class Offices {
             item = values.get(i);
 
             //Log.d(TABLE_NAME,"status"+item.get("status"));
-            if (item.get("status").equals("true")){
+            if (item.get("status").equals("true")) {
                 int edo = States.getStateNumberByName(context, item.get("estado_name"));
 
                 if (edo == 99) {
@@ -208,27 +208,27 @@ public class Offices {
                     if (!auxVersion.equals(item.get("ultimaAct"))) {
                         try {
                             aux = DataBaseAdapter.getDB(context).update(TABLE_NAME, cv, NO_OFICINA + "=?", new String[]{item.get("idOficina")});
-                             Log.d(TABLE_NAME, "actualizar aux: " + aux);
+                            Log.d(TABLE_NAME, "actualizar aux: " + aux);
                         } catch (Exception e) {
                             e.printStackTrace();
-                            Log.d(TABLE_NAME,"No actualizado");
+                            Log.d(TABLE_NAME, "No actualizado");
                         }
-                       
+
                     }
                     /*else {
                         Log.d(TABLE_NAME, "oficina actualizada");
                     }*/
-                }else {
+                } else {
                     try {
-                        aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null,cv);
+                        aux = DataBaseAdapter.getDB(context).insert(TABLE_NAME, null, cv);
                         Log.d(TABLE_NAME, "insertar aux: " + aux);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Log.d(TABLE_NAME,"No insertado");
+                        Log.d(TABLE_NAME, "No insertado");
                     }
                 }
-            }
-            else{
+
+            }else{
                 String auxId = item.get("idOficina");
                 //Log.d(TABLE_NAME,"idOficina: "+auxId);
                 delete(context,auxId);
@@ -261,6 +261,7 @@ public class Offices {
             cursor.close();
             return version;
         }
+        cursor.close();
         return null;
 
     }

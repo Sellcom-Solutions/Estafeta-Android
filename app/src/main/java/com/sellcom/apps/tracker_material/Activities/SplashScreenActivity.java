@@ -27,6 +27,7 @@ import java.util.Map;
 
 import database.DataBaseHelper;
 import database.DataBaseManager;
+import database.model.Codes;
 import database.model.Offices;
 
 
@@ -34,7 +35,7 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
 
     String TAG= "SPLASH_SCREEN";
     Context context;
-
+    String last_date,method="";
 
 
     @Override
@@ -59,10 +60,12 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
 
             //Actualizar oficinas
             Map<String, String> requestData = new HashMap<>();
-            String fecha = Offices.getVersion(context);
+            //String fecha = Offices.getVersion(context);
+
+            String fecha = "2012-09-16 15:01:22.000";
 
             SharedPreferences sharedPref        = getPreferences(Context.MODE_PRIVATE);
-            String last_date = sharedPref.getString("last_date", fecha);
+            last_date = sharedPref.getString("last_date", fecha);
 
             requestData.put("ultimaAct", last_date);
 
@@ -70,8 +73,8 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             editor.putString("last_date", DatesHelper.getStringDate(new Date()));
             editor.commit();
 
-
             Log.d(TAG, "Llama al servicio");
+            method = "oficinas";
             RequestManager.sharedInstance().setListener(this);
             RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
         }
@@ -116,7 +119,13 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             ArrayList<Map<String,String>> auxResponse = new ArrayList<>();
             try {
                 auxResponse = RequestManager.sharedInstance().getResponseArray();
-                Log.d(TAG,"auxResponse size"+auxResponse.size());
+                if(auxResponse == null){
+                    Log.d(TAG,"nulo");
+                }else{
+                    Log.d(TAG,"auxResponse size "+auxResponse.size());
+                }
+
+
                 Map<String, String> item = new HashMap<>();
                 item = auxResponse.get(0);
                 if (item.get("method").equals(METHOD.REQUEST_OFFICES.toString())){
@@ -125,16 +134,27 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
 
                         updateOffices.execute();
 
+                }else if(item.get("method").equals(METHOD.REQUEST_EXCEPTION_CODES.toString())){
+                    Log.d(TAG,"decode response ExceptionCodes");
+
+                    new UpdateExceptionCodes(auxResponse).execute();
+
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         else {
-            Log.d(TAG,"response null");
-            Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
-            startActivity(intent);
-            finish();
+            if(method.equals("oficinas")) {
+                Map<String, String> requestData = new HashMap<>();
+                requestData.put("ultimaAct", last_date);
+                RequestManager.sharedInstance().setListener(SplashScreenActivity.this);
+                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_EXCEPTION_CODES, requestData);
+            }else if(method.equals("codigos")){
+                Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
 
        /* Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
@@ -157,6 +177,39 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             return null;
         }
         @Override
+        protected void onPostExecute(String result) {/*
+            Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
+            startActivity(intent);
+            finish();*/
+
+            method = "codigos";
+            Map<String, String> requestData = new HashMap<>();
+            requestData.put("ultimaAct", last_date);
+            RequestManager.sharedInstance().setListener(SplashScreenActivity.this);
+            RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_EXCEPTION_CODES, requestData);
+
+        }
+
+
+    }
+
+
+    class UpdateExceptionCodes extends AsyncTask<String, Void, String>  {
+
+        ArrayList<Map<String,String>> values;
+        public UpdateExceptionCodes(ArrayList<Map<String, String>> values){
+            this.values = values;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            if(values.size() != 0) {
+                Codes.updateCodes(context, values);
+            }
+            // dbHelper.close();
+            return null;
+        }
+        @Override
         protected void onPostExecute(String result) {
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
             startActivity(intent);
@@ -165,5 +218,6 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
 
 
     }
+
 
 }

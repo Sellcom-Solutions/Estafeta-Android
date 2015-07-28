@@ -16,6 +16,8 @@ import java.util.Map;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import database.model.Codes;
+
 /**
  * Created by rebecalopezmartinez on 02/06/15.
  */
@@ -451,7 +453,7 @@ public class ResponseManager {
 
         }
 
-        data.add(0,map);
+        data.add(0, map);
 
         if (data.size() <0)
             return null;
@@ -625,10 +627,10 @@ public class ResponseManager {
         if(officeMap.size()>0){
            /* for(int i=0;i<officeMap.size();i++)
             Log.d("ArrayList",officeMap.get(i).get("nombreOficina"));*/
-            Log.d("Response Manager","end");
+            Log.d("Response Manager","endMayor que 0");
             return officeMap;
         }
-        Log.d("Response Manager","end");
+        Log.d("Response Manager", "end");
         return null;
     }
 
@@ -1051,6 +1053,98 @@ public class ResponseManager {
 
         return null;
     }
+
+
+
+    public ArrayList<Map<String,String>> ExceptionCodes(Document doc) throws SAXException, IOException, ParserConfigurationException{
+
+        ArrayList<Map<String ,String>> codesMap =new ArrayList<>();
+        doc.getDocumentElement().normalize();
+
+        NodeList clavesExcepcion = doc.getElementsByTagName("a:ClaveExcepcion");
+
+        if(clavesExcepcion!=null){
+            if(clavesExcepcion.getLength()==0){
+                return null;
+            }
+        }
+        Node node = null;
+        String value="";
+
+        for (int i = 0; i < clavesExcepcion.getLength(); i++) {
+            node = clavesExcepcion.item(i);
+            Map<String,String> map  = new HashMap<String, String>();
+            NodeList list2 = node.getChildNodes();
+            for (int j = 0; j < list2.getLength(); j++) {
+                Node nodoItem=list2.item(j);
+                String nodeName = nodoItem.getNodeName();
+                Log.d("nodeName", nodeName);
+
+                if(!nodeName.startsWith("#"))
+                    if (nodeName != null) {
+                        Node subNode=nodoItem.getFirstChild();
+                        if(subNode==null){
+                            continue;
+                        }
+                        value=subNode.getNodeValue();
+                        if ("a:clave".equals(nodeName)) {
+                            Log.d("clave", value);
+                            map.put("clave",value);
+                            continue;
+                        } else if ("a:descripcion".equals(nodeName)) {
+                            Log.d("descripcion", value);
+                            map.put("descripcion",value);
+                            continue;
+                        } else if ("a:status".equals(nodeName)) {
+                            Log.d("status", value);
+                            map.put("status", value);
+                            if(value.equals("false")){
+                                Log.d("borrar", value);
+                                map.put("borrar", "true");
+                            } else {
+                                Log.d("borrar", value);
+                                map.put("borrar", "false");
+                            }
+                            continue;
+                        } else if ("a:ultimaAct".equals(nodeName)) {
+                            Log.d("ultimaAct", value);
+                            map.put("ultimaAct", value);
+                            String cdb = Codes.getCodeByClave(activity ,map.get("clave"));
+                            if(cdb!=null){
+                                Log.d("encontrado", value);
+                                map.put("encontrado", "true");
+                                if(!value.equals(cdb)){
+                                    Log.d("modificado", value);
+                                    map.put("modificado", "true");
+                                } else {
+                                    Log.d("modificado", value);
+                                    map.put("modificado","false");
+                                }
+                            } else {
+                                Log.d("encontrado", value);
+                                map.put("encontrado", "false");
+                            }
+                            continue;
+                        }
+                    }
+            }
+            Log.d("method",METHOD.REQUEST_EXCEPTION_CODES.toString());
+            map.put("method",METHOD.REQUEST_EXCEPTION_CODES.toString());
+
+            codesMap.add(map);
+        }
+
+
+        if(codesMap.size()>0){
+           /* for(int i=0;i<officeMap.size();i++)
+            Log.d("ArrayList",officeMap.get(i).get("nombreOficina"));*/
+            Log.d("Response Manager","end");
+            return codesMap;
+        }
+        Log.d("Response Manager","end");
+        return null;
+    }
+
 
 
 }
