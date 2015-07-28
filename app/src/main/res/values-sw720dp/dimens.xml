@@ -6,6 +6,7 @@
     <dimen name="activity_vertical_margin">32dp</dimen>
     <dimen name="list_item_horizontal_margin">16dp</dimen>
     <dimen name="Margen_General">16dp</dimen>
+    <dimen name="sizeXSmallText">16sp</dimen>
     <dimen name="sizeNormalText">20sp</dimen>
     <dimen name="sizeMediumText">25sp</dimen>
     <dimen name="sizeLargeText">40sp</dimen>

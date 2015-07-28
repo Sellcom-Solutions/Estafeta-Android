@@ -10,7 +10,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,7 +21,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:weightSum="100"
                 android:orientation="horizontal">
 
@@ -66,7 +67,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textStyle="bold"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
@@ -77,7 +78,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:text=""/>
                     </LinearLayout>
 
@@ -88,7 +89,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textStyle="bold"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
@@ -98,7 +99,7 @@
                             android:id="@+id/txv_origen"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:text=""/>
                     </LinearLayout>
@@ -110,7 +111,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textStyle="bold"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
@@ -120,7 +121,7 @@
                             android:id="@+id/txv_destino"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:text=""/>
                     </LinearLayout>
@@ -247,20 +248,22 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sizeXSmallText"
+                        android:textSize="@dimen/sizeSmallText"
                         android:textStyle="bold"
                         android:layout_marginRight="5dp"
                         android:textColor="@color/estafeta_text"
-                        android:text="Tarifa"/>
+                        android:text="Tarifa"
+                        android:layout_marginBottom="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
                             android:textColor="@color/estafeta_text"
                             android:text="Guía: "/>
@@ -269,7 +272,7 @@
                             android:id="@+id/txv_guia"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:text=""/>
                     </LinearLayout>
@@ -281,9 +284,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
+                            android:layout_marginBottom="10dp"
                             android:text="CC: "/>
 
                         <TextView
@@ -291,18 +295,20 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
+                            android:layout_marginBottom="10dp"
                             android:text=""/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
                             android:text="Cargos extra:"/>
@@ -312,15 +318,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:text=""/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sizeXSmallText"
+                        android:textSize="@dimen/sizeSmallText"
                         android:layout_marginTop="5dp"
+                        android:layout_marginBottom="10dp"
                         android:textStyle="bold"
                         android:layout_marginRight="5dp"
                         android:textColor="@color/estafeta_text"
@@ -329,11 +336,12 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
                             android:text="Costo: "/>
@@ -343,7 +351,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:text=""/>
                     </LinearLayout>
 
@@ -354,7 +362,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
                             android:text="CC: "/>
@@ -364,7 +372,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:text=""/>
                     </LinearLayout>
 
@@ -376,7 +384,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textStyle="bold"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
@@ -386,9 +394,9 @@
                         <TextView
                             android:layout_marginTop="5dp"
                             android:id="@+id/txv_costo_total"
-                            android:layout_width="70dp"
+                            android:layout_width="130dp"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textStyle="bold"
                             android:textColor="@color/estafeta_text"
                             android:text=""/>
@@ -399,35 +407,37 @@
                             android:layout_width        ="wrap_content"
                             android:layout_height       ="match_parent"
                             android:text                ="@string/buy"
-                            android:textSize            ="@dimen/sizeXSmallText"
+                            android:textSize            ="@dimen/sizeSmallText"
                             android:textColor           ="@color/estafeta_red"
                             android:background          ="@android:color/transparent"
                             android:gravity="right"
                             android:layout_gravity="right"
-                            android:visibility="visible"/>
+                            android:visibility="gone"/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:layout_marginTop="10dp"
-                        android:background="@color/estafeta_soft_gray"/>
+                        android:background="@color/estafeta_soft_gray"
+                        android:layout_marginBottom="10dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sizeXSmallText"
+                        android:textSize="@dimen/sizeSmallText"
                         android:textStyle="bold"
                         android:textColor="@color/estafeta_text"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
                         android:text="Días de Entrega"/>
 
                     <TextView
                         android:id="@+id/txv_dias_entrega"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sizeXSmallText"
+                        android:textSize="@dimen/sizeSmallText"
                         android:textStyle="bold"
                         android:gravity="center"
                         android:textColor="@color/estafeta_red"
@@ -437,22 +447,24 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sizeXSmallText"
+                        android:textSize="@dimen/sizeSmallText"
                         android:textStyle="bold"
                         android:textColor="@color/estafeta_text"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
+                        android:layout_marginBottom="10dp"
                         android:text="Modalidad de Entrega"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
                             android:text="Frecuencia:"/>
 
@@ -461,18 +473,19 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:text=""/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
                             android:text="Ocurre forzoso:"/>
@@ -482,28 +495,30 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:text=""/>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sizeXSmallText"
+                        android:textSize="@dimen/sizeSmallText"
                         android:textStyle="bold"
                         android:textColor="@color/estafeta_text"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:text="Costos Adicionales"/>
+                        android:text="Costos Adicionales"
+                        android:layout_marginBottom="10dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="10dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
                             android:textColor="@color/estafeta_text"
                             android:text="Costo de reexpedición:"/>
@@ -513,7 +528,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/estafeta_text"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:text=""/>
                     </LinearLayout>
 
@@ -526,7 +541,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
                             android:layout_marginBottom="5dp"
                             android:textColor="@color/estafeta_soft_gray"
@@ -534,7 +549,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeXSmallText"
+                            android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
                             android:textColor="@color/estafeta_soft_gray"
                             android:text="@string/no_iva"/>
