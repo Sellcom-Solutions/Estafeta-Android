@@ -111,11 +111,11 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         if(!(codes_info.get("estatus") == null)) {
 
             if(codes_info.get("estatus").equals("CONFIRMADO")){
-                fav_estatus.setText("Entregado");
+                fav_estatus.setText(" Entregado");
             }else if(codes_info.get("estatus").equals("DEVUELTO")){
-                fav_estatus.setText("Pendiente");
+                fav_estatus.setText(" Pendiente");
             }else if(codes_info.get("estatus").equals("EN_TRANSITO")){
-                fav_estatus.setText("Proceso de entrega");
+                fav_estatus.setText(" Proceso de entrega");
             }
 
         }

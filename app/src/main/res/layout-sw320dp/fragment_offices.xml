@@ -73,11 +73,13 @@
                 android:layout_weight   ="20"
                 android:weightSum="100"
                 android:layout_marginTop="10dp">
+
+                <!--  android:layout_weight   ="45" -->
                 <Button
                     android:id              ="@+id/btn_near"
                     android:layout_width    ="0dp"
                     android:layout_height   ="wrap_content"
-                    android:layout_weight   ="45"
+                    android:layout_weight   ="90"
                     android:text            ="@string/offices_near"
                     android:textSize        ="@dimen/sizeSmallText"
                     android:textColor       ="@color/estafeta_red"
@@ -87,11 +89,14 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginRight="3dp"/>
 
+
+                <!--  android:layout_weight   ="45" -->
                 <Button
                     android:id              ="@+id/btn_ar"
                     android:layout_width    ="0dp"
                     android:layout_height   ="wrap_content"
-                    android:layout_weight   ="45"
+
+                    android:visibility="gone"
                     android:text            ="@string/view_ar"
                     android:textSize        ="@dimen/sizeSmallText"
                     android:textColor       ="@color/estafeta_red"

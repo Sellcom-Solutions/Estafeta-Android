@@ -133,7 +133,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="60"
                                 android:text="@string/sucursal"
-                                android:gravity="center"
+                                android:gravity="top|center_horizontal"
                                 android:textSize="14sp"
                                 android:textColor="@color/estafeta_text"/>
 
@@ -180,7 +180,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="60"
                                 android:text="@string/consesionaria_autorizada"
-                                android:gravity="center"
+                                android:gravity="top|center_horizontal"
                                 android:textSize="14sp"
                                 android:textColor="@color/estafeta_text"/>
 
@@ -226,7 +226,7 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="60"
                                 android:text="@string/centro_operativo"
-                                android:gravity="center"
+                                android:gravity="top|center_horizontal"
                                 android:textSize="14sp"
                                 android:textColor="@color/estafeta_text"/>
 
