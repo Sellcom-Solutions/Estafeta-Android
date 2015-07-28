@@ -146,6 +146,7 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         }
         else {
             if(method.equals("oficinas")) {
+                method = "codigos";
                 Map<String, String> requestData = new HashMap<>();
                 requestData.put("ultimaAct", last_date);
                 RequestManager.sharedInstance().setListener(SplashScreenActivity.this);
