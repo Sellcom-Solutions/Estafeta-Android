@@ -559,7 +559,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 if (lin_dimensiones.getVisibility() == View.GONE) {
-                    String sendText = "Servicio: " + servicioList.get(posServicio) + "."
+                    String sendText = "Servicio: " + servicioList.get(posServicio) + ". "
                             + "Tipo: " + txv_send_type.getText() + ". "
                             + "Origen: " + txv_origen.getText() + ". "
                             + "Destino: " + txv_destino.getText() + ". "
@@ -568,14 +568,14 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
                             + "CC: " + txv_cc_tarifa.getText() + ". "
                             + "Costo Sobrepeso: " + txv_costo.getText() + ". "
-                            + "Sobrepeso: " + txv_cc_sobrepeso.getText() + ". ";
+                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". ";
 
 
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
-                    //      sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                     sendIntent.setType("text/plain");
                 }else{
-                    String sendText = "Servicio: " + servicioList.get(posServicio) + "."
+                    String sendText = "Servicio: " + servicioList.get(posServicio) + ". "
                             + "Tipo: " + txv_send_type.getText() + ". "
                             + "Origen: " + txv_origen.getText() + ". "
                             + "Destino: " + txv_destino.getText() + ". "
@@ -584,12 +584,12 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
                             + "CC: " + txv_cc_tarifa.getText() + ". "
                             + "Costo Sobrepeso: " + txv_costo.getText() + ". "
-                            + "Sobrepeso: " + txv_cc_sobrepeso.getText() + ". "
+                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". "
                             +"Dimenciones: "+txv_dimensiones.getText()+". ";
 
 
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
-                    //      sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                     sendIntent.setType("text/plain");
 
                 }

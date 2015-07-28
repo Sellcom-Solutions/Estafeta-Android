@@ -195,15 +195,15 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
 
-                String sendText = "No.Guía: "+ fav_no_guia.getText()+". "
-                        +"Código Rastreo: "+fav_codigo.getText()+". "
+                String sendText = "No.guía: "+ fav_no_guia.getText()+". "
+                        +"Código rastreo: "+fav_codigo.getText()+". "
                         +"Origen: "+fav_origen.getText()+". "
                         +"Destino: "+fav_destino.getText()+". "
                         +"Estatus: "+fav_estatus.getText()+". "
                         +"Fecha: "+fav_fecha.getText()+". "
                         +"Recibio: "+fav_recibio.getText()+". ";
 
-          //      sendIntent.putExtra(Intent.EXTRA_SUBJECT, sendText);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
