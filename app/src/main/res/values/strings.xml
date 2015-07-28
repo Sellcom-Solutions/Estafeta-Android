@@ -55,8 +55,8 @@
     <string name="aviso_codigo">Puedes ingresar hasta 10 envíos (uno por línea)</string>
     <string name="boton_escanear">ESCANEAR</string>
     <string name="boton_rastrear">RASTREAR</string>
-    <string name="no_guia">Número de Guía:</string>
-    <string name="cod_rastreo">Código de Rastreo: </string>
+    <string name="no_guia">Número de guía:</string>
+    <string name="cod_rastreo">Código de rastreo: </string>
     <string name="boton_codigo_guia">Guía</string>
     <string name="codigo_factura">Factura</string>
     <string name="codigo_ticket">Ticket</string>

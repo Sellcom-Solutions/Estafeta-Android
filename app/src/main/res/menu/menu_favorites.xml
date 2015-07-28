@@ -4,7 +4,6 @@
 
     <item android:id="@+id/add_favorite"
         android:icon="@drawable/delete"
-
         app:showAsAction="ifRoom"
-        android:title="delete" />
+        android:title="" />
 </menu>

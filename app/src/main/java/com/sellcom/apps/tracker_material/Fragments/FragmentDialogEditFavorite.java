@@ -106,11 +106,9 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
                                          boolean isChecked) {
 
                 if (isChecked) {
-                    Toast.makeText(context, "Confirmacion Activado" , Toast.LENGTH_SHORT).show();
                     notify=isChecked;
                     return;
                 } else {
-                    Toast.makeText(context, "Confirmacion Desactivado", Toast.LENGTH_SHORT).show();
                     notify=isChecked;
                     return;
                 }

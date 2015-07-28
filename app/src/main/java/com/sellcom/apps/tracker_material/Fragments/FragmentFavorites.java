@@ -154,7 +154,6 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                                          boolean isChecked) {
 
                 if (isChecked) {
-                    Toast.makeText(context, "Alarma Activada ", Toast.LENGTH_SHORT).show();
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
 
@@ -166,7 +165,6 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                     return;
                 } else {
-                    Toast.makeText(context, "Desactivada Alarma Desactivada ", Toast.LENGTH_SHORT).show();
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
 
@@ -195,7 +193,6 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
             DialogManager.sharedInstance().dismissDialog();
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(context, "fallo fragment", Toast.LENGTH_SHORT).show();
         }
 
 
