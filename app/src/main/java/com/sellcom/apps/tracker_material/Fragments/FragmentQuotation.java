@@ -1153,6 +1153,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
         @Override
         protected String doInBackground(String... params) {
+
+            Utilities.position = 0;
             fragmentTransaction.replace(R.id.container, fragment, FragmentDetailQuoatation.TAG);
             fragmentTransaction.commit();
             return null;
