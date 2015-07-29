@@ -27,6 +27,7 @@ import database.model.Offices;
 public class Utilities {
 
     public static boolean flag = true;
+    public static int position = 0;
 
     public static boolean isHandset(Context context) {
         return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK)

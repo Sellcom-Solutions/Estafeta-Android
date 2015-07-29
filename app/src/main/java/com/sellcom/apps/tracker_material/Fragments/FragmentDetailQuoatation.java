@@ -24,6 +24,7 @@ import com.sellcom.apps.tracker_material.Adapters.DetailQuotationAdapter;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -86,6 +87,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
     private String cpo,cpd;
 
     private static  int posServicio = 0;
+
+    DetailQuotationAdapter adapter;
 
 
     @Override
@@ -182,7 +185,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
             }
         }
 
-        final DetailQuotationAdapter adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
+        adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
         lv_quotation.setAdapter(adapter);
 
         lv_quotation.getSelectedItemPosition();
@@ -192,6 +195,10 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Utilities.position = position;
+
+                adapter.notifyDataSetChanged();
+
                 posServicio = position;
                 TextView selection = (TextView) view.findViewById(R.id.txv_selection);
                 TextView description = (TextView) view.findViewById(R.id.txv_descripcion_servicio);
@@ -199,9 +206,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 Log.d(TAG, " --- " + view);
 
-
-                adapter.setSelectionState(true, view, selection, description);
-                adapter.setLastSelectedItemPosition(position + 1);
 
                 lv_quotation.setSelection(position);
 
@@ -250,12 +254,16 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
         }
 
-        final DetailQuotationAdapter adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
+        adapter = new DetailQuotationAdapter(context,getActivity(),servicioList);
         lv_quotation.setAdapter(adapter);
 
         lv_quotation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Utilities.position = position;
+
+                adapter.notifyDataSetChanged();
 
                 posServicio = position;
                 TextView selection = (TextView) view.findViewById(R.id.txv_selection);
@@ -264,9 +272,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 Log.d(TAG, " --- " + view);
 
-
-                adapter.setSelectionState(true, view, selection, description);
-                adapter.setLastSelectedItemPosition(position + 1);
 
                 lv_quotation.setSelection(position);
 

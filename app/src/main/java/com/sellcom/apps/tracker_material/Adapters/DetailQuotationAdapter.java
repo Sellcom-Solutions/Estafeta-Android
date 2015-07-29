@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.sellcom.apps.tracker_material.R;
+import com.sellcom.apps.tracker_material.Utils.Utilities;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,13 +24,8 @@ public class DetailQuotationAdapter extends BaseAdapter {
     private Context context;
     private static Activity activity;
     private ArrayList<String> list;
-    private static int lastSelectedItemPosition = 0;
-    private static TextView txv_selection, txv_description;
-    private static View lastSelectedView = null;
-
     public DetailQuotationAdapter(Context context, Activity activity, ArrayList<String> list){
 
-        lastSelectedItemPosition = 0;
         this.context = context;
         this.activity = activity;
         this.list = list;
@@ -71,13 +67,17 @@ public class DetailQuotationAdapter extends BaseAdapter {
 
 
 
-        if( position == lastSelectedItemPosition ) {
-            setSelectionState(true, convertView, holder.txv_selection, holder.txv_descripcion_servicio);
-            Log.d("getView", "TRUE lastSelectedItemPosition = " + lastSelectedItemPosition  );
+        if(Utilities.position == position ) {
+            //setSelectionState(true, convertView, holder.txv_selection, holder.txv_descripcion_servicio);
+            holder.txv_selection.setVisibility(View.VISIBLE);
+            holder.txv_descripcion_servicio.setTextColor(activity.getResources().getColor(R.color.estafeta_text));
+            convertView.setBackgroundResource(R.color.white);
         }
         else {
-            setSelectionState(false, convertView, holder.txv_selection, holder.txv_descripcion_servicio);
-
+            //setSelectionState(false, convertView, holder.txv_selection, holder.txv_descripcion_servicio);
+            holder.txv_selection.setVisibility(View.INVISIBLE);
+            holder.txv_descripcion_servicio.setTextColor(activity.getResources().getColor(R.color.estafeta_soft_gray));
+            convertView.setBackgroundResource(R.color.estafeta_light_gray);
         }
 
         return convertView;
@@ -89,40 +89,6 @@ public class DetailQuotationAdapter extends BaseAdapter {
 
     }
 
-    public static void setSelectionState( boolean state, View currentView, TextView selection, TextView description){
-        CodigosViewHolder holder  = (CodigosViewHolder)currentView.getTag();
-        Log.d("setSelectionState"," ----!!");
-        if( state ){
-            if( lastSelectedView != null ) {
-                Log.d("lastSelectedView"," entre!!");
-                txv_selection.setVisibility(View.INVISIBLE);
-                txv_description.setTextColor(activity.getResources().getColor(R.color.estafeta_soft_gray));
-                lastSelectedView.setBackgroundResource(R.color.estafeta_light_gray);
-            }
-            if( currentView != null ) {
-                Log.d("currentView"," entre!!");
-                holder.txv_selection.setVisibility(View.VISIBLE);
-                holder.txv_descripcion_servicio.setTextColor(activity.getResources().getColor(R.color.estafeta_text));
-                currentView.setBackgroundResource(R.color.white);
 
-                txv_selection = selection;
-                txv_description = description;
-                lastSelectedView = currentView;
-            }
-
-        }else{
-
-            holder.txv_selection.setVisibility(View.INVISIBLE);
-            holder.txv_descripcion_servicio.setTextColor(activity.getResources().getColor(R.color.estafeta_soft_gray));
-            currentView.setBackgroundResource(R.color.estafeta_light_gray);
-
-
-        }
-
-    }
-
-    public static void setLastSelectedItemPosition( int position ){
-        lastSelectedItemPosition = position;
-    }
 
 }
