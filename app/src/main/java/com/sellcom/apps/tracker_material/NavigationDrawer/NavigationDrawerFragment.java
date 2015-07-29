@@ -1,6 +1,7 @@
 package com.sellcom.apps.tracker_material.NavigationDrawer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -16,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -107,7 +109,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mActionBarDrawerToggle = actionBarDrawerToggle;
     }
 
-    public void setup(int fragmentId, DrawerLayout drawerLayout, Toolbar toolbar) {
+    public void setup(int fragmentId, DrawerLayout drawerLayout, final Toolbar toolbar) {
         mFragmentContainerView  = getActivity().findViewById(fragmentId);
         mDrawerLayout           = drawerLayout;
         mDrawerLayout.setStatusBarBackgroundColor(
@@ -124,8 +126,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(toolbar.getWindowToken(), 0);
                 if (!isAdded()) return;
-                //Utilities.hideKeyboard(getActivity(), new EditText(getActivity()));
+                //Utilities.hideKe  yboard(getActivity(), new EditText(getActivity()));
                 getActivity().invalidateOptionsMenu();
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             }
