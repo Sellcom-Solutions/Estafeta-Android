@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+import android.widget.TextView;
 
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.RastreoEfectuadoAdapter;
@@ -48,6 +49,8 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
 
+    private TextView footer;
+
     String TAG = "FRAG_RASTREO_EFECTUADO";
     Context context;
     ListView lst_rastreo_efectuado;
@@ -67,6 +70,11 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
         TrackerFragment.section_index = 0;
         context = getActivity();
         lst_rastreo_efectuado = (ListView)view.findViewById(R.id.lst_rastreo_efectuado);
+
+        footer      = (TextView)view.findViewById(R.id.footer);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
         codes_info = (ArrayList<ArrayList<Map<String,String>>>) getArguments().getSerializable("codes_info");
 

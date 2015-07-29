@@ -26,7 +26,9 @@ import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,7 +59,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             txv_guia_internacional,
                             txv_cc_tarifa_internacional,
                             txv_costo_total_internacional,
-                            txv_terminos;
+                            txv_terminos,
+                            footer;
 
     private ImageView       imv_send_type;
 
@@ -120,6 +123,11 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         txv_cc_tarifa_internacional  = (TextView)view.findViewById(R.id.txv_cc_tarifa_internacional);
         txv_costo_total_internacional  = (TextView)view.findViewById(R.id.txv_costo_total_internacional);
         txv_terminos            = (TextView)view.findViewById(R.id.txv_terminos);
+
+        footer      = (TextView)view.findViewById(R.id.footer);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
         imv_send_type           = (ImageView)view.findViewById(R.id.imv_send_type);
 

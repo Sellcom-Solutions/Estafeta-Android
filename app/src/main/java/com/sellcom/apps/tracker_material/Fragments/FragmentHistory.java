@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.sellcom.apps.tracker_material.Adapters.HistoryAdapter;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,6 +36,7 @@ public class FragmentHistory extends TrackerFragment {
     ArrayList<Map<String, String>> codes_info;
     Map<String,String> map;
     String origin = "";
+    private TextView footer;
 
     Context context;
 
@@ -62,6 +66,11 @@ public class FragmentHistory extends TrackerFragment {
             codes_info.add(0, new HashMap<String, String>());
 
         }
+
+        footer      = (TextView)view.findViewById(R.id.footer);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
 
 

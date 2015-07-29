@@ -45,7 +45,9 @@ import com.sellcom.apps.tracker_material.Utils.Utilities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -116,7 +118,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private TextView        tv_dialog_estado,
                             tv_dialog_ciudad,
-                            tv_dialog_cp;
+                            tv_dialog_cp,
+                            footer;
 
     String                  ciudadString,
                             coloniaString,
@@ -174,6 +177,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             edt_width           = (EditText) view.findViewById(R.id.edt_width);
             edt_width.setOnEditorActionListener(this);
             edt_dummy  = (EditText) view.findViewById(R.id.edt_dummy);
+
+            footer      = (TextView)view.findViewById(R.id.footer);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+            String currentYear = formatter.format(new Date());
+            footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 /*
             edt_weigth.setOnEditorActionListener(new TextView.OnEditorActionListener() {
                 @Override

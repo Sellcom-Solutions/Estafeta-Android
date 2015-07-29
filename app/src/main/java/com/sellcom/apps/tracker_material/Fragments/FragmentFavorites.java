@@ -33,7 +33,9 @@ import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 
 import database.model.Favorites;
@@ -49,7 +51,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
     View view;
     ListView lst_favorite;
     LinearLayout lin_margin,lin_delete,lin_toolbar;
-    TextView txv_footer;
+    TextView footer;
     SwitchCompat swch_notifica;
 
     ImageView imgbtn_delete;
@@ -103,8 +105,12 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
         lst_favorite = (ListView) view.findViewById(R.id.liv_favorite);
         lin_margin = (LinearLayout)view.findViewById(R.id.lin_margin);
         lin_delete = (LinearLayout)view.findViewById(R.id.lin_delete);
-        txv_footer = (TextView)view.findViewById(R.id.txv_footer);
+        footer = (TextView)view.findViewById(R.id.txv_footer);
         imgbtn_delete = (ImageView)view.findViewById(R.id.imgbtn_delete);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
 
         actionBarActivity = ((ActionBarActivity) getActivity()).getSupportActionBar();
@@ -144,7 +150,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                     lst_favorite.setLayoutParams(lv);
 
                     lin_delete.setVisibility(View.GONE);
-                    txv_footer.setVisibility(View.VISIBLE);
+                    footer.setVisibility(View.VISIBLE);
 
                     lin_toolbar.setVisibility(View.GONE);
                     actionBarActivity.show();
@@ -292,7 +298,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                         lst_favorite.setLayoutParams(lv);
 
                         lin_delete.setVisibility(View.GONE);
-                        txv_footer.setVisibility(View.VISIBLE);
+                        footer.setVisibility(View.VISIBLE);
 
                         lin_toolbar.setVisibility(View.GONE);
                         actionBarActivity.show();
@@ -307,7 +313,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                 swch_notifica.setEnabled(false);
 
-                txv_footer.setVisibility(View.GONE);
+                footer.setVisibility(View.GONE);
                 lin_delete.setVisibility(View.VISIBLE);
 
                 ViewGroup.MarginLayoutParams lv = (ViewGroup.MarginLayoutParams) lst_favorite.getLayoutParams();

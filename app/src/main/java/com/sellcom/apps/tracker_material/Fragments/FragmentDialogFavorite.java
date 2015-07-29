@@ -23,7 +23,9 @@ import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,15 +38,16 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
 
     Context context;
 
-    TextView fav_no_guia;
-    TextView fav_codigo;
-    TextView fav_reference;
-    TextView fav_origen;
-    TextView fav_destino;
-    TextView fav_cp_destino;
-    TextView fav_estatus;
-    TextView fav_fecha;
-    TextView fav_recibio;
+    TextView fav_no_guia,
+            fav_codigo,
+            fav_reference,
+            fav_origen,
+            fav_destino,
+            fav_cp_destino,
+             fav_estatus,
+             fav_fecha,
+             fav_recibio,
+            footer;
 
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
@@ -77,6 +80,11 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         fav_estatus = (TextView) view.findViewById(R.id.fav_estatus);
         fav_fecha = (TextView) view.findViewById(R.id.fav_fecha);
         fav_recibio = (TextView) view.findViewById(R.id.fav_recibio);
+
+        footer      = (TextView)view.findViewById(R.id.footer);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
 
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.btn_fav_call);

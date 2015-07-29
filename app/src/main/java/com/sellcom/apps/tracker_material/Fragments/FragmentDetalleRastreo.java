@@ -22,7 +22,9 @@ import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,7 +53,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
              cp_destino,
              estatus,
              fecha_hora_entrega,
-             recibio;
+             recibio,
+                footer;
     ImageView img_estatus;
     CheckBox btn_favorito;
     Button btn_historia;
@@ -85,6 +88,12 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         btn_historia        = (Button)view.findViewById(R.id.btn_historia);
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
+
+        footer      = (TextView)view.findViewById(R.id.footer);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
+
 
         btn_favorito.setOnClickListener(this);
         btn_historia.setOnClickListener(this);
@@ -152,7 +161,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
             String statusStr = codes_info.get(0).get("statusSPA");
 
-        Toast.makeText(context,""+statusStr,Toast.LENGTH_LONG).show();
             String codigoExcStr = codes_info.get(0).get("H_exceptionCode");
 
         Log.e(TAG,""+codes_info.get(1).get("H_eventDateTime"));

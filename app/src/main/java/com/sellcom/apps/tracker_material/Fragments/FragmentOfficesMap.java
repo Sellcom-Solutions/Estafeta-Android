@@ -30,7 +30,9 @@ import android.widget.LinearLayout;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,7 +68,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
     float                                   height,currentHeight;
     private boolean                         flagFAB = true;
 
-    private TextView                        txv_footer;
+    private TextView                        footer;
 
     private String Type,typeSearch,sql,state;
     private String[] selectionArgs = {};
@@ -103,7 +105,11 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
         lin_container.setVisibility(View.GONE);
 
 
-        txv_footer      = (TextView)view.findViewById(R.id.txv_footer);
+        footer      = (TextView)view.findViewById(R.id.txv_footer);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
         rg1             = (CheckBox)view.findViewById(R.id.rg1);
         rg1.setOnClickListener(this);
@@ -220,7 +226,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
 
         if(lin_container.getVisibility() == View.VISIBLE) {
-            txv_footer.setVisibility(View.GONE);
+            footer.setVisibility(View.GONE);
             lin_container.startAnimation(filterDown);
             lin_container.setVisibility(View.GONE);
 
@@ -228,8 +234,8 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
         }else{
             lin_container.startAnimation(filterUp);
             lin_container.setVisibility(View.VISIBLE);
-            txv_footer.startAnimation(filterUp);
-            txv_footer.setVisibility(View.VISIBLE);
+            footer.startAnimation(filterUp);
+            footer.setVisibility(View.VISIBLE);
             lin_container.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {

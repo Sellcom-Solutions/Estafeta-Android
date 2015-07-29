@@ -34,7 +34,9 @@ import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import com.sellcom.apps.tracker_material.Utils.Utilities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,6 +72,8 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                         edt_colony,
                         edt_zip_code;
 
+    private TextView footer;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +106,11 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             btn_near.setOnClickListener(this);
             btn_search.setOnClickListener(this);
             btn_ar.setOnClickListener(this);
+
+            footer      = (TextView)view.findViewById(R.id.footer);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+            String currentYear = formatter.format(new Date());
+            footer.setText("©2012-" + currentYear + " " + getString(R.string.footer));
 
             setStatesToSpinner(spn_state, context);
 

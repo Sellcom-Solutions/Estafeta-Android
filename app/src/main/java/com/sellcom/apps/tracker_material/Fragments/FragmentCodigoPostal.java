@@ -24,7 +24,9 @@ import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import com.sellcom.apps.tracker_material.Utils.Utilities;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +48,8 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     private EditText zipCode;
     private EditText ciudad;
     private EditText colonia;
+
+    private TextView footer;
 
     private String zipCodeString;
     private String ciudadString;
@@ -72,6 +76,11 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
             zipCode         = (EditText) view.findViewById(R.id.verify_zip_code);
             ciudad          = (EditText) view.findViewById(R.id.ciudad);
             colonia         = (EditText) view.findViewById(R.id.colonia);
+
+            footer      = (TextView)view.findViewById(R.id.footer);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+            String currentYear = formatter.format(new Date());
+            footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
 
             //setStates to Spinner
