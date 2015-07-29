@@ -49,16 +49,8 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
-
-        try {
-
-            Date currentYear = formatter.parse(String.valueOf(new Date()));
-
-            footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        String currentYear = formatter.format(new Date());
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
         /*
         DataBaseHelper db=new DataBaseHelper(this);
