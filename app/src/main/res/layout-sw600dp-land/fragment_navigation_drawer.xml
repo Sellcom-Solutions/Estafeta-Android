@@ -60,6 +60,7 @@
                 android:text                    ="..."
                 android:layout_gravity          ="center_horizontal"
                 android:textSize                ="@dimen/sizeXSmallText"
+                android:visibility="gone"
                 android:textColor               ="@color/white"/>
         </LinearLayout>
     </LinearLayout>

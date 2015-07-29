@@ -191,7 +191,7 @@
     <string name="error_codigo">Error, código postal no válido.</string>
     <string name="error_ciudad">Error, la ciudad es obligatoria.</string>
     <string name="error_estado">Error, debes seleccionar un estado.</string>
-    <string name="cargando_oficinas">Cargando Oficinas...</string>
+    <string name="cargando_oficinas">Cargando oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
     <string name="error_servicio1">Ocurrió un error con el servicio, intente de nuevo.</string>
     <string name="cargando">Cargando ...</string>
@@ -277,16 +277,16 @@
 
 
     <!-- FragmentQuotation -->
-    <string name="noPostalCode">El contacto seleccionado no tiene un Código Postal válido. Por favor, verifique.</string>
-    <string name="noOrigin">Error, Código postal origen no válido.</string>
-    <string name="noDestination">Error, Código postal destino no válido.</string>
-    <string name="noCountry">Error, Seleccione un país destino.</string>
-    <string name="noWeigth">Error, Valor de peso no válido.</string>
-    <string name="noHigh">Error, Valor de alto no válido.</string>
-    <string name="noLong">Error, Valor de largo no válido.</string>
-    <string name="noWidth">Error, Valor de ancho no válido.</string>
-    <string name="noCpOrigin">Error, Código postal origen no existe.</string>
-    <string name="noCpDestination">Error, Código postal destino no existe.</string>
+    <string name="noPostalCode">El contacto seleccionado no tiene un código postal válido. Por favor, verifique.</string>
+    <string name="noOrigin">Error, código postal origen no válido.</string>
+    <string name="noDestination">Error, código postal destino no válido.</string>
+    <string name="noCountry">Error, celeccione un país destino.</string>
+    <string name="noWeigth">Error, valor de peso no válido.</string>
+    <string name="noHigh">Error, valor de alto no válido.</string>
+    <string name="noLong">Error, valor de largo no válido.</string>
+    <string name="noWidth">Error, valor de ancho no válido.</string>
+    <string name="noCpOrigin">Error, código postal origen no existe.</string>
+    <string name="noCpDestination">Error, código postal destino no existe.</string>
 
     <!-- FragmentDetailQuotation -->
     <string name="no_iva">Los precios no incluyen IVA.</string>
@@ -299,13 +299,13 @@
 
     <!-- Edit Favorite -->
     <string name="EditFavorite">Editar</string>
-    <string name="No_Guia">No. Guia</string>
+    <string name="No_Guia">No. guia</string>
     <string name="Cod_Rastreo">Codigo de rastreo</string>
-    <string name="no_guia3">No. Guía: </string>
+    <string name="no_guia3">No. guía: </string>
     <string name="references_favorite">Referencia: </string>
     <string name="favorite_cod_rastreo">Código de rastreo: </string>
     <string name="name_guia">Asigna un nombre a tu numero de guía para facilitar su localización </string>
-    <string name="favorite_ServiceStatus">Estatus del Servicio: </string>
+    <string name="favorite_ServiceStatus">Estatus del servicio: </string>
     <string name="edit_cancel">Cancelar</string>
     <string name="edit_save">Guardar</string>
     <string name="edit_name_guia">Referencia</string>
@@ -315,11 +315,11 @@
     <string name="fav_favorite">Favorito</string>
     <string name="fav_reference">Referencia: </string>
     <string name="fav_cod_rastreo">Codigo de rastreo:</string>
-    <string name="fav_no_guia">No. Guía: </string>
+    <string name="fav_no_guia">No. guía: </string>
     <string name="fav_origen">Origen: </string>
     <string name="fav_destino">Destino:</string>
     <string name="fav_cp_destino">C.R. Destino:</string>
-    <string name="fav_estatus">Estatus del Servicio:</string>
+    <string name="fav_estatus">Estatus del servicio:</string>
     <string name="fav_fecha">Fecha y hora de entrega:</string>
     <string name="fav_recibio">Recibio: </string>
     <string name="fav_btn_call">Llamar </string>
