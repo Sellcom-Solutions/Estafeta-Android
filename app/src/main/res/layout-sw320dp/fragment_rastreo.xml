@@ -213,11 +213,11 @@
             android:layout_gravity="bottom|center_horizontal"
             android:background="@color/white">
             <TextView
+                android:id="@+id/footer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/footerSize"
                 android:layout_marginLeft="10dp"
-                android:text="@string/footer"
                 android:textColor="@color/estafeta_soft_gray"
                 android:textStyle="bold"
                 android:padding="5dp"

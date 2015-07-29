@@ -25,6 +25,9 @@ import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.ProfileManager;
 import com.sellcom.apps.tracker_material.Utils.Utilities;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
@@ -49,7 +52,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private ActionBarDrawerToggle mActionBarDrawerToggle;
     private boolean mFromSavedInstanceState;
     private int mCurrentSelectedPosition    = -1;
-    private TextView txv_version;
+    private TextView txv_version,footer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,6 +64,20 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mDrawerList.setHasFixedSize(true);
 
         txv_version= (TextView)view.findViewById(R.id.versionName);
+        footer = (TextView)view.findViewById(R.id.footer);
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+
+        try {
+
+            Date currentYear = formatter.parse(String.valueOf(new Date()));
+
+            footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
 
         final List<NavigationItem> navigationItems = ProfileManager.getDrawerModulesFromProfile(getActivity());

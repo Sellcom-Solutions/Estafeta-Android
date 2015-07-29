@@ -12,11 +12,13 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:text="@string/footer"
             android:textSize="@dimen/sizeXSmallText"
+            android:gravity="center"
             android:textColor="@color/white" />
     </LinearLayout>
 

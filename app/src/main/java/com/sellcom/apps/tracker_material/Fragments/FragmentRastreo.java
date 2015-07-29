@@ -68,7 +68,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     Button                          escanear;
     Button                     agregar;
     EditText                        codigo;
-    TextView    txv_num_sends;
+    TextView    txv_num_sends,
+                footer;
 
     private int restantes = 10;
 
@@ -116,6 +117,13 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         lst_rastreo.setOnItemClickListener(this);
         codigo      = (EditText)view.findViewById(R.id.edt_codigo);
         txv_num_sends = (TextView)view.findViewById(R.id.txv_num_sends);
+        footer      = (TextView)view.findViewById(R.id.footer);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+
+        String currentYear = formatter.format(new Date());
+
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
         Utilities.hideKeyboard(context,codigo);
         //codes_array = Rastreo_tmp.getAllInMaps(context);

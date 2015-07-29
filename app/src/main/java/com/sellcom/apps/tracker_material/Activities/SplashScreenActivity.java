@@ -30,12 +30,14 @@ import database.DataBaseManager;
 import database.model.Codes;
 import database.model.Offices;
 
+import android.widget.TextView;
 
 public class SplashScreenActivity extends ActionBarActivity implements UIResponseListenerInterface {
 
     String TAG= "SPLASH_SCREEN";
     Context context;
     String last_date,method="";
+    TextView footer;
 
 
     @Override
@@ -43,6 +45,20 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
+        footer = (TextView)findViewById(R.id.footer);
+
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
+
+        try {
+
+            Date currentYear = formatter.parse(String.valueOf(new Date()));
+
+            footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         /*
         DataBaseHelper db=new DataBaseHelper(this);

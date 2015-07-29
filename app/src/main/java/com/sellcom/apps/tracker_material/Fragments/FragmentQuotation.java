@@ -535,12 +535,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                             if(Integer.parseInt(edt_weigth.getText().toString()) > 70){
                                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso no debe superar los 70kg.", 3000);
-                            }else if(Integer.parseInt(edt_high.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "La altura no debe superar los 70cm.", 3000);
-                            }else if(Integer.parseInt(edt_long.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El largo no debe superar los 70cm.", 3000);
-                            }else if(Integer.parseInt(edt_width.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El ancho no debe superar los 70cm.", 3000);
                             }else{
 
                                 int pesoVolumetrico = (Integer.parseInt(edt_high.getText().toString()) * Integer.parseInt(edt_long.getText().toString()) * Integer.parseInt(edt_width.getText().toString()))/5000;
@@ -583,20 +577,14 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                         }else{
 
 
-                            if(Integer.parseInt(edt_weigth.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso no debe superar los 70kg.", 3000);
-                            }else if(Integer.parseInt(edt_high.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "La altura no debe superar los 70cm.", 3000);
-                            }else if(Integer.parseInt(edt_long.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El largo no debe superar los 70cm.", 3000);
-                            }else if(Integer.parseInt(edt_width.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El ancho no debe superar los 70cm.", 3000);
+                            if(Integer.parseInt(edt_weigth.getText().toString()) > 68){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso no debe superar los 68kg.", 3000);
                             }else{
 
                                 int pesoVolumetrico = (Integer.parseInt(edt_high.getText().toString()) * Integer.parseInt(edt_long.getText().toString()) * Integer.parseInt(edt_width.getText().toString()))/5000;
 
-                                if(pesoVolumetrico > 70){
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumetrico no debe ser mayor que 70, verifique los datos ingresados.", 3000);
+                                if(pesoVolumetrico > 68){
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumetrico no debe ser mayor que 68, verifique los datos ingresados.", 3000);
                                 }else{
 
                                     int numCountrie = spn_countrie.getSelectedItemPosition();
