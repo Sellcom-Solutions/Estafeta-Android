@@ -69,16 +69,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
 
-        try {
+        String currentYear = formatter.format(new Date());
 
-            Date currentYear = formatter.parse(String.valueOf(new Date()));
-
-            footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
         final List<NavigationItem> navigationItems = ProfileManager.getDrawerModulesFromProfile(getActivity());
         NavigationDrawerAdapter adapter = new NavigationDrawerAdapter(navigationItems);
@@ -133,6 +126,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
                 getResources().getColor(R.color.white));
 
         mActionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
+
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -141,10 +135,17 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             }
 
             @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+
                 InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(toolbar.getWindowToken(), 0);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
                 if (!isAdded()) return;
                 //Utilities.hideKe  yboard(getActivity(), new EditText(getActivity()));
                 getActivity().invalidateOptionsMenu();
