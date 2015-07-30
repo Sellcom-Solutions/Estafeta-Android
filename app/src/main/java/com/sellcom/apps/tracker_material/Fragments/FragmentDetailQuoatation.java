@@ -388,7 +388,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 map = new HashMap<String,String>();
                 map = list.get(0);
 
-                txv_dimensiones.setText("" + map.get("Alto") + "cm x " + map.get("Ancho") + "cm x " + map.get("Largo") + ", " + map.get("Peso") + "kg");
+                txv_dimensiones.setText("" + map.get("Alto") + "cm x " + map.get("Ancho") + "cm x " + map.get("Largo") + "cm, " + map.get("Peso") + "kg");
 
                 addExtraData();
 
@@ -447,7 +447,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_origen.setText("México");
                 txv_destino.setText(""+getArguments().getString("destino"));
 
-                txv_dimensiones.setText("" + getArguments().getString("alto") + "cm x " + getArguments().getString("ancho") + "cm x " + getArguments().getString("largo") + ", " + getArguments().getString("peso") + "kg");
+                txv_dimensiones.setText("" + getArguments().getString("alto") + "cm x " + getArguments().getString("ancho") + "cm x " + getArguments().getString("largo") + "cm, " + getArguments().getString("peso") + "kg");
 
                 break;
 
@@ -505,7 +505,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_origen.setText("México");
                 txv_destino.setText(""+getArguments().getString("destino"));
 
-                txv_dimensiones.setText("" + getArguments().getString("alto") + "cm x " + getArguments().getString("ancho") + "cm x " + getArguments().getString("largo") + ", " + getArguments().getString("peso") + "kg");
+                txv_dimensiones.setText("" + getArguments().getString("alto") + "cm x " + getArguments().getString("ancho") + "cm x " + getArguments().getString("largo") + "cm, " + getArguments().getString("peso") + "kg");
 
                 break;
 
@@ -572,33 +572,33 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
                 if (lin_dimensiones.getVisibility() == View.GONE) {
-                    String sendText = "Servicio: " + servicioList.get(posServicio) + ". "
+                    String sendText = "Servicio: " + servicioList.get(Utilities.position) + ". "
                             + "Tipo: " + txv_send_type.getText() + ". "
                             + "Origen: " + txv_origen.getText() + ". "
                             + "Destino: " + txv_destino.getText() + ". "
-                            + "Costo Total: " + txv_costo_total.getText() + ". "
+                            + "Costo total: " + txv_costo_total.getText() + ". "
                             + "Tarifa:" + txv_guia.getText() + ". "
-                            + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
+                            + "Cargo extra: " + txv_cargo_extra.getText() + ". "
                             + "CC: " + txv_cc_tarifa.getText() + ". "
-                            + "Costo Sobrepeso: " + txv_costo.getText() + ". "
-                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". ";
+                            + "Costo sobrepeso: " + txv_costo.getText() + ". "
+                            + "CC sobrepeso: " + txv_cc_sobrepeso.getText() + ". Precios sujetos a cambio sin previo aviso. Los precios no incluyen IVA.";
 
 
                     sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
                     sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                     sendIntent.setType("text/plain");
                 }else{
-                    String sendText = "Servicio: " + servicioList.get(posServicio) + ". "
+                    String sendText = "Servicio: " + servicioList.get(Utilities.position) + ". "
                             + "Tipo: " + txv_send_type.getText() + ". "
                             + "Origen: " + txv_origen.getText() + ". "
                             + "Destino: " + txv_destino.getText() + ". "
-                            + "Costo Total: " + txv_costo_total.getText() + ". "
+                            + "Costo total: " + txv_costo_total.getText() + ". "
                             + "Tarifa:" + txv_guia.getText() + ". "
-                            + "Cargo Extra: " + txv_cargo_extra.getText() + ". "
+                            + "Cargo extra: " + txv_cargo_extra.getText() + ". "
                             + "CC: " + txv_cc_tarifa.getText() + ". "
-                            + "Costo Sobrepeso: " + txv_costo.getText() + ". "
-                            + "CC Sobrepeso: " + txv_cc_sobrepeso.getText() + ". "
-                            +"Dimenciones: "+txv_dimensiones.getText()+". ";
+                            + "Costo sobrepeso: " + txv_costo.getText() + ". "
+                            + "CC sobrepeso: " + txv_cc_sobrepeso.getText() + ". "
+                            +"Dimensiones: "+txv_dimensiones.getText()+". Precios sujetos a cambio sin previo aviso. Los precios no incluyen IVA.";
 
 
                     sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");

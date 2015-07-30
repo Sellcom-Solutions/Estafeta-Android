@@ -85,7 +85,7 @@
                             android:layout_width        ="match_parent"
                             android:layout_height       ="wrap_content"
                             android:textSize            ="@dimen/sizeMediumText"
-                            android:textColor           ="@android:color/black"
+                            android:textColor           ="@color/estafeta_text"
                             android:text                ="@string/verificar_codigo"
                             android:layout_marginLeft   ="20dp"
                             android:layout_marginRight  ="20dp"
@@ -144,7 +144,7 @@
                             android:layout_width        ="match_parent"
                             android:layout_height       ="match_parent"
                             android:textSize            ="@dimen/sizeMediumText"
-                            android:textColor           ="@android:color/black"
+                            android:textColor           ="@color/estafeta_text"
                             android:text                ="@string/buscar_codigo"
                             android:layout_marginLeft   ="20dp"
                             android:layout_marginRight  ="20dp"/>

@@ -169,7 +169,7 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("codes_info", (java.io.Serializable) codes_info);
-                    bundle.putString("origin","detalle_favorito");
+                    bundle.putString("origin", "detalle_favorito");
 
                     fragmentManager = getActivity().getSupportFragmentManager();
                     fragmentTransaction = fragmentManager.beginTransaction();
@@ -203,13 +203,23 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
 
-                String sendText = "No.guía: "+ fav_no_guia.getText()+". "
-                        +"Código rastreo: "+fav_codigo.getText()+". "
-                        +"Origen: "+fav_origen.getText()+". "
-                        +"Destino: "+fav_destino.getText()+". "
-                        +"Estatus: "+fav_estatus.getText()+". "
-                        +"Fecha: "+fav_fecha.getText()+". "
-                        +"Recibio: "+fav_recibio.getText()+". ";
+                String sendText ="";
+                if(fav_fecha.getText().toString().equals("")){
+                    sendText = "No. guía: "+ fav_no_guia.getText()+". "
+                            +"Código rastreo: "+fav_codigo.getText()+". "
+                            +"Origen: "+fav_origen.getText()+". "
+                            +"Destino: "+fav_destino.getText()+". "
+                            +"Estatus: "+fav_estatus.getText()+". "
+                            +"Recibió: "+fav_recibio.getText()+". ";
+                }else{
+                    sendText = "No. guía: "+ fav_no_guia.getText()+". "
+                            +"Código rastreo: "+fav_codigo.getText()+". "
+                            +"Origen: "+fav_origen.getText()+". "
+                            +"Destino: "+fav_destino.getText()+". "
+                            +"Estatus: "+fav_estatus.getText()+". "
+                            +"Fecha de entrega: "+fav_fecha.getText()+". "
+                            +"Recibió: "+fav_recibio.getText()+". ";
+                }
 
                 sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);

@@ -87,7 +87,7 @@ public class RastreoAdapter extends BaseSwipeAdapter {
 
             }
 
-            int size = 10-codigos.size();
+            int size = codigos.size();
             setNumCodes.setCodes(size);
             no_codigo.setText(codStr);
 

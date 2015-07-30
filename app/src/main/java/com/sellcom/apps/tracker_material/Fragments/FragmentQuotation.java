@@ -526,29 +526,29 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noDestination), 3000);
                             return;
                         } else if (edt_weigth.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noWeigth), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         } else if (edt_high.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noHigh), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         } else if (edt_long.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noLong), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         } else if (edt_width.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noWidth), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         }else{
 
 
 
-                            if(Integer.parseInt(edt_weigth.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso no debe superar los 70kg.", 3000);
+                            if(Double.parseDouble(edt_weigth.getText().toString()) > 70){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede los 70kg.", 3000);
                             }else{
 
-                                int pesoVolumetrico = (Integer.parseInt(edt_high.getText().toString()) * Integer.parseInt(edt_long.getText().toString()) * Integer.parseInt(edt_width.getText().toString()))/5000;
+                                double pesoVolumetrico = (Double.parseDouble(edt_high.getText().toString()) * Double.parseDouble(edt_long.getText().toString()) * Double.parseDouble(edt_width.getText().toString()))/5000;
 
                                 if(pesoVolumetrico > 70){
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumetrico no debe ser mayor que 70, verifique los datos ingresados.", 3000);
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede los 70kg.", 3000);
                                 }else{
                                     origen  = edt_zc_origin.getText().toString();
                                     destino = edt_zc_destination.getText().toString();
@@ -571,28 +571,28 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noCountry), 3000);
                             return;
                         }else if (edt_weigth.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noWeigth), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         } else if (edt_high.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noHigh), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         } else if (edt_long.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noLong), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         } else if (edt_width.getText().toString().equals("")) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noWidth), 3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         }else{
 
 
-                            if(Integer.parseInt(edt_weigth.getText().toString()) > 68){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso no debe superar los 68kg.", 3000);
+                            if(Double.parseDouble(edt_weigth.getText().toString()) > 68){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede los 68kg.", 3000);
                             }else{
 
-                                int pesoVolumetrico = (Integer.parseInt(edt_high.getText().toString()) * Integer.parseInt(edt_long.getText().toString()) * Integer.parseInt(edt_width.getText().toString()))/5000;
+                                double pesoVolumetrico = (Double.parseDouble(edt_high.getText().toString()) * Double.parseDouble(edt_long.getText().toString()) * Double.parseDouble(edt_width.getText().toString()))/5000;
 
                                 if(pesoVolumetrico > 68){
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumetrico no debe ser mayor que 68, verifique los datos ingresados.", 3000);
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede los 68kg..", 3000);
                                 }else{
 
                                     int numCountrie = spn_countrie.getSelectedItemPosition();
@@ -603,7 +603,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                                     if(numCountrie == 63){
                                         contEUA_Canada = 0;
-                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando...", 0);
                                         cotizar("internacional_paquete_eua_canada");
 
                                         //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
@@ -649,7 +649,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                             if(numCountrie == 39 || numCountrie == 63){
                                 contEUA_Canada = 0;
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando...", 0);
                                 cotizar("internacional_sobre_eua_canada");
 
                                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
@@ -782,7 +782,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case "internacional_paquete":
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cotizando...", 0);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando...", 0);
 
                 requestData.put("peso", peso);
 

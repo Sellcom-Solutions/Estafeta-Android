@@ -544,14 +544,14 @@
                             android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
                             android:layout_marginBottom="5dp"
-                            android:textColor="@color/estafeta_soft_gray"
+                            android:textColor="@color/estafeta_text"
                             android:text="@string/cambion_sin_aviso"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
-                            android:textColor="@color/estafeta_soft_gray"
+                            android:textColor="@color/estafeta_text"
                             android:text="@string/no_iva"/>
                     </LinearLayout>
 

@@ -52,7 +52,7 @@
     <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de guía debe tener 22 dígitos</string>
     <string name="code_invalid">Código invalido, favor de verificarlo.</string>
     <string name="codigo">Código</string>
-    <string name="aviso_codigo">Puedes ingresar hasta 10 envíos (uno por línea)</string>
+    <string name="aviso_codigo">Has ingresado 0 de 10 guías de rastreo.</string>
     <string name="boton_escanear">ESCANEAR</string>
     <string name="boton_rastrear">RASTREAR</string>
     <string name="no_guia">Número de guía:</string>
@@ -98,8 +98,8 @@
     <string name="quotation_shipping">Cotizar envío</string>
     <string name="quotation_national">Nacional</string>
     <string name="quotation_international">Internacional</string>
-    <string name="quotation_packet">SOBRE</string>
-    <string name="quotation_package">PAQUETE</string>
+    <string name="quotation_packet">Sobre</string>
+    <string name="quotation_package">Paquete</string>
     <string name="quotation_zip_origin">C.P. Origen</string>
     <string name="quotation_zip_destination">C.P. Destino</string>
     <string name="quotation_quote">Cotizar</string>
@@ -117,7 +117,7 @@
 
     <!--Fragment Quotation_Buy-->
 
-    <string name="sender_name">Nobre remitente</string>
+    <string name="sender_name">Nombre remitente</string>
     <string name="phone_number">Teléfono</string>
     <string name="email">Correo eléctronico</string>
     <string name="bussines_name">Razón social</string>
@@ -159,7 +159,7 @@
     <string name="abr_codigo">C.P.</string>
     <string name="validar_codigo">Validar</string>
     <string name="buscar_codigo">Buscar un código postal</string>
-    <string name="search_by_zip_code">Código postal</string>
+    <string name="search_by_zip_code">Código postal*</string>
     <string name="estado">Estado</string>
 
     <!-- Aviso de Privacidad -->
@@ -193,7 +193,7 @@
     <string name="error_estado">Error, debes seleccionar un estado.</string>
     <string name="cargando_oficinas">Cargando oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
-    <string name="error_servicio1">Ocurrió un error con el servicio, intente de nuevo.</string>
+    <string name="error_servicio1">Revisa tu conexión a Internet.</string>
     <string name="cargando">Cargando ...</string>
     <string name="actualizando">Actualizando ...</string>
     <string name="error_tamaño_codigo">Error,un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
@@ -280,13 +280,14 @@
     <string name="noPostalCode">El contacto seleccionado no tiene un código postal válido. Por favor, verifique.</string>
     <string name="noOrigin">Error, código postal origen no válido.</string>
     <string name="noDestination">Error, código postal destino no válido.</string>
-    <string name="noCountry">Error, celeccione un país destino.</string>
+    <string name="noCountry">Error, seleccione un país destino.</string>
     <string name="noWeigth">Error, valor de peso no válido.</string>
     <string name="noHigh">Error, valor de alto no válido.</string>
     <string name="noLong">Error, valor de largo no válido.</string>
     <string name="noWidth">Error, valor de ancho no válido.</string>
     <string name="noCpOrigin">Error, código postal origen no existe.</string>
     <string name="noCpDestination">Error, código postal destino no existe.</string>
+    <string name="verifique">Verifique los datos.</string>
 
     <!-- FragmentDetailQuotation -->
     <string name="no_iva">Los precios no incluyen IVA.</string>

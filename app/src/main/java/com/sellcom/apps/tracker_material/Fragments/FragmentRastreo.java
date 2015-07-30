@@ -376,7 +376,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     @Override
     public void setCodes(int restantes) {
 
-            txv_num_sends.setText("Puedes ingresar hasta " + restantes + " envíos (uno por línea)");
+            txv_num_sends.setText("Has ingresado " + restantes + " de 10 guías por rastrear.");
 
     }
 
@@ -392,7 +392,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             escanear.setEnabled(true);
         }
 
-        setCodes(10-codes_array.size());
+        setCodes(codes_array.size());
         lstAdapter.stateDelete[position] = 0;
         lstAdapter.notifyDataSetChanged();
         /*

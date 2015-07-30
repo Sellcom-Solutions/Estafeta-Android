@@ -20,6 +20,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 import com.sellcom.apps.tracker_material.R;
 import com.sellcom.apps.tracker_material.Utils.ProfileManager;
@@ -54,6 +55,10 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private int mCurrentSelectedPosition    = -1;
     private TextView txv_version,footer;
 
+    private static ImageView img_estafeta = null;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
@@ -65,6 +70,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
         txv_version= (TextView)view.findViewById(R.id.versionName);
         footer = (TextView)view.findViewById(R.id.footer);
+
+        img_estafeta = (ImageView)view.findViewById(R.id.img_estafeta);
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
@@ -102,6 +109,16 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        if(img_estafeta != null) {
+            img_estafeta.setImageDrawable(getResources().getDrawable(R.drawable.menu_estafeta));
+        }
+
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
@@ -112,6 +129,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     }
 
     public ActionBarDrawerToggle getActionBarDrawerToggle() {
+        if(img_estafeta != null) {
+            img_estafeta.setImageDrawable(getResources().getDrawable(R.drawable.menu_estafeta));
+        }
         return mActionBarDrawerToggle;
     }
 
