@@ -1018,7 +1018,6 @@ public class ResponseManager {
                 }
 
                 if ("HasError".equals(nodeName)) {
-                    if (subNode.getNodeValue().equals("true"))
                         map.put("HasError",nodeValue);
                         Log.d("HasError", "" + nodeValue);
                     continue;

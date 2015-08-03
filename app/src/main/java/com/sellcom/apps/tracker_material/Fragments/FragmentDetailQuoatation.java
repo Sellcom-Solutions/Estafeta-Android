@@ -232,7 +232,9 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
 
                 numero = Double.parseDouble(map.get("CostoTotal"));
-                txv_costo_total.setText("$" + decimales.format(numero));
+
+
+                txv_costo_total.setText(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
 
             }
@@ -291,7 +293,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_tarifa_internacional.append("" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
-                txv_costo_total_internacional.append("" + decimales.format(numero));
+                txv_costo_total_internacional.append("" + Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 if(position == 0){
                     txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
@@ -339,7 +341,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_sobrepeso.append("$" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("CostoTotal"));
-                txv_costo_total.append("$" + decimales.format(numero));
+                txv_costo_total.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
@@ -381,7 +383,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_sobrepeso.append("$" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("CostoTotal"));
-                txv_costo_total.append("$" + decimales.format(numero));
+                txv_costo_total.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
@@ -412,7 +414,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_tarifa_internacional.append("" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
-                txv_costo_total_internacional.append("" + decimales.format(numero));
+                txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 txv_origen.setText("México");
                 txv_destino.setText("" + getArguments().getString("destino"));
@@ -440,7 +442,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_tarifa_internacional.append("" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
-                txv_costo_total_internacional.append("" + decimales.format(numero));
+                txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 
@@ -470,7 +472,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_tarifa_internacional.append("" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
-                txv_costo_total_internacional.append("" + decimales.format(numero));
+                txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 txv_origen.setText("México");
                 txv_destino.append(""+getArguments().getString("destino"));
@@ -498,7 +500,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 txv_cc_tarifa_internacional.append("" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
-                txv_costo_total_internacional.append("" + decimales.format(numero));
+                txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
 

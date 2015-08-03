@@ -18,6 +18,8 @@ import com.sellcom.apps.tracker_material.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -218,6 +220,38 @@ public class Utilities {
         }
 
         return saveString;
+    }
+
+    public static String setReceiptMoneyNumberFormat (double amount, int strLength){
+
+        DecimalFormatSymbols simbolo=new DecimalFormatSymbols();
+        simbolo.setDecimalSeparator('.');
+        simbolo.setGroupingSeparator(',');
+
+        DecimalFormat form  = new DecimalFormat("###,###.##",simbolo);
+        String strAmount    = form.format(amount);
+        while (strAmount.length()<strLength){
+            strAmount = " "+strAmount;
+        }
+/*7
+        int cont=1;
+        for(int i = strAmount.length()-3; i>0; i--){
+
+            if((cont % 3)==0){
+                if(cont<4) {
+                    strAmount = strAmount.substring(0, (strAmount.length() - 3) - cont) + "," + strAmount.substring((strAmount.length() - 3) - cont, strAmount.length());
+                }else{
+                    strAmount = strAmount.substring(0, (strAmount.length() - 4) - cont) + "," + strAmount.substring((strAmount.length() - 4) - cont, strAmount.length());
+                }
+            }
+            cont++;
+
+
+        }
+*/
+        strAmount = "$"+strAmount;
+
+        return strAmount;
     }
 
 }

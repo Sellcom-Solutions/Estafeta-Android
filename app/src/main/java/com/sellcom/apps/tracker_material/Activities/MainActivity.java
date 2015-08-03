@@ -76,6 +76,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
 
         mNavigationDrawerFragment.selectItem(0);
+        Log.d("MainActivity","Super prueba de comas"+Utilities.setReceiptMoneyNumberFormat(108271827.23322,2));
 
     }
 
