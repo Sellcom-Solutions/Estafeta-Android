@@ -176,7 +176,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 break;
 
             case "celda_pe":
-                img_estatus.setImageResource(R.drawable.estatus_sin);
+                img_estatus.setImageResource(R.drawable.estatus_pendiente);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 estatus.setText("Pendiente");
                 break;

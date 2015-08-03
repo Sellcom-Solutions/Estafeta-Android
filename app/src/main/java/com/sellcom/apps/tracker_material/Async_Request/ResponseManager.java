@@ -980,6 +980,7 @@ public class ResponseManager {
 
 
         Node subNode;
+        /*
         NodeList errores = doc.getElementsByTagName("HasError");
         if(errores.getLength()>0){
             subNode = errores.item(0);
@@ -989,7 +990,7 @@ public class ResponseManager {
                 return null;
             }
         }
-
+*/
         NodeList response = doc.getElementsByTagName("CotizaPlanoResult");
         if (response != null) {
             if (response.getLength() == 0) {
@@ -1021,6 +1022,12 @@ public class ResponseManager {
                         map.put("HasError",nodeValue);
                         Log.d("HasError", "" + nodeValue);
                     continue;
+                }
+
+                if("ErrorMessageESP".equals(nodeName)){
+                        map.put("ErrorMessageESP",nodeValue);
+                        Log.d("ErrorMessageESP", "" + nodeValue);
+                        continue;
                 }
 
                 if ("PrecioCombustible".equals(nodeName)) {

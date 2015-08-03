@@ -7,10 +7,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -71,11 +73,45 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
         if(view != null){
             spinner_state   = (Spinner) view.findViewById(R.id.spinner_state);
+            spinner_state.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if(hasFocus) {
+                        zipCode.setText("");
+                    }
+                }
+            });
             validateZipCode = (Button) view.findViewById(R.id.btn_validar_zipcode);
             buscarZipCode   = (Button) view.findViewById(R.id.btn_buscar_zipcode);
             zipCode         = (EditText) view.findViewById(R.id.verify_zip_code);
+            zipCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        setStatesToSpinner(spinner_state, context);
+                        ciudad.setText("");
+                        colonia.setText("");
+                    }
+                }
+            });
             ciudad          = (EditText) view.findViewById(R.id.ciudad);
+            ciudad.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        zipCode.setText("");
+                    }
+                }
+            });
             colonia         = (EditText) view.findViewById(R.id.colonia);
+            colonia.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View v, boolean hasFocus) {
+                    if (hasFocus) {
+                        zipCode.setText("");
+                    }
+                }
+            });
 
             footer      = (TextView)view.findViewById(R.id.footer);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
@@ -93,6 +129,12 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
         }
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        footer.requestFocus();
     }
 
     @Override

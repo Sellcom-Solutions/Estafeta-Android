@@ -14,17 +14,17 @@
     </string-array>
 
     <!-- Dialog messages-->
-    <string name="error_codigo">Error, código postal no válido.</string>
-    <string name="error_ciudad">Error, el campo ciudad es obligatorio.</string>
-    <string name="error_estado">Error, debes seleccionar un estado.</string>
+    <string name="error_codigo">Código postal no válido.</string>
+    <string name="error_ciudad">El campo ciudad es obligatorio.</string>
+    <string name="error_estado">Debes seleccionar un estado.</string>
     <string name="cargando_oficinas">Cargando oficinas...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
     <string name="cargando">Cargando ...</string>
     <string name="actualizando">Actualizando ...</string>
-    <string name="error_tamaño_codigo">Error,un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
-    <string name="error_cod_repetido">Error, el número ya existe en la lista de rastreo.</string>
-    <string name="error_lista_vacia">Error, la lista de rastreo se encuentra vacía.</string>
-    <string name="error_agregar_fav">Error, no existe información acerca de este registro</string>
+    <string name="error_tamaño_codigo">Un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
+    <string name="error_cod_repetido">El número ya existe en la lista de rastreo.</string>
+    <string name="error_lista_vacia">La lista de rastreo se encuentra vacía.</string>
+    <string name="error_agregar_fav">No existe información acerca de este registro</string>
     <string name="exito_agregar_fav">Operación exitosa</string>
 
     <!-- Globals -->

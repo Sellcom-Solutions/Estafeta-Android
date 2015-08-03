@@ -1050,23 +1050,58 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                         }
 
 
-                } else if(typeSend.equals("internacional_paquete_eua_canada")){
+                } else if(typeSend.equals("internacional_paquete_eua_canada")) {
 
-                    if (contEUA_Canada == 0) {
-                        contEUA_Canada++;
+                    if (respCotizador.get(0).get("HasError").equals("true")) {
+                        DialogManager.sharedInstance().dismissDialog();
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,""+respCotizador.get(0).get("ErrorMessageESP"),3000);
+                    }else {
+
+                        if (contEUA_Canada == 0) {
+                            contEUA_Canada++;
+                            respCotizador.get(0).put("DescripcionServicio", "Global Express");
+                            auxResp.add(respCotizador.get(0));
+                            cotizar("internacional_paquete_eua_canada");
+                        } else {
+                            respCotizador.get(0).put("DescripcionServicio", "USA-Canadá-Estandar");
+                            auxResp.add(respCotizador.get(0));
+                            bundle.putString("type", "internacional_paquete_eua_canada");
+
+                            bundle.putString("destino", spn_countrie.getSelectedItem().toString());
+                            bundle.putString("peso", peso);
+                            bundle.putString("alto", alto);
+                            bundle.putString("largo", largo);
+                            bundle.putString("ancho", ancho);
+
+                            bundle.putSerializable("auxResp", auxResp);
+                            fragment = new FragmentDetailQuoatation();
+                            fragment.addFragmentToStack(getActivity());
+                            fragment.setArguments(bundle);
+                            fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.addToBackStack(null);
+
+                            new AsynTask().execute();
+                        }
+                    }
+
+                }else if(typeSend.equals("internacional_paquete")){
+
+                    if (respCotizador.get(0).get("HasError").equals("true")) {
+                        DialogManager.sharedInstance().dismissDialog();
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,""+respCotizador.get(0).get("ErrorMessageESP"),3000);
+                    }else {
+
                         respCotizador.get(0).put("DescripcionServicio", "Global Express");
-                        auxResp.add(respCotizador.get(0));
-                        cotizar("internacional_paquete_eua_canada");
-                    } else {
-                        respCotizador.get(0).put("DescripcionServicio", "USA-Canadá-Estandar");
-                        auxResp.add(respCotizador.get(0));
-                        bundle.putString("type", "internacional_paquete_eua_canada");
 
-                        bundle.putString("destino",spn_countrie.getSelectedItem().toString());
-                        bundle.putString("peso",peso);
-                        bundle.putString("alto",alto);
-                        bundle.putString("largo",largo);
-                        bundle.putString("ancho",ancho);
+                        auxResp.add(respCotizador.get(0));
+
+                        bundle.putString("type", "internacional_paquete");
+
+                        bundle.putString("destino", spn_countrie.getSelectedItem().toString());
+                        bundle.putString("peso", peso);
+                        bundle.putString("alto", alto);
+                        bundle.putString("largo", largo);
+                        bundle.putString("ancho", ancho);
 
                         bundle.putSerializable("auxResp", auxResp);
                         fragment = new FragmentDetailQuoatation();
@@ -1077,29 +1112,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         new AsynTask().execute();
                     }
-
-                }else if(typeSend.equals("internacional_paquete")){
-
-                    respCotizador.get(0).put("DescripcionServicio","Global Express");
-
-                    auxResp.add(respCotizador.get(0));
-
-                    bundle.putString("type", "internacional_paquete");
-
-                    bundle.putString("destino",spn_countrie.getSelectedItem().toString());
-                    bundle.putString("peso",peso);
-                    bundle.putString("alto",alto);
-                    bundle.putString("largo",largo);
-                    bundle.putString("ancho",ancho);
-
-                    bundle.putSerializable("auxResp", auxResp);
-                    fragment = new FragmentDetailQuoatation();
-                    fragment.addFragmentToStack(getActivity());
-                    fragment.setArguments(bundle);
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.addToBackStack(null);
-
-                    new AsynTask().execute();
 
                 }
 
