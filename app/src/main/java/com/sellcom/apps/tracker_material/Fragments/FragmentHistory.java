@@ -66,6 +66,7 @@ public class FragmentHistory extends TrackerFragment {
             codes_info.add(0, new HashMap<String, String>());
 
         }
+        TrackerFragment.section_index = 6;
 
         footer      = (TextView)view.findViewById(R.id.footer);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");

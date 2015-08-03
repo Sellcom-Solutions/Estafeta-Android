@@ -86,6 +86,7 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         String currentYear = formatter.format(new Date());
         footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
+        TrackerFragment.section_index = 5;
 
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.btn_fav_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.btn_fav_share);
