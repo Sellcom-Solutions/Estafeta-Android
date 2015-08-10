@@ -16,6 +16,8 @@
         <item name="colorControlActivated">@color/estafeta_red</item>
         <item name="colorControlHighlight">@color/estafeta_soft_gray</item>
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:actionMenuTextAppearance">@style/MenuTitle</item>
+
     </style>
 
     <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
@@ -60,4 +62,10 @@
         <item name="android:popupBackground">@android:color/transparent</item>
     </style>
 
+    <style name="MenuTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu">
+        <item name="android:textAllCaps">@bool/abs__config_actionMenuItemAllCaps</item>
+        <item name="android:scaleType">fitCenter</item>
+    </style>
+
+    <bool name="abs__config_actionMenuItemAllCaps">false</bool>
 </resources>

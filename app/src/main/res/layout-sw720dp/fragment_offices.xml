@@ -89,6 +89,7 @@
                     android:layout_height   ="wrap_content"
                     android:layout_weight   ="90"
                     android:text            ="@string/offices_near"
+                    android:textAllCaps     ="false"
                     android:textSize        ="@dimen/sizeNormalText"
                     android:textColor       ="@color/estafeta_red"
                     android:textStyle       ="normal"
@@ -242,14 +243,15 @@
                 android:paddingTop="2dp">
 
                 <Button
-                    android:id="@+id/btn_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/Search"
-                    android:textSize="@dimen/sizeLargeText"
-                    android:textColor="@color/estafeta_red"
-                    android:background="@android:color/transparent"
-                    android:layout_gravity="bottom|center_horizontal"/>
+                    android:id              ="@+id/btn_search"
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="match_parent"
+                    android:text            ="@string/Search"
+                    android:textAllCaps     ="false"
+                    android:textSize        ="@dimen/sizeLargeText"
+                    android:textColor       ="@color/estafeta_red"
+                    android:background      ="@android:color/transparent"
+                    android:layout_gravity  ="bottom|center_horizontal"/>
             </LinearLayout><!--10-->
         </LinearLayout><!--72-->
 

@@ -44,10 +44,10 @@
         android:weightSum="10">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:orientation="horizontal">
+            android:layout_width        ="0dp"
+            android:layout_height       ="match_parent"
+            android:layout_weight       ="6"
+            android:orientation         ="horizontal">
 
             <EditText
                 android:id                  ="@+id/verify_zip_code"
@@ -59,18 +59,18 @@
                 android:textColorHint       ="@color/estafeta_soft_gray"
                 android:maxLength           ="5"
                 android:layout_marginLeft   ="20dp"
-                android:paddingRight="30dp"
+                android:paddingRight        ="30dp"
                 android:inputType           ="numberSigned"
                 android:layout_marginRight  ="10dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:textColor="@color/estafeta_red"
+                android:layout_width        ="wrap_content"
+                android:layout_height       ="match_parent"
+                android:textColor           ="@color/estafeta_red"
                 android:layout_marginRight  ="10dp"
-                android:text="*"
-                android:gravity="center"
-                android:textStyle="bold"/>
+                android:text                ="*"
+                android:gravity             ="center"
+                android:textStyle           ="bold"/>
 
         </LinearLayout>
 
@@ -80,6 +80,7 @@
             android:layout_width    ="0dp"
             android:layout_height   ="wrap_content"
             android:layout_weight   ="4"
+            android:textAllCaps     ="false"
             android:text            ="@string/validar_codigo"
             android:textSize        ="@dimen/sizeNormalText"
             android:textColor       ="@color/estafeta_red"
@@ -131,7 +132,7 @@
                 android:id                  ="@+id/ciudad"
                 android:layout_width        ="0dp"
                 android:layout_height       ="wrap_content"
-                android:layout_weight="95"
+                android:layout_weight       ="95"
                 android:textColor           ="@color/estafeta_text"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:hint                ="@string/city_etc"
@@ -141,13 +142,13 @@
                 android:layout_marginRight  ="20dp" />
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"
-                android:textColor="@color/estafeta_red"
+                android:layout_width        ="0dp"
+                android:layout_height       ="wrap_content"
+                android:layout_weight       ="5"
+                android:textColor           ="@color/estafeta_red"
                 android:layout_marginRight  ="10dp"
-                android:text="*"
-                android:textStyle="bold"/>
+                android:text                ="*"
+                android:textStyle           ="bold"/>
 
         </LinearLayout>
         <EditText
@@ -162,26 +163,27 @@
             android:layout_marginRight  ="20dp" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/mandatory_fields"
-            android:textSize="@dimen/sizeSmallText"
-            android:textColor="@color/estafeta_red"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginLeft="20dp"/>
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:text                ="@string/mandatory_fields"
+            android:textSize            ="@dimen/sizeSmallText"
+            android:textColor           ="@color/estafeta_red"
+            android:layout_marginTop    ="10dp"
+            android:layout_marginRight  ="20dp"
+            android:layout_marginLeft   ="20dp"/>
 
         <Button
-            android:id="@+id/btn_buscar_zipcode"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/Search"
-            android:textSize="@dimen/sizeNormalText"
-            android:textColor="@color/estafeta_red"
-            android:background="@android:color/transparent"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="15dp"/>
+            android:id                  ="@+id/btn_buscar_zipcode"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:layout_gravity      ="center_horizontal"
+            android:text                ="@string/Search"
+            android:textAllCaps         ="false"
+            android:textSize            ="@dimen/sizeNormalText"
+            android:textColor           ="@color/estafeta_red"
+            android:background          ="@android:color/transparent"
+            android:layout_marginTop    ="10dp"
+            android:layout_marginBottom ="15dp"/>
 
         </LinearLayout>
 

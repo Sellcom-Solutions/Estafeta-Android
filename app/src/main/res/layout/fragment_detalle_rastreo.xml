@@ -264,14 +264,15 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_historia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:background="@color/zxing_transparent"
-        android:text="@string/ver_historia"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/estafeta_red" />
+        android:id                  ="@+id/btn_historia"
+        android:layout_width        ="wrap_content"
+        android:layout_height       ="wrap_content"
+        android:layout_gravity      ="bottom|center"
+        android:background          ="@color/zxing_transparent"
+        android:textAllCaps         ="false"
+        android:text                ="@string/ver_historia"
+        android:layout_marginBottom ="20dp"
+        android:textColor           ="@color/estafeta_red" />
 
 
 

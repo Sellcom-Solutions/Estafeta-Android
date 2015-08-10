@@ -97,6 +97,7 @@
                             android:textSize            ="@dimen/sizeMediumText"
                             android:background          ="@drawable/toggle_selector"
                             android:layout_weight       ="1"
+                            android:textAllCaps         ="false"
                             android:textColor           ="@color/estafeta_text"
                             android:textOn              ="@string/quotation_national"
                             android:textOff             ="@string/quotation_national"/>
@@ -115,6 +116,7 @@
                             android:textSize            ="@dimen/sizeMediumText"
                             android:background          ="@drawable/toggle_selector"
                             android:layout_weight       ="1"
+                            android:textAllCaps         ="false"
                             android:textColor           ="@color/estafeta_text"
                             android:textOn              ="@string/quotation_international"
                             android:textOff             ="@string/quotation_international"/>
@@ -408,6 +410,7 @@
                             android:paddingTop          ="35dp"
                             android:text                ="@string/quotation_quote"
                             android:textSize            ="@dimen/sizeLargeText"
+                            android:textAllCaps         ="false"
                             android:textColor           ="@color/estafeta_red"
                             android:background          ="@android:color/transparent"
                             android:gravity             ="center"

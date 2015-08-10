@@ -45,6 +45,7 @@
     <string name="rastreo">Rastreo</string>
     <string name="codigo_postal">Código postal</string>
     <string name="favoritos">Favoritos</string>
+    <string name="history">Historia</string>
 
     <!-- Footer -->
     <string name="footer">Estafeta Mexicana, S.A. de C.V.</string>
@@ -54,8 +55,8 @@
     <string name="code_invalid">Código invalido, favor de verificarlo.</string>
     <string name="codigo">Código</string>
     <string name="aviso_codigo">Has ingresado 0 de 10 guías de rastreo.</string>
-    <string name="boton_escanear">ESCANEAR</string>
-    <string name="boton_rastrear">RASTREAR</string>
+    <string name="boton_escanear">Escanear</string>
+    <string name="boton_rastrear">Rastrear</string>
     <string name="no_guia">Número de guía:</string>
     <string name="cod_rastreo">Código de rastreo: </string>
     <string name="boton_codigo_guia">Guía</string>
@@ -70,7 +71,7 @@
     <string name="cp_destino">C.P. Destino: </string>
     <string name="fecha_hora">Fecha y hora de entrega: </string>
     <string name="recibio">Recibió: </string>
-    <string name="ver_historia">VER HISTORIA</string>
+    <string name="ver_historia">Ver historia</string>
     <string name="llamar">Llamar</string>
     <string name="compartir">Compartir</string>
     <string name="delete">Eliminar</string>
@@ -78,9 +79,9 @@
     <string name="code_incorrect">El código leído es incorrecto</string>
 
     <!-- History -->
-    <string name="title_date_time">FECHA - HORA</string>
-    <string name="title_place_event">LUGAR - MOVIMIENTO</string>
-    <string name="title_coments">COMENTARIOS</string>
+    <string name="title_date_time">Fecha - Hora</string>
+    <string name="title_place_event">Lugar - Moviento</string>
+    <string name="title_coments">Comentarios</string>
 
     <!-- Favorites -->
     <string name="notification_alarm">Alarma de notificación</string>

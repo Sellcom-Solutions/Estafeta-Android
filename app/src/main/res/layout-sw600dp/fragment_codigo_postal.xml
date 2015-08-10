@@ -117,6 +117,7 @@
                                 android:layout_width    ="0dp"
                                 android:layout_height   ="wrap_content"
                                 android:layout_weight   ="1"
+                                android:textAllCaps     ="false"
                                 android:text            ="@string/validar_codigo"
                                 android:textSize        ="@dimen/sizeMediumText"
                                 android:textColor       ="@color/estafeta_red"
@@ -207,15 +208,16 @@
                 android:layout_gravity="bottom|center_horizontal"
                 android:weightSum="5">
                 <Button
-                    android:id="@+id/btn_buscar_zipcode"
+                    android:id                  ="@+id/btn_buscar_zipcode"
                     android:layout_width        ="match_parent"
                     android:layout_height       ="match_parent"
                     android:paddingTop          ="35dp"
-                    android:text="@string/Search"
-                    android:textSize="@dimen/sizeLargeText"
+                    android:textAllCaps         ="false"
+                    android:text                ="@string/Search"
+                    android:textSize            ="@dimen/sizeLargeText"
                     android:textColor           ="@color/estafeta_red"
                     android:background          ="@android:color/transparent"
-                    android:layout_gravity="bottom|center_horizontal"/>
+                    android:layout_gravity      ="bottom|center_horizontal"/>
             </LinearLayout>
 
 
