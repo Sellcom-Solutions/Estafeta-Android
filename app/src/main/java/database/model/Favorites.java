@@ -52,7 +52,7 @@ public class Favorites {
         cv.put(RASTREO, values.get("shortWayBillId"));
         cv.put(CP_DESTINO, values.get("DD_zipCode"));
         cv.put(DESTINO, values.get("DD_destinationName"));
-        cv.put(ESTATUS, values.get("statusSPA"));
+        cv.put(ESTATUS, values.get("estatus1"));
         cv.put(FECHA_RECOLECCION, values.get("PK_pickupDateTime"));
         cv.put(FECHA_HORA_ENTREGA, values.get("DD_deliveryDateTime"));
         cv.put(HISTORIA, " ");
@@ -86,7 +86,7 @@ public class Favorites {
         cv.put(RASTREO, values.get("shortWayBillId"));
         cv.put(CP_DESTINO, values.get("DD_zipCode"));
         cv.put(DESTINO, values.get("DD_destinationName"));
-        cv.put(ESTATUS, values.get("statusSPA"));
+        cv.put(ESTATUS, values.get("estatus1"));
         cv.put(FECHA_RECOLECCION, values.get("PK_pickupDateTime"));
         cv.put(FECHA_HORA_ENTREGA, values.get("DD_deliveryDateTime"));
         cv.put(HISTORIA, values.get("history_id"));

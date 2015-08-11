@@ -48,6 +48,8 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
     Context context;
     Activity activity;
+    String new_status;
+
     private ArrayList<ArrayList<Map<String,String>>> codigos;
 
 
@@ -127,25 +129,33 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
             case "celda_pr":
                 holder.img_status.setImageResource(R.drawable.estatus_transito);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
-                holder.estatus.setText("Proceso de entrega");
+                holder.estatus.setText("Pendiente en tránsito");
+                new_status="Pendiente en tránsito";
+                codigos.get(position).get(0).put("estatus1",new_status);
                 break;
 
             case "celda_pe":
                 holder.img_status.setImageResource(R.drawable.estatus_sin);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 holder.estatus.setText("Pendiente");
+                new_status="Pendiente";
+                codigos.get(position).get(0).put("estatus1", new_status);
                 break;
 
             case "celda_en":
                 holder.img_status.setImageResource(R.drawable.estatus_entregado);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 holder.estatus.setText("Entregado");
+                new_status="Entregado";
+                codigos.get(position).get(0).put("estatus1", new_status);
                 break;
 
             default:
                 holder.img_status.setImageResource(R.drawable.estatus_sin);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 holder.estatus.setText("Sin información");
+                new_status="Sin información";
+                codigos.get(position).get(0).put("estatus1",new_status);
                 break;
         }
 

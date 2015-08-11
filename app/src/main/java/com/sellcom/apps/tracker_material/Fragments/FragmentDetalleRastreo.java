@@ -62,6 +62,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
     Map<String, String> data = new HashMap<>();
     ArrayList<Map<String, String>> codes_info = new ArrayList<>();
 
+    String new_status;
     public FragmentDetalleRastreo() {
         // Required empty public constructor
     }
@@ -168,28 +169,37 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
         String estatus_aux= selectImageOnStatus(statusStr, codigoExcStr);
 
+
         switch (estatus_aux) {
             case "celda_pr":
                 img_estatus.setImageResource(R.drawable.estatus_transito);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
-                estatus.setText("Proceso de entrega");
+                estatus.setText("Pendiente en tránsito");
+                new_status="Pendiente en tránsito";
+                codes_info.get(0).put("estatus1",new_status);
                 break;
 
             case "celda_pe":
                 img_estatus.setImageResource(R.drawable.estatus_pendiente);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
+                new_status="Pendiente";
+                codes_info.get(0).put("estatus1", new_status);
                 estatus.setText("Pendiente");
                 break;
 
             case "celda_en":
                 img_estatus.setImageResource(R.drawable.estatus_entregado);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
+                new_status="Entregado";
+                codes_info.get(0).put("estatus1", new_status);
                 estatus.setText("Entregado");
                 break;
 
             default:
                 img_estatus.setImageResource(R.drawable.estatus_sin);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
+                new_status="Sin información";
+                codes_info.get(0).put("estatus1",new_status);
                 estatus.setText("Sin información");
                 break;
         }

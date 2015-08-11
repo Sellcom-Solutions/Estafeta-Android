@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import database.model.Codes;
 import database.model.Favorites;
 
 /**
@@ -126,7 +127,35 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
         holder.codigo.setText(codigoStr);
 
         String estatusStr = codigos_copy.get("estatus");
-        Log.d("estatus FA Adapter", "" + estatusStr);
+        Log.d("estatus FA Adapter1", "" + estatusStr);
+
+//        estatusStr= selectImageOnStatus(estatusStr);
+//
+//        Log.d("estatus FA Adapter", "" + estatusStr);
+        /*switch (estatusStr) {
+            case "celda_pr":
+
+                holder.estatus.setText("Pendiente en tránsito");
+                break;
+
+            case "celda_pe":
+                //img_estatus.setImageResource(R.drawable.estatus_pendiente);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                holder.estatus.setText("Pendiente");
+                break;
+
+            case "celda_en":
+                //img_estatus.setImageResource(R.drawable.estatus_entregado);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                holder.estatus.setText("Entregado");
+                break;
+
+            default:
+                //img_estatus.setImageResource(R.drawable.estatus_sin);
+                //Log.d("Codigo RE Adapter", "" + estatusStr);
+                holder.estatus.setText("Sin información");
+                break;
+        }*/
         holder.estatus.setText(estatusStr);
 
         if(type.equalsIgnoreCase("favorite")){
@@ -209,8 +238,28 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
         public void changeReference();
     }
 
+
     public void setDelete(delete listener) {
         delete = listener;
+    }
+
+    public String selectImageOnStatus(String status){
+
+        String imagen = "celda_";
+        if (status == null) {
+            imagen = imagen + "no";
+        } else {
+            if (status.equals("CONFIRMADO")) {
+                imagen = imagen + "en";
+            } else if (status.equals("DEVUELTO")) {
+                imagen = imagen + "pe";
+            } else if (status.equals("EN_TRANSITO")) {
+                    imagen = imagen + "pe";
+                }
+            else
+                imagen = imagen + "no";
+            }
+        return imagen;
     }
 
 }

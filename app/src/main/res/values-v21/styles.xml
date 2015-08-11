@@ -65,6 +65,7 @@
     <style name="MenuTitle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu">
         <item name="android:textAllCaps">@bool/abs__config_actionMenuItemAllCaps</item>
         <item name="android:scaleType">fitCenter</item>
+        <item name="android:layout_width">20dp</item>
     </style>
 
     <bool name="abs__config_actionMenuItemAllCaps">false</bool>
