@@ -49,6 +49,8 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
              fav_recibio,
             footer;
 
+    Button btn_historia;
+
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
 
@@ -80,6 +82,26 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         fav_estatus = (TextView) view.findViewById(R.id.fav_estatus);
         fav_fecha = (TextView) view.findViewById(R.id.fav_fecha);
         fav_recibio = (TextView) view.findViewById(R.id.fav_recibio);
+
+
+        btn_historia = (Button)view.findViewById(R.id.btn_historia);
+        btn_historia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("codes_info", (java.io.Serializable) codes_info);
+                bundle.putString("origin", "detalle_favorito");
+
+                fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                fragment = new FragmentHistory();
+                fragment.addFragmentToStack(getActivity());
+                fragment.setArguments(bundle);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.replace(R.id.container, fragment, TAG);
+                fragmentTransaction.commit();
+            }
+        });
 
         footer      = (TextView)view.findViewById(R.id.footer);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
@@ -141,53 +163,6 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
     }
 
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        if (savedInstanceState != null) {
-
-        }
-        setHasOptionsMenu(true);
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-
-        if (!((MainActivity) getActivity()).isDrawerOpen) {
-            menu.clear();
-            inflater.inflate(R.menu.menu_history, menu);
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(TAG, "Selected:  " + item.getItemId());
-        switch (item.getItemId()) {
-
-            case R.id.add_history:
-
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("codes_info", (java.io.Serializable) codes_info);
-                    bundle.putString("origin", "detalle_favorito");
-
-                    fragmentManager = getActivity().getSupportFragmentManager();
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragment = new FragmentHistory();
-                    fragment.addFragmentToStack(getActivity());
-                    fragment.setArguments(bundle);
-                    fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.container, fragment, TAG);
-                    fragmentTransaction.commit();
-
-                return true;
-
-            default: return super.onOptionsItemSelected(item);
-        }
-    }
 
     @Override
     public void onClick(View v) {

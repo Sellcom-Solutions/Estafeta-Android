@@ -200,6 +200,15 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     Log.d("ESTADOREQUEST",requestData.get("estado")+".");
                     Log.d("Estado",estadoString);
 
+                    if (Utilities.specialCharacteresInString(ciudadString)){
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se permiten acentos ni caracteres especiales.", 3000);
+                        return;
+                    }
+                    if (Utilities.specialCharacteresInString(coloniaString)){
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se permiten acentos ni caracteres especiales.", 3000);
+                        return;
+                    }
+
                     requestData.put("ciudad", convertNonAscii(ciudadString).trim());
                     requestData.put("localidad", convertNonAscii(coloniaString).trim());
 

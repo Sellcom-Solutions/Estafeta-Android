@@ -34,6 +34,7 @@ import com.sellcom.apps.tracker_material.Utils.DialogManager;
 import com.sellcom.apps.tracker_material.Utils.TrackerFragment;
 import com.sellcom.apps.tracker_material.Utils.Utilities;
 
+import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -234,7 +235,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
     }
 
     private void searchOffice(){
-        String state, city, colony, zipCode;
+        String state, city="", colony, zipCode;
         selectionArgs = null;
         ArrayList<String> args = new ArrayList<String>();
         String sql = "select * from offices where estado=? ";
@@ -256,15 +257,22 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         args.add("" + state);
 
 
-        city    = "" + edt_city.getText().toString();
+        city    = Normalizer.normalize(city, Normalizer.Form.NFD);
+        city    = city.replaceAll("[^\\p{ASCII}]", "");
+
+
         if(!city.equals("")){
             args.add("%" + city + "%");
-            sql += " and ciudad_n like ? ";
+            sql += " and ciudad_n like lower(?)";
         }
         colony  = "" + edt_colony.getText().toString();
+
+        colony    = Normalizer.normalize(colony, Normalizer.Form.NFD);
+        colony    = colony.replaceAll("[^\\p{ASCII}]", "");
+
         if(!colony.equals("")){
             args.add("%" + colony + "%");
-            sql += " and colonia_n like ? ";
+            sql += " and colonia_n like  lower(?)";
         }
         zipCode = "" + edt_zip_code.getText().toString();
         if(!zipCode.equals("")){

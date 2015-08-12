@@ -39,7 +39,6 @@
     <string name="zip_code">C.P.</string>
     <string name="mandatory_fields">Campos obligatorios *</string>
 
-    offices_required
 
     <!-- Headers -->
     <string name="rastreo">Rastreo</string>
@@ -324,7 +323,7 @@
     <string name="fav_cp_destino">C.R. Destino:</string>
     <string name="fav_estatus">Estatus del servicio:</string>
     <string name="fav_fecha">Fecha y hora de entrega:</string>
-    <string name="fav_recibio">Recibio: </string>
+    <string name="fav_recibio">Recibió: </string>
     <string name="fav_btn_call">Llamar </string>
     <string name="fav_btn_share">Compartir </string>
     <string name="fav_btn_closed">Cerrar </string>

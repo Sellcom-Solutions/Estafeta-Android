@@ -298,6 +298,7 @@
                             android:layout_gravity          ="bottom|center"
                             android:background              ="@color/zxing_transparent"
                             android:textAllCaps             ="false"
+                            android:textSize                ="@dimen/sizeMediumText"
                             android:text                    ="@string/ver_historia"
                             android:paddingTop              ="20dp"
                             android:gravity                 ="bottom|center_horizontal"

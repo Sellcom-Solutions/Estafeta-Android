@@ -7,13 +7,11 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.sellcom.apps.tracker_material.R;
 
-import static com.sellcom.apps.tracker_material.R.color.estafeta_red;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,7 +59,6 @@ public class FragmentDialogHelp extends DialogFragment implements View.OnClickLi
         btn_cod_ticket.setOnClickListener(this);
         return view;
     }
-
 
     @Override
     public void onClick(View v) {

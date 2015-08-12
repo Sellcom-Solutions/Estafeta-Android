@@ -23,6 +23,8 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import database.model.Offices;
 
@@ -252,6 +254,15 @@ public class Utilities {
         strAmount = "$"+strAmount;
 
         return strAmount;
+    }
+
+
+    public static boolean specialCharacteresInString(String str){
+
+        Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(str);
+        return m.find();
+
     }
 
 }

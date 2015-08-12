@@ -287,10 +287,10 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 decimales = new DecimalFormat("0.00");
                 numero = Double.parseDouble(map.get("PrecioPaquete"));
-                txv_guia_internacional.append("" + decimales.format(numero));
+                txv_guia_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCombustible"));
-                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+                txv_cc_tarifa_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
                 txv_costo_total_internacional.append("" + Utilities.setReceiptMoneyNumberFormat(numero, 2));
@@ -325,20 +325,20 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
 
                 numero = Double.parseDouble(map.get("TarifaBase"));
-                txv_guia.append("$" +decimales.format(numero));
+                txv_guia.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("CCTarifaBase"));
-                txv_cc_tarifa.append("$" +decimales.format(numero));
+                txv_cc_tarifa.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("CargosExtra"));
-                txv_cargo_extra.append("$" +decimales.format(numero));
+                txv_cargo_extra.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
 
                 numero = Double.parseDouble(map.get("SobrePeso"));
-                txv_costo.append("$" + decimales.format(numero));
+                txv_costo.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("CCSobrePeso"));
-                txv_cc_sobrepeso.append("$" + decimales.format(numero));
+                txv_cc_sobrepeso.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("CostoTotal"));
                 txv_costo_total.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
@@ -367,20 +367,20 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
 
                 numero = Double.parseDouble(map.get("TarifaBase"));
-                txv_guia.setText("$" + decimales.format(numero));
+                txv_guia.setText(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("CCTarifaBase"));
-                txv_cc_tarifa.append("$" + decimales.format(numero));
+                txv_cc_tarifa.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("CargosExtra"));
-                txv_cargo_extra.append("$" +decimales.format(numero));
+                txv_cargo_extra.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
 
                 numero = Double.parseDouble(map.get("SobrePeso"));
                 txv_costo.append("$" + decimales.format(numero));
 
                 numero = Double.parseDouble(map.get("CCSobrePeso"));
-                txv_cc_sobrepeso.append("$" + decimales.format(numero));
+                txv_cc_sobrepeso.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("CostoTotal"));
                 txv_costo_total.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
@@ -408,10 +408,10 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 decimales = new DecimalFormat("0.00");
                 numero = Double.parseDouble(map.get("PrecioPaquete"));
-                txv_guia_internacional.append("" + decimales.format(numero));
+                txv_guia_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCombustible"));
-                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+                txv_cc_tarifa_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
                 txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
@@ -436,10 +436,10 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 decimales = new DecimalFormat("0.00");
                 numero = Double.parseDouble(map.get("PrecioPaquete"));
-                txv_guia_internacional.append("" + decimales.format(numero));
+                txv_guia_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCombustible"));
-                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+                txv_cc_tarifa_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
                 txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
@@ -466,10 +466,10 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 decimales = new DecimalFormat("0.00");
                 numero = Double.parseDouble(map.get("PrecioPaquete"));
-                txv_guia_internacional.append("" + decimales.format(numero));
+                txv_guia_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCombustible"));
-                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+                txv_cc_tarifa_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
                 txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
@@ -494,10 +494,10 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 decimales = new DecimalFormat("0.00");
                 numero = Double.parseDouble(map.get("PrecioPaquete"));
-                txv_guia_internacional.append("" + decimales.format(numero));
+                txv_guia_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCombustible"));
-                txv_cc_tarifa_internacional.append("" + decimales.format(numero));
+                txv_cc_tarifa_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
 
                 numero = Double.parseDouble(map.get("PrecioCotizado"));
                 txv_costo_total_internacional.append(Utilities.setReceiptMoneyNumberFormat(numero, 2));
