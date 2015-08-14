@@ -34,8 +34,8 @@
     </style>
 
     <style name="DialogAnimations">
-        <item name="android:windowEnterAnimation">@anim/dialog_from_bottom</item>
-        <item name="android:windowExitAnimation">@anim/dialog_to_bottom</item>
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
     <style name="AnimatedDialog" parent="@android:style/Theme.Holo.Dialog">

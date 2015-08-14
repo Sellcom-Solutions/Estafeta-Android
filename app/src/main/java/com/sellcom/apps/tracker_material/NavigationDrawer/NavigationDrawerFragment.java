@@ -55,7 +55,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private int mCurrentSelectedPosition    = -1;
     private TextView txv_version,footer;
 
-    private static ImageView img_estafeta = null;
+    private ImageView img_estafeta = null;
 
 
 
@@ -72,6 +72,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         footer = (TextView)view.findViewById(R.id.footer);
 
         img_estafeta = (ImageView)view.findViewById(R.id.img_estafeta);
+        img_estafeta.setImageDrawable(getResources().getDrawable(R.drawable.menu_estafeta));
 
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
@@ -95,6 +96,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
+        //setRetainInstance(true);
 
         return view;
 
@@ -168,6 +170,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
                 if (!isAdded()) return;
                 //Utilities.hideKe  yboard(getActivity(), new EditText(getActivity()));
+                img_estafeta.setImageDrawable(getResources().getDrawable(R.drawable.menu_estafeta));
                 getActivity().invalidateOptionsMenu();
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
             }
@@ -189,7 +192,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
     public void closeDrawer() {
         mDrawerLayout.closeDrawer(mFragmentContainerView);
-        Log.e( "cerro: " , String.valueOf(mFragmentContainerView));
+        Log.e("cerro: ", String.valueOf(mFragmentContainerView));
     }
 
     @Override
@@ -217,7 +220,24 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+
+        boolean flag = false;
+        if(isDrawerOpen()){
+            flag = true;
+        }
+
         mActionBarDrawerToggle.onConfigurationChanged(newConfig);
+
+        ViewGroup viewGroup = (ViewGroup) getView();
+        viewGroup.removeAllViewsInLayout();
+        View view = onCreateView(getActivity().getLayoutInflater(), viewGroup, null);
+        viewGroup.addView(view);
+
+        if(flag) {
+            if (mDrawerLayout != null) {
+                openDrawer();
+            }
+        }
     }
 
     @Override
@@ -237,5 +257,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     public void setDrawerLayout(DrawerLayout drawerLayout) {
         mDrawerLayout = drawerLayout;
     }
+
+
+
 
 }

@@ -4,8 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="@color/estafeta_light_gray"
+    android:paddingTop="50dp"
+    android:background="@color/dialog_help"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:layout_gravity="center"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sizeMediumText"
+        android:text="Ubica tu número de guía o código de rastreo en"/>
 
     <ImageView
         android:id="@+id/im_dialog_help"
@@ -16,53 +29,81 @@
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:background="@color/white"
+        android:background="@color/dialog_help"
         android:src="@drawable/help_guia"
        />
 
-    <Button
-        android:id="@+id/btn_guia"
-        android:layout_gravity="left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/boton_codigo_guia"
-        android:textSize="@dimen/sizeMediumText"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="10dp"
-        android:background="@color/zxing_transparent"
-        android:textColor="@color/estafeta_red"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/btn_factura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/codigo_factura"
-        android:textSize="@dimen/sizeMediumText"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="10dp"
-        android:background="@color/zxing_transparent"
-        android:textColor="@color/estafeta_text"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/white"/>
 
-    <Button
-        android:id="@+id/btn_ticket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/codigo_ticket"
-        android:textSize="@dimen/sizeMediumText"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="10dp"
-        android:background="@color/zxing_transparent"
-        android:textColor="@color/estafeta_text"/>
+        <Button
+            android:id="@+id/btn_guia"
+            android:layout_gravity="left"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:text="@string/boton_codigo_guia"
+            android:textSize="@dimen/sizeNormalText"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:background="@color/zxing_transparent"
+            android:textColor="@color/white"/>
 
-    <Button
-        android:id="@+id/btn_cerrar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cerrar"
-        android:textSize="@dimen/sizeMediumText"
-        android:layout_gravity="right"
-        android:gravity="right|center_vertical"
-        android:paddingRight="10dp"
-        android:background="@color/zxing_transparent"
-        android:textColor="@color/estafeta_red"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_factura"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:text="@string/codigo_factura"
+            android:textSize="@dimen/sizeNormalText"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:background="@color/zxing_transparent"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:text="@string/codigo_ticket"
+            android:textSize="@dimen/sizeNormalText"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:background="@color/zxing_transparent"
+            android:textColor="@color/white"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/btn_cerrar"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:text="@string/cerrar"
+            android:textSize="@dimen/sizeNormalText"
+            android:gravity="center"
+            android:paddingRight="10dp"
+            android:textAllCaps="false"
+            android:background="@color/zxing_transparent"
+            android:textColor="@color/white"/>
+
+        </LinearLayout>
 </LinearLayout>

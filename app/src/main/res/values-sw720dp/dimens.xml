@@ -7,7 +7,7 @@
     <dimen name="list_item_horizontal_margin">16dp</dimen>
     <dimen name="Margen_General">16dp</dimen>
     <dimen name="sizeXSmallText">16sp</dimen>
-    <dimen name="sizeNormalText">20sp</dimen>
+    <dimen name="sizeNormalText">30sp</dimen>
     <dimen name="sizeMediumText">25sp</dimen>
     <dimen name="sizeLargeText">40sp</dimen>
     <dimen name="sizeAugmentedRealityText">35sp</dimen>
@@ -17,7 +17,7 @@
     <dimen name="navigation_drawer_width_Large">550dp</dimen>
     <dimen name="login_progressBar_width">300dp</dimen>
     <dimen name="login_progressBar_height">40dp</dimen>
-    <dimen name="dialog_width">600dp</dimen>
+    <dimen name="dialog_width">450dp</dimen>
     <dimen name="sizeCamera">200dp</dimen>
     <dimen name="sizeItemProduct">144dp</dimen>
     <dimen name="dimen_text_step_visit">35sp</dimen>

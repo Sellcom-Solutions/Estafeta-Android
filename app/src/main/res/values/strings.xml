@@ -79,7 +79,7 @@
 
     <!-- History -->
     <string name="title_date_time">Fecha - Hora</string>
-    <string name="title_place_event">Lugar - Moviento</string>
+    <string name="title_place_event">Lugar - Movimiento</string>
     <string name="title_coments">Comentarios</string>
 
     <!-- Favorites -->
@@ -320,7 +320,7 @@
     <string name="fav_no_guia">No. guía: </string>
     <string name="fav_origen">Origen: </string>
     <string name="fav_destino">Destino:</string>
-    <string name="fav_cp_destino">C.R. Destino:</string>
+    <string name="fav_cp_destino">C.P. Destino:</string>
     <string name="fav_estatus">Estatus del servicio:</string>
     <string name="fav_fecha">Fecha y hora de entrega:</string>
     <string name="fav_recibio">Recibió: </string>

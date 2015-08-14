@@ -86,7 +86,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:text="\?"
-                    android:textColor="@color/white"
+                    android:textColor="@color/estafeta_red"
                     android:layout_marginRight="11dp"
                     android:textSize="@dimen/sizeLargeText"
                     android:textAlignment="center"

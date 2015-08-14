@@ -4,7 +4,8 @@
     android:shape="oval"
     >
 
-    <solid android:color="@color/estafeta_red"/>
+    <solid android:color="@color/white"/>
+    <stroke android:color="@color/estafeta_red" android:width="2dp"></stroke>
     <size android:height="15dp" android:width="15dp"></size>
 
 

@@ -2,7 +2,6 @@ package com.sellcom.apps.tracker_material.Activities;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.nfc.Tag;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sellcom.apps.tracker_material.Async_Request.DecisionDialogWithListener;
@@ -24,7 +22,6 @@ import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterfa
 import com.sellcom.apps.tracker_material.Fragments.FragmentAR;
 import com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad;
 import com.sellcom.apps.tracker_material.Fragments.FragmentCodigoPostal;
-import com.sellcom.apps.tracker_material.Fragments.FragmentHistorial;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotation;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotationBuy;
 import com.sellcom.apps.tracker_material.Fragments.FragmentQuotationBuyFields;
@@ -76,7 +73,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
 
         mNavigationDrawerFragment.selectItem(0);
-        Log.d("MainActivity","Super prueba de comas"+Utilities.setReceiptMoneyNumberFormat(108271827.23322,2));
 
     }
 
@@ -154,6 +150,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             Log.d("MAIN ACTIVITY","Error fragment manager");
 
         fragmentTransaction         = fragmentManager.beginTransaction();
+        if(this.position == position){
+            return;
+        }
         this.position               = position;
         Fragment_Default = null;
         switch (position) {
@@ -281,7 +280,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         //this.prepareRequest(method, params, true);
-
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
+        mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
     }
 
     @Override
@@ -306,5 +306,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
 
     }
+
 
 }

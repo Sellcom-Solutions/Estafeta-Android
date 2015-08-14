@@ -11,7 +11,7 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
     <dimen name="login_progressBar_width">200dp</dimen>
     <dimen name="login_progressBar_height">30dp</dimen>
-    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="dialog_width">250dp</dimen>
     <dimen name="sizeCamera">100dp</dimen>
     <dimen name="sizeItemProduct">72dp</dimen>
     <dimen name="dimen_text_step_visit">20sp</dimen>
@@ -24,7 +24,7 @@
     <dimen name="size_button_dialog">12sp</dimen>
     <dimen name="dimen_photo">200dp</dimen>
 
-    <dimen name="sizeXXSmallText">8sp</dimen>
+    <dimen name="sizeXXSmallText">10sp</dimen>
     <dimen name="sizeXSmallText">12sp</dimen>
     <dimen name="sizeSmallText">15sp</dimen>
     <dimen name="sizeMediumText">18sp</dimen>

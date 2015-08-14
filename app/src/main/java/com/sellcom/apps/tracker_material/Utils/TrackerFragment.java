@@ -138,7 +138,7 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         ArrayList<Map<String,String>> auxCountries = Countries.getCountriesNames(context);
 
         Map<String,String> mapa  = new HashMap<String,String>();
-        mapa.put("NOMBREPAIS_ESP","País Destino*");
+        mapa.put("NOMBREPAIS_ESP","País destino");
         countries.add(mapa);
 
 

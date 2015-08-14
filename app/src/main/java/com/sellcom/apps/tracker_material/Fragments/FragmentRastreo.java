@@ -71,6 +71,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     TextView    txv_num_sends,
                 footer;
 
+    FragmentDialogHelp fdh;
+
     private int restantes = 10;
 
     MenuItem favorite;
@@ -220,7 +222,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             case R.id.btn_help:
 
                 fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentDialogHelp fdh = new FragmentDialogHelp();
+                fdh = new FragmentDialogHelp();
                 fdh.show(fragmentManager,"FRAG_DIALOG_HELP");
 
 

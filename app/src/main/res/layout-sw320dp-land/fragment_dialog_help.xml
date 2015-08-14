@@ -4,11 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100"
-    android:background="@color/estafeta_light_gray"
+    android:gravity="center"
+    android:background="@color/dialog_help"
     tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
     <LinearLayout
         android:layout_width="500dp"
-        android:layout_height="250dp"
+        android:layout_height="300dp"
         android:orientation="horizontal"
         android:layout_gravity="center|center_horizontal"
         android:gravity="center"
@@ -18,48 +19,86 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical"
                     android:layout_weight="50"
-                    android:gravity="bottom">
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:layout_gravity="center"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sizeSmallText"
+
+                        android:text="Ubica tu número de guía o código de rastreo en"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white"/>
                     <Button
                         android:id="@+id/btn_guia"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:text="@string/boton_codigo_guia"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textAllCaps="false"
                         android:background="@color/zxing_transparent"
-                        android:textColor="@color/estafeta_red"/>
+                        android:textColor="@color/white"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white"/>
 
                     <Button
                         android:id="@+id/btn_factura"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:text="@string/codigo_factura"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textAllCaps="false"
                         android:background="@color/zxing_transparent"
-                        android:textColor="@color/estafeta_text"/>
+                        android:textColor="@color/white"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/white"/>
 
                     <Button
                         android:id="@+id/btn_ticket"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:text="@string/codigo_ticket"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textAllCaps="false"
                         android:background="@color/zxing_transparent"
-                        android:textColor="@color/estafeta_text"/>
+                        android:textColor="@color/white"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@color/white"/>
 
                     <Button
                         android:id="@+id/btn_cerrar"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:text="@string/cerrar"
                         android:textSize="@dimen/sizeMediumText"
+                        android:textAllCaps="false"
                         android:background="@color/zxing_transparent"
-                        android:textColor="@color/estafeta_red"
+                        android:textColor="@color/white"
                         android:layout_gravity="bottom"/>
 
         </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
                     android:orientation="vertical"
                     android:layout_weight="50">
 
@@ -68,7 +107,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
-                        android:scaleType="fitStart"
+                        android:scaleType="fitCenter"
                         android:background="@color/white"
                         android:src="@drawable/help_guia"
                         android:layout_marginRight="10dp"
