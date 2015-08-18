@@ -132,7 +132,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                 case R.id.btn_near:
                     Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
                     if (myLocation != null) {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Buscando oficinas cercanas...", 0);
                         nearOffice();
                     } else {
                         Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
@@ -151,10 +151,18 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_ciudad), 3000);
                     return;
 
-                }*/ else {
+
+
+                }*/
+                    if(edt_zip_code.getText().toString().length() > 0 && edt_zip_code.getText().toString().length() != 5) {
+
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "Código postal no válido.", 3000);
+                        return;
+
+                    }else {
                         Location myLocationAdvance = new GPSTracker(getActivity()).getCurrentLocation();
                         if (myLocationAdvance != null) {
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Buscando oficinas...", 0);
                             searchOffice();
                         } else {
                             Toast.makeText(context, getString(R.string.encender_gps), Toast.LENGTH_SHORT).show();
@@ -241,6 +249,8 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         String sql = "select * from offices where estado=? ";
 
         state   = "" + (spn_state.getSelectedItemPosition());
+        String auxState = state;
+
         switch (state){
             case "15":
                 state = "17";
@@ -256,6 +266,8 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
         Log.e("Prompt"," ------ "+(spn_state.getSelectedItemPosition() + 1));
         args.add("" + state);
 
+        city  = "" + edt_city.getText().toString();
+
 
         city    = Normalizer.normalize(city, Normalizer.Form.NFD);
         city    = city.replaceAll("[^\\p{ASCII}]", "");
@@ -263,7 +275,12 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
         if(!city.equals("")){
             args.add("%" + city + "%");
-            sql += " and ciudad_n like lower(?)";
+            args.add("%" + city + "%");
+            sql += " and (ciudad_n like lower(?) or ciudad_n_decode like lower(?))";
+/*
+            args.add("%" + city + "%");
+            sql += " or ciudad_n_decode like lower(?)";
+*/
         }
         colony  = "" + edt_colony.getText().toString();
 
@@ -272,7 +289,13 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
 
         if(!colony.equals("")){
             args.add("%" + colony + "%");
-            sql += " and colonia_n like  lower(?)";
+            args.add("%" + colony + "%");
+            sql += " and (colonia_n like lower(?) or colonia_n_decode like lower(?))";
+
+/*
+            args.add("%" + colony + "%");
+            sql += " or colonia_n_decode like lower(?)";
+*/
         }
         zipCode = "" + edt_zip_code.getText().toString();
         if(!zipCode.equals("")){
@@ -290,7 +313,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             bundle.putString("typeSearch","busqueda_avanzada");
             bundle.putString("sql",sql);
             bundle.putStringArray("selectionArgs",selectionArgs);
-            bundle.putString("state",state);
+            bundle.putString("state",auxState);
 
             FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -302,10 +325,10 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
             fragmentTransaction.commit();
             //Toast.makeText(context, "" + mapList.size(), Toast.LENGTH_SHORT).show();
-        }else{
+        }else {
 
-            bundle.putString("typeSearch","nada");
-            bundle.putString("state",state);
+            bundle.putString("typeSearch", "nada");
+            bundle.putString("state",auxState);
             FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 

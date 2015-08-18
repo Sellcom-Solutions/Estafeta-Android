@@ -62,21 +62,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/sizeLargeText"
+                    android:textSize="@dimen/sizeMediumText"
                     android:textColor="@color/estafeta_text"
-                    android:text="@string/ver"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginBottom="5dp"
-                    android:background="@color/estafeta_soft_gray"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="@color/estafeta_soft_gray"
                     android:layout_marginBottom="5dp"
                     android:text="@string/seccion_estafeta"/>
 
@@ -258,7 +245,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
-                            android:textColor="@color/estafeta_soft_gray"
+                            android:textColor="@color/estafeta_text"
                             android:text="@string/afiliados"/>
 
 

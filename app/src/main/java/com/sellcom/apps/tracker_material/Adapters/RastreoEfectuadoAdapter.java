@@ -135,7 +135,7 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                 break;
 
             case "celda_pe":
-                holder.img_status.setImageResource(R.drawable.estatus_sin);
+                holder.img_status.setImageResource(R.drawable.estatus_transito);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 holder.estatus.setText("Pendiente");
                 new_status="Pendiente";
@@ -191,7 +191,7 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                             }
 
 
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),4050);
 
                         } catch (Exception e) {
                             e.printStackTrace();

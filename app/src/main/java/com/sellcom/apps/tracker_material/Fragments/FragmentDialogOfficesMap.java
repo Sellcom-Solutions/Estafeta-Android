@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -52,6 +53,8 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
                             btn_compartir_estafeta,
                             btn_cerrar_estafeta;
 
+    private LinearLayout    lin_ext;
+
 
     public FragmentDialogOfficesMap(){
 
@@ -87,31 +90,38 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
         txv_direccion_estafeta  = (TextView)view.findViewById(R.id.txv_direccion_estafeta);
         txv_horario_estafeta    = (TextView)view.findViewById(R.id.txv_horario_estafeta);
         txv_horario2_estafeta   = (TextView)view.findViewById(R.id.txv_horario2_estafeta);
-        txv_correo_estafeta     = (TextView)view.findViewById(R.id.txv_correo_estafeta);
+        //txv_correo_estafeta     = (TextView)view.findViewById(R.id.txv_correo_estafeta);
         txv_ext_estafeta        = (TextView)view.findViewById(R.id.txv_ext_estafeta);
         txv_telefono_estafeta   = (TextView)view.findViewById(R.id.txv_telefono_estafeta);
         txv_telefono_estafeta.setOnClickListener(this);
 
+        lin_ext                 = (LinearLayout)view.findViewById(R.id.lin_ext);
+
         txv_nombre_estafeta.setText(""+list.get("nombre"));
-        txv_direccion_estafeta.setText(""+list.get("calle1")+"\n"+list.get("colonia")+"\n"+list.get("codigo_postal")+" "+list.get("ciudad"));
+        txv_direccion_estafeta.setText(""+list.get("calle1")+"\n"+list.get("colonia_n")+"\n"+list.get("codigo_postal")+" "+list.get("ciudad_n"));
         txv_horario2_estafeta.setText(""+list.get("horario_atencion"));
+
+
+        /*
         if(list.get("correo") == null){
             txv_correo_estafeta.setVisibility(View.GONE);
             txv_correo_estafeta.setText("");
         }else{
             txv_correo_estafeta.setVisibility(View.VISIBLE);
             txv_correo_estafeta.setText(""+list.get("correo"));
-        }
+        }*/
 
         if(list.get("ext1").equals("0")){
             txv_ext_estafeta.setText("");
+            lin_ext.setVisibility(View.GONE);
         }else{
             txv_ext_estafeta.setText(""+list.get("ext1"));
+            lin_ext.setVisibility(View.VISIBLE);
         }
 
         if(list.get("telefono1") == null){
             txv_telefono_estafeta.setVisibility(View.GONE);
-            txv_correo_estafeta.setText("");
+            //txv_correo_estafeta.setText("");
         }else{
             txv_telefono_estafeta.setVisibility(View.VISIBLE);
             txv_telefono_estafeta.setText(""+list.get("telefono1"));

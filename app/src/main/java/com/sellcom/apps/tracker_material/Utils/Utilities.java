@@ -235,6 +235,23 @@ public class Utilities {
         while (strAmount.length()<strLength){
             strAmount = " "+strAmount;
         }
+
+        if(strAmount.equals(" 0")){
+            strAmount = "0.00";
+            strAmount = "$"+strAmount;
+
+            return strAmount;
+        }
+
+        for(int i =0; i<strAmount.length(); i++){
+            if((""+strAmount.charAt(i)).equals(".")){
+                if((strAmount.length()-1)-i == 1){
+                    strAmount = strAmount + "0";
+                }
+            }
+
+        }
+
 /*7
         int cont=1;
         for(int i = strAmount.length()-3; i>0; i--){

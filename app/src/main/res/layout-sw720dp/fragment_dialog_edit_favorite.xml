@@ -18,9 +18,10 @@
 
         <TextView
             android:id="@+id/ed_favorite"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/estafeta_text"
+            android:gravity="center"
             android:text="@string/EditFavorite"
             android:textSize="@dimen/sizeLargeText"
             android:layout_gravity="left"
@@ -30,6 +31,16 @@
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/estafeta_text"
+                android:text="@string/name_guia"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/sizeMediumText"
+                android:paddingTop="5dp"/>
+
             <LinearLayout
                 android:id="@+id/fav_edit_info"
                 android:layout_width="match_parent"
@@ -83,13 +94,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/estafeta_text"
-                    android:text="@string/name_guia"
-                    android:textSize="@dimen/sizeSmallText"
-                    android:paddingTop="5dp"/>
 
                 <EditText
                     android:id                      ="@+id/fav_edit_referencia"
@@ -103,7 +107,7 @@
                     android:inputType=              "text"
                     android:maxLength               ="22"
                     android:padding                 ="3dp"
-                    android:textColor               ="@color/estafeta_text"
+                    android:textColor               ="@color/estafeta_red"
                     android:textColorHint           ="@color/estafeta_red"
                     android:textSize                ="@dimen/sizeNormalText"
                     style                           ="@style/EditStyle"/>

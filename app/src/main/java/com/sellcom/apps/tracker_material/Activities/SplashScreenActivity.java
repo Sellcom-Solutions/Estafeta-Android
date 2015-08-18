@@ -57,7 +57,7 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         db.onUpgrade(db.getWritableDatabase(), 1, 2);
         */
             DialogManager.sharedInstance().setActivity(this);
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, getString(R.string.cargando), 0);
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, "Configurando aplicación...", 0);
         if(Utilities.flag) {
             Utilities.flag = false;
 
@@ -83,6 +83,9 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
 
             Log.d(TAG, "Llama al servicio");
             method = "oficinas";
+
+            DialogManager.sharedInstance().dismissDialog();
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, "Actualizando aplicación...", 0);
             RequestManager.sharedInstance().setListener(this);
             RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
         }

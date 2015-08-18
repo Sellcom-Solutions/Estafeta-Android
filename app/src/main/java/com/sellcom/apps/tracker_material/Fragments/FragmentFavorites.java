@@ -130,6 +130,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
 
                     codes_info = Favorites.getAll(context);
+                    codes_info = Favorites.getAll(context);
                     if(codes_info == null){
                         codes_info = new ArrayList<>();
                         delete.setEnabled(false);

@@ -1,7 +1,6 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:fillViewport="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="100"
     android:background="@color/estafeta_light_gray">
@@ -16,22 +15,34 @@
 
         <TextView
             android:id="@+id/ed_favorite"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/estafeta_text"
+            android:gravity="center"
             android:text="@string/EditFavorite"
             android:textSize="@dimen/sizeLargeText"
             android:layout_gravity="left"
-            android:paddingTop="20dp"/>
+            android:layout_marginTop="20dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/estafeta_text"
+                android:text="@string/name_guia"
+                android:layout_marginBottom="10dp"
+                android:textSize="@dimen/sizeSmallText"
+                android:layout_marginTop="5dp"/>
+
             <LinearLayout
                 android:id="@+id/fav_edit_info"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
@@ -39,23 +50,21 @@
                     android:layout_height="match_parent"
                     android:textColor="@color/estafeta_text"
                     android:text="@string/fav_no_guia"
-                    android:textSize="@dimen/sizeMediumText"
-                    android:gravity="top"/>
+                    android:textSize="@dimen/sizeMediumText"/>
                 <TextView
                     android:id                  ="@+id/fav_edit_no_guia"
                     android:layout_width        ="wrap_content"
                     android:layout_height       ="match_parent"
                     android:textColor           ="@color/estafeta_text"
                     android:textSize            ="@dimen/sizeSmallText"
-                    android:text=""
-                    android:gravity="top"/>
+                    android:text=""/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="5dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -67,27 +76,19 @@
                     android:layout_width        ="wrap_content"
                     android:layout_height       ="match_parent"
                     android:textColor           ="@color/estafeta_text"
-                    android:textSize            ="@dimen/sizeSmallText"
-                    android:text=""
-                    android:gravity="bottom"/>
+                    android:gravity="top"
+                    android:textSize            ="@dimen/sizeSmallText"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="10dp">
+            android:layout_marginTop="10dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/estafeta_text"
-                    android:text="@string/name_guia"
-                    android:textSize="@dimen/sizeSmallText"
-                    android:paddingTop="5dp"/>
 
                 <EditText
                     android:id                      ="@+id/fav_edit_referencia"
@@ -101,7 +102,7 @@
                     android:inputType=              "text"
                     android:maxLength               ="22"
                     android:padding                 ="3dp"
-                    android:textColor               ="@color/estafeta_text"
+                    android:textColor               ="@color/estafeta_red"
                     android:textColorHint           ="@color/estafeta_red"
                     android:textSize                ="@dimen/sizeNormalText"
                     style                           ="@style/EditStyle"
@@ -137,7 +138,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="right"
-            android:paddingTop="20dp">
+            android:layout_marginTop="20dp">
             <Button
                 android:id="@+id/btn_cancel_edit"
                 android:layout_width="wrap_content"

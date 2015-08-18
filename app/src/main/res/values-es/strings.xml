@@ -11,6 +11,7 @@
         <item>Aviso de privacidad</item>
         <item>Favoritos</item>
         <item>Historia</item>
+        <item>Detalle</item>
     </string-array>
 
     <!-- Dialog messages-->
@@ -25,7 +26,7 @@
     <string name="error_cod_repetido">El número ya existe en la lista de rastreo.</string>
     <string name="error_lista_vacia">La lista de rastreo se encuentra vacía.</string>
     <string name="error_agregar_fav">No existe información acerca de este registro</string>
-    <string name="exito_agregar_fav">Operación exitosa</string>
+    <string name="exito_agregar_fav">Operación exitosa.</string>
 
     <!-- Globals -->
     <string name="Search">Buscar</string>
@@ -40,9 +41,9 @@
     <string name="oficinas">Oficinas</string>
 
     <!-- Rastreo-->
-    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de guía debe tener 22 dígitos</string>
+    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos. \nEl número de guía debe tener 22 dígitos.</string>
     <string name="codigo">Código</string>
-    <string name="aviso_codigo">Has ingresado 0 de 10 guías de rastreo.</string>
+    <string name="aviso_codigo">Has ingresado 0 de 10 guías para rastrear.</string>
     <string name="boton_escanear">Escanear</string>
     <string name="boton_rastrear">Rastrear</string>
     <string name="code_incorrect">El código leído es incorrecto</string>
@@ -63,7 +64,7 @@
         <![CDATA[
         <html>
          <head></head>
-         <body style="text-align:justify;color:#555555;background:#ffffff">
+         <body style="text-align:justify;color:#838383;background:#ffffff">
             ESTAFETA MEXICANA, S.A DE C.V. (en lo sucesivo ESTAFETA) le comunica al CLIENTE que la
             información que este último le proporcione para la prestación de los servicios que se contraten con ESTAFETA, puede
             contener Datos Personales y/o Datos Personales Sensibles o financieros, mismos que podrán ser tratados y/o almacenados
@@ -87,7 +88,7 @@
     <!-- FragmentOffices  -->
 
     <string name="encender_gps">Favor de encender su GPS</string>
-    <string name="consesionaria_autorizada">Concecionaria autorizada</string>
+    <string name="consesionaria_autorizada">Concesionaria autorizada</string>
     <string name="centro_operativo">Centro operativo y sucursal</string>
     <string name="sucursal">Sucursal</string>
     <string name="seccion_estafeta">Estafeta</string>

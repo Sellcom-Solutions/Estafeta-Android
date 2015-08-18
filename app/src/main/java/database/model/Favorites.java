@@ -171,6 +171,24 @@ public class Favorites {
             return null;
     }
 
+    public static String getReferenceByNoGuia(Context context,String no_guia){
+
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
+                null,
+                GUIA + "=?",
+                new String[] {no_guia}, null ,null, null);
+
+        if(cursor != null & cursor.getCount() > 0){
+            cursor.moveToFirst();
+            String response= cursor.getString(cursor.getColumnIndexOrThrow(REFERENCIA));
+            cursor.close();
+            return response;
+        }
+
+        else
+            return null;
+    }
+
     public static Map<String, String> getFavoriteByWayBill(Context context, String waybill){
         Map<String, String> map = new HashMap<>();
         Cursor cursor = DataBaseAdapter.getDB(context).query(

@@ -96,6 +96,11 @@ public class SpinnerAdapter extends BaseAdapter {
         }
 
         TextView main_text = (TextView) view .findViewById(R.id.txt_spn_item_head);
+        if(i == 0){
+            main_text.setTextColor(mContext.getResources().getColor(R.color.estafeta_red));
+        }else{
+            main_text.setTextColor(mContext.getResources().getColor(R.color.estafeta_text));
+        }
 
         switch (type){
             case STATES:

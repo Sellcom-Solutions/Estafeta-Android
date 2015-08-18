@@ -124,7 +124,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 this.recreate();
             }*/
 
-            RequestManager.sharedInstance().showDecisionDialogWithListener(getString(R.string.req_man_confirm_exit), this, this);
+            //Utilities.flag = true;
+            moveTaskToBack(true);
+            //this.finish();
+            //RequestManager.sharedInstance().showDecisionDialogWithListener(getString(R.string.req_man_confirm_exit), this, this);
 
         } else {
             //Fragment home = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString());

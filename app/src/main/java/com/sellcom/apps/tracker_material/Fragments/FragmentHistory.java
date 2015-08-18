@@ -33,8 +33,8 @@ public class FragmentHistory extends TrackerFragment {
 
     ListView history_lst;
     //ArrayList<Map<String, String>> history_data = new ArrayList<>();
-    ArrayList<Map<String, String>> codes_info;
-    Map<String,String> map;
+    ArrayList<Map<String, String>> codes = new ArrayList<Map<String, String>>();
+    Map<String,String> map = new HashMap<String,String>();
     String origin = "";
     private TextView footer;
 
@@ -57,13 +57,13 @@ public class FragmentHistory extends TrackerFragment {
         origin = getArguments().getString("origin");
 
         if(origin.equalsIgnoreCase("detalle_rastreo")){
-            codes_info = (ArrayList<Map<String, String>>) getArguments().getSerializable("codes_info");
+            codes = (ArrayList<Map<String, String>>) getArguments().getSerializable("codes_info");
         }else if(origin.equalsIgnoreCase("detalle_favorito")){
             map = (Map<String, String>) getArguments().getSerializable("codes_info");
 
-            codes_info = History.getHistotyByFavoriteId(context,map.get("id_favoritos"));
-            Log.d(TAG,"size code_info: "+codes_info.size());
-            codes_info.add(0, new HashMap<String, String>());
+            codes = History.getHistotyByFavoriteId(context,map.get("id_favoritos"));
+            Log.d(TAG,"size code_info: "+codes.size());
+            codes.add(0, new HashMap<String, String>());
 
         }
         TrackerFragment.section_index = 6;
@@ -77,7 +77,7 @@ public class FragmentHistory extends TrackerFragment {
 
 
         try {
-            Log.d(TAG, "size" + codes_info.size());
+            Log.d(TAG, "size" + codes.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,7 +86,7 @@ public class FragmentHistory extends TrackerFragment {
 
 
         //HistoryAdapter adapter = new HistoryAdapter(getActivity(),history_data);
-        HistoryAdapter adapter = new HistoryAdapter(getActivity(),codes_info);
+        HistoryAdapter adapter = new HistoryAdapter(getActivity(),codes);
 
         history_lst.setAdapter(adapter);
 

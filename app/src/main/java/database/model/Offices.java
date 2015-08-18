@@ -48,6 +48,8 @@ public class Offices {
     public static final String VERSION = "version";
     public static final String CIUDAD_N = "ciudad_n";
     public static final String COLONIA_N = "colonia_n";
+    public static final String CIUDAD_N_DECODE = "ciudad_n_decode";
+    public static final String COLONIA_N_DECODE = "colonia_n_decode";
 
     private int id_office;
     private String ent;
@@ -181,9 +183,11 @@ public class Offices {
 
                 cv.put(CALLE1, item.get("calle1"));
                 cv.put(CALLE2, item.get("calle2"));
-                cv.put(CIUDAD, item.get("ciudad"));
+                cv.put(CIUDAD_N_DECODE, item.get("ciudad_n_decode"));
+                cv.put(CIUDAD_N, item.get("ciudad"));
                 cv.put(CODIGO_POSTAL, item.get("codigoPostal"));
-                cv.put(COLONIA, item.get("colonia"));
+                cv.put(COLONIA_N_DECODE, item.get("colonia_n_decode"));
+                cv.put(COLONIA_N, item.get("colonia"));
                 cv.put(CORREO, item.get("correoE"));
                 cv.put(ENTREGA_OFICINA, item.get("entregaOcurre"));
                 cv.put(EXT1, item.get("ext1"));

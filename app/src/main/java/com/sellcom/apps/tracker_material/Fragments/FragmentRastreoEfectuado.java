@@ -165,11 +165,11 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
                 favorite.setEnabled(true);
                 ArrayList<Map<String,String>> listFavorites= Favorites.getAll(context);
                 if(listFavorites==null){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No hay registro de favoritos.", 3000);
 
                 }else {
                     favorite.setEnabled(false);
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,getString(R.string.cargando),0);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Actualizando favoritos...",0);
 
                     new CheckDateFavorite().execute();
                 }

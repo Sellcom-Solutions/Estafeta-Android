@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,8 +41,8 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
 
     TextView fav_no_guia,
             fav_codigo,
-            fav_reference,
             fav_origen,
+            fd_fecha_recol,
             fav_destino,
             fav_cp_destino,
              fav_estatus,
@@ -50,6 +51,8 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
             footer;
 
     Button btn_historia;
+
+    ImageView   img_estatus;
 
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
@@ -73,15 +76,17 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         context = getActivity();
         View view = inflater.inflate(R.layout.fragment_dialog_favorite, container, false);
 
-        fav_reference = (TextView) view.findViewById(R.id.fav_reference);
         fav_no_guia = (TextView) view.findViewById(R.id.fav_no_guia);
         fav_codigo = (TextView) view.findViewById(R.id.fav_cod_rastreo);
         fav_origen = (TextView) view.findViewById(R.id.fav_origen);
+        fd_fecha_recol = (TextView)view.findViewById(R.id.fd_fecha_recol);
         fav_destino = (TextView) view.findViewById(R.id.fav_destino);
         fav_cp_destino = (TextView) view.findViewById(R.id.fav_cp_destino);
         fav_estatus = (TextView) view.findViewById(R.id.fav_estatus);
         fav_fecha = (TextView) view.findViewById(R.id.fav_fecha);
         fav_recibio = (TextView) view.findViewById(R.id.fav_recibio);
+
+        img_estatus         = (ImageView) view.findViewById(R.id.fd_img_status);
 
 
         btn_historia = (Button)view.findViewById(R.id.btn_historia);
@@ -108,7 +113,7 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         String currentYear = formatter.format(new Date());
         footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
-        TrackerFragment.section_index = 5;
+        TrackerFragment.section_index = 7;
 
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.btn_fav_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.btn_fav_share);
@@ -121,9 +126,6 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         Log.d(TAG, "size: " + codes_info.size());
 
 
-        if(!(codes_info.get("referencia") == null)){
-            fav_reference.setText(" " + codes_info.get("referencia"));
-        }
         if(!(codes_info.get("no_guia") == null)) {
             fav_no_guia.setText(" " + codes_info.get("no_guia"));
         }
@@ -132,6 +134,9 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         }
         if(!(codes_info.get("origen") == null)) {
             fav_origen.setText(" " + codes_info.get("origen"));
+        }
+        if(!(codes_info.get("fecha_recoleccion") == null)) {
+            fd_fecha_recol.setText(" " + codes_info.get("fecha_recoleccion"));
         }
         if(!(codes_info.get("destino") == null)) {
             fav_destino.setText(" " + codes_info.get("destino"));
@@ -149,6 +154,8 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
             }else if(codes_info.get("estatus").equals("EN_TRANSITO")){
                 fav_estatus.setText(" Pendiente en tránsito");
             }*/
+
+            setStatus(codes_info.get("estatus"));
             fav_estatus.setText(codes_info.get("estatus"));
 
         }
@@ -159,7 +166,31 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
             fav_recibio.setText(" " + codes_info.get("recibio"));
         }
 
+
+
         return view;
+    }
+
+    public void setStatus(String status){
+
+        switch (status){
+            case "Entregado":
+                img_estatus.setImageResource(R.drawable.estatus_entregado);
+                break;
+
+            case "Pendiente":
+                img_estatus.setImageResource(R.drawable.estatus_transito);
+                break;
+
+            case "Sin información":
+                img_estatus.setImageResource(R.drawable.estatus_sin);
+                break;
+
+            case "Pendiente en tránsito":
+                img_estatus.setImageResource(R.drawable.estatus_transito);
+                break;
+        }
+
     }
 
 

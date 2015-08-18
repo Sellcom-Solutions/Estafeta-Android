@@ -79,8 +79,7 @@
                     android:layout_gravity="center_vertical"
                     android:text                    ="@string/aviso_rastreo"
                     android:textColor               ="@color/estafeta_text"
-                    android:textSize                ="@dimen/sizeNormalText"
-                    android:textStyle               ="bold"/>
+                    android:textSize                ="@dimen/sizeNormalText"/>
                 <Button
                     android:id                      ="@+id/btn_help"
                     android:layout_width="45dp"

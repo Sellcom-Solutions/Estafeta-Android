@@ -44,7 +44,7 @@ public class DataBaseManager {
         readInsertsFile("insert_estados.txt");
         readInsertsFile("insert_paises.txt");
         readInsertsFile("insert_codigos.txt");
-        readInsertsFile("insert_oficinas.txt");
+        //readInsertsFile("insert_oficinas.txt");
     }
 
     public void readInsertsFile(String filename) {

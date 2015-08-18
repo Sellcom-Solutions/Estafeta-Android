@@ -11,7 +11,9 @@ import android.widget.TextView;
 import com.sellcom.apps.tracker_material.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +26,7 @@ public class HistoryAdapter extends BaseAdapter {
     public HistoryAdapter(Context context, ArrayList<Map<String,String>> history){
         this.context = context;
         this.history = history;
+        //Collections.reverse((List)this.history);
     }
 
     class HistoryViewHolder{
@@ -65,7 +68,7 @@ public class HistoryAdapter extends BaseAdapter {
 
         try {
             Map<String, String> item = new HashMap<>();
-            item = history.get(position+1);
+            item = history.get((history.size()-1) - position);
             Log.d("HistoryAdapter", "size"+item.size());
             String dateStr = item.get("H_eventDateTime");
             holder.date_time.setText(dateStr);

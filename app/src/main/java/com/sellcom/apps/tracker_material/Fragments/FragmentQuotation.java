@@ -325,7 +325,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 if(ll_for_package.getVisibility() == View.VISIBLE) {
                     if(edt_zc_destination.isFocused()){
                         edt_weigth.requestFocus();
-                        edt_weigth.callOnClick();
+                        edt_weigth.performClick();
                     }else{
                         Utilities.hideKeyboard(context,edt_width);
                     }
@@ -539,6 +539,25 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             return;
                         }else{
 
+                            if(Double.parseDouble(edt_weigth.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico es menor al peso permitido.", 3000);
+                                return;
+                            }
+
+                            if(Double.parseDouble(edt_high.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                return;
+                            }
+
+                            if(Double.parseDouble(edt_long.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                return;
+                            }
+
+                            if(Double.parseDouble(edt_width.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                return;
+                            }
 
 
                             if(Double.parseDouble(edt_weigth.getText().toString()) > 70){
@@ -584,6 +603,25 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             return;
                         }else{
 
+                            if(Double.parseDouble(edt_weigth.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico es menor al peso permitido.", 3000);
+                                return;
+                            }
+
+                            if(Double.parseDouble(edt_high.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                return;
+                            }
+
+                            if(Double.parseDouble(edt_long.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                return;
+                            }
+
+                            if(Double.parseDouble(edt_width.getText().toString()) ==0 ){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                return;
+                            }
 
                             if(Double.parseDouble(edt_weigth.getText().toString()) > 68){
                                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede los 68kg.", 3000);
@@ -1034,7 +1072,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             auxResp.add(respCotizador.get(0));
                             cotizar("internacional_sobre_eua_canada");
                         } else {
-                            respCotizador.get(0).put("DescripcionServicio","USA-Canadá-Estandar");
+                            respCotizador.get(0).put("DescripcionServicio","USA-Canadá-Estándar");
                             auxResp.add(respCotizador.get(0));
                             bundle.putString("type", "internacional_sobre_eua_canada");
                             bundle.putString("destino",spn_countrie.getSelectedItem().toString());
@@ -1063,7 +1101,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             auxResp.add(respCotizador.get(0));
                             cotizar("internacional_paquete_eua_canada");
                         } else {
-                            respCotizador.get(0).put("DescripcionServicio", "USA-Canadá-Estandar");
+                            respCotizador.get(0).put("DescripcionServicio", "USA-Canadá-Estándar");
                             auxResp.add(respCotizador.get(0));
                             bundle.putString("type", "internacional_paquete_eua_canada");
 

@@ -415,10 +415,14 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
             }
 
+            //Toast.makeText(getActivity(), ""+(listOficinasFiltradas.size()-1), Toast.LENGTH_SHORT).show();
+
         }
 
         @Override
         protected String doInBackground(String... params) {
+
+
 
             mapFragment = CustomMapFragment.newInstance(getActivity(), listPositions, listType, listOficinasFiltradas, typeSearch);
 

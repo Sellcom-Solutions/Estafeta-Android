@@ -198,14 +198,14 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
                 ArrayList<Map<String,String>> listFavorites= Favorites.getAll(context);
                 if(listFavorites==null){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No hay registro de favoritos.", 3000);
 
                 }else {
                     favorite.setEnabled(false);
                     //Log.d(TAG,"item selected");
                     // Bundle bundle= new Bundle();
                     // bundle.putSerializable("codes_info", codes_info);
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Cargando...",0);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING,"Actualizando favoritos...",0);
 
                     new CheckDateFavorite().execute();
                 }
@@ -231,7 +231,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             //15000
             case R.id.btn_escanear:
                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
-                List<String> oDesiredFormats = Arrays.asList("PDF_417,CODE_128".split(","));
+                List<String> oDesiredFormats = Arrays.asList("PDF_417,CODE_128,QR_CODE".split(","));
                 IntentIntegrator integrator= IntentIntegrator.forSupportFragment(this);
                 integrator.initiateScan(oDesiredFormats);
                 codigo.setText("");
@@ -378,7 +378,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     @Override
     public void setCodes(int restantes) {
 
-            txv_num_sends.setText("Has ingresado " + restantes + " de 10 guías por rastrear.");
+            txv_num_sends.setText("Has ingresado " + restantes + " de 10 guías para rastrear.");
 
     }
 
@@ -630,7 +630,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             if(listFavorites == null){
                 DialogManager.sharedInstance().dismissDialog();
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No hay registro de favoritos.", 3000);
             }else {
 
                 new UpdateInfoFavorites().execute();

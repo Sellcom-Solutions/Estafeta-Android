@@ -174,8 +174,8 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
                 Log.d(TAG, "btn edit: ");
 
                 Bundle bundle = new Bundle();
-                bundle.putString("code", codigos.get(holder.position).get("no_guia"));
-                bundle.putString("code", codigos.get(holder.position).get("codigo_rastreo"));
+                bundle.putString("no_guia", codigos.get(holder.position).get("no_guia"));
+                bundle.putString("codigo_rastreo", codigos.get(holder.position).get("codigo_rastreo"));
                 bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
 
                 FragmentDialogEditFavorite fdfe = new FragmentDialogEditFavorite();

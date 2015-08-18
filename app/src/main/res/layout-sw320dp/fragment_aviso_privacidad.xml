@@ -45,7 +45,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
-                android:textColor="@color/estafeta_text"
+                android:textColor="@color/estafeta_soft_gray"
                 android:textSize="@dimen/sizeSmallText" />
 
     </LinearLayout>

@@ -28,6 +28,7 @@
        <item>Aviso de privacidad</item>
        <item>Favoritos</item>
         <item>Historia</item>
+        <item>Detalle</item>
 </string-array>
 
 <!-- Globals -->
@@ -50,26 +51,26 @@
     <string name="footer">Estafeta Mexicana, S.A. de C.V.</string>
 
     <!-- Rastreo -->
-    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos \nEl número de guía debe tener 22 dígitos</string>
+    <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos. \nEl número de guía debe tener 22 dígitos.</string>
     <string name="code_invalid">Código invalido, favor de verificarlo.</string>
     <string name="codigo">Código</string>
-    <string name="aviso_codigo">Has ingresado 0 de 10 guías de rastreo.</string>
+    <string name="aviso_codigo">Has ingresado 0 de 10 guías para rastrear.</string>
     <string name="boton_escanear">Escanear</string>
     <string name="boton_rastrear">Rastrear</string>
     <string name="no_guia">Número de guía:</string>
-    <string name="cod_rastreo">Código de rastreo: </string>
+    <string name="cod_rastreo">Código de rastreo: \u0020</string>
     <string name="boton_codigo_guia">Guía</string>
     <string name="codigo_factura">Factura</string>
     <string name="codigo_ticket">Ticket</string>
     <string name="cerrar">Cerrar</string>
-    <string name="no_guia2">No. guía: </string>
-    <string name="estatus_servicio">Estatus del servicio: </string>
-    <string name="origen">Origen: </string>
-    <string name="fecha_recoleccion">Fecha de recolección: </string>
-    <string name="destino">Destino: </string>
-    <string name="cp_destino">C.P. Destino: </string>
-    <string name="fecha_hora">Fecha y hora de entrega: </string>
-    <string name="recibio">Recibió: </string>
+    <string name="no_guia2">No. guía: \u0020</string>
+    <string name="estatus_servicio">Estatus del servicio: \u0020</string>
+    <string name="origen">Origen: \u0020</string>
+    <string name="fecha_recoleccion">Fecha de recolección: \u0020</string>
+    <string name="destino">Destino: \u0020</string>
+    <string name="cp_destino">C.P. Destino: \u0020</string>
+    <string name="fecha_hora">Fecha y hora de entrega: \u0020</string>
+    <string name="recibio">Recibió: \u0020</string>
     <string name="ver_historia">Ver historia</string>
     <string name="llamar">Llamar</string>
     <string name="compartir">Compartir</string>
@@ -105,14 +106,14 @@
     <string name="quotation_zip_destination">C.P. Destino</string>
     <string name="quotation_quote">Cotizar</string>
 
-    <string name="quotation_weigth">Peso(kg)</string>
-    <string name="quotation_high">Alto(cm)</string>
-    <string name="quotation_long">Largo(cm)</string>
-    <string name="quotation_width">Ancho(cm)</string>
+    <string name="quotation_weigth">Peso (kg)</string>
+    <string name="quotation_high">Alto (cm)</string>
+    <string name="quotation_long">Largo (cm)</string>
+    <string name="quotation_width">Ancho (cm)</string>
 
     <string name="quotation_search_zc">Buscar código postal</string>
 
-    <string name="quotation_search_zc_accept">Aceptar</string>
+    <string name="quotation_search_zc_accept">Buscar</string>
     <string name="quotation_search_zc_cancel">Cancelar</string>
 
 
@@ -168,7 +169,7 @@
         <![CDATA[
         <html>
          <head></head>
-         <body style="text-align:justify;color:#555555;background:#ffffff">
+         <body style="text-align:justify;color:#838383;background:#ffffff">
             ESTAFETA MEXICANA, S.A DE C.V. (en lo sucesivo ESTAFETA) le comunica al CLIENTE que la
             información que este último le proporcione para la prestación de los servicios que se contraten con ESTAFETA, puede
             contener Datos Personales y/o Datos Personales Sensibles o financieros, mismos que podrán ser tratados y/o almacenados
@@ -201,7 +202,7 @@
     <string name="error_cod_repetido">El número ya existe en la lista de rastreo.</string>
     <string name="error_lista_vacia">La lista de rastreo se encuentra vacía.</string>
     <string name="error_agregar_fav">No existe información acerca de este registro.</string>
-    <string name="exito_agregar_fav">Operación exitosa</string>
+    <string name="exito_agregar_fav">Operación exitosa.</string>
     <string name="no_sensor">No es posible llevar a cabo la función de realidad aumentada debido a que tu dispositivo no cuenta con sensor de campo magnético. </string>
 
     <!-- Data base -->
@@ -236,8 +237,8 @@
         "estado" TEXT(24) NOT NULL, "calle1" TEXT(200), "calle2" TEXT(200), "ciudad" TEXT(200), "codigo_postal" TEXT(10), "colonia" TEXT(200), "correo" TEXT(200),
         "entrega_oficina" TEXT(200), "ext1" TEXT(10), "ext2" TEXT(10), "horario_atencion" TEXT(200), "horario_comida" TEXT(200), "horario_ext" TEXT(200),
         "horario_recol" TEXT(200), "horario_sabatino" TEXT(200), "idcatalogo" TEXT(24), "latitud" TEXT(24) NOT NULL,  "longitud" TEXT(24) NOT NULL, "no_oficina" TEXT(24),
-        "nombre" TEXT(200), "telefono1" TEXT(50), "telefono2" TEXT(50), "tipo_oficina" TEXT(5), "tipos_pago" TEXT(200), "version" TEXT(25), "ciudad_n"
-        TEXT(200), "colonia_n" TEXT(200))</string>
+        "nombre" TEXT(200), "telefono1" TEXT(50), "telefono2" TEXT(50), "tipo_oficina" TEXT(5), "tipos_pago" TEXT(200), "version" TEXT(25), "ciudad_n" TEXT(200),
+        "colonia_n" TEXT(200), "ciudad_n_decode" TEXT(200), "colonia_n_decode" TEXT(200))</string>
 
     <string name="db_codigos">CREATE TABLE codigos ( Z_PK INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ZCLAVE VARCHAR, ZDESCRIPCIONCLAVE VARCHAR,
         ZIDCATALOGO VARCHAR, ZVERSION VARCHAR )</string>
@@ -264,7 +265,7 @@
     <!-- FragmentOffices  -->
 
     <string name="encender_gps">Favor de encender su GPS</string>
-    <string name="consesionaria_autorizada">Concecionaria autorizada</string>
+    <string name="consesionaria_autorizada">Concesionaria autorizada</string>
     <string name="centro_operativo">Centro operativo y sucursal</string>
     <string name="sucursal">Sucursal</string>
     <string name="seccion_estafeta">Estafeta</string>
@@ -278,7 +279,7 @@
 
 
     <!-- FragmentQuotation -->
-    <string name="noPostalCode">El contacto seleccionado no tiene un código postal válido. Por favor, verifique.</string>
+    <string name="noPostalCode">El contacto seleccionado no tiene un código postal válido.</string>
     <string name="noOrigin">Código postal origen no válido.</string>
     <string name="noDestination">Código postal destino no válido.</string>
     <string name="noCountry">Seleccione un país destino.</string>
@@ -303,11 +304,11 @@
     <string name="EditFavorite">Editar</string>
     <string name="No_Guia">No. guia</string>
     <string name="Cod_Rastreo">Codigo de rastreo</string>
-    <string name="no_guia3">No. guía: </string>
-    <string name="references_favorite">Referencia: </string>
-    <string name="favorite_cod_rastreo">Código de rastreo: </string>
-    <string name="name_guia">Asigna un nombre a tu numero de guía para facilitar su localización </string>
-    <string name="favorite_ServiceStatus">Estatus del servicio: </string>
+    <string name="no_guia3">No. guía: \u0020</string>
+    <string name="references_favorite">Referencia: \u0020</string>
+    <string name="favorite_cod_rastreo">Código de rastreo: \u0020</string>
+    <string name="name_guia">Asigna un nombre a tu número de guía para facilitar su localización.</string>
+    <string name="favorite_ServiceStatus">Estatus del servicio: \u0020</string>
     <string name="edit_cancel">Cancelar</string>
     <string name="edit_save">Guardar</string>
     <string name="edit_name_guia">Referencia</string>
@@ -321,7 +322,7 @@
     <string name="fav_origen">Origen: </string>
     <string name="fav_destino">Destino:</string>
     <string name="fav_cp_destino">C.P. Destino:</string>
-    <string name="fav_estatus">Estatus del servicio:</string>
+    <string name="fav_estatus">Estatus del servicio: \u0020</string>
     <string name="fav_fecha">Fecha y hora de entrega:</string>
     <string name="fav_recibio">Recibió: </string>
     <string name="fav_btn_call">Llamar </string>

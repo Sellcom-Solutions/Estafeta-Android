@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -512,6 +513,11 @@ public class ResponseManager {
                         }
                         if ("a:ciudad".equals(nodeName)) {
                             map.put("ciudad", value);
+
+                            value = Normalizer.normalize(value, Normalizer.Form.NFD);
+                            value    = value.replaceAll("[^\\p{ASCII}]", "");
+                            map.put("ciudad_n_decode", value);
+
                             continue;
                         }
                         if ("a:codigoPostal".equals(nodeName)) {
@@ -519,7 +525,12 @@ public class ResponseManager {
                             continue;
                         }
                         if ("a:colonia".equals(nodeName)) {
+
                             map.put("colonia", value);
+
+                            value = Normalizer.normalize(value, Normalizer.Form.NFD);
+                            value    = value.replaceAll("[^\\p{ASCII}]", "");
+                            map.put("colonia_n_decode", value);
                             continue;
                         }
                         if ("a:correoE".equals(nodeName)) {

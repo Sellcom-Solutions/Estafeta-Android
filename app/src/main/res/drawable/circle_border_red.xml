@@ -5,7 +5,7 @@
     >
 
     <solid android:color="@color/white"/>
-    <stroke android:color="@color/estafeta_red" android:width="2dp"></stroke>
+    <stroke android:color="@color/estafeta_red" android:width="1dp"></stroke>
     <size android:height="15dp" android:width="15dp"></size>
 
 

@@ -223,7 +223,7 @@
                             android:textSize="@dimen/sizeXSmallText"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
-                            android:text="Costo Total:"/>
+                            android:text="Costo total:"/>
 
                         <TextView
                             android:id="@+id/txv_costo_total_internacional"
@@ -389,7 +389,7 @@
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
                             android:layout_marginTop="5dp"
-                            android:text="Costo Total:"/>
+                            android:text="Costo total:"/>
 
                         <TextView
                             android:layout_marginTop="5dp"
@@ -431,7 +431,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Días de Entrega"/>
+                        android:text="Días de entrega"/>
 
                     <TextView
                         android:id="@+id/txv_dias_entrega"
@@ -453,7 +453,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Modalidad de Entrega"/>
+                        android:text="Modalidad de entrega"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -507,7 +507,7 @@
                         android:textColor="@color/estafeta_text"
                         android:layout_marginTop="5dp"
                         android:layout_marginRight="5dp"
-                        android:text="Costos Adicionales"
+                        android:text="Costos adicionales"
                         android:layout_marginBottom="10dp"/>
 
                     <LinearLayout
@@ -543,7 +543,6 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/sizeSmallText"
                             android:layout_marginRight="5dp"
-                            android:layout_marginBottom="5dp"
                             android:textColor="@color/estafeta_text"
                             android:text="@string/cambion_sin_aviso"/>
                         <TextView

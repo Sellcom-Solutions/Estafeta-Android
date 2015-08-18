@@ -60,13 +60,9 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
     Button btn_historia;
 
     Map<String, String> data = new HashMap<>();
-    ArrayList<Map<String, String>> codes_info = new ArrayList<>();
+    ArrayList<Map<String, String>> codes_info;
 
     String new_status;
-    public FragmentDetalleRastreo() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,12 +86,14 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
 
+        codes_info = new ArrayList<>();
+
         footer      = (TextView)view.findViewById(R.id.footer);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
         String currentYear = formatter.format(new Date());
         footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
-        TrackerFragment.section_index = 0;
+        TrackerFragment.section_index = 7;
 
         btn_favorito.setOnClickListener(this);
         btn_historia.setOnClickListener(this);
@@ -152,6 +150,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
         }
        // else {
+
+
             no_guia.setText(codes_info.get(0).get("wayBill"));
             cod_rastreo.setText(codes_info.get(0).get("shortWayBillId"));
             origen.setText(codes_info.get(0).get("PK_originName"));
@@ -180,7 +180,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 break;
 
             case "celda_pe":
-                img_estatus.setImageResource(R.drawable.estatus_pendiente);
+                img_estatus.setImageResource(R.drawable.estatus_transito);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 new_status="Pendiente";
                 codes_info.get(0).put("estatus1", new_status);
@@ -214,9 +214,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
             case R.id.btn_historia:
                 //Toast.makeText(context, "Módulo en Desarrollo", Toast.LENGTH_SHORT).show();
-
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("codes_info",codes_info);
+                bundle.putSerializable("codes_info", codes_info);
                 bundle.putString("origin","detalle_rastreo");
 
                 fragmentManager = getActivity().getSupportFragmentManager();
@@ -245,7 +244,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                         }
 
                         btn_favorito.setEnabled(false);
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),3000);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),4050);
 
 
                     } catch (Exception e) {
