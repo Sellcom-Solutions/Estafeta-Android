@@ -145,7 +145,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center"
-                android:text="@string/codigo_postal"
+                android:text="Seleccione un código postal"
                 android:textColor="@color/estafeta_text"
                 android:textSize="@dimen/sizeNormalText"
                 android:textStyle="bold"/>
@@ -157,6 +157,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="@string/estado"
+                android:visibility="gone"
                 android:textColor="@color/estafeta_text"
                 android:textSize="@dimen/sizeSmallText"
                 android:textStyle="bold"
@@ -170,6 +171,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textColor="@color/estafeta_text"
+                android:visibility="gone"
                 android:textSize="@dimen/sizeSmallText"
                 />
 
@@ -179,7 +181,8 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/city_etc"
+                android:text="@string/city"
+                android:visibility="gone"
                 android:textColor="@color/estafeta_text"
                 android:textSize="@dimen/sizeSmallText"
                 android:textStyle="bold"
@@ -192,6 +195,7 @@
                 android:layout_gravity="left"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:visibility="gone"
                 android:textColor="@color/estafeta_text"
                 android:textSize="@dimen/sizeSmallText"
                 />
@@ -206,6 +210,7 @@
             android:weightSum="100"
             android:layout_marginTop="5dp"
             android:orientation="horizontal"
+            android:gravity="center"
             android:background="@color/estafeta_red">
 
             <TextView
@@ -282,7 +287,8 @@
                 android:id                  ="@+id/btn_accept"
                 android:layout_width        ="wrap_content"
                 android:layout_height       ="wrap_content"
-                android:text                ="@string/quotation_search_zc_accept"
+                android:text                ="Agregar"
+                android:textAllCaps="false"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:textColor           ="@color/estafeta_red"
                 android:background          ="@android:color/transparent"

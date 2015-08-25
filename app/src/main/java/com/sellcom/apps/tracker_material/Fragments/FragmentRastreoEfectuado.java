@@ -248,7 +248,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
             if(listFavorites == null){
                 favorite.setEnabled(true);
                 DialogManager.sharedInstance().dismissDialog();
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existen favoritos.", 3000);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No hay registro de favoritos.", 3000);
             }else {
 
                 new UpdateInfoFavorites().execute();

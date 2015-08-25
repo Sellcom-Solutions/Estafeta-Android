@@ -16,6 +16,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.sellcom.apps.tracker_material.R;
@@ -61,6 +62,9 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
 
     Map<String, String> data = new HashMap<>();
     ArrayList<Map<String, String>> codes_info;
+    LinearLayout lin_entrega,
+                    lin_recibio;
+
 
     String new_status;
 
@@ -85,6 +89,9 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         btn_historia        = (Button)view.findViewById(R.id.btn_historia);
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
+
+        lin_entrega         = (LinearLayout)view.findViewById(R.id.lin_entrega);
+        lin_recibio         = (LinearLayout)view.findViewById(R.id.lin_recibio);
 
         codes_info = new ArrayList<>();
 
@@ -177,6 +184,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 estatus.setText("Pendiente en tránsito");
                 new_status="Pendiente en tránsito";
                 codes_info.get(0).put("estatus1",new_status);
+                lin_entrega.setVisibility(View.GONE);
+                lin_recibio.setVisibility(View.GONE);
                 break;
 
             case "celda_pe":
@@ -185,6 +194,8 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 new_status="Pendiente";
                 codes_info.get(0).put("estatus1", new_status);
                 estatus.setText("Pendiente");
+                lin_entrega.setVisibility(View.GONE);
+                lin_recibio.setVisibility(View.GONE);
                 break;
 
             case "celda_en":
@@ -193,14 +204,18 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 new_status="Entregado";
                 codes_info.get(0).put("estatus1", new_status);
                 estatus.setText("Entregado");
+                lin_entrega.setVisibility(View.VISIBLE);
+                lin_recibio.setVisibility(View.VISIBLE);
                 break;
 
             default:
                 img_estatus.setImageResource(R.drawable.estatus_sin);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
                 new_status="Sin información";
-                codes_info.get(0).put("estatus1",new_status);
+                codes_info.get(0).put("estatus1", new_status);
                 estatus.setText("Sin información");
+                lin_entrega.setVisibility(View.GONE);
+                lin_recibio.setVisibility(View.GONE);
                 break;
         }
 
@@ -264,7 +279,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
 
-                String sendText = "No.guía: "+ no_guia.getText()+". "
+                String sendText = "No.Guía: "+ no_guia.getText()+". "
                         +"Código rastreo: "+cod_rastreo.getText()+". "
                         +"Origen: "+origen.getText()+". "
                         +"Destino: "+destino.getText()+". "
@@ -272,7 +287,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                         +"Fecha: "+fecha_hora_entrega.getText()+". "
                         +"Recibio: "+recibio.getText()+". ";
 
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);

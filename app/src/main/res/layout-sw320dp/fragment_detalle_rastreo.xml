@@ -19,12 +19,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:gravity="center"
                         android:orientation="horizontal"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
                         android:weightSum="100">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
+                            android:visibility="gone"
                             android:layout_weight="5"
                             android:layout_marginLeft="10dp">
 
@@ -42,7 +46,7 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="90"
+                            android:layout_weight="95"
                             android:orientation="vertical"
                             android:layout_marginRight="10dp">
 
@@ -124,7 +128,6 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
                                     android:orientation="vertical">
 
                                     <TextView
@@ -148,7 +151,6 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
                                     android:layout_marginBottom="5dp"
                                     android:orientation="horizontal">
 
@@ -203,7 +205,6 @@
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginBottom="5dp"
                                     android:orientation="horizontal"
                                     >
 
@@ -218,8 +219,8 @@
 
                                     <ImageView
                                         android:id="@+id/fd_img_status"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
                                         android:layout_gravity="center"
                                         android:scaleType="centerInside"
                                         android:layout_weight="0"
@@ -228,6 +229,7 @@
 
 
                                 <LinearLayout
+                                    android:id="@+id/lin_entrega"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
@@ -252,6 +254,7 @@
                                 </LinearLayout>
 
                                 <LinearLayout
+                                    android:id="@+id/lin_recibio"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="10dp"
@@ -276,6 +279,7 @@
                                 </LinearLayout>
 
                                 <TextView
+                                    android:layout_marginTop="10dp"
                                     android:layout_width="match_parent"
                                     android:layout_height="70dp"
                                     android:background="@drawable/border_gray" />

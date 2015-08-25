@@ -63,7 +63,7 @@
     <string name="codigo_factura">Factura</string>
     <string name="codigo_ticket">Ticket</string>
     <string name="cerrar">Cerrar</string>
-    <string name="no_guia2">No. guía: \u0020</string>
+    <string name="no_guia2">No. Guía: \u0020</string>
     <string name="estatus_servicio">Estatus del servicio: \u0020</string>
     <string name="origen">Origen: \u0020</string>
     <string name="fecha_recoleccion">Fecha de recolección: \u0020</string>
@@ -201,7 +201,7 @@
     <string name="error_tamaño_codigo">Un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
     <string name="error_cod_repetido">El número ya existe en la lista de rastreo.</string>
     <string name="error_lista_vacia">La lista de rastreo se encuentra vacía.</string>
-    <string name="error_agregar_fav">No existe información acerca de este registro.</string>
+    <string name="error_agregar_fav">No existe información acerca de este registro, no puede agregarse a favoritos.</string>
     <string name="exito_agregar_fav">Operación exitosa.</string>
     <string name="no_sensor">No es posible llevar a cabo la función de realidad aumentada debido a que tu dispositivo no cuenta con sensor de campo magnético. </string>
 
@@ -304,8 +304,8 @@
     <string name="EditFavorite">Editar</string>
     <string name="No_Guia">No. guia</string>
     <string name="Cod_Rastreo">Codigo de rastreo</string>
-    <string name="no_guia3">No. guía: \u0020</string>
-    <string name="references_favorite">Referencia: \u0020</string>
+    <string name="no_guia3">No. Guía: \u0020</string>
+    <string name="references_favorite">Referencia: </string>
     <string name="favorite_cod_rastreo">Código de rastreo: \u0020</string>
     <string name="name_guia">Asigna un nombre a tu número de guía para facilitar su localización.</string>
     <string name="favorite_ServiceStatus">Estatus del servicio: \u0020</string>
@@ -318,7 +318,7 @@
     <string name="fav_favorite">Favorito</string>
     <string name="fav_reference">Referencia: </string>
     <string name="fav_cod_rastreo">Codigo de rastreo:</string>
-    <string name="fav_no_guia">No. guía: </string>
+    <string name="fav_no_guia">No. Guía: </string>
     <string name="fav_origen">Origen: </string>
     <string name="fav_destino">Destino:</string>
     <string name="fav_cp_destino">C.P. Destino:</string>

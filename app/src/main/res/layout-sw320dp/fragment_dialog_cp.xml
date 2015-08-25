@@ -92,7 +92,7 @@
         android:background="@color/estafeta_red">
 
         <TextView
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
             android:layout_weight="60"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -111,6 +111,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="40"
+            android:visibility="gone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="@string/zip_code"

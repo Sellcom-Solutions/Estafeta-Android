@@ -501,9 +501,13 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                         auxResponseList = RequestManager.sharedInstance().getResponseArray();
                         if (auxResponseList != null) {
                             // Log.v(TAG + "auxResponse", "" + auxResponse.size());
+
                             if (auxResponseList.size() > 0) {
                                 aux.add(auxResponseList);
                             }
+
+
+
 
                             //   Log.v(TAG + "aux", "" + aux.size());
                         }
@@ -514,6 +518,27 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                     if (j == codes_array.size()) {
                         /*ArrayList<ArrayList<Map<String, String>>> codes_ver;
                         codes_ver = verifyFavorites(aux);*/
+
+                        for (int i = 0; i < aux.size(); i++) {
+                            if(!aux.get(i).get(0).get("wayBill").equals("Sin información") || !aux.get(i).get(0).get("shortWayBillId").equals("Sin información")) {
+                                for (int j = 0; j < aux.size(); j++) {
+                                    j = i + j;
+
+                                    if (i != j) {
+                                        if( j < aux.size()) {
+                                            if (aux.get(i).get(0).get("wayBill").equals(aux.get(j).get(0).get("wayBill"))) {
+                                                aux.remove(i);
+                                                i++;
+                                                break;
+                                            }
+
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
 
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("codes_info", aux);
@@ -558,14 +583,17 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             String preCod = scanResult.getContents().trim();
             Log.d("Longitud", String.valueOf(preCod.length()));
             Log.d("Codigo", preCod);
-            if (Utilities.validateCode(preCod.substring(0,22))) {
-                if(!compareCodeRepeat(scanResult.getContents().trim())){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido),3000);
-                }else{
-                    setCodeRatreo(preCod.substring(0,22));
-                }
-            }
-            else
+
+            if(preCod.length() >= 22) {
+                if (Utilities.validateCode(preCod.substring(0, 22))) {
+                    if (!compareCodeRepeat(scanResult.getContents().trim())) {
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_cod_repetido), 3000);
+                    } else {
+                        setCodeRatreo(preCod.substring(0, 22));
+                    }
+                } else
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.code_invalid), 3000);
+            }else
                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.code_invalid), 3000);
         }
     }

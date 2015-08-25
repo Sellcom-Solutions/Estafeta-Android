@@ -6,6 +6,7 @@ package com.sellcom.apps.tracker_material.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,12 +72,14 @@ public class DetailQuotationAdapter extends BaseAdapter {
             //setSelectionState(true, convertView, holder.txv_selection, holder.txv_descripcion_servicio);
             holder.txv_selection.setVisibility(View.VISIBLE);
             holder.txv_descripcion_servicio.setTextColor(activity.getResources().getColor(R.color.estafeta_text));
+            holder.txv_descripcion_servicio.setTypeface(null, Typeface.BOLD);
             convertView.setBackgroundResource(R.color.white);
         }
         else {
             //setSelectionState(false, convertView, holder.txv_selection, holder.txv_descripcion_servicio);
             holder.txv_selection.setVisibility(View.INVISIBLE);
             holder.txv_descripcion_servicio.setTextColor(activity.getResources().getColor(R.color.estafeta_soft_gray));
+            holder.txv_descripcion_servicio.setTypeface(null, Typeface.NORMAL);
             convertView.setBackgroundResource(R.color.estafeta_light_gray);
         }
 

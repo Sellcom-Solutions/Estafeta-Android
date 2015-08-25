@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,9 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
     Map<String, String> data = new HashMap<>();
     Map<String, String> codes_info = new HashMap<>();
 
+    LinearLayout lin_entrega,
+            lin_recibio;
+
     TrackerFragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
@@ -85,6 +89,9 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         fav_estatus = (TextView) view.findViewById(R.id.fav_estatus);
         fav_fecha = (TextView) view.findViewById(R.id.fav_fecha);
         fav_recibio = (TextView) view.findViewById(R.id.fav_recibio);
+
+        lin_entrega         = (LinearLayout)view.findViewById(R.id.lin_entrega);
+        lin_recibio         = (LinearLayout)view.findViewById(R.id.lin_recibio);
 
         img_estatus         = (ImageView) view.findViewById(R.id.fd_img_status);
 
@@ -176,18 +183,26 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         switch (status){
             case "Entregado":
                 img_estatus.setImageResource(R.drawable.estatus_entregado);
+                lin_entrega.setVisibility(View.VISIBLE);
+                lin_recibio.setVisibility(View.VISIBLE);
                 break;
 
             case "Pendiente":
                 img_estatus.setImageResource(R.drawable.estatus_transito);
+                lin_entrega.setVisibility(View.GONE);
+                lin_recibio.setVisibility(View.GONE);
                 break;
 
             case "Sin información":
                 img_estatus.setImageResource(R.drawable.estatus_sin);
+                lin_entrega.setVisibility(View.GONE);
+                lin_recibio.setVisibility(View.GONE);
                 break;
 
             case "Pendiente en tránsito":
                 img_estatus.setImageResource(R.drawable.estatus_transito);
+                lin_entrega.setVisibility(View.GONE);
+                lin_recibio.setVisibility(View.GONE);
                 break;
         }
 
@@ -214,7 +229,7 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
 
                 String sendText ="";
                 if(fav_fecha.getText().toString().equals("")){
-                    sendText = "No. guía: "+ fav_no_guia.getText()+". "
+                    sendText = "No. Guía: "+ fav_no_guia.getText()+". "
                             +"Código rastreo: "+fav_codigo.getText()+". "
                             +"Origen: "+fav_origen.getText()+". "
                             +"Destino: "+fav_destino.getText()+". "

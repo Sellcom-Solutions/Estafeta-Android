@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager;
@@ -265,7 +266,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             tv_dialog_estado    = (TextView)dialogCP.findViewById(R.id.tv_dialog_estado);
             tv_dialog_ciudad    = (TextView)dialogCP.findViewById(R.id.tv_dialog_ciudad);
             edt_city            = (EditText) dialogCP.findViewById(R.id.edt_city);
+            edt_city.getBackground().setColorFilter(getResources().getColor(R.color.estafeta_red), PorterDuff.Mode.SRC_ATOP);
+
             edt_colony          = (EditText) dialogCP.findViewById(R.id.edt_colony);
+            edt_colony.getBackground().setColorFilter(getResources().getColor(R.color.estafeta_red), PorterDuff.Mode.SRC_ATOP);
             btn_accept          = (Button) dialogCP.findViewById(R.id.btn_accept);
             btn_cancel_cp       = (Button)dialogCP.findViewById(R.id.btn_cancel_cp);
             btn_search          = (Button) dialogCP.findViewById(R.id.btn_search);
@@ -393,6 +397,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             case R.id.btn_zc_ori_search:
                 cpOrigen = true;
                 positionCP = 0;
+                edt_city.setText("");
+                edt_colony.setText("");
                 searchZipCode();
                 break;
 
@@ -405,6 +411,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             case R.id.btn_zc_dest_search:
                 cpOrigen = false;
                 positionCP = 0;
+                edt_city.setText("");
+                edt_colony.setText("");
                 searchZipCode();
                 break;
 
@@ -919,12 +927,24 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             }
 
 
+            if (Utilities.specialCharacteresInString(ciudadString)){
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se permiten acentos ni caracteres especiales.", 3000);
+                return;
+            }
+            if (Utilities.specialCharacteresInString(coloniaString)){
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se permiten acentos ni caracteres especiales.", 3000);
+                return;
+            }
+
+
             Map<String, String> requestData = new HashMap<>();
             requestData = new HashMap<>();
+
+            requestData.put("ciudad", convertNonAscii(ciudadString).trim());
+            requestData.put("localidad", convertNonAscii(coloniaString).trim());
+
             requestData.put("pais", "MEXICO");
             requestData.put("estado", estadoString);
-            requestData.put("ciudad", ciudadString);
-            requestData.put("localidad", coloniaString);
 
             typeSend = "codigo_postal";
 
@@ -953,7 +973,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                     positionCP = position;
-                    view.setSelected(true);
+                    lv_dialog_colonia.setSelected(true);
 
                     adapter.setSelectionState(true, view);
                     adapter.setLastSelectedItemPosition(position);
@@ -1042,7 +1062,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                     }
                 }else if(typeSend.equals("internacional_sobre")){
 
-                    respCotizador.get(0).put("DescripcionServicio", "Global Express");
+                    respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
 
                     auxResp.add(respCotizador.get(0));
 
@@ -1068,7 +1088,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         if (contEUA_Canada == 0) {
                             contEUA_Canada++;
-                            respCotizador.get(0).put("DescripcionServicio", "Global Express");
+                            respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
                             auxResp.add(respCotizador.get(0));
                             cotizar("internacional_sobre_eua_canada");
                         } else {
@@ -1097,7 +1117,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         if (contEUA_Canada == 0) {
                             contEUA_Canada++;
-                            respCotizador.get(0).put("DescripcionServicio", "Global Express");
+                            respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
                             auxResp.add(respCotizador.get(0));
                             cotizar("internacional_paquete_eua_canada");
                         } else {
@@ -1129,7 +1149,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,""+respCotizador.get(0).get("ErrorMessageESP"),3000);
                     }else {
 
-                        respCotizador.get(0).put("DescripcionServicio", "Global Express");
+                        respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
 
                         auxResp.add(respCotizador.get(0));
 
@@ -1175,7 +1195,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio), 2000);
+                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
                 Log.v("FragmentQuotation", "El servidor devolvio null");
             }
         }else{
@@ -1184,7 +1204,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 2000);
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
             Log.v("FragmentQuotation", "respCotizador es igual a null");
         }
 

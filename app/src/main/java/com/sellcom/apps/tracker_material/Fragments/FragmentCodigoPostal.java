@@ -145,8 +145,11 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                 zipCodeString = zipCode.getText().toString();
                 if(zipCodeString == null || zipCodeString.equals("")){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo),3000);
-                }
-                else {
+                }else if(zipCodeString.length() < 5) {
+
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo),3000);
+
+                }else {
                     //MapString Params...
                     //Query from Zip Code
                     Map<String, String> requestData = new HashMap<>();

@@ -208,7 +208,7 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
 
                 if(codigos.get(holder.position).get(0).get("statusSPA").equals("Sin información")){
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),3000);
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existe información acerca de este registro.",3000);
                 }else {
                     Bundle bundle = new Bundle();
                     bundle.putString("code", codigos.get(holder.position).get(0).get("wayBill"));

@@ -98,7 +98,6 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
         lin_ext                 = (LinearLayout)view.findViewById(R.id.lin_ext);
 
         txv_nombre_estafeta.setText(""+list.get("nombre"));
-        txv_direccion_estafeta.setText(""+list.get("calle1")+"\n"+list.get("colonia_n")+"\n"+list.get("codigo_postal")+" "+list.get("ciudad_n"));
         txv_horario2_estafeta.setText(""+list.get("horario_atencion"));
 
 
@@ -127,8 +126,8 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
             txv_telefono_estafeta.setText(""+list.get("telefono1"));
         }
 
-        sendText = txv_nombre_estafeta.getText().toString() + "\n" + txv_horario2_estafeta.getText().toString() + " \n" +
-                    txv_direccion_estafeta.getText().toString() + "\nTeléfono: " + txv_telefono_estafeta.getText().toString();
+        sendText = txv_nombre_estafeta.getText().toString() + "\nDirección: " + txv_direccion_estafeta.getText().toString() + " \nHorario: " +
+                txv_horario2_estafeta.getText().toString() + "\nTeléfono: " + txv_telefono_estafeta.getText().toString();
 
         supportMapFragment      = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapEstafeta);
         supportMapFragment      = SupportMapFragment.newInstance();
@@ -237,7 +236,6 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
 
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, txv_nombre_estafeta.getText().toString());
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);

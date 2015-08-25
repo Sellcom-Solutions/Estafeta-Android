@@ -61,7 +61,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             txv_cc_tarifa_internacional,
                             txv_costo_total_internacional,
                             txv_terminos,
-                            footer;
+                            footer,
+                            txv_articulos;
 
     private ImageView       imv_send_type;
 
@@ -126,6 +127,16 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         txv_cc_tarifa_internacional  = (TextView)view.findViewById(R.id.txv_cc_tarifa_internacional);
         txv_costo_total_internacional  = (TextView)view.findViewById(R.id.txv_costo_total_internacional);
         txv_terminos            = (TextView)view.findViewById(R.id.txv_terminos);
+        txv_articulos           = (TextView)view.findViewById(R.id.txv_articulos);
+
+        txv_articulos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("http://www.estafeta.com"));
+                getActivity().startActivity(intent);
+            }
+        });
 
         footer      = (TextView)view.findViewById(R.id.footer);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
@@ -587,7 +598,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             + "CC sobrepeso: " + txv_cc_sobrepeso.getText() + ". Precios sujetos a cambio sin previo aviso. Los precios no incluyen IVA.";
 
 
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
                     sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                     sendIntent.setType("text/plain");
                 }else{
@@ -604,7 +614,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                             +"Dimensiones: "+txv_dimensiones.getText()+". Precios sujetos a cambio sin previo aviso. Los precios no incluyen IVA.";
 
 
-                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
                     sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                     sendIntent.setType("text/plain");
 

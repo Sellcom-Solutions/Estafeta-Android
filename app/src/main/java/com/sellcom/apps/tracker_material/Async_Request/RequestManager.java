@@ -594,7 +594,7 @@ public class RequestManager implements ResponseListenerInterface {
                 requestData.put("usuario","AdminUser");
                 requestData.put("pass","zi+Eybk8");
                 requestData.put("modalidad","0");
-                requestData.put("medicion","1");
+                requestData.put("medicion","0");
                 Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), "");
                 break;
 
