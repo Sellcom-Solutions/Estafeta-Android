@@ -171,7 +171,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
-
+/*
                 if (isChecked) {
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
@@ -202,6 +202,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
                     }
                     return;
                 }
+                */
 
             }
         });

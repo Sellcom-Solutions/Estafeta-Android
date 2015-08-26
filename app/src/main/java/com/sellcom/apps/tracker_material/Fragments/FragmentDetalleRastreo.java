@@ -279,13 +279,24 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
 
-                String sendText = "No.Guía: "+ no_guia.getText()+". "
-                        +"Código rastreo: "+cod_rastreo.getText()+". "
-                        +"Origen: "+origen.getText()+". "
-                        +"Destino: "+destino.getText()+". "
-                        +"Estatus: "+estatus.getText()+". "
-                        +"Fecha: "+fecha_hora_entrega.getText()+". "
-                        +"Recibio: "+recibio.getText()+". ";
+                String sendText ="";
+                if(fecha_hora_entrega.getText().toString().equals("")){
+                    sendText = "No.Guía: "+ no_guia.getText()+". "
+                            +"Código rastreo: "+cod_rastreo.getText()+". "
+                            +"Origen: "+origen.getText()+". "
+                            +"Destino: "+destino.getText()+". "
+                            +"Estatus: "+estatus.getText()+".";
+
+                }else{
+                    sendText = "No.Guía: "+ no_guia.getText()+". "
+                            +"Código rastreo: "+cod_rastreo.getText()+". "
+                            +"Origen: "+origen.getText()+". "
+                            +"Destino: "+destino.getText()+". "
+                            +"Estatus: "+estatus.getText()+". "
+                            +"Fecha de entrega: "+fecha_hora_entrega.getText()+". "
+                            +"Recibió: "+recibio.getText()+".";
+                }
+
 
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");

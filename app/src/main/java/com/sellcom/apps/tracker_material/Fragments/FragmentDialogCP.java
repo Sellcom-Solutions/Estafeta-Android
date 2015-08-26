@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.sellcom.apps.tracker_material.Adapters.CPAListdapter;
 import com.sellcom.apps.tracker_material.R;
@@ -30,6 +32,7 @@ public class FragmentDialogCP extends DialogFragment implements View.OnClickList
     TextView txt_cp;
     TextView txt_estado;
     TextView txt_ciudad;
+    LinearLayout colonia_title;
     ListView lst_colonias;
     Button   cerrar;
 
@@ -63,6 +66,8 @@ public class FragmentDialogCP extends DialogFragment implements View.OnClickList
         lst_colonias    = (ListView) view.findViewById(R.id.lv_dialog_colonia);
         cerrar          = (Button)   view.findViewById(R.id.btn_dialog_cerrar);
 
+        colonia_title   = (LinearLayout) view.findViewById(R.id.colonia_title);
+
         try {
            // colonias = getArguments().getParcelableArrayList("col");
             colonias = (ArrayList<Map<String,String>>) getArguments().getSerializable("col");
@@ -74,6 +79,7 @@ public class FragmentDialogCP extends DialogFragment implements View.OnClickList
             tipo = getArguments().getString("tipo");
             if (tipo.equals("0")){
                 cp = aux.get("cp");
+                colonia_title.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
                 view.findViewById(R.id.tv_cp_header).setVisibility(view.GONE);
                 txt_cp.setText(txt_cp.getText().toString()+" "+cp);
             }

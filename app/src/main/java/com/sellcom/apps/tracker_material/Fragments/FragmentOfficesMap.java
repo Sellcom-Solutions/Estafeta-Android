@@ -320,6 +320,7 @@ public class FragmentOfficesMap extends TrackerFragment implements View.OnClickL
 
             if(typeSearch.equals("cerca_de_mi")) {
                 listOficinas = Offices.getAllInMaps(context);
+                Log.e(TAG,"size: "+listOficinas.size());
             }else if(typeSearch.equals("busqueda_avanzada")){
                 sql = getArguments().getString("sql");
                 selectionArgs = getArguments().getStringArray("selectionArgs");

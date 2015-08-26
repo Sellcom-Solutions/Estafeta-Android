@@ -233,19 +233,17 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
                             +"Código rastreo: "+fav_codigo.getText()+". "
                             +"Origen: "+fav_origen.getText()+". "
                             +"Destino: "+fav_destino.getText()+". "
-                            +"Estatus: "+fav_estatus.getText()+". "
-                            +"Recibió: "+fav_recibio.getText()+". ";
+                            +"Estatus: "+fav_estatus.getText()+".";
                 }else{
-                    sendText = "No. guía: "+ fav_no_guia.getText()+". "
+                    sendText = "No. Guía: "+ fav_no_guia.getText()+". "
                             +"Código rastreo: "+fav_codigo.getText()+". "
                             +"Origen: "+fav_origen.getText()+". "
                             +"Destino: "+fav_destino.getText()+". "
                             +"Estatus: "+fav_estatus.getText()+". "
                             +"Fecha de entrega: "+fav_fecha.getText()+". "
-                            +"Recibió: "+fav_recibio.getText()+". ";
+                            +"Recibió: "+fav_recibio.getText()+".";
                 }
 
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Estafeta");
                 sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);

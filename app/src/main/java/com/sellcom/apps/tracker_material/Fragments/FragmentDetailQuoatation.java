@@ -542,24 +542,38 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
             if(map.get("Domingo").equalsIgnoreCase("x")){
                 dias += "DO  ";
+            }else{
+                dias += "    ";
             }
             if(map.get("Lunes").equalsIgnoreCase("x")){
                 dias += "LU  ";
+            }else{
+                dias += "    ";
             }
             if(map.get("Martes").equalsIgnoreCase("x")){
                 dias += "MA  ";
+            }else{
+                dias += "    ";
             }
             if(map.get("Miercoles").equalsIgnoreCase("x")){
                 dias += "MI  ";
+            }else{
+                dias += "    ";
             }
             if(map.get("Jueves").equalsIgnoreCase("x")){
                 dias += "JU  ";
+            }else{
+                dias += "    ";
             }
             if(map.get("Viernes").equalsIgnoreCase("x")){
                 dias += "VI  ";
+            }else{
+                dias += "    ";
             }
             if(map.get("Sabado").equalsIgnoreCase("x")){
                 dias += "SA  ";
+            }else{
+                dias += "    ";
             }
 
             txv_dias_entrega.setText("" + dias);

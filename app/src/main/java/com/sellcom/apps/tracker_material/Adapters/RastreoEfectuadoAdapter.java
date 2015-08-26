@@ -92,22 +92,17 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
 
         final CodigosViewHolder   holder;
-        if (convertView == null){
-            holder                  = new CodigosViewHolder();
-            convertView             = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_rastreo_efectuado,parent,false);
-            holder.codigo           = (TextView)convertView.findViewById(R.id.txt_codigo_rastreo);
-            holder.no_guia          = (TextView)convertView.findViewById(R.id.txt_no_guia);
-            holder.estatus          = (TextView)convertView.findViewById(R.id.txt_estatus);
-            holder.btn_favoritos    = (CheckBox)convertView.findViewById(R.id.btn_favorito);
-            holder.img_status       = (ImageView) convertView.findViewById(R.id.img_status);
-            holder.linear_rastreo   = (LinearLayout) convertView.findViewById(R.id.linear_rastreo);
-            holder.position         = position;
-            convertView.setTag(holder);
-        }
-        else{
-            holder  = (CodigosViewHolder)convertView.getTag();
-            holder.position         = position;
-        }
+        holder                  = new CodigosViewHolder();
+
+        convertView             = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_rastreo_efectuado,parent,false);
+        holder.codigo           = (TextView)convertView.findViewById(R.id.txt_codigo_rastreo);
+        holder.no_guia          = (TextView)convertView.findViewById(R.id.txt_no_guia);
+        holder.estatus          = (TextView)convertView.findViewById(R.id.txt_estatus);
+        holder.btn_favoritos    = (CheckBox)convertView.findViewById(R.id.btn_favorito);
+        holder.img_status       = (ImageView) convertView.findViewById(R.id.img_status);
+        holder.linear_rastreo   = (LinearLayout) convertView.findViewById(R.id.linear_rastreo);
+        holder.position         = position;
+
 
         Map<String,String> codigos_copy=new HashMap<>();
         codigos_copy= codigos.get(position).get(0);

@@ -547,49 +547,52 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             return;
                         }else{
 
-                            if(Double.parseDouble(edt_weigth.getText().toString()) ==0 ){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico es menor al peso permitido.", 3000);
-                                return;
-                            }
+                            try {
+                                if (Double.parseDouble(edt_weigth.getText().toString()) == 0) {
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico es menor al peso permitido.", 3000);
+                                    return;
+                                }
 
-                            if(Double.parseDouble(edt_high.getText().toString()) ==0 ){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
-                                return;
-                            }
+                                if (Double.parseDouble(edt_high.getText().toString()) == 0) {
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                    return;
+                                }
 
-                            if(Double.parseDouble(edt_long.getText().toString()) ==0 ){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
-                                return;
-                            }
+                                if (Double.parseDouble(edt_long.getText().toString()) == 0) {
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                    return;
+                                }
 
-                            if(Double.parseDouble(edt_width.getText().toString()) ==0 ){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
-                                return;
-                            }
-
-
-                            if(Double.parseDouble(edt_weigth.getText().toString()) > 70){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede los 70kg.", 3000);
-                            }else{
-
-                                double pesoVolumetrico = (Double.parseDouble(edt_high.getText().toString()) * Double.parseDouble(edt_long.getText().toString()) * Double.parseDouble(edt_width.getText().toString()))/5000;
-
-                                if(pesoVolumetrico > 70){
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede los 70kg.", 3000);
-                                }else{
-                                    origen  = edt_zc_origin.getText().toString();
-                                    destino = edt_zc_destination.getText().toString();
-                                    peso    = edt_weigth.getText().toString();
-                                    alto    = edt_high.getText().toString();
-                                    largo   = edt_long.getText().toString();
-                                    ancho   = edt_width.getText().toString();
-                                    cotizar("nacional_paquete");
+                                if (Double.parseDouble(edt_width.getText().toString()) == 0) {
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                                    return;
                                 }
 
 
+                                if (Double.parseDouble(edt_weigth.getText().toString()) > 70) {
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede los 70kg.", 3000);
+                                } else {
+
+                                    double pesoVolumetrico = (Double.parseDouble(edt_high.getText().toString()) * Double.parseDouble(edt_long.getText().toString()) * Double.parseDouble(edt_width.getText().toString())) / 5000;
+
+                                    if (pesoVolumetrico > 70) {
+                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede los 70kg.", 3000);
+                                    } else {
+                                        origen = edt_zc_origin.getText().toString();
+                                        destino = edt_zc_destination.getText().toString();
+                                        peso = edt_weigth.getText().toString();
+                                        alto = edt_high.getText().toString();
+                                        largo = edt_long.getText().toString();
+                                        ancho = edt_width.getText().toString();
+                                        cotizar("nacional_paquete");
+                                    }
+
+
+                                }
+
+                            }catch(NumberFormatException nfe){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             }
-
-
 
 
                         }
@@ -610,6 +613,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
                             return;
                         }else{
+
+                            try{
 
                             if(Double.parseDouble(edt_weigth.getText().toString()) ==0 ){
                                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico es menor al peso permitido.", 3000);
@@ -664,7 +669,9 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             }
 
 
-
+                            }catch(NumberFormatException nfe){
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+                            }
 
 
                         }
@@ -1062,28 +1069,36 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                     }
                 }else if(typeSend.equals("internacional_sobre")){
 
-                    respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
+                    if (respCotizador.get(0).get("HasError").equals("true")) {
+                        DialogManager.sharedInstance().dismissDialog();
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,""+respCotizador.get(0).get("ErrorMessageESP"),3000);
+                    }else {
 
-                    auxResp.add(respCotizador.get(0));
+                        respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
 
-                    bundle.putString("type", "internacional_sobre");
+                        auxResp.add(respCotizador.get(0));
 
-                    bundle.putString("destino",spn_countrie.getSelectedItem().toString());
+                        bundle.putString("type", "internacional_sobre");
+
+                        bundle.putString("destino", spn_countrie.getSelectedItem().toString());
 
 
-                    bundle.putSerializable("auxResp", auxResp);
-                    fragment = new FragmentDetailQuoatation();
-                    fragment.addFragmentToStack(getActivity());
-                    fragment.setArguments(bundle);
-                    fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.addToBackStack(null);
+                        bundle.putSerializable("auxResp", auxResp);
+                        fragment = new FragmentDetailQuoatation();
+                        fragment.addFragmentToStack(getActivity());
+                        fragment.setArguments(bundle);
+                        fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.addToBackStack(null);
 
-                    new AsynTask().execute();
+                        new AsynTask().execute();
+                    }
 
                 }else if (typeSend.equals("internacional_sobre_eua_canada")) {
 
-
-
+                    if (respCotizador.get(0).get("HasError").equals("true")) {
+                        DialogManager.sharedInstance().dismissDialog();
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,""+respCotizador.get(0).get("ErrorMessageESP"),3000);
+                    }else {
 
 
                         if (contEUA_Canada == 0) {
@@ -1092,10 +1107,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             auxResp.add(respCotizador.get(0));
                             cotizar("internacional_sobre_eua_canada");
                         } else {
-                            respCotizador.get(0).put("DescripcionServicio","USA-Canadá-Estándar");
+                            respCotizador.get(0).put("DescripcionServicio", "USA-Canadá-Estándar");
                             auxResp.add(respCotizador.get(0));
                             bundle.putString("type", "internacional_sobre_eua_canada");
-                            bundle.putString("destino",spn_countrie.getSelectedItem().toString());
+                            bundle.putString("destino", spn_countrie.getSelectedItem().toString());
 
                             bundle.putSerializable("auxResp", auxResp);
                             fragment = new FragmentDetailQuoatation();
@@ -1106,6 +1121,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                             new AsynTask().execute();
                         }
+                    }
 
 
                 } else if(typeSend.equals("internacional_paquete_eua_canada")) {

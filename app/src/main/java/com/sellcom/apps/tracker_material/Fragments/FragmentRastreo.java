@@ -366,7 +366,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         }
         codigo.setText("");
 
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+        //getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
     }
 
 
@@ -567,6 +567,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
+
         super.onActivityResult(requestCode,resultCode,data);
 
         if (resultCode == getActivity().RESULT_OK) {
@@ -579,6 +580,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     }
 
     public void scanResult(IntentResult scanResult) {
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         if (scanResult != null) {
             String preCod = scanResult.getContents().trim();
             Log.d("Longitud", String.valueOf(preCod.length()));

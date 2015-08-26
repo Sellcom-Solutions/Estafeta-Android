@@ -98,6 +98,31 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
         lin_ext                 = (LinearLayout)view.findViewById(R.id.lin_ext);
 
         txv_nombre_estafeta.setText(""+list.get("nombre"));
+
+        if(list.get("calle1").equals("") || list.get("calle1").equals("null")){
+            txv_direccion_estafeta.setText("");
+        }else{
+            txv_direccion_estafeta.setText(""+list.get("calle1"));
+        }
+
+        if(list.get("colonia_n").equals("") || list.get("colonia_n").equals("null")){
+            //NOTHING
+        }else{
+            txv_direccion_estafeta.append("\n" + list.get("colonia_n"));
+        }
+
+        if(list.get("ciudad_n").equals("") || list.get("ciudad_n").equals("null")){
+            //NOTHING
+        }else{
+            txv_direccion_estafeta.append("\n"+list.get("ciudad_n"));
+        }
+
+        if(list.get("codigo_postal").equals("") || list.get("codigo_postal").equals("null")){
+            //NOTHING
+        }else{
+            txv_direccion_estafeta.append(" C.P. "+list.get("codigo_postal"));
+        }
+
         txv_horario2_estafeta.setText(""+list.get("horario_atencion"));
 
 
@@ -126,7 +151,7 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
             txv_telefono_estafeta.setText(""+list.get("telefono1"));
         }
 
-        sendText = txv_nombre_estafeta.getText().toString() + "\nDirección: " + txv_direccion_estafeta.getText().toString() + " \nHorario: " +
+        sendText = txv_nombre_estafeta.getText().toString() + "\n"+txv_direccion_estafeta.getText().toString() + " \nHorario: " +
                 txv_horario2_estafeta.getText().toString() + "\nTeléfono: " + txv_telefono_estafeta.getText().toString();
 
         supportMapFragment      = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapEstafeta);

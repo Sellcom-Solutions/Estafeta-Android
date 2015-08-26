@@ -91,27 +91,35 @@
         android:orientation="horizontal"
         android:background="@color/estafeta_red">
 
-        <TextView
-        android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/colonia_title"
+            android:layout_width="0dp"
             android:layout_weight="60"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_gravity="left"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/locality"
-        android:textColor="@color/white"
-        android:background="@color/estafeta_red"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        />
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="left"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/locality"
+                android:textColor="@color/white"
+                android:background="@color/estafeta_red"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
         <TextView
             android:id="@+id/tv_cp_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_weight="40"
-            android:visibility="gone"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="@string/zip_code"

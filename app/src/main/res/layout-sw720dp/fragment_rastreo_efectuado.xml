@@ -13,7 +13,7 @@
         android:id="@+id/lst_rastreo_efectuado"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="90"
+        android:layout_weight="95"
         android:divider="@color/estafeta_light_gray"
         android:dividerHeight="2dp"
         android:background="@color/white">
@@ -23,7 +23,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="5"
         android:layout_gravity="bottom"
         android:orientation="vertical"
         android:background="@color/white">

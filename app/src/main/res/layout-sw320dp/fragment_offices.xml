@@ -210,7 +210,7 @@
                         android:layout_height       ="wrap_content"
                         android:maxLength           ="5"
                         android:imeOptions          ="actionNext"
-                        android:inputType           ="numberSigned"
+                        android:inputType           ="number"
                         android:textColor           ="@color/estafeta_text"
                         android:textSize            ="@dimen/sizeMediumText"
                         android:hint                ="@string/codigo_postal"

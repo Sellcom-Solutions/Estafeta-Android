@@ -177,7 +177,7 @@
                                 android:maxLength           ="5"
                                 android:focusable           ="true"
                                 android:imeOptions          ="actionNext"
-                                android:inputType           ="numberSigned"
+                                android:inputType           ="number"
                                 android:layout_gravity      ="center"
                                 android:singleLine          ="true"/>
 
@@ -217,7 +217,7 @@
                                 android:textColorHint       ="@color/estafeta_soft_gray"
                                 android:layout_weight       ="1"
                                 android:maxLength           ="5"
-                                android:inputType           ="numberSigned"
+                                android:inputType           ="number"
                                 android:layout_gravity      ="center"
                                 android:singleLine          ="true"/>
 
