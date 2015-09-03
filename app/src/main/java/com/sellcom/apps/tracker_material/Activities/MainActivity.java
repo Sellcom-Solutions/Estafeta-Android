@@ -14,6 +14,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.EasyTracker;
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 import com.sellcom.apps.tracker_material.Async_Request.DecisionDialogWithListener;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
@@ -45,6 +48,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private Toolbar                     mToolbar;
     private CharSequence                mTitle;
 
+    //Google Analytics
+    private Tracker tracker;
+    private GoogleAnalytics analytics;
+
     private NavigationDrawerFragment    mNavigationDrawerFragment;
     public boolean                      isDrawerOpen;
     private FragmentTransaction         fragmentTransaction;
@@ -65,6 +72,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         RequestManager.sharedInstance().setActivity(this);
         DialogManager.sharedInstance().setActivity(this);
 
+
+        /*
+        //Google Analytics
+        analytics = GoogleAnalytics.getInstance(getActivity());
+        tracker = analytics.getTracker("");  // Placeholder tracking ID.
+        */
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -74,6 +88,20 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         mNavigationDrawerFragment.selectItem(0);
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Google Analytics
+        //EasyTracker.getInstance().activityStart(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //Google Analytics
+        //EasyTracker.getInstance().activityStop(this);
     }
 
     @Override
@@ -160,6 +188,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         Fragment_Default = null;
         switch (position) {
             case NavigationDrawerFragment.RASTREO:
+                //Google Analytics
+                //tracker.sendEvent("Menu","Tap","pantalla_rastreo",null);
+
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -169,6 +200,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             break;
 
             case NavigationDrawerFragment.OFICINAS:
+                //Google Analytics
+                //tracker.sendEvent("Menu","Tap","pantalla_oficinas",null);
+
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_OFFICES.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -178,6 +212,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
             //Created by Jose Luis 26/05/2015
             case NavigationDrawerFragment.CODIGO_POSTAL://codigo postal //prellenado
+                //Google Analytics
+                //tracker.sendEvent("Menu","Tap","pantalla_cp",null);
+
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_CODIGO_POSTAL.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -187,6 +224,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             case NavigationDrawerFragment.AVISO_PRIVACIDAD://aviso de privasidad HISTORIA
+                //Google Analytics
+                //tracker.sendEvent("Menu","Tap","pantalla_cp",null);
+
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_AVISO_PRIVACIDAD.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
@@ -196,6 +236,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             case NavigationDrawerFragment.COTIZADOR://cotizador
+                //Google Analytics
+                //tracker.sendEvent("Menu","Tap","pantalla_cotizador",null);
+
                 CURRENT_FRAGMENT_TAG    = TrackerFragment.FRAGMENT_TAG.FRAG_QUOTATION.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment            = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);

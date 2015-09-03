@@ -32,7 +32,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/sizeSmallText"
 
-                        android:text="Ubica tu número de guía o código de rastreo en"/>
+                        android:text="Ubica tu número de guía o código de rastreo en:"/>
 
                     <View
                         android:layout_width="match_parent"

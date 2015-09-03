@@ -26,6 +26,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 import com.google.android.gms.maps.model.LatLng;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.SpinnerAdapter;
@@ -43,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 
 import database.model.Offices;
+import database.model.States;
 import location.GPSTracker;
 
 /**
@@ -56,6 +59,10 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
     private Button      btn_near,
                         btn_search,
                         btn_ar;
+
+    //Google Analytics
+    private Tracker tracker;
+    private GoogleAnalytics analytics;
 
     Bundle bundle = new Bundle();
     private Spinner     spn_state;
@@ -79,6 +86,12 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = getActivity();
+
+        /*
+        //Google Analytics
+        analytics = GoogleAnalytics.getInstance(getActivity());
+        tracker = analytics.getTracker("");  // Placeholder tracking ID.
+        */
     }
 
     @Override
@@ -130,6 +143,10 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             switch (v.getId()) {
 
                 case R.id.btn_near:
+
+                    //Google Analytics
+                    //tracker.sendEvent("Oficinas","TapBoton","Boton_Ubicacion",null);
+
                     Location myLocation = new GPSTracker(getActivity()).getCurrentLocation();
                     if (myLocation != null) {
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Buscando oficinas cercanas...", 0);
@@ -141,6 +158,9 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                     break;
 
                 case R.id.btn_search:
+
+                    //Google Analytics
+                    //tracker.sendEvent("Oficinas","TapBoton","Boton_Direccion",null);
 
                     if (spn_state.getSelectedItemPosition() == 0) {
 
@@ -262,6 +282,10 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                 state = "16";
                 break;
         }
+
+        //Google Analytics
+        //String locationName = States.getStateNameById(getActivity(),state);
+        //tracker.sendEvent("Oficinas","SeleccionEstado",locationName,null);
 
         Log.e("Prompt"," ------ "+(spn_state.getSelectedItemPosition() + 1));
         args.add("" + state);

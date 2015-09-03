@@ -26,6 +26,8 @@ import android.widget.TextView;
 import android.content.Context;
 
 import com.daimajia.swipe.SwipeLayout;
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
@@ -63,6 +65,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     private FragmentTransaction     fragmentTransaction;
     private TrackerFragment         fragment;
 
+    //Google Analytics
+    private Tracker tracker;
+    private GoogleAnalytics analytics;
+
     Button                     info;
     Button                          rastreo;
     Button                          escanear;
@@ -70,6 +76,8 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     EditText                        codigo;
     TextView    txv_num_sends,
                 footer;
+
+    boolean flag = false;
 
     FragmentDialogHelp fdh;
 
@@ -100,6 +108,16 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        /*
+        //Google Analytics
+        analytics = GoogleAnalytics.getInstance(getActivity());
+        tracker = analytics.getTracker("");  // Placeholder tracking ID.
+        */
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,10 +141,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         footer      = (TextView)view.findViewById(R.id.footer);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
         String currentYear = formatter.format(new Date());
-        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
+        footer.setText("©2012-" + currentYear + " " + getString(R.string.footer));
 
         Utilities.hideKeyboard(context,codigo);
         //codes_array = Rastreo_tmp.getAllInMaps(context);
+
 
         if( codes_array != null){
             Log.v(TAG,"aux size"+codes_array.size());
@@ -141,6 +160,53 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             lst_rastreo.setAdapter(lstAdapter);
             lstAdapter.notifyDataSetChanged();
         }
+/*
+        Map<String,String> item = new HashMap<>();
+        item.put("codigo", "0054000428651707586076");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "7054000428651707586087");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "3054000428651707586084");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "1234567890123456789012");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "005556507861a700004182");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "405556507861a700004161");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "205556507861a700004063");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "605556507861a700004160");
+        item.put("favorito", "false");
+        codes_array.add(item);
+
+        item = new HashMap<>();
+        item.put("codigo", "405556507861a700003855");
+        item.put("favorito", "false");
+        codes_array.add(item);
+*/
+
 
         try {
             DialogManager.sharedInstance().dismissDialog();
@@ -163,7 +229,9 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (savedInstanceState != null) {
-            codes_array = (ArrayList<Map<String,String>>) getArguments().getSerializable("codes");
+            if(getArguments().getSerializable("codes") !=null) {
+                codes_array = (ArrayList<Map<String, String>>) getArguments().getSerializable("codes");
+            }
         }
         setHasOptionsMenu(true);
     }
@@ -230,6 +298,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             //15000
             case R.id.btn_escanear:
+
+                //Google Analytics
+                //tracker.sendEvent("Rastreo","TapBoton","Boton_Escanear",null);
+
                 //Toast.makeText(context,"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
                 List<String> oDesiredFormats = Arrays.asList("PDF_417,CODE_128,QR_CODE".split(","));
                 IntentIntegrator integrator= IntentIntegrator.forSupportFragment(this);
@@ -249,6 +321,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 break;
 
             case R.id.btn_agregar:
+
+                //Google Analytics
+                //tracker.sendEvent("Rastreo","TapBoton","Boton_Agregar",null);
+
                 Utilities.hideKeyboard(context,codigo);
                 addCode();
                 break;
@@ -378,7 +454,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
     @Override
     public void setCodes(int restantes) {
 
-            txv_num_sends.setText("Has ingresado " + restantes + " de 10 guías para rastrear.");
+            txv_num_sends.setText("Has ingresado " + restantes + " de 10 guías para rastrear");
 
     }
 
@@ -409,6 +485,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
         int j = 0;
         ArrayList<ArrayList<Map<String, String>>> aux = new ArrayList<ArrayList<Map<String,String>>>();
+        ArrayList<ArrayList<Map<String, String>>> buenos = new ArrayList<ArrayList<Map<String,String>>>();
         boolean flag = false;
 
         protected void onPreExecute() {
@@ -476,59 +553,79 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
 
                     }
-                } else {
-                    if (stringResponse.equals("0")) {
-                        Log.v(TAG, "El servidor devolvió null o 0");
-                        String cod_aux = codes_array.get(j).get("codigo");
-                        ArrayList<Map<String, String>> auxResponseList = new ArrayList<Map<String, String>>();
-                        Map<String, String> auxResponse = new HashMap<>();
-                        if (cod_aux.length() == 10) {
-                            auxResponse.put("shortWayBillId", cod_aux);
-                            auxResponse.put("wayBill", "Sin información");
-                            auxResponse.put("statusSPA", "Sin información");
+                } else if(stringResponse.contains("falla_timeOut")) {
+                    Log.d(TAG, "contador:" + j);
+                    j++;
+                    Log.v(TAG, stringResponse);
+                    Log.e(TAG, "------------------------2");
+                    flag = true;
+                    /*
+                    DialogManager.sharedInstance().dismissDialog();
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
+                    */
+                }else {
+                        if (stringResponse.equals("0")) {
+                            Log.v(TAG, "El servidor devolvió null o 0");
+                            String cod_aux = codes_array.get(j).get("codigo");
+                            ArrayList<Map<String, String>> auxResponseList = new ArrayList<Map<String, String>>();
+                            Map<String, String> auxResponse = new HashMap<>();
+                            if (cod_aux.length() == 10) {
+                                auxResponse.put("shortWayBillId", cod_aux);
+                                auxResponse.put("wayBill", "Sin información");
+                                auxResponse.put("statusSPA", "Sin información");
+                            } else {
+                                auxResponse.put("shortWayBillId", "Sin información");
+                                auxResponse.put("wayBill", cod_aux);
+                                auxResponse.put("statusSPA", "Sin información");
+                            }
+                            auxResponseList.add(auxResponse);
+                            aux.add(auxResponseList);
+                            Log.v(TAG + "aux", "" + aux.size());
+
                         } else {
-                            auxResponse.put("shortWayBillId", "Sin información");
-                            auxResponse.put("wayBill", cod_aux);
-                            auxResponse.put("statusSPA", "Sin información");
-                        }
-                        auxResponseList.add(auxResponse);
-                        aux.add(auxResponseList);
-                        Log.v(TAG + "aux", "" + aux.size());
+                            Log.v(TAG, stringResponse);
+                            ArrayList<Map<String, String>> auxResponseList;
+                            auxResponseList = RequestManager.sharedInstance().getResponseArray();
+                            if (auxResponseList != null) {
+                                // Log.v(TAG + "auxResponse", "" + auxResponse.size());
 
-                    } else {
-                        Log.v(TAG, stringResponse);
-                        ArrayList<Map<String, String>> auxResponseList;
-                        auxResponseList = RequestManager.sharedInstance().getResponseArray();
-                        if (auxResponseList != null) {
-                            // Log.v(TAG + "auxResponse", "" + auxResponse.size());
+                                if (auxResponseList.size() > 0) {
+                                    aux.add(auxResponseList);
+                                }
 
-                            if (auxResponseList.size() > 0) {
-                                aux.add(auxResponseList);
+
+                                //   Log.v(TAG + "aux", "" + aux.size());
                             }
 
-
-
-
-                            //   Log.v(TAG + "aux", "" + aux.size());
                         }
-
-                    }
-                    j++;
-                    Log.d(TAG, "contador:" + j);
-                    if (j == codes_array.size()) {
+                        j++;
+                        Log.d(TAG, "contador:" + j);
+                        if (j == codes_array.size()) {
+                            if(flag) {
+                                flag = false;
+                                DialogManager.sharedInstance().dismissDialog();
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
+                            }else{
                         /*ArrayList<ArrayList<Map<String, String>>> codes_ver;
                         codes_ver = verifyFavorites(aux);*/
 
+                        /*
+                        List<Integer> removePos = new ArrayList<Integer>();
+
                         for (int i = 0; i < aux.size(); i++) {
+                            Log.e(TAG,"AQUI ESTOY ----------------------------111-i: "+i+"-"+i+"-"+i);
+                            Log.e(TAG,"Código: "+aux.get(i).get(0).get("wayBill"));
                             if(!aux.get(i).get(0).get("wayBill").equals("Sin información") || !aux.get(i).get(0).get("shortWayBillId").equals("Sin información")) {
                                 for (int j = 0; j < aux.size(); j++) {
-                                    j = i + j;
-
+                                    //j = i + j;
                                     if (i != j) {
+                                        Log.e(TAG,"AQUI ESTOY ----------------------------222-j: "+j+"-"+j+"-"+j);
+                                        Log.e(TAG,"Código: "+aux.get(j).get(0).get("wayBill"));
                                         if( j < aux.size()) {
                                             if (aux.get(i).get(0).get("wayBill").equals(aux.get(j).get(0).get("wayBill"))) {
-                                                aux.remove(i);
-                                                i++;
+                                                Log.e(TAG,"AQUI ESTOY --------------------------------------333-j: "+j+"-"+j+"-"+j);
+                                                Log.e(TAG,"Código: "+aux.get(j).get(0).get("wayBill"));
+                                                aux.remove(j);
                                                 break;
                                             }
 
@@ -538,20 +635,45 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                                 }
                             }
                         }
+                        */
+
+                                boolean add = false;
+                                for (ArrayList<Map<String, String>> x : aux) {
+
+                                    if (buenos.size() == 0) {
+                                        buenos.add(x);
+                                    } else {
+                                        add = true;
+                                        for (ArrayList<Map<String, String>> y : buenos) {
+                                            if (!x.get(0).get("wayBill").equals("Sin información") || !y.get(0).get("shortWayBillId").equals("Sin información")) {
+                                                if (x.get(0).get("wayBill").equals(y.get(0).get("wayBill"))) {
+                                                    add = false;
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                    if (add) {
+                                        buenos.add(x);
+                                    }
+                                }
 
 
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("codes_info", aux);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("codes_info", buenos);
 
-                        fragmentManager = getActivity().getSupportFragmentManager();
-                        fragmentTransaction = fragmentManager.beginTransaction();
-                        fragment = new FragmentRastreoEfectuado();
-                        fragment.addFragmentToStack(getActivity());
-                        fragment.setArguments(bundle);
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.replace(R.id.container, fragment, TAG);
-                        fragmentTransaction.commit();
-                    }
+                                fragmentManager = getActivity().getSupportFragmentManager();
+                                fragmentTransaction = fragmentManager.beginTransaction();
+                                fragment = new FragmentRastreoEfectuado();
+                                fragment.addFragmentToStack(getActivity());
+                                fragment.setArguments(bundle);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.replace(R.id.container, fragment, TAG);
+                                fragmentTransaction.commit();
+                            }
+                        }
+
+
                 }
 
             } catch (Exception e) {
@@ -731,8 +853,10 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         @Override
         public void decodeResponse(String stringResponse) {
 
+            Log.e(TAG,"------------------------1");
 
             try {
+
                 if (stringResponse == null) {
                     Log.d(TAG, "respuesta null");
                     j++;
@@ -748,8 +872,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                         fragmentTransaction.commit();
 
                     }
-                } else {
+                }else {
                     {
+
+                        Log.e(TAG,"------------------------3");
+                        Log.d(TAG,"SIZE: "+stringResponse.length());
                         Log.v(TAG, stringResponse);
                         ArrayList<Map<String, String>> auxResponseList;
                         auxResponseList = RequestManager.sharedInstance().getResponseArray();

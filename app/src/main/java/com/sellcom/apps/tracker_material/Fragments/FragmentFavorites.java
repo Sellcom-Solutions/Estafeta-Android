@@ -27,6 +27,8 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 import com.sellcom.apps.tracker_material.Activities.MainActivity;
 import com.sellcom.apps.tracker_material.Adapters.FavoriteListAdapter;
 import com.sellcom.apps.tracker_material.R;
@@ -47,6 +49,10 @@ import database.model.History;
 public class FragmentFavorites extends TrackerFragment implements FavoriteListAdapter.delete {
     public static final String TAG = "FRAG_FAVORITES";
     Context context;
+
+    //Google Analytics
+    private Tracker tracker;
+    private GoogleAnalytics analytics;
 
     View view;
     ListView lst_favorite;
@@ -72,6 +78,12 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         DialogManager.sharedInstance().dismissDialog();
+
+        /*
+        //Google Analytics
+        analytics = GoogleAnalytics.getInstance(getActivity());
+        tracker = analytics.getTracker("");  // Placeholder tracking ID.
+        */
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -171,8 +183,15 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
+
+                //Google Analytics
+                //tracker.sendEvent("Rastreo","TapBoton","Boton_Agregar",null);
 /*
                 if (isChecked) {
+
+                    //Google Analytics
+                    //tracker.sendEvent("Configuracion","TapBoton","Boton_On",null);
+
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
 
@@ -188,6 +207,10 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
 
                     return;
                 } else {
+
+                    //Google Analytics
+                    //tracker.sendEvent("Configuracion","TapBoton","Boton_Off",null);
+
                     listAdapter.notifyDataSetChanged();
                     notify = isChecked;
 

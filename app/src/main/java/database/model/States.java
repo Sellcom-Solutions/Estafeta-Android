@@ -102,17 +102,18 @@ public class States {
     }
 
     public static String getStateNameById(Context context,String Id){
-        if(Id.equals("") ){
-            return null;
-        }
+
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
-                new String[] {ZNUMEROESTADO, ZNOMBRE},
-                ZNUMEROESTADO +"= ?",
-                new String[] {Id}, null ,null, null);
+                new String[]{ZNUMEROESTADO, ZNOMBRE},
+                ZNUMEROESTADO + "= ?",
+                new String[]{Id}, null, null, null);
+
+        String estado = "";
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
+            estado = cursor.getString(cursor.getColumnIndexOrThrow(ZNOMBRE));
         }
-        String estado = cursor.getString(cursor.getColumnIndexOrThrow(ZNOMBRE));
+
         cursor.close();
 
         return estado;

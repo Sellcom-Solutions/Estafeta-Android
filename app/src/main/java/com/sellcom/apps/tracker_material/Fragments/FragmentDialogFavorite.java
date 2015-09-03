@@ -143,7 +143,16 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
             fav_origen.setText(" " + codes_info.get("origen"));
         }
         if(!(codes_info.get("fecha_recoleccion") == null)) {
-            fd_fecha_recol.setText(" " + codes_info.get("fecha_recoleccion"));
+
+            if(codes_info.get("fecha_recoleccion").equals("")){// NO TIENE INFORMACIÓN
+                fd_fecha_recol.setVisibility(View.GONE);
+            }else{
+                fd_fecha_recol.setVisibility(View.VISIBLE);
+                fd_fecha_recol.setText(" " + codes_info.get("fecha_recoleccion"));
+            }
+
+        }else{
+            fd_fecha_recol.setVisibility(View.GONE);
         }
         if(!(codes_info.get("destino") == null)) {
             fav_destino.setText(" " + codes_info.get("destino"));

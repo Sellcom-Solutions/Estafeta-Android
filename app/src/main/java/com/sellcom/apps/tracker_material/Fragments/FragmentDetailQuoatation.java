@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.sellcom.apps.tracker_material.Adapters.DetailQuotationAdapter;
@@ -89,6 +90,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
     private static  int posServicio = 0;
 
+    private FrameLayout lin_floating;
+
     DetailQuotationAdapter adapter;
 
 
@@ -128,6 +131,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         txv_costo_total_internacional  = (TextView)view.findViewById(R.id.txv_costo_total_internacional);
         txv_terminos            = (TextView)view.findViewById(R.id.txv_terminos);
         txv_articulos           = (TextView)view.findViewById(R.id.txv_articulos);
+
+        lin_floating            = (FrameLayout)view.findViewById(R.id.lin_floating);
 
         txv_articulos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -309,7 +314,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 if(position == 0){
                     txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_3));
                 }else{
-                    txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_2));
+                    txv_terminos.setText(getActivity().getString(R.string.terminos_internacional_1));
                 }
 
             }
@@ -324,7 +329,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
             case "nacional_sobre":
                 checkListNational(list);
 
-
+                lin_floating.setVisibility(View.VISIBLE);
                 map = new HashMap<String,String>();
                 map = list.get(1);
 
@@ -369,6 +374,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 map = new HashMap<String,String>();
                 map = list.get(1);
 
+                lin_floating.setVisibility(View.VISIBLE);
+
                 imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.paquete));
                 txv_send_type.setText("Paquete");
                 lin_dimensiones.setVisibility(View.VISIBLE);
@@ -411,6 +418,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
             case "internacional_sobre":
                 checkListInternational(list);
 
+                lin_floating.setVisibility(View.GONE);
+
                 map = new HashMap<String,String>();
                 map = list.get(0);
 
@@ -436,6 +445,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 break;
 
             case "internacional_paquete":
+
+                lin_floating.setVisibility(View.GONE);
 
                 checkListInternational(list);
 
@@ -467,6 +478,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
             case "internacional_sobre_eua_canada":
 
+
+                lin_floating.setVisibility(View.VISIBLE);
                 checkListInternational(list);
 
                 map = new HashMap<String,String>();
@@ -494,6 +507,8 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 break;
 
             case "internacional_paquete_eua_canada":
+
+                lin_floating.setVisibility(View.GONE);
 
                 checkListInternational(list);
 
@@ -540,11 +555,6 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
             String dias = "";
 
-            if(map.get("Domingo").equalsIgnoreCase("x")){
-                dias += "DO  ";
-            }else{
-                dias += "    ";
-            }
             if(map.get("Lunes").equalsIgnoreCase("x")){
                 dias += "LU  ";
             }else{
@@ -572,6 +582,11 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
             }
             if(map.get("Sabado").equalsIgnoreCase("x")){
                 dias += "SA  ";
+            }else{
+                dias += "    ";
+            }
+            if(map.get("Domingo").equalsIgnoreCase("x")){
+                dias += "DO  ";
             }else{
                 dias += "    ";
             }

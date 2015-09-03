@@ -35,7 +35,7 @@
                    android:layout_marginTop="10dp"
                    android:layout_marginBottom="10dp"
                    android:layout_weight="27"
-                   android:gravity="center_horizontal"
+                   android:gravity="left"
                    android:textStyle="bold"/>
 
                <TextView
@@ -48,7 +48,7 @@
                    android:layout_marginRight="2dp"
                    android:layout_marginTop="10dp"
                    android:layout_marginBottom="10dp"
-                   android:gravity="center_horizontal"
+                   android:gravity="left"
                    android:textColor="@color/estafeta_text"
                    android:textStyle="bold"/>
 
@@ -62,7 +62,7 @@
                    android:layout_marginTop="10dp"
                    android:layout_marginBottom="10dp"
                    android:layout_weight="28"
-                   android:gravity="center_horizontal"
+                   android:gravity="left"
                    android:textColor="@color/estafeta_text"
                    android:textStyle="bold"/>
 

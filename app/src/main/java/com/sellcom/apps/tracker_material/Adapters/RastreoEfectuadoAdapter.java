@@ -15,8 +15,10 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.Button;
 import com.sellcom.apps.tracker_material.Fragments.FragmentDetalleRastreo;
 import com.sellcom.apps.tracker_material.Fragments.FragmentRastreoEfectuado;
 import com.sellcom.apps.tracker_material.R;
@@ -44,6 +46,7 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private TrackerFragment fragment;
+    private Map<String,String> codigos_copy;
 
 
     Context context;
@@ -61,16 +64,7 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
         Log.d("Cod adapter size",""+codigos.size());
     }
 
-    class CodigosViewHolder{
-        TextView        no_guia;
-        TextView        codigo;
-        TextView        estatus;
-        CheckBox        btn_favoritos;
-        ImageView       img_status;
-        LinearLayout    linear_rastreo;
-        int             position;
 
-    }
     @Override
     public int getCount() {
         return codigos.size();
@@ -89,31 +83,28 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent) {
 
-        final CodigosViewHolder   holder;
-        holder                  = new CodigosViewHolder();
+        View view =  ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_rastreo_efectuado,parent,false);
 
-        convertView             = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_rastreo_efectuado,parent,false);
-        holder.codigo           = (TextView)convertView.findViewById(R.id.txt_codigo_rastreo);
-        holder.no_guia          = (TextView)convertView.findViewById(R.id.txt_no_guia);
-        holder.estatus          = (TextView)convertView.findViewById(R.id.txt_estatus);
-        holder.btn_favoritos    = (CheckBox)convertView.findViewById(R.id.btn_favorito);
-        holder.img_status       = (ImageView) convertView.findViewById(R.id.img_status);
-        holder.linear_rastreo   = (LinearLayout) convertView.findViewById(R.id.linear_rastreo);
-        holder.position         = position;
+        TextView codigo           = (TextView)view.findViewById(R.id.txt_codigo_rastreo);
+        TextView no_guia          = (TextView)view.findViewById(R.id.txt_no_guia);
+        TextView estatus          = (TextView)view.findViewById(R.id.txt_estatus);
+        CheckBox btn_favoritos    = (CheckBox)view.findViewById(R.id.btn_favorito);
+        ImageView img_status       = (ImageView) view.findViewById(R.id.img_status);
+        LinearLayout linear_rastreo   = (LinearLayout) view.findViewById(R.id.linear_rastreo);
 
 
-        Map<String,String> codigos_copy=new HashMap<>();
+
         codigos_copy= codigos.get(position).get(0);
 
         String noGuia = codigos_copy.get("wayBill");
         Log.d("Codigo RE Adapter",""+noGuia);
-        holder.no_guia.setText(noGuia);
+        no_guia.setText(noGuia);
 
         String codigoStr = codigos_copy.get("shortWayBillId");
         Log.d("Codigo RE Adapter",""+codigoStr);
-        holder.codigo.setText(codigoStr);
+        codigo.setText(codigoStr);
 
         String estatusStr = codigos_copy.get("statusSPA");
         String codigoExcStr = codigos_copy.get("H_exceptionCode");
@@ -122,71 +113,79 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
 
         switch (estatus_aux) {
             case "celda_pr":
-                holder.img_status.setImageResource(R.drawable.estatus_transito);
+                img_status.setImageResource(R.drawable.estatus_transito);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
-                holder.estatus.setText("Pendiente en tránsito");
+                estatus.setText("Pendiente en tránsito");
                 new_status="Pendiente en tránsito";
                 codigos.get(position).get(0).put("estatus1",new_status);
                 break;
 
             case "celda_pe":
-                holder.img_status.setImageResource(R.drawable.estatus_transito);
+                img_status.setImageResource(R.drawable.estatus_transito);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
-                holder.estatus.setText("Pendiente");
+                estatus.setText("Pendiente");
                 new_status="Pendiente";
                 codigos.get(position).get(0).put("estatus1", new_status);
                 break;
 
             case "celda_en":
-                holder.img_status.setImageResource(R.drawable.estatus_entregado);
+                img_status.setImageResource(R.drawable.estatus_entregado);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
-                holder.estatus.setText("Entregado");
+                estatus.setText("Entregado");
                 new_status="Entregado";
                 codigos.get(position).get(0).put("estatus1", new_status);
                 break;
 
             default:
-                holder.img_status.setImageResource(R.drawable.estatus_sin);
+                img_status.setImageResource(R.drawable.estatus_sin);
                 //Log.d("Codigo RE Adapter", "" + estatusStr);
-                holder.estatus.setText("Sin información");
+                estatus.setText("Sin información");
                 new_status="Sin información";
                 codigos.get(position).get(0).put("estatus1",new_status);
                 break;
         }
 
         String favorite = codigos_copy.get("favorites");
-        Log.d("Codigo RE Adapter",""+favorite);
+        Log.d("Codigo RE Adapter", "" + favorite);
         if(favorite.equals("true")){
-            holder.btn_favoritos.setChecked(true);
-            holder.btn_favoritos.setEnabled(false);
+            btn_favoritos.setChecked(true);
+            btn_favoritos.setEnabled(false);
+            //btn_favoritos.setVisibility(View.INVISIBLE);
         }
 
-        holder.btn_favoritos.setOnClickListener(new View.OnClickListener() {
+        btn_favoritos.setTag(position);
+        btn_favoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.btn_favoritos.isChecked()) {
-                    if (holder.estatus.getText().toString().equals("Sin información")) {
-                        holder.btn_favoritos.setChecked(false);
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav),3000);
+
+                int pos = (int) v.getTag();
+                CheckBox btnFav = (CheckBox)v;
+                codigos_copy= codigos.get(pos).get(0);
+
+                Log.e(TAG, "Posición: " + pos);
+                if (btnFav.isChecked()) {
+                    if (codigos.get(pos).get(0).get("estatus1").equals("Sin información")) {
+                        btnFav.setChecked(false);
+                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, context.getString(R.string.error_agregar_fav), 3000);
                         //Log.d(TAG,"Position"+holder.position);
-                    }
-                    else {
+                    } else {
                         try {
-                            holder.btn_favoritos.setEnabled(false);
+                            btnFav.setEnabled(false);
 
-                            long idFavorite = Favorites.insertMap(context, codigos.get(holder.position).get(0));
+                            long idFavorite = Favorites.insertMap(context, codigos.get(pos).get(0));
 
-                            for(int i = 1; i<codigos.get(holder.position).size(); i++){
 
-                                codigos.get(holder.position).get(i).put("favorite_id", String.valueOf(idFavorite));
-                                History.insertMap(context, codigos.get(holder.position).get(i));
-                                Log.d(TAG,"INSERT IN HISTORY");
+                            for (int i = 1; i < codigos.get(pos).size(); i++) {
+
+                                codigos.get(pos).get(i).put("favorite_id", String.valueOf(idFavorite));
+                                History.insertMap(context, codigos.get(pos).get(i));
+                                Log.d(TAG, "INSERT IN HISTORY");
 
 
                             }
+                            codigos_copy.put("favorites", "true");
 
-
-                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),4050);
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav), 4050);
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -197,19 +196,21 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
             }
         });
 
-        holder.linear_rastreo.setOnClickListener(new View.OnClickListener() {
+        linear_rastreo.setTag(position);
+        linear_rastreo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                int pos = (int)v.getTag();
 
-                if(codigos.get(holder.position).get(0).get("statusSPA").equals("Sin información")){
+                if(codigos.get(pos).get(0).get("statusSPA").equals("Sin información")){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No existe información acerca de este registro.",3000);
                 }else {
                     Bundle bundle = new Bundle();
-                    bundle.putString("code", codigos.get(holder.position).get(0).get("wayBill"));
-                    bundle.putSerializable("code_array", codigos.get(holder.position));
+                    bundle.putString("code", codigos.get(pos).get(0).get("wayBill"));
+                    bundle.putSerializable("code_array", codigos.get(pos));
 
-                    Log.d(TAG, "codigo enviado" + codigos.get(holder.position).get(0).get("wayBill"));
+                    Log.d(TAG, "codigo enviado" + codigos.get(pos).get(0).get("wayBill"));
                     fragmentTransaction = fragmentManager.beginTransaction();
                     fragment = new FragmentDetalleRastreo();
                     fragment.addFragmentToStack(activity);
@@ -217,12 +218,12 @@ public class RastreoEfectuadoAdapter extends BaseAdapter{
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.replace(R.id.container, fragment, TAG);
                     fragmentTransaction.commit();
-                   // DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),1000);
+                    // DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, context.getString(R.string.exito_agregar_fav),1000);
                 }
             }
         });
 
-        return convertView;
+        return view;
     }
 
     public String selectImageOnStatus(String status, String code){

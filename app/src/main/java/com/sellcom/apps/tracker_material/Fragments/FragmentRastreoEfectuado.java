@@ -56,11 +56,11 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
     ListView lst_rastreo_efectuado;
 
     RastreoEfectuadoAdapter efectuadoAdapter;
-    ArrayList<Map<String,String>> codes= new ArrayList<>();
     ArrayList<ArrayList<Map<String, String>>> codes_info = new ArrayList<>();
     private ArrayList<Map<String,String>> listFavorites;
 
     MenuItem favorite;
+    ArrayList<ArrayList<Map<String, String>>> codes;
 
 
     @Override
@@ -78,8 +78,10 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
 
         codes_info = (ArrayList<ArrayList<Map<String,String>>>) getArguments().getSerializable("codes_info");
 
-        ArrayList<ArrayList<Map<String, String>>> codes;
+
                         codes = verifyFavorites(codes_info);
+
+
 
         efectuadoAdapter = new RastreoEfectuadoAdapter(getActivity(),context ,codes,getActivity().getSupportFragmentManager());
         lst_rastreo_efectuado.setAdapter(efectuadoAdapter);
@@ -188,6 +190,7 @@ public class FragmentRastreoEfectuado extends TrackerFragment implements Adapter
                 .show();
 
     }
+
 
 
     public class CheckDateFavorite extends AsyncTask<Void, Void, Void> {

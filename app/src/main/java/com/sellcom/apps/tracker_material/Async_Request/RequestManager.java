@@ -2,6 +2,7 @@ package com.sellcom.apps.tracker_material.Async_Request;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.BasicHttpParams;
@@ -224,107 +226,126 @@ public class RequestManager implements ResponseListenerInterface {
                     Thread.sleep(5000);
                     jsonResponse = new JSONObject();
                     try {
-                        jsonResponse.put("method",method.toString());
+                        jsonResponse.put("method", method.toString());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                        try {
-                            jsonResponse.put("success",true);
-                            jsonResponse.put("resp","OK");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.COSTO.toString(),
-                                    requestData.get(Parameter.BUY_REQUEST.COSTO.toString()));
-                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_DESTINO.toString(),
-                                    requestData.get(Parameter.BUY_REQUEST.CP_DESTINO.toString()));
-                            jsonResponse.put(Parameter.BUY_RESPONSE.CP_ORIGEN.toString(),
-                                    requestData.get(Parameter.BUY_REQUEST.CP_ORIGEN.toString()));
-                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINATARIO.toString(),
-                                    requestData.get(Parameter.BUY_REQUEST.NOMBRE_DESTINATARIO.toString()));
-                            jsonResponse.put(Parameter.BUY_RESPONSE.DESTINO.toString(),
-                                    requestData.get(Parameter.BUY_REQUEST.ESTADO_DESTINO.toString())+","+
-                                            requestData.get(Parameter.BUY_REQUEST.CIUDAD_DESTINO.toString())+".");
+                    try {
+                        jsonResponse.put("success", true);
+                        jsonResponse.put("resp", "OK");
+                        jsonResponse.put(Parameter.BUY_RESPONSE.COSTO.toString(),
+                                requestData.get(Parameter.BUY_REQUEST.COSTO.toString()));
+                        jsonResponse.put(Parameter.BUY_RESPONSE.CP_DESTINO.toString(),
+                                requestData.get(Parameter.BUY_REQUEST.CP_DESTINO.toString()));
+                        jsonResponse.put(Parameter.BUY_RESPONSE.CP_ORIGEN.toString(),
+                                requestData.get(Parameter.BUY_REQUEST.CP_ORIGEN.toString()));
+                        jsonResponse.put(Parameter.BUY_RESPONSE.DESTINATARIO.toString(),
+                                requestData.get(Parameter.BUY_REQUEST.NOMBRE_DESTINATARIO.toString()));
+                        jsonResponse.put(Parameter.BUY_RESPONSE.DESTINO.toString(),
+                                requestData.get(Parameter.BUY_REQUEST.ESTADO_DESTINO.toString()) + "," +
+                                        requestData.get(Parameter.BUY_REQUEST.CIUDAD_DESTINO.toString()) + ".");
 
-                            jsonResponse.put(Parameter.BUY_RESPONSE.GARANTIA.toString(),"Zona 3, Tercer día hábil");
-                            jsonResponse.put(Parameter.BUY_RESPONSE.ORIGEN.toString(),
-                                    requestData.get(Parameter.BUY_REQUEST.ESTADO_ORIGEN.toString())+","+
-                                            requestData.get(Parameter.BUY_REQUEST.CIUDAD_ORIGEN.toString())+".");
-
-
-                            Random rnd = new Random();
-                            long n = (long)(rnd.nextDouble() * new Double("9999999999") + new Double("1000000000"));
-                            jsonResponse.put(Parameter.BUY_RESPONSE.REFERENCIA.toString(),
-                                    String.valueOf(n));
-                            jsonResponse.put(Parameter.BUY_RESPONSE.REMITENTE.toString(),
-                                    requestData.get(Parameter.BUY_REQUEST.NOMBRE_REMITENTE.toString()));
-                            jsonResponse.put(Parameter.BUY_RESPONSE.TIPO_SERVICIO.toString(),
-                                    "2 Días");
+                        jsonResponse.put(Parameter.BUY_RESPONSE.GARANTIA.toString(), "Zona 3, Tercer día hábil");
+                        jsonResponse.put(Parameter.BUY_RESPONSE.ORIGEN.toString(),
+                                requestData.get(Parameter.BUY_REQUEST.ESTADO_ORIGEN.toString()) + "," +
+                                        requestData.get(Parameter.BUY_REQUEST.CIUDAD_ORIGEN.toString()) + ".");
 
 
-                            Map<String,String> response = new HashMap<String,String>();
-                            Iterator<?> keys = jsonResponse.keys();
-                            while( keys.hasNext() ) {
-                                String key = (String)keys.next();
-                                response.put(key,jsonResponse.getString(key));
-                            }
-                            ArrayList<Map<String, String>> responseArray = new ArrayList<>();
-                            responseArray.add(response);
-                            setResponseArray(responseArray);
+                        Random rnd = new Random();
+                        long n = (long) (rnd.nextDouble() * new Double("9999999999") + new Double("1000000000"));
+                        jsonResponse.put(Parameter.BUY_RESPONSE.REFERENCIA.toString(),
+                                String.valueOf(n));
+                        jsonResponse.put(Parameter.BUY_RESPONSE.REMITENTE.toString(),
+                                requestData.get(Parameter.BUY_REQUEST.NOMBRE_REMITENTE.toString()));
+                        jsonResponse.put(Parameter.BUY_RESPONSE.TIPO_SERVICIO.toString(),
+                                "2 Días");
 
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        Map<String, String> response = new HashMap<String, String>();
+                        Iterator<?> keys = jsonResponse.keys();
+                        while (keys.hasNext()) {
+                            String key = (String) keys.next();
+                            response.put(key, jsonResponse.getString(key));
                         }
+                        ArrayList<Map<String, String>> responseArray = new ArrayList<>();
+                        responseArray.add(response);
+                        setResponseArray(responseArray);
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
                 return jsonResponse.toString();
 
-            }
+            } else {
 
-
-            else {
                 try {
-                    // List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
-                    List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
 
-                for (Map.Entry<String, String> entry : credentials.entrySet()) {
-                    Log.d("credentials: ",""+entry.getKey()+" ----- "+ entry.getValue().toString());
-                    params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
-                }
+                    try {
+                            try {
+                                // List<NameValuePair> credentialsParams = new ArrayList<NameValuePair>(credentials.size());
+                                List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
 
-                for (Map.Entry<String, String> entry : requestData.entrySet())
-                    params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+                                for (Map.Entry<String, String> entry : credentials.entrySet()) {
+                                    Log.d("credentials: ", "" + entry.getKey() + " ----- " + entry.getValue().toString());
+                                    params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
+                                }
 
-                httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
-                httppost.setHeader("Content-Type","application/x-www-form-urlencoded");
-                //httppost.setHeader("Host",getRequestURL(this.method) );
+                                for (Map.Entry<String, String> entry : requestData.entrySet())
+                                    params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
 
-                //Log.v("Request",httppost.toString());
+                                httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+                                httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+                                //httppost.setHeader("Host",getRequestURL(this.method) );
 
-                HttpResponse response = httpclient.execute(httppost);
-                Log.d(LOG_TAG_REQUEST+"response",response.toString());
+                                //Log.v("Request",httppost.toString());
 
-                    HttpEntity entity = response.getEntity();
-                    if (entity != null) {
-                        InputStream streamZipCodes = entity.getContent();
-                        try {
-                            stringResponse = parseToStringZipCodes(streamZipCodes);
-                            //responseArray = responseParse(streamZipCodes,this.method);
-                            Log.d(LOG_TAG_REQUEST + "Method", ":" + this.method);
-                            Log.v(LOG_TAG_REQUEST + "Response", stringResponse);
-                        } catch (SAXException e) {
-                            e.printStackTrace();
-                        } catch (ParserConfigurationException e) {
-                            e.printStackTrace();
+                                HttpResponse response = httpclient.execute(httppost);
+                                Log.d(LOG_TAG_REQUEST + "response", response.toString());
+
+
+                                HttpEntity entity = response.getEntity();
+                                if (entity != null) {
+                                    InputStream streamZipCodes = entity.getContent();
+                                    try {
+                                        stringResponse = parseToStringZipCodes(streamZipCodes);
+                                        //responseArray = responseParse(streamZipCodes,this.method);
+                                        Log.d(LOG_TAG_REQUEST + "Method", ":" + this.method);
+                                        Log.v(LOG_TAG_REQUEST + "Response", stringResponse);
+                                    } catch (SAXException e) {
+                                        e.printStackTrace();
+                                    } catch (ParserConfigurationException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+
+                            } catch (ConnectTimeoutException cte) {
+                                if (this.method == METHOD.REQUEST_TRACKING_LIST_CODES || this.method == METHOD.REQUEST_TRACKING_LIST_GUIDES) {
+                                    stringResponse = "falla_timeOut";
+                                    return stringResponse;
+                                }
+                            }
+
+                        } catch (SocketTimeoutException ste) {
+                            if (this.method == METHOD.REQUEST_TRACKING_LIST_CODES || this.method == METHOD.REQUEST_TRACKING_LIST_GUIDES) {
+                                stringResponse = "falla_timeOut";
+                                return stringResponse;
+                            }
                         }
 
+
+                    } catch (ClientProtocolException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
 
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+
 
                 return stringResponse;
             }

@@ -35,6 +35,8 @@ import android.widget.TextView;
 import android.widget.ListView;
 
 
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 import com.sellcom.apps.tracker_material.Adapters.CPAListdapter;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
@@ -70,6 +72,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private TrackerFragment fragment;
 
+    //Google Analytics
+    private Tracker tracker;
+    private GoogleAnalytics analytics;
+
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
 
@@ -82,6 +88,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private EditText        edt_zc_origin,
             edt_zc_destination,
+    edt_pais_mex,
             edt_weigth,
             edt_high,
             edt_long,
@@ -145,6 +152,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
     private Bundle          bundle;
 
+
     private ArrayList<Map<String,String>> colonias,respCotizador,auxResp;
 
     @Override
@@ -154,6 +162,11 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
         fragmentManager = getActivity().getSupportFragmentManager();
 
+        /*
+        //Google Analytics
+        analytics = GoogleAnalytics.getInstance(getActivity());
+        tracker = analytics.getTracker("");  // Placeholder tracking ID.
+        */
     }
 
     @Override
@@ -178,6 +191,8 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             edt_width           = (EditText) view.findViewById(R.id.edt_width);
             edt_width.setOnEditorActionListener(this);
             edt_dummy  = (EditText) view.findViewById(R.id.edt_dummy);
+
+            edt_pais_mex = (EditText)view.findViewById(R.id.pais_mex);
 
             footer      = (TextView)view.findViewById(R.id.footer);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
@@ -233,7 +248,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             lin_internacional_pais      = (LinearLayout) view.findViewById(R.id.lin_internacional_pais);
 
             spn_countrie         =(Spinner)view.findViewById(R.id.spn_countrie);
-            setCountriesToSpinner(spn_countrie,context);
+            setCountriesToSpinner(spn_countrie, context);
 
             tbtn_nat.setOnClickListener(this);
             tbtn_inter.setOnClickListener(this);
@@ -266,10 +281,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             tv_dialog_estado    = (TextView)dialogCP.findViewById(R.id.tv_dialog_estado);
             tv_dialog_ciudad    = (TextView)dialogCP.findViewById(R.id.tv_dialog_ciudad);
             edt_city            = (EditText) dialogCP.findViewById(R.id.edt_city);
-            edt_city.getBackground().setColorFilter(getResources().getColor(R.color.estafeta_red), PorterDuff.Mode.SRC_ATOP);
+            edt_city.getBackground().setColorFilter(getResources().getColor(R.color.estafeta_soft_gray), PorterDuff.Mode.SRC_ATOP);
 
             edt_colony          = (EditText) dialogCP.findViewById(R.id.edt_colony);
-            edt_colony.getBackground().setColorFilter(getResources().getColor(R.color.estafeta_red), PorterDuff.Mode.SRC_ATOP);
+            edt_colony.getBackground().setColorFilter(getResources().getColor(R.color.estafeta_soft_gray), PorterDuff.Mode.SRC_ATOP);
             btn_accept          = (Button) dialogCP.findViewById(R.id.btn_accept);
             btn_cancel_cp       = (Button)dialogCP.findViewById(R.id.btn_cancel_cp);
             btn_search          = (Button) dialogCP.findViewById(R.id.btn_search);
@@ -314,8 +329,6 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 }
             });
 
-
-
         }
 
         return view;
@@ -350,10 +363,15 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.tbtn_nat:
+                //Google Analytics
+                //tracker.sendEvent("Cotizador","TapBoton","Boton_Nacional",null);
+
                 if (((ToggleButton) v).isChecked()) {
                     tbtn_inter.setChecked(false);
                     lin_internacional_pais.setVisibility(View.GONE);
                     lin_nacional_cp.setVisibility(View.VISIBLE);
+
+                    spn_countrie.setSelection(0);
 
                 }
                 else{
@@ -362,10 +380,18 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case R.id.tbtn_inter:
+
+                //Google Analytics
+                //tracker.sendEvent("Cotizador","TapBoton","Boton_Internacional",null);
+
                 if (((ToggleButton) v).isChecked()) {
                     tbtn_nat.setChecked(false);
                     lin_nacional_cp.setVisibility(View.GONE);
                     lin_internacional_pais.setVisibility(View.VISIBLE);
+
+
+                    edt_zc_origin.setText("");
+                    edt_zc_destination.setText("");
                 }
                 else{
                     tbtn_inter.setChecked(true);
@@ -373,9 +399,18 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case R.id.cb_packet:
+
+                //Google Analytics
+                //tracker.sendEvent("Cotizador","TapBoton","Boton_Sobre",null);
+
                 if (((CheckBox) v).isChecked()) {
                     cb_package.setChecked(false);
                     ll_for_package.setVisibility(View.GONE);
+
+                    edt_weigth.setText("");
+                    edt_high.setText("");
+                    edt_long.setText("");
+                    edt_width.setText("");
                 }
                 else{
                     cb_packet.setChecked(true);
@@ -384,6 +419,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                 break;
 
             case R.id.cb_package:
+
+                //Google Analytics
+                //tracker.sendEvent("Cotizador","TapBoton","Boton_Paquete",null);
+
                 if (((CheckBox) v).isChecked()) {
                     cb_packet.setChecked(false);
                     ll_for_package.setVisibility(View.VISIBLE);
@@ -527,10 +566,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             if(ll_for_package.getVisibility() == View.VISIBLE) {
 
                     if (lin_nacional_cp.getVisibility() == View.VISIBLE) {
-                        if (edt_zc_origin.getText().toString().equals("") || edt_zc_origin.getText().toString().length() != 5) {
+                        if (edt_zc_origin.getText().toString().equals("") || edt_zc_origin.getText().toString().length() != 5 || Integer.parseInt(edt_zc_origin.getText().toString()) == 0) {
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noOrigin), 3000);
                             return;
-                        } else if (edt_zc_destination.getText().toString().equals("") || edt_zc_destination.getText().toString().length() != 5) {
+                        } else if (edt_zc_destination.getText().toString().equals("") || edt_zc_destination.getText().toString().length() != 5 || Integer.parseInt(edt_zc_destination.getText().toString()) == 0) {
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noDestination), 3000);
                             return;
                         } else if (edt_weigth.getText().toString().equals("")) {
@@ -570,13 +609,13 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
 
                                 if (Double.parseDouble(edt_weigth.getText().toString()) > 70) {
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede los 70kg.", 3000);
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede el peso permitido.", 3000);
                                 } else {
 
                                     double pesoVolumetrico = (Double.parseDouble(edt_high.getText().toString()) * Double.parseDouble(edt_long.getText().toString()) * Double.parseDouble(edt_width.getText().toString())) / 5000;
 
                                     if (pesoVolumetrico > 70) {
-                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede los 70kg.", 3000);
+                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede el peso permitido.", 3000);
                                     } else {
                                         origen = edt_zc_origin.getText().toString();
                                         destino = edt_zc_destination.getText().toString();
@@ -637,13 +676,13 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                             }
 
                             if(Double.parseDouble(edt_weigth.getText().toString()) > 68){
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede los 68kg.", 3000);
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso físico excede el peso permitido.", 3000);
                             }else{
 
                                 double pesoVolumetrico = (Double.parseDouble(edt_high.getText().toString()) * Double.parseDouble(edt_long.getText().toString()) * Double.parseDouble(edt_width.getText().toString()))/5000;
 
                                 if(pesoVolumetrico > 68){
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede los 68kg..", 3000);
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "El peso volumétrico excede el peso permitido.", 3000);
                                 }else{
 
                                     int numCountrie = spn_countrie.getSelectedItemPosition();
@@ -679,10 +718,10 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             } else {
 
                     if (lin_nacional_cp.getVisibility() == View.VISIBLE) {
-                        if (edt_zc_origin.getText().toString().equals("") || edt_zc_origin.getText().toString().length() != 5) {
+                        if (edt_zc_origin.getText().toString().equals("") || edt_zc_origin.getText().toString().length() != 5 || Integer.parseInt(edt_zc_origin.getText().toString()) == 0) {
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noOrigin), 3000);
                             return;
-                        } else if (edt_zc_destination.getText().toString().equals("") || edt_zc_destination.getText().toString().length() != 5) {
+                        } else if (edt_zc_destination.getText().toString().equals("") || edt_zc_destination.getText().toString().length() != 5 || Integer.parseInt(edt_zc_destination.getText().toString()) == 0) {
                             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.noDestination), 3000);
                             return;
                         } else {
@@ -725,6 +764,41 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
     @Override
     public void onResume() {
         super.onResume();
+
+
+        if(tbtn_nat.isChecked()){
+            tbtn_inter.setChecked(false);
+            lin_internacional_pais.setVisibility(View.GONE);
+            lin_nacional_cp.setVisibility(View.VISIBLE);
+
+            spn_countrie.setSelection(0);
+
+        }
+
+        if(tbtn_inter.isChecked()){
+            tbtn_nat.setChecked(false);
+            lin_nacional_cp.setVisibility(View.GONE);
+            lin_internacional_pais.setVisibility(View.VISIBLE);
+
+            edt_zc_origin.setText("");
+            edt_zc_destination.setText("");
+        }
+
+        if(cb_packet.isChecked()){
+            cb_package.setChecked(false);
+            ll_for_package.setVisibility(View.GONE);
+            edt_weigth.setText("");
+            edt_high.setText("");
+            edt_long.setText("");
+            edt_width.setText("");
+        }
+
+        if(cb_package.isChecked()){
+            cb_packet.setChecked(false);
+            ll_for_package.setVisibility(View.VISIBLE);
+        }
+
+        /*
         cb_packet.setChecked(true);
         cb_package.setChecked(false);
         tbtn_nat.setChecked(true);
@@ -733,6 +807,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
         edt_high.setText("");
         edt_long.setText("");
         edt_width.setText("");
+        */
     }
 
     private void cotizar(String type){
@@ -1074,7 +1149,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,""+respCotizador.get(0).get("ErrorMessageESP"),3000);
                     }else {
 
-                        respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
+                        respCotizador.get(0).put("DescripcionServicio", "Global \nExprés");
 
                         auxResp.add(respCotizador.get(0));
 
@@ -1103,7 +1178,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         if (contEUA_Canada == 0) {
                             contEUA_Canada++;
-                            respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
+                            respCotizador.get(0).put("DescripcionServicio", "Global \nExprés");
                             auxResp.add(respCotizador.get(0));
                             cotizar("internacional_sobre_eua_canada");
                         } else {
@@ -1133,7 +1208,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                         if (contEUA_Canada == 0) {
                             contEUA_Canada++;
-                            respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
+                            respCotizador.get(0).put("DescripcionServicio", "Global \nExprés");
                             auxResp.add(respCotizador.get(0));
                             cotizar("internacional_paquete_eua_canada");
                         } else {
@@ -1165,7 +1240,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,""+respCotizador.get(0).get("ErrorMessageESP"),3000);
                     }else {
 
-                        respCotizador.get(0).put("DescripcionServicio", "Global Exprés");
+                        respCotizador.get(0).put("DescripcionServicio", "Global \nExprés");
 
                         auxResp.add(respCotizador.get(0));
 

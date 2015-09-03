@@ -18,7 +18,7 @@
         android:paddingRight="50dp"
         android:textColor="@color/white"
         android:textSize="@dimen/sizeMediumText"
-        android:text="Ubica tu número de guía o código de rastreo en"/>
+        android:text="Ubica tu número de guía o código de rastreo en:"/>
 
     <ImageView
         android:id="@+id/im_dialog_help"

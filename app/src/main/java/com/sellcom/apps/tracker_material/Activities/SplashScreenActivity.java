@@ -58,7 +58,7 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         */
             DialogManager.sharedInstance().setActivity(this);
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, "Configurando aplicación...", 0);
-        if(Utilities.flag) {
+        //if(Utilities.flag) {
             Utilities.flag = false;
 
             context = this;
@@ -88,7 +88,7 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SPLASH, "Actualizando aplicación...", 0);
             RequestManager.sharedInstance().setListener(this);
             RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_OFFICES, requestData);
-        }
+        //}
     }
 
     protected void onResume(){

@@ -72,33 +72,33 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_detalle_rastreo, container, false);
+        View view = inflater.inflate(R.layout.fragment_detalle_rastreo, container, false);
         context = getActivity();
 
-        no_guia             = (TextView) view.findViewById(R.id.fd_no_guia);
-        cod_rastreo         = (TextView) view.findViewById(R.id.fd_cod_rastreo);
-        origen              = (TextView) view.findViewById(R.id.fd_origen);
-        fecha_recol         = (TextView) view.findViewById(R.id.fd_fecha_recol);
-        destino             = (TextView) view.findViewById(R.id.fd_destino);
-        cp_destino          = (TextView) view.findViewById(R.id.fd_cp_destino);
-        estatus             = (TextView) view.findViewById(R.id.fd_estatus);
-        fecha_hora_entrega  = (TextView) view.findViewById(R.id.fd_fecha_hora_entrega);
-        recibio             = (TextView) view.findViewById(R.id.fd_recibio);
-        img_estatus         = (ImageView) view.findViewById(R.id.fd_img_status);
-        btn_favorito        = (CheckBox) view.findViewById(R.id.fd_btn_favorito);
-        btn_historia        = (Button)view.findViewById(R.id.btn_historia);
+        no_guia = (TextView) view.findViewById(R.id.fd_no_guia);
+        cod_rastreo = (TextView) view.findViewById(R.id.fd_cod_rastreo);
+        origen = (TextView) view.findViewById(R.id.fd_origen);
+        fecha_recol = (TextView) view.findViewById(R.id.fd_fecha_recol);
+        destino = (TextView) view.findViewById(R.id.fd_destino);
+        cp_destino = (TextView) view.findViewById(R.id.fd_cp_destino);
+        estatus = (TextView) view.findViewById(R.id.fd_estatus);
+        fecha_hora_entrega = (TextView) view.findViewById(R.id.fd_fecha_hora_entrega);
+        recibio = (TextView) view.findViewById(R.id.fd_recibio);
+        img_estatus = (ImageView) view.findViewById(R.id.fd_img_status);
+        btn_favorito = (CheckBox) view.findViewById(R.id.fd_btn_favorito);
+        btn_historia = (Button) view.findViewById(R.id.btn_historia);
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.button_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.button_share);
 
-        lin_entrega         = (LinearLayout)view.findViewById(R.id.lin_entrega);
-        lin_recibio         = (LinearLayout)view.findViewById(R.id.lin_recibio);
+        lin_entrega = (LinearLayout) view.findViewById(R.id.lin_entrega);
+        lin_recibio = (LinearLayout) view.findViewById(R.id.lin_recibio);
 
         codes_info = new ArrayList<>();
 
-        footer      = (TextView)view.findViewById(R.id.footer);
+        footer = (TextView) view.findViewById(R.id.footer);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
         String currentYear = formatter.format(new Date());
-        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
+        footer.setText("©2012-" + currentYear + " " + getString(R.string.footer));
 
         TrackerFragment.section_index = 7;
 
@@ -108,15 +108,15 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         btn_share.setOnClickListener(this);
 
         String code = getArguments().getString("code");
-        Log.d(TAG,"cod_rastreo: "+code);
-        codes_info =  (ArrayList<Map<String, String>>) getArguments().getSerializable("code_array");
-        Log.d(TAG, "size: "+codes_info.size());
+        Log.d(TAG, "cod_rastreo: " + code);
+        codes_info = (ArrayList<Map<String, String>>) getArguments().getSerializable("code_array");
+        Log.d(TAG, "size: " + codes_info.size());
 
 
-        data = Favorites.getFavoriteByWayBill(context,code);
-            //Log.d(TAG,"data: "+data.size());
+        data = Favorites.getFavoriteByWayBill(context, code);
+        //Log.d(TAG,"data: "+data.size());
 
-        if(data != null) {
+        if (data != null) {
 /*            long idHistory = History.insertMap(context, codes_info);
             Log.d(TAG,"Despues de insertar en History");
             codes_info.put("history_id", String.valueOf(idHistory));
@@ -156,13 +156,24 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             }*/
 
         }
-       // else {
+        // else {
 
 
-            no_guia.setText(codes_info.get(0).get("wayBill"));
-            cod_rastreo.setText(codes_info.get(0).get("shortWayBillId"));
-            origen.setText(codes_info.get(0).get("PK_originName"));
-            fecha_recol.setText(codes_info.get(0).get("PK_pickupDateTime"));
+        no_guia.setText(codes_info.get(0).get("wayBill"));
+        cod_rastreo.setText(codes_info.get(0).get("shortWayBillId"));
+        origen.setText(codes_info.get(0).get("PK_originName"));
+
+        if(!(codes_info.get(0).get("PK_pickupDateTime") == null)){
+            if (codes_info.get(0).get("PK_pickupDateTime").equals("")) {// NO TIENE INFORMACIÓN
+                fecha_recol.setVisibility(View.GONE);
+            } else {
+                fecha_recol.setVisibility(View.VISIBLE);
+                fecha_recol.setText(codes_info.get(0).get("PK_pickupDateTime"));
+            }
+        }else{
+            fecha_recol.setVisibility(View.GONE);
+        }
+
             destino.setText(codes_info.get(0).get("DD_destinationName"));
             cp_destino.setText(codes_info.get(0).get("DD_zipCode"));
             fecha_hora_entrega.setText(codes_info.get(0).get("DD_deliveryDateTime"));

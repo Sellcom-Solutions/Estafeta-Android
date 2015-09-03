@@ -9,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sizeLargeText"
-        android:paddingLeft="10dp"
         android:textColor="@color/estafeta_red"
         android:drawableRight="@drawable/ic_arrow_spinner"
         android:singleLine="true"

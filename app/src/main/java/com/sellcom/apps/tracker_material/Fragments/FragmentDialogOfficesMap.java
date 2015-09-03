@@ -151,8 +151,8 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
             txv_telefono_estafeta.setText(""+list.get("telefono1"));
         }
 
-        sendText = txv_nombre_estafeta.getText().toString() + "\n"+txv_direccion_estafeta.getText().toString() + " \nHorario: " +
-                txv_horario2_estafeta.getText().toString() + "\nTeléfono: " + txv_telefono_estafeta.getText().toString();
+        sendText = txv_nombre_estafeta.getText().toString() + ".\n"+txv_direccion_estafeta.getText().toString() + ". \nHorario: " +
+                txv_horario2_estafeta.getText().toString() + ".\nTeléfono: " + txv_telefono_estafeta.getText().toString();
 
         supportMapFragment      = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.mapEstafeta);
         supportMapFragment      = SupportMapFragment.newInstance();

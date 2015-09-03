@@ -18,6 +18,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.analytics.tracking.android.GoogleAnalytics;
+import com.google.analytics.tracking.android.Tracker;
 import com.sellcom.apps.tracker_material.Async_Request.METHOD;
 import com.sellcom.apps.tracker_material.Async_Request.RequestManager;
 import com.sellcom.apps.tracker_material.Async_Request.UIResponseListenerInterface;
@@ -36,12 +38,16 @@ import java.util.Map;
 /**
  * Created by Jose Luis 26/05/2015
  */
-public class FragmentCodigoPostal extends TrackerFragment implements OnClickListener, UIResponseListenerInterface, EditText.OnEditorActionListener{
+public class  FragmentCodigoPostal extends TrackerFragment implements OnClickListener, UIResponseListenerInterface, EditText.OnEditorActionListener{
 
     Context context;
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
     private TrackerFragment         fragment;
+
+    //Google Analytics
+    private Tracker tracker;
+    private GoogleAnalytics analytics;
 
     private Spinner spinner_state;
 
@@ -63,6 +69,12 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         context = getActivity();
+
+         /*
+        //Google Analytics
+        analytics = GoogleAnalytics.getInstance(getActivity());
+        tracker = analytics.getTracker("");  // Placeholder tracking ID.
+        */
     }
 
 
@@ -142,6 +154,10 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
 
         switch (view.getId()){
             case R.id.btn_validar_zipcode:
+
+                //Google Analytics
+                //tracker.sendEvent("CodigosPostales","TapBoton","Boton_Validar",null);
+
                 zipCodeString = zipCode.getText().toString();
                 if(zipCodeString == null || zipCodeString.equals("")){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR,getString(R.string.error_codigo),3000);
@@ -165,6 +181,10 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                 break;
 
             case R.id.btn_buscar_zipcode:
+
+                //Google Analytics
+                //tracker.sendEvent("CodigosPostales","TapBoton","Boton_Buscar",null);
+
                 ciudadString = ciudad.getText().toString();
                 coloniaString = colonia.getText().toString();
                 if(spinner_state.getSelectedItemPosition() == 0){
@@ -191,6 +211,9 @@ public class FragmentCodigoPostal extends TrackerFragment implements OnClickList
                     else if (estadoString.equalsIgnoreCase("México, D.F.")) {
                         estadoString = "DISTRITO FEDERAL";
                     }
+
+                    //Google Analytics
+                    //tracker.sendEvent("CodigosPostales","SeleccionEstado",estadoString,null);
 
 
                     Map<String, String> requestData = new HashMap<>();

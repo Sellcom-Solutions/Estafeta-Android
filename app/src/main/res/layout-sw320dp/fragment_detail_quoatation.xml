@@ -45,8 +45,6 @@
                         android:textStyle="bold"
                         android:textColor="@color/estafeta_text"
                         android:text="Sobre"
-
-                        android:layout_marginTop="5dp"
                         android:gravity="center"/>
 
                 </LinearLayout>
@@ -625,6 +623,7 @@
 
 
     <FrameLayout
+        android:id="@+id/lin_floating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom">

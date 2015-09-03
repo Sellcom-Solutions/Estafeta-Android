@@ -55,4 +55,6 @@ dependencies {
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
 
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+
+    compile files('libs/libGoogleAnalyticsV2.jar')
 }

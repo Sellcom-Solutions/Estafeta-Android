@@ -39,6 +39,7 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
     Activity activity;
 
     private ArrayList<Map<String,String>> codigos;
+    ArrayList<Integer> list_delete = new ArrayList<Integer>();
 
     String TAG = "FAVORITE_LIST_ADAPTER_LOG";
 
@@ -47,6 +48,14 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
     private TrackerFragment fragment;
     private String type = "";
     delete  delete;
+    TextView    referencia;
+    TextView    no_guia;
+    TextView    codigo;
+    TextView    estatus;
+    ImageButton btn_editar;
+    CheckBox check_delete;
+
+    LinearLayout    linear_favorite;
 
 
     public FavoriteListAdapter(Activity activity,Context context, ArrayList<Map<String,String>> codigos, FragmentManager fragmentManager,String type) {
@@ -57,19 +66,6 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
         this.type           = type;
     }
 
-    class CodigosViewHolder{
-
-        int         position;
-        TextView    referencia;
-        TextView    no_guia;
-        TextView    codigo;
-        TextView    estatus;
-        ImageButton btn_editar;
-        CheckBox check_delete;
-
-        LinearLayout    linear_favorite;
-
-    }
 
     @Override
     public int getCount() {
@@ -89,23 +85,14 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
-        final CodigosViewHolder holder;
-            if (convertView == null) {
-                holder = new CodigosViewHolder();
-                convertView = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_favorite, parent, false);
-                holder.referencia = (TextView) convertView.findViewById(R.id.favorite_reference);
-                holder.no_guia = (TextView) convertView.findViewById(R.id.favorite_NoGuia);
-                holder.codigo = (TextView) convertView.findViewById(R.id.favorite_cod_rastreo);
-                holder.estatus = (TextView) convertView.findViewById(R.id.favorite_ServiceStatus);
-                holder.btn_editar = (ImageButton) convertView.findViewById(R.id.btn_editar);
-                holder.linear_favorite=(LinearLayout)convertView.findViewById((R.id.linear_favorite));
-                holder.check_delete = (CheckBox)convertView.findViewById(R.id.check_delete);
-
-                holder.position = position;
-                convertView.setTag(holder);
-            } else {
-                holder = (CodigosViewHolder) convertView.getTag();
-            }
+        View view = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_favorite, parent, false);
+        TextView referencia = (TextView) view.findViewById(R.id.favorite_reference);
+        TextView no_guia = (TextView) view.findViewById(R.id.favorite_NoGuia);
+        final TextView codigo = (TextView) view.findViewById(R.id.favorite_cod_rastreo);
+        TextView estatus = (TextView) view.findViewById(R.id.favorite_ServiceStatus);
+        ImageButton btn_editar = (ImageButton) view.findViewById(R.id.btn_editar);
+        LinearLayout linear_favorite = (LinearLayout) view.findViewById((R.id.linear_favorite));
+        CheckBox check_delete = (CheckBox) view.findViewById(R.id.check_delete);
 
 
         Map<String, String> codigos_copy = new HashMap<>();
@@ -115,16 +102,16 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
 
         String reference = codigos_copy.get("referencia");
         Log.d("Reference FA Adapter", "" + reference);
-        holder.referencia.setText(reference);
+        referencia.setText(reference);
 
 
         String noGuia = codigos_copy.get("no_guia");
         Log.d("noGuia FA Adapter", "" + noGuia);
-        holder.no_guia.setText(noGuia);
+        no_guia.setText(noGuia);
 
         String codigoStr = codigos_copy.get("codigo_rastreo");
         Log.d("Codigo FA Adapter", "" + codigoStr);
-        holder.codigo.setText(codigoStr);
+        codigo.setText(codigoStr);
 
         String estatusStr = codigos_copy.get("estatus");
         Log.d("estatus FA Adapter1", "" + estatusStr);
@@ -156,27 +143,30 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
                 holder.estatus.setText("Sin información");
                 break;
         }*/
-        holder.estatus.setText(estatusStr);
+        estatus.setText(estatusStr);
 
-        if(type.equalsIgnoreCase("favorite")){
-            holder.linear_favorite.setEnabled(true);
-            holder.check_delete.setVisibility(View.GONE);
-            holder.btn_editar.setVisibility(View.VISIBLE);
-        }else if(type.equalsIgnoreCase("delete")){
-            holder.linear_favorite.setEnabled(false);
-            holder.btn_editar.setVisibility(View.GONE);
-            holder.check_delete.setVisibility(View.VISIBLE);
+        if (type.equalsIgnoreCase("favorite")) {
+            linear_favorite.setEnabled(true);
+            check_delete.setVisibility(View.GONE);
+            btn_editar.setVisibility(View.VISIBLE);
+        } else if (type.equalsIgnoreCase("delete")) {
+            linear_favorite.setEnabled(false);
+            btn_editar.setVisibility(View.GONE);
+            check_delete.setVisibility(View.VISIBLE);
         }
 
-        holder.btn_editar.setOnClickListener(new View.OnClickListener() {
+        btn_editar.setTag(position);
+        btn_editar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "btn edit: ");
 
+                int pos = (int) v.getTag();
+
                 Bundle bundle = new Bundle();
-                bundle.putString("no_guia", codigos.get(holder.position).get("no_guia"));
-                bundle.putString("codigo_rastreo", codigos.get(holder.position).get("codigo_rastreo"));
-                bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(holder.position));
+                bundle.putString("no_guia", codigos.get(pos).get("no_guia"));
+                bundle.putString("codigo_rastreo", codigos.get(pos).get("codigo_rastreo"));
+                bundle.putSerializable("code_array", (java.io.Serializable) codigos.get(pos));
 
                 FragmentDialogEditFavorite fdfe = new FragmentDialogEditFavorite();
                 fdfe.setChangeReference(FavoriteListAdapter.this);
@@ -187,21 +177,44 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
         });
 
 
-        holder.check_delete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        if (list_delete.size() != 0){
+            for(int i= 0; i<list_delete.size(); i++) {
+                if(list_delete.get(i) == position) {
+                    Log.d(TAG, "POS en getView: " + position);
+                    check_delete.setChecked(true);
+                }
+            }
+        }
+
+
+        check_delete.setTag(position);
+        check_delete.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    delete.deleteFavoriteById(codigos.get(holder.position));
-                }else{
-                    delete.cancelDeleteById(codigos.get(holder.position));
+                int pos = (int) buttonView.getTag();
+                Log.d(TAG, "POS en onCheckedChanged: "+pos);
+
+                if (isChecked) {
+                    delete.deleteFavoriteById(codigos.get(pos));
+                    list_delete.add(pos);
+                } else {
+                    for(int i=0; i<list_delete.size(); i++){
+                        if(list_delete.get(i) == pos){
+                            list_delete.remove(i);
+                        }
+                    }
+                    delete.cancelDeleteById(codigos.get(pos));
                 }
             }
         });
 
-       holder.linear_favorite.setOnClickListener(new View.OnClickListener() {
+        linear_favorite.setTag(position);
+       linear_favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "list edit: ");
+
+                int pos = (int)v.getTag();
 
                 Bundle bundle = new Bundle();
                 Map<String,String> map = Favorites.getFavoriteByWayBill(context, codigos.get(position).get("no_guia"));
@@ -219,7 +232,7 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
                 fragmentTransaction.commit();
             }
         });
-        return convertView;
+        return view;
 
 
 

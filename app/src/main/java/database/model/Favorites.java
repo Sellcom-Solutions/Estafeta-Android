@@ -119,7 +119,7 @@ public class Favorites {
 
     public static ArrayList<Map<String,String>> getAll(Context context){
 
-        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null, null, FECHA_REGISTRO+" DESC");
         if (cursor != null && cursor.getCount() > 0) {
             ArrayList<Map<String,String>> list = new ArrayList<Map<String,String>>();
 

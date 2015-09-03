@@ -81,6 +81,8 @@
         android:layout_height="0dp"
         android:layout_weight="5"
         android:weightSum="100"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:orientation="horizontal"
         android:background="@color/estafeta_red">
@@ -133,6 +135,7 @@
         android:layout_height="150dp"
         android:layout_gravity="left"
         android:divider="@color/estafeta_soft_gray"
+        android:dividerHeight="1dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
