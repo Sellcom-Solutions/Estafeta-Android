@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:weightSum="100"
     android:background="@color/white"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentDialogHelp">
 
     <ScrollView
         android:layout_width="match_parent"

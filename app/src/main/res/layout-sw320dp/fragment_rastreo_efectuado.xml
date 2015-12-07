@@ -6,7 +6,7 @@
     android:weightSum="100"
     android:background="@color/white"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentRastreoEfectuado">
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentRastreoEfectuado">
 
 
     <ListView

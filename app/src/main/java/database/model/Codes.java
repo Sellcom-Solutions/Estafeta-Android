@@ -1,11 +1,16 @@
 package database.model;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.util.Log;
 
+import com.estafeta.estafetamovilv1.Utils.DatesHelper;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +18,7 @@ import database.DataBaseAdapter;
 
 /**
  * Created by rebecalopezmartinez on 28/05/15.
+ * This class contains methods that let you edit the table 'Codes' Database.
  */
 public class Codes {
     public static final String TABLE_NAME = "codigos";
@@ -37,6 +43,16 @@ public class Codes {
         this.zversion = zversion;
     }
 
+    /**
+     * It allows you to insert data into the database.
+     * @param context
+     * @param zpk
+     * @param zclave
+     * @param zdescripcionclave
+     * @param zidcatalogo
+     * @param zversion
+     * @return
+     */
     public static long insert(Context context,String zpk,String zclave,String zdescripcionclave,String zidcatalogo,
                               String zversion){
         ContentValues cv = new ContentValues();
@@ -49,9 +65,22 @@ public class Codes {
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
 
     }
-    public static long updateCodes(Context context, ArrayList<Map<String, String>> values){
+
+    /**
+     * It allows update data in the database.
+     * @param activity
+     * @param context
+     * @param values
+     * @return
+     */
+    public static long updateCodes(Activity activity,Context context, ArrayList<Map<String, String>> values){
         ContentValues cv = new ContentValues();
         long aux=0;
+
+        SharedPreferences sharedPref        = activity.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor     = sharedPref.edit();
+        editor.putString("last_date", DatesHelper.getStringDate(new Date()));
+        editor.commit();
 
         for(int i = 0; i <values.size(); i++) {
             Map<String, String> item = new HashMap<>();
@@ -98,7 +127,11 @@ public class Codes {
         return aux;
     }
 
-
+    /**
+     * It lets get all the information in this table within the database.
+     * @param context
+     * @return
+     */
     public static ArrayList<Map<String,String>> getAllInMaps(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
@@ -129,6 +162,12 @@ public class Codes {
         return null;
     }
 
+    /**
+     * Gets a code via the key.
+     * @param context
+     * @param clave
+     * @return
+     */
     public static String getCodeByClave(Context context,String clave){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
@@ -148,6 +187,12 @@ public class Codes {
         }
     }
 
+    /**
+     * Check if a key in the database.
+     * @param zclave
+     * @param context
+     * @return
+     */
     public static boolean existsZclave(String zclave, Context context){
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
                 null,
@@ -171,6 +216,10 @@ public class Codes {
         return false;
     }
 
+    /**
+     * @deprecated
+     * @param context
+     */
     public static void removeAll(Context context){
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ZPK);
         if (cursor != null && cursor.getCount() > 0) {
@@ -187,6 +236,12 @@ public class Codes {
         }
     }
 
+    /**
+     * Deleting a key database.
+     * @param context
+     * @param clave
+     * @return
+     */
     public static int delete(Context context, String clave) {
         return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ZCLAVE + "=" + clave, null);
     }

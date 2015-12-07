@@ -14,6 +14,7 @@ import database.DataBaseAdapter;
 
 /**
  * Created by rebecalopezmartinez on 28/05/15.
+ * This class contains methods that let you edit the table 'Offices' Database.
  */
 public class Offices {
     public static final String TABLE_NAME = "offices";
@@ -122,6 +123,40 @@ public class Offices {
         this.colonia_n = colonia_n;
     }
 
+    /**
+     * It allows you to insert data into the database.
+     * @param context
+     * @param ent
+     * @param opt
+     * @param estado
+     * @param calle1
+     * @param calle2
+     * @param ciudad
+     * @param codigo_postal
+     * @param colonia
+     * @param correo
+     * @param entrega_oficina
+     * @param ext1
+     * @param ext2
+     * @param horario_atencion
+     * @param horario_comida
+     * @param horario_ext
+     * @param horario_recol
+     * @param horario_sabatino
+     * @param idcatalogo
+     * @param latitud
+     * @param longitud
+     * @param no_oficina
+     * @param nombre
+     * @param telefono1
+     * @param telefono2
+     * @param tipo_oficina
+     * @param version
+     * @param tipos_pago
+     * @param ciudad_n
+     * @param colonia_n
+     * @return
+     */
     public static long insert(Context context, String ent, String opt, String estado, String calle1, String calle2,
                               String ciudad, String codigo_postal, String colonia, String correo, String entrega_oficina,
                               String ext1, String ext2, String horario_atencion, String horario_comida,
@@ -164,6 +199,12 @@ public class Offices {
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
     }
 
+    /**
+     * Update elements within the database.
+     * @param context
+     * @param values
+     * @return
+     */
     public static long updateOffices(Context context, ArrayList<Map<String, String>> values){
         ContentValues cv = new ContentValues();
         long aux=0;
@@ -243,6 +284,11 @@ public class Offices {
 
     }
 
+    /**
+     * @deprecated
+     * @param context
+     * @return
+     */
     public static String getVersion(Context context) {
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -253,6 +299,12 @@ public class Offices {
         return null;
     }
 
+    /**
+     * You get an item in the database.
+     * @param context
+     * @param no_oficina
+     * @return
+     */
     public static String getVersionByOffice(Context context, String no_oficina){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
@@ -271,6 +323,11 @@ public class Offices {
     }
 
 
+    /**
+     * It lets get all the information in this table within the database.
+     * @param context
+     * @return
+     */
     public static ArrayList<Map<String,String>> getAllInMaps(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
@@ -321,6 +378,13 @@ public class Offices {
     }
 
 
+    /**
+     * You get an item in the database.
+     * @param context
+     * @param sql
+     * @param args
+     * @return
+     */
     public static ArrayList<Map<String,String>> getOfficesByCity(Context context, String sql, String[] args){
         Cursor cursor = DataBaseAdapter.getDB(context).rawQuery(sql,args);
        /* Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, "estado LIKE ? AND ciudad_n LIKE ? AND colonia_n LIKE ? AND codigo_postal LIKE ?",
@@ -375,6 +439,10 @@ public class Offices {
     }
 
 
+    /**
+     * @deprecated
+     * @param context
+     */
     public static void removeAll(Context context){
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, NO_OFICINA);
         if (cursor != null && cursor.getCount() > 0) {
@@ -387,6 +455,12 @@ public class Offices {
         cursor.close();
     }
 
+    /**
+     * Delete items from the database.
+     * @param context
+     * @param id
+     * @return
+     */
     public static int delete(Context context, String id) {
         int resp = DataBaseAdapter.getDB(context).delete(TABLE_NAME, NO_OFICINA + "=?" , new String[]{ id });
         //Log.d(TABLE_NAME,"delete resp:"+resp);

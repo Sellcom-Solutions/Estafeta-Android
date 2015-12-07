@@ -14,6 +14,7 @@ import database.model.States;
 
 /**
  * Created by rebecalopezmartinez on 02/06/15.
+ * Operations in the database.
  */
 public class DataBaseManager {
 
@@ -38,6 +39,10 @@ public class DataBaseManager {
     }*/
 
 
+    /**
+     * Insert information in the database using a .txt file
+     * @param context
+     */
     public void insert(Context context){
         mContext = context;
         Log.d("DataBaseHelper", "insert");
@@ -47,6 +52,10 @@ public class DataBaseManager {
         //readInsertsFile("insert_oficinas.txt");
     }
 
+    /**
+     * Check if the databases already have elements.
+     * @param filename
+     */
     public void readInsertsFile(String filename) {
         if(filename.equals("insert_oficinas.txt")){
             if(Offices.getAllInMaps(mContext)!= null){

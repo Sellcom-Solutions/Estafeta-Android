@@ -20,6 +20,7 @@ import database.DataBaseAdapter;
 
 /**
  * Created by rebecalopezmartinez on 28/05/15.
+ * This class contains methods that let you edit the table 'States' Database.
  */
 public class States {
     public static final String TABLE_NAME = "estados";
@@ -44,6 +45,15 @@ public class States {
         this.znombre = znombre;
     }
 
+    /**
+     * It allows you to insert data into the database.
+     * @param context
+     * @param znumero_estado
+     * @param zlatitud
+     * @param zlongitud
+     * @param znombre
+     * @return
+     */
     public static long insert(Context context, int znumero_estado, String zlatitud, String zlongitud,
                               String znombre){
         ContentValues cv = new ContentValues();
@@ -55,6 +65,11 @@ public class States {
         return DataBaseAdapter.getDB(context).insert(TABLE_NAME,null,cv);
     }
 
+    /**
+     * It lets get all the information in this table within the database.
+     * @param context
+     * @return
+     */
     public static ArrayList<Map<String,String>> getAllInMaps(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, null);
@@ -78,6 +93,11 @@ public class States {
         return null;
     }
 
+    /**
+     * Get an item in the database.
+     * @param context
+     * @return
+     */
     public static ArrayList<Map<String,String>> getStatesNames(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ZNOMBRE + " COLLATE UNICODE");
@@ -101,6 +121,12 @@ public class States {
         return null;
     }
 
+    /**
+     * @deprecated
+     * @param context
+     * @param Id
+     * @return
+     */
     public static String getStateNameById(Context context,String Id){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME,
@@ -119,6 +145,12 @@ public class States {
         return estado;
     }
 
+    /**
+     * Get an item in the database.
+     * @param context
+     * @param name
+     * @return
+     */
     public static int getStateNumberByName(Context context,String name){
        // Log.d(TABLE_NAME,"estado: "+name);
         if(name.equals("") ){
@@ -138,6 +170,11 @@ public class States {
        return 99;
     }
 
+    /**
+     * @deprecated
+     * @param context
+     * @param file_name
+     */
     public static void setStates(Context context, String file_name){
 
         try {
@@ -177,6 +214,10 @@ public class States {
 
     }
 
+    /**
+     * @deprecated
+     * @param context
+     */
     public static void removeAll(Context context){
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, Z_PK);
         if (cursor != null && cursor.getCount() > 0) {
@@ -189,6 +230,12 @@ public class States {
         cursor.close();
     }
 
+    /**
+     * Delete items from the database.
+     * @param context
+     * @param id
+     * @return
+     */
     public static int delete(Context context, int id) {
         return DataBaseAdapter.getDB(context).delete(TABLE_NAME, Z_PK + "=" + id, null);
     }

@@ -37,6 +37,7 @@
             android:layout_gravity      ="left"
             android:layout_marginTop    ="30dp"
             android:spinnerMode         ="dialog"
+            android:layout_marginLeft="5dp"
             style                       ="@style/mySpinnerItemStyle"
             android:dividerHeight       ="0dp"
             />
@@ -58,7 +59,7 @@
                 android:textColorHint       ="@color/estafeta_soft_gray"
                 style                       ="@style/EditStyle"
                 android:nextFocusDown       ="@+id/edt_colony"
-
+                android:singleLine = "true"
                 android:layout_marginTop    ="10dp"/>
 
 
@@ -68,7 +69,7 @@
             android:id                  ="@+id/edt_colony"
             android:layout_width        ="match_parent"
             android:layout_height       ="wrap_content"
-
+            android:singleLine = "true"
             android:textColor           ="@color/estafeta_text"
             android:textSize            ="@dimen/sizeMediumText"
             android:hint                ="@string/locality"

@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/white"
     android:weightSum="100"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentAvisoPrivacidad">
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentAvisoPrivacidad">
 
     <ImageView
         android:layout_width="match_parent"

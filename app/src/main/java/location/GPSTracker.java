@@ -14,6 +14,9 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+/**
+ * To interact with the GPS device.
+ */
 public class GPSTracker extends Service implements LocationListener {
  
     private final Context mContext;
@@ -44,7 +47,11 @@ public class GPSTracker extends Service implements LocationListener {
         this.mContext = context;
         getLocation();
     }
- 
+
+    /**
+     * Get current location using the GPS device.
+     * @return
+     */
     Location getLocation() {
         try {
             locationManager = (LocationManager) mContext

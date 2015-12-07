@@ -85,7 +85,7 @@
 
     <!-- Favorites -->
     <string name="notification_alarm">Alarma de notificación</string>
-    <string name="delivery_confirmation">Confirmación de entrega</string>
+    <string name="delivery_confirmation">Confirmación de entrega.</string>
     <string name="maximo_favoritos">La información de favoritos se almacena durante un periodo máximo de 30 días.</string>
 
     <!-- Oficinas -->
@@ -217,7 +217,7 @@
         "except_descspa" TEXT(200), "except_desceng" TEXT(200), "except_details"  TEXT(200), "id_trackdata"  INTEGER NOT NULL)</string>-->
 
     <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "add_date"  TEXT(30),
-                              "code_number" TEXT(50), "favorite"  TEXT(24), "H_eventDescriptionSPA" TEXT(200), "H_eventDateTime" TEXT(200), "H_eventPlaceName" TEXT(200))</string>
+                              "code_number" TEXT(50), "favorite"  TEXT(24), "H_eventDescriptionSPA" TEXT(200), "H_eventDateTime" TEXT(200), "H_eventPlaceName" TEXT(200), "H_exceptionCodeDescriptionSPA" TEXT(200))</string>
 
     <!-- <string name="db_ctlfavoritos">CREATE TABLE "ctl_favoritos" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"guia"  TEXT(24),"rastreo"
         TEXT(24),"alias"  TEXT(100),"fecha_registro"  TEXT(20) NOT NULL, "notifica" integer not null default(0))</string>-->

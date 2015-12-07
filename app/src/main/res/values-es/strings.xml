@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Estafeta</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="error_invalid_email_address">Verifica que el email este escrito correctamente</string>
+    <string name="error_empty_field">Este campo no puede estar vacío</string>
+    <string name="error_phone_field">El número debe de ser de 10 dígitos</string>
+
+    <!-- RequestManager -->
+    <string name="done">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="req_man_confirm_exit">¿Desea salir de la aplicación?</string>
+
+
+    <!-- Drawer options strings -->
     <string-array name="drawer_items">
         <item>Rastreo</item>
         <item>Oficinas</item>
-        <!--<item>Prellenado de Guías</item>-->
+        <!--<item>Prellenado de Guías</item> -->
         <item>Cotizador</item>
         <!--<item>Historial de operaciones</item>-->
         <item>Código postal</item>
@@ -14,49 +31,137 @@
         <item>Detalle</item>
     </string-array>
 
-    <!-- Dialog messages-->
-    <string name="error_codigo">Código postal no válido.</string>
-    <string name="error_ciudad">El campo ciudad es obligatorio.</string>
-    <string name="error_estado">Debes seleccionar un estado.</string>
-    <string name="cargando_oficinas">Cargando oficinas...</string>
-    <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
-    <string name="cargando">Cargando...</string>
-    <string name="actualizando">Actualizando...</string>
-    <string name="error_tamaño_codigo">Un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
-    <string name="error_cod_repetido">El número ya existe en la lista de rastreo.</string>
-    <string name="error_lista_vacia">La lista de rastreo se encuentra vacía.</string>
-    <string name="error_agregar_fav">No existe información acerca de este registro, no puede agregarse a favoritos.</string>
-    <string name="exito_agregar_fav">Operación exitosa.</string>
-
     <!-- Globals -->
     <string name="Search">Buscar</string>
     <string name="offices_search_by_address">Buscar por dirección</string>
     <string name="city_etc">Ciudad, municipio, delegación*</string>
+    <string name="city">Ciudad, municipio, delegación</string>
     <string name="locality">Colonia</string>
     <string name="zip_code">C.P.</string>
     <string name="mandatory_fields">Campos obligatorios *</string>
 
-    <!-- Headers-->
-    <string name="rastreo">Rastreo</string>
-    <string name="oficinas">Oficinas</string>
 
-    <!-- Rastreo-->
+    <!-- Headers -->
+    <string name="rastreo">Rastreo</string>
+    <string name="codigo_postal">Código postal</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="history">Historia</string>
+
+    <!-- Footer -->
+    <string name="footer">Estafeta Mexicana, S.A. de C.V.</string>
+
+    <!-- Rastreo -->
     <string name="aviso_rastreo"> El código de rastreo debe tener 10 dígitos. \nEl número de guía debe tener 22 dígitos.</string>
+    <string name="code_invalid">Código invalido, favor de verificarlo.</string>
     <string name="codigo">Código</string>
     <string name="aviso_codigo">Has ingresado 0 de 10 guías para rastrear</string>
     <string name="boton_escanear">Escanear</string>
     <string name="boton_rastrear">Rastrear</string>
+    <string name="no_guia">Número de guía:</string>
+    <string name="cod_rastreo">Código de rastreo: \u0020</string>
+    <string name="boton_codigo_guia">Guía</string>
+    <string name="codigo_factura">Factura</string>
+    <string name="codigo_ticket">Ticket</string>
+    <string name="cerrar">Cerrar</string>
+    <string name="no_guia2">No. Guía: \u0020</string>
+    <string name="estatus_servicio">Estatus del servicio: \u0020</string>
+    <string name="origen">Origen: \u0020</string>
+    <string name="fecha_recoleccion">Fecha de recolección: \u0020</string>
+    <string name="destino">Destino: \u0020</string>
+    <string name="cp_destino">C.P. Destino: \u0020</string>
+    <string name="fecha_hora">Fecha y hora de entrega: \u0020</string>
+    <string name="recibio">Recibió: \u0020</string>
+    <string name="ver_historia">Ver historia</string>
+    <string name="llamar">Llamar</string>
+    <string name="compartir">Compartir</string>
+    <string name="delete">Eliminar</string>
+    <string name="modify">Modificar</string>
     <string name="code_incorrect">El código leído es incorrecto</string>
+
+    <!-- History -->
+    <string name="title_date_time">Fecha - Hora</string>
+    <string name="title_place_event">Lugar - Movimiento</string>
+    <string name="title_coments">Comentarios</string>
+
+    <!-- Favorites -->
+    <string name="notification_alarm">Alarma de notificación</string>
+    <string name="delivery_confirmation">Confirmación de entrega.</string>
+    <string name="maximo_favoritos">La información de favoritos se almacena durante un periodo máximo de 30 días.</string>
 
     <!-- Oficinas -->
     <string name="view_ar">Ver a mi alrededor</string>
     <string name="loading_AR_elements">Cargando componentes</string>
     <string name="offices_near"> Cerca de mí</string>
+    <string name="oficinas">Oficinas</string>
     <string name="ubicar_oficinas">Ubicar oficinas</string>
 
-    <!-- Footer -->
-    <string name="footer">Estafeta Mexicana, S.A. de C.V.</string>
+    <!--Fragment Quotation-->
+    <string name="quotation_title">Cotizador</string>
+    <string name="quotation_shipping">Cotizar envío</string>
+    <string name="quotation_national">Nacional</string>
+    <string name="quotation_international">Internacional</string>
+    <string name="quotation_packet">Sobre</string>
+    <string name="quotation_package">Paquete</string>
+    <string name="quotation_zip_origin">C.P. Origen</string>
+    <string name="quotation_zip_destination">C.P. Destino</string>
+    <string name="quotation_quote">Cotizar</string>
 
+    <string name="quotation_weigth">Peso (kg)</string>
+    <string name="quotation_high">Alto (cm)</string>
+    <string name="quotation_long">Largo (cm)</string>
+    <string name="quotation_width">Ancho (cm)</string>
+
+    <string name="quotation_search_zc">Buscar código postal</string>
+
+    <string name="quotation_search_zc_accept">Buscar</string>
+    <string name="quotation_search_zc_cancel">Cancelar</string>
+
+
+    <!--Fragment Quotation_Buy-->
+
+    <string name="sender_name">Nombre remitente</string>
+    <string name="phone_number">Teléfono</string>
+    <string name="email">Correo eléctronico</string>
+    <string name="bussines_name">Razón social</string>
+    <string name="cp_source">C.P. Origen</string>
+    <string name="state">Estado</string>
+    <string name="city_district">Ciudad, municipio, delegación</string>
+    <string name="colony">Colonia</string>
+
+    <string name="street">Calle</string>
+    <string name="number">No.</string>
+    <string name="next">Siguiente</string>
+    <string name="receiver_name">Nombre destinatario</string>
+    <string name="cp_receiver">C.P. Destino</string>
+    <string name="continue_buy">Continuar compra</string>
+    <string name="buy">Comprar</string>
+
+
+    <!-- Fragment comprobante -->
+
+    <string name="comprobante_compra">Comprobante de compra</string>
+    <string name="sender">Remitente: </string>
+    <string name="origin">Origen: </string>
+    <string name="cp_origin">C.P. Origen: </string>
+
+    <string name="receiver">Destinatario: </string>
+    <string name="destiny">Destino: </string>
+    <string name="cp_destiny">C.P. Destino: </string>
+
+    <string name="type_of_service">Tipo de servicio: </string>
+    <string name="quarantee">Garantía de entrega: </string>
+
+    <string name="total_cost">Costo total: </string>
+    <string name="payment_reference">Referencia de pago: </string>
+
+
+
+    <!-- Codigo Postal -->
+    <string name="verificar_codigo">Validar un código postal</string>
+    <string name="abr_codigo">C.P.</string>
+    <string name="validar_codigo">Validar</string>
+    <string name="buscar_codigo">Buscar un código postal</string>
+    <string name="search_by_zip_code">Código postal*</string>
     <string name="estado">Estado</string>
 
     <!-- Aviso de Privacidad -->
@@ -81,6 +186,78 @@
         ]]>
     </string>
 
+    <!-- Dialog messages-->
+    <string name="error_codigo">Código postal no válido.</string>
+    <string name="error_ciudad">La ciudad es obligatoria.</string>
+    <string name="error_estado">Debes seleccionar un estado.</string>
+    <string name="cargando_oficinas">Cargando oficinas...</string>
+    <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
+    <string name="error_servicio1">Revisa tu conexión a Internet.</string>
+    <string name="cargando">Cargando...</string>
+    <string name="actualizando">Actualizando...</string>
+    <string name="error_tamaño_codigo">Un código de rastreo debe ser de 10 dígitos, y un número de guía debe ser de 22 dígitos.</string>
+    <string name="error_cod_repetido">El número ya existe en la lista de rastreo.</string>
+    <string name="error_lista_vacia">La lista de rastreo se encuentra vacía.</string>
+    <string name="error_agregar_fav">No existe información acerca de este registro, no puede agregarse a favoritos.</string>
+    <string name="exito_agregar_fav">Operación exitosa.</string>
+    <string name="no_sensor">No es posible llevar a cabo la función de realidad aumentada debido a que tu dispositivo no cuenta con sensor de campo magnético. </string>
+
+    <!-- Data base -->
+    <string name="db_trackdata">CREATE TABLE "trackdata" ("id_trackdata"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "waybill"  TEXT(24),
+        "shortwaybill" TEXT(24), "srvcid"  TEXT(24), "srvcdescspa" TEXT(24), "srvcdesceng" TEXT(24), "custnumber" TEXT(24), "packagetype" TEXT(24),
+        "adtnlinfo" TEXT(24), "statusspa" TEXT(24), "statuseng"  TEXT(24), "pd_org_acronym" TEXT(24), "pd_org_name"  TEXT(24), "pd_pkup_date" TEXT(24),
+        "dd_dst_acronym" TEXT(24), "dd_dst_name" TEXT(24), "dd_dlvry_date" TEXT(24), "dd_zip"  TEXT(24), "dd_rcvr" TEXT(24), "dm_weight" TEXT(24),
+        "dm_volweight"  TEXT(24), "dm_width"  TEXT(24), "dm_length"  TEXT(24), "dm_height" TEXT(24), "wbrd_org_waybill"  TEXT(24), "wbrd_rplc_waybill"
+        TEXT(24), "rtrndd_initl_waybill"  TEXT(24), "rtrndd_final_waybill" TEXT(24), "msd_prec_waybills" TEXT(24), "msd_foll_waybills" TEXT(24),
+        "msd_wb_list"  TEXT(24), "intld_intl_waybill"  TEXT(24), "intld_org_countrycode" TEXT(24), "intld_org_countryspa"  TEXT(24), "intld_org_countryeng"
+        TEXT(24), "cstminfo_reference" TEXT(24), "cstminfo_costsCentre" TEXT(24), "id_ctl_favoritos" INTEGER NOT NULL)</string>
+
+    <!-- <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "evnt_date"  TEXT(20), "evnt_id" TEXT(50),
+        "evnt_desc_spa" TEXT(200), "evnt_desc_eng" TEXT(200), "evnt_place_acronym" TEXT(200), "evnt_place_name"  TEXT(200), "except_code"  TEXT(3),
+        "except_descspa" TEXT(200), "except_desceng" TEXT(200), "except_details"  TEXT(200), "id_trackdata"  INTEGER NOT NULL)</string>-->
+
+    <string name="db_history">CREATE TABLE "history" ( "id_history"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "add_date"  TEXT(30),
+                              "code_number" TEXT(50), "favorite"  TEXT(24), "H_eventDescriptionSPA" TEXT(200), "H_eventDateTime" TEXT(200), "H_eventPlaceName" TEXT(200), "H_exceptionCodeDescriptionSPA" TEXT(200))</string>
+
+    <!-- <string name="db_ctlfavoritos">CREATE TABLE "ctl_favoritos" ("id_ctl_favoritos"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"guia"  TEXT(24),"rastreo"
+        TEXT(24),"alias"  TEXT(100),"fecha_registro"  TEXT(20) NOT NULL, "notifica" integer not null default(0))</string>-->
+
+    <string name="db_ctlfavoritos">CREATE TABLE "favorites" ("id_favoritos" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"add_date"  TEXT(24) NOT NULL,
+                                   "alias"  TEXT(24), "codigo_rastreo"  TEXT(24), "cp_destino"  TEXT(24), "destino"  TEXT(24), "estatus"  TEXT(24),
+                                   "fecha_recoleccion"  TEXT(24), "fechaHoraEntrega"  TEXT(24), "historia"  TEXT(24), "no_guia"  TEXT(24), "origen"  TEXT(24),
+                                   "recibio"  TEXT(24), "referencia"  TEXT(24), "signature"  TEXT(24),"notifica"  TEXT(24))</string>
+
+    <string name="db_estados">CREATE TABLE estados ( Z_PK INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ZNUMEROESTADO INTEGER, ZLATITUD VARCHAR,
+                              ZLONGITUD VARCHAR, ZNOMBRE VARCHAR )</string>
+
+    <string name="db_offices">CREATE TABLE "offices" ( "id_office" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "ent" TEXT(24), "opt" TEXT(24),
+        "estado" TEXT(24) NOT NULL, "calle1" TEXT(200), "calle2" TEXT(200), "ciudad" TEXT(200), "codigo_postal" TEXT(10), "colonia" TEXT(200), "correo" TEXT(200),
+        "entrega_oficina" TEXT(200), "ext1" TEXT(10), "ext2" TEXT(10), "horario_atencion" TEXT(200), "horario_comida" TEXT(200), "horario_ext" TEXT(200),
+        "horario_recol" TEXT(200), "horario_sabatino" TEXT(200), "idcatalogo" TEXT(24), "latitud" TEXT(24) NOT NULL,  "longitud" TEXT(24) NOT NULL, "no_oficina" TEXT(24),
+        "nombre" TEXT(200), "telefono1" TEXT(50), "telefono2" TEXT(50), "tipo_oficina" TEXT(5), "tipos_pago" TEXT(200), "version" TEXT(25), "ciudad_n" TEXT(200),
+        "colonia_n" TEXT(200), "ciudad_n_decode" TEXT(200), "colonia_n_decode" TEXT(200))</string>
+
+    <string name="db_codigos">CREATE TABLE codigos ( Z_PK INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ZCLAVE VARCHAR, ZDESCRIPCIONCLAVE VARCHAR,
+        ZIDCATALOGO VARCHAR, ZVERSION VARCHAR )</string>
+
+    <string name="db_paises">CREATE TABLE "paises" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "idpais" TEXT, "nombrepais_esp" TEXT,
+        "nombrepais_ing" TEXT)</string>
+
+    <string name="db_rastreo_tmp">CREATE TABLE "rastreo_tmp" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "codigo" TEXT, "favorito" TEXT)</string>
+
+    <string name="db_recurrente">CREATE TABLE "recurrente" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "Nombre" TEXT, "Telefono" TEXT,
+         "correo_electronico" TEXT, "razon_social" TEXT, "Telefono" TEXT, "Telefono" TEXT, "Telefono" TEXT)</string>
+
+    <string name="db_compra">CREATE TABLE "compra" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        "Nombre_remitente" TEXT, "Origen" TEXT, "CPO" TEXT,
+        "Nombre_destinatario" TEXT, "Destino" TEXT, "CPD" TEXT,
+        "Tipo_servicio" TEXT, "Garantia" TEXT, "Costo" TEXT,
+        "Referencia" TEXT, Fecha TEXT)</string>
+
+
+    <!-- ********************   Strings aplicación anterior   ************************** -->
+    <string name="title_activity_main">MainActivity</string>
+
 
     <!-- FragmentOffices  -->
 
@@ -97,8 +274,70 @@
     <string name="ext">Ext.</string>
     <string name="horario">Horario</string>
 
+
+    <!-- FragmentQuotation -->
+    <string name="noPostalCode">El contacto seleccionado no tiene un código postal válido.</string>
+    <string name="noOrigin">Código postal origen no válido.</string>
+    <string name="noDestination">Código postal destino no válido.</string>
+    <string name="noCountry">Seleccione un país destino.</string>
+    <string name="noWeigth">Valor de peso no válido.</string>
+    <string name="noHigh">Valor de alto no válido.</string>
+    <string name="noLong">Valor de largo no válido.</string>
+    <string name="noWidth">Valor de ancho no válido.</string>
+    <string name="noCpOrigin">Código postal origen no existe.</string>
+    <string name="noCpDestination">Código postal destino no existe.</string>
+    <string name="verifique">Verifique los datos.</string>
+
     <!-- FragmentDetailQuotation -->
     <string name="no_iva">Los precios no incluyen IVA.</string>
     <string name="cambion_sin_aviso">Precios sujetos a cambios sin previo aviso.</string>
+    <string name="terminos_internacional_1">USA-Canadá-Estándar:\n    *Documentos de 3 a 5 días habiles de lunes a viernes (entrega en apartados postales,cárceles y cuarteles militares solamente en este servicio).
+    \n    *Paquetes, a partir de 3 días hábiles dependiendo del trámite aduanal.</string>
+    <string name="terminos_internacional_2">Servicios no garantizados por revisión de aduanas.\nArtículos prohibidos y restringidos: Ver lista de artículos
+    restringidos o con condición especial para su envío.\nPrecios sujetos a cambio sin previo aviso. Los precios no incluyen IVA.</string>
+    <string name="terminos_internacional_3">Global exprés:\n    *Estados Unidos y Canadá (1 a 3 días hábiles).\n    *Resto del mundo (2 a 5 días hábiles).</string>
+
+    <!-- Edit Favorite -->
+    <string name="EditFavorite">Editar</string>
+    <string name="No_Guia">No. guia</string>
+    <string name="Cod_Rastreo">Codigo de rastreo</string>
+    <string name="no_guia3">No. Guía: \u0020</string>
+    <string name="references_favorite">Referencia: </string>
+    <string name="favorite_cod_rastreo">Código de rastreo: \u0020</string>
+    <string name="name_guia">Asigna un nombre a tu número de guía para facilitar su localización.</string>
+    <string name="favorite_ServiceStatus">Estatus del servicio: \u0020</string>
+    <string name="edit_cancel">Cancelar</string>
+    <string name="edit_save">Guardar</string>
+    <string name="edit_name_guia">Referencia</string>
+
+    <!-- Detalle Favorite -->
+
+    <string name="fav_favorite">Favorito</string>
+    <string name="fav_reference">Referencia: </string>
+    <string name="fav_cod_rastreo">Código de rastreo:</string>
+    <string name="fav_no_guia">No. Guía: </string>
+    <string name="fav_origen">Origen: </string>
+    <string name="fav_destino">Destino:</string>
+    <string name="fav_cp_destino">C.P. Destino:</string>
+    <string name="fav_estatus">Estatus del servicio: \u0020</string>
+    <string name="fav_fecha">Fecha y hora de entrega:</string>
+    <string name="fav_recibio">Recibió: </string>
+    <string name="fav_btn_call">Llamar </string>
+    <string name="fav_btn_share">Compartir </string>
+    <string name="fav_btn_closed">Cerrar </string>
+
+
+    <!-- fragment history -->
+    <string name="history_title">Historial (Cambiar Imagen)</string>
+    <string name="hist_pre">Prellenados</string>
+    <string name="hist_buy">Compras</string>
+
+    <!-- Fragment AR-->
+    <string name="gps_alert_title">GPS desactivado</string>
+    <string name="gps_alert_message">El GPS no esta activado. ¿Deseas ir a ajustes para activarlo ahora?</string>
+    <string name="gps_alert_go">Ir a ajustes</string>
+    <string name="gps_alert_cancel">Cancelar</string>
+
+
 
 </resources>

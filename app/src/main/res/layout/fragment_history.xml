@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentHistory"
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentHistory"
     android:background="@color/white">
 
    <LinearLayout

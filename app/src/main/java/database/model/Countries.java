@@ -13,6 +13,7 @@ import database.DataBaseAdapter;
 
 /**
  * Created by rebecalopezmartinez on 28/05/15.
+ * This class contains methods that let you edit the table 'Countries' Database.
  */
 public class Countries {
     public static final String TABLE_NAME = "paises";
@@ -34,6 +35,14 @@ public class Countries {
         this.nombrepais_ing = nombrepais_ing;
     }
 
+    /**
+     * It allows you to insert data into the database.
+     * @param context
+     * @param idpais
+     * @param nombrepais_esp
+     * @param nombrepais_ing
+     * @return
+     */
     public static long insert(Context context, String idpais, String nombrepais_esp,
                               String nombrepais_ing){
         ContentValues cv = new ContentValues();
@@ -45,6 +54,11 @@ public class Countries {
 
     }
 
+    /**
+     * It lets get all the information in this table within the database.
+     * @param context
+     * @return
+     */
     public static ArrayList<Map<String,String>> getCountriesNames(Context context){
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ID);
@@ -68,6 +82,12 @@ public class Countries {
         return null;
     }
 
+    /**
+     * Gets the ID of the country by an id.
+     * @param context
+     * @param id
+     * @return
+     */
     public static Map<String,String> getIdPaisById(Context context, String id) {
 
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, "id = ?",
@@ -91,6 +111,10 @@ public class Countries {
         return null;
     }
 
+    /**
+     * @deprecated
+     * @param context
+     */
     public static void removeAll(Context context){
         Cursor cursor = DataBaseAdapter.getDB(context).query(TABLE_NAME, null, null, null, null ,null, ID);
         if (cursor != null && cursor.getCount() > 0) {
@@ -103,6 +127,12 @@ public class Countries {
         cursor.close();
     }
 
+    /**
+     * Delete items from the database.
+     * @param context
+     * @param id
+     * @return
+     */
     public static int delete(Context context, int id) {
         return DataBaseAdapter.getDB(context).delete(TABLE_NAME, ID + "=" + id, null);
     }
