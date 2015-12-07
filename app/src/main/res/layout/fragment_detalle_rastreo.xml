@@ -5,7 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDetalleRastreo">
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentDetalleRastreo">
 
     <LinearLayout
         android:layout_width="match_parent"

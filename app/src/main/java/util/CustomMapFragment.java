@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -20,8 +19,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.sellcom.apps.tracker_material.Fragments.FragmentDialogOfficesMap;
-import com.sellcom.apps.tracker_material.R;
+import com.estafeta.estafetamovilv1.Fragments.FragmentDialogOfficesMap;
+import com.estafeta.estafetamovilv1.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +28,7 @@ import java.util.Map;
 
 /**
  * Created by juanc.jimenez on 16/05/14.
+ * This class helps to control the operation of the markers on the map offices.
  */
 public class CustomMapFragment extends SupportMapFragment implements GoogleMap.OnMarkerClickListener{
 
@@ -73,6 +73,9 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
         return v;
     }
 
+    /**
+     * Insert the appropriate markers for each type of office.
+     */
     private void initMap(){
         map = getMap();
         if (map != null) {
@@ -121,29 +124,34 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
 
 
             }
-            if(list.size()>2) {
 
-                final LatLngBounds bounds = builder.build();
+            if(typeSearch.equals("nada")){
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 4));
+            }else {
+                if (list.size() > 2) {
 
-                final int padding = 100; // offset from edges of the map in pixels
-                //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                    final LatLngBounds bounds = builder.build();
 
-                map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+                    final int padding = 100; // offset from edges of the map in pixels
+                    //CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
 
-                    @Override
-                    public void onCameraChange(CameraPosition arg0) {
-                        // Move camera.
-                        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
-                        // Remove listener to prevent position reset on camera move.
-                        map.setOnCameraChangeListener(null);
-                    }
-                });
-            }else if(list.size() == 2){
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(1),17));
-            }else if(list.size() == 1){
-                map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0),10));
+                    map.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
+
+                        @Override
+                        public void onCameraChange(CameraPosition arg0) {
+                            // Move camera.
+                            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
+                            // Remove listener to prevent position reset on camera move.
+                            map.setOnCameraChangeListener(null);
+                        }
+                    });
+                } else if (list.size() == 2) {
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(1), 17));
+                } else if (list.size() == 1) {
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(list.get(0), 10));
+                }
+
             }
-
 
             map.setMyLocationEnabled(true);
             map.setTrafficEnabled(false);
@@ -153,6 +161,9 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
         }
     }
 
+    /**
+     * Putting visible markers SU offices.
+     */
     public static void addSU(){
 
         for (int i = 0; i < markerSU.size(); i++){
@@ -163,6 +174,9 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
 
     }
 
+    /**
+     * Putting invisible markers SU offices.
+     */
     public static void removeSU(){
 
         for (int i = 0; i < markerSU.size(); i++){
@@ -173,6 +187,9 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
 
     }
 
+    /**
+     * Putting visible markers CO offices.
+     */
     public static void addCO(){
 
 
@@ -184,6 +201,9 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
 
     }
 
+    /**
+     * Putting invisible markers CO offices.
+     */
     public static void removeCO(){
 
         for (int i = 0; i < markerCO.size(); i++){
@@ -194,6 +214,9 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
 
     }
 
+    /**
+     * Putting visible markers CA offices.
+     */
     public static void addCA(){
 
         for (int i = 0; i < markerCA.size(); i++){
@@ -204,6 +227,9 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
 
     }
 
+    /**
+     * Putting invisible markers CA offices.
+     */
     public static void removeCA(){
 
         for (int i = 0; i < markerCA.size(); i++){
@@ -215,8 +241,11 @@ public class CustomMapFragment extends SupportMapFragment implements GoogleMap.O
     }
 
 
-
-
+    /**
+     * Opens a dialog with the information office of the marker that was pressed.
+     * @param marker
+     * @return
+     */
     @Override
     public boolean onMarkerClick(Marker marker) {
 

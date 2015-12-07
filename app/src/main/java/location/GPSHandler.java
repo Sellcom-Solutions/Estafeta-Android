@@ -5,6 +5,7 @@ import android.location.Location;
 
 /**
  * Created by juan.guerra on 09/07/2015.
+ * @deprecated
  */
 public class GPSHandler {
 

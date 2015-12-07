@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:weightSum="100"
     android:background="@color/estafeta_light_gray"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentDialogHelp">
 
     <ImageView
         android:id="@+id/im_dialog_help"

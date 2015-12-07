@@ -277,6 +277,14 @@
                                         android:textSize="@dimen/sizeSmallText" />
 
                                 </LinearLayout>
+<!-- Para mostrar la firma
+                                <ImageView
+                                    android:id="@+id/img_signature"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_width="match_parent"
+                                    android:scaleType="centerInside"
+                                    android:layout_height="70dp" />
+                                    -->
 
                                 <TextView
                                     android:layout_marginTop="10dp"
@@ -363,6 +371,18 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginEnd="10dp">
+
+                <!--
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/estafeta_blue"
+                    fab:fab_colorPressed="@color/white"
+                    fab:fab_icon="@android:drawable/sym_action_email"
+                    fab:fab_title="Share"/>
+
+                    -->
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/button_share"

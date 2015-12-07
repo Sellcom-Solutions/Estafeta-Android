@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sellcom.apps.tracker_material.Adapters.VerticalScrollView
+<com.estafeta.estafetamovilv1.Adapters.VerticalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -113,6 +113,7 @@
                     android:hint                    ="@string/codigo"
                     android:maxLength               ="22"
                     android:padding                 ="3dp"
+                    android:singleLine="true"
                     android:textColor               ="@color/estafeta_text"
                     android:textColorHint           ="@color/estafeta_red"
                     android:textSize                ="@dimen/sizeLargeText"
@@ -232,4 +233,4 @@
 
     </FrameLayout>
 
-</com.sellcom.apps.tracker_material.Adapters.VerticalScrollView>
+</com.estafeta.estafetamovilv1.Adapters.VerticalScrollView>

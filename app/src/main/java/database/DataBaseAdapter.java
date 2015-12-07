@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Created by rebecalopezmartinez on 28/05/15.
+ * Open and makes a new instance of the database.
  */
 public class DataBaseAdapter {
 

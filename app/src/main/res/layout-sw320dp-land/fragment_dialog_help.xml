@@ -6,7 +6,7 @@
     android:weightSum="100"
     android:gravity="center"
     android:background="@color/dialog_help"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentDialogHelp">
     <LinearLayout
         android:layout_width="500dp"
         android:layout_height="300dp"

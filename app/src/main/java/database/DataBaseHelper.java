@@ -1,24 +1,16 @@
 package database;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.sellcom.apps.tracker_material.R;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.security.acl.Permission;
-
-
-import database.model.Offices;
-import database.model.States;
+import com.estafeta.estafetamovilv1.R;
 
 /**
  * Created by rebecalopezmartinez on 27/05/15.
+ * This class creates the database application.
  */
 public class DataBaseHelper extends SQLiteOpenHelper {
 
@@ -37,6 +29,10 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         mContext = context;
     }
 
+    /**
+     * Create tables in the database.
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -104,7 +100,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
 
-
+    /**
+     * Update Database.
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // NOTE: This switch statement is designed to handle cascading database

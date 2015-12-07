@@ -15,6 +15,7 @@ import database.DataBaseAdapter;
 
 /**
  * Created by juan.guerra on 13/07/2015.
+ * @deprecated
  */
 public class Buys {
 

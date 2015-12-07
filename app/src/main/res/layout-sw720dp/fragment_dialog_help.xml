@@ -6,7 +6,7 @@
     android:weightSum="100"
     android:paddingTop="50dp"
     android:background="@color/dialog_help"
-    tools:context="com.sellcom.apps.tracker_material.Fragments.FragmentDialogHelp">
+    tools:context="com.estafeta.estafetamovilv1.Fragments.FragmentDialogHelp">
 
 
     <TextView

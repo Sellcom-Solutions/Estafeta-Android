@@ -9,6 +9,7 @@ import database.DataBaseAdapter;
 
 /**
  * Created by rebecalopezmartinez on 28/05/15.
+ * This class contains methods that let you edit the table 'Trackdata' Database.
  */
 public class Trackdata {
     public static final String TABLE_NAME = "trackdata";
@@ -140,6 +141,48 @@ public class Trackdata {
         this.id_ctl_favoritos = id_ctl_favoritos;
     }
 
+    /**
+     * It allows you to insert data into the database.
+     * @param context
+     * @param waybill
+     * @param shortwaybill
+     * @param srvcid
+     * @param srvcdescspa
+     * @param srvcdesceng
+     * @param custnumber
+     * @param packagetype
+     * @param adtnlinfo
+     * @param statusspa
+     * @param statuseng
+     * @param pd_org_acronym
+     * @param pd_org_name
+     * @param pd_pkup_date
+     * @param dd_dst_acronym
+     * @param dd_dst_name
+     * @param dd_dlvry_date
+     * @param dd_zip
+     * @param dd_rcvr
+     * @param dm_weight
+     * @param dm_volweight
+     * @param dm_width
+     * @param dm_length
+     * @param dm_height
+     * @param wbrd_org_waybill
+     * @param wbrd_rplc_waybill
+     * @param rtrndd_initl_waybill
+     * @param rtrndd_final_waybill
+     * @param msd_prec_waybills
+     * @param msd_foll_waybills
+     * @param msd_wb_list
+     * @param initId_org_countrycode
+     * @param initId_initl_waybill
+     * @param iniId_org_countryspa
+     * @param initId_org_countryeng
+     * @param cstminfo_reference
+     * @param cstminfo_costsCentre
+     * @param id_ctl_favoritos
+     * @return
+     */
     public static long insert(Context context, String waybill, String shortwaybill, String srvcid, String srvcdescspa,
                               String srvcdesceng, String custnumber, String packagetype, String adtnlinfo, String statusspa,
                               String statuseng, String pd_org_acronym, String pd_org_name, String pd_pkup_date, String dd_dst_acronym,
@@ -192,6 +235,11 @@ public class Trackdata {
 
     }
 
+    /**
+     * It allows you to insert data into the database.
+     * @param values
+     * @return
+     */
     public static long insert(Map<String, String> values){
         ContentValues cv = new ContentValues();
 
