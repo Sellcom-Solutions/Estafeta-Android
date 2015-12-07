@@ -120,17 +120,10 @@ public class FragmentDialogEditFavorite extends DialogFragment implements View.O
 
                 if (isChecked) {
 
-                    MyApp.tracker().send(new HitBuilders.EventBuilder("Configuracion", "TapBoton")
-                            .setLabel("Boton_On")
-                            .build());
-
                     notify=isChecked;
                     return;
-                } else {
 
-                    MyApp.tracker().send(new HitBuilders.EventBuilder("Configuracion", "TapBoton")
-                            .setLabel("Boton_Off")
-                            .build());
+                } else {
 
                     notify=isChecked;
                     return;
