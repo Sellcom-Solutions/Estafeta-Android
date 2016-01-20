@@ -32,7 +32,7 @@ public class Sensores implements SensorEventListener{
     private float []RMXB;
 
     public static int AuxiliarActualizacion=2;
-    public static long TiempoAuxiliarActualizacion = 100;
+    public static long TiempoAuxiliarActualizacion = 1000;
     private SensorsListener listener;
 
     public double getAzimuth() {
@@ -52,6 +52,8 @@ public class Sensores implements SensorEventListener{
     private static Sensores sensor;
 
     private long lastTime;
+
+    private float ALPHA = 0.1f;
 
     public synchronized static Sensores getInstance(Context a,SensorsListener listener){
         if (sensor==null){
@@ -115,12 +117,15 @@ public class Sensores implements SensorEventListener{
 
             case Sensor.TYPE_ACCELEROMETER:
                 for(int i =0; i < 3; i++){
-                    valuesAccelerometer[i] = event.values[i];
+                    valuesAccelerometer = lowPass(event.values.clone(), valuesAccelerometer);
+
+                    //valuesAccelerometer[i] = event.values[i];
                 }
                 break;
             case Sensor.TYPE_MAGNETIC_FIELD:
                 for(int i =0; i < 3; i++){
-                    valuesMagneticField[i] = event.values[i];
+                    valuesMagneticField = lowPass(event.values.clone(), valuesMagneticField);
+                    //valuesMagneticField[i] = event.values[i];
 
                 }
 
@@ -236,6 +241,14 @@ public class Sensores implements SensorEventListener{
 
     public void setListener(SensorsListener listener){
         this.listener=listener;
+    }
+
+    protected float[] lowPass( float[] input, float[] output ) {
+        if ( output == null ) return input;
+        for ( int i=0; i<input.length; i++ ) {
+            output[i] = output[i] + ALPHA * (input[i] - output[i]);
+        }
+        return output;
     }
 
 }

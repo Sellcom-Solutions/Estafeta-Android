@@ -16,7 +16,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "estafeta.db";
 
-    private static final int VER_1            = 1;  // 1.1
+    private static final int VER_1            = 5;  // 1.1
     private static final int DATABASE_VERSION = VER_1;
     public static final int NOT_UPDATE        = -1;
     private final Context mContext;

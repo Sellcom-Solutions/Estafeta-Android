@@ -51,7 +51,8 @@ public class MyApp extends Application {
         analytics = GoogleAnalytics.getInstance(this);
 
         // TODO: Replace the tracker-id with your app one from https://www.google.com/analytics/web/
-        tracker = analytics.newTracker("UA-38591266-1");
+        tracker = analytics.newTracker("UA-38591266-1");// UA-70931136-1 Llave googleplay@estafeta
+        //UA-38591266-1 Llave de repositorioapps
 
         // Provide unhandled exceptions reports. Do that first after creating the tracker
         tracker.enableExceptionReporting(true);

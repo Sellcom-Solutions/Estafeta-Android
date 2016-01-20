@@ -2,10 +2,15 @@ package com.estafeta.estafetamovilv1.Fragments;
 
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.estafeta.estafetamovilv1.Utils.Utilities;
 import com.gc.materialdesign.widgets.Dialog;
 import com.estafeta.estafetamovilv1.Augmented_Reality_Items.CajaDeTexto;
 import com.estafeta.estafetamovilv1.Augmented_Reality_Items.Camara;
@@ -26,11 +32,16 @@ import com.estafeta.estafetamovilv1.Augmented_Reality_Items.SensorsListener;
 import com.estafeta.estafetamovilv1.R;
 import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
+import com.google.android.gms.maps.model.LatLng;
+
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by juan.guerra on 22/06/2015.
@@ -55,12 +66,14 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     private View view;
     private RelativeLayout contenedorCajas;
     private GPS_AR gps;
+    private FragmentManager fragmentManager;
 ///////////////////////////////////////////////////////////////////
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        fragmentManager = getActivity().getSupportFragmentManager();
 
     }
 
@@ -68,12 +81,8 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_augmented_reality, container, false);
         context = getActivity();
-        if (verificarSensores())
             inicializar();
-        else {
-            if (DialogManager.sharedInstance().isShowingDialog())
-                DialogManager.sharedInstance().dismissDialog();
-        }
+
 
         return view;
     }
@@ -86,16 +95,21 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
         RelativeLayout.LayoutParams parametros=new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT,
                 RelativeLayout.LayoutParams.MATCH_PARENT);
+/*
+        int marginPixel = 10;
+        float density = context.getResources().getDisplayMetrics().density;
+        int marginDp = (int)(marginPixel * density);
+        parametros.setMargins(marginDp, marginDp, marginDp, marginDp);*/
 
         RRA=(RelativeLayout)view.findViewById(R.id.Principal_layout_RA);
         camara=new Camara(this.getActivity());
         RRA.addView(camara);
         RRA.addView(contenedorCajas, parametros);
-        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         ((ActionBarActivity)getActivity()).getSupportActionBar().hide();
         Pantalla.obtenerMedidas(getActivity());
         identificacion=true;
-        contenedor=new ContenedorCajas(contenedorCajas);
+        contenedor=new ContenedorCajas(contenedorCajas,getActivity(),getActivity().getSupportFragmentManager());
         this.ubicacion=null;
 
         sensor=Sensores.getInstance(getActivity(), this);
@@ -106,19 +120,9 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
             }
         };
         ocupado=false;
-    }
 
-    public boolean verificarSensores(){
-        SensorManager sensorManager = (SensorManager)getActivity().getSystemService(Context.SENSOR_SERVICE);
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) == null){
-          //if (null == null){
-                Dialog dialog = new Dialog(context,"Error",getResources().getString(R.string.no_sensor));
-                dialog.show();
-            getActivity().onBackPressed();
-              return false;
-        }
-        else
-              return true;
+        if (DialogManager.sharedInstance().isShowingDialog())
+            DialogManager.sharedInstance().dismissDialog();
     }
 
 
@@ -156,18 +160,57 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
 
 
     }
-
+    String type = "";
+    LatLng position;
+    FragmentDialogOfficesMap dialogo;
+    Map<String,String> oficina;
 
     public void agregarElementos(List<Marcador> identificados){
         Log.d("SENSOR","Agregar elementos en direccion: "+ String.valueOf(sensor.getAzimuth()));
         Marcador temporal=new Marcador();
+
         int posX,posY;
+
         for (int indice=0;indice<identificados.size();indice++){
             //Log.d("Main","Lugar Identificado");
             temporal=identificados.get(indice);
-            posX= ListaMarcadores.verificarPosicionEjeX(ubicacion, sensor.getAzimuth(), temporal);
-            posY=ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(), temporal);
+            posX= ListaMarcadores.verificarPosicionEjeX(ubicacion, sensor.getAzimuth(), temporal,getActivity());
+            posY=ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(), temporal,getActivity());
             contenedor.agregarLugaraPantalla(listener, new CajaDeTexto(context), posX, posY, temporal, ubicacion);
+
+            /*oficina = new HashMap<>();
+            oficina.put("nombre",temporal.getNombre());
+            oficina.put("calle1",temporal.getCalle1());
+            oficina.put("ciudad_n",temporal.getCiudad_n());
+            oficina.put("codigo_postal",temporal.getCodigo_postal());
+            oficina.put("horario_atencion",temporal.getHorario_atencion());
+            oficina.put("ext1",temporal.getExt1());
+            oficina.put("telefono1", temporal.getTelefono1());
+            oficina.put("colonia_n", temporal.getColonia_n());
+
+            Location location = temporal.getLocalizacionLugar();
+
+            position = new LatLng(location.getLatitude(), location.getLongitude());
+
+            if (Utilities.convertOfficesIntToType(temporal.getTipo_elemento()).equals("SU")) {
+                type = "SU";
+            } else if (Utilities.convertOfficesIntToType(temporal.getTipo_elemento()).equals("CO")) {
+                type = "CO";
+            } else if (Utilities.convertOfficesIntToType(temporal.getTipo_elemento()).equals("CA")) {
+                type = "CA";
+            }
+
+            contenedorCajas.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando oficina...", 0);
+
+                    new AsyckTask().execute();
+
+
+                }
+            });*/
         }
         //Log.d("SENSOR", "Elementos agregados");
 
@@ -191,14 +234,35 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     public void finalizar(){
         try {
             GPS_AR.getInstance(context).finalize();
-
             Sensores.getInstance(context,this).setListener(null);
             //Sensores.getInstance(context,this).finalize();
-
             //super.finalize();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
+    }
+
+    public class AsyckTask extends AsyncTask<Void,Void,Void>{
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            dialogo = new FragmentDialogOfficesMap();
+            dialogo.setList(oficina);
+            dialogo.setLatLng(position);
+            dialogo.setType(type);
+            dialogo.show(fragmentManager, FragmentDialogOfficesMap.TAG);
+
+            return null;
+        }
+
+
     }
 
 }

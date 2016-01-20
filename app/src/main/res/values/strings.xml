@@ -90,7 +90,7 @@
 
     <!-- Oficinas -->
     <string name="view_ar">Ver a mi alrededor</string>
-    <string name="loading_AR_elements">Cargando componentes</string>
+    <string name="loading_AR_elements">Loading components...</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Oficinas</string>
     <string name="ubicar_oficinas">Ubicar oficinas</string>

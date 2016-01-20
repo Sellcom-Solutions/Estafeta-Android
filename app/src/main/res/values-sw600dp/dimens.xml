@@ -15,7 +15,7 @@
     <dimen name="login_progressBar_height">40dp</dimen>
     <dimen name="dialog_width">450dp</dimen>
     <dimen name="sizeItemProduct">96dp</dimen>
-    <dimen name="sizeAugmentedRealityText">30sp</dimen>
+    <dimen name="sizeAugmentedRealityText">27sp</dimen>
 
     <dimen name="dimen_text_step_visit">35sp</dimen>
     <dimen name="dimen_item_step_visit">300dp</dimen>

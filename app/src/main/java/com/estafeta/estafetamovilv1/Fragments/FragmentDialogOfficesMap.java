@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 
+import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -200,6 +201,12 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
         }, 1000);
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        DialogManager.sharedInstance().dismissDialog();
     }
 
     public static void setList(Map<String, String> list) {

@@ -1,7 +1,9 @@
 package com.estafeta.estafetamovilv1.Augmented_Reality_Items;
 
+import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
+import android.util.DisplayMetrics;
 
 import com.estafeta.estafetamovilv1.Fragments.FragmentOfficesMap;
 import com.estafeta.estafetamovilv1.Utils.Utilities;
@@ -40,7 +42,14 @@ public class ListaMarcadores {
                         oficina.get(Offices.NOMBRE),
                         Double.valueOf(oficina.get(Offices.LATITUD)),
                         Double.valueOf(oficina.get(Offices.LONGITUD)),
-                        Utilities.convertOfficesTypeToInt(oficina.get(Offices.TIPO_OFICINA))));
+                        Utilities.convertOfficesTypeToInt(oficina.get(Offices.TIPO_OFICINA)),
+                        oficina.get(Offices.CALLE1),
+                        oficina.get(Offices.CIUDAD_N),
+                        oficina.get(Offices.CODIGO_POSTAL),
+                        oficina.get(Offices.HORARIO_ATENCION),
+                        oficina.get(Offices.EXT1),
+                        oficina.get(Offices.TELEFONO1),
+                        oficina.get(Offices.COLONIA_N)));
             }
             catch(java.lang.NumberFormatException e){
                 //e.printStackTrace();
@@ -168,7 +177,7 @@ public class ListaMarcadores {
     }
 
 
-    public static int verificarPosicionEjeX(Location loc,double direccion,Marcador marcador){
+    public static int verificarPosicionEjeX(Location loc,double direccion,Marcador marcador, Activity activity){
         int posicionX;
 		/*if(direccion<0)
 			direccion=360+direccion;
@@ -178,6 +187,42 @@ public class ListaMarcadores {
 		if(direccion>360)
 			direccion=direccion-360;*/
         //Verificar Bearing
+
+        int ancho = 0, alto = 0;
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int widthPixels = metrics.widthPixels;
+        int heightPixels = metrics.heightPixels;
+        float widthDpi = metrics.xdpi;
+        float heightDpi = metrics.ydpi;
+
+        float widthInches = widthPixels / widthDpi;
+        float heightInches = heightPixels / heightDpi;
+
+        double diagonalInches = Math.sqrt(
+                (widthInches * widthInches)
+                        + (heightInches * heightInches));
+
+        if (diagonalInches >= 10) {
+            //Device is a 10" tablet
+
+            ancho = (int) (180 * Pantalla.DENSIDAD + 5);
+            alto = (int) (130 * Pantalla.DENSIDAD + 5);
+
+        }
+        else if (diagonalInches >= 7) {
+            //Device is a 7" tablet
+
+            ancho = (int) (140 * Pantalla.DENSIDAD + 5);
+            alto = (int) (100 * Pantalla.DENSIDAD + 5);
+
+        }else{
+            ancho = (int) (100 * Pantalla.DENSIDAD + 5);
+            alto = (int) (70 * Pantalla.DENSIDAD + 5);
+        }
+
+
         double bearing=loc.bearingTo(marcador.getLocalizacionLugar());
         double diferencia=0;
         if(bearing<0){
@@ -241,7 +286,7 @@ public class ListaMarcadores {
 
         //posicionX=posicionX-parametros.width;
 
-        posicionX= posicionX-   (int)((CajaDeTexto.getAnchoGenerico(marcador.getTextoMasLargo())*Pantalla.DENSIDAD+5)/2)  ;
+        posicionX= posicionX-   ancho/2 ;
 
 
         //Log.d("ListaMarcadores","PosX: "+String.valueOf(posicionX));
@@ -250,8 +295,42 @@ public class ListaMarcadores {
         //t.show();
     }
 
-    public static int verificarPosicionEjeY(double direccion,Marcador marcador){
+    public static int verificarPosicionEjeY(double direccion,Marcador marcador, Activity activity){
         int posicionY;
+
+        int ancho = 0, alto = 0;
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int widthPixels = metrics.widthPixels;
+        int heightPixels = metrics.heightPixels;
+        float widthDpi = metrics.xdpi;
+        float heightDpi = metrics.ydpi;
+
+        float widthInches = widthPixels / widthDpi;
+        float heightInches = heightPixels / heightDpi;
+
+        double diagonalInches = Math.sqrt(
+                (widthInches * widthInches)
+                        + (heightInches * heightInches));
+
+        if (diagonalInches >= 10) {
+            //Device is a 10" tablet
+
+            ancho = (int) (180 * Pantalla.DENSIDAD + 5);
+            alto = (int) (130 * Pantalla.DENSIDAD + 5);
+
+        }
+        else if (diagonalInches >= 7) {
+            //Device is a 7" tablet
+
+            ancho = (int) (140 * Pantalla.DENSIDAD + 5);
+            alto = (int) (100 * Pantalla.DENSIDAD + 5);
+
+        }else{
+            ancho = (int) (100 * Pantalla.DENSIDAD + 5);
+            alto = (int) (70 * Pantalla.DENSIDAD + 5);
+        }
 
         //direccion=-direccion;
         double diferencia;
@@ -262,7 +341,7 @@ public class ListaMarcadores {
         posicionY=     (int) (Pantalla.ALTO/2- (Pantalla.Paso_Pantalla_Eje_Y*diferencia));
         //posicionX=posicionX-parametros.width;
 
-        posicionY= posicionY-   (CajaDeTexto.getAltoGenerico()*marcador.getNumLineas()) ;
+        posicionY= posicionY-   alto ;
         //posicionY=
         return posicionY;
         //Toast t=Toast.makeText(c,"Identificados: "+identificados.size(),Toast.LENGTH_LONG);
@@ -296,4 +375,6 @@ public class ListaMarcadores {
 
         return diferencia;
     }
+
+
 }

@@ -10,7 +10,7 @@
         <item name="colorPrimary">@color/estafeta_red</item>
         <item name="colorPrimaryDark">@color/estafeta_red</item>
         <item name="android:textColorPrimary">@color/estafeta_text</item>
-        <item name="android:navigationBarColor">@color/estafeta_red</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:spinnerStyle">@style/mySpinnerItemStyle</item>

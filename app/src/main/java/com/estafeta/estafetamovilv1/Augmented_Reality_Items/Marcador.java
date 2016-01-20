@@ -21,11 +21,19 @@ public class Marcador extends ObjetoPintable{
     private boolean enVista;
     public static int tamMax=20;
     private boolean tipo;
+    private String calle1;
+    private String ciudad_n;
+    private String codigo_postal;
+    private String horario_atencion;
+    private String ext1;
+    private String telefono1;
+    private String colonia_n;
 
 
 
 
-    public Marcador(int id,String nombre,double Latitud,double Longitud,int tipo_elemento) {
+    public Marcador(int id,String nombre,double Latitud,double Longitud,int tipo_elemento, String calle1, String ciudad_n, String codigo_postal,
+                    String horario_atencion, String ext1, String telefono1, String colonia_n) {
         super();
         this.localizacionLugar=new Location("");
         this.localizacionLugar.setLatitude(Latitud);
@@ -37,6 +45,15 @@ public class Marcador extends ObjetoPintable{
         this.tipo_elemento=tipo_elemento;
         this.enVista=false;
         this.tipo=true;//CajaDetexto
+
+        this.calle1 = calle1;
+        this.ciudad_n = ciudad_n;
+        this.codigo_postal = codigo_postal;
+        this.horario_atencion = horario_atencion;
+        this.ext1 = ext1;
+        this.telefono1 = telefono1;
+        this.colonia_n = colonia_n;
+
         separarTexto();
 
         // TODO Auto-generated constructor stub
@@ -190,6 +207,31 @@ public class Marcador extends ObjetoPintable{
     }
 
 
+    public String getCalle1() {
+        return calle1;
+    }
 
+    public String getCiudad_n() {
+        return ciudad_n;
+    }
 
+    public String getCodigo_postal() {
+        return codigo_postal;
+    }
+
+    public String getHorario_atencion() {
+        return horario_atencion;
+    }
+
+    public String getExt1() {
+        return ext1;
+    }
+
+    public String getTelefono1() {
+        return telefono1;
+    }
+
+    public String getColonia_n() {
+        return colonia_n;
+    }
 }

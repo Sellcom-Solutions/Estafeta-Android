@@ -4,11 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -25,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gc.materialdesign.widgets.Dialog;
 import com.google.android.gms.analytics.HitBuilders;
 import com.estafeta.estafetamovilv1.Adapters.SpinnerAdapter;
 import com.estafeta.estafetamovilv1.R;
@@ -191,7 +195,6 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                     if (!(((LocationManager) context.getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER))) {
                         showSettingsAlert();
                     } else {
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.loading_AR_elements), 0);
                         openFragmentAR();
                     }
 
@@ -206,14 +209,27 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
      */
     public void openFragmentAR(){
         //System.gc();
-        FragmentManager fragmentManager         = getActivity().getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragment   = new FragmentAR();
-        fragment.addFragmentToStack(getActivity());
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
-        fragmentTransaction.commit();
+        if(verificarSensores()) {
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.loading_AR_elements), 0);
+
+
+            Handler handler = new Handler ();//Para dar un tiempo al dialog
+
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                    fragment = new FragmentAR();
+                    fragment.addFragmentToStack(getActivity());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
+                    fragmentTransaction.commit();
+                }
+            }, 2000);
+
+        }
     }
 
     /**
@@ -400,5 +416,21 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
             return true;
         }
         return false;
+    }
+
+    public boolean verificarSensores(){
+        try {
+            SensorManager sensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
+            if (sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD) == null) {
+                //if (null == null){
+                Dialog dialog = new Dialog(context, "Error", getResources().getString(R.string.no_sensor));
+                dialog.show();
+                return false;
+            } else
+                return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }

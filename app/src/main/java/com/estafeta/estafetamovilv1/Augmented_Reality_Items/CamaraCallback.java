@@ -36,6 +36,7 @@ public class CamaraCallback implements SurfaceHolder.Callback{
         }
         if (camera == null) {
             camera = Camera.open();
+            camera.setDisplayOrientation(90);
         }
         try {
             camera.setPreviewDisplay(holder);
