@@ -20,7 +20,7 @@
         android:textSize="@dimen/sizeMediumText"
         android:text="Ubica tu número de guía o código de rastreo en:"/>
 
-    <ImageView
+    <com.estafeta.estafetamovilv1.Utils.TouchImageView
         android:id="@+id/im_dialog_help"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_width"
@@ -79,7 +79,7 @@
 
         <Button
             android:id="@+id/btn_ticket"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="90dp"
             android:text="@string/codigo_ticket"
             android:textSize="@dimen/sizeNormalText"
@@ -95,7 +95,7 @@
 
         <Button
             android:id="@+id/btn_cerrar"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="90dp"
             android:text="@string/cerrar"
             android:textSize="@dimen/sizeNormalText"

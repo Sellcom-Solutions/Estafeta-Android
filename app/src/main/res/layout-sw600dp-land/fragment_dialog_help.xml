@@ -102,7 +102,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_weight="50">
 
-                    <ImageView
+                    <com.estafeta.estafetamovilv1.Utils.TouchImageView
                         android:id="@+id/im_dialog_help"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

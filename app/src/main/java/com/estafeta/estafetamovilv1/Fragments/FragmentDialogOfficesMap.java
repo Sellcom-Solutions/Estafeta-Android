@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 
+import com.estafeta.estafetamovilv1.Augmented_Reality_Items.Sensores;
 import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -29,6 +31,8 @@ import com.estafeta.estafetamovilv1.R;
 
 import java.util.Locale;
 import java.util.Map;
+
+import location.GPS_AR;
 
 /**
  * This class shows in detail the office that is selected on the map offices.
@@ -43,6 +47,8 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
     private static LatLng latLng;
     private static String type;
     private String          sendText;
+    private boolean flag = true;
+
 
     private TextView        txv_nombre_estafeta,
                             txv_direccion_estafeta,
@@ -63,6 +69,33 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
 
 
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        try {
+            list.get("contenedor");
+
+            if(flag) {
+                try {
+
+                    FragmentAR fragmentAR = (FragmentAR) getActivity().getSupportFragmentManager().findFragmentByTag(FragmentAR.TAG);
+                    GPS_AR.getInstance(context).finalize();
+                    Sensores.getInstance(context, null).setListener(null);
+                    //Sensores.getInstance(context,this).finalize();
+                    //super.finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+
+                dismiss();
+            }
+        }catch (Exception e){
+
+        }
+    }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -234,6 +267,18 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         try {
             startActivity(intent);
+
+            try {
+
+                FragmentAR fragmentAR = (FragmentAR)getActivity().getSupportFragmentManager().findFragmentByTag(FragmentAR.TAG);
+                fragmentAR.sensor.finalize();
+                fragmentAR.gps.finalize();
+                //Sensores.getInstance(context,this).finalize();
+                //super.finalize();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+
         } catch(ActivityNotFoundException ex) {
             Toast.makeText(context, "Por favor instale Google Maps", Toast.LENGTH_LONG).show();
             /*
@@ -287,14 +332,17 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
 
             case R.id.btn_cerrar_estafeta:
 
+                flag = false;
                 dismiss();
 
                 break;
 
             case R.id.txv_telefono_estafeta:
+
                 String telefono = list.get("telefono1").replace("(","");
                 telefono = telefono.replace(")","");
                 onClickTelefono(telefono.trim());
+
                 break;
         }
 

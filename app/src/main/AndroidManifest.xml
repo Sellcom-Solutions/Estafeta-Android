@@ -68,7 +68,10 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBy7I6nc3ACnLs4zx3ffhr2NrnraIHhy78" />
+            android:value="AIzaSyCuhBTiRmww5g2MavSfUIAHLieVsf17KSA" />
+
+
+       <!-- AIzaSyBy7I6nc3ACnLs4zx3ffhr2NrnraIHhy78 API KEY PRODUCCION-->
 
         <!-- Enable background dispatching to improve delivery on non-Google Play devices -->
         <receiver

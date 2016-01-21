@@ -19,7 +19,7 @@
         android:textSize="@dimen/sizeNormalText"
         android:text="Ubica tu número de guía o código de rastreo en:"/>
 
-    <ImageView
+    <com.estafeta.estafetamovilv1.Utils.TouchImageView
         android:id="@+id/im_dialog_help"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dialog_width"

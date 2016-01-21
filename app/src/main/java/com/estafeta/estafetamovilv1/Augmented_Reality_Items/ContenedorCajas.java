@@ -9,20 +9,19 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.internal.view.ContextThemeWrapper;
+import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.ImageSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SuperscriptSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.RelativeLayout;
 
 import java.math.RoundingMode;
@@ -55,8 +54,9 @@ public class ContenedorCajas {
     private int color_texto_AR;
     private Activity activity;
     private FragmentManager fragmentManager;
-    private int ancho = 0, alto = 0, sizeTextSucursal = 0, sizeImage = 0;
+    private int ancho = 0, alto = 0, sizeTextSucursal = 0, sizeImage = 0, anchoImage = 0, altoImage = 0;
 
+    boolean isDialogClosed = true;
 
     public ContenedorCajas(RelativeLayout contenedor, Activity activity, FragmentManager fragmentManager) {
         this.contenedor=contenedor;
@@ -156,8 +156,12 @@ public class ContenedorCajas {
             sizeB = 1.9f;
             sizeC = 1.6f;
 
-            sizeTextSucursal = 16;
+            sizeTextSucursal = 15;
             sizeImage = (int) (70 * Pantalla.DENSIDAD + 5);
+
+
+            anchoImage = (int) (160 * Pantalla.DENSIDAD + 5);
+            altoImage = (int) (30 * Pantalla.DENSIDAD + 5);
         }
         else if (diagonalInches >= 7) {
             //Device is a 7" tablet
@@ -169,8 +173,12 @@ public class ContenedorCajas {
             sizeB = 1.2f;
             sizeC = 1f;
 
-            sizeTextSucursal = 12;
+
+            sizeTextSucursal = 11;
             sizeImage = (int) (50 * Pantalla.DENSIDAD + 5);
+
+            anchoImage = (int) (110 * Pantalla.DENSIDAD + 5);
+            altoImage = (int) (22 * Pantalla.DENSIDAD + 5);
 
         }else{
             ancho = (int) (100 * Pantalla.DENSIDAD + 5);
@@ -180,8 +188,11 @@ public class ContenedorCajas {
             sizeB = 0.8f;
             sizeC = 0.6f;
 
-            sizeTextSucursal = 8;
-            sizeImage = (int) (30 * Pantalla.DENSIDAD + 5);
+            sizeTextSucursal = 7;
+            sizeImage = (int) (40 * Pantalla.DENSIDAD + 5);
+
+            anchoImage = (int) (80 * Pantalla.DENSIDAD + 5);
+            altoImage = (int) (15 * Pantalla.DENSIDAD + 5);
         }
 
 
@@ -190,24 +201,29 @@ public class ContenedorCajas {
             marcador.setNombre(marcador.getNombre().substring(0,22)+"...");
         }
 
-        String s= "Estafeta®\n" + marcador.getNombre() + "\nDistancia"+ units + " -- " +marcador.getTelefono1();
+        Drawable d = activity.getResources().getDrawable(R.drawable.estafeta_ra);
+        d.setBounds(0, 0, anchoImage, altoImage);
+        ImageSpan span = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
+
+        String s= "Estafeta®\n" + marcador.getNombre() + "\nDistancia "+ units;
         SpannableString ss1=  new SpannableString(s);
 
-        ss1.setSpan(new RelativeSizeSpan(sizeA), 0, 8, 0); // set size
+        /*ss1.setSpan(new RelativeSizeSpan(sizeA), 0, 8, 0); // set size
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 0, 8, 0);
-        ss1.setSpan(new ForegroundColorSpan(0xFFA91F20), 0, 8, 0);// set color
+        ss1.setSpan(new ForegroundColorSpan(0xFFA91F20), 0, 8, 0);// set color*/
 
-        ss1.setSpan(new RelativeSizeSpan(sizeB), 8, 9, 0); // set size
+        ss1.setSpan(span, 0, 9, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+
+       /* ss1.setSpan(new RelativeSizeSpan(sizeB), 8, 9, 0); // set size
         ss1.setSpan(new StyleSpan(Typeface.BOLD), 8, 9, 0);
         ss1.setSpan(new SuperscriptSpan(), 8, 9, 0);
-        ss1.setSpan(new ForegroundColorSpan(0xFFA91F20), 8, 9, 0);// set color
+        ss1.setSpan(new ForegroundColorSpan(0xFFA91F20), 8, 9, 0);// set color*/
 
         ss1.setSpan(new RelativeSizeSpan(sizeC), 10, (10+marcador.getNombre().length()), 0); // set size
         ss1.setSpan(new ForegroundColorSpan(Color.BLACK), 10, (10 + marcador.getNombre().length()), 0);// set color
 
         ss1.setSpan(new RelativeSizeSpan(sizeC), (10 + marcador.getNombre().length()), s.length(), 0); // set size
         ss1.setSpan(new ForegroundColorSpan(Color.GRAY), (10 + marcador.getNombre().length()), s.length(), 0);// set color
-
 
         caja.setText(ss1);
         //caja.setText(Html.fromHtml("<b><font color=#A91F20>Estafeta<sup>®</sup></font></b> <br />"+"<font color=#000000>Hipódromo Condesa</font><br />"+"<font color=#888888> Distancia "+units+ "</font>"));
@@ -224,12 +240,12 @@ public class ContenedorCajas {
                 alto);
 
         caja.setBackgroundResource(R.drawable.background_white_textview_ra);
-        caja.setOnClickListener(listener);
         caja.setHeight(parametros.height);
         caja.setWidth(parametros.width);
 
         final Map<String,String> oficina;
         oficina = new HashMap<>();
+        oficina.put("contenedor","contenedor");
         oficina.put("nombre", marcador.getNombre().replace("...",""));
         oficina.put("calle1",marcador.getCalle1());
         oficina.put("ciudad_n", marcador.getCiudad_n());
@@ -238,6 +254,8 @@ public class ContenedorCajas {
         oficina.put("ext1", marcador.getExt1());
         oficina.put("telefono1", marcador.getTelefono1());
         oficina.put("colonia_n", marcador.getColonia_n());
+        oficina.put("latitud", marcador.getLatitud());
+        oficina.put("longitud", marcador.getLongitud());
 
         Location loc = marcador.getLocalizacionLugar();
 
@@ -258,9 +276,12 @@ public class ContenedorCajas {
         caja.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando oficina...", 0);
-                AsyckTask asyckTask = new AsyckTask(oficina, position, finalType);
-                asyckTask.execute();
+                if (isDialogClosed) {
+                    isDialogClosed = false;
+                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando oficina...", 0);
+                    AsyckTask asyckTask = new AsyckTask(oficina, position, finalType);
+                    asyckTask.execute();
+                }
 
             }
         });
@@ -269,18 +290,9 @@ public class ContenedorCajas {
         Marcador temp2;
         agregar(caja, parametros, marcador);
         Button imagen=new Button(contenedor.getContext());
-
-        imagen.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando oficina...", 0);
-                AsyckTask asyckTask = new AsyckTask(oficina,position,finalType);
-                asyckTask.execute();
-
-            }
-        });
+        imagen.setEnabled(false);
+        imagen.setGravity(Gravity.CENTER);
         imagen.setId(caja.getId());
-        imagen.setOnClickListener(listener);
         Bitmap bMap=null;
         bMap=Utilities.getOfficesIcon(Utilities.convertOfficesIntToType(marcador.getTipo_elemento()), contenedor.getContext());
         //bMap=bMap.createScaledBitmap(bMap, altoC, altoC, false);
@@ -307,11 +319,12 @@ public class ContenedorCajas {
         int paddingDp = (int)(paddingPixel * Pantalla.DENSIDAD+5);
         imagen.setPadding(paddingDp,paddingDp,paddingDp,paddingDp);*/
 
-        imagen.setX(marcador.getXmin()-alto);
+        imagen.setX(marcador.getXmin() - alto + 20);
         imagen.setY(marcador.getYmin());
-        parametros=new RelativeLayout.LayoutParams(alto
+
+        parametros=new RelativeLayout.LayoutParams(alto-20
                 ,alto);
-        ma.setValoresX(marcador.getXmin()-alto, alto);
+        ma.setValoresX(marcador.getXmin()-alto+20, alto);
         ma.setValoresY(marcador.getYmin(), alto);
         agregar(imagen,parametros,ma);
         //Log.d("ContenedorCajas",marcador.getNombre());
@@ -330,33 +343,36 @@ public class ContenedorCajas {
             }
         }
 
-        for (int location=0;location<lista.size()-2;location++){
+        for (int location=0;location<lista.size() - 2; location++) {
             temp=lista.get(location);
-            temp2=lista.get(location+1);
-            if (temp.isTipo()){
-                if(temp.verificarColisionMarcador(marcador)||marcador.verificarColisionMarcador(temp)
+            temp2=lista.get(location + 1);
+            if (temp.isTipo()) {
+                if(temp.verificarColisionMarcador(marcador)|| marcador.verificarColisionMarcador(temp)
                         ||temp2.verificarColisionMarcador(marcador)||marcador.verificarColisionMarcador(temp2)
                         ||temp.verificarColisionMarcador(ma)||ma.verificarColisionMarcador(temp)){
                     //Regresamos a los valores originales
                     caja=(CajaDeTexto)this.contenedor.getChildAt(lista.size()-2);
                     caja.setX(x);
-                    contenedor.removeViewAt(lista.size()-2);
+                    contenedor.removeViewAt(lista.size() - 2);
                     parametros=new RelativeLayout.LayoutParams(
                             ancho,
                             alto);
-                            //
+                    //
                     contenedor.addView(caja, lista.size() - 2, parametros);
                     marcador.setValoresX(x, ancho);
                     lista.set(lista.size() - 2, marcador);
 
                     imagen=(Button)this.contenedor.getChildAt(lista.size()-1);
+                    imagen.setGravity(Gravity.CENTER);
+                    imagen.setEnabled(false);
                     ma=new Marcador(marcador.getId(), marcador.getTipo_elemento());
-                    imagen.setX(marcador.getXmin()-alto);
+                    imagen.setX(marcador.getXmin() - alto + 20);
                     imagen.setY(marcador.getYmin());
-                    contenedor.removeViewAt(lista.size()-1);
-                    parametros=new RelativeLayout.LayoutParams(alto
+                    contenedor.removeViewAt(lista.size() - 1);
+
+                    parametros=new RelativeLayout.LayoutParams(alto-20
                             ,alto);
-                    ma.setValoresX(marcador.getXmin()-alto, alto);
+                    ma.setValoresX(marcador.getXmin()-alto+20, alto);
                     ma.setValoresY(marcador.getYmin(), alto);
                     contenedor.addView(imagen, lista.size()-1,parametros);
                     lista.set(lista.size()-1,ma);
@@ -406,8 +422,11 @@ public class ContenedorCajas {
         lista.set(location, m);
 
         Button imagen=(Button)this.contenedor.getChildAt(location+1);
-        imagen.setX(imagen.getX()+30);
-        parametros=new RelativeLayout.LayoutParams(alto
+        imagen.setGravity(Gravity.CENTER);
+        imagen.setEnabled(false);
+        imagen.setX(imagen.getX() + 30);
+
+        parametros=new RelativeLayout.LayoutParams(alto-20
                 , alto);
         contenedor.removeViewAt(lista.size()-1);
         contenedor.addView(imagen, location+1,parametros);
@@ -437,8 +456,11 @@ public class ContenedorCajas {
         lista.set(location, m);
 
         Button imagen = (Button)this.contenedor.getChildAt(location + 1);
-        imagen.setX(imagen.getX()-30);
-        parametros=new RelativeLayout.LayoutParams(alto
+        imagen.setGravity(Gravity.CENTER);
+        imagen.setEnabled(false);
+        imagen.setX(imagen.getX() - 30);
+
+        parametros=new RelativeLayout.LayoutParams(alto-20
                 , alto);
         contenedor.removeViewAt(lista.size()-1);
         contenedor.addView(imagen, location+1,parametros);
@@ -453,6 +475,8 @@ public class ContenedorCajas {
         //Calculamos bearing de cada marcador
         CajaDeTexto caja=(CajaDeTexto)this.contenedor.getChildAt(location);
         Button imagen=(Button)this.contenedor.getChildAt(location+1);
+        imagen.setGravity(Gravity.CENTER);
+        imagen.setEnabled(false);
         //posY=(int)caja.getY();
         if (posY>=2*Pantalla.ALTO/3){//Movemos arriba
             caja.setY(caja.getY()-10);
@@ -473,7 +497,8 @@ public class ContenedorCajas {
         m.setValoresY((int) this.contenedor.getChildAt(location).getY(), alto);
         //lista.add(1, m);
         lista.set(location, m);
-        parametros=new RelativeLayout.LayoutParams(alto
+
+        parametros=new RelativeLayout.LayoutParams(alto-20
                 ,alto);
         contenedor.removeViewAt(lista.size()-1);
         contenedor.addView(imagen, location+1,parametros);
@@ -521,6 +546,7 @@ public class ContenedorCajas {
             dialogo.setType(finalType);
             dialogo.show(fragmentManager, FragmentDialogOfficesMap.TAG);
 
+            isDialogClosed = true;
             return null;
         }
 

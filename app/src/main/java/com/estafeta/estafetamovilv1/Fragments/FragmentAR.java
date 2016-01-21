@@ -50,6 +50,8 @@ import java.util.Map;
 public class FragmentAR extends TrackerFragment implements SensorsListener{
 
 
+    public static final String TAG = "FRAG_AR";
+
     //9 a 6,
     //Para barrido vertical es +- 20 grados (Roll)
     private ContenedorCajas contenedor;
@@ -65,8 +67,11 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     private Context context;
     private View view;
     private RelativeLayout contenedorCajas;
-    private GPS_AR gps;
+    public static GPS_AR gps;
     private FragmentManager fragmentManager;
+
+
+    private boolean flag = false;
 ///////////////////////////////////////////////////////////////////
 
 
@@ -81,7 +86,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_augmented_reality, container, false);
         context = getActivity();
-            inicializar();
+        inicializar();
 
 
         return view;
@@ -146,7 +151,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
                         identificados=ListaMarcadores.identificarMarcadores(ubicacion,sensor.getAzimuth());
                     //else
 
-                        //Log.d("GPS","GPS NULO");
+                    //Log.d("GPS","GPS NULO");
                 }
                 contenedor.eliminar();
                 agregarElementos(identificados);
@@ -166,6 +171,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     Map<String,String> oficina;
 
     public void agregarElementos(List<Marcador> identificados){
+
         Log.d("SENSOR","Agregar elementos en direccion: "+ String.valueOf(sensor.getAzimuth()));
         Marcador temporal=new Marcador();
 
@@ -174,8 +180,16 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
         for (int indice=0;indice<identificados.size();indice++){
             //Log.d("Main","Lugar Identificado");
             temporal=identificados.get(indice);
-            posX= ListaMarcadores.verificarPosicionEjeX(ubicacion, sensor.getAzimuth(), temporal,getActivity());
-            posY=ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(), temporal,getActivity());
+            posX= ListaMarcadores.verificarPosicionEjeX(ubicacion, sensor.getAzimuth(), temporal, getActivity());
+            posY=ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(), temporal, getActivity());
+
+            if(posX == 10000 || posY == 10000){
+                Log.v(TAG, "Finalizado forzoso");
+                gps.finalize();
+                sensor.finalize();
+                return;
+            }
+
             contenedor.agregarLugaraPantalla(listener, new CajaDeTexto(context), posX, posY, temporal, ubicacion);
 
             /*oficina = new HashMap<>();
@@ -223,18 +237,24 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     @Override
     public void onResume() {
         super.onResume();
+        if(flag){
+            flag = false;
+            getActivity().onBackPressed();
+        }
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        finalizar();
+        flag = true;
     }
 
 
     public void finalizar(){
         try {
             GPS_AR.getInstance(context).finalize();
-            Sensores.getInstance(context,this).setListener(null);
+            Sensores.getInstance(context,null).setListener(null);
             //Sensores.getInstance(context,this).finalize();
             //super.finalize();
         } catch (Throwable throwable) {

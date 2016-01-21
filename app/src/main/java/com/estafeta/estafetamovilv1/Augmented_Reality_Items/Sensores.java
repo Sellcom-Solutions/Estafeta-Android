@@ -7,6 +7,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 
+import location.GPSTracker;
+import location.GPS_AR;
+
 /**
  * Created by juan.guerra on 22/06/2015.
  * @deprecated
@@ -57,8 +60,16 @@ public class Sensores implements SensorEventListener{
 
     public synchronized static Sensores getInstance(Context a,SensorsListener listener){
         if (sensor==null){
-            sensor=new Sensores();
-            sensor.initSensor(a,listener);
+            sensor = new Sensores();
+            if(listener != null) {
+                sensor.initSensor(a, listener);
+            }else{
+                //sensor.setListener(null);
+                Log.d("Sensores", "listener es igual a null");
+                sensor.finalize();
+                GPS_AR.getInstance(a).finalize();
+                sensor.setListener(null);
+            }
         }
         else
             sensor.setListener(listener);
@@ -106,7 +117,7 @@ public class Sensores implements SensorEventListener{
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (listener== null){
+        if (listener == null){
             this.finalize();
             return;
         }
@@ -207,7 +218,9 @@ public class Sensores implements SensorEventListener{
                     if ( ((newTime - this.lastTime)/1000000) >= TiempoAuxiliarActualizacion ){
                         //Log.d("Final Time: ", String.valueOf((newTime - this.lastTime) / 1000000));
                         this.lastTime = newTime;
-                        listener.identificar();
+                        if(listener != null )
+                            listener.identificar();
+
                     }
 
                 }
@@ -241,6 +254,10 @@ public class Sensores implements SensorEventListener{
 
     public void setListener(SensorsListener listener){
         this.listener=listener;
+    }
+
+    public SensorsListener getListener() {
+        return listener;
     }
 
     protected float[] lowPass( float[] input, float[] output ) {

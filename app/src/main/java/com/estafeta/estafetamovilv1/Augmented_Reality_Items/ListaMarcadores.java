@@ -49,7 +49,9 @@ public class ListaMarcadores {
                         oficina.get(Offices.HORARIO_ATENCION),
                         oficina.get(Offices.EXT1),
                         oficina.get(Offices.TELEFONO1),
-                        oficina.get(Offices.COLONIA_N)));
+                        oficina.get(Offices.COLONIA_N),
+                        oficina.get(Offices.LATITUD),
+                        oficina.get(Offices.LONGITUD)));
             }
             catch(java.lang.NumberFormatException e){
                 //e.printStackTrace();
@@ -191,7 +193,11 @@ public class ListaMarcadores {
         int ancho = 0, alto = 0;
 
         DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        try {
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        }catch (Exception e){
+            return 10000;
+        }
         int widthPixels = metrics.widthPixels;
         int heightPixels = metrics.heightPixels;
         float widthDpi = metrics.xdpi;
@@ -207,18 +213,18 @@ public class ListaMarcadores {
         if (diagonalInches >= 10) {
             //Device is a 10" tablet
 
-            ancho = (int) (180 * Pantalla.DENSIDAD + 5);
+            ancho = (int) (200 * Pantalla.DENSIDAD + 5);
             alto = (int) (130 * Pantalla.DENSIDAD + 5);
 
         }
         else if (diagonalInches >= 7) {
             //Device is a 7" tablet
 
-            ancho = (int) (140 * Pantalla.DENSIDAD + 5);
+            ancho = (int) (160 * Pantalla.DENSIDAD + 5);
             alto = (int) (100 * Pantalla.DENSIDAD + 5);
 
         }else{
-            ancho = (int) (100 * Pantalla.DENSIDAD + 5);
+            ancho = (int) (120 * Pantalla.DENSIDAD + 5);
             alto = (int) (70 * Pantalla.DENSIDAD + 5);
         }
 
@@ -301,7 +307,11 @@ public class ListaMarcadores {
         int ancho = 0, alto = 0;
 
         DisplayMetrics metrics = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        try {
+            activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        }catch (Exception e){
+            return 10000;
+        }
         int widthPixels = metrics.widthPixels;
         int heightPixels = metrics.heightPixels;
         float widthDpi = metrics.xdpi;
@@ -317,18 +327,18 @@ public class ListaMarcadores {
         if (diagonalInches >= 10) {
             //Device is a 10" tablet
 
-            ancho = (int) (180 * Pantalla.DENSIDAD + 5);
+            ancho = (int) (200 * Pantalla.DENSIDAD + 5);
             alto = (int) (130 * Pantalla.DENSIDAD + 5);
 
         }
         else if (diagonalInches >= 7) {
             //Device is a 7" tablet
 
-            ancho = (int) (140 * Pantalla.DENSIDAD + 5);
+            ancho = (int) (160 * Pantalla.DENSIDAD + 5);
             alto = (int) (100 * Pantalla.DENSIDAD + 5);
 
         }else{
-            ancho = (int) (100 * Pantalla.DENSIDAD + 5);
+            ancho = (int) (130 * Pantalla.DENSIDAD + 5);
             alto = (int) (70 * Pantalla.DENSIDAD + 5);
         }
 

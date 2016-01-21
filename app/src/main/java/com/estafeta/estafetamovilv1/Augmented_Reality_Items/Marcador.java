@@ -28,12 +28,13 @@ public class Marcador extends ObjetoPintable{
     private String ext1;
     private String telefono1;
     private String colonia_n;
-
+    private String latitud;
+    private String longitud;
 
 
 
     public Marcador(int id,String nombre,double Latitud,double Longitud,int tipo_elemento, String calle1, String ciudad_n, String codigo_postal,
-                    String horario_atencion, String ext1, String telefono1, String colonia_n) {
+                    String horario_atencion, String ext1, String telefono1, String colonia_n, String latid, String longit) {
         super();
         this.localizacionLugar=new Location("");
         this.localizacionLugar.setLatitude(Latitud);
@@ -53,6 +54,8 @@ public class Marcador extends ObjetoPintable{
         this.ext1 = ext1;
         this.telefono1 = telefono1;
         this.colonia_n = colonia_n;
+        this.latitud = latid;
+        this.longitud = longit;
 
         separarTexto();
 
@@ -233,5 +236,13 @@ public class Marcador extends ObjetoPintable{
 
     public String getColonia_n() {
         return colonia_n;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
     }
 }

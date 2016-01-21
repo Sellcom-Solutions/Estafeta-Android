@@ -224,7 +224,7 @@ public class FragmentOffices extends TrackerFragment implements View.OnClickList
                     fragment = new FragmentAR();
                     fragment.addFragmentToStack(getActivity());
                     fragmentTransaction.addToBackStack(null);
-                    fragmentTransaction.replace(R.id.container, fragment, FragmentOfficesMap.TAG);
+                    fragmentTransaction.replace(R.id.container, fragment, FragmentAR.TAG);
                     fragmentTransaction.commit();
                 }
             }, 2000);

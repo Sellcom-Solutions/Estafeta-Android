@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.estafeta.estafetamovilv1.R;
+import com.estafeta.estafetamovilv1.Utils.TouchImageView;
 
 
 /**
@@ -23,6 +24,7 @@ public class FragmentDialogHelp extends DialogFragment implements View.OnClickLi
     Button btn_cod_guia;
     Button btn_cod_factura;
     Button btn_cod_ticket;
+    //TouchImageView im_dialog_help;
     ImageView im_dialog_help;
     Bundle savedInstanceState;
 
@@ -47,6 +49,7 @@ public class FragmentDialogHelp extends DialogFragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_dialog_help, container, false);
         getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimations;
 
+        //im_dialog_help = (TouchImageView) view.findViewById(R.id.im_dialog_help);
         im_dialog_help = (ImageView) view.findViewById(R.id.im_dialog_help);
 
         cerrar = (Button)view.findViewById(R.id.btn_cerrar);
