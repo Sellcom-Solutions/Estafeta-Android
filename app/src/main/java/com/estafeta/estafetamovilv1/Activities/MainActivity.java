@@ -3,7 +3,7 @@ package com.estafeta.estafetamovilv1.Activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,18 +17,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilled;
+import com.estafeta.estafetamovilv1.communication.CommunicationBetweenFragments;
 import com.google.android.gms.analytics.HitBuilders;
 import com.estafeta.estafetamovilv1.Async_Request.DecisionDialogWithListener;
-import com.estafeta.estafetamovilv1.Async_Request.METHOD;
 import com.estafeta.estafetamovilv1.Async_Request.RequestManager;
-import com.estafeta.estafetamovilv1.Async_Request.UIResponseListenerInterface;
 
 import com.estafeta.estafetamovilv1.Fragments.FragmentAR;
 import com.estafeta.estafetamovilv1.Fragments.FragmentAvisoPrivacidad;
 import com.estafeta.estafetamovilv1.Fragments.FragmentCodigoPostal;
 import com.estafeta.estafetamovilv1.Fragments.FragmentQuotation;
-import com.estafeta.estafetamovilv1.Fragments.FragmentQuotationBuy;
-import com.estafeta.estafetamovilv1.Fragments.FragmentQuotationBuyFields;
 import com.estafeta.estafetamovilv1.Fragments.FragmentRastreo;
 import com.estafeta.estafetamovilv1.Fragments.FragmentOffices;
 
@@ -44,7 +42,7 @@ import com.estafeta.estafetamovilv1.Utils.Utilities;
 
 import java.util.Map;
 
-public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks, UIResponseListenerInterface ,DecisionDialogWithListener {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks ,DecisionDialogWithListener, CommunicationBetweenFragments {
 
     public static final String          ACT_TAG     = "MainActivity";
 
@@ -56,11 +54,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public boolean                      isDrawerOpen;
     private FragmentTransaction         fragmentTransaction;
     private FragmentManager             fragmentManager;
-    private int                         position;
-    private TrackerFragment             Fragment_Default,fragment;
+    private int                         position = -1;
+    private TrackerFragment             fragment;
             String                      CURRENT_FRAGMENT_TAG;
     public  int                         depthCounter    = 0;
 
+    private long            mLastClickTime;
 
 
     @Override
@@ -109,10 +108,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     }
 
-    public void returnToHome(){
-        mNavigationDrawerFragment.selectItem(0);
-    }
-
     /*It allows control the actions the 'back' button of the device*/
     @Override
     public void onBackPressed() {
@@ -130,15 +125,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             return;
         }
 
-        else if (currentFragment instanceof FragmentQuotationBuy){
+        /*else if (currentFragment instanceof FragmentQuotationBuy){
             if ( ((FragmentQuotationBuy)currentFragment).getCurrent() == FragmentQuotationBuyFields.DESTINY)
                 ((FragmentQuotationBuy)currentFragment).handleBackPressed();
             else
                 super.onBackPressed();
             return;
-        }
+        }*/
 
-        Log.d(ACT_TAG,"Deep depthCounter Back 1:"+depthCounter);
+        Log.d(ACT_TAG, "Deep depthCounter Back 1:" + depthCounter);
 
         if (mNavigationDrawerFragment.isDrawerOpen()) {
             mNavigationDrawerFragment.closeDrawer();
@@ -173,12 +168,17 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         fragmentTransaction  = fragmentManager.beginTransaction();
         if(this.position == position){
+            Log.d("MAIN ACTIVITY", "this.position == position");
             return;
         }
         this.position = position;
-        Fragment_Default = null;
         switch (position) {
             case NavigationDrawerFragment.RASTREO:
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 //Google Analytics
                 MyApp.tracker().send(new HitBuilders.EventBuilder("Menu", "Tap")
                         .setLabel("pantalla_rastreo")
@@ -187,12 +187,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 CURRENT_FRAGMENT_TAG = TrackerFragment.FRAGMENT_TAG.FRAG_RASTREO.toString();
                 if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
                     fragment = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
-                    Fragment_Default = new FragmentRastreo();
                 }else
                     fragment = new FragmentRastreo();
             break;
 
             case NavigationDrawerFragment.OFICINAS:
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 //Google Analytics
                 MyApp.tracker().send(new HitBuilders.EventBuilder("Menu", "Tap")
                         .setLabel("pantalla_oficinas")
@@ -203,10 +207,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                     fragment = (TrackerFragment)fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
                 }else
                     fragment = new FragmentOffices();
+
                 break;
 
-            //Created by Jose Luis 26/05/2015
             case NavigationDrawerFragment.CODIGO_POSTAL:
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 //Google Analytics
                 MyApp.tracker().send(new HitBuilders.EventBuilder("Menu", "Tap")
                         .setLabel("pantalla_cp")
@@ -221,6 +230,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             case NavigationDrawerFragment.AVISO_PRIVACIDAD:
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 //Google Analytics
                 MyApp.tracker().send(new HitBuilders.EventBuilder("Menu", "Tap")
                         .setLabel("pantalla_cp")
@@ -235,6 +249,11 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 break;
 
             case NavigationDrawerFragment.COTIZADOR:
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 //Google Analytics
                 MyApp.tracker().send(new HitBuilders.EventBuilder("Menu", "Tap")
                         .setLabel("pantalla_cotizador")
@@ -248,14 +267,33 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 }
                 break;
 
-            default:
-                //Toast.makeText(this,"Módulo no implementado",Toast.LENGTH_SHORT).show();
-                return;
+            case NavigationDrawerFragment.PRELLENADO:
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
+
+                CURRENT_FRAGMENT_TAG = TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString();
+                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
+                    fragment = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
+                }else{
+                    fragment = new FragmentPrefilled();
+                }
+
+                break;
+
+            /*case NavigationDrawerFragment.HISTORIAL:
+
+                fragment = null;
+
+                break;*/
         }
+
         if (fragment != null)
             prepareTransaction();
         else
-            Toast.makeText(this,"Modulo en desarrollo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Módulo en desarrollo",Toast.LENGTH_SHORT).show();
     }
 
     /**
@@ -269,8 +307,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         fragmentTransaction.setCustomAnimations(R.anim.slide_from_right, R.anim.shrink_out, R.anim.slide_from_left, R.anim.shrink_out);
         depthCounter = 0;
 
-        if(Fragment_Default != null)
-            fragment = Fragment_Default;
 
         fragmentTransaction.replace(R.id.container, fragment, CURRENT_FRAGMENT_TAG).commit();
 
@@ -306,7 +342,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         return false;
     }
 
-    @Override
+    /*@Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
@@ -316,17 +352,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         //this.prepareRequest(method, params, true);
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
-    }
 
-    @Override
-    public void prepareRequest(METHOD method, Map<String, String> params, boolean includeCredentials) {
-        //RequestManager.sharedInstance().makeRequestWithDataAndMethodIncludeCredentials(params, method,includeCredentials);
-    }
+    }*/
 
-    @Override
-    public void decodeResponse(String stringResponse) {
-
-    }
 
 
     @Override
@@ -335,9 +363,30 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             Utilities.flag = true;
             this.finish();
         }
+    }
 
+    @Override
+    public void setDataSender(Map<String, String> dataSender) {
+
+        FragmentPrefilled fragment = (FragmentPrefilled)fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
+        fragment.setDataSender(dataSender);
 
     }
 
+    @Override
+    public Map<String, String> getDataSender() {
+        FragmentPrefilled fragment = (FragmentPrefilled)fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
+        return fragment.getDataSender();
+    }
 
+    public NavigationDrawerFragment getmNavigationDrawerFragment() {
+        return mNavigationDrawerFragment;
+    }
+
+    public void hideDrawer(boolean status){
+
+        mNavigationDrawerFragment.setDrawerState(status);
+
+
+    }
 }

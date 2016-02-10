@@ -256,7 +256,7 @@
             <ListView
                 android:id="@+id/lv_dialog_colonia"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="240dp"
                 android:layout_gravity="left"
                 android:divider="@color/estafeta_text"
                 android:dividerHeight="0.5dp"

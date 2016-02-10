@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.CheckBox;
 
 import com.estafeta.estafetamovilv1.Fragments.FragmentDialogEditFavorite;
-import com.estafeta.estafetamovilv1.Fragments.FragmentDialogFavorite;
+import com.estafeta.estafetamovilv1.Fragments.FragmentDetailFavorite;
 import com.estafeta.estafetamovilv1.R;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 
@@ -232,7 +232,7 @@ public class FavoriteListAdapter extends BaseAdapter implements FragmentDialogEd
 
 
                 fragmentTransaction = fragmentManager.beginTransaction();
-                FragmentDialogFavorite fdf = new FragmentDialogFavorite();
+                FragmentDetailFavorite fdf = new FragmentDetailFavorite();
                 fdf.setArguments(bundle);
               //  fdf.show(fragmentManager, "FRAG_DIALOG_FAVORITE");
                 fragmentTransaction.addToBackStack(null);

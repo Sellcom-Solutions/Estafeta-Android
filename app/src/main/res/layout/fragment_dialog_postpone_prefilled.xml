@@ -1,0 +1,157 @@
+<LinearLayout
+    xmlns:android               ="http://schemas.android.com/apk/res/android"
+    android:layout_width        ="match_parent"
+    android:layout_height       ="wrap_content"
+    android:orientation         ="vertical"
+    android:gravity             ="center_horizontal"
+    android:paddingTop          ="20dp"
+    android:paddingRight        ="30dp"
+    android:paddingLeft         ="30dp"
+    android:paddingBottom       ="15dp"
+    android:background          ="@color/white">
+
+    <TextView
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:textSize            ="@dimen/sizeLargeText"
+        android:textColor           ="@android:color/black"
+        android:layout_marginBottom ="30dp"
+        android:gravity             ="center"
+        android:text                ="@string/postpone_prefilled"
+        />
+
+    <TextView
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginBottom ="10dp"
+        android:textSize            ="@dimen/sizeSmallText"
+        android:textColor           ="@color/estafeta_text_light_gray"
+        android:text                ="@string/code_get_prefilled"/>
+
+    <TextView
+        android:id                  ="@+id/lbl_postpone_code"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginBottom ="20dp"
+        android:padding             ="10dp"
+        android:gravity             ="center"
+        android:textSize            ="@dimen/sizeMediumText"
+        android:textColor           ="@color/estafeta_text"
+        android:text                ="A1234567890"
+        android:background          ="@drawable/background_postpone_prefilled"/>
+
+    <TextView
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginBottom ="20dp"
+        android:textSize            ="@dimen/sizeSmallText"
+        android:textColor           ="@color/estafeta_text_light_gray"
+        android:text                ="@string/add_email_to_send_prefilled"/>
+
+    <LinearLayout
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginBottom ="20dp"
+        android:orientation         ="horizontal"
+        android:weightSum           ="100">
+
+        <EditText
+            android:id              ="@+id/txt_add_email"
+            android:layout_width    ="0dp"
+            android:layout_height   ="wrap_content"
+            android:enabled         ="false"
+            android:layout_weight   ="85"
+            android:textSize        ="@dimen/sizeSmallText"
+            android:singleLine      ="true"
+            android:inputType       ="textEmailAddress"
+            android:hint            ="@string/add_email"
+            android:ellipsize       ="end"
+            android:textColorHint   ="@color/estafeta_red"
+            android:textColor       ="@color/estafeta_text"/>
+
+        <ImageView
+            android:id              ="@+id/imgv_selected_email_1"
+            android:layout_width    ="0dp"
+            android:layout_height   ="match_parent"
+            android:padding         ="5dp"
+            android:scaleType       ="fitCenter"
+            android:layout_weight   ="15"
+            android:src             ="@android:drawable/ic_notification_overlay"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id                  ="@+id/lin_add_other_email"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginBottom ="20dp"
+        android:orientation         ="horizontal"
+        android:weightSum           ="100">
+
+        <EditText
+            android:id              ="@+id/txt_add_other_email"
+            android:layout_width    ="0dp"
+            android:layout_height   ="wrap_content"
+            android:layout_weight   ="85"
+            android:textSize        ="@dimen/sizeSmallText"
+            android:inputType       ="textEmailAddress"
+            android:hint            ="@string/add_other_email"
+            android:singleLine      ="true"
+            android:textColorHint   ="@color/estafeta_red"
+            android:textColor       ="@color/estafeta_text"/>
+
+        <ImageView
+            android:id              ="@+id/imgv_selected_email_2"
+            android:layout_width    ="0dp"
+            android:layout_height   ="match_parent"
+            android:padding         ="5dp"
+            android:scaleType       ="fitCenter"
+            android:layout_weight   ="15"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:orientation         ="horizontal">
+
+        <Button
+            android:id              ="@+id/btn_close"
+            android:layout_width    ="0dp"
+            android:layout_height   ="wrap_content"
+            android:layout_weight   ="1"
+            android:gravity         ="center"
+            android:textAllCaps     ="false"
+            android:textSize        ="@dimen/sizeMediumText"
+            android:textColor       ="@color/estafeta_red"
+            android:background      ="@android:color/transparent"
+            android:text            ="@string/fav_btn_closed"/>
+
+        <Button
+            android:id                  ="@+id/btn_share"
+            android:layout_width        ="0dp"
+            android:layout_height       ="wrap_content"
+            android:layout_weight       ="1"
+            android:gravity             ="center"
+            android:textAllCaps         ="false"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:textColor           ="@color/estafeta_red"
+            android:background          ="@android:color/transparent"
+            android:text                ="@string/fav_btn_share"/>
+
+        <Button
+            android:id                  ="@+id/btn_send"
+            android:layout_width        ="0dp"
+            android:layout_height       ="wrap_content"
+            android:layout_weight       ="1"
+            android:gravity             ="center"
+            android:textAllCaps         ="false"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:textColor           ="@color/estafeta_red"
+            android:background          ="@android:color/transparent"
+            android:text                ="@string/send"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

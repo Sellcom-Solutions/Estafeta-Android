@@ -86,13 +86,14 @@ public class  FragmentCodigoPostal extends TrackerFragment implements OnClickLis
                 }
             });
             validateZipCode = (Button) view.findViewById(R.id.btn_validar_zipcode);
+            validateZipCode.requestFocus();
             buscarZipCode   = (Button) view.findViewById(R.id.btn_buscar_zipcode);
             zipCode         = (EditText) view.findViewById(R.id.verify_zip_code);
             zipCode.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
                     if (hasFocus) {
-                        setStatesToSpinner(spinner_state, context);
+                        spinner_state.setSelection(0);
                         ciudad.setText("");
                         colonia.setText("");
                     }

@@ -5,31 +5,50 @@
     <dimen name="activity_horizontal_margin">32dp</dimen>
     <dimen name="activity_vertical_margin">32dp</dimen>
     <dimen name="list_item_horizontal_margin">8dp</dimen>
-    <dimen name="sizeSmallText">18sp</dimen>
-    <dimen name="sizeNormalText">20sp</dimen>
-    <dimen name="sizeMediumText">25sp</dimen>
-    <dimen name="sizeLargeText">35sp</dimen>
-    <dimen name="sizeXLargeText">40sp</dimen>
+    <dimen name="sizeSmallText">18dp</dimen>
+    <dimen name="sizeNormalText">20dp</dimen>
+    <dimen name="sizeNormalLargeText">22dp</dimen>
+    <dimen name="sizeMediumText">25dp</dimen>
+    <dimen name="sizeLargeText">35dp</dimen>
+    <dimen name="sizeXLargeText">40dp</dimen>
     <dimen name="navigation_drawer_width">400dp</dimen>
     <dimen name="login_progressBar_width">300dp</dimen>
     <dimen name="login_progressBar_height">40dp</dimen>
     <dimen name="dialog_width">450dp</dimen>
     <dimen name="sizeItemProduct">96dp</dimen>
-    <dimen name="sizeAugmentedRealityText">27sp</dimen>
+    <dimen name="sizeAugmentedRealityText">27dp</dimen>
 
-    <dimen name="dimen_text_step_visit">35sp</dimen>
+    <dimen name="dimen_text_step_visit">35dp</dimen>
     <dimen name="dimen_item_step_visit">300dp</dimen>
 
-    <dimen name="dimen_text_customer_work_plan">25sp</dimen>
+    <dimen name="dimen_text_customer_work_plan">25dp</dimen>
 
-    <dimen name="dimen_text_cashing">23sp</dimen>
+    <dimen name="dimen_text_cashing">23dp</dimen>
     <!-- Partial Liquidation / Liquidacion Parcial -->
-    <dimen name="text_camera">25sp</dimen>
-    <dimen name="text_size">27sp</dimen>
+    <dimen name="text_camera">25dp</dimen>
+    <dimen name="text_size">27dp</dimen>
     <dimen name="size_photo">200dp</dimen>
-    <dimen name="size_button_dialog">18sp</dimen>
+    <dimen name="size_button_dialog">18dp</dimen>
     <dimen name="dimen_photo">300dp</dimen>
     <dimen name="footerSizeMedium">20dp</dimen>
     <dimen name="footerSizeNormal">20dp</dimen>
     <dimen name="footerSize">15dp</dimen>
+
+    <!-- Prefilled -->
+    <dimen name="sizeImagesPrefilledWidth">40dp</dimen>
+    <dimen name="sizeImagesPrefilledHeight">45dp</dimen>
+
+    <dimen name="sizeDialogSaveWidth">320dp</dimen>
+    <dimen name="sizeDialogSaveHeight">280dp</dimen>
+
+    <dimen name="marginContinuePrefilled">50dp</dimen>
+    <dimen name="marginContinuePrefilled2">10dp</dimen>
+
+    <dimen name="sizeDialogGetDataWidth">310dp</dimen>
+    <dimen name="sizeDialogGetDataHeight">270dp</dimen>
+
+    <dimen name="sizeImageCheck">80dp</dimen>
+    <dimen name="marginLeftImageCheck">15dp</dimen>
+
+    <dimen name="sizeImageQR">240dp</dimen>
 </resources>

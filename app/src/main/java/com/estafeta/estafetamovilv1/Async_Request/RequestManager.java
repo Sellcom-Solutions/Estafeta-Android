@@ -46,7 +46,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class RequestManager implements ResponseListenerInterface {
 
-    public  final   boolean                                 TEST_MODE          = false;
+    public  final   boolean                                 TEST_MODE          = true;
 
     public  final   String 	                                LOG_TAG_MANAGER    = "requestManager";
     public  final   String 	                                LOG_TAG_REQUEST    = "asyncRequest";
@@ -85,7 +85,8 @@ public class RequestManager implements ResponseListenerInterface {
      *
      */
     public void showErrorDialog(String errorMessage, Context context){
-        Log.d(LOG_TAG_MANAGER, "Error message: " + errorMessage);
+        if(TEST_MODE)
+            Log.d(LOG_TAG_MANAGER, "Error message: " + errorMessage);
 
         Dialog  dialog = new Dialog(context,"Error",errorMessage);
         dialog.show();
@@ -108,7 +109,8 @@ public class RequestManager implements ResponseListenerInterface {
         try {
             if(jsonResponse.getString("success").equalsIgnoreCase("true")){
                 // Decode the json object
-                Log.d(LOG_TAG_MANAGER, jsonResponse.toString());
+                if(TEST_MODE)
+                    Log.d(LOG_TAG_MANAGER, jsonResponse.toString());
                 responseTo.decodeResponse(jsonResponse.toString());
             }
             else{
@@ -237,7 +239,6 @@ public class RequestManager implements ResponseListenerInterface {
                                 List<NameValuePair> params = new ArrayList<NameValuePair>(requestData.size());
 
                                 for (Map.Entry<String, String> entry : credentials.entrySet()) {
-                                    Log.d("credentials: ", "" + entry.getKey() + " ----- " + entry.getValue().toString());
                                     params.add(new BasicNameValuePair(entry.getKey(), entry.getValue()));
                                 }
 
@@ -248,10 +249,10 @@ public class RequestManager implements ResponseListenerInterface {
                                 httppost.setHeader("Content-Type", "application/x-www-form-urlencoded");
                                 //httppost.setHeader("Host",getRequestURL(this.method) );
 
-                                //Log.v("Request",httppost.toString());
 
                                 HttpResponse response = httpclient.execute(httppost);
-                                Log.d(LOG_TAG_REQUEST + "response", response.toString());
+                                if(TEST_MODE)
+                                    Log.d(LOG_TAG_REQUEST + "response", response.toString());
 
 
                                 HttpEntity entity = response.getEntity();
@@ -260,9 +261,10 @@ public class RequestManager implements ResponseListenerInterface {
                                     InputStream streamZipCodes = entity.getContent();
                                     try {
                                         stringResponse = parseToStringZipCodes(streamZipCodes);
-                                        //responseArray = responseParse(streamZipCodes,this.method);
-                                        Log.d(LOG_TAG_REQUEST + "Method", ":" + this.method);
-                                        Log.v(LOG_TAG_REQUEST + "Response", stringResponse);
+                                        if(TEST_MODE) {
+                                            Log.d(LOG_TAG_REQUEST + "Method", ":" + this.method);
+                                            Log.v(LOG_TAG_REQUEST + "Response", stringResponse);
+                                        }
                                     } catch (SAXException e) {
                                         e.printStackTrace();
                                     } catch (ParserConfigurationException e) {
@@ -314,13 +316,13 @@ public class RequestManager implements ResponseListenerInterface {
      */
     protected ArrayList<Map<String,String>> responseParse(Document doc,METHOD method){
         ArrayList<Map<String,String>> responseArray= new ArrayList<>();
-        Log.d("responseParse","inicial");
+        if(TEST_MODE)
+            Log.d("responseParse","inicial");
         switch (method){
             case REQUEST_ZIPCODE:
                 try {
                     responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"1");
                     setResponseArray(responseArray);
-                    //Log.d("responseParse","ok"+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -328,14 +330,14 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-                Log.v(METHOD.REQUEST_ZIPCODE.toString(), "parse");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_ZIPCODE.toString(), "parse");
                 break;
 
             case REQUEST_ZIPCODE_ADDRESSES:
                 try {
                     responseArray = ResponseManager.sharedInstance().parseZipCodes(doc,"0");
                     setResponseArray(responseArray);
-                    //Log.d("responseParse","ok"+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -343,14 +345,14 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "parse");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "parse");
                 break;
 
             case REQUEST_TRACKING_LIST_CODES:
                 try {
                     responseArray = ResponseManager.sharedInstance().parseGuide(doc);
                     setResponseArray(responseArray);
-                    //Log.d("responseParse","ok size: "+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -358,19 +360,18 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-                Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), "");
+                if(TEST_MODE)
+                    Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), "");
                 break;
             case REQUEST_TRACKING_LIST_GUIDES:
-
-                Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), "");
+                if(TEST_MODE)
+                    Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), "");
                 break;
             case REQUEST_NATIONAL_DELIVERY:
                 try {
                     responseArray = ResponseManager.sharedInstance().parseCotizador(doc);
                     setResponseArray(responseArray);
-                    Log.d("responseParse", "NATIONAL_DELIVERY");
 
-                    //Log.d("responseParse","ok size: "+responseArray.size());
                 } catch (SAXException e) {
                     e.printStackTrace();
                 } catch (IOException e) {
@@ -378,15 +379,14 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-
-                Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), "");
+                if(TEST_MODE)
+                    Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), "");
                 break;
             case REQUEST_INTERNATIONAL_DELIVERY:
 
                 try {
                     responseArray = ResponseManager.sharedInstance().parseCotizadorInternational(doc);
                     setResponseArray(responseArray);
-                    Log.d("responseParse", "INTERNATIONAL_DELIVERY");
 
                 } catch (SAXException e) {
                     e.printStackTrace();
@@ -396,15 +396,12 @@ public class RequestManager implements ResponseListenerInterface {
                     e.printStackTrace();
                 }
 
-                //Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(),"");
                 break;
             case REQUEST_OFFICES:
                 try {
 
-                    Log.d("responseParse", "OFFICINAS");
                     responseArray = ResponseManager.sharedInstance().parseOffices(doc);
                     setResponseArray(responseArray);
-                    //Log.d("responseParse", "" + responseArray.size());
                     setResponseArray(responseArray);;
                 } catch (SAXException e) {
                     e.printStackTrace();
@@ -413,7 +410,6 @@ public class RequestManager implements ResponseListenerInterface {
                 } catch (ParserConfigurationException e) {
                     e.printStackTrace();
                 }
-                //Log.v( METHOD.REQUEST_OFFICES.toString(), "");
                 break;
             case REQUEST_EXCEPTION_CODES:
                 try {
@@ -468,43 +464,51 @@ public class RequestManager implements ResponseListenerInterface {
         switch (type_request){
             case REQUEST_ZIPCODE:
                 url=  "http://validacpscs.estafeta.com/RestService.svc/ConsultaCP";
-                Log.v(METHOD.REQUEST_ZIPCODE.toString(), url);
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_ZIPCODE.toString(), url);
             break;
 
             case REQUEST_ZIPCODE_ADDRESSES:
                 url =  "http://validacpscs.estafeta.com/RestService.svc/ConsultaDatosCP";
-                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), url);
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), url);
             break;
 
             case REQUEST_TRACKING_LIST_CODES:
                 url =  "http://trackingcs.estafeta.com/RestService.svc/ExecuteQueryPlano";
-                Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), url);
+                if(TEST_MODE)
+                    Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), url);
             break;
 
             case REQUEST_TRACKING_LIST_GUIDES:
                 url =  "http://trackingcs.estafeta.com/RestService.svc/ExecuteQueryPlano";
-                Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), url);
+                if(TEST_MODE)
+                    Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), url);
             break;
 
             case REQUEST_NATIONAL_DELIVERY:
                 url =  "http://frecuenciacotizadorcs.estafeta.com/RestService.svc/FrecuenciaCotizadorPlano";
-                Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), url);
+                if(TEST_MODE)
+                    Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), url);
             break;
 
             case REQUEST_INTERNATIONAL_DELIVERY:
                 url =  "http://cotizadorintcs.estafeta.com/RestService.svc/CotizaPlano";
-                Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), url);
+                if(TEST_MODE)
+                    Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), url);
                 break;
 
             case REQUEST_OFFICES:
                 url = "http://sucursalescs.estafeta.com/RestService.svc/consultaConFechaPlano";
-                Log.v( "Request URL"+METHOD.REQUEST_OFFICES.toString(), url);
+                if(TEST_MODE)
+                    Log.v( "Request URL"+METHOD.REQUEST_OFFICES.toString(), url);
                 break;
 
 
             case REQUEST_EXCEPTION_CODES:
                 url =  "http://clavexcs.estafeta.com/RestService.svc/consultaConFechaMovilidadPlano";
-                Log.v( "Request URL"+METHOD.REQUEST_EXCEPTION_CODES.toString(), url);
+                if(TEST_MODE)
+                    Log.v( "Request URL"+METHOD.REQUEST_EXCEPTION_CODES.toString(), url);
             break;
 
             default:
@@ -525,15 +529,17 @@ public class RequestManager implements ResponseListenerInterface {
             case REQUEST_OFFICES:
                 requestData.put("idUsuario","1");
                 requestData.put("usuario","AdminUser");
-                requestData.put("password","zi+Eybk8");
+                requestData.put("password", "zi+Eybk8");
 
-                Log.v( METHOD.REQUEST_OFFICES.toString(), "");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_OFFICES.toString(), "");
 
             case REQUEST_EXCEPTION_CODES:
                 requestData.put("idUsuario","1");
                 requestData.put("usuario","AdminUser");
-                requestData.put("password","zi+Eybk8");
-                Log.v( METHOD.REQUEST_EXCEPTION_CODES.toString(), "");
+                requestData.put("password", "zi+Eybk8");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_EXCEPTION_CODES.toString(), "");
                 break;
 
             case REQUEST_ZIPCODE:
@@ -541,42 +547,48 @@ public class RequestManager implements ResponseListenerInterface {
                 requestData.put("login", "AdminUser");
                 requestData.put("password", "zi+Eybk8");
 
-                Log.v(METHOD.REQUEST_ZIPCODE.toString(), "");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_ZIPCODE.toString(), "");
                 break;
             case REQUEST_ZIPCODE_ADDRESSES:
                 requestData.put("suscriberId", "1");
                 requestData.put("login", "AdminUser");
                 requestData.put("password", "zi+Eybk8");
-                Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_ZIPCODE_ADDRESSES.toString(), "");
                 break;
             case REQUEST_TRACKING_LIST_CODES:
                 requestData.put("suscriberId", "1");
                 requestData.put("login", "AdminUser");
                 requestData.put("password", "zi+Eybk8");
-                Log.v( METHOD.REQUEST_TRACKING_LIST_CODES.toString(), "");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_TRACKING_LIST_CODES.toString(), "");
                 break;
             case REQUEST_TRACKING_LIST_GUIDES:
                 requestData.put("suscriberId", "1");
                 requestData.put("login", "AdminUser");
                 requestData.put("password", "zi+Eybk8");
-                Log.v( METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), "");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_TRACKING_LIST_GUIDES.toString(), "");
                 break;
             case REQUEST_NATIONAL_DELIVERY:
                 requestData.put("idUsuario","1");
                 requestData.put("usuario","AdminUser");
                 requestData.put("contra",",1,B(vVi");
                 requestData.put("esFrecuencia","false");
-                requestData.put("esLista","true");
+                requestData.put("esLista", "true");
 
-                Log.v( METHOD.REQUEST_NATIONAL_DELIVERY.toString(), "");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_NATIONAL_DELIVERY.toString(), "");
                 break;
             case REQUEST_INTERNATIONAL_DELIVERY:
                 requestData.put("idUsuario","1");
                 requestData.put("usuario","AdminUser");
                 requestData.put("pass","zi+Eybk8");
                 requestData.put("modalidad","0");
-                requestData.put("medicion","0");
-                Log.v( METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), "");
+                requestData.put("medicion", "0");
+                if(TEST_MODE)
+                    Log.v(METHOD.REQUEST_INTERNATIONAL_DELIVERY.toString(), "");
                 break;
 
 

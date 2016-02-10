@@ -1,6 +1,7 @@
 package com.estafeta.estafetamovilv1.Adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -143,8 +144,14 @@ public class SpinnerAdapter extends BaseAdapter {
             view.setTag("DIALOG2");
         }
 
-
         TextView main_text = (TextView) view .findViewById(R.id.txt_spn_item);
+
+        if(i == 0){
+            main_text.setTextColor(Color.GRAY);
+        }
+
+
+
 
         switch (type){
             case STATES:

@@ -2,6 +2,7 @@ package com.estafeta.estafetamovilv1.Utils;
 
 import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,5 +65,30 @@ public class DatesHelper {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
         return (int)calendar.getTimeInMillis();
+    }
+
+    public static boolean comparateDateIsLess(Date date1, Date date2){
+        if(date1.compareTo(date2)>0){
+            System.out.println("Date1 is after Date2");
+                return false;
+        }else if(date1.compareTo(date2)<0){
+            System.out.println("Date1 is before Date2");
+            return true;
+        }else{
+            System.out.println("Date1 is equal to Date2");
+        }
+        return false;
+    }
+
+    public static Date stringToDate(String date) {
+
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            Date fecha = formatter.parse(date);
+            return fecha;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android           ="http://schemas.android.com/apk/res/android"
+    android:orientation     ="vertical"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:gravity         ="center">
+
+    <LinearLayout
+        android:layout_width    ="@dimen/sizeDialogGetDataWidth"
+        android:layout_height   ="@dimen/sizeDialogGetDataHeight"
+        android:orientation     ="vertical"
+        android:paddingLeft     ="20dp"
+        android:paddingRight    ="20dp"
+        android:paddingTop      ="20dp"
+        android:paddingBottom   ="20dp"
+        android:background      ="@color/white">
+
+        <TextView
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:gravity             ="center"
+            android:layout_marginBottom ="@dimen/marginContinuePrefilled2"
+            android:textSize            ="@dimen/sizeNormalText"
+            android:textStyle           ="bold"
+            android:textColor           ="@color/estafeta_dark_gray"
+            android:text                ="@string/get_data_contacts"/>
+
+        <TextView
+            android:id                  ="@+id/lbl_contacts"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:paddingTop          ="10dp"
+            android:paddingBottom       ="10dp"
+            android:layout_marginBottom ="@dimen/marginContinuePrefilled2"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:textColor           ="@color/estafeta_text_light_gray"
+            android:text                ="@string/contacts"
+            />
+
+        <TextView
+            android:id                  ="@+id/lbl_frequently"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:paddingTop          ="10dp"
+            android:paddingBottom       ="10dp"
+            android:layout_marginBottom ="@dimen/marginContinuePrefilled2"
+            android:textSize            ="@dimen/sizeMediumText"
+            android:textColor           ="@color/estafeta_text_light_gray"
+            android:text                ="@string/frequently"
+            />
+
+        <LinearLayout
+            android:layout_width    ="match_parent"
+            android:layout_height   ="match_parent"
+            android:orientation     ="horizontal"
+            android:gravity         ="center_horizontal|bottom"
+            android:weightSum       ="100">
+
+
+            <Button
+                android:id              ="@+id/btn_cancel"
+                android:layout_width    ="0dp"
+                android:layout_height   ="wrap_content"
+                android:layout_weight   ="60"
+                android:gravity         ="center"
+                android:textSize        ="@dimen/sizeMediumText"
+                android:textColor       ="@color/estafeta_red"
+                android:textAllCaps     ="false"
+                android:background      ="@android:color/transparent"
+                android:text            ="@string/cancel"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

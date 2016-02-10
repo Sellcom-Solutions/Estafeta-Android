@@ -59,7 +59,7 @@ public class CPAListAdapter extends BaseAdapter{
 
     @Override
     public Object getItem(int position) {
-         return colonias.get(position).get("cp");
+         return colonias.get(position);
         //return null;
     }
 

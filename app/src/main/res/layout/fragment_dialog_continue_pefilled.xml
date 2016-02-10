@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android     ="http://schemas.android.com/apk/res/android"
+    android:orientation         ="vertical"
+    android:layout_width        ="wrap_content"
+    android:layout_height       ="wrap_content"
+    android:gravity             ="center_horizontal"
+    android:paddingTop          ="20dp"
+    android:paddingRight        ="30dp"
+    android:paddingLeft         ="30dp"
+    android:paddingBottom       ="15dp"
+    android:background          ="@color/white">
+
+    <TextView
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:textSize            ="@dimen/sizeLargeText"
+        android:textColor           ="@android:color/black"
+        android:layout_marginBottom ="@dimen/marginContinuePrefilled"
+        android:gravity             ="center"
+        android:text                ="@string/prefilled_code"
+        />
+
+    <TextView
+        android:layout_width            ="match_parent"
+        android:layout_height           ="wrap_content"
+        android:layout_marginBottom     ="@dimen/marginContinuePrefilled"
+        android:textSize                ="@dimen/sizeSmallText"
+        android:textColor               ="@color/estafeta_text"
+        android:text                    ="@string/instruction_prefilled"/>
+
+    <EditText
+        android:id                  ="@+id/txt_prefilled_code"
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:layout_marginBottom ="@dimen/marginContinuePrefilled"
+        android:textSize            ="@dimen/sizeMediumText"
+        android:hint                ="@string/code"
+        android:textCursorDrawable  ="@null"
+        android:textColorHint       ="@color/estafeta_red"
+        android:textColor           ="@color/estafeta_text"/>
+
+    <LinearLayout
+        android:layout_width        ="match_parent"
+        android:layout_height       ="wrap_content"
+        android:orientation         ="horizontal"
+        android:layout_marginBottom ="@dimen/marginContinuePrefilled2"
+        android:gravity             ="right"
+        android:weightSum           ="100">
+
+
+        <Button
+            android:id              ="@+id/btn_cancel"
+            android:layout_width    ="0dp"
+            android:layout_height   ="wrap_content"
+            android:layout_weight   ="40"
+            android:gravity         ="center_vertical|right"
+            android:textSize        ="@dimen/sizeMediumText"
+            android:textColor       ="@color/estafeta_red"
+            android:textAllCaps     ="false"
+            android:background      ="@android:color/transparent"
+            android:text            ="@string/cancel"/>
+
+        <Button
+            android:id              ="@+id/btn_continue"
+            android:gravity         ="center_vertical|right"
+            android:layout_width    ="0dp"
+            android:layout_height   ="wrap_content"
+            android:layout_weight   ="40"
+            android:textSize        ="@dimen/sizeMediumText"
+            android:textColor       ="@color/estafeta_red"
+            android:textAllCaps     ="false"
+            android:background      ="@android:color/transparent"
+            android:text            ="@string/continue_btn"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

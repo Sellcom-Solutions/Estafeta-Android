@@ -18,6 +18,7 @@ import com.estafeta.estafetamovilv1.R;
 import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.Utilities;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,9 +80,8 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
             Map<String, String> requestData     = new HashMap<>();
             //String fecha = Offices.getVersion(context);
 
-            String fecha                        = "2012-09-16 15:01:22.000";
             SharedPreferences sharedPref        = getPreferences(Context.MODE_PRIVATE);
-            last_date                           = sharedPref.getString("last_date", fecha);
+            last_date                           = sharedPref.getString("last_date", "2012-09-16 15:01:22.000");
             requestData.put("ultimaAct", last_date);
             Log.d(TAG, "Llama al servicio");
             method                              = "oficinas";
@@ -205,6 +205,16 @@ public class SplashScreenActivity extends ActionBarActivity implements UIRespons
         }
         @Override
         protected void onPostExecute(String result) {
+
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            //get current date time with Date()
+            Date date = new Date();
+
+            SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+            editor.putString("last_date", dateFormat.format(date));
+            editor.commit();
+
+
             Intent intent = new Intent(SplashScreenActivity.this,MainActivity.class);
             startActivity(intent);
             finish();

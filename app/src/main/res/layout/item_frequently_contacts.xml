@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/lin_container_frequently"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="75"
+        android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="@dimen/sizeImageCheck"
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/marginLeftImageCheck"
+        android:paddingBottom="@dimen/marginLeftImageCheck"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/marginLeftImageCheck">
+        <CheckBox
+            android:id="@+id/btn_favorito"
+            android:layout_width        ="match_parent"
+            android:layout_height       ="match_parent"
+            android:layout_gravity="center"
+            android:scaleY=".8"
+            android:scaleX=".8"
+            style="@style/StarCheckBox"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id                      ="@+id/linear_rastreo"
+        android:layout_width            ="match_parent"
+        android:layout_height           ="match_parent"
+        android:gravity="center"
+        android:layout_gravity="right"
+        android:layout_toLeftOf="@+id/lin_delete"
+        android:orientation             ="vertical">
+
+        <TextView
+            android:id="@+id/lbl_name_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/sizeSmallText"
+            android:textColor="@color/estafeta_text"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:text="Nombre Apellido Apellido"/>
+
+        <TextView
+            android:id="@+id/lbl_cp_contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="@dimen/sizeXSmallText"
+            android:textColor="@color/estafeta_text_light_gray"
+            android:text="C.P. 00000"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_delete"
+        android:layout_width="0dp"
+        android:layout_gravity="right"
+        android:layout_height="match_parent"
+        android:layout_weight="25"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:background="@color/estafeta_red"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerInside"
+            android:src="@drawable/delete"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

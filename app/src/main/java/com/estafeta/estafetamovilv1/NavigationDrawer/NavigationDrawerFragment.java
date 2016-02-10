@@ -28,15 +28,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
 public class NavigationDrawerFragment extends Fragment implements NavigationDrawerCallbacks {
 
     public static final int RASTREO             = 0;
     public static final int OFICINAS            = 1;
-    //public static final int PRELLENADO          = 2;
-    public static final int COTIZADOR           = 2;
-    //public static final int HISTORIAL           = 4;
-    public static final int CODIGO_POSTAL       = 3;
-    public static final int AVISO_PRIVACIDAD    = 4;
+    public static final int PRELLENADO          = 2;
+    public static final int COTIZADOR           = 3;
+//    public static final int HISTORIAL           = 4;
+    public static final int CODIGO_POSTAL       = 4;
+    public static final int AVISO_PRIVACIDAD    = 5;
 
 
     public static final int RECOMMENDATIONS = 2;
@@ -146,25 +147,26 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
         mActionBarDrawerToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
 
+
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 if (!isAdded()) return;
-                getActivity().invalidateOptionsMenu();
+                    getActivity().invalidateOptionsMenu();
+
             }
 
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
                 super.onDrawerSlide(drawerView, slideOffset);
-
                 InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(toolbar.getWindowToken(), 0);
+
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-
                 if (!isAdded()) return;
                 //Utilities.hideKe  yboard(getActivity(), new EditText(getActivity()));
                 img_estafeta.setImageDrawable(getResources().getDrawable(R.drawable.menu_estafeta));
@@ -207,6 +209,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         if (mCallbacks != null) {
             mCallbacks.onNavigationDrawerItemSelected(position);
         }
+
         ((NavigationDrawerAdapter) mDrawerList.getAdapter()).selectPosition(position);
     }
 
@@ -255,7 +258,23 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         mDrawerLayout = drawerLayout;
     }
 
+    public void setDrawerState(boolean isEnabled) {
+        if ( isEnabled ) {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+            mActionBarDrawerToggle.onDrawerStateChanged(DrawerLayout.LOCK_MODE_UNLOCKED);
+            mActionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+            mActionBarDrawerToggle.syncState();
+            //getActivity().getActionBar().setHomeButtonEnabled(true);
 
+        }
+        else {
+            mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mActionBarDrawerToggle.onDrawerStateChanged(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+            mActionBarDrawerToggle.setDrawerIndicatorEnabled(false);
+            mActionBarDrawerToggle.syncState();
+            //getActivity().getActionBar().setHomeButtonEnabled(false);
+        }
+    }
 
 
 }

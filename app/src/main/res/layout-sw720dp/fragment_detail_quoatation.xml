@@ -375,42 +375,57 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeSmallText"
-                            android:textStyle="bold"
-                            android:textColor="@color/estafeta_text"
-                            android:layout_marginRight="5dp"
-                            android:layout_marginTop="5dp"
-                            android:text="Costo total:"/>
 
-                        <TextView
-                            android:layout_marginTop="5dp"
-                            android:id="@+id/txv_costo_total"
-                            android:layout_width="130dp"
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeSmallText"
-                            android:textStyle="bold"
-                            android:textColor="@color/estafeta_text"
-                            android:text=""/>
+                            android:layout_weight="60"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sizeSmallText"
+                                android:textStyle="bold"
+                                android:textColor="@color/estafeta_text"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginTop="5dp"
+                                android:text="Costo total:"/>
 
-                        <Button
-                            android:paddingTop="5dp"
-                            android:id                  ="@+id/btn_buy"
-                            android:layout_width        ="wrap_content"
-                            android:layout_height       ="match_parent"
-                            android:text                ="@string/buy"
-                            android:textSize            ="@dimen/sizeSmallText"
-                            android:textColor           ="@color/estafeta_red"
-                            android:background          ="@android:color/transparent"
-                            android:gravity="right"
-                            android:layout_gravity="right"
-                            android:visibility="gone"/>
+                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:id="@+id/txv_costo_total"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/sizeSmallText"
+                                android:textStyle="bold"
+                                android:textColor="@color/estafeta_text"
+                                android:text=""/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="40"
+                            android:orientation="vertical"
+                            android:weightSum="100">
+                            <Button
+                                android:id                  ="@+id/btn_buy"
+                                android:layout_width        ="match_parent"
+                                android:layout_height       ="70dp"
+                                android:text                ="@string/buy"
+                                android:textSize            ="@dimen/sizeSmallText"
+                                android:textColor           ="@color/white"
+                                android:background          ="@drawable/border_button_red"
+                                android:gravity="center"
+                                android:visibility="gone"/>
+                        </LinearLayout>
                     </LinearLayout>
 
                     <TextView

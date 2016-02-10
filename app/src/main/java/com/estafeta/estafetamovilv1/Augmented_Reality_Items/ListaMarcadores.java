@@ -23,7 +23,7 @@ public class ListaMarcadores {
     public static List<Marcador> listaMarcadores;
     public static double tolerancia=Pantalla.Angulo_Tolerancia;
     public static double distancia;
-    private static final float DISTANCIA= FragmentOfficesMap.distancia_max_deteccion;
+    private static final float DISTANCIA= 5000;
     private static final int NUMERO_ELEMENTOS = 5;
 
     public static void actualizarMarcadores(Context context){
@@ -352,6 +352,8 @@ public class ListaMarcadores {
         //posicionX=posicionX-parametros.width;
 
         posicionY= posicionY-   alto ;
+
+        posicionY = (int) (Pantalla.ALTO/2) - alto;
         //posicionY=
         return posicionY;
         //Toast t=Toast.makeText(c,"Identificados: "+identificados.size(),Toast.LENGTH_LONG);

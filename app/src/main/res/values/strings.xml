@@ -20,18 +20,19 @@
     <!-- Drawer options strings -->
     <string-array name="drawer_items">
         <item>Rastreo</item>
-        <item>Oficinas</item>
-        <!--<item>Prellenado de Guías</item> -->
-       <item>Cotizador</item>
+        <item>Sucursales</item>
+        <item>Prellenado de guías</item>
+        <item>Cotizador</item>
         <!--<item>Historial de operaciones</item>-->
-       <item>Código postal</item>
-       <item>Aviso de privacidad</item>
-       <item>Favoritos</item>
+        <item>Código postal</item>
+        <item>Aviso de privacidad</item>
+        <item>Favoritos</item>
         <item>Historia</item>
         <item>Detalle</item>
-</string-array>
+        <item>Contactos frecuentes</item>
+    </string-array>
 
-<!-- Globals -->
+    <!-- Globals -->
     <string name="Search">Buscar</string>
     <string name="offices_search_by_address">Buscar por dirección</string>
     <string name="city_etc">Ciudad, municipio, delegación*</string>
@@ -92,7 +93,7 @@
     <string name="view_ar">Ver a mi alrededor</string>
     <string name="loading_AR_elements">Loading components...</string>
     <string name="offices_near"> Cerca de mí</string>
-    <string name="oficinas">Oficinas</string>
+    <string name="oficinas">Sucursales</string>
     <string name="ubicar_oficinas">Ubicar oficinas</string>
 
     <!--Fragment Quotation-->
@@ -155,7 +156,6 @@
     <string name="payment_reference">Referencia de pago: </string>
 
 
-
     <!-- Codigo Postal -->
     <string name="verificar_codigo">Validar un código postal</string>
     <string name="abr_codigo">C.P.</string>
@@ -201,6 +201,7 @@
     <string name="error_agregar_fav">No existe información acerca de este registro, no puede agregarse a favoritos.</string>
     <string name="exito_agregar_fav">Operación exitosa.</string>
     <string name="no_sensor">No es posible llevar a cabo la función de realidad aumentada debido a que tu dispositivo no cuenta con sensor de campo magnético. </string>
+    <string name="error_service">Error contactando al servidor, intente de nuevo mas tarde.</string>
 
     <!-- Data base -->
     <string name="db_trackdata">CREATE TABLE "trackdata" ("id_trackdata"  INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "waybill"  TEXT(24),
@@ -253,6 +254,11 @@
         "Nombre_destinatario" TEXT, "Destino" TEXT, "CPD" TEXT,
         "Tipo_servicio" TEXT, "Garantia" TEXT, "Costo" TEXT,
         "Referencia" TEXT, Fecha TEXT)</string>
+
+    <string name="db_frequently_contacts">CREATE TABLE "frequently_contacts" ("id_frequently" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"name_contact"  TEXT(24) NOT NULL,
+                                   "business_name_contact"  TEXT(24), "street_contact"  TEXT(24), "no_ext_contact"  TEXT(24), "no_int_contact"  TEXT(24),
+                                     "cp_contact"  TEXT(24), "phone_contact"  TEXT(24), "email_contact"  TEXT(24), "reference_contact"  TEXT(24), "nave_contact"  TEXT(24),
+                                    "platform_contact"  TEXT(24), "timestamp"  TEXT(24) , "status_contact"  TEXT(24))</string>
 
 
     <!-- ********************   Strings aplicación anterior   ************************** -->
@@ -338,6 +344,61 @@
     <string name="gps_alert_go">Ir a ajustes</string>
     <string name="gps_alert_cancel">Cancelar</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- FragmentPrellenado -->
+    <string name="module_name">Prellenado de guías</string>
+    <string name="data_sender">Datos de remitente</string>
+    <string name="prefilled_name">Nombre</string>
+    <string name="prefilled_business_name">Razón social</string>
+    <string name="prefilled_street">Calle</string>
+    <string name="prefilled_no_ext">No. Ext.</string>
+    <string name="prefilled_no_int">No. Int.</string>
+    <string name="prefilled_zip_code">Código postal</string>
+    <string name="prefilled_phone">Teléfono</string>
+    <string name="prefilled_email">Correo electrónico</string>
+    <string name="sender_next">Siguiente</string>
+
+
+    <!--dialog_prefilled_code -->
+    <string name="instruction_prefilled">Introduzca el código alfanumérico de \"X\" dígitos generado para continuar con el prellenado iniciado previamente.</string>
+    <string name="continue_btn">Continuar</string>
+    <string name="code">Código</string>
+    <string name="prefilled_code">Código de prellenado</string>
+
+    <!-- dialog_prefilled_save_contact -->
+    <string name="question_previous_save_sender">¿Desea guardar los datos de remitente como contacto frecuente?</string>
+    <string name="question_previous_save_addreessee">¿Desea guardar los datos de destinatario como contacto frecuente?</string>
+
+    <!-- FragmentDialogGetDataContacts -->
+    <string name="get_data_contacts">Extraer datos</string>
+    <string name="contacts">Contactos</string>
+    <string name="frequently">Frecuentes</string>
+
+    <!-- FragmentPrefilledAddressee -->
+    <string name="data_addressee">Datos de destinatario</string>
+    <string name="addressee_reference">Referencia</string>
+    <string name="addressee_nave">Nave</string>
+    <string name="addressee_platform">Andén</string>
+    <string name="generate_code">Generar código</string>
+
+    <!-- FragmentDialogQRCode -->
+    <string name="extra_info_save_as">Su prellenado de guía se guarda automáticamente, puede consultarlo en el apartado de historial de operaciones. <b>Vigencia 10 días hábiles.</b></string>
+    <string name="save_as">Guardar como</string>
+
+    <!-- FragmentDialogGetDateFrequentlyContacts -->
+    <string name="get_data">¿Desea extraer los datos del contacto</string>
+
+    <!-- FragmentDialogGPostponePrefilled -->
+    <string name="postpone_prefilled">Posponer prellenado</string>
+    <string name="code_get_prefilled">Código para recuperar tu prellenado. Este código tiene vigencia de 10 días hábiles.</string>
+    <string name="add_email_to_send_prefilled">Ingresa un correo electrónico al cual deseas que se envíe el código para reanudar tu prellenado.</string>
+    <string name="add_email">Agregar correo</string>
+    <string name="add_other_email">Agregar otra cuenta</string>
+    <string name="send">Enviar</string>
+
+    <!-- FragmentFrequentlyContacts -->
+    <string name="mark_five_contacts">Puede marcar hasta 5 contactos como favoritos</string>
 
 </resources>

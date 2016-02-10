@@ -80,9 +80,9 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
         view = inflater.inflate(R.layout.fragment_quotation_buy_fields, container, false);
         initvariables();
         Bundle b = getArguments();
-        CP = b.getString(FragmentQuotationBuy.EXTRAS.CP.toString());
+        CP = b.getString(FragmentQuotationBuy2.EXTRAS.CP.toString());
         version = b.getInt(EXTRAS.VERSION.toString());
-        data = (Map<String, String>) b.getSerializable(FragmentQuotationBuy.EXTRAS.DATOS.toString());
+        data = (Map<String, String>) b.getSerializable(FragmentQuotationBuy2.EXTRAS.DATOS.toString());
         fromInflate = (Map<String,Map<String,String>>)b.getSerializable(EXTRAS.DATA.toString());
         setParametersToVariables();
         setPreviousData();
@@ -128,7 +128,7 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
         switch (version){
             case ORIGIN:
                 items = new String[1];
-                items[0] = fromInflate.get(FragmentQuotationBuy.ESTADO_ORIGEN).get("0");
+                items[0] = fromInflate.get(FragmentQuotationBuy2.ESTADO_ORIGEN).get("0");
                 adapter = new ArrayAdapter<String>(getActivity(),
                         R.layout.spinner_item, items);
                 adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -137,7 +137,7 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
 
             case DESTINY:
                 items = new String[1];
-                items[0] = fromInflate.get(FragmentQuotationBuy.ESTADO_DESTINO).get("0");
+                items[0] = fromInflate.get(FragmentQuotationBuy2.ESTADO_DESTINO).get("0");
                 adapter = new ArrayAdapter<String>(getActivity(),
                         R.layout.spinner_item, items);
                 adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -153,7 +153,7 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
         switch (version){
             case ORIGIN:
                 items = new String[1];
-                items[0] = fromInflate.get(FragmentQuotationBuy.MUNICIPIO_ORIGEN).get("0");
+                items[0] = fromInflate.get(FragmentQuotationBuy2.MUNICIPIO_ORIGEN).get("0");
                 adapter = new ArrayAdapter<String>(getActivity(),
                         R.layout.spinner_item, items);
                 adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -162,7 +162,7 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
 
             case DESTINY:
                 items = new String[1];
-                items[0] = fromInflate.get(FragmentQuotationBuy.MUNICIPIO_DESTINO).get("0");
+                items[0] = fromInflate.get(FragmentQuotationBuy2.MUNICIPIO_DESTINO).get("0");
                 adapter = new ArrayAdapter<String>(getActivity(),
                         R.layout.spinner_item, items);
                 adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
@@ -179,7 +179,7 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
         Map<String,String> cols;
         switch (version){
             case ORIGIN:
-                cols = fromInflate.get(FragmentQuotationBuy.COLONIA_ORIGEN);
+                cols = fromInflate.get(FragmentQuotationBuy2.COLONIA_ORIGEN);
                 items = new String[cols.size()];
                 for (int index = 0; index < cols.size(); index++){
                     items[index] = cols.get(String.valueOf(index));
@@ -191,7 +191,7 @@ public class FragmentQuotationBuyFields extends TrackerFragment{
                 break;
 
             case DESTINY:
-                cols = fromInflate.get(FragmentQuotationBuy.COLONIA_DESTINO);
+                cols = fromInflate.get(FragmentQuotationBuy2.COLONIA_DESTINO);
                 items = new String[cols.size()];
                 for (int index = 0; index < cols.size(); index++){
                     items[index] = cols.get(String.valueOf(index));

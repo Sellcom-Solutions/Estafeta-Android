@@ -1,0 +1,98 @@
+<LinearLayout
+    xmlns:android           ="http://schemas.android.com/apk/res/android"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:orientation     ="vertical"
+    android:background      ="@color/white"
+    android:weightSum       ="100">
+
+
+    <LinearLayout
+        android:orientation     ="vertical"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="96"
+        android:background      ="@color/white"
+        android:weightSum       ="100">
+
+        <LinearLayout
+            android:layout_width    ="match_parent"
+            android:layout_height   ="0dp"
+            android:layout_weight   ="28"
+            android:orientation     ="vertical">
+
+            <FrameLayout
+                android:layout_width    ="match_parent"
+                android:layout_height   ="match_parent"
+                android:orientation     ="vertical"
+                android:gravity         ="center">
+
+                <ImageView
+                    android:id                  ="@+id/imgv_prefilled_head"
+                    android:layout_width        ="match_parent"
+                    android:layout_height       ="wrap_content"
+                    android:src                 ="@drawable/head_cpostal"
+                    android:adjustViewBounds    ="true"
+                    android:scaleType           ="centerCrop"
+                    android:paddingLeft         ="-10dp"
+                    android:paddingRight        ="-10dp"
+                    android:paddingBottom       ="30dp"
+                    android:layout_gravity      ="top|center_horizontal"/>
+
+                <FrameLayout
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="match_parent">
+
+                    <TextView
+                        android:layout_width        ="match_parent"
+                        android:layout_height       ="match_parent"
+                        android:text                ="@string/module_name"
+                        android:textSize            ="@dimen/sizeNormalLargeText"
+                        android:layout_weight       ="100"
+                        android:paddingLeft         ="80dp"
+                        android:layout_marginTop    ="40dp"
+                        android:textColor           ="@color/estafeta_text"
+                        android:layout_gravity      ="right"
+                        android:gravity             ="center"/>
+
+                </FrameLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id              ="@+id/prefillect_container"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="0dp"
+            android:layout_weight   ="72">
+
+
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="4"
+        android:orientation     ="vertical"
+        android:layout_gravity  ="center"
+        android:background      ="@color/white">
+
+
+        <TextView
+            android:id              ="@+id/footer"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="match_parent"
+            android:textSize        ="@dimen/footerSize"
+            android:text            ="@string/footer"
+            android:textColor       ="@color/estafeta_soft_gray"
+            android:textStyle       ="bold"
+            android:gravity         ="center"
+            />
+    </LinearLayout><!--5-->
+
+
+</LinearLayout>

@@ -28,7 +28,7 @@ import java.util.Map;
  * Created by anel 01/07/2015.
  * This class shows the detail of a saved favorites scan.
  */
-public class FragmentDialogFavorite  extends TrackerFragment implements View.OnClickListener {
+public class FragmentDetailFavorite extends TrackerFragment implements View.OnClickListener {
 
     String TAG = "FRAG_DIALOG_FAVORITE";
 
@@ -72,7 +72,7 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         context = getActivity();
-        View view = inflater.inflate(R.layout.fragment_dialog_favorite, container, false);
+        View view = inflater.inflate(R.layout.fragment_detail_favorite, container, false);
 
         fav_no_guia = (TextView) view.findViewById(R.id.fav_no_guia);
         fav_codigo = (TextView) view.findViewById(R.id.fav_cod_rastreo);
@@ -114,7 +114,7 @@ public class FragmentDialogFavorite  extends TrackerFragment implements View.OnC
         String currentYear = formatter.format(new Date());
         footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
-        TrackerFragment.section_index = 7;
+        TrackerFragment.section_index = 9;
 
         final FloatingActionButton btn_call = (FloatingActionButton) view.findViewById(R.id.btn_fav_call);
         final FloatingActionButton btn_share = (FloatingActionButton) view.findViewById(R.id.btn_fav_share);

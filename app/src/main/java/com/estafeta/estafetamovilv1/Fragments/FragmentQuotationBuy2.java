@@ -32,7 +32,7 @@ import database.model.Buys;
 /**
  * Created by juan.guerra on 07/07/2015.
  */
-public class FragmentQuotationBuy extends TrackerFragment implements View.OnClickListener,
+public class FragmentQuotationBuy2 extends TrackerFragment implements View.OnClickListener,
         UIResponseListenerInterface{
 
     private View view;
@@ -91,7 +91,7 @@ public class FragmentQuotationBuy extends TrackerFragment implements View.OnClic
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_quotation_buy, container, false);
+        view = inflater.inflate(R.layout.fragment_quotation_buy2, container, false);
         context = getActivity();
         Bundle b = getArguments();
         CPO = b.getString(EXTRAS.CP_ORIGEN.toString());
@@ -386,10 +386,10 @@ public class FragmentQuotationBuy extends TrackerFragment implements View.OnClic
                 }
                 zipCodesLocationValues.put(COLONIA_DESTINO, aux);
                 costo.setText(COSTO);
-                cp_origen.setText(CPO + ". " +zipCodesLocationValues.get(FragmentQuotationBuy.MUNICIPIO_ORIGEN).get("0")
-                + ", " + zipCodesLocationValues.get(FragmentQuotationBuy.ESTADO_ORIGEN).get("0"));
-                cp_destino.setText(CPD + ". " +zipCodesLocationValues.get(FragmentQuotationBuy.MUNICIPIO_DESTINO).get("0")
-                + ", " + zipCodesLocationValues.get(FragmentQuotationBuy.ESTADO_DESTINO).get("0"));
+                cp_origen.setText(CPO + ". " +zipCodesLocationValues.get(FragmentQuotationBuy2.MUNICIPIO_ORIGEN).get("0")
+                + ", " + zipCodesLocationValues.get(FragmentQuotationBuy2.ESTADO_ORIGEN).get("0"));
+                cp_destino.setText(CPD + ". " +zipCodesLocationValues.get(FragmentQuotationBuy2.MUNICIPIO_DESTINO).get("0")
+                + ", " + zipCodesLocationValues.get(FragmentQuotationBuy2.ESTADO_DESTINO).get("0"));
 
                 chargeFragment(FragmentQuotationBuyFields.ORIGIN, origin);
             }

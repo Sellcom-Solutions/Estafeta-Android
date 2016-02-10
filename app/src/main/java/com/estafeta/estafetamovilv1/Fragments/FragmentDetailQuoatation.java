@@ -17,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.LinearLayout;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.QuoteAndBuy.FragmentQuotationBuy;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.estafeta.estafetamovilv1.Adapters.DetailQuotationAdapter;
 import com.estafeta.estafetamovilv1.R;
@@ -25,6 +27,7 @@ import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 import com.estafeta.estafetamovilv1.Utils.Utilities;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -704,7 +707,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
             case R.id.btn_buy:
 
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                /*FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.addToBackStack(null);
                 TrackerFragment fragment = new FragmentQuotationBuy();
                 Bundle b = new Bundle();
@@ -714,7 +717,24 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 fragment.setArguments(b);
                 fragment.addFragmentToStack(getActivity());
                 fragmentTransaction.replace(R.id.container, fragment, "");
-                fragmentTransaction.commit();
+                fragmentTransaction.commit();*/
+
+                TrackerFragment fragment = new FragmentQuotationBuy();
+                Bundle b = new Bundle();
+                Map<String,String> dataQuotation = new HashMap<>();
+                dataQuotation.put("cp_origin",map.get("CodigoPosOri"));
+                dataQuotation.put("city_origin",map.get("MunicipioOri"));
+                dataQuotation.put("state_origin",map.get("EstadoOri"));
+                dataQuotation.put("cp_destiny",map.get("CpDestino"));
+                dataQuotation.put("city_destiny",map.get("Municipio"));
+                dataQuotation.put("state_destiny",map.get("Estado"));
+                dataQuotation.put("total_coste", txv_costo_total.getText().toString());
+
+                b.putSerializable("dataQuotation", (Serializable) dataQuotation);
+                fragment.setArguments(b);
+                addFragmentToStack(getActivity(), fragment, FragmentQuotationBuy.TAG, true);
+
+
                 break;
 
         }

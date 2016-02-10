@@ -292,7 +292,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             btn_cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e(TAG, "CANCEL");
+                    Log.d(TAG, "CANCEL");
                     dialogCP.dismiss();
                 }
             });
@@ -300,7 +300,7 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             btn_search.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e(TAG, "ACCEPT");
+                    Log.d(TAG, "ACCEPT");
                     searchZC();
                 }
             });
@@ -1085,12 +1085,12 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
 
                     adapter.setSelectionState(true, view);
                     adapter.setLastSelectedItemPosition(position);
-                    cp_obtenido = lv_dialog_colonia.getItemAtPosition(positionCP).toString();
+                    cp_obtenido = ((Map<String,String>)lv_dialog_colonia.getItemAtPosition(positionCP)).get("cp");
 
                 }
             });
 
-            cp_obtenido = lv_dialog_colonia.getItemAtPosition(positionCP).toString();
+            cp_obtenido = ((Map<String,String>)lv_dialog_colonia.getItemAtPosition(positionCP)).get("cp");
 
             tv_dialog_ciudad.setText(ciudadString);
 

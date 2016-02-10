@@ -1,6 +1,7 @@
 package com.estafeta.estafetamovilv1.NavigationDrawer;
 
 import android.graphics.Color;
+import android.os.SystemClock;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -8,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
+import com.estafeta.estafetamovilv1.NavigationDrawer.NavigationDrawerCallbacks;
+import com.estafeta.estafetamovilv1.NavigationDrawer.NavigationItem;
 import com.estafeta.estafetamovilv1.R;
+
 import java.util.List;
 
 /**
  * Created by raymundo.piedra on 07/02/15.
- * This adapter is for NavigationDrawerFragment class.
  */
 public class NavigationDrawerAdapter extends RecyclerView.Adapter<NavigationDrawerAdapter.ViewHolder> {
 

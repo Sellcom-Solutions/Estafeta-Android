@@ -5,12 +5,13 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="list_item_horizontal_margin">4dp</dimen>
-    <dimen name="sizeNormalText">15sp</dimen>
-    <dimen name="sizeMediumText">20sp</dimen>
-    <dimen name="sizeLargeText">30sp</dimen>
+    <dimen name="sizeNormalText">20dp</dimen>
+    <dimen name="sizeNormalLargeText">22dp</dimen>
+    <dimen name="sizeMediumText">18dp</dimen>
+    <dimen name="sizeLargeText">25dp</dimen>
     <dimen name="navigation_drawer_width">220dp</dimen>
     <dimen name="dialog_width">400dp</dimen>
-    <dimen name="dimen_text_step_visit">25sp</dimen>
+    <dimen name="dimen_text_step_visit">25dp</dimen>
     <dimen name="dimen_item_step_visit">200dp</dimen>
-    <dimen name="sizeAugmentedRealityText">22sp</dimen>
+    <dimen name="sizeAugmentedRealityText">22dp</dimen>
 </resources>

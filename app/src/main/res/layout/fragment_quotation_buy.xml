@@ -1,0 +1,181 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:orientation     ="vertical"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="96"
+        android:background      ="@color/white"
+        android:weightSum       ="100">
+
+        <LinearLayout
+            android:layout_width    ="match_parent"
+            android:layout_height   ="0dp"
+            android:layout_weight   ="25"
+            android:orientation     ="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:weightSum="100"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="60"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="50"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeSmallText"
+                            android:textStyle="bold"
+                            android:textColor="@color/estafeta_text"
+                            android:layout_marginRight="5dp"
+                            android:text="Origen: "/>
+
+                        <TextView
+                            android:id="@+id/lbl_origin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeSmallText"
+                            android:textColor="@color/estafeta_text"
+                            android:text="01111, Huixquilucan, Edo, de México"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="50"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeSmallText"
+                            android:textStyle="bold"
+                            android:textColor="@color/estafeta_text"
+                            android:layout_marginRight="5dp"
+                            android:text="Destino: "/>
+
+                        <TextView
+                            android:id="@+id/lbl_destiny"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sizeSmallText"
+                            android:textColor="@color/estafeta_text"
+                            android:text="02222, Miguel Hidalgo, Distrito Federal"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:weightSum="100">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="70"
+                        android:background="@color/estafeta_text" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="40"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sizeSmallText"
+                        android:textStyle="bold"
+                        android:textColor="@color/estafeta_text"
+                        android:text="Costo total:"
+                        android:layout_marginTop="5dp"
+                        android:gravity="left"/>
+
+                    <TextView
+                        android:id="@+id/lbl_total_coste"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sizeSmallText"
+                        android:textColor="@color/estafeta_text"
+                        android:text=""
+                        android:gravity="left"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sizeXSmallText"
+                        android:textColor="@color/estafeta_text"
+                        android:text="Con IVA incluido."
+                        android:gravity="left"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/quotation_buy_container"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="0dp"
+            android:layout_weight   ="75"
+            android:orientation     ="vertical">
+
+
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="4"
+        android:orientation     ="vertical"
+        android:layout_gravity  ="center"
+        android:background      ="@color/white">
+
+
+        <TextView
+            android:id              ="@+id/footer"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="match_parent"
+            android:textSize        ="@dimen/footerSize"
+            android:text            ="@string/footer"
+            android:textColor       ="@color/estafeta_soft_gray"
+            android:textStyle       ="bold"
+            android:gravity         ="center"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

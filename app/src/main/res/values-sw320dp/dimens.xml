@@ -14,7 +14,7 @@
     <dimen name="dialog_width">250dp</dimen>
     <dimen name="sizeCamera">100dp</dimen>
     <dimen name="sizeItemProduct">72dp</dimen>
-    <dimen name="dimen_text_step_visit">20sp</dimen>
+    <dimen name="dimen_text_step_visit">20dp</dimen>
     <dimen name="dimen_item_step_visit">180dp</dimen>
 
     <!-- Partial Liquidation / Liquidacion Parcial -->
@@ -24,20 +24,41 @@
     <dimen name="size_button_dialog">12sp</dimen>
     <dimen name="dimen_photo">200dp</dimen>
 
-    <dimen name="sizeXXSmallText">10sp</dimen>
-    <dimen name="sizeXSmallText">12sp</dimen>
-    <dimen name="sizeSmallText">15sp</dimen>
-    <dimen name="sizeMediumText">18sp</dimen>
-    <dimen name="sizeNormalText">20sp</dimen>
-    <dimen name="sizeLargeText">25sp</dimen>
-    <dimen name="sizeXLargeText">30sp</dimen>
+    <dimen name="sizeXXSmallText">10dp</dimen>
+    <dimen name="sizeXSmallText">12dp</dimen>
+    <dimen name="sizeSmallText">15dp</dimen>
+    <dimen name="sizeMediumText">18dp</dimen>
+    <dimen name="sizeNormalText">20dp</dimen>
+    <dimen name="sizeNormalLargeText">22dp</dimen>
+    <dimen name="sizeLargeText">25dp</dimen>
+    <dimen name="sizeXLargeText">30dp</dimen>
     <dimen name="sizeAugmentedRealityText">10dp</dimen>
+
 
     <!--item_rastreo_efect  -->
 
-    <dimen name="sizeRastreoEfectuado">13sp</dimen>
+    <dimen name="sizeRastreoEfectuado">13dp</dimen>
 
     <!--Footer  -->
     <dimen name="footerSize">10dp</dimen>
+
+    <!-- Prefilled -->
+    <dimen name="sizeImagesPrefilledWidth">35dp</dimen>
+    <dimen name="sizeImagesPrefilledHeight">40dp</dimen>
+
+    <dimen name="sizeDialogSaveWidth">270dp</dimen>
+    <dimen name="sizeDialogSaveHeight">230dp</dimen>
+
+    <dimen name="marginContinuePrefilled">40dp</dimen>
+    <dimen name="marginContinuePrefilled2">5dp</dimen>
+
+    <dimen name="sizeDialogGetDataWidth">250dp</dimen>
+    <dimen name="sizeDialogGetDataHeight">230dp</dimen>
+
+    <dimen name="sizeImageCheck">50dp</dimen>
+    <dimen name="marginLeftImageCheck">10dp</dimen>
+
+    <dimen name="sizeImageQR">180dp</dimen>
+
 
 </resources>

@@ -39,7 +39,6 @@
             android:layout_marginTop    ="30dp"
             android:spinnerMode         ="dialog"
             style                       ="@style/mySpinnerItemStyle"
-            android:dividerHeight       ="0dp"
             />
 
         <LinearLayout
@@ -101,6 +100,7 @@
                 android:layout_height       ="wrap_content"
                 android:text                ="@string/quotation_search_zc_cancel"
                 android:textSize            ="@dimen/sizeMediumText"
+                android:textAllCaps         ="false"
                 android:textColor           ="@color/estafeta_red"
                 android:background          ="@android:color/transparent"
                 android:paddingLeft         ="20dp"
@@ -113,6 +113,7 @@
                 android:layout_height       ="wrap_content"
                 android:text                ="@string/quotation_search_zc_accept"
                 android:textSize            ="@dimen/sizeMediumText"
+                android:textAllCaps         ="false"
                 android:textColor           ="@color/estafeta_red"
                 android:background          ="@android:color/transparent"
                 android:paddingLeft         ="10dp"
@@ -281,6 +282,7 @@
                 android:layout_height       ="wrap_content"
                 android:text                ="@string/quotation_search_zc_cancel"
                 android:textSize            ="@dimen/sizeMediumText"
+                android:textAllCaps         ="false"
                 android:textColor           ="@color/estafeta_red"
                 android:background          ="@android:color/transparent"
                 android:paddingLeft         ="20dp"
@@ -292,7 +294,7 @@
                 android:layout_width        ="wrap_content"
                 android:layout_height       ="wrap_content"
                 android:text                ="Agregar"
-                android:textAllCaps="false"
+                android:textAllCaps         ="false"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:textColor           ="@color/estafeta_red"
                 android:background          ="@android:color/transparent"

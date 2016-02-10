@@ -20,7 +20,7 @@ public class ProfileManager {
 
         String[] titlesArray    = context.getResources().getStringArray(R.array.drawer_items);
 
-            for (int i=0; i<titlesArray.length-3; i++){
+            for (int i=0; i<titlesArray.length-4; i++){
                 /*if(i==2 || i==4){
                     //Nothing
                 }else{*/

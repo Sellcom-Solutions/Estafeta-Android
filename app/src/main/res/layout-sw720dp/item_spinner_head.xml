@@ -8,7 +8,7 @@
         android:id="@+id/txt_spn_item_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/sizeLargeText"
+        android:textSize="@dimen/sizeNormalText"
         android:background="@drawable/underline_red"
         android:textColor="@color/estafeta_red"
         android:drawableRight="@drawable/ic_arrow_spinner"

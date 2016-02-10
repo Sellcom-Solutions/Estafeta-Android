@@ -1,14 +1,19 @@
 package com.estafeta.estafetamovilv1.Fragments;
 
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.ImageView;
 
 import android.widget.TextView;
 
+import com.caverock.androidsvg.SVG;
+import com.caverock.androidsvg.SVGParseException;
 import com.estafeta.estafetamovilv1.R;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 
@@ -38,11 +43,22 @@ public class FragmentAvisoPrivacidad extends TrackerFragment {
         footer                          = (TextView)view.findViewById(R.id.footer);
         SimpleDateFormat formatter      = new SimpleDateFormat("yyyy");
         String currentYear              = formatter.format(new Date());
-        footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
+        footer.setText("©2012-" + currentYear + " " + getString(R.string.footer));
 
         WebView Wview                   = (WebView) view.findViewById(R.id.webview);
         Wview.setVerticalScrollBarEnabled(true);
         Wview.loadDataWithBaseURL(null,getString(R.string.aviso_privacidad), "text/html", "utf-8", null);
+
+        /*ImageView  imageView = (ImageView) view.findViewById(R.id.imageView1);
+        imageView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        try
+        {
+            SVG svg = SVG.getFromResource(getActivity(), R.raw.batman);
+            Drawable drawable = new PictureDrawable(svg.renderToPicture());
+            imageView.setImageDrawable(drawable);
+        }
+        catch(SVGParseException e)
+        {}*/
 
         return view;
     }

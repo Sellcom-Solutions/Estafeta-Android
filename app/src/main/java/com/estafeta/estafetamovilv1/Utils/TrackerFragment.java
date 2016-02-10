@@ -4,12 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Spinner;
 
 import com.estafeta.estafetamovilv1.Activities.MainActivity;
 import com.estafeta.estafetamovilv1.Adapters.SpinnerAdapter;
 import com.estafeta.estafetamovilv1.Async_Request.METHOD;
 import com.estafeta.estafetamovilv1.Async_Request.UIResponseListenerInterface;
+import com.estafeta.estafetamovilv1.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +29,9 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
     public SpinnerAdapter   spinnerAdapter,
                             spinnerAdapterCountries;
 
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+
     /**
      * Stores the tag of fragments.
      */
@@ -41,7 +47,13 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         FRAG_CODIGO_POSTAL("codigo_postal"),
         FRAG_QUOTATION("cotizador"),
         FRAG_AVISO_PRIVACIDAD("aviso_privacidad"),
-        FRAG_HISTORIAL("historial");
+        FRAG_HISTORIAL("historial"),
+        FRAG_PRELLENADO("prellenado"),
+        FRAG_REMITENTE("remitente"),
+        FRAG_DESTINATARIO("destinatario"),
+        FRAG_FRECUENTES("frecuentes"),
+        FRAG_REMITENTE_QUOTATION_BUY("remitente_quotation_buy"),
+        FRAG_DESTINATARIO_QUOTATION_BUY("destinatario_quotation_buy");
 
         private final String name;
 
@@ -210,4 +222,46 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         }
         return sb.toString();
     }
+
+
+    public void addFragmentPrefilledToStack(Activity activity,TrackerFragment fragment, String TAG, boolean incrementDepthCounter){
+
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.prefillect_container, fragment, TAG);
+        fragmentTransaction.commit();
+
+        if(incrementDepthCounter) {
+            ((MainActivity) activity).incrementDepthCounter();
+        }
+    }
+
+    public void addFragmentQuotationBuyToStack(Activity activity,TrackerFragment fragment, String TAG, boolean incrementDepthCounter){
+
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.quotation_buy_container, fragment, TAG);
+        fragmentTransaction.commit();
+
+        if(incrementDepthCounter) {
+            ((MainActivity) activity).incrementDepthCounter();
+        }
+    }
+
+    public void addFragmentToStack(Activity activity,TrackerFragment fragment, String TAG, boolean incrementDepthCounter){
+
+        fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.replace(R.id.container, fragment, TAG);
+        fragmentTransaction.commit();
+
+        if(incrementDepthCounter) {
+            ((MainActivity) activity).incrementDepthCounter();
+        }
+
+    }
+
 }

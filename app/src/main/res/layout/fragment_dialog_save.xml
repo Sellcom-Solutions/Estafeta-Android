@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android           ="http://schemas.android.com/apk/res/android"
+    android:orientation     ="vertical"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:gravity         ="center">
+
+    <LinearLayout
+        android:layout_width    ="@dimen/sizeDialogSaveWidth"
+        android:layout_height   ="@dimen/sizeDialogSaveHeight"
+        android:orientation     ="vertical"
+        android:paddingLeft     ="20dp"
+        android:paddingRight    ="20dp"
+        android:paddingTop      ="20dp"
+        android:paddingBottom   ="20dp"
+        android:background      ="@color/white">
+
+        <TextView
+            android:layout_width        ="match_parent"
+            android:layout_height       ="wrap_content"
+            android:gravity             ="center"
+            android:layout_marginBottom ="30dp"
+            android:textSize            ="@dimen/sizeLargeText"
+            android:textColor           ="@android:color/black"
+            android:text                ="@string/edit_save"/>
+
+        <TextView
+            android:id              ="@+id/lbl_question_previous_save"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="wrap_content"
+            android:textSize        ="@dimen/sizeSmallText"
+            android:textColor       ="@color/estafeta_text"
+            android:text            ="@string/question_previous_save_sender"
+            />
+
+        <LinearLayout
+            android:layout_width        ="match_parent"
+            android:layout_height       ="match_parent"
+
+            android:orientation     ="horizontal"
+            android:gravity         ="bottom|right"
+            android:weightSum       ="100">
+
+
+            <Button
+                android:id              ="@+id/btn_cancel"
+                android:layout_width    ="0dp"
+                android:layout_height   ="wrap_content"
+                android:layout_weight   ="40"
+                android:gravity         ="center_vertical|right"
+                android:textSize        ="@dimen/sizeMediumText"
+                android:textColor       ="@color/estafeta_red"
+                android:textAllCaps     ="false"
+                android:background      ="@android:color/transparent"
+                android:text            ="@string/cancel"/>
+
+            <Button
+                android:id              ="@+id/btn_save"
+                android:gravity         ="center_vertical|right"
+                android:layout_width    ="0dp"
+                android:layout_height   ="wrap_content"
+                android:layout_weight   ="40"
+                android:textSize        ="@dimen/sizeMediumText"
+                android:textColor       ="@color/estafeta_red"
+                android:textAllCaps     ="false"
+                android:background      ="@android:color/transparent"
+                android:text            ="@string/edit_save"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

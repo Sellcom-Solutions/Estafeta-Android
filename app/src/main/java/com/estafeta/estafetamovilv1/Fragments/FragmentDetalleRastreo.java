@@ -112,7 +112,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         String currentYear = formatter.format(new Date());
         footer.setText("©2012-" + currentYear + " " + getString(R.string.footer));
 
-        TrackerFragment.section_index = 7;
+        TrackerFragment.section_index = 8;
 
         btn_favorito.setOnClickListener(this);
         btn_historia.setOnClickListener(this);

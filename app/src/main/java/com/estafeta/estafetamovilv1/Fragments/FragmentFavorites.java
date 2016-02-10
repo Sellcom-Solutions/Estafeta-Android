@@ -72,7 +72,7 @@ public class FragmentFavorites extends TrackerFragment implements FavoriteListAd
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_favorites, container, false);
 
-        TrackerFragment.section_index = 5;
+        TrackerFragment.section_index = 6;
         context = getActivity();
 
         lin_toolbar = (LinearLayout)view.findViewById(R.id.lin_toolbar);

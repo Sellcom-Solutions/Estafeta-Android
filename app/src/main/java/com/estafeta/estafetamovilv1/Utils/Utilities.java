@@ -6,11 +6,15 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.estafeta.estafetamovilv1.R;
 
@@ -191,6 +195,29 @@ public class Utilities {
     }
 
     /**
+     * Validates that a text is to type e-mail.
+     * @param context
+     * @param email
+     * @return
+     */
+    public static boolean validateEmail(Context context, String email){
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-z]+";
+        email=email.trim();
+        if (email.isEmpty()){
+            return false;
+        }
+
+        if (email.matches(emailPattern))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
+
+    /**
      * Validates that a text is to type number.
      * @param context
      * @param email
@@ -361,6 +388,45 @@ public class Utilities {
         Pattern p = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
         Matcher m = p.matcher(str);
         return m.find();
+
+    }
+
+    public static void setCustomHint(Context context, String text, TextView textView){
+
+        String colored = "*";
+        SpannableStringBuilder builder = new SpannableStringBuilder();
+
+        builder.append(text);
+        int start = builder.length();
+        builder.append(colored);
+        int end = builder.length();
+
+        builder.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.estafeta_red)), start, end,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        textView.setHint(builder);
+
+    }
+
+    /**
+     * Validates that a text is to type e-mail.
+     * @param email
+     * @return
+     */
+    public static boolean validateEmail(String email){
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-z]+";
+        email=email.trim();
+        if (email.isEmpty()){
+            return false;
+        }
+
+        if (email.matches(emailPattern))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 
