@@ -22,7 +22,7 @@
         <item>Rastreo</item>
         <item>Sucursales</item>
         <item>Prellenado de guías</item>
-        <item>Cotizador</item>
+        <item>@string/quotation_title</item>
         <!--<item>Historial de operaciones</item>-->
         <item>Código postal</item>
         <item>Aviso de privacidad</item>
@@ -97,7 +97,7 @@
     <string name="ubicar_oficinas">Ubicar oficinas</string>
 
     <!--Fragment Quotation-->
-    <string name="quotation_title">Cotizador</string>
+    <string name="quotation_title">Cotizar y comprar</string>
     <string name="quotation_shipping">Cotizar envío</string>
     <string name="quotation_national">Nacional</string>
     <string name="quotation_international">Internacional</string>
@@ -249,12 +249,6 @@
     <string name="db_recurrente">CREATE TABLE "recurrente" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "Nombre" TEXT, "Telefono" TEXT,
          "correo_electronico" TEXT, "razon_social" TEXT, "Telefono" TEXT, "Telefono" TEXT, "Telefono" TEXT)</string>
 
-    <string name="db_compra">CREATE TABLE "compra" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        "Nombre_remitente" TEXT, "Origen" TEXT, "CPO" TEXT,
-        "Nombre_destinatario" TEXT, "Destino" TEXT, "CPD" TEXT,
-        "Tipo_servicio" TEXT, "Garantia" TEXT, "Costo" TEXT,
-        "Referencia" TEXT, Fecha TEXT)</string>
-
     <string name="db_frequently_contacts">CREATE TABLE "frequently_contacts" ("id_frequently" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"name_contact"  TEXT(24) NOT NULL,
                                    "business_name_contact"  TEXT(24), "street_contact"  TEXT(24), "no_ext_contact"  TEXT(24), "no_int_contact"  TEXT(24),
                                      "cp_contact"  TEXT(24), "phone_contact"  TEXT(24), "email_contact"  TEXT(24), "reference_contact"  TEXT(24), "nave_contact"  TEXT(24),
@@ -262,7 +256,7 @@
 
 
     <!-- ********************   Strings aplicación anterior   ************************** -->
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">Estafeta</string>
 
 
     <!-- FragmentOffices  -->
@@ -400,5 +394,12 @@
 
     <!-- FragmentFrequentlyContacts -->
     <string name="mark_five_contacts">Puede marcar hasta 5 contactos como favoritos</string>
+
+    <!-- FragmentDialogWrongData -->
+    <string name="btn_accept">Aceptar</string>
+    <string name="wrong_data">Datos incorrectos</string>
+    <string name="wrong_code1">El código postal ingresado en la cotización</string>
+    <string name="wrong_code2">, no corresponde con el código postal registrado, favor de verificar.</string>
+
 
 </resources>

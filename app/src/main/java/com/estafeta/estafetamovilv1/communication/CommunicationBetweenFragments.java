@@ -10,5 +10,8 @@ public interface CommunicationBetweenFragments {
     void setDataSender(Map<String,String> dataSender);
     Map<String,String> getDataSender();
 
+    void setDataSenderQuotation(Map<String,String> dataSender);
+    Map<String,String> getDataSenderQuotation();
+
 
 }

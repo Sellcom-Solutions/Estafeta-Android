@@ -3,6 +3,8 @@ package com.estafeta.estafetamovilv1.Utils;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Handler;
+import android.text.Spannable;
+import android.text.Spanned;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.ProgressBar;
@@ -135,6 +137,77 @@ public class DialogManager {
 
 
    }
+
+    /**
+     * This method is responsible for displaying the dialog.
+     * @param type Dialog type.
+     * @param message Dialog message with style.
+     * @param time Dialog duration.
+     */
+    public void showDialog(TYPE_DIALOG type ,Spanned message, int time){
+
+
+        dialogType = type;
+
+        if(dialogLoadig != null){
+            dismissDialog();
+        }
+
+        if(type == TYPE_DIALOG.SPLASH) {
+
+            dialogSplahs = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar);
+            dialogSplahs.setContentView(R.layout.dialog_message_splash);
+            dialogSplahs.setCancelable(false);
+
+            TextView textDialogSplash = (TextView) dialogSplahs.findViewById(R.id.txv_transparent_name_dialog);
+            textDialogSplash.setText(message);
+            dialogSplahs.show();
+
+        }else if(type == TYPE_DIALOG.LOADING || type == TYPE_DIALOG.ERROR || type == TYPE_DIALOG.SUCCESS) {
+            dialogLoadig = new Dialog(activity);
+            dialogLoadig.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialogLoadig.setContentView(R.layout.dialog_message_loading);
+            dialogLoadig.setCancelable(false);
+
+            TextView textDialogLoading = (TextView) dialogLoadig.findViewById(R.id.txv_general_name_dialog);
+            textDialogLoading.setText(message);
+
+            ProgressBar pgb = (ProgressBar) dialogLoadig.findViewById(R.id.pgb_general_dialog);
+
+
+            if(type == TYPE_DIALOG.LOADING){
+                pgb.setIndeterminateDrawable(activity.getResources().getDrawable(R.drawable.progress_anim_gray));
+            }else if(type == TYPE_DIALOG.ERROR){
+                pgb.setIndeterminateDrawable(activity.getResources().getDrawable(R.drawable.ic_error));
+            }else if(type == TYPE_DIALOG.SUCCESS){
+                pgb.setIndeterminateDrawable(activity.getResources().getDrawable(R.drawable.success_drawable_dialog));
+            }
+
+            if(!isShowingDialog()) {
+                if(flag) {
+                    flag = false;
+                    dialogLoadig.show();
+                    if (time != 0) {
+
+                        Handler handler = new Handler ();//Para dar un tiempo al dialog
+
+                        handler.postDelayed(new Runnable() {
+                            public void run() {
+                                dismissDialog();
+                            }
+                        }, time);
+
+                    }
+
+                }
+
+            }
+
+
+        }
+
+
+    }
 
     /**
      * This method closes a dialog visible.

@@ -11,9 +11,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
+import com.estafeta.estafetamovilv1.Activities.MainActivity;
 import com.estafeta.estafetamovilv1.Adapters.CPAListAdapter;
 import com.estafeta.estafetamovilv1.Adapters.SpinnerAdapterPrefilled;
 import com.estafeta.estafetamovilv1.Async_Request.METHOD;
@@ -45,9 +46,7 @@ import com.estafeta.estafetamovilv1.Utils.Utilities;
 import com.estafeta.estafetamovilv1.communication.CommunicationBetweenFragments;
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilled.DATA_SENDER;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -133,9 +132,7 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
 
     private TrackerFragment fragment;
 
-    private View view;
-
-
+    private View            view;
 
     @Override
     public void onAttach(Activity activity) {
@@ -157,13 +154,12 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_prefilled_sender, container, false);
         if(view!=null) {
-
             //Buttons
             btn_next = (Button) view.findViewById(R.id.btn_next);
             //EditText
-            txt_sender_name = (EditText) view.findViewById(R.id.txt_sender_name);
+            txt_sender_name = (EditText) view.findViewById(R.id.txt_addressee_name);
             txt_business_name = (EditText) view.findViewById(R.id.txt_business_name);
-            txt_sender_street = (EditText) view.findViewById(R.id.txt_sender_street);
+            txt_sender_street = (EditText) view.findViewById(R.id.txt_addressee_street);
             txt_no_ext = (EditText) view.findViewById(R.id.txt_no_ext);
             txt_no_int = (EditText) view.findViewById(R.id.txt_no_int);
             txt_zip_code = (EditText) view.findViewById(R.id.txt_zip_code);
@@ -206,6 +202,7 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_street), txt_sender_street);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_no_ext), txt_no_ext);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_zip_code), txt_zip_code);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_phone), txt_sender_phone);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_email), txt_sender_email);
 
             items_list_colony = new ArrayList<>();
@@ -809,40 +806,42 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
             @Override
             public void afterTextChanged(Editable s) {
 
-                txt_zip_code.setError(null);
-                if (s.length() <= 1) {
-                    checkImageSaveFrequently();
-                }
-                if (s.length() == 5) {
-                    if(spn_sender_colony.getSelectedItem().toString().equals(items_list_colony.get(0))) {
-                        if (search) {
-                            zipCodeString = txt_zip_code.getText().toString();
-                            if (zipCodeString == null || zipCodeString.equals("")) {
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
-                            } else if (zipCodeString.length() < 5) {
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
-
-                            } else {
-
-                                typeSend = "search_colony_city_state";
-                                //MapString Params...
-                                //Query from Zip Code
-                                Map<String, String> requestData = new HashMap<>();
-                                requestData.put("pais", "Mexico");
-                                requestData.put("codigoPostal", zipCodeString);
-                                //Send params to RequestManager
-                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
-                                RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData, FragmentPrefilledSender.this);
-
-                            }
-                        } else {
-                            search = true;
-                        }
+                if (!(((MainActivity) getActivity()).auxFragment instanceof FragmentDialogQRCode)) {
+                    txt_zip_code.setError(null);
+                    if (s.length() <= 1) {
+                        checkImageSaveFrequently();
                     }
-                } else if (s.length() == 4) {
+                    if (s.length() == 5) {
+                        if (spn_sender_colony.getSelectedItem().toString().equals(items_list_colony.get(0))) {
+                            if (search) {
+                                zipCodeString = txt_zip_code.getText().toString();
+                                if (zipCodeString == null || zipCodeString.equals("")) {
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
+                                } else if (zipCodeString.length() < 5) {
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
 
-                    clearSpinnersZipCode();
+                                } else {
 
+                                    typeSend = "search_colony_city_state";
+                                    //MapString Params...
+                                    //Query from Zip Code
+                                    Map<String, String> requestData = new HashMap<>();
+                                    requestData.put("pais", "Mexico");
+                                    requestData.put("codigoPostal", zipCodeString);
+                                    //Send params to RequestManager
+                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
+                                    RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData, FragmentPrefilledSender.this);
+
+                                }
+                            } else {
+                                search = true;
+                            }
+                        }
+                    } else if (s.length() == 4) {
+
+                        clearSpinnersZipCode();
+
+                    }
                 }
             }
         });
@@ -986,23 +985,23 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
     private boolean validateFields(){
 
         if(txt_sender_name.getText().toString().equals("")){
-            txt_sender_name.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_sender_name.requestFocus();
             return false;
         } else if(txt_business_name.getText().toString().equals("")){
-            txt_business_name.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_business_name.requestFocus();
             return false;
         } else if(txt_sender_street.getText().toString().equals("")){
-            txt_sender_street.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_sender_street.requestFocus();
             return false;
         } else if(txt_no_ext.getText().toString().equals("")){
-            txt_no_ext.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_no_ext.requestFocus();
             return false;
         } else if(txt_zip_code.getText().toString().equals("") && txt_zip_code.getText().toString().length() != 5){
-            txt_zip_code.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_zip_code.requestFocus();
             return false;
         } else if(spn_sender_colony.getSelectedItem().toString().equals(items_list_colony.get(0))){
@@ -1014,8 +1013,13 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         } else if(spn_sender_state.getSelectedItem().toString().equals(items_list_state.get(0))){
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             return false;
-        } else if(!Utilities.validateEmail(getActivity(),txt_sender_email.getText().toString(),txt_sender_email)){
+        } else if(txt_sender_phone.getText().toString().equals("")){
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+            txt_sender_phone.requestFocus();
+            return false;
+        } else if(!Utilities.validateEmail(getActivity(),txt_sender_email.getText().toString())){
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+            txt_sender_email.requestFocus();
             return false;
         }
 
@@ -1122,6 +1126,26 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
             }
         });
 
+        txt_sender_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                txt_sender_phone.setError(null);
+                if (s.length() <= 1) {
+                    checkImageSaveFrequently();
+                }
+            }
+        });
+
 
         txt_sender_email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1137,7 +1161,7 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
             @Override
             public void afterTextChanged(Editable s) {
                 txt_sender_email.setError(null);
-                if (s.length() > 1) {
+                if (s.length() > 2) {
                     checkImageSaveFrequently();
                 }
             }
@@ -1156,6 +1180,10 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         } else if(!txt_no_ext.getText().toString().equals("")){
             return false;
         } else if(!txt_zip_code.getText().toString().equals("") && txt_zip_code.getText().toString().length() != 5){
+            return false;
+        } else if(!txt_sender_phone.getText().toString().equals("")){
+            return false;
+        } else if(!txt_sender_email.getText().toString().equals("")){
             return false;
         }
 
@@ -1180,7 +1208,9 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
             return false;
         } else if(spn_sender_state.getSelectedItem().toString().equals(items_list_state.get(0))){
             return false;
-        } else if(!Utilities.validateEmail(txt_sender_email.getText().toString())){
+        } else if(txt_sender_phone.getText().toString().equals("")){
+            return false;
+        } else if(!Utilities.validateEmail(getActivity(),txt_sender_email.getText().toString())){
             return false;
         }
 
@@ -1264,5 +1294,17 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         txt_zip_code.setText(dataContact.get(FrequentlyContacts.CP_CONTACT));
         txt_sender_phone.setText(dataContact.get(FrequentlyContacts.PHONE_CONTACT));
         txt_sender_email.setText(dataContact.get(FrequentlyContacts.EMAIL_CONTACT));
+    }
+
+    public void clearAll(){
+        txt_sender_name.setText("");
+        txt_business_name.setText("");
+        txt_sender_street.setText("");
+        txt_no_ext.setText("");
+        txt_no_int.setText("");
+        txt_zip_code.setText("");
+        txt_sender_phone.setText("");
+        txt_sender_email.setText("");
+        clearSpinnersZipCode();
     }
 }

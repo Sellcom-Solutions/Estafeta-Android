@@ -30,7 +30,57 @@ public class FragmentQuotationBuy extends TrackerFragment {
                         lbl_destiny,
                         lbl_total_coste;
 
-    private Map<String,String>  dataQuotation;
+    private Map<String,String>  dataSender,
+                                dataQuotation;
+
+    public enum DATA_SENDER_QUOTATION {
+        SENDER_NAME("sender_name"),
+        BUSINESS_NAME("business_name"),
+        STREET_SENDER("street_sender"),
+        NO_EXT_SENDER("no_ext_sender"),
+        NO_INT_SENDER("no_int_sender"),
+        ZIP_CODE_SENDER("zip_code_sender"),
+        COLONY_SENDER("colony_sender"),
+        CITY_SENDER("city_sender"),
+        STATE_SENDER("state_sender"),
+        PHONE_SENDER("phone_sender"),
+        EMAIL_SENDER("email_sender");
+
+        private final String name;
+
+        private DATA_SENDER_QUOTATION(String s) {
+            name = s;
+        }
+
+        public String toString(){
+            return name;
+        }
+    }
+
+    public enum DATA_ADDRESSEE_QUOTATION {
+        ADDRESSEE_NAME("addressee_name"),
+        ADDRESSEE_BUSINESS_NAME("addressee_business_name"),
+        STREET_ADDRESSEE("street_addressee"),
+        NO_EXT_ADDRESSEE("no_ext_addressee"),
+        NO_INT_ADDRESSEE("no_int_addressee"),
+        ZIP_CODE_ADDRESSEE("zip_code_addressee"),
+        COLONY_ADDRESSEE("colony_addressee"),
+        CITY_ADDRESSEE("city_addressee"),
+        STATE_ADDRESSEE("state_addressee"),
+        PHONE_ADDRESSEE("phone_addressee"),
+        EMAIL_ADDRESSEE("email_addressee");
+
+        private final String name;
+
+        private DATA_ADDRESSEE_QUOTATION(String s) {
+            name = s;
+        }
+
+        public String toString(){
+            return name;
+        }
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +109,10 @@ public class FragmentQuotationBuy extends TrackerFragment {
             lbl_destiny.setText(dataQuotation.get("cp_destiny")+", "
                     + dataQuotation.get("city_destiny")+", "+dataQuotation.get("state_destiny"));
 
-            lbl_total_coste.setText(dataQuotation.get("total_coste")+" mxn");
+            Double totalNum = Double.parseDouble(dataQuotation.get("total_coste"));
+            totalNum = totalNum + (totalNum * 0.15);
+
+            lbl_total_coste.setText(Utilities.setReceiptMoneyNumberFormat(totalNum, 2)+" mxn");
 
             footer                          = (TextView)view.findViewById(R.id.footer);
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy");
@@ -77,6 +130,14 @@ public class FragmentQuotationBuy extends TrackerFragment {
 
         }
         return view;
+    }
+
+    public Map<String, String> getDataSenderQuotation() {
+        return dataSender;
+    }
+
+    public void setDataSenderQuotation(Map<String, String> dataSender) {
+        this.dataSender = dataSender;
     }
 
 }

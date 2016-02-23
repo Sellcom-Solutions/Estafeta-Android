@@ -168,68 +168,7 @@ public class RequestManager implements ResponseListenerInterface {
             HttpPost httppost = new HttpPost(getRequestURL(this.method));
             credentials = getCredentials(this.method);
 
-            if (this.method == METHOD.TEST) {
-
-                try {
-                    Thread.sleep(5000);
-                    jsonResponse = new JSONObject();
-                    try {
-                        jsonResponse.put("method", method.toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        jsonResponse.put("success", true);
-                        jsonResponse.put("resp", "OK");
-                        jsonResponse.put(Parameter.BUY_RESPONSE.COSTO.toString(),
-                                requestData.get(Parameter.BUY_REQUEST.COSTO.toString()));
-                        jsonResponse.put(Parameter.BUY_RESPONSE.CP_DESTINO.toString(),
-                                requestData.get(Parameter.BUY_REQUEST.CP_DESTINO.toString()));
-                        jsonResponse.put(Parameter.BUY_RESPONSE.CP_ORIGEN.toString(),
-                                requestData.get(Parameter.BUY_REQUEST.CP_ORIGEN.toString()));
-                        jsonResponse.put(Parameter.BUY_RESPONSE.DESTINATARIO.toString(),
-                                requestData.get(Parameter.BUY_REQUEST.NOMBRE_DESTINATARIO.toString()));
-                        jsonResponse.put(Parameter.BUY_RESPONSE.DESTINO.toString(),
-                                requestData.get(Parameter.BUY_REQUEST.ESTADO_DESTINO.toString()) + "," +
-                                        requestData.get(Parameter.BUY_REQUEST.CIUDAD_DESTINO.toString()) + ".");
-
-                        jsonResponse.put(Parameter.BUY_RESPONSE.GARANTIA.toString(), "Zona 3, Tercer día hábil");
-                        jsonResponse.put(Parameter.BUY_RESPONSE.ORIGEN.toString(),
-                                requestData.get(Parameter.BUY_REQUEST.ESTADO_ORIGEN.toString()) + "," +
-                                        requestData.get(Parameter.BUY_REQUEST.CIUDAD_ORIGEN.toString()) + ".");
-
-
-                        Random rnd = new Random();
-                        long n = (long) (rnd.nextDouble() * new Double("9999999999") + new Double("1000000000"));
-                        jsonResponse.put(Parameter.BUY_RESPONSE.REFERENCIA.toString(),
-                                String.valueOf(n));
-                        jsonResponse.put(Parameter.BUY_RESPONSE.REMITENTE.toString(),
-                                requestData.get(Parameter.BUY_REQUEST.NOMBRE_REMITENTE.toString()));
-                        jsonResponse.put(Parameter.BUY_RESPONSE.TIPO_SERVICIO.toString(),
-                                "2 Días");
-
-
-                        Map<String, String> response = new HashMap<String, String>();
-                        Iterator<?> keys = jsonResponse.keys();
-                        while (keys.hasNext()) {
-                            String key = (String) keys.next();
-                            response.put(key, jsonResponse.getString(key));
-                        }
-                        ArrayList<Map<String, String>> responseArray = new ArrayList<>();
-                        responseArray.add(response);
-                        setResponseArray(responseArray);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                return jsonResponse.toString();
-
-            } else {
+            if(this.method != METHOD.TEST){
 
                 try {
 
@@ -293,11 +232,9 @@ public class RequestManager implements ResponseListenerInterface {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
-
                 return stringResponse;
             }
+            return stringResponse;
         }
 
         @Override

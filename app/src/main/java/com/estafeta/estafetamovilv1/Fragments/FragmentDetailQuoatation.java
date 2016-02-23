@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.QuoteAndBuy.FragmentDialogBuyGuide;
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.QuoteAndBuy.FragmentQuotationBuy;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.estafeta.estafetamovilv1.Adapters.DetailQuotationAdapter;
@@ -39,7 +40,8 @@ import java.util.Map;
 /**
  * Quotitation result.
  */
-public class FragmentDetailQuoatation extends TrackerFragment implements View.OnClickListener{
+public class FragmentDetailQuoatation extends TrackerFragment implements View.OnClickListener,
+                                                                        FragmentDialogBuyGuide.setPressedButtonContinue{
 
     public static final String TAG = "FRAG_DETAIL_QUOTATION";
 
@@ -81,7 +83,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
     private ArrayList<String>  servicioList;
 
-    private Map<String,String> map;
+    private Map<String,String> map,data;
 
     private String type;
     private DecimalFormat   decimales;
@@ -228,6 +230,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
 
                 map = new HashMap<String, String>();
                 map = list.get((position + 1));
+                data = map;
 
                 decimales   = new DecimalFormat("0.00");
 
@@ -340,6 +343,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 lin_floating.setVisibility(View.VISIBLE);
                 map = new HashMap<String,String>();
                 map = list.get(1);
+                data = map;
 
                 imv_send_type.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.sobre));
                 txv_send_type.setText("Sobre");
@@ -384,6 +388,7 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 checkListNational(list);
                 map = new HashMap<String,String>();
                 map = list.get(1);
+                data = map;
 
                 lin_floating.setVisibility(View.VISIBLE);
 
@@ -718,21 +723,11 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
                 fragment.addFragmentToStack(getActivity());
                 fragmentTransaction.replace(R.id.container, fragment, "");
                 fragmentTransaction.commit();*/
-
-                TrackerFragment fragment = new FragmentQuotationBuy();
+                FragmentDialogBuyGuide fdbg = new FragmentDialogBuyGuide();
                 Bundle b = new Bundle();
-                Map<String,String> dataQuotation = new HashMap<>();
-                dataQuotation.put("cp_origin",map.get("CodigoPosOri"));
-                dataQuotation.put("city_origin",map.get("MunicipioOri"));
-                dataQuotation.put("state_origin",map.get("EstadoOri"));
-                dataQuotation.put("cp_destiny",map.get("CpDestino"));
-                dataQuotation.put("city_destiny",map.get("Municipio"));
-                dataQuotation.put("state_destiny",map.get("Estado"));
-                dataQuotation.put("total_coste", txv_costo_total.getText().toString());
-
-                b.putSerializable("dataQuotation", (Serializable) dataQuotation);
-                fragment.setArguments(b);
-                addFragmentToStack(getActivity(), fragment, FragmentQuotationBuy.TAG, true);
+                b.putString("total", data.get("CostoTotal"));
+                fdbg.setArguments(b);
+                fdbg.show(getActivity().getSupportFragmentManager(),FragmentDialogBuyGuide.TAG);
 
 
                 break;
@@ -752,5 +747,26 @@ public class FragmentDetailQuoatation extends TrackerFragment implements View.On
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void pressedButtonContinue() {
+        Map<String,String> auxMap = list.get((0));
+        TrackerFragment fragment = new FragmentQuotationBuy();
+        Bundle b = new Bundle();
+        Map<String,String> dataQuotation = new HashMap<>();
+        dataQuotation.put("cp_origin",auxMap.get("CodigoPosOri"));
+        dataQuotation.put("city_origin",auxMap.get("MunicipioOri"));
+        dataQuotation.put("state_origin",auxMap.get("EstadoOri"));
+        dataQuotation.put("cp_destiny",auxMap.get("CpDestino"));
+        dataQuotation.put("city_destiny",auxMap.get("Municipio"));
+        dataQuotation.put("state_destiny",auxMap.get("Estado"));
+
+
+        dataQuotation.put("total_coste", data.get("CostoTotal"));
+
+        b.putSerializable("dataQuotation", (Serializable) dataQuotation);
+        fragment.setArguments(b);
+        addFragmentToStack(getActivity(), fragment, FragmentQuotationBuy.TAG, true);
     }
 }

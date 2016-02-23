@@ -35,6 +35,8 @@
         android:layout_marginBottom ="@dimen/marginContinuePrefilled"
         android:textSize            ="@dimen/sizeMediumText"
         android:hint                ="@string/code"
+        android:maxLength           ="9"
+        android:inputType           ="text"
         android:textCursorDrawable  ="@null"
         android:textColorHint       ="@color/estafeta_red"
         android:textColor           ="@color/estafeta_text"/>

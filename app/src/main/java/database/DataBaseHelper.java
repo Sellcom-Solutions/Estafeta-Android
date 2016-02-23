@@ -86,12 +86,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
 
         try {
-            db.execSQL(mContext.getString(R.string.db_compra));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
             db.execSQL(mContext.getString(R.string.db_frequently_contacts));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -130,7 +124,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS paises");
             db.execSQL("DROP TABLE IF EXISTS rastreo_tmp");
             db.execSQL("DROP TABLE IF EXISTS recurrente");
-            db.execSQL("DROP TABLE IF EXISTS compra");
             db.execSQL("DROP TABLE IF EXISTS frequently_contacts");
             onCreate(db);
         }

@@ -174,7 +174,7 @@ public class Utilities {
      * @return
      */
     public static boolean validateEmail(Context context, String email, EditText view){
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-z]+";
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+\\.+[a-zA-Z.]+";
         email=email.trim();
         if (email.isEmpty()){
             view.setError(context.getResources().getText(R.string.error_empty_field).toString());
@@ -201,7 +201,7 @@ public class Utilities {
      * @return
      */
     public static boolean validateEmail(Context context, String email){
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-z]+";
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+\\.+[a-zA-Z.]+";
         email=email.trim();
         if (email.isEmpty()){
             return false;
@@ -414,7 +414,7 @@ public class Utilities {
      * @return
      */
     public static boolean validateEmail(String email){
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z]+\\.+[a-z]+";
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-zA-Z0-9_-]+\\.+[a-zA-Z.]+";
         email=email.trim();
         if (email.isEmpty()){
             return false;

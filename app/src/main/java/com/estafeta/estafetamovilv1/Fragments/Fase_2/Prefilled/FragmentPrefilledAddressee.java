@@ -45,9 +45,7 @@ import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilled
 import com.estafeta.estafetamovilv1.communication.CommunicationBetweenFragments;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -66,17 +64,17 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
     protected static final int REQ_GET_CONTACT = 0;
 
-    private EditText    txt_addresse_name,
+    private EditText    txt_addressee_name,
                         txt_business_name,
-                        txt_addresse_street,
+                        txt_addressee_street,
                         txt_no_ext,
                         txt_no_int,
                         txt_zip_code,
-                        txt_addresse_phone,
-                        txt_addresse_email,
-                        txt_addresse_reference,
-                        txt_addresse_nave,
-                        txt_addresse_platform,
+                        txt_addressee_phone,
+                        txt_addressee_email,
+                        txt_addressee_reference,
+                        txt_addressee_nave,
+                        txt_addressee_platform,
                         txt_city,
                         txt_colony;
 
@@ -159,17 +157,17 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
         if(view!=null) {
 
             //EditTexts
-            txt_addresse_name = (EditText) view.findViewById(R.id.txt_addresse_name);
+            txt_addressee_name = (EditText) view.findViewById(R.id.txt_addressee_name);
             txt_business_name = (EditText) view.findViewById(R.id.txt_business_name);
-            txt_addresse_street = (EditText) view.findViewById(R.id.txt_addresse_street);
+            txt_addressee_street = (EditText) view.findViewById(R.id.txt_addressee_street);
             txt_no_ext = (EditText) view.findViewById(R.id.txt_no_ext);
             txt_no_int = (EditText) view.findViewById(R.id.txt_no_int);
             txt_zip_code = (EditText) view.findViewById(R.id.txt_zip_code);
-            txt_addresse_phone = (EditText) view.findViewById(R.id.txt_addresse_phone);
-            txt_addresse_email = (EditText) view.findViewById(R.id.txt_addresse_email);
-            txt_addresse_reference = (EditText) view.findViewById(R.id.txt_addresse_reference);
-            txt_addresse_nave = (EditText) view.findViewById(R.id.txt_addresse_nave);
-            txt_addresse_platform = (EditText) view.findViewById(R.id.txt_addresse_platform);
+            txt_addressee_phone = (EditText) view.findViewById(R.id.txt_addresse_phone);
+            txt_addressee_email = (EditText) view.findViewById(R.id.txt_addressee_email);
+            txt_addressee_reference = (EditText) view.findViewById(R.id.txt_addressee_reference);
+            txt_addressee_nave = (EditText) view.findViewById(R.id.txt_addressee_nave);
+            txt_addressee_platform = (EditText) view.findViewById(R.id.txt_addressee_platform);
             //ImageViews
             imgv_save_frequent = (ImageView) view.findViewById(R.id.imgv_save_frequent);
             imgv_download_prefilled = (ImageView) view.findViewById(R.id.imgv_download_prefilled);
@@ -224,25 +222,25 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
 
             //Set Hints
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_name), txt_addresse_name);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_name), txt_addressee_name);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_business_name), txt_business_name);
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_street), txt_addresse_street);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_street), txt_addressee_street);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_no_ext), txt_no_ext);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_zip_code), txt_zip_code);
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_phone), txt_addresse_phone);
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_email), txt_addresse_email);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_phone), txt_addressee_phone);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_email), txt_addressee_email);
 
             initDialogCP();
             initial_txt_zip_code();
 
             if (testAddresse) {
-                txt_addresse_name.setText("Fulanito de Tal");
+                txt_addressee_name.setText("Fulanito de Tal");
                 txt_business_name.setText("Anonimus");
-                txt_addresse_street.setText("Ningun Lugar");
+                txt_addressee_street.setText("Ningun Lugar");
                 txt_no_ext.setText("0");
                 txt_zip_code.setText("52777");
-                txt_addresse_phone.setText("52938400");
-                txt_addresse_email.setText("fulanito_el_mejor@hotmail.com");
+                txt_addressee_phone.setText("52938400");
+                txt_addressee_email.setText("fulanito_el_mejor@hotmail.com");
             }
 
             imgv_save_frequent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
@@ -319,9 +317,9 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
                 mLastClickTime = SystemClock.elapsedRealtime();
 
                 if(checkIfDatsIsComplete()){
-                    if(FrequentlyContacts.checkIfExistContactInDB(getActivity(), getText(txt_addresse_name), getText(txt_business_name), getText(txt_addresse_street),
-                            getText(txt_no_ext), getText(txt_no_int), getText(txt_zip_code), getText(txt_addresse_phone), getText(txt_addresse_email), getText(txt_addresse_reference),
-                            getText(txt_addresse_nave), getText(txt_addresse_platform))){
+                    if(FrequentlyContacts.checkIfExistContactInDB(getActivity(), getText(txt_addressee_name), getText(txt_business_name), getText(txt_addressee_street),
+                            getText(txt_no_ext), getText(txt_no_int), getText(txt_zip_code), getText(txt_addressee_phone), getText(txt_addressee_email), getText(txt_addressee_reference),
+                            getText(txt_addressee_nave), getText(txt_addressee_platform))){
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "Ya existe un contacto con esta información.", 3000);
                     }else {
                         FragmentDialogSave fds = new FragmentDialogSave();
@@ -334,7 +332,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se puede posponer un prellenado vacio.", 3000);
                     }else{
                         Bundle bundle = new Bundle();
-                        bundle.putString("email_postpone_code", txt_addresse_email.getText().toString());
+                        bundle.putString("email_postpone_code", txt_addressee_email.getText().toString());
 
                         FragmentDialogPostponePrefilled fdpp = new FragmentDialogPostponePrefilled();
                         fdpp.setArguments(bundle);
@@ -593,40 +591,40 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
                     txt_no_ext.setText("");
                     txt_no_int.setText("");
                     txt_business_name.setText("");
-                    txt_addresse_reference.setText("");
-                    txt_addresse_nave.setText("");
-                    txt_addresse_platform.setText("");
+                    txt_addressee_reference.setText("");
+                    txt_addressee_nave.setText("");
+                    txt_addressee_platform.setText("");
 
                     if(!numberPhone.equals("")){
-                        txt_addresse_phone.setText(numberPhone);
+                        txt_addressee_phone.setText(numberPhone);
                     }else{
-                        txt_addresse_phone.setText("");
+                        txt_addressee_phone.setText("");
                     }
 
                     if (infoContact.length != 0) {
                         if (!infoContact[2].equals("")) {
-                            txt_addresse_name.setText(infoContact[2]);
+                            txt_addressee_name.setText(infoContact[2]);
                         } else if (!infoContact[1].equals("")) {
-                            txt_addresse_name.setText(infoContact[1]);
+                            txt_addressee_name.setText(infoContact[1]);
                         } else if (!infoContact[0].equals("")) {
-                            txt_addresse_name.setText(infoContact[0]);
+                            txt_addressee_name.setText(infoContact[0]);
                         } else {
-                            txt_addresse_name.setText("");
+                            txt_addressee_name.setText("");
                         }
                     }
 
                     if (!email.equals("")) {
-                        txt_addresse_email.setText(email);
+                        txt_addressee_email.setText(email);
                     } else {
-                        txt_addresse_email.setText("");
+                        txt_addressee_email.setText("");
                     }
 
                     if (infoAddress.length != 0) {
 
                         if (infoAddress[1] != null && !infoAddress[1].equals("")) {
-                            txt_addresse_street.setText(infoAddress[1]);
+                            txt_addressee_street.setText(infoAddress[1]);
                         } else {
-                            txt_addresse_street.setText("");
+                            txt_addressee_street.setText("");
                         }
 
                         try {
@@ -1014,9 +1012,9 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
     @Override
     public void buttonSavePressed() {
 
-        FrequentlyContacts.insert(getActivity(), getText(txt_addresse_name), getText(txt_business_name), getText(txt_addresse_street),
-                getText(txt_no_ext),getText(txt_no_int),getText(txt_zip_code), getText(txt_addresse_phone), getText(txt_addresse_email),
-                getText(txt_addresse_reference), getText(txt_addresse_nave), getText(txt_addresse_platform));
+        FrequentlyContacts.insert(getActivity(), getText(txt_addressee_name), getText(txt_business_name), getText(txt_addressee_street),
+                getText(txt_no_ext),getText(txt_no_int),getText(txt_zip_code), getText(txt_addressee_phone), getText(txt_addressee_email),
+                getText(txt_addressee_reference), getText(txt_addressee_nave), getText(txt_addressee_platform));
 
         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, "El contacto fue guardado con exito", 3000);
 
@@ -1029,28 +1027,28 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
     private boolean validateFields(){
 
-        if(txt_addresse_name.getText().toString().equals("")){
-            txt_addresse_name.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
-            txt_addresse_name.requestFocus();
+        if(txt_addressee_name.getText().toString().equals("")){
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+            txt_addressee_name.requestFocus();
             return false;
         } else if(txt_business_name.getText().toString().equals("")){
-            txt_business_name.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_business_name.requestFocus();
             return false;
-        } else if(txt_addresse_street.getText().toString().equals("")){
-            txt_addresse_street.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
-            txt_addresse_street.requestFocus();
+        } else if(txt_addressee_street.getText().toString().equals("")){
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+            txt_addressee_street.requestFocus();
             return false;
         } else if(txt_no_ext.getText().toString().equals("")){
-            txt_no_ext.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_no_ext.requestFocus();
             return false;
         } else if(txt_zip_code.getText().toString().equals("")){
-            txt_zip_code.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_zip_code.requestFocus();
             return false;
         } else if(txt_zip_code.getText().toString().length() != 5){
-            txt_zip_code.setError(getActivity().getResources().getText(R.string.verifique).toString());
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             txt_zip_code.requestFocus();
             return false;
         } else if(spn_addressee_colony.getSelectedItem().toString().equals(items_list_colony.get(0))){
@@ -1062,12 +1060,13 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
         } else if(spn_addressee_state.getSelectedItem().toString().equals(items_list_state.get(0))){
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
             return false;
-        } else if(txt_addresse_phone.getText().toString().equals("")){
-            txt_addresse_phone.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
-            txt_addresse_phone.requestFocus();
-            return false;
-        } else if(!Utilities.validateEmail(getActivity(),txt_addresse_email.getText().toString(),txt_addresse_email)){
+        } else if(txt_addressee_phone.getText().toString().equals("")){
             DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+            txt_addressee_phone.requestFocus();
+            return false;
+        } else if(!Utilities.validateEmail(getActivity(),txt_addressee_email.getText().toString())){
+            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.verifique), 3000);
+            txt_addressee_email.requestFocus();
             return false;
         }
 
@@ -1077,15 +1076,15 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
     private boolean checkIfDatsIsComplete(){
 
-        if(txt_addresse_name.getText().toString().equals("")){
+        if(txt_addressee_name.getText().toString().equals("")){
             return false;
         } else if(txt_business_name.getText().toString().equals("")){
             return false;
-        } else if(txt_addresse_street.getText().toString().equals("")){
+        } else if(txt_addressee_street.getText().toString().equals("")){
             return false;
         } else if(txt_no_ext.getText().toString().equals("")){
             return false;
-        } else if(txt_addresse_phone.getText().toString().equals("")){
+        } else if(txt_addressee_phone.getText().toString().equals("")){
             return false;
         }  else if(txt_zip_code.getText().toString().equals("") && txt_zip_code.getText().toString().length() != 5){
             return false;
@@ -1095,7 +1094,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
             return false;
         } else if(spn_addressee_state.getSelectedItem().toString().equals(items_list_state.get(0))){
             return false;
-        } else if(!Utilities.validateEmail(txt_addresse_email.getText().toString())){
+        } else if(!Utilities.validateEmail(getActivity(),txt_addressee_email.getText().toString())){
             return false;
         }
 
@@ -1104,17 +1103,19 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
     private boolean checkIfDataIsNull(){
 
-        if(!txt_addresse_name.getText().toString().equals("")){
+        if(!txt_addressee_name.getText().toString().equals("")){
             return false;
         } else if(!txt_business_name.getText().toString().equals("")){
             return false;
-        } else if(!txt_addresse_street.getText().toString().equals("")){
+        } else if(!txt_addressee_street.getText().toString().equals("")){
             return false;
         } else if(!txt_no_ext.getText().toString().equals("")){
             return false;
-        } else if(!txt_addresse_phone.getText().toString().equals("")){
+        } else if(!txt_addressee_phone.getText().toString().equals("")){
             return false;
         } else if(!txt_zip_code.getText().toString().equals("") && txt_zip_code.getText().toString().length() != 5){
+            return false;
+        } else if(!txt_addressee_email.getText().toString().equals("")){
             return false;
         }
 
@@ -1148,7 +1149,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
     private void addTextWatchers(){
 
-        txt_addresse_name.addTextChangedListener(new TextWatcher() {
+        txt_addressee_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -1161,7 +1162,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_addresse_name.setError(null);
+                txt_addressee_name.setError(null);
                 if (s.length() <= 1) {
                     checkImageSaveFrequently();
                 }
@@ -1188,7 +1189,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
             }
         });
 
-        txt_addresse_street.addTextChangedListener(new TextWatcher() {
+        txt_addressee_street.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -1201,7 +1202,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_addresse_street.setError(null);
+                txt_addressee_street.setError(null);
                 if (s.length() <= 1) {
                     checkImageSaveFrequently();
                 }
@@ -1228,7 +1229,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
             }
         });
 
-        txt_addresse_phone.addTextChangedListener(new TextWatcher() {
+        txt_addressee_phone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -1241,7 +1242,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_addresse_phone.setError(null);
+                txt_addressee_phone.setError(null);
                 if (s.length() <= 1) {
                     checkImageSaveFrequently();
                 }
@@ -1249,7 +1250,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
         });
 
 
-        txt_addresse_email.addTextChangedListener(new TextWatcher() {
+        txt_addressee_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -1262,8 +1263,8 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_addresse_email.setError(null);
-                if (s.length() > 1) {
+                txt_addressee_email.setError(null);
+                if (s.length() >2) {
                     checkImageSaveFrequently();
                 }
             }
@@ -1273,20 +1274,20 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
     private void saveDataAddressee(){
         dataAddressee = new HashMap<>();
-        dataAddressee.put(DATA_ADDRESSEE.ADDRESSEE_NAME.toString(),txt_addresse_name.getText().toString());
+        dataAddressee.put(DATA_ADDRESSEE.ADDRESSEE_NAME.toString(), txt_addressee_name.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.ADDRESSEE_BUSINESS_NAME.toString(), txt_business_name.getText().toString());
-        dataAddressee.put(DATA_ADDRESSEE.STREET_ADDRESSEE.toString(), txt_addresse_street.getText().toString());
+        dataAddressee.put(DATA_ADDRESSEE.STREET_ADDRESSEE.toString(), txt_addressee_street.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.NO_INT_ADDRESSEE.toString(),txt_no_int.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.ZIP_CODE_ADDRESSEE.toString(),txt_zip_code.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.NO_EXT_ADDRESSEE.toString(),txt_no_ext.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.COLONY_ADDRESSEE.toString(),spn_addressee_colony.getSelectedItem().toString());
         dataAddressee.put(DATA_ADDRESSEE.CITY_ADDRESSEE.toString(),spn_addressee_city.getSelectedItem().toString());
         dataAddressee.put(DATA_ADDRESSEE.STATE_ADDRESSEE.toString(),spn_addressee_state.getSelectedItem().toString());
-        dataAddressee.put(DATA_ADDRESSEE.PHONE_ADDRESSEE.toString(),txt_addresse_phone.getText().toString());
-        dataAddressee.put(DATA_ADDRESSEE.EMAIL_ADDRESSEE.toString(),txt_addresse_email.getText().toString());
-        dataAddressee.put(DATA_ADDRESSEE.REFERENCE_ADDRESSEE.toString(),txt_addresse_reference.getText().toString());
-        dataAddressee.put(DATA_ADDRESSEE.NAVE_ADDRESSEE.toString(),txt_addresse_nave.getText().toString());
-        dataAddressee.put(DATA_ADDRESSEE.PLATFORM_ADDRESSEE.toString(),txt_addresse_platform.getText().toString());
+        dataAddressee.put(DATA_ADDRESSEE.PHONE_ADDRESSEE.toString(), txt_addressee_phone.getText().toString());
+        dataAddressee.put(DATA_ADDRESSEE.EMAIL_ADDRESSEE.toString(), txt_addressee_email.getText().toString());
+        dataAddressee.put(DATA_ADDRESSEE.REFERENCE_ADDRESSEE.toString(), txt_addressee_reference.getText().toString());
+        dataAddressee.put(DATA_ADDRESSEE.NAVE_ADDRESSEE.toString(), txt_addressee_nave.getText().toString());
+        dataAddressee.put(DATA_ADDRESSEE.PLATFORM_ADDRESSEE.toString(), txt_addressee_platform.getText().toString());
 
     }
 
@@ -1303,16 +1304,16 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
 
         spn_addressee_colony.setSelection(0);
 
-        txt_addresse_name.setText(dataContact.get(FrequentlyContacts.NAME_CONTACT));
+        txt_addressee_name.setText(dataContact.get(FrequentlyContacts.NAME_CONTACT));
         txt_business_name.setText(dataContact.get(FrequentlyContacts.BUSINESS_NAME_CONTACT));
-        txt_addresse_street.setText(dataContact.get(FrequentlyContacts.STREET_CONTACT));
+        txt_addressee_street.setText(dataContact.get(FrequentlyContacts.STREET_CONTACT));
         txt_no_ext.setText(dataContact.get(FrequentlyContacts.NO_EXT_CONTACT));
         txt_no_int.setText(dataContact.get(FrequentlyContacts.NO_INT_CONTACT));
         txt_zip_code.setText(dataContact.get(FrequentlyContacts.CP_CONTACT));
-        txt_addresse_phone.setText(dataContact.get(FrequentlyContacts.PHONE_CONTACT));
-        txt_addresse_email.setText(dataContact.get(FrequentlyContacts.EMAIL_CONTACT));
-        txt_addresse_reference.setText(dataContact.get(FrequentlyContacts.REFERENCE_CONTACT));
-        txt_addresse_nave.setText(dataContact.get(FrequentlyContacts.NAVE_CONTACT));
-        txt_addresse_platform.setText(dataContact.get(FrequentlyContacts.PLATFORM_CONTACT));
+        txt_addressee_phone.setText(dataContact.get(FrequentlyContacts.PHONE_CONTACT));
+        txt_addressee_email.setText(dataContact.get(FrequentlyContacts.EMAIL_CONTACT));
+        txt_addressee_reference.setText(dataContact.get(FrequentlyContacts.REFERENCE_CONTACT));
+        txt_addressee_nave.setText(dataContact.get(FrequentlyContacts.NAVE_CONTACT));
+        txt_addressee_platform.setText(dataContact.get(FrequentlyContacts.PLATFORM_CONTACT));
     }
 }

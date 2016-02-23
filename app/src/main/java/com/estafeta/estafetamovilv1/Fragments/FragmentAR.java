@@ -86,6 +86,7 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_augmented_reality, container, false);
         context = getActivity();
+
         inicializar();
 
 
@@ -93,8 +94,9 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
     }
 
     public void inicializar(){
-        ListaMarcadores.actualizarMarcadores(context);
+
         gps= GPS_AR.getInstance(context);
+        ListaMarcadores.actualizarMarcadores(context);
         //RRA.getId();
         contenedorCajas=new RelativeLayout(getActivity());
         RelativeLayout.LayoutParams parametros=new RelativeLayout.LayoutParams(
@@ -172,7 +174,6 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
 
     public void agregarElementos(List<Marcador> identificados){
 
-        Log.d("SENSOR","Agregar elementos en direccion: "+ String.valueOf(sensor.getAzimuth()));
         Marcador temporal=new Marcador();
 
         int posX,posY;
@@ -180,51 +181,27 @@ public class FragmentAR extends TrackerFragment implements SensorsListener{
         for (int indice=0;indice<identificados.size();indice++){
             //Log.d("Main","Lugar Identificado");
             temporal=identificados.get(indice);
-            posX= ListaMarcadores.verificarPosicionEjeX(ubicacion, sensor.getAzimuth(), temporal, getActivity());
-            posY=ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(), temporal, getActivity());
 
-            if(posX == 10000 || posY == 10000){
-                Log.v(TAG, "Finalizado forzoso");
-                gps.finalize();
-                sensor.finalize();
-                return;
-            }
+            try {//En caso de que haya un problema con alguna información del sensor
+                if(sensor.getAzimuth() != 0) {
 
-            contenedor.agregarLugaraPantalla(listener, new CajaDeTexto(context), posX, posY, temporal, ubicacion);
+                    posX = ListaMarcadores.verificarPosicionEjeX(ubicacion, sensor.getAzimuth(), temporal, getActivity());
+                    posY = ListaMarcadores.verificarPosicionEjeY(sensor.getRoll(), temporal, getActivity());
 
-            /*oficina = new HashMap<>();
-            oficina.put("nombre",temporal.getNombre());
-            oficina.put("calle1",temporal.getCalle1());
-            oficina.put("ciudad_n",temporal.getCiudad_n());
-            oficina.put("codigo_postal",temporal.getCodigo_postal());
-            oficina.put("horario_atencion",temporal.getHorario_atencion());
-            oficina.put("ext1",temporal.getExt1());
-            oficina.put("telefono1", temporal.getTelefono1());
-            oficina.put("colonia_n", temporal.getColonia_n());
+                    if (posX == 10000 || posY == 10000) {
+                        Log.v(TAG, "Finalizado forzoso");
+                        gps.finalize();
+                        sensor.finalize();
+                        return;
+                    }
 
-            Location location = temporal.getLocalizacionLugar();
-
-            position = new LatLng(location.getLatitude(), location.getLongitude());
-
-            if (Utilities.convertOfficesIntToType(temporal.getTipo_elemento()).equals("SU")) {
-                type = "SU";
-            } else if (Utilities.convertOfficesIntToType(temporal.getTipo_elemento()).equals("CO")) {
-                type = "CO";
-            } else if (Utilities.convertOfficesIntToType(temporal.getTipo_elemento()).equals("CA")) {
-                type = "CA";
-            }
-
-            contenedorCajas.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, "Cargando oficina...", 0);
-
-                    new AsyckTask().execute();
-
+                    contenedor.agregarLugaraPantalla(listener, new CajaDeTexto(context), posX, posY, temporal, ubicacion);
 
                 }
-            });*/
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         //Log.d("SENSOR", "Elementos agregados");
 

@@ -49,11 +49,13 @@
 
                 <!-- 1.1 -->
                 <EditText
-                    android:id                  ="@+id/txt_sender_name"
+                    android:id                  ="@+id/txt_addressee_name"
                     android:layout_width        ="0dp"
                     android:layout_height       ="match_parent"
                     android:textSize            ="@dimen/sizeMediumText"
                     android:hint                ="@string/prefilled_name"
+                    android:maxLength           ="30"
+                    android:digits              ="üáéíóúñabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
                     android:textCursorDrawable  ="@null"
                     android:imeOptions          ="actionNext"
                     android:singleLine          ="true"
@@ -106,18 +108,22 @@
                 android:layout_marginBottom ="5dp"
                 android:textCursorDrawable  ="@null"
                 android:imeOptions          ="actionNext"
+                android:maxLength           ="50"
+                android:inputType           ="textNoSuggestions"
                 android:singleLine          ="true"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:hint                ="@string/prefilled_business_name"/>
 
             <!-- 3 -->
             <EditText
-                android:id                  ="@+id/txt_sender_street"
+                android:id                  ="@+id/txt_addressee_street"
                 android:layout_width        ="match_parent"
                 android:layout_height       ="wrap_content"
                 android:layout_marginBottom ="5dp"
                 android:textCursorDrawable  ="@null"
                 android:imeOptions          ="actionNext"
+                android:maxLength           ="30"
+                android:inputType           ="textNoSuggestions"
                 android:singleLine          ="true"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:hint                ="@string/prefilled_street"/>
@@ -138,6 +144,8 @@
                     android:textSize            ="@dimen/sizeMediumText"
                     android:hint                ="@string/prefilled_no_ext"
                     android:imeOptions          ="actionNext"
+                    android:maxLength           ="5"
+                    android:inputType           ="textNoSuggestions"
                     android:singleLine          ="true"
                     android:textCursorDrawable  ="@null"
                     android:layout_weight       ="47"/>
@@ -154,6 +162,8 @@
                     android:layout_width        ="0dp"
                     android:layout_height       ="match_parent"
                     android:textSize            ="@dimen/sizeMediumText"
+                    android:maxLength           ="5"
+                    android:inputType           ="textNoSuggestions"
                     android:textCursorDrawable  ="@null"
                     android:hint                ="@string/prefilled_no_int"
                     android:imeOptions          ="actionNext"
@@ -250,7 +260,7 @@
                 android:layout_height       ="wrap_content"
                 android:layout_marginBottom ="5dp"
                 android:inputType           ="phone"
-                android:maxLength           ="10"
+                android:maxLength           ="20"
                 android:imeOptions          ="actionNext"
                 android:singleLine          ="true"
                 android:textCursorDrawable  ="@null"
@@ -265,6 +275,7 @@
                 android:textCursorDrawable  ="@null"
                 android:inputType           ="textEmailAddress"
                 android:textSize            ="@dimen/sizeMediumText"
+                android:maxLength           ="50"
                 android:imeOptions          ="actionDone"
                 android:singleLine          ="true"
                 android:hint                ="@string/prefilled_email"/>

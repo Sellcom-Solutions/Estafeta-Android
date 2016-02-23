@@ -71,7 +71,7 @@ public class FragmentPrefilled extends TrackerFragment{
         EMAIL_ADDRESSEE("email_addressee"),
         REFERENCE_ADDRESSEE("reference_addressee"),
         NAVE_ADDRESSEE("nave_addressee"),
-        PLATFORM_ADDRESSEE("platform_addressee"),;
+        PLATFORM_ADDRESSEE("platform_addressee");
 
         private final String name;
 

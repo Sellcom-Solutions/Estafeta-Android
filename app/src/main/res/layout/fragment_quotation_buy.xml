@@ -28,11 +28,12 @@
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="60"
+                    android:layout_weight="65"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:paddingLeft="10dp"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:orientation="vertical"
                     android:weightSum="100">
 
@@ -40,46 +41,50 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="50"
+                        android:layout_weight="40"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="30"
                             android:textSize="@dimen/sizeSmallText"
                             android:textStyle="bold"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
-                            android:text="Origen: "/>
+                            android:text="@string/origin"/>
 
                         <TextView
                             android:id="@+id/lbl_origin"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeSmallText"
-                            android:textColor="@color/estafeta_text"
+                            android:layout_weight="70"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:textColor="@color/estafeta_text_light_gray"
                             android:text="01111, Huixquilucan, Edo, de México"/>
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="50"
+                        android:layout_weight="40"
                         android:orientation="horizontal">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="30"
                             android:textSize="@dimen/sizeSmallText"
                             android:textStyle="bold"
                             android:textColor="@color/estafeta_text"
                             android:layout_marginRight="5dp"
-                            android:text="Destino: "/>
+                            android:text="@string/destiny"/>
 
                         <TextView
                             android:id="@+id/lbl_destiny"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/sizeSmallText"
-                            android:textColor="@color/estafeta_text"
+                            android:layout_weight="70"
+                            android:textSize="@dimen/sizeXSmallText"
+                            android:textColor="@color/estafeta_text_light_gray"
                             android:text="02222, Miguel Hidalgo, Distrito Federal"/>
                     </LinearLayout>
 
@@ -96,13 +101,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:layout_weight="70"
-                        android:background="@color/estafeta_text" />
+                        android:background="@color/estafeta_soft_gray" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_weight="40"
+                    android:layout_weight="35"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="15dp"

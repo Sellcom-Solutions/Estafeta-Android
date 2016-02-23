@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.estafeta.estafetamovilv1.Fragments.FragmentOfficesMap;
 import com.estafeta.estafetamovilv1.Utils.Utilities;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import database.model.Offices;
+import location.GPS_AR;
 
 /**
  * Created by juan.guerra on 23/06/2015.
@@ -21,14 +23,20 @@ import database.model.Offices;
 public class ListaMarcadores {
 
     public static List<Marcador> listaMarcadores;
+    public static List<Marcador> newListaMarcadores;
     public static double tolerancia=Pantalla.Angulo_Tolerancia;
     public static double distancia;
     private static final float DISTANCIA= 5000;
     private static final int NUMERO_ELEMENTOS = 5;
+    private static boolean flag = true;
+
 
     public static void actualizarMarcadores(Context context){
         listaMarcadores=new LinkedList<Marcador>();
+        newListaMarcadores=new LinkedList<Marcador>();
         List<Map<String,String>> listOficinas;
+
+        flag = true;
         listOficinas = Offices.getAllInMaps(context);
         Map<String,String> oficina;
         if (listOficinas == null)
@@ -37,7 +45,7 @@ public class ListaMarcadores {
         for (int index=0;index<listOficinas.size();index++){
             oficina=listOficinas.get(index);
             try{
-                listaMarcadores.add(new Marcador(
+                newListaMarcadores.add(new Marcador(
                         Integer.valueOf(oficina.get(Offices.ID_OFFICE)),
                         oficina.get(Offices.NOMBRE),
                         Double.valueOf(oficina.get(Offices.LATITUD)),
@@ -52,6 +60,9 @@ public class ListaMarcadores {
                         oficina.get(Offices.COLONIA_N),
                         oficina.get(Offices.LATITUD),
                         oficina.get(Offices.LONGITUD)));
+
+
+
             }
             catch(java.lang.NumberFormatException e){
                 //e.printStackTrace();
@@ -66,6 +77,19 @@ public class ListaMarcadores {
         Marcador aux;
         //Verificar Bearing
         //Log.d("Marcadores Size",String.valueOf(listaMarcadores.size()));
+
+        if(flag) {
+            flag = false;
+            for (int i = 0; i < newListaMarcadores.size(); i++) {
+                if (loc.distanceTo(newListaMarcadores.get(i).getLocalizacionLugar()) <= DISTANCIA) {
+                    listaMarcadores.add(newListaMarcadores.get(i));
+                }
+            }
+
+            listaMarcadores = ordenarMarcadores(listaMarcadores, loc);
+            Log.d("lista","sizeList: "+ listaMarcadores.size());
+        }
+        //*****************************************************************************************************************************
         for(int i=0;i<listaMarcadores.size();i++){
             aux=listaMarcadores.get(i);
             aux.setEnVista(false);
@@ -129,6 +153,9 @@ public class ListaMarcadores {
             }
 
         }
+        //*****************************************************************************************************************************
+
+
         //Log.d("Identificados", "Identificados: "+String.valueOf(identificados.size()));
         return identificados;
         //Toast t=Toast.makeText(c,"Identificados: "+identificados.size(),Toast.LENGTH_LONG);

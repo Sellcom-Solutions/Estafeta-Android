@@ -126,7 +126,7 @@ public class ContenedorCajas {
         }
         NumberFormat nf=NumberFormat.getInstance();
 
-        nf.setMaximumFractionDigits(1);
+        nf.setMaximumFractionDigits(2);
         nf.setRoundingMode(RoundingMode.DOWN);
         units=nf.format(distance)+units;
 

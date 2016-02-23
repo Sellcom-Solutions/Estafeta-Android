@@ -17,7 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentDialogQRCode;
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilled;
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilledSender;
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.QuoteAndBuy.FragmentQuotationBuy;
 import com.estafeta.estafetamovilv1.communication.CommunicationBetweenFragments;
 import com.google.android.gms.analytics.HitBuilders;
 import com.estafeta.estafetamovilv1.Async_Request.DecisionDialogWithListener;
@@ -49,6 +52,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     private Toolbar                     mToolbar;
     private CharSequence                mTitle;
 
+    public  Fragment                    auxFragment;
 
     private NavigationDrawerFragment    mNavigationDrawerFragment;
     public boolean                      isDrawerOpen;
@@ -59,7 +63,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             String                      CURRENT_FRAGMENT_TAG;
     public  int                         depthCounter    = 0;
 
-    private long            mLastClickTime;
+    private long                        mLastClickTime;
 
 
     @Override
@@ -81,6 +85,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
 
         mNavigationDrawerFragment.selectItem(0);
+
+        auxFragment = null;
 
     }
 
@@ -125,13 +131,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             return;
         }
 
-        /*else if (currentFragment instanceof FragmentQuotationBuy){
-            if ( ((FragmentQuotationBuy)currentFragment).getCurrent() == FragmentQuotationBuyFields.DESTINY)
-                ((FragmentQuotationBuy)currentFragment).handleBackPressed();
-            else
-                super.onBackPressed();
-            return;
-        }*/
+        currentFragment = getSupportFragmentManager().findFragmentByTag(FragmentDialogQRCode.TAG);
+
 
         Log.d(ACT_TAG, "Deep depthCounter Back 1:" + depthCounter);
 
@@ -145,7 +146,16 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             moveTaskToBack(true);
 
         } else {
-                super.onBackPressed();
+                if(currentFragment instanceof FragmentDialogQRCode){ //Para que no se limpien los datos de FragmentPrefilledSender
+                    auxFragment = new FragmentDialogQRCode();
+                    Log.d(ACT_TAG, "-------------:" + depthCounter);
+                    super.onBackPressed();
+                    FragmentPrefilledSender fragment = (FragmentPrefilledSender)getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_REMITENTE.toString());
+                    fragment.clearAll();
+                    auxFragment = null;
+                }else{
+                    super.onBackPressed();
+                }
         }
 
         if (depthCounter > 0)
@@ -342,19 +352,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         return false;
     }
 
-    /*@Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-
-        FragmentManager     fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        //this.prepareRequest(method, params, true);
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
-        mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
-
-    }*/
-
 
 
     @Override
@@ -377,6 +374,18 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public Map<String, String> getDataSender() {
         FragmentPrefilled fragment = (FragmentPrefilled)fragmentManager.findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
         return fragment.getDataSender();
+    }
+
+    @Override
+    public void setDataSenderQuotation(Map<String, String> dataSender) {
+        FragmentQuotationBuy fragment = (FragmentQuotationBuy)fragmentManager.findFragmentByTag(FragmentQuotationBuy.TAG);
+        fragment.setDataSenderQuotation(dataSender);
+    }
+
+    @Override
+    public Map<String, String> getDataSenderQuotation() {
+        FragmentQuotationBuy fragment = (FragmentQuotationBuy)fragmentManager.findFragmentByTag(FragmentQuotationBuy.TAG);
+        return fragment.getDataSenderQuotation();
     }
 
     public NavigationDrawerFragment getmNavigationDrawerFragment() {

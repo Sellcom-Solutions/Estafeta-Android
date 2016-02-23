@@ -228,26 +228,27 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
 
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.prefillect_container, fragment, TAG);
-        fragmentTransaction.commit();
-
         if(incrementDepthCounter) {
+            fragmentTransaction.addToBackStack(null);
             ((MainActivity) activity).incrementDepthCounter();
         }
+        fragmentTransaction.commit();
+
+
     }
 
     public void addFragmentQuotationBuyToStack(Activity activity,TrackerFragment fragment, String TAG, boolean incrementDepthCounter){
 
         fragmentManager = getActivity().getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.quotation_buy_container, fragment, TAG);
-        fragmentTransaction.commit();
-
         if(incrementDepthCounter) {
+            fragmentTransaction.addToBackStack(null);
             ((MainActivity) activity).incrementDepthCounter();
         }
+        fragmentTransaction.commit();
+
     }
 
     public void addFragmentToStack(Activity activity,TrackerFragment fragment, String TAG, boolean incrementDepthCounter){
@@ -256,11 +257,10 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.replace(R.id.container, fragment, TAG);
-        fragmentTransaction.commit();
-
         if(incrementDepthCounter) {
             ((MainActivity) activity).incrementDepthCounter();
         }
+        fragmentTransaction.commit();
 
     }
 

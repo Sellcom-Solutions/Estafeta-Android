@@ -413,17 +413,17 @@
                                 android:layout_height       ="40dp"
                                 android:text                ="@string/buy"
                                 android:textSize            ="@dimen/sizeXSmallText"
+                                android:textAllCaps         ="false"
                                 android:textColor           ="@color/white"
                                 android:background          ="@drawable/border_button_red"
                                 android:gravity="center"
-                                android:visibility="gone"/>
+                                android:visibility="visible"/>
                         </LinearLayout>
                     </LinearLayout>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginTop="10dp"
                         android:background="@color/estafeta_soft_gray"/>
 
                     <TextView

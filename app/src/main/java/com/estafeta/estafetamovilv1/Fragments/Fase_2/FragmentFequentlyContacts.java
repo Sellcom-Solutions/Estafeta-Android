@@ -2,10 +2,12 @@ package com.estafeta.estafetamovilv1.Fragments.Fase_2;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +20,9 @@ import android.widget.ListView;
 import com.estafeta.estafetamovilv1.Activities.MainActivity;
 import com.estafeta.estafetamovilv1.Adapters.FrequentlyContactsAdapter;
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentDialogGetDataFrequentlyContacts;
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.QuoteAndBuy.FragmentDialogWrongData;
 import com.estafeta.estafetamovilv1.R;
+import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 
 import java.text.SimpleDateFormat;
@@ -79,15 +83,12 @@ public class FragmentFequentlyContacts extends DialogFragment implements Fragmen
                     switch (arg0.getItemId()) {
                         case R.id.close:
                             //((MainActivity) getActivity()).hideDrawer(true);
-                            actionBarActivity.show();
                             dismiss();
                             return true;
                     }
                     return false;
                 }
             });
-
-            actionBarActivity = ((ActionBarActivity) getActivity()).getSupportActionBar();
 
             listFrequentlyContacts = FrequentlyContacts.getAllInMaps(getActivity());
 
@@ -108,9 +109,8 @@ public class FragmentFequentlyContacts extends DialogFragment implements Fragmen
 
 
     @Override
-    public void onResume() {
-        super.onResume();
-        actionBarActivity.hide();
+    public void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -135,6 +135,7 @@ public class FragmentFequentlyContacts extends DialogFragment implements Fragmen
                 //((MainActivity) getActivity()).hideDrawer(true);
                 actionBarActivity.show();
                 dismiss();
+
                 return true;
             default: return super.onOptionsItemSelected(item);
         }
@@ -145,16 +146,30 @@ public class FragmentFequentlyContacts extends DialogFragment implements Fragmen
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        actionBarActivity.show();
+        dismiss();
         //((MainActivity) getActivity()).hideDrawer(true);
     }
 
     @Override
     public void pressedButtonContinue(Map<String, String> dataContacs){
-        actionBarActivity.show();
         //((MainActivity) getActivity()).hideDrawer(true);
-        listener.pressedButtonContinue(dataContacs);
-        dismiss();
+        if(getArguments()!= null && getArguments().getString("cp_quote") != null){
+            if(!getArguments().getString("cp_quote").equals(dataContacs.get(FrequentlyContacts.CP_CONTACT))){
+                FragmentDialogWrongData fdwd = new FragmentDialogWrongData();
+                fdwd.setArguments(getArguments());
+                fdwd.show(getActivity().getSupportFragmentManager(),FragmentDialogWrongData.TAG);
+            }else{
+
+                listener.pressedButtonContinue(dataContacs);
+                dismiss();
+            }
+
+        }else {
+
+            listener.pressedButtonContinue(dataContacs);
+            dismiss();
+        }
+
     }
 
     public interface setPressedButtonContinue{

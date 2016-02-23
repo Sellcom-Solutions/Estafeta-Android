@@ -39,7 +39,6 @@
             android:paddingTop      ="10dp"
             android:paddingBottom   ="10dp"
             android:orientation     ="vertical">
-
             <!-- 1 -->
             <LinearLayout
                 android:layout_width        ="match_parent"
@@ -60,7 +59,7 @@
                     android:textCursorDrawable  ="@null"
                     android:imeOptions          ="actionNext"
                     android:singleLine          ="true"
-                    android:layout_weight       ="70"/>
+                    android:layout_weight       ="85"/>
 
                 <!-- 1.2 -->
                 <LinearLayout
@@ -76,28 +75,11 @@
                         android:padding         ="5dp"
                         android:layout_width    ="@dimen/sizeImagesPrefilledWidth"
                         android:layout_height   ="@dimen/sizeImagesPrefilledHeight"
-                        android:scaleType       ="fitCenter"
+                        android:scaleType       =  "fitCenter"
                         android:src             ="@drawable/ic_launcher"/>
 
                 </LinearLayout>
 
-                <!-- 1.3 -->
-                <LinearLayout
-                    android:layout_width    ="0dp"
-                    android:layout_height   ="match_parent"
-                    android:layout_weight   ="15"
-                    android:gravity         ="center"
-                    android:orientation     ="vertical">
-
-                    <ImageView
-                        android:id              ="@+id/imgv_download_prefilled"
-                        android:padding         ="5dp"
-                        android:layout_width    ="@dimen/sizeImagesPrefilledWidth"
-                        android:layout_height   ="@dimen/sizeImagesPrefilledHeight"
-                        android:scaleType       ="fitCenter"
-                        android:src             ="@drawable/ic_launcher"/>
-
-                </LinearLayout>
             </LinearLayout>
 
 
@@ -107,9 +89,11 @@
                 android:layout_width        ="match_parent"
                 android:layout_height       ="wrap_content"
                 android:layout_marginBottom ="5dp"
+                android:textCursorDrawable  ="@null"
                 android:maxLength           ="50"
                 android:inputType           ="textNoSuggestions"
-                android:textCursorDrawable  ="@null"
+                android:imeOptions          ="actionNext"
+                android:singleLine          ="true"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:hint                ="@string/prefilled_business_name"/>
 
@@ -122,6 +106,8 @@
                 android:textCursorDrawable  ="@null"
                 android:maxLength           ="30"
                 android:inputType           ="textNoSuggestions"
+                android:imeOptions          ="actionNext"
+                android:singleLine          ="true"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:hint                ="@string/prefilled_street"/>
 
@@ -142,6 +128,8 @@
                     android:hint                ="@string/prefilled_no_ext"
                     android:maxLength           ="5"
                     android:inputType           ="textNoSuggestions"
+                    android:imeOptions          ="actionNext"
+                    android:singleLine          ="true"
                     android:textCursorDrawable  ="@null"
                     android:layout_weight       ="47"/>
 
@@ -161,6 +149,8 @@
                     android:maxLength           ="5"
                     android:inputType           ="textNoSuggestions"
                     android:hint                ="@string/prefilled_no_int"
+                    android:imeOptions          ="actionNext"
+                    android:singleLine          ="true"
                     android:layout_weight       ="47"/>
 
             </LinearLayout>
@@ -182,27 +172,14 @@
                     android:textCursorDrawable  ="@null"
                     android:inputType           ="number"
                     android:maxLength           ="5"
+                    android:enabled             ="false"
+                    android:imeOptions          ="actionNext"
+                    android:singleLine          ="true"
+                    android:textColor           ="@color/estafeta_soft_gray"
                     android:hint                ="@string/prefilled_zip_code"
-                    android:layout_weight       ="70"/>
+                    android:layout_weight       ="85"/>
 
                 <!-- 5.2 -->
-                <LinearLayout
-                    android:layout_width        ="0dp"
-                    android:layout_height       ="match_parent"
-                    android:layout_weight       ="15"
-                    android:gravity             ="center"
-                    android:orientation         ="vertical">
-
-                    <ImageView
-                        android:id              ="@+id/imgv_search_zip_code"
-                        android:layout_width    ="@dimen/sizeImagesPrefilledWidth"
-                        android:layout_height   ="@dimen/sizeImagesPrefilledHeight"
-                        android:scaleType       =  "fitCenter"
-                        android:src             ="@drawable/busca"/>
-
-                </LinearLayout>
-
-                <!-- 5.3 -->
                 <LinearLayout
                     android:layout_width    ="0dp"
                     android:layout_height   ="match_parent"
@@ -222,11 +199,11 @@
 
             <!-- 6 -->
             <Spinner
-                android:id                  ="@+id/spn_addressee_colony"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:layout_marginBottom ="15dp"
-                android:spinnerMode         ="dialog"/>
+                android:id                      ="@+id/spn_addressee_colony"
+                android:layout_width            ="match_parent"
+                android:layout_height           ="wrap_content"
+                android:layout_marginBottom     ="15dp"
+                android:spinnerMode             ="dialog"/>
 
             <!-- 7 -->
             <Spinner
@@ -246,12 +223,14 @@
 
             <!-- 9 -->
             <EditText
-                android:id                  ="@+id/txt_addresse_phone"
+                android:id                  ="@+id/txt_addressee_phone"
                 android:layout_width        ="match_parent"
                 android:layout_height       ="wrap_content"
                 android:layout_marginBottom ="5dp"
                 android:inputType           ="phone"
                 android:maxLength           ="20"
+                android:imeOptions          ="actionNext"
+                android:singleLine          ="true"
                 android:textCursorDrawable  ="@null"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:hint                ="@string/prefilled_phone"/>
@@ -261,75 +240,35 @@
                 android:id                  ="@+id/txt_addressee_email"
                 android:layout_width        ="match_parent"
                 android:layout_height       ="wrap_content"
-                android:layout_marginBottom ="5dp"
                 android:textCursorDrawable  ="@null"
                 android:inputType           ="textEmailAddress"
                 android:maxLength           ="50"
                 android:textSize            ="@dimen/sizeMediumText"
+                android:imeOptions          ="actionDone"
+                android:singleLine          ="true"
                 android:hint                ="@string/prefilled_email"/>
 
             <!-- 11 -->
-            <EditText
-                android:id                  ="@+id/txt_addressee_reference"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:layout_marginBottom ="5dp"
-                android:maxLength           ="200"
-                android:inputType           ="textNoSuggestions"
-                android:textCursorDrawable  ="@null"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/addressee_reference"/>
-
-            <!-- 12 -->
-            <EditText
-                android:id                  ="@+id/txt_addressee_nave"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:layout_marginBottom ="5dp"
-                android:textCursorDrawable  ="@null"
-                android:maxLength           ="5"
-                android:inputType           ="textNoSuggestions"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/addressee_nave"/>
-
-            <!-- 13 -->
-            <EditText
-                android:id                  ="@+id/txt_addressee_platform"
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:textCursorDrawable  ="@null"
-                android:maxLength           ="5"
-                android:inputType           ="textNoSuggestions"
-                android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/addressee_platform"/>
-
-            <!-- 14 -->
             <TextView
-                android:layout_width        ="match_parent"
-                android:layout_height       ="wrap_content"
-                android:layout_marginBottom ="30dp"
-                android:textSize            ="@dimen/sizeXSmallText"
-                android:textColor           ="@color/estafeta_red"
-                android:text                ="@string/mandatory_fields"/>
+                android:layout_width            ="match_parent"
+                android:layout_height           ="wrap_content"
+                android:layout_marginBottom     ="30dp"
+                android:textSize                ="@dimen/sizeXSmallText"
+                android:textColor               ="@color/estafeta_red"
+                android:text                    ="@string/mandatory_fields"/>
 
 
             <Button
-                android:id              ="@+id/btn_generate_code"
+                android:id              ="@+id/btn_next"
                 android:layout_width    ="match_parent"
                 android:layout_height   ="wrap_content"
                 android:gravity         ="center"
                 android:textColor       ="@color/estafeta_red"
                 android:textSize        ="@dimen/sizeLargeText"
                 android:textAllCaps     ="false"
-                android:text            ="@string/generate_code"
+                android:text            ="@string/sender_next"
                 android:background      ="@android:color/transparent"/>
 
-
-
         </LinearLayout>
-
-
     </ScrollView>
-
-
 </LinearLayout>

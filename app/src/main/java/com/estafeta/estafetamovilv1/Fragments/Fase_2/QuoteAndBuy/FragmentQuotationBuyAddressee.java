@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
@@ -37,6 +38,7 @@ import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 import com.estafeta.estafetamovilv1.Utils.Utilities;
 import com.estafeta.estafetamovilv1.communication.CommunicationBetweenFragments;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -47,56 +49,57 @@ import database.model.FrequentlyContacts;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FragmentQuotationBuySender extends TrackerFragment implements View.OnClickListener,
-                                                                            FragmentDialogSave.listenerButtonSave,
-                                                                            FragmentDialogGetDataContacts.contactsOptionPressed,
-                                                                            FragmentFequentlyContacts.setPressedButtonContinue{
+public class FragmentQuotationBuyAddressee extends TrackerFragment implements View.OnClickListener,
+                                                                                FragmentDialogSave.listenerButtonSave,
+                                                                                FragmentDialogGetDataContacts.contactsOptionPressed,
+                                                                                FragmentFequentlyContacts.setPressedButtonContinue{
 
-    private TrackerFragment fragment;
+
 
     private boolean statusImageRed = false;
 
     protected static final int REQ_GET_CONTACT = 0;
 
-    private EditText        txt_sender_name,
-                            txt_business_name,
-                            txt_sender_street,
-                            txt_no_ext,
-                            txt_no_int,
-                            txt_zip_code,
-                            txt_sender_phone,
-                            txt_sender_email,
-                            txt_city,
-                            txt_colony;
+    private EditText txt_addressee_name,
+            txt_business_name,
+            txt_addressee_street,
+            txt_no_ext,
+            txt_no_int,
+            txt_zip_code,
+            txt_addressee_phone,
+            txt_addressee_email,
+            txt_city,
+            txt_colony;
 
-    private ImageView       imgv_save_frequent,
-                            imgv_diary;
+    private ImageView imgv_save_frequent,
+            imgv_diary;
 
-    private Spinner         spn_sender_colony,
-                            spn_sender_city,
-                            spn_sender_state;
+    private Spinner spn_addressee_colony,
+            spn_addressee_city,
+            spn_addressee_state;
 
-    private Button          btn_next;
+    private Button btn_next;
 
 
-    private List<String>    items_list_colony,
-                            items_list_city,
-                            items_list_state;
+    private List<String> items_list_colony,
+            items_list_city,
+            items_list_state;
 
-    private SpinnerAdapterPrefilled     spinnerAdapterColony,
-                                        spinnerAdapterCity,
-                                        spinnerAdapterState;
+    private SpinnerAdapterPrefilled spinnerAdapterColony,
+            spinnerAdapterCity,
+            spinnerAdapterState;
 
     private String          typeSend = "",
-                            zipCodeString,
-                            cp_origin = "";
+            zipCodeString,
+            cp_origin = "";
 
     private List<Map<String,String>> respCotizador;
 
     private long            mLastClickTime;
 
-    private CommunicationBetweenFragments listener;
+    private Map<String,String> dataAddressee;
 
+    private CommunicationBetweenFragments listener;
 
     @Override
     public void onAttach(Activity activity) {
@@ -114,8 +117,8 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getArguments() != null && getArguments().getString("cp_origin") != null){
-            cp_origin = getArguments().getString("cp_origin");
+        if(getArguments() != null && getArguments().getString("cp_destiny") != null){
+            cp_origin = getArguments().getString("cp_destiny");
         }
     }
 
@@ -123,7 +126,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_quotation_buy_sender, container, false);
+        View view = inflater.inflate(R.layout.fragment_quotation_buy_addressee, container, false);
         if(view != null) {
 
             //Buttons
@@ -133,33 +136,33 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
             imgv_save_frequent = (ImageView) view.findViewById(R.id.imgv_save_frequent);
             imgv_diary = (ImageView) view.findViewById(R.id.imgv_diary);
             //EditText
-            txt_sender_name = (EditText) view.findViewById(R.id.txt_sender_name);
+            txt_addressee_name = (EditText) view.findViewById(R.id.txt_addressee_name);
             txt_business_name = (EditText) view.findViewById(R.id.txt_business_name);
-            txt_sender_street = (EditText) view.findViewById(R.id.txt_sender_street);
+            txt_addressee_street = (EditText) view.findViewById(R.id.txt_addressee_street);
             txt_no_ext = (EditText) view.findViewById(R.id.txt_no_ext);
             txt_no_int = (EditText) view.findViewById(R.id.txt_no_int);
             txt_zip_code = (EditText) view.findViewById(R.id.txt_zip_code);
-            txt_sender_phone = (EditText) view.findViewById(R.id.txt_sender_phone);
-            txt_sender_email = (EditText) view.findViewById(R.id.txt_sender_email);
+            txt_addressee_phone = (EditText) view.findViewById(R.id.txt_addressee_phone);
+            txt_addressee_email = (EditText) view.findViewById(R.id.txt_addressee_email);
             //Spinners
-            spn_sender_colony = (Spinner) view.findViewById(R.id.spn_sender_colony);
-            spn_sender_city = (Spinner) view.findViewById(R.id.spn_sender_city);
-            spn_sender_state = (Spinner) view.findViewById(R.id.spn_sender_state);
+            spn_addressee_colony = (Spinner) view.findViewById(R.id.spn_addressee_colony);
+            spn_addressee_city = (Spinner) view.findViewById(R.id.spn_addressee_city);
+            spn_addressee_state = (Spinner) view.findViewById(R.id.spn_addressee_state);
 
             items_list_colony = new ArrayList<>();
             items_list_colony.add("Colonia*");
             spinnerAdapterColony = new SpinnerAdapterPrefilled(getActivity(), items_list_colony);
-            spn_sender_colony.setAdapter(spinnerAdapterColony);
+            spn_addressee_colony.setAdapter(spinnerAdapterColony);
 
             items_list_city = new ArrayList<>();
             items_list_city.add("Ciudad, municipio, delegación*");
             spinnerAdapterCity = new SpinnerAdapterPrefilled(getActivity(), items_list_city);
-            spn_sender_city.setAdapter(spinnerAdapterCity);
+            spn_addressee_city.setAdapter(spinnerAdapterCity);
 
             items_list_state = new ArrayList<>();
             items_list_state.add("Estado*");
             spinnerAdapterState = new SpinnerAdapterPrefilled(getActivity(), items_list_state);
-            spn_sender_state.setAdapter(spinnerAdapterState);
+            spn_addressee_state.setAdapter(spinnerAdapterState);
 
             //Set Listeners
             imgv_diary.setOnClickListener(this);
@@ -169,18 +172,19 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
             addTextWatchers();
 
             //Set Hints
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_name), txt_sender_name);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_name), txt_addressee_name);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_business_name), txt_business_name);
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_street), txt_sender_street);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_street), txt_addressee_street);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_no_ext), txt_no_ext);
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_phone), txt_sender_phone);
-            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_email), txt_sender_email);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_phone), txt_addressee_phone);
+            Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_email), txt_addressee_email);
 
             imgv_save_frequent.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
             try {
                 SVG svg = SVG.getFromResource(getActivity(), R.raw.guardar_gris);
                 Drawable drawable = new PictureDrawable(svg.renderToPicture());
                 imgv_save_frequent.setImageDrawable(drawable);
+
                 statusImageRed = false;
             } catch (SVGParseException e) {
             }
@@ -225,7 +229,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
                         requestData.put("codigoPostal", zipCodeString);
                         //Send params to RequestManager
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
-                        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData, FragmentQuotationBuySender.this);
+                        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData, FragmentQuotationBuyAddressee.this);
 
                     }
 
@@ -299,9 +303,9 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
                         }
 
                         if (infoAddress[1] != null && !infoAddress[1].equals("")) {
-                            txt_sender_street.setText(infoAddress[1]);
+                            txt_addressee_street.setText(infoAddress[1]);
                         } else {
-                            txt_sender_street.setText("");
+                            txt_addressee_street.setText("");
                         }
                     }
 
@@ -310,25 +314,25 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
                     txt_business_name.setText("");
 
                     if(numberPhone!= null && !numberPhone.equals("")){
-                        txt_sender_phone.setText(numberPhone);
+                        txt_addressee_phone.setText(numberPhone);
                     }else{
-                        txt_sender_phone.setText("");
+                        txt_addressee_phone.setText("");
                     }
                     if (infoContact.length != 0) {
                         if (infoContact[2] != null && !infoContact[2].equals("")) {
-                            txt_sender_name.setText(infoContact[2]);
+                            txt_addressee_name.setText(infoContact[2]);
                         } else if (infoContact[1] != null && !infoContact[1].equals("")) {
-                            txt_sender_name.setText(infoContact[1]);
+                            txt_addressee_name.setText(infoContact[1]);
                         } else if (infoContact[0] != null && !infoContact[0].equals("")) {
-                            txt_sender_name.setText(infoContact[0]);
+                            txt_addressee_name.setText(infoContact[0]);
                         } else {
-                            txt_sender_name.setText("");
+                            txt_addressee_name.setText("");
                         }
                     }
                     if (email != null && !email.equals("")) {
-                        txt_sender_email.setText(email);
+                        txt_addressee_email.setText(email);
                     } else {
-                        txt_sender_email.setText("");
+                        txt_addressee_email.setText("");
                     }
 
                 }catch(Exception e){
@@ -453,36 +457,36 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
                         }
 
                         spinnerAdapterColony.notifyDataSetChanged();
-                       /* SpinnerAdapterPrefilled spinnerAdapterColony = new SpinnerAdapterPrefilled(getActivity(), items_list_colony);
-                        spn_sender_colony.setAdapter(spinnerAdapterColony);*/
+                   /* SpinnerAdapterPrefilled spinnerAdapterColony = new SpinnerAdapterPrefilled(getActivity(), items_list_colony);
+                    spn_sender_colony.setAdapter(spinnerAdapterColony);*/
                         if(items_list_colony.size() > 1) {
-                            spn_sender_colony.setSelection(1);
+                            spn_addressee_colony.setSelection(1);
                         }else if(items_list_colony.size() == 1){
-                            spn_sender_colony.setSelection(0);
+                            spn_addressee_colony.setSelection(0);
                         }
 
                         items_list_city.removeAll(items_list_city);
                         items_list_city.add("Ciudad, municipio, delegación*");
                         items_list_city.add(resp.get(0).get("ciudad"));
                         spinnerAdapterCity.notifyDataSetChanged();
-                        /*SpinnerAdapterPrefilled spinnerAdapterCity = new SpinnerAdapterPrefilled(getActivity(), items_list_city);
-                        spn_sender_city.setAdapter(spinnerAdapterCity);*/
+                    /*SpinnerAdapterPrefilled spinnerAdapterCity = new SpinnerAdapterPrefilled(getActivity(), items_list_city);
+                    spn_sender_city.setAdapter(spinnerAdapterCity);*/
                         if(items_list_city.size() > 1) {
-                            spn_sender_city.setSelection(1);
+                            spn_addressee_city.setSelection(1);
                         }else if(items_list_city.size() == 1){
-                            spn_sender_city.setSelection(0);
+                            spn_addressee_city.setSelection(0);
                         }
 
                         items_list_state.removeAll(items_list_state);
                         items_list_state.add("Estado*");
                         items_list_state.add(resp.get(0).get("estado").trim());
                         spinnerAdapterState.notifyDataSetChanged();
-                        /*SpinnerAdapterPrefilled spinnerAdapterState = new SpinnerAdapterPrefilled(getActivity(), items_list_state);
-                        spn_sender_state.setAdapter(spinnerAdapterState);*/
+                    /*SpinnerAdapterPrefilled spinnerAdapterState = new SpinnerAdapterPrefilled(getActivity(), items_list_state);
+                    spn_sender_state.setAdapter(spinnerAdapterState);*/
                         if(items_list_state.size() > 1) {
-                            spn_sender_state.setSelection(1);
+                            spn_addressee_state.setSelection(1);
                         }else if(items_list_state.size() == 1){
-                            spn_sender_state.setSelection(0);
+                            spn_addressee_state.setSelection(0);
                         }
 
 
@@ -543,7 +547,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
 
     private void addTextWatchers(){
 
-        txt_sender_name.addTextChangedListener(new TextWatcher() {
+        txt_addressee_name.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -556,7 +560,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_sender_name.setError(null);
+                txt_addressee_name.setError(null);
                 if (s.length() >= 0) {
                     checkImageSaveFrequently();
                 }
@@ -583,7 +587,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
             }
         });
 
-        txt_sender_street.addTextChangedListener(new TextWatcher() {
+        txt_addressee_street.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -596,7 +600,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_sender_street.setError(null);
+                txt_addressee_street.setError(null);
                 if (s.length() >= 0) {
                     checkImageSaveFrequently();
                 }
@@ -623,7 +627,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
             }
         });
 
-        txt_sender_phone.addTextChangedListener(new TextWatcher() {
+        txt_addressee_phone.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -636,14 +640,14 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_sender_email.setError(null);
+                txt_addressee_phone.setError(null);
                 if (s.length() >= 0) {
                     checkImageSaveFrequently();
                 }
             }
         });
 
-        txt_sender_email.addTextChangedListener(new TextWatcher() {
+        txt_addressee_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -656,7 +660,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
 
             @Override
             public void afterTextChanged(Editable s) {
-                txt_sender_email.setError(null);
+                txt_addressee_email.setError(null);
                 if (s.length() >= 0) {
                     checkImageSaveFrequently();
                 }
@@ -687,6 +691,7 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
                     Drawable drawable = new PictureDrawable(svg.renderToPicture());
                     imgv_save_frequent.setImageDrawable(drawable);
                     statusImageRed = false;
+
                 } catch (SVGParseException e) {
                 }
             }
@@ -695,25 +700,25 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
 
     private boolean checkIfDatsIsComplete(){
 
-        if(txt_sender_name.getText().toString().equals("")){
+        if(txt_addressee_name.getText().toString().equals("")){
             return false;
         } else if(txt_business_name.getText().toString().equals("")){
             return false;
-        } else if(txt_sender_street.getText().toString().equals("")){
+        } else if(txt_addressee_street.getText().toString().equals("")){
             return false;
         } else if(txt_no_ext.getText().toString().equals("")){
             return false;
         } else if(txt_zip_code.getText().toString().equals("") && txt_zip_code.getText().toString().length() != 5){
             return false;
-        } else if(spn_sender_colony.getSelectedItem().toString().equals(items_list_colony.get(0))){
+        } else if(spn_addressee_colony.getSelectedItem().toString().equals(items_list_colony.get(0))){
             return false;
-        } else if(spn_sender_city.getSelectedItem().toString().equals(items_list_city.get(0))){
+        } else if(spn_addressee_city.getSelectedItem().toString().equals(items_list_city.get(0))){
             return false;
-        } else if(spn_sender_state.getSelectedItem().toString().equals(items_list_state.get(0))){
+        } else if(spn_addressee_state.getSelectedItem().toString().equals(items_list_state.get(0))){
             return false;
-        } else if(txt_sender_phone.getText().toString().equals("")){
+        } else if(txt_addressee_phone.getText().toString().equals("")){
             return false;
-        } else if(txt_sender_email.getText().toString().equals("")){
+        } else if(txt_addressee_email.getText().toString().equals("")){
             return false;
         }
 
@@ -722,29 +727,29 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
 
     private boolean validateFields(){
 
-        if(txt_sender_name.getText().toString().equals("")){
-            txt_sender_name.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
-            txt_sender_name.requestFocus();
+        if(txt_addressee_name.getText().toString().equals("")){
+            txt_addressee_name.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            txt_addressee_name.requestFocus();
             return false;
         } else if(txt_business_name.getText().toString().equals("")){
             txt_business_name.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
             txt_business_name.requestFocus();
             return false;
-        } else if(txt_sender_street.getText().toString().equals("")){
-            txt_sender_street.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
-            txt_sender_street.requestFocus();
+        } else if(txt_addressee_street.getText().toString().equals("")){
+            txt_addressee_street.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            txt_addressee_street.requestFocus();
             return false;
         } else if(txt_no_ext.getText().toString().equals("")){
             txt_no_ext.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
             txt_no_ext.requestFocus();
             return false;
-        } else if(txt_sender_phone.getText().toString().equals("")){
-            txt_sender_phone.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
-            txt_sender_phone.requestFocus();
+        } else if(txt_addressee_phone.getText().toString().equals("")){
+            txt_addressee_phone.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            txt_addressee_phone.requestFocus();
             return false;
-        }else if(txt_sender_email.getText().toString().equals("")){
-            txt_sender_email.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
-            txt_sender_email.requestFocus();
+        }else if(txt_addressee_email.getText().toString().equals("")){
+            txt_addressee_email.setError(getActivity().getResources().getText(R.string.error_empty_field).toString());
+            txt_addressee_email.requestFocus();
             return false;
         }
 
@@ -762,11 +767,15 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
                 mLastClickTime = SystemClock.elapsedRealtime();
 
                 if(validateFields()){
-                    saveDataSender();
 
-                    fragment = new FragmentQuotationBuyAddressee();
-                    fragment.setArguments(getArguments());
-                    addFragmentQuotationBuyToStack(getActivity(), fragment, FRAGMENT_TAG.FRAG_DESTINATARIO_QUOTATION_BUY.toString(), true);
+                    saveDataAddressee();
+                    dataAddressee.putAll(listener.getDataSenderQuotation());
+
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("dataAddresseeQuotation", (Serializable) dataAddressee);
+
+                    Toast.makeText(getActivity(), "Módulo en desarrollo.", Toast.LENGTH_SHORT).show();
+
                 }
                 break;
             case R.id.imgv_diary:
@@ -790,8 +799,8 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
                 mLastClickTime = SystemClock.elapsedRealtime();
 
                 if(checkIfDatsIsComplete()){
-                    if(FrequentlyContacts.checkIfExistContactInDB(getActivity(),getText(txt_sender_name),getText(txt_business_name),getText(txt_sender_street),
-                            getText(txt_no_ext),getText(txt_no_int),getText(txt_zip_code),getText(txt_sender_phone),getText(txt_sender_email),"","","")){
+                    if(FrequentlyContacts.checkIfExistContactInDB(getActivity(), getText(txt_addressee_name), getText(txt_business_name), getText(txt_addressee_street),
+                            getText(txt_no_ext), getText(txt_no_int), getText(txt_zip_code), getText(txt_addressee_phone), getText(txt_addressee_email), "", "", "")){
                         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "Ya existe un contacto con esta información.", 3000);
                     }else {
                         FragmentDialogSave fds = new FragmentDialogSave();
@@ -815,21 +824,20 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
     }
 
 
-    private void saveDataSender(){
-        Map<String,String> dataSender = new HashMap<>();
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.SENDER_NAME.toString(),txt_sender_name.getText().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.BUSINESS_NAME.toString(), txt_business_name.getText().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.STREET_SENDER.toString(), txt_sender_street.getText().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.NO_EXT_SENDER.toString(),txt_no_ext.getText().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.NO_INT_SENDER.toString(),txt_no_int.getText().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.ZIP_CODE_SENDER.toString(),txt_zip_code.getText().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.COLONY_SENDER.toString(),spn_sender_colony.getSelectedItem().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.CITY_SENDER.toString(),spn_sender_city.getSelectedItem().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.STATE_SENDER.toString(),spn_sender_state.getSelectedItem().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.PHONE_SENDER.toString(),txt_sender_phone.getText().toString());
-        dataSender.put(FragmentQuotationBuy.DATA_SENDER_QUOTATION.EMAIL_SENDER.toString(),txt_sender_email.getText().toString());
+    private void saveDataAddressee(){
+        dataAddressee = new HashMap<>();
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.ADDRESSEE_NAME.toString(),txt_addressee_name.getText().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.ADDRESSEE_BUSINESS_NAME.toString(), txt_business_name.getText().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.STREET_ADDRESSEE.toString(), txt_addressee_street.getText().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.NO_INT_ADDRESSEE.toString(),txt_no_int.getText().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.ZIP_CODE_ADDRESSEE.toString(),txt_zip_code.getText().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.NO_EXT_ADDRESSEE.toString(),txt_no_ext.getText().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.COLONY_ADDRESSEE.toString(),spn_addressee_colony.getSelectedItem().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.CITY_ADDRESSEE.toString(),spn_addressee_city.getSelectedItem().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.STATE_ADDRESSEE.toString(),spn_addressee_state.getSelectedItem().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.PHONE_ADDRESSEE.toString(),txt_addressee_phone.getText().toString());
+        dataAddressee.put(FragmentQuotationBuy.DATA_ADDRESSEE_QUOTATION.EMAIL_ADDRESSEE.toString(),txt_addressee_email.getText().toString());
 
-        listener.setDataSenderQuotation(dataSender);
     }
 
     @Override
@@ -857,21 +865,24 @@ public class FragmentQuotationBuySender extends TrackerFragment implements View.
     @Override
     public void pressedButtonContinue(Map<String, String> dataContact) {
 
-        txt_sender_name.setText(dataContact.get(FrequentlyContacts.NAME_CONTACT));
+        txt_addressee_name.setText(dataContact.get(FrequentlyContacts.NAME_CONTACT));
         txt_business_name.setText(dataContact.get(FrequentlyContacts.BUSINESS_NAME_CONTACT));
-        txt_sender_street.setText(dataContact.get(FrequentlyContacts.STREET_CONTACT));
+        txt_addressee_street.setText(dataContact.get(FrequentlyContacts.STREET_CONTACT));
         txt_no_ext.setText(dataContact.get(FrequentlyContacts.NO_EXT_CONTACT));
         txt_no_int.setText(dataContact.get(FrequentlyContacts.NO_INT_CONTACT));
-        txt_sender_phone.setText(dataContact.get(FrequentlyContacts.PHONE_CONTACT));
-        txt_sender_email.setText(dataContact.get(FrequentlyContacts.EMAIL_CONTACT));
+        txt_addressee_phone.setText(dataContact.get(FrequentlyContacts.PHONE_CONTACT));
+        txt_addressee_email.setText(dataContact.get(FrequentlyContacts.EMAIL_CONTACT));
 
     }
 
     @Override
     public void buttonSavePressed() {
-        FrequentlyContacts.insert(getActivity(), getText(txt_sender_name), getText(txt_business_name), getText(txt_sender_street),
-                getText(txt_no_ext),getText(txt_no_int),getText(txt_zip_code), getText(txt_sender_phone), getText(txt_sender_email), "", "", "");
+        FrequentlyContacts.insert(getActivity(), getText(txt_addressee_name), getText(txt_business_name), getText(txt_addressee_street),
+                getText(txt_no_ext),getText(txt_no_int),getText(txt_zip_code), getText(txt_addressee_phone), getText(txt_addressee_email), "", "", "");
 
         DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.SUCCESS, "El contacto fue guardado con exito", 3000);
     }
+
+
+
 }
