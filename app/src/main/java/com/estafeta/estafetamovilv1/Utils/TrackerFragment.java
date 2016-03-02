@@ -53,7 +53,8 @@ public class TrackerFragment extends Fragment implements UIResponseListenerInter
         FRAG_DESTINATARIO("destinatario"),
         FRAG_FRECUENTES("frecuentes"),
         FRAG_REMITENTE_QUOTATION_BUY("remitente_quotation_buy"),
-        FRAG_DESTINATARIO_QUOTATION_BUY("destinatario_quotation_buy");
+        FRAG_DESTINATARIO_QUOTATION_BUY("destinatario_quotation_buy"),
+        FRAG_OPERATION_HISTORY("historial_operaciones");
 
         private final String name;
 

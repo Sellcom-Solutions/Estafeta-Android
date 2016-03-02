@@ -7,8 +7,8 @@
     android:gravity         ="center">
 
     <LinearLayout
-        android:layout_width        ="@dimen/sizeDialogSaveWidth"
-        android:layout_height       ="@dimen/sizeDialogSaveHeight"
+        android:layout_width        ="@dimen/sizeDialogBuyGuideWidth"
+        android:layout_height       ="@dimen/sizeDialogBuyGuideHeight"
         android:orientation         ="vertical"
         android:paddingLeft         ="20dp"
         android:paddingRight        ="20dp"

@@ -200,17 +200,14 @@ public class FragmentDialogOfficesMap extends DialogFragment implements View.OnC
             public void run() {
                 if (supportMapFragment != null) {
 
-
-                    Log.d("DIALOG", "AQUI ESTOY 111111");
                     GoogleMap mapDialog = supportMapFragment.getMap();
 
 
                     if (mapDialog != null) {
 
-                        Log.d("DIALOG", "AQUI ESTOY 222222");
-
                         mapDialog.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
                         mapDialog.setMyLocationEnabled(false);
+                        mapDialog.getUiSettings().setMapToolbarEnabled(false);
 
                         if (type.equals("SU")) {
                             mapDialog.addMarker(new MarkerOptions()

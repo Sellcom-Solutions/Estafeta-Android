@@ -55,7 +55,7 @@
                 android:textColor           ="@color/estafeta_text"
                 android:textSize            ="@dimen/sizeMediumText"
                 android:textCursorDrawable  ="@null"
-                android:hint                ="@string/city_etc"
+                android:hint                ="@string/city"
                 android:textColorHint       ="@color/estafeta_soft_gray"
                 android:inputType           ="textNoSuggestions"
                 android:maxLength           ="50"

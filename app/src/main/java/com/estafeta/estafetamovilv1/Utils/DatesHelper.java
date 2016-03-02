@@ -52,6 +52,15 @@ public class DatesHelper {
      * @param date
      * @return
      */
+    public static String getStringDateWithoutSSS (Date date){
+        return new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(date);
+    }
+
+    /**
+     * Change the date format.
+     * @param date
+     * @return
+     */
     public static String getStringDateDays (Date date){
         return new SimpleDateFormat("yyyy-MM-dd").format(date);
     }
@@ -84,6 +93,18 @@ public class DatesHelper {
 
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+            Date fecha = formatter.parse(date);
+            return fecha;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Date stringToDateWithOtherFormat(String date) {
+
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             Date fecha = formatter.parse(date);
             return fecha;
         } catch (ParseException e) {

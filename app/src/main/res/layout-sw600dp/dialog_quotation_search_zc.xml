@@ -58,7 +58,7 @@
                 android:textCursorDrawable  ="@null"
                 android:inputType           ="textNoSuggestions"
                 android:maxLength           ="50"
-                android:hint                ="@string/city_etc"
+                android:hint                ="@string/city"
                 android:textColorHint       ="@color/estafeta_soft_gray"
                 style                       ="@style/EditStyle"
                 android:nextFocusDown       ="@+id/edt_colony"

@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -28,6 +29,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.content.Context;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -54,6 +57,8 @@ import java.util.Map;
 
 import database.model.Favorites;
 import database.model.History;
+
+import com.liveperson.mobile.android.LivePerson;
 
 /**
  * Created by rebecalopezmartinez on 21/05/15.
@@ -96,7 +101,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
     private ArrayList<Map<String,String>>       listFavorites;
 
-
+    private long                                mLastClickTime;
 
     @Override
     public void onAttach(Activity activity) {
@@ -127,6 +132,22 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
 
         TrackerFragment.section_index = 0;
+/*
+        //Check availability of specific account and skill
+        Log.d("antes","--------");
+        if(LivePerson.getEnabled("73777575", "Tech support")) {
+
+            Log.d("online","si se pudo");
+            FloatingActionButton button_call = (FloatingActionButton) view.findViewById(R.id.button_call);
+            button_call.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LivePerson.beginChat(getActivity());
+                }
+            });
+        }else{
+            Log.d("offline","no se pudo");
+        }*/
 
         info        = (Button)view.findViewById(R.id.btn_help);
         rastreo     = (Button)view.findViewById(R.id.btn_rastrear);
@@ -159,6 +180,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
             lst_rastreo.setAdapter(lstAdapter);
             lstAdapter.notifyDataSetChanged();
         }
+
 /*
         Map<String,String> item = new HashMap<>();
         item.put("codigo", "0054000428651707586076");
@@ -204,6 +226,7 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         item.put("codigo", "405556507861a700003855");
         item.put("favorito", "false");
         codes_array.add(item);
+
 */
 
 
@@ -273,6 +296,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             case R.id.add_favorite:
 
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return true;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 ArrayList<Map<String,String>> listFavorites= Favorites.getAll(context);
                 if(listFavorites==null){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No hay registro de favoritos.", 3000);
@@ -304,6 +332,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
         switch (v.getId()){
             case R.id.btn_help:
 
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 fragmentManager = getActivity().getSupportFragmentManager();
                 fdh = new FragmentDialogHelp();
                 fdh.show(fragmentManager,"FRAG_DIALOG_HELP");
@@ -313,6 +346,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
 
             //15000
             case R.id.btn_escanear:
+
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
 
                 //Google Analytics
                 MyApp.tracker().send(new HitBuilders.EventBuilder("Rastreo", "TapBoton")
@@ -327,6 +365,12 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 break;
 
             case R.id.btn_rastrear:
+
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
                 if(codes_array == null || codes_array.size()<=0){
                     DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_lista_vacia),3000);
                 }
@@ -338,6 +382,11 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                 break;
 
             case R.id.btn_agregar:
+
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
 
                 //Google Analytics
                 MyApp.tracker().send(new HitBuilders.EventBuilder("Rastreo", "TapBoton")
@@ -649,36 +698,6 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                                 DialogManager.sharedInstance().dismissDialog();
                                 DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_servicio1), 3000);
                             }else{
-                        /*ArrayList<ArrayList<Map<String, String>>> codes_ver;
-                        codes_ver = verifyFavorites(aux);*/
-
-                        /*
-                        List<Integer> removePos = new ArrayList<Integer>();
-
-                        for (int i = 0; i < aux.size(); i++) {
-                            Log.e(TAG,"AQUI ESTOY ----------------------------111-i: "+i+"-"+i+"-"+i);
-                            Log.e(TAG,"Código: "+aux.get(i).get(0).get("wayBill"));
-                            if(!aux.get(i).get(0).get("wayBill").equals("Sin información") || !aux.get(i).get(0).get("shortWayBillId").equals("Sin información")) {
-                                for (int j = 0; j < aux.size(); j++) {
-                                    //j = i + j;
-                                    if (i != j) {
-                                        Log.e(TAG,"AQUI ESTOY ----------------------------222-j: "+j+"-"+j+"-"+j);
-                                        Log.e(TAG,"Código: "+aux.get(j).get(0).get("wayBill"));
-                                        if( j < aux.size()) {
-                                            if (aux.get(i).get(0).get("wayBill").equals(aux.get(j).get(0).get("wayBill"))) {
-                                                Log.e(TAG,"AQUI ESTOY --------------------------------------333-j: "+j+"-"+j+"-"+j);
-                                                Log.e(TAG,"Código: "+aux.get(j).get(0).get("wayBill"));
-                                                aux.remove(j);
-                                                break;
-                                            }
-
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                        */
 
                                 boolean add = false;
                                 for (ArrayList<Map<String, String>> x : aux) {
@@ -688,11 +707,20 @@ public class FragmentRastreo extends TrackerFragment implements View.OnClickList
                                     } else {
                                         add = true;
                                         for (ArrayList<Map<String, String>> y : buenos) {
-                                            if (!x.get(0).get("wayBill").equals("Sin información") || !y.get(0).get("shortWayBillId").equals("Sin información")) {
+                                            Log.d("wayBill",x.get(0).get("wayBill"));
+                                            Log.d("shortWayBillId",y.get(0).get("shortWayBillId"));
+                                            if (!x.get(0).get("wayBill").equals("Sin información")) {
                                                 if (x.get(0).get("wayBill").equals(y.get(0).get("wayBill"))) {
                                                     add = false;
                                                 }
                                             }
+
+                                            if (!y.get(0).get("shortWayBillId").equals("Sin información")) {
+                                                if (x.get(0).get("shortWayBillId").equals(y.get(0).get("shortWayBillId"))) {
+                                                    add = false;
+                                                }
+                                            }
+
                                         }
 
                                     }

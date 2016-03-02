@@ -53,7 +53,7 @@
                 android:layout_weight="95"
                 android:textColor           ="@color/estafeta_text"
                 android:textSize            ="@dimen/sizeMediumText"
-                android:hint                ="@string/city_etc"
+                android:hint                ="@string/city"
                 android:textColorHint       ="@color/estafeta_soft_gray"
                 style                       ="@style/EditStyle"
                 android:nextFocusDown       ="@+id/edt_colony"

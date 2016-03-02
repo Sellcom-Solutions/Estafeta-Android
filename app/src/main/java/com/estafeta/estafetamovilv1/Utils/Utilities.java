@@ -21,6 +21,7 @@ import com.estafeta.estafetamovilv1.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
@@ -58,21 +59,6 @@ public class Utilities {
         imm.hideSoftInputFromWindow(editField.getWindowToken(), 0);
     }
 
-    /**
-     * @deprecated
-     * @param encodedString
-     * @return
-     */
-    public static Bitmap stringToBitmap(String encodedString) {
-
-        try{
-            byte [] encodeByte = Base64.decode(encodedString, Base64.DEFAULT);
-            return BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-        }catch(Exception e){
-            e.getMessage();
-            return null;
-        }
-    }
 
     /**
      * @deprecated
@@ -428,6 +414,23 @@ public class Utilities {
             return false;
         }
 
+    }
+
+    public static String bitmapToString(Bitmap image)
+    {
+        Bitmap immagex=image;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        immagex.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] b = baos.toByteArray();
+        String imageEncoded = Base64.encodeToString(b, Base64.DEFAULT);
+
+        return imageEncoded;
+    }
+
+    public static Bitmap stringToBitmap(String input)
+    {
+        byte[] decodedByte = Base64.decode(input, 0);
+        return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
 
 }

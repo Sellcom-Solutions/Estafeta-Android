@@ -124,6 +124,10 @@ public class  FragmentCodigoPostal extends TrackerFragment implements OnClickLis
             footer.setText("©2012-"+currentYear+" "+getString(R.string.footer));
 
 
+            //Set Hints
+            Utilities.setCustomHint(getActivity(), getString(R.string.search_by_zip_code), zipCode);
+            Utilities.setCustomHint(getActivity(), getString(R.string.city), ciudad);
+
             //setStates to Spinner
             setStatesToSpinner(spinner_state,context);
             zipCode.setOnEditorActionListener(this);

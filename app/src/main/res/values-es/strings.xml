@@ -23,7 +23,7 @@
         <item>Sucursales</item>
         <item>Prellenado de guías</item>
         <item>@string/quotation_title</item>
-        <!--<item>Historial de operaciones</item>-->
+        <item>Historial de operaciones</item>
         <item>Código postal</item>
         <item>Aviso de privacidad</item>
         <item>Favoritos</item>
@@ -40,6 +40,7 @@
     <string name="locality">Colonia</string>
     <string name="zip_code">C.P.</string>
     <string name="mandatory_fields">Campos obligatorios *</string>
+    <string name="log_out">\n¿Desea salir de la aplicación?\n</string>
 
 
     <!-- Headers -->
@@ -94,10 +95,10 @@
     <string name="loading_AR_elements">Cargando componentes...</string>
     <string name="offices_near"> Cerca de mí</string>
     <string name="oficinas">Sucursales</string>
-    <string name="ubicar_oficinas">Ubicar oficinas</string>
+    <string name="ubicar_oficinas">Ubicar sucursales</string>
 
     <!--Fragment Quotation-->
-    <string name="quotation_title">Cotizar y comprar</string>
+    <string name="quotation_title">Cotizar y comprar guías</string>
     <string name="quotation_shipping">Cotizar envío</string>
     <string name="quotation_national">Nacional</string>
     <string name="quotation_international">Internacional</string>
@@ -162,7 +163,7 @@
     <string name="abr_codigo">C.P.</string>
     <string name="validar_codigo">Validar</string>
     <string name="buscar_codigo">Buscar un código postal</string>
-    <string name="search_by_zip_code">Código postal*</string>
+    <string name="search_by_zip_code">Código postal</string>
     <string name="estado">Estado</string>
 
     <!-- Aviso de Privacidad -->
@@ -191,7 +192,7 @@
     <string name="error_codigo">Código postal no válido.</string>
     <string name="error_ciudad">La ciudad es obligatoria.</string>
     <string name="error_estado">Debes seleccionar un estado.</string>
-    <string name="cargando_oficinas">Cargando oficinas...</string>
+    <string name="cargando_oficinas">Cargando sucursales...</string>
     <string name="error_servicio">No se encontraron resultados para su búsqueda, intente nuevamente.</string>
     <string name="error_servicio1">Revisa tu conexión a Internet.</string>
     <string name="cargando">Cargando...</string>
@@ -255,6 +256,10 @@
                                    "business_name_contact"  TEXT(24), "street_contact"  TEXT(24), "cp_contact"  TEXT(24), "no_ext_contact"  TEXT(24), "no_int_contact"  TEXT(24),
                                     "zip_code_contact"  TEXT(24), "phone_contact"  TEXT(24), "email_contact"  TEXT(24), "reference_contact"  TEXT(24), "nave_contact"  TEXT(24),
                                     "platform_contact"  TEXT(24), "timestamp"  TEXT(24),  "status_contact"  TEXT(24))</string>
+
+    <string name="db_prefilled_history">CREATE TABLE "prefilled_history" ("id_prefilled_history" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"name_sender" TEXT(30) NOT NULL,
+                                    "origin_sender" TEXT(50) NOT NULL, "cp_origin_sender" TEXT(5) NOT NULL,"city_sender" TEXT(30) NOT NULL, "name_addressee" TEXT(30) NOT NULL, "destiny_addressee" TEXT(50) NOT NULL,
+                                    "cp_destiny_addressee" TEXT(5) NOT NULL, "city_addressee" TEXT(30) NOT NULL, "image_qr" TEXT(250) NOT NULL, "timestamp" DATETIME NOT NULL)</string>
 
 
     <!-- ********************   Strings aplicación anterior   ************************** -->
@@ -402,5 +407,11 @@
     <string name="wrong_data">Datos incorrectos</string>
     <string name="wrong_code1">El código postal ingresado en la cotización</string>
     <string name="wrong_code2">, no corresponde con el código postal registrado, favor de verificar.</string>
+
+    <!-- FragmentOperationHistory -->
+    <string name="oh_prefilled">Prellenados</string>
+    <string name="oh_buys">Compras</string>
+
+    <string name="title_activity_lpmobile">Live Chat</string>
 
 </resources>

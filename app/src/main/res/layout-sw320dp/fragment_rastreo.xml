@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.estafeta.estafetamovilv1.Adapters.VerticalScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -108,12 +109,12 @@
                     android:layout_marginLeft       ="10dp"
                     android:layout_marginTop        ="5dp"
                     android:layout_weight           ="1"
-                    android:drawablePadding         ="5dp"
                     android:focusableInTouchMode    ="true"
                     android:hint                    ="@string/codigo"
                     android:maxLength               ="22"
-                    android:singleLine="true"
-                    android:padding                 ="3dp"
+                    android:singleLine              ="true"
+                    android:padding                 ="5dp"
+                    android:textCursorDrawable      ="@null"
                     android:textColor               ="@color/estafeta_text"
                     android:textColorHint           ="@color/estafeta_red"
                     android:textSize                ="@dimen/sizeNormalText"
@@ -208,6 +209,7 @@
         </LinearLayout>
 
         </LinearLayout>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -216,20 +218,51 @@
             android:background="@color/white">
             <TextView
                 android:id="@+id/footer"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/footerSize"
-                android:layout_marginLeft="10dp"
                 android:textColor="@color/estafeta_soft_gray"
                 android:textStyle="bold"
                 android:padding="5dp"
-                android:gravity="top"
+                android:gravity="center"
                 android:layout_gravity="top|center_horizontal"
                 />
         </FrameLayout><!--5-->
 
+        <!--<FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right">
+
+
+                &lt;!&ndash;
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_colorNormal="@color/estafeta_blue"
+                    fab:fab_colorPressed="@color/white"
+                    fab:fab_icon="@android:drawable/sym_action_email"
+                    fab:fab_title="Share"/>
+
+                    &ndash;&gt;
+
+
+                <com.getbase.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/button_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    fab:fab_addButtonColorNormal="@color/estafeta_blue"
+                    fab:fab_addButtonColorPressed="@color/estafeta_blue"
+                    fab:fab_addButtonSize="normal"
+                    fab:fab_addButtonPlusIconColor="@color/white"
+                    android:layout_gravity="bottom|right"/>
+
+        </FrameLayout>-->
 
 
     </FrameLayout>
+
+
 
 </com.estafeta.estafetamovilv1.Adapters.VerticalScrollView>

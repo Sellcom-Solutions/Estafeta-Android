@@ -110,6 +110,7 @@
                                 android:textColorHint       ="@color/estafeta_soft_gray"
                                 android:layout_weight       ="3"
                                 android:maxLength           ="5"
+                                android:textCursorDrawable  ="@null"
                                 android:imeOptions          ="actionDone"
                                 android:inputType           ="number"
                                 android:layout_marginRight  ="20dp"/>
@@ -166,10 +167,11 @@
                             android:layout_height       ="wrap_content"
                             android:textColor           ="@color/estafeta_text"
                             android:textSize            ="@dimen/sizeMediumText"
-                            android:hint                ="@string/city_etc"
+                            android:hint                ="@string/city"
                             android:textColorHint       ="@color/estafeta_soft_gray"
                             android:inputType           ="text"
                             android:imeOptions          ="actionNext"
+                            android:textCursorDrawable  ="@null"
                             android:layout_marginLeft   ="20dp"
                             android:layout_marginRight  ="20dp"/>
 
@@ -181,6 +183,7 @@
                             android:textColor           ="@color/estafeta_text"
                             android:textSize            ="@dimen/sizeMediumText"
                             android:hint                ="@string/locality"
+                            android:textCursorDrawable  ="@null"
                             android:textColorHint       ="@color/estafeta_soft_gray"
                             android:inputType           ="text"
                             android:imeOptions          ="actionNext"

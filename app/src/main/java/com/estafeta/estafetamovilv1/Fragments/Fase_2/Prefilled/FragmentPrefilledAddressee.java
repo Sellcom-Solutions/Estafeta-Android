@@ -15,6 +15,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,6 +34,7 @@ import android.widget.Toast;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
+import com.estafeta.estafetamovilv1.Activities.MainActivity;
 import com.estafeta.estafetamovilv1.Adapters.CPAListAdapter;
 import com.estafeta.estafetamovilv1.Adapters.SpinnerAdapterPrefilled;
 import com.estafeta.estafetamovilv1.Async_Request.METHOD;
@@ -51,6 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 import database.model.FrequentlyContacts;
+import database.model.PrefilledHistory;
 
 /**
  *
@@ -71,12 +76,13 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
                         txt_no_int,
                         txt_zip_code,
                         txt_addressee_phone,
-                        txt_addressee_email,
                         txt_addressee_reference,
                         txt_addressee_nave,
                         txt_addressee_platform,
                         txt_city,
                         txt_colony;
+
+    public EditText     txt_addressee_email;
 
     private ImageView   imgv_save_frequent,
                         imgv_download_prefilled,
@@ -135,6 +141,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
     private Map<String,String> dataAddressee;
 
     private CommunicationBetweenFragments listener;
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -264,6 +271,8 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
         return view;
     }
 
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -328,22 +337,15 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
                         fds.show(getActivity().getSupportFragmentManager(), fds.TAG);
                     }
                 }else{
-                    if(checkIfDataIsNull()){
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se puede posponer un prellenado vacio.", 3000);
-                    }else{
-                        Bundle bundle = new Bundle();
-                        bundle.putString("email_postpone_code", txt_addressee_email.getText().toString());
-
-                        FragmentDialogPostponePrefilled fdpp = new FragmentDialogPostponePrefilled();
-                        fdpp.setArguments(bundle);
-                        fdpp.show(getActivity().getSupportFragmentManager(), fdpp.TAG);
-                    }
+                    //Desactivado.
                 }
 
                 break;
 
             case R.id.btn_generate_code:
                 if(validateFields()){
+
+
 
                     saveDataAddressee();
                     dataAddressee.putAll(listener.getDataSender());
@@ -1074,7 +1076,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
     }
 
 
-    private boolean checkIfDatsIsComplete(){
+    public boolean checkIfDatsIsComplete(){
 
         if(txt_addressee_name.getText().toString().equals("")){
             return false;
@@ -1101,7 +1103,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
         return true;
     }
 
-    private boolean checkIfDataIsNull(){
+    public boolean checkIfDataIsNull(){
 
         if(!txt_addressee_name.getText().toString().equals("")){
             return false;
@@ -1282,7 +1284,7 @@ public class FragmentPrefilledAddressee extends TrackerFragment implements View.
         dataAddressee.put(DATA_ADDRESSEE.NO_EXT_ADDRESSEE.toString(),txt_no_ext.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.COLONY_ADDRESSEE.toString(),spn_addressee_colony.getSelectedItem().toString());
         dataAddressee.put(DATA_ADDRESSEE.CITY_ADDRESSEE.toString(),spn_addressee_city.getSelectedItem().toString());
-        dataAddressee.put(DATA_ADDRESSEE.STATE_ADDRESSEE.toString(),spn_addressee_state.getSelectedItem().toString());
+        dataAddressee.put(DATA_ADDRESSEE.STATE_ADDRESSEE.toString(), spn_addressee_state.getSelectedItem().toString());
         dataAddressee.put(DATA_ADDRESSEE.PHONE_ADDRESSEE.toString(), txt_addressee_phone.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.EMAIL_ADDRESSEE.toString(), txt_addressee_email.getText().toString());
         dataAddressee.put(DATA_ADDRESSEE.REFERENCE_ADDRESSEE.toString(), txt_addressee_reference.getText().toString());

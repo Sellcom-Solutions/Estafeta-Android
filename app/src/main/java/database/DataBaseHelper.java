@@ -16,7 +16,9 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "estafeta.db";
 
-    private static final int VER_1            = 6;  // 1.1
+    private static final int VER_1            = 7;  // 1.1
+                                                    //Ver 6 - Se agrega tabla de contactos frecuentes
+                                                    //Ver 7 - Se agrega tabla de prellenado-historial
     private static final int DATABASE_VERSION = VER_1;
     public static final int NOT_UPDATE        = -1;
     private final Context mContext;
@@ -91,6 +93,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
 
+        try {
+            db.execSQL(mContext.getString(R.string.db_prefilled_history));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         /*try {
             db.execSQL(mContext.getString(R.string.db_rastreo_tmp));
         } catch (SQLException e) {
@@ -125,6 +133,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS rastreo_tmp");
             db.execSQL("DROP TABLE IF EXISTS recurrente");
             db.execSQL("DROP TABLE IF EXISTS frequently_contacts");
+            db.execSQL("DROP TABLE IF EXISTS prefilled_history");
             onCreate(db);
         }
 

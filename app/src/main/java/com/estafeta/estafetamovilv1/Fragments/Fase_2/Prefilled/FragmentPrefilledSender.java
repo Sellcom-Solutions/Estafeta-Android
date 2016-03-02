@@ -17,6 +17,9 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -73,9 +76,9 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
                             txt_no_int,
                             txt_zip_code,
                             txt_sender_phone,
-                            txt_sender_email,
                             txt_city,
                             txt_colony;
+    public EditText         txt_sender_email;
 
     private TextView        lbl_dialog_estado,
                             lbl_dialog_ciudad;
@@ -146,7 +149,6 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         }
 
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -321,16 +323,7 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
                         fds.show(getActivity().getSupportFragmentManager(), fds.TAG);
                     }
                 }else{
-                    if(checkIfDataIsNull()){
-                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se puede posponer un prellenado vacio.", 3000);
-                    }else{
-                        Bundle bundle = new Bundle();
-                        bundle.putString("email_postpone_code", txt_sender_email.getText().toString());
-
-                        FragmentDialogPostponePrefilled fdpp = new FragmentDialogPostponePrefilled();
-                        fdpp.setArguments(bundle);
-                        fdpp.show(getActivity().getSupportFragmentManager(), fdpp.TAG);
-                    }
+                    //Desactivado.
                 }
 
                 break;
@@ -1169,7 +1162,7 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
 
     }
 
-    private boolean checkIfDataIsNull(){
+    public boolean checkIfDataIsNull(){
 
         if(!txt_sender_name.getText().toString().equals("")){
             return false;
@@ -1190,7 +1183,7 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         return true;
     }
 
-    private boolean checkIfDatsIsComplete(){
+    public boolean checkIfDatsIsComplete(){
 
         if(txt_sender_name.getText().toString().equals("")){
             return false;

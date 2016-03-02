@@ -60,5 +60,7 @@
 
     <dimen name="sizeImageQR">180dp</dimen>
 
+    <dimen name="sizeDialogBuyGuideWidth">270dp</dimen>
+    <dimen name="sizeDialogBuyGuideHeight">230dp</dimen>
 
 </resources>

@@ -69,4 +69,27 @@
     </style>
 
     <bool name="abs__config_actionMenuItemAllCaps">false</bool>
+
+    <style name="Theme.Transparent" parent="android:Theme.Holo.Light">
+
+
+        <item name="android:windowIsTranslucent">true</item>
+
+
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+
+        <item name="android:windowContentOverlay">@null</item>
+
+
+        <item name="android:windowIsFloating">false</item>
+
+
+        <item name="android:windowActionBar">true</item>
+
+
+        <item name="android:backgroundDimEnabled">true</item>
+
+
+    </style>
 </resources>

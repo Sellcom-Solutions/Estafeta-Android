@@ -26,6 +26,7 @@ import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilled
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilled.DATA_ADDRESSEE;
 import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
+import com.estafeta.estafetamovilv1.Utils.Utilities;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -36,6 +37,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.Map;
+
+import database.model.PrefilledHistory;
 
 /**
  *
@@ -56,6 +59,8 @@ public class FragmentDialogQRCode extends DialogFragment implements View.OnClick
     private Bitmap      bitmap_qr;
 
     private ImageView   imgv_qr_code;
+
+    private String      qr_base64 = "";
 
     public static final String TAG = "FragmentDialogQRCode";
 
@@ -99,6 +104,12 @@ public class FragmentDialogQRCode extends DialogFragment implements View.OnClick
 
         populateDialog();
 
+        qr_base64 = Utilities.bitmapToString(bitmap_qr);
+
+        if(getArguments().getString("origin") == null) {
+            savePrefilledInDB(qr_base64);
+        }
+
         return view;
     }
 
@@ -116,10 +127,35 @@ public class FragmentDialogQRCode extends DialogFragment implements View.OnClick
 
                 break;
             case R.id.btn_share:
-                Toast.makeText(getActivity(),"Módulo en Desarrollo",Toast.LENGTH_SHORT).show();
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+
+                String sendText = "";
+                if(getArguments().getString("origin") == null) {
+                    sendText = "Remitente: " + dataPrefilled.get(DATA_SENDER.SENDER_NAME.toString().trim()) + ".\n"
+                            + "Origen: " + dataPrefilled.get(DATA_SENDER.STATE_SENDER.toString().trim()) + ", " + dataPrefilled.get(DATA_SENDER.CITY_SENDER.toString().trim()) + ".\n"
+                            + "C.P. Origen: " + dataPrefilled.get(DATA_SENDER.ZIP_CODE_SENDER.toString().trim()) + ".\n\n"
+                            + "Destinatario: " + dataPrefilled.get(DATA_ADDRESSEE.ADDRESSEE_NAME.toString().trim()) + ".\n"
+                            + "Destino: " + dataPrefilled.get(DATA_ADDRESSEE.STATE_ADDRESSEE.toString().trim()) + ", " + dataPrefilled.get(DATA_ADDRESSEE.CITY_ADDRESSEE.toString().trim()) + ".\n"
+                            + "C.P. Destino: " + dataPrefilled.get(DATA_ADDRESSEE.ZIP_CODE_ADDRESSEE.toString().trim()) + ".";
+                }else{
+                    sendText = "Remitente: " + dataPrefilled.get(PrefilledHistory.NAME_SENDER.toString().trim()) + ".\n"
+                            + "Origen: " + dataPrefilled.get(PrefilledHistory.ORIGIN_SENDER.toString().trim()) + ", " + dataPrefilled.get(PrefilledHistory.CITY_SENDER.toString().trim()) + ".\n"
+                            + "C.P. Origen: " + dataPrefilled.get(PrefilledHistory.CP_ORIGIN_SENDER.toString().trim()) + ".\n\n"
+                            + "Destinatario: " + dataPrefilled.get(PrefilledHistory.NAME_ADDRESSEE.toString().trim()) + ".\n"
+                            + "Destino: " + dataPrefilled.get(PrefilledHistory.DESTINY_ADDRESSEE.toString().trim()) + ", " + dataPrefilled.get(PrefilledHistory.CITY_ADDRESSEE.toString().trim()) + ".\n"
+                            + "C.P. Destino: " + dataPrefilled.get(PrefilledHistory.CP_DESTINY_ADDRESSEE.toString().trim()) + ".";
+                }
+
+                sendIntent.putExtra(Intent.EXTRA_TEXT, sendText);
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+
                 break;
             case R.id.btn_close:
-                getActivity().onBackPressed();
+                if(getArguments().getString("origin") == null) {
+                    getActivity().onBackPressed();
+                }
                 /*TrackerFragment fragment = (TrackerFragment) getActivity().getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
                 FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.container, fragment, TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString()).commit();*/
@@ -160,14 +196,29 @@ public class FragmentDialogQRCode extends DialogFragment implements View.OnClick
 
 
     private void populateDialog(){
+        if(getArguments().getString("origin") == null) {
+            lbl_sender_name.setText("" + dataPrefilled.get(DATA_SENDER.SENDER_NAME.toString().trim()));
+            lbl_origin.setText("" + dataPrefilled.get(DATA_SENDER.STATE_SENDER.toString().trim()) + ", " + dataPrefilled.get(DATA_SENDER.CITY_SENDER.toString().trim()));
+            lbl_sender_zip_code.setText("" + dataPrefilled.get(DATA_SENDER.ZIP_CODE_SENDER.toString().trim()));
 
-        lbl_sender_name.setText(""+dataPrefilled.get(DATA_SENDER.SENDER_NAME.toString().trim()));
-        lbl_origin.setText(""+dataPrefilled.get(DATA_SENDER.STATE_SENDER.toString().trim())+", "+dataPrefilled.get(DATA_SENDER.CITY_SENDER.toString().trim()));
-        lbl_sender_zip_code.setText(""+dataPrefilled.get(DATA_SENDER.ZIP_CODE_SENDER.toString().trim()));
+            lbl_addressee_name.setText("" + dataPrefilled.get(DATA_ADDRESSEE.ADDRESSEE_NAME.toString().trim()));
+            lbl_destiny.setText("" + dataPrefilled.get(DATA_ADDRESSEE.STATE_ADDRESSEE.toString().trim()) + ", " + dataPrefilled.get(DATA_ADDRESSEE.CITY_ADDRESSEE.toString().trim()));
+            lbl_addressee_zip_code.setText("" + dataPrefilled.get(DATA_ADDRESSEE.ZIP_CODE_ADDRESSEE.toString().trim()));
 
-        lbl_addressee_name.setText(""+dataPrefilled.get(DATA_ADDRESSEE.ADDRESSEE_NAME.toString().trim()));
-        lbl_destiny.setText(""+dataPrefilled.get(DATA_ADDRESSEE.STATE_ADDRESSEE.toString().trim())+", "+dataPrefilled.get(DATA_ADDRESSEE.CITY_ADDRESSEE.toString().trim()));
-        lbl_addressee_zip_code.setText(""+dataPrefilled.get(DATA_ADDRESSEE.ZIP_CODE_ADDRESSEE.toString().trim()));
+
+        }else{
+            lbl_sender_name.setText("" + dataPrefilled.get(PrefilledHistory.NAME_SENDER.toString().trim()));
+            lbl_origin.setText("" + dataPrefilled.get(PrefilledHistory.ORIGIN_SENDER.toString().trim()) + ", " + dataPrefilled.get(PrefilledHistory.CITY_SENDER.toString().trim()));
+            lbl_sender_zip_code.setText("" + dataPrefilled.get(PrefilledHistory.CP_ORIGIN_SENDER.toString().trim()));
+
+            lbl_addressee_name.setText("" + dataPrefilled.get(PrefilledHistory.NAME_ADDRESSEE.toString().trim()));
+            lbl_destiny.setText("" + dataPrefilled.get(PrefilledHistory.DESTINY_ADDRESSEE.toString().trim()) + ", " + dataPrefilled.get(PrefilledHistory.CITY_ADDRESSEE.toString().trim()));
+            lbl_addressee_zip_code.setText("" + dataPrefilled.get(PrefilledHistory.CP_DESTINY_ADDRESSEE.toString().trim()));
+
+            //Para crear imagen apartir de string guardado en BD
+            /*bitmap_qr = Utilities.stringToBitmap(dataPrefilled.get(PrefilledHistory.IMAGE_QR.toString()));
+            imgv_qr_code.setImageBitmap(bitmap_qr);*/
+        }
 
         generateQRCode();
 
@@ -206,4 +257,13 @@ public class FragmentDialogQRCode extends DialogFragment implements View.OnClick
         }
         return bmp;
     }
+
+
+    private void savePrefilledInDB(String image_qr){
+        PrefilledHistory.insert(getActivity(), dataPrefilled.get(DATA_SENDER.SENDER_NAME.toString()), dataPrefilled.get(DATA_SENDER.STATE_SENDER.toString()), dataPrefilled.get(DATA_SENDER.ZIP_CODE_SENDER.toString()),dataPrefilled.get(DATA_SENDER.CITY_SENDER.toString()),
+                dataPrefilled.get(DATA_ADDRESSEE.ADDRESSEE_NAME.toString()), dataPrefilled.get(DATA_ADDRESSEE.STATE_ADDRESSEE.toString()), dataPrefilled.get(DATA_ADDRESSEE.ZIP_CODE_ADDRESSEE.toString()),dataPrefilled.get(DATA_ADDRESSEE.CITY_ADDRESSEE.toString()),
+                image_qr);
+    }
+
+
 }

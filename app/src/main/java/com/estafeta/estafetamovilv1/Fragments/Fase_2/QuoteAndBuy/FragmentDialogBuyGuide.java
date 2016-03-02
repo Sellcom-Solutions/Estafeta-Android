@@ -64,7 +64,7 @@ public class FragmentDialogBuyGuide extends DialogFragment implements View.OnCli
 
             try {
                 Double totalNum = Double.parseDouble(total);
-                totalNum = totalNum + (totalNum * 0.15);
+                totalNum = totalNum + (totalNum * 0.16);
                 lbl_question_previous_continue_buy.setText(Html.fromHtml("El costo total más IVA resulta en la siguiente cantidad:" + " <b>" + Utilities.setReceiptMoneyNumberFormat(totalNum, 2) + " mxn</b>"));
             }catch (Exception e){
                 e.printStackTrace();

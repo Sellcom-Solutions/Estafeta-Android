@@ -19,6 +19,7 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.estafeta.estafetamovilv1.Async_Request.METHOD;
@@ -112,7 +113,7 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         String currentYear = formatter.format(new Date());
         footer.setText("©2012-" + currentYear + " " + getString(R.string.footer));
 
-        TrackerFragment.section_index = 8;
+        TrackerFragment.section_index = 9;
 
         btn_favorito.setOnClickListener(this);
         btn_historia.setOnClickListener(this);
@@ -209,7 +210,6 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
         }
 
         //Este código si sirve es para decodificar la firma, aun no se implementa pero se hara
-        /*
         if(codes_info.get(0).get("signature") != null){
 
             try {
@@ -221,7 +221,9 @@ public class FragmentDetalleRastreo extends TrackerFragment implements View.OnCl
             }
 
 
-        }*/
+        }else{
+            Toast.makeText(context,"firma null",Toast.LENGTH_SHORT).show();
+        }
 
       //  }
         return view;

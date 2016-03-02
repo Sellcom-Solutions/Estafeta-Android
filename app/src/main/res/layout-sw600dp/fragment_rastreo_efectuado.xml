@@ -11,7 +11,7 @@
         android:id="@+id/lst_rastreo_efectuado"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="95"
+        android:layout_weight="96"
         android:divider="@color/estafeta_light_gray"
         android:dividerHeight="2dp"
         android:background="@color/white">
@@ -19,24 +19,23 @@
     </ListView>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:layout_gravity="bottom"
-        android:orientation="vertical">
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="4"
+        android:orientation     ="vertical"
+        android:layout_gravity  ="center"
+        android:background      ="@color/white">
+
 
         <TextView
-            android:id="@+id/footer"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="@dimen/footerSize"
-            android:layout_marginLeft="10dp"
-            android:text="@string/footer"
-            android:textColor="@color/estafeta_soft_gray"
-            android:textStyle="bold"
-            android:gravity="bottom"
-            android:layout_gravity="bottom|center_horizontal"
+            android:id              ="@+id/footer"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="match_parent"
+            android:textSize        ="@dimen/footerSize"
+            android:text            ="@string/footer"
+            android:textColor       ="@color/estafeta_soft_gray"
+            android:textStyle       ="bold"
+            android:gravity         ="center"
             />
-
-    </LinearLayout>
+    </LinearLayout><!--5-->
 </LinearLayout>

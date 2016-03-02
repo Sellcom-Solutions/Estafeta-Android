@@ -13,5 +13,7 @@ public interface CommunicationBetweenFragments {
     void setDataSenderQuotation(Map<String,String> dataSender);
     Map<String,String> getDataSenderQuotation();
 
+//    void showMenu(boolean visible);
+
 
 }

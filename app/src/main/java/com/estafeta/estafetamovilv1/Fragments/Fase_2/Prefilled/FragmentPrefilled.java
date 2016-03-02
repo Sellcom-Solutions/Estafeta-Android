@@ -3,8 +3,13 @@ package com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,7 +18,9 @@ import android.widget.TextView;
 
 import com.caverock.androidsvg.SVG;
 import com.caverock.androidsvg.SVGParseException;
+import com.estafeta.estafetamovilv1.Activities.MainActivity;
 import com.estafeta.estafetamovilv1.R;
+import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 
 import java.text.SimpleDateFormat;
@@ -28,10 +35,14 @@ public class FragmentPrefilled extends TrackerFragment{
 
     public boolean test = false;
 
-    private TrackerFragment     fragment;
+    private TrackerFragment     trackerFragment;
     private Map<String,String>   dataSender;
 
     private TextView        footer;
+
+    private Fragment        fragment;
+
+    private long            mLastClickTime;
 
     public enum DATA_SENDER {
         SENDER_NAME("sender_name"),
@@ -108,11 +119,11 @@ public class FragmentPrefilled extends TrackerFragment{
             String currentYear = formatter.format(new Date());
             footer.setText("©2012-" + currentYear + " " + getString(R.string.footer));
 
-            fragment = new FragmentPrefilledSender();
+            trackerFragment = new FragmentPrefilledSender();
             if (test) {
                 ((FragmentPrefilledSender) fragment).testSender = true;
             }
-            addFragmentPrefilledToStack(getActivity(), fragment, FRAGMENT_TAG.FRAG_REMITENTE.toString(), false);
+            addFragmentPrefilledToStack(getActivity(), trackerFragment, FRAGMENT_TAG.FRAG_REMITENTE.toString(), false);
         }
         return view;
     }
@@ -133,4 +144,97 @@ public class FragmentPrefilled extends TrackerFragment{
         super.onResume();
         TrackerFragment.section_index = 2;
     }
+
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        if (!((MainActivity) getActivity()).isDrawerOpen) {
+            inflater.inflate(R.menu.menu_prefilled, menu);
+        }
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+
+            case R.id.posponer:
+
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return true;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
+
+                fragment = getActivity().getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG.FRAG_REMITENTE.toString());
+                if(fragment.isAdded() && fragment.isVisible()){
+                    Log.d("PREFILLED","FRAG_REMITENTE visible");
+                    if(!((FragmentPrefilledSender)fragment).checkIfDatsIsComplete()){
+                        if(((FragmentPrefilledSender)fragment).checkIfDataIsNull()){
+                            DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se puede posponer un prellenado vacio.", 3000);
+                        }else{
+                            Bundle bundle = new Bundle();
+                            bundle.putString("email_postpone_code", ((FragmentPrefilledSender)fragment).txt_sender_email.getText().toString());
+
+                            FragmentDialogPostponePrefilled fdpp = new FragmentDialogPostponePrefilled();
+                            fdpp.setArguments(bundle);
+                            fdpp.show(getActivity().getSupportFragmentManager(), null);
+                        }
+                    }else{
+                        Bundle bundle = new Bundle();
+                        bundle.putString("email_postpone_code", ((FragmentPrefilledSender)fragment).txt_sender_email.getText().toString());
+
+                        FragmentDialogPostponePrefilled fdpp = new FragmentDialogPostponePrefilled();
+                        fdpp.setArguments(bundle);
+                        fdpp.show(getActivity().getSupportFragmentManager(), null);
+                    }
+                }else{
+                    Log.d("PREFILLED","FRAG_REMITENTE no visible");
+                    fragment = getActivity().getSupportFragmentManager().findFragmentByTag(FRAGMENT_TAG.FRAG_DESTINATARIO.toString());
+                    if(fragment.isAdded() && fragment.isVisible()) {
+                        Log.d("PREFILLED","FRAG_DESTINATARIO visible");
+                        if (!((FragmentPrefilledAddressee) fragment).checkIfDatsIsComplete()) {
+                            if (((FragmentPrefilledAddressee) fragment).checkIfDataIsNull()) {
+                                DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, "No se puede posponer un prellenado vacio.", 3000);
+                            } else {
+                                Bundle bundle = new Bundle();
+                                bundle.putString("email_postpone_code", ((FragmentPrefilledAddressee) fragment).txt_addressee_email.getText().toString());
+
+                                FragmentDialogPostponePrefilled fdpp = new FragmentDialogPostponePrefilled();
+                                fdpp.setArguments(bundle);
+                                fdpp.show(getActivity().getSupportFragmentManager(), null);
+                            }
+                        }else{
+                            Bundle bundle = new Bundle();
+                            bundle.putString("email_postpone_code", ((FragmentPrefilledAddressee) fragment).txt_addressee_email.getText().toString());
+
+                            FragmentDialogPostponePrefilled fdpp = new FragmentDialogPostponePrefilled();
+                            fdpp.setArguments(bundle);
+                            fdpp.show(getActivity().getSupportFragmentManager(), null);
+                        }
+                    }else{
+                        Log.d("PREFILLED","FRAG_DESTINATARIO no visible");
+                    }
+                }
+
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /*public void showMenu(boolean visible){
+        posponer.setVisible(visible);
+        getActivity().invalidateOptionsMenu();
+    }*/
 }

@@ -6,7 +6,7 @@
     <dimen name="activity_vertical_margin">32dp</dimen>
     <dimen name="list_item_horizontal_margin">16dp</dimen>
     <dimen name="Margen_General">16dp</dimen>
-    <dimen name="sizeXSmallText">16dp</dimen>
+    <dimen name="sizeXSmallText">20dp</dimen>
     <dimen name="sizeNormalText">30dp</dimen>
     <dimen name="sizeNormalLargeText">34dp</dimen>
     <dimen name="sizeMediumText">25dp</dimen>
@@ -59,4 +59,8 @@
     <dimen name="marginLeftImageCheck">15dp</dimen>
 
     <dimen name="sizeImageQR">280dp</dimen>
+
+    <dimen name="sizeDialogBuyGuideWidth">400dp</dimen>
+    <dimen name="sizeDialogBuyGuideHeight">360dp</dimen>
+
 </resources>

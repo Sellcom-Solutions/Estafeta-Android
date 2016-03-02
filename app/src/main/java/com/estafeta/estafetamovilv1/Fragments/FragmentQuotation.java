@@ -282,6 +282,9 @@ public class FragmentQuotation extends TrackerFragment implements View.OnClickLi
             lin_escoger_cp      = (LinearLayout)dialogCP.findViewById(R.id.lin_escoger_cp);
             lv_dialog_colonia   = (ListView)dialogCP.findViewById(R.id.lv_dialog_colonia);
 
+            //Set Hint
+            Utilities.setCustomHint(getActivity(), getString(R.string.city), edt_city);
+
             btn_cancel_cp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

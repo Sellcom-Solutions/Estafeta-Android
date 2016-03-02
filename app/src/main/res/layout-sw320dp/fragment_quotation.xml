@@ -53,9 +53,9 @@
                         android:layout_width        ="match_parent"
                         android:layout_height       ="match_parent"
                         android:text                ="@string/quotation_title"
-                        android:textSize            ="@dimen/sizeLargeText"
+                        android:textSize            ="@dimen/sizeMediumText"
                         android:layout_weight       ="100"
-                        android:paddingLeft         ="60dp"
+                        android:paddingLeft         ="80dp"
                         android:layout_marginTop    ="40dp"
                         android:textColor           ="@color/estafeta_text"
                         android:layout_gravity      ="right"
@@ -396,9 +396,9 @@
 
                         <Button
                             android:id                  ="@+id/btn_quote"
-                            android:layout_width        ="match_parent"
+                            android:layout_width        ="wrap_content"
                             android:layout_height       ="match_parent"
-                            android:paddingTop          ="35dp"
+                            android:layout_marginTop    ="30dp"
                             android:textAllCaps         ="false"
                             android:text                ="@string/quotation_quote"
                             android:textSize            ="@dimen/sizeNormalText"

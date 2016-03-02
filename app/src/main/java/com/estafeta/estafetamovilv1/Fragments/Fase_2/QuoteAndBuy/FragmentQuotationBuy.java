@@ -110,7 +110,7 @@ public class FragmentQuotationBuy extends TrackerFragment {
                     + dataQuotation.get("city_destiny")+", "+dataQuotation.get("state_destiny"));
 
             Double totalNum = Double.parseDouble(dataQuotation.get("total_coste"));
-            totalNum = totalNum + (totalNum * 0.15);
+            totalNum = totalNum + (totalNum * 0.16);
 
             lbl_total_coste.setText(Utilities.setReceiptMoneyNumberFormat(totalNum, 2)+" mxn");
 

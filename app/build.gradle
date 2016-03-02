@@ -28,6 +28,7 @@ android {
 
 repositories {
     mavenCentral()
+
     maven {
         url "https://raw.github.com/embarkmobile/zxing-android-minimal/mvn-repo/maven-repository/"
     }
@@ -37,14 +38,15 @@ dependencies {
     compile project(':library')
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile files('libs/ZSDK_ANDROID_API.jar')
+    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.0'
     compile('com.rengwuxian.materialedittext:library:1.7.1') {
         exclude group: 'com.nineoldandroids', module: 'library'
     }
+    compile files('libs/lpmobile.jar')
     compile files('libs/androidsvg-1.2.1.jar')
-    compile 'com.android.support:appcompat-v7:21.0.3'
-    compile 'com.android.support:recyclerview-v7:21.0.3'
-    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-    compile 'com.google.android.gms:play-services:8.3.0'
+    compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
+    compile 'com.google.android.gms:play-services:8.1.0'
     compile 'de.timroes.android:EnhancedListView:0.3.2@aar'
     compile 'com.embarkmobile:zxing-android-minimal:2.0.0@aar'
     compile 'com.embarkmobile:zxing-android-legacy:2.0.0@aar'
@@ -52,5 +54,4 @@ dependencies {
     compile 'com.google.zxing:core:3.0.1'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
-    compile 'com.android.support:support-v4:21.0.3'
 }

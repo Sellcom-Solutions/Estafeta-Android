@@ -1,5 +1,7 @@
 package com.estafeta.estafetamovilv1.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -13,10 +15,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.RelativeSizeSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
+import android.widget.Button;
 
+import com.estafeta.estafetamovilv1.Fragments.Fase_2.OperationHistory.FragmentOperationHistory;
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentDialogQRCode;
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilled;
 import com.estafeta.estafetamovilv1.Fragments.Fase_2.Prefilled.FragmentPrefilledSender;
@@ -41,6 +47,7 @@ import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.MyApp;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 import com.estafeta.estafetamovilv1.Utils.Utilities;
+import com.liveperson.mobile.android.LivePerson;
 
 
 import java.util.Map;
@@ -87,6 +94,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mNavigationDrawerFragment.selectItem(0);
 
         auxFragment = null;
+
+        //LivePerson.init(this);
 
     }
 
@@ -143,7 +152,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         if (depthCounter == 0) {
 
-            moveTaskToBack(true);
+
+            logOut();
 
         } else {
                 if(currentFragment instanceof FragmentDialogQRCode){ //Para que no se limpien los datos de FragmentPrefilledSender
@@ -164,6 +174,41 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         Log.d(ACT_TAG, "Deep depthCounter Back 2:" + depthCounter);
     }
 
+    public void logOut() {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder
+                .setCancelable(false)
+                .setMessage(getString(R.string.log_out))
+                .setPositiveButton(getString(R.string.done),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                moveTaskToBack(true);
+                                dialog.cancel();
+                            }
+                        }
+                )
+                .setNegativeButton(getString(R.string.cancel),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        }
+                );
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+
+        Button button = alertDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+        button.setTextColor(getResources().getColor(R.color.estafeta_red));
+
+        Button button2 = alertDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+        button2.setTextColor(getResources().getColor(R.color.estafeta_text));
+
+    }
+
     /**
      * It allows control the actions of the Drawer item that was selected.
      * @param position
@@ -181,6 +226,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             Log.d("MAIN ACTIVITY", "this.position == position");
             return;
         }
+
+        invalidateOptionsMenu();
         this.position = position;
         switch (position) {
             case NavigationDrawerFragment.RASTREO:
@@ -293,11 +340,22 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
                 break;
 
-            /*case NavigationDrawerFragment.HISTORIAL:
+            case NavigationDrawerFragment.HISTORIAL:
 
-                fragment = null;
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
 
-                break;*/
+
+                CURRENT_FRAGMENT_TAG = TrackerFragment.FRAGMENT_TAG.FRAG_OPERATION_HISTORY.toString();
+                if(fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG) != null){
+                    fragment = (TrackerFragment) fragmentManager.findFragmentByTag(CURRENT_FRAGMENT_TAG);
+                }else{
+                    fragment = new FragmentOperationHistory();
+                }
+
+                break;
         }
 
         if (fragment != null)
@@ -342,6 +400,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+        //Código para cambiar tamaño de letra en actionbar
+        /*SpannableString spannableString = new SpannableString(mTitle);
+        spannableString.setSpan(new RelativeSizeSpan(0.75f), 0, mTitle.length(), 0);
+        actionBar.setTitle(spannableString);*/
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -387,6 +449,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         FragmentQuotationBuy fragment = (FragmentQuotationBuy)fragmentManager.findFragmentByTag(FragmentQuotationBuy.TAG);
         return fragment.getDataSenderQuotation();
     }
+
+    /*@Override
+    public void showMenu(boolean visible) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
+        ((FragmentPrefilled)fragment).showMenu(visible);
+    }*/
 
     public NavigationDrawerFragment getmNavigationDrawerFragment() {
         return mNavigationDrawerFragment;

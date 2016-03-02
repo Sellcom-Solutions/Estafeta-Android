@@ -1,0 +1,179 @@
+<LinearLayout
+    xmlns:android           ="http://schemas.android.com/apk/res/android"
+    android:layout_width    ="match_parent"
+    android:layout_height   ="match_parent"
+    android:orientation     ="vertical"
+    android:background      ="@color/white"
+    android:weightSum       ="100">
+
+
+    <LinearLayout
+        android:orientation     ="vertical"
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="96"
+        android:background      ="@color/white"
+        android:weightSum       ="100">
+
+        <LinearLayout
+            android:layout_width    ="match_parent"
+            android:layout_height   ="0dp"
+            android:layout_weight   ="28"
+            android:orientation     ="vertical">
+
+            <FrameLayout
+                android:layout_width    ="match_parent"
+                android:layout_height   ="match_parent"
+                android:orientation     ="vertical"
+                android:gravity         ="center">
+
+                <ImageView
+                    android:id                  ="@+id/imgv_operation_history"
+                    android:layout_width        ="match_parent"
+                    android:layout_height       ="wrap_content"
+                    android:src                 ="@drawable/head_cpostal"
+                    android:adjustViewBounds    ="true"
+                    android:scaleType           ="centerCrop"
+                    android:paddingLeft         ="-10dp"
+                    android:paddingRight        ="-10dp"
+                    android:paddingBottom       ="30dp"
+                    android:layout_gravity      ="top|center_horizontal"/>
+
+                <FrameLayout
+                    android:layout_width    ="match_parent"
+                    android:layout_height   ="match_parent">
+
+                    <TextView
+                        android:layout_width        ="match_parent"
+                        android:layout_height       ="match_parent"
+                        android:text                ="@string/module_history_name"
+                        android:textSize            ="@dimen/sizeNormalLargeText"
+                        android:layout_weight       ="100"
+                        android:layout_marginTop    ="40dp"
+                        android:textColor           ="@color/estafeta_text"
+                        android:layout_gravity      ="right"
+                        android:gravity             ="center"/>
+
+                </FrameLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id              ="@+id/operation_history_container"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="0dp"
+            android:layout_weight   ="72"
+            android:orientation     ="vertical">
+
+            <LinearLayout
+                android:orientation     ="horizontal"
+                android:layout_width    ="match_parent"
+                android:background      ="@color/white"
+                android:layout_height   ="wrap_content">
+
+                <ToggleButton
+                    android:layout_width        ="match_parent"
+                    android:layout_height       ="wrap_content"
+                    android:id                  ="@+id/tbtn_prefilled"
+                    android:textSize            ="@dimen/sizeMediumText"
+                    android:background          ="@drawable/toggle_selector"
+                    android:layout_weight       ="1"
+                    android:textAllCaps         ="false"
+                    android:checked             ="true"
+                    android:textColor           ="@color/estafeta_text"
+                    android:textOn              ="@string/oh_prefilled"
+                    android:textOff             ="@string/oh_prefilled"/>
+
+                <TextView
+                    android:orientation     ="vertical"
+                    android:layout_width    ="2dp"
+                    android:layout_height   ="match_parent"
+                    android:layout_weight   ="0"
+                    android:background      ="@color/estafeta_light_gray"></TextView>
+
+                <ToggleButton
+                    android:layout_width        ="match_parent"
+                    android:layout_height       ="wrap_content"
+                    android:id                  ="@+id/tbtn_buys"
+                    android:textSize            ="@dimen/sizeMediumText"
+                    android:background          ="@drawable/toggle_selector"
+                    android:layout_weight       ="1"
+                    android:textAllCaps         ="false"
+                    android:textColor           ="@color/estafeta_text"
+                    android:textOn              ="@string/oh_buys"
+                    android:textOff             ="@string/oh_buys"/>
+
+            </LinearLayout>
+
+            <ListView
+                android:id                  ="@+id/lv_prefilled"
+                android:layout_width        ="match_parent"
+                android:layout_height       ="match_parent"
+                android:fadeScrollbars      ="false"
+                android:visibility          ="gone"/>
+
+            <LinearLayout
+                android:id                  ="@+id/lin_no_prefilled"
+                android:layout_width        ="match_parent"
+                android:layout_height       ="match_parent"
+                android:gravity             ="center"
+                android:orientation         ="vertical">
+
+                <ImageView
+
+
+
+                    android:id              ="@+id/imgv_no_prefilled"
+                    android:layout_width    ="100dp"
+                    android:layout_height   ="100dp" />
+
+                <TextView
+                    android:layout_width        ="wrap_content"
+                    android:layout_height       ="wrap_content"
+                    android:layout_marginLeft   ="20dp"
+                    android:layout_marginRight  ="20dp"
+                    android:textColor           ="@color/estafeta_text_light_gray"
+                    android:gravity             ="center"
+                    android:textSize            ="@dimen/sizeLargeText"
+                    android:text                ="Aún no cuentas con prellenados para mostrar"/>
+
+
+            </LinearLayout>
+
+            <ListView
+                android:id                  ="@+id/lv_buys"
+                android:layout_width        ="match_parent"
+                android:layout_height       ="match_parent"
+                android:fadeScrollbars      ="false"
+                android:visibility          ="gone"/>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="4"
+        android:orientation     ="vertical"
+        android:layout_gravity  ="center"
+        android:background      ="@color/white">
+
+
+        <TextView
+            android:id              ="@+id/footer"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="match_parent"
+            android:textSize        ="@dimen/footerSize"
+            android:text            ="@string/footer"
+            android:textColor       ="@color/estafeta_soft_gray"
+            android:textStyle       ="bold"
+            android:gravity         ="center"
+            />
+    </LinearLayout><!--5-->
+
+
+</LinearLayout>

@@ -424,7 +424,7 @@
                                 android:textColor           ="@color/white"
                                 android:background          ="@drawable/border_button_red"
                                 android:gravity="center"
-                                android:visibility="gone"/>
+                                android:visibility="visible"/>
                         </LinearLayout>
                     </LinearLayout>
 

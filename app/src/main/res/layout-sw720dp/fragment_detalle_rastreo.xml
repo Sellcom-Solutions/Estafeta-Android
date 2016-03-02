@@ -5,9 +5,16 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="100">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="96">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -326,27 +333,27 @@
     </ScrollView>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="bottom"
-        android:layout_gravity="bottom|center_horizontal">
+        android:layout_width    ="match_parent"
+        android:layout_height   ="0dp"
+        android:layout_weight   ="4"
+        android:orientation     ="vertical"
+        android:layout_gravity  ="center"
+        android:background      ="@color/white">
 
 
         <TextView
-            android:id="@+id/footer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/footerSize"
-            android:layout_marginLeft="10dp"
-            android:text="@string/footer"
-            android:textColor="@color/estafeta_soft_gray"
-            android:textStyle="bold"
-            android:padding="5dp"
-            android:gravity="bottom"
-            android:layout_gravity="bottom|center_horizontal"
+            android:id              ="@+id/footer"
+            android:layout_width    ="match_parent"
+            android:layout_height   ="match_parent"
+            android:textSize        ="@dimen/footerSize"
+            android:text            ="@string/footer"
+            android:textColor       ="@color/estafeta_soft_gray"
+            android:textStyle       ="bold"
+            android:gravity         ="center"
             />
     </LinearLayout><!--5-->
+
+    </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
