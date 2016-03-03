@@ -11,15 +11,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.provider.ContactsContract;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -125,7 +120,8 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
 
     private int             positionCP = 0;
 
-    private boolean         search = true;
+    private boolean         search = true,
+                            charge = true;
 
     private Dialog          dialogCP;
 
@@ -136,6 +132,9 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
     private TrackerFragment fragment;
 
     private View            view;
+
+    Bundle savedState;
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -156,6 +155,16 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_prefilled_sender, container, false);
         if(view!=null) {
+
+            Bundle b = listener.getDataPrefilledSender();
+            if(b != null){
+                items_list_colony   = (List<String>) b.getSerializable("listColony");
+                items_list_city     = (List<String>) b.getSerializable("listCity");
+                items_list_state    = (List<String>) b.getSerializable("listState");
+                listener.clearBundlePrefilledSender();
+            }
+
+
             //Buttons
             btn_next = (Button) view.findViewById(R.id.btn_next);
             //EditText
@@ -196,7 +205,6 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
             imgv_download_prefilled.setOnClickListener(this);
             imgv_save_frequent.setOnClickListener(this);
             btn_next.setOnClickListener(this);
-            addTextWatchers();
 
             //Set Hints
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_name), txt_sender_name);
@@ -207,21 +215,29 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_phone), txt_sender_phone);
             Utilities.setCustomHint(getActivity(), getString(R.string.prefilled_email), txt_sender_email);
 
-            items_list_colony = new ArrayList<>();
-            items_list_colony.add("Colonia*");
+
+            if(charge) {
+
+                items_list_colony = new ArrayList<>();
+                items_list_colony.add("Colonia*");
+                items_list_city = new ArrayList<>();
+                items_list_city.add("Ciudad, municipio, delegación*");
+                items_list_state = new ArrayList<>();
+                items_list_state.add("Estado*");
+
+            }
+
             spinnerAdapterColony = new SpinnerAdapterPrefilled(getActivity(), items_list_colony);
             spn_sender_colony.setAdapter(spinnerAdapterColony);
 
-            items_list_city = new ArrayList<>();
-            items_list_city.add("Ciudad, municipio, delegación*");
             spinnerAdapterCity = new SpinnerAdapterPrefilled(getActivity(), items_list_city);
             spn_sender_city.setAdapter(spinnerAdapterCity);
 
-            items_list_state = new ArrayList<>();
-            items_list_state.add("Estado*");
             spinnerAdapterState = new SpinnerAdapterPrefilled(getActivity(), items_list_state);
             spn_sender_state.setAdapter(spinnerAdapterState);
 
+
+            addTextWatchers();
             data = new ArrayList<>();
 
             initDialogCP();
@@ -338,6 +354,9 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
                     if(testSender){
                         ((FragmentPrefilledAddressee)fragment).testAddresse = true;
                     }
+
+                    charge = false;
+                    listener.temporarilySaveDataPrefilledSender(items_list_colony, items_list_city, items_list_state);
                     addFragmentPrefilledToStack(getActivity(), fragment, FRAGMENT_TAG.FRAG_DESTINATARIO.toString(), true);
                 }
 
@@ -805,30 +824,34 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
                         checkImageSaveFrequently();
                     }
                     if (s.length() == 5) {
-                        if (spn_sender_colony.getSelectedItem().toString().equals(items_list_colony.get(0))) {
-                            if (search) {
-                                zipCodeString = txt_zip_code.getText().toString();
-                                if (zipCodeString == null || zipCodeString.equals("")) {
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
-                                } else if (zipCodeString.length() < 5) {
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
+                        if(charge) {
+                            if (spn_sender_colony.getSelectedItem().toString().equals(items_list_colony.get(0))) {
+                                if (search) {
+                                    zipCodeString = txt_zip_code.getText().toString();
+                                    if (zipCodeString == null || zipCodeString.equals("")) {
+                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
+                                    } else if (zipCodeString.length() < 5) {
+                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.ERROR, getString(R.string.error_codigo), 3000);
 
+                                    } else {
+
+                                        typeSend = "search_colony_city_state";
+                                        //MapString Params...
+                                        //Query from Zip Code
+                                        Map<String, String> requestData = new HashMap<>();
+                                        requestData.put("pais", "Mexico");
+                                        requestData.put("codigoPostal", zipCodeString);
+                                        //Send params to RequestManager
+                                        DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
+                                        RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData, FragmentPrefilledSender.this);
+
+                                    }
                                 } else {
-
-                                    typeSend = "search_colony_city_state";
-                                    //MapString Params...
-                                    //Query from Zip Code
-                                    Map<String, String> requestData = new HashMap<>();
-                                    requestData.put("pais", "Mexico");
-                                    requestData.put("codigoPostal", zipCodeString);
-                                    //Send params to RequestManager
-                                    DialogManager.sharedInstance().showDialog(DialogManager.TYPE_DIALOG.LOADING, getString(R.string.cargando), 0);
-                                    RequestManager.sharedInstance().makeRequest(METHOD.REQUEST_ZIPCODE_ADDRESSES, requestData, FragmentPrefilledSender.this);
-
+                                    search = true;
                                 }
-                            } else {
-                                search = true;
                             }
+                        }else{
+                            charge = true;
                         }
                     } else if (s.length() == 4) {
 
@@ -867,7 +890,7 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
 
     @Override
     public void decodeResponse(String response) {
-        Log.d(FRAGMENT_TAG.FRAG_PRELLENADO.toString(),""+response);
+        Log.d(FRAGMENT_TAG.FRAG_PRELLENADO.toString(), "" + response);
 
         respCotizador = RequestManager.sharedInstance().getResponseArray();
 
@@ -1026,12 +1049,12 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         dataSender.put(DATA_SENDER.STREET_SENDER.toString(), txt_sender_street.getText().toString());
         dataSender.put(DATA_SENDER.NO_EXT_SENDER.toString(),txt_no_ext.getText().toString());
         dataSender.put(DATA_SENDER.NO_INT_SENDER.toString(),txt_no_int.getText().toString());
-        dataSender.put(DATA_SENDER.ZIP_CODE_SENDER.toString(),txt_zip_code.getText().toString());
-        dataSender.put(DATA_SENDER.COLONY_SENDER.toString(),spn_sender_colony.getSelectedItem().toString());
-        dataSender.put(DATA_SENDER.CITY_SENDER.toString(),spn_sender_city.getSelectedItem().toString());
-        dataSender.put(DATA_SENDER.STATE_SENDER.toString(),spn_sender_state.getSelectedItem().toString());
-        dataSender.put(DATA_SENDER.PHONE_SENDER.toString(),txt_sender_phone.getText().toString());
-        dataSender.put(DATA_SENDER.EMAIL_SENDER.toString(),txt_sender_email.getText().toString());
+        dataSender.put(DATA_SENDER.ZIP_CODE_SENDER.toString(), txt_zip_code.getText().toString());
+        dataSender.put(DATA_SENDER.COLONY_SENDER.toString(), spn_sender_colony.getSelectedItem().toString());
+        dataSender.put(DATA_SENDER.CITY_SENDER.toString(), spn_sender_city.getSelectedItem().toString());
+        dataSender.put(DATA_SENDER.STATE_SENDER.toString(), spn_sender_state.getSelectedItem().toString());
+        dataSender.put(DATA_SENDER.PHONE_SENDER.toString(), txt_sender_phone.getText().toString());
+        dataSender.put(DATA_SENDER.EMAIL_SENDER.toString(), txt_sender_email.getText().toString());
 
         listener.setDataSender(dataSender);
     }
@@ -1300,4 +1323,6 @@ public class FragmentPrefilledSender extends TrackerFragment implements View.OnC
         txt_sender_email.setText("");
         clearSpinnersZipCode();
     }
+
+
 }

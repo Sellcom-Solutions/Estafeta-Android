@@ -23,8 +23,10 @@ import com.estafeta.estafetamovilv1.R;
 import com.estafeta.estafetamovilv1.Utils.DialogManager;
 import com.estafeta.estafetamovilv1.Utils.TrackerFragment;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -43,6 +45,8 @@ public class FragmentPrefilled extends TrackerFragment{
     private Fragment        fragment;
 
     private long            mLastClickTime;
+
+    private Bundle          prefilledSender;
 
     public enum DATA_SENDER {
         SENDER_NAME("sender_name"),
@@ -233,8 +237,18 @@ public class FragmentPrefilled extends TrackerFragment{
         }
     }
 
-    /*public void showMenu(boolean visible){
-        posponer.setVisible(visible);
-        getActivity().invalidateOptionsMenu();
-    }*/
+    public void temporarilySaveDataPrefilledSender(List<String> listColony, List<String> listCity, List<String> listState){
+        prefilledSender = new Bundle();
+        prefilledSender.putSerializable("listColony", (Serializable) listColony);
+        prefilledSender.putSerializable("listCity", (Serializable) listCity);
+        prefilledSender.putSerializable("listState", (Serializable) listState);
+    }
+
+    public Bundle getDataPrefilledSender(){
+        return prefilledSender;
+    }
+
+    public void clearBundlePrefilledSender(){
+        prefilledSender = new Bundle();
+    }
 }

@@ -229,7 +229,7 @@ public class FragmentDialogQRCode extends DialogFragment implements View.OnClick
         QRCodeWriter writer = new QRCodeWriter();
         try {
             BitMatrix matrix = writer.encode(
-                    "La información de este código aun esta por definirse, saludos." , BarcodeFormat.QR_CODE, 400, 400
+                    "La información de este código aún esta por definirse, saludos." , BarcodeFormat.QR_CODE, 400, 400
             );
 
             bitmap_qr = toBitmap(matrix);

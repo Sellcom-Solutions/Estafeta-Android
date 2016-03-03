@@ -65,6 +65,12 @@ public class SpinnerAdapterPrefilled extends BaseAdapter {
 
         TextView tv = (TextView) view.findViewById(R.id.txt_spn_item_head);
         tv.setText(items_list.get(position));
+        if(position == 0){
+            tv.setTextColor(context.getResources().getColor(R.color.estafeta_red));
+        }else{
+            tv.setTextColor(context.getResources().getColor(R.color.estafeta_text));
+        }
+
 
         return view;
     }

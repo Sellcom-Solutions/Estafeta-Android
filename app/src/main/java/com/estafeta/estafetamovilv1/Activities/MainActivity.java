@@ -50,6 +50,7 @@ import com.estafeta.estafetamovilv1.Utils.Utilities;
 import com.liveperson.mobile.android.LivePerson;
 
 
+import java.util.List;
 import java.util.Map;
 
 public class MainActivity extends ActionBarActivity implements NavigationDrawerCallbacks ,DecisionDialogWithListener, CommunicationBetweenFragments {
@@ -72,7 +73,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     private long                        mLastClickTime;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +82,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
         RequestManager.sharedInstance().setActivity(this);
         DialogManager.sharedInstance().setActivity(this);
-
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -448,6 +447,24 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     public Map<String, String> getDataSenderQuotation() {
         FragmentQuotationBuy fragment = (FragmentQuotationBuy)fragmentManager.findFragmentByTag(FragmentQuotationBuy.TAG);
         return fragment.getDataSenderQuotation();
+    }
+
+    @Override
+    public void temporarilySaveDataPrefilledSender(List<String> listColony, List<String> listCity, List<String> listState) {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
+        ((FragmentPrefilled)fragment).temporarilySaveDataPrefilledSender(listColony,listCity,listState);
+    }
+
+    @Override
+    public Bundle getDataPrefilledSender() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
+        return ((FragmentPrefilled)fragment).getDataPrefilledSender();
+    }
+
+    @Override
+    public void clearBundlePrefilledSender() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TrackerFragment.FRAGMENT_TAG.FRAG_PRELLENADO.toString());
+        ((FragmentPrefilled)fragment).clearBundlePrefilledSender();
     }
 
     /*@Override
